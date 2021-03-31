@@ -14,7 +14,7 @@ const TopKarmaCoinsUser = () => {
         <p className="text-sm font-medium text-gray-900 dark:text-white">
           <a href="#">Leonard Krasner</a>
         </p>
-        <p className="text-sm text-orange-500 flex items-center">
+        <p className="text-sm text-orange-500 flex items-center font-medium">
           <svg
             className="w-4 h-4 mr-1"
             xmlns="http://www.w3.org/2000/svg"
