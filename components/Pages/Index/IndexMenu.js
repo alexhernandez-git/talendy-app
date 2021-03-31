@@ -19,7 +19,7 @@ const IndexMenu = ({ page }) => {
         >
           <option>Recent</option>
 
-          <option>Most Karmas</option>
+          <option>Most Karma</option>
 
           <option>Most Followed</option>
         </select>
@@ -60,7 +60,7 @@ const IndexMenu = ({ page }) => {
                   : "text-gray-500 hover:text-gray-700"
               } dark:text-white group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700 dark:hover:bg-gray-800 py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10`}
             >
-              <span>Most Karmas</span>
+              <span>Most Karma</span>
               {page === MOST_KARMA_POSTS_PAGE ? (
                 <span
                   aria-hidden="true"

@@ -15,7 +15,7 @@ const ProfileMenu = ({ page }) => {
         >
           <option>Recent</option>
 
-          <option>Most Karmas</option>
+          <option>Most Karma</option>
 
           <option>Most Followed</option>
         </select>

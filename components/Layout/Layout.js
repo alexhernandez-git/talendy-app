@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
         {(ref) => (
           <div
             ref={ref}
-            class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+            className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
             aria-hidden="true"
           ></div>
         )}
@@ -141,60 +141,60 @@ const Layout = ({ children }) => {
                         </li>
                       </ul>
                       <div className="w-full bg-gray-100 ">
-                        <div class="min-h-0 flex-1 overflow-y-auto">
-                          <div class="bg-white pt-5 pb-6 shadow">
-                            <div class="px-4 sm:flex sm:justify-between sm:items-baseline sm:px-6 lg:px-8">
-                              <div class="sm:w-0 sm:flex-1">
+                        <div className="min-h-0 flex-1 overflow-y-auto">
+                          <div className="bg-white pt-5 pb-6 shadow">
+                            <div className="px-4 sm:flex sm:justify-between sm:items-baseline sm:px-6 lg:px-8">
+                              <div className="sm:w-0 sm:flex-1">
                                 <h1
                                   id="message-heading"
-                                  class="text-lg font-medium text-gray-900"
+                                  className="text-lg font-medium text-gray-900"
                                 >
                                   Leslie Alexander
                                 </h1>
-                                <p class="mt-1 text-sm text-gray-500 truncate">
+                                <p className="mt-1 text-sm text-gray-500 truncate">
                                   joearmstrong@example.com
                                 </p>
                               </div>
                             </div>
                           </div>
                           <ul
-                            class="py-4 space-y-2 sm:px-6 sm:space-y-4 lg:px-8"
+                            className="py-4 space-y-2 sm:px-6 sm:space-y-4 lg:px-8"
                             style={{ height: "calc(100vh - 196px)" }}
                           >
-                            <li class="bg-white px-4 py-6 shadow sm:rounded-lg sm:px-6">
-                              <div class="sm:flex sm:justify-between sm:items-baseline">
-                                <h3 class="text-base font-medium">
-                                  <span class="text-gray-900">
+                            <li className="bg-white px-4 py-6 shadow sm:rounded-lg sm:px-6">
+                              <div className="sm:flex sm:justify-between sm:items-baseline">
+                                <h3 className="text-base font-medium">
+                                  <span className="text-gray-900">
                                     Joe Armstrong
                                   </span>
-                                  <span class="text-gray-600">wrote</span>
+                                  <span className="text-gray-600">wrote</span>
                                 </h3>
-                                <p class="mt-1 text-sm text-gray-600 whitespace-nowrap sm:mt-0 sm:ml-3">
+                                <p className="mt-1 text-sm text-gray-600 whitespace-nowrap sm:mt-0 sm:ml-3">
                                   <time dateTime="2021-01-28T19:24">
                                     Yesterday at 7:24am
                                   </time>
                                 </p>
                               </div>
-                              <div class="mt-4 space-y-6 text-sm text-gray-800">
+                              <div className="mt-4 space-y-6 text-sm text-gray-800">
                                 <p>Thanks so much! Can't wait to try it out.</p>
                               </div>
                             </li>
 
-                            <li class="bg-white px-4 py-6 shadow sm:rounded-lg sm:px-6">
-                              <div class="sm:flex sm:justify-between sm:items-baseline">
-                                <h3 class="text-base font-medium">
-                                  <span class="text-gray-900">
+                            <li className="bg-white px-4 py-6 shadow sm:rounded-lg sm:px-6">
+                              <div className="sm:flex sm:justify-between sm:items-baseline">
+                                <h3 className="text-base font-medium">
+                                  <span className="text-gray-900">
                                     Monica White
                                   </span>
-                                  <span class="text-gray-600">wrote</span>
+                                  <span className="text-gray-600">wrote</span>
                                 </h3>
-                                <p class="mt-1 text-sm text-gray-600 whitespace-nowrap sm:mt-0 sm:ml-3">
+                                <p className="mt-1 text-sm text-gray-600 whitespace-nowrap sm:mt-0 sm:ml-3">
                                   <time dateTime="2021-01-27T16:35">
                                     Wednesday at 4:35pm
                                   </time>
                                 </p>
                               </div>
-                              <div class="mt-4 space-y-6 text-sm text-gray-800">
+                              <div className="mt-4 space-y-6 text-sm text-gray-800">
                                 <p>
                                   Lorem ipsum dolor sit amet, consectetur
                                   adipiscing elit. Malesuada at ultricies
@@ -222,21 +222,21 @@ const Layout = ({ children }) => {
                               </div>
                             </li>
 
-                            <li class="bg-white px-4 py-6 shadow sm:rounded-lg sm:px-6">
-                              <div class="sm:flex sm:justify-between sm:items-baseline">
-                                <h3 class="text-base font-medium">
-                                  <span class="text-gray-900">
+                            <li className="bg-white px-4 py-6 shadow sm:rounded-lg sm:px-6">
+                              <div className="sm:flex sm:justify-between sm:items-baseline">
+                                <h3 className="text-base font-medium">
+                                  <span className="text-gray-900">
                                     Joe Armstrong
                                   </span>
-                                  <span class="text-gray-600">wrote</span>
+                                  <span className="text-gray-600">wrote</span>
                                 </h3>
-                                <p class="mt-1 text-sm text-gray-600 whitespace-nowrap sm:mt-0 sm:ml-3">
+                                <p className="mt-1 text-sm text-gray-600 whitespace-nowrap sm:mt-0 sm:ml-3">
                                   <time dateTime="2021-01-27T16:09">
                                     Wednesday at 4:09pm
                                   </time>
                                 </p>
                               </div>
-                              <div class="mt-4 space-y-6 text-sm text-gray-800">
+                              <div className="mt-4 space-y-6 text-sm text-gray-800">
                                 <p>
                                   Lorem ipsum dolor sit amet, consectetur
                                   adipiscing elit. Malesuada at ultricies

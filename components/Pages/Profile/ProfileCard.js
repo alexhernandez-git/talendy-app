@@ -10,18 +10,18 @@ const ProfileCard = ({ mobile }) => {
       <div className="sticky top-4 space-y-4">
         <section aria-labelledby="who-to-follow-heading" className="">
           <div className="bg-white rounded-lg shadow relative overflow-hidden">
-            <div class="absolute inset-0 h-2/4 bg-gray-500"></div>
-            <div class="space-y-6 p-6 relative">
+            <div className="absolute inset-0 h-2/4 bg-gray-500"></div>
+            <div className="space-y-6 p-6 relative">
               <img
-                class="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56 z-20"
+                className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56 z-20"
                 src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
                 alt=""
               />
-              <div class="space-y-2">
-                <div class="text-lg leading-6 font-medium space-y-1 text-center">
+              <div className="space-y-2">
+                <div className="text-lg leading-6 font-medium space-y-1 text-center">
                   <h3 className="mb-3">Whitney Francis</h3>
                   <div className=" flex justify-center items-center">
-                    <span class="bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 text-white text-sm flex justify-center items-center py-1 px-4 rounded-xl">
+                    <span className="bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 text-white text-sm flex justify-center items-center py-1 px-4 rounded-xl">
                       <svg
                         className="w-6 h-6 mr-1"
                         xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +36,7 @@ const ProfileCard = ({ mobile }) => {
                           d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                         />
                       </svg>
-                      300 Karmas
+                      300 Karma
                     </span>
                   </div>
                 </div>

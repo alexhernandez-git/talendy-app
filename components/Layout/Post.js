@@ -178,7 +178,7 @@ const Oportunity = ({ page }) => {
                   d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <span className="font-medium text-orange-500">100 Karmas</span>
+              <span className="font-medium text-orange-500">100 Karma</span>
               <span className="sr-only">karmas amount</span>
             </button>
           </span>
@@ -210,7 +210,7 @@ const Oportunity = ({ page }) => {
             type="text"
             name="title"
             id="title"
-            class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+            className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
             placeholder="Message"
             aria-describedby="title-description"
             value=""

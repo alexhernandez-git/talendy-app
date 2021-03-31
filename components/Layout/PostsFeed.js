@@ -17,6 +17,12 @@ const PostsFeed = ({ page, profile }) => {
           <li>
             <Post page={page} />
           </li>
+          <li>
+            <Post page={page} />
+          </li>
+          <li>
+            <Post page={page} />
+          </li>
         </ul>
       </div>
     </main>
