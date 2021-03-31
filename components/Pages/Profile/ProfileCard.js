@@ -21,7 +21,7 @@ const ProfileCard = ({ mobile }) => {
                 <div className="text-lg leading-6 font-medium space-y-1 text-center">
                   <h3 className="mb-3">Whitney Francis</h3>
                   <div className=" flex justify-center items-center">
-                    <span className="bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 text-white text-sm flex justify-center items-center py-1 px-4 rounded-xl">
+                    <span className="bg-gradient-to-r from-orange-500 to-pink-500 text-white text-sm flex justify-center items-center py-1 px-4 rounded-xl">
                       <svg
                         className="w-6 h-6 mr-1"
                         xmlns="http://www.w3.org/2000/svg"

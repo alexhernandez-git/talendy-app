@@ -6,7 +6,7 @@ import {
 } from "pages";
 import React from "react";
 
-const IndexMenu = ({ page }) => {
+const HomeMenu = ({ page }) => {
   return (
     <div className="px-4 sm:px-0">
       <div className="sm:hidden">
@@ -57,8 +57,8 @@ const IndexMenu = ({ page }) => {
               className={`${
                 page === MOST_KARMA_POSTS_PAGE
                   ? "text-gray-900"
-                  : "text-gray-500 hover:text-gray-700"
-              } dark:text-white group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700 dark:hover:bg-gray-800 py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10`}
+                  : "text-gray-500 hover:text-gray-700 dark:hover:bg-gray-800"
+              } dark:text-white group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700 py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10`}
             >
               <span>Most Karma</span>
               {page === MOST_KARMA_POSTS_PAGE ? (
@@ -79,8 +79,8 @@ const IndexMenu = ({ page }) => {
               className={`${
                 page === FOLLOWED_USERS_POSTS_PAGE
                   ? "text-gray-900"
-                  : "text-gray-500 hover:text-gray-700"
-              }  dark:text-white hover:text-gray-700 rounded-r-lg group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700 dark:hover:bg-gray-800 py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10`}
+                  : "text-gray-500 hover:text-gray-700 dark:hover:bg-gray-800"
+              }  dark:text-white hover:text-gray-700 rounded-r-lg group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10`}
             >
               <span>Followed</span>
               {page === FOLLOWED_USERS_POSTS_PAGE ? (
@@ -102,4 +102,4 @@ const IndexMenu = ({ page }) => {
   );
 };
 
-export default IndexMenu;
+export default HomeMenu;

@@ -17,7 +17,7 @@ const Header = ({ handleToggleMessages }) => {
   const menuRef = useRef();
   useOutsideClick(menuRef, () => handleCloseMenu());
   return (
-    <header className="bg-white shadow-sm lg:static lg:overflow-y-visible">
+    <header className="bg-white dark:bg-gray-700 shadow-sm lg:static lg:overflow-y-visible">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
           <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
@@ -40,7 +40,7 @@ const Header = ({ handleToggleMessages }) => {
                 <div className="relative">
                   <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
                     <svg
-                      className="h-5 w-5 text-gray-400"
+                      className="h-5 w-5 text-gray-400 dark:text-gray-100"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
@@ -56,7 +56,7 @@ const Header = ({ handleToggleMessages }) => {
                   <input
                     id="search"
                     name="search"
-                    className="block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                    className="block w-full bg-white dark:bg-gray-600 border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     placeholder="Search"
                     type="search"
                   />
@@ -109,7 +109,7 @@ const Header = ({ handleToggleMessages }) => {
             <a
               href="#"
               onClick={handleToggleMessages}
-              className="ml-5 flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+              className="ml-5 flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
             >
               <span className="sr-only">View Messages</span>
 
@@ -130,7 +130,7 @@ const Header = ({ handleToggleMessages }) => {
             </a>
             <a
               href="#"
-              className="ml-5 flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+              className="ml-5 flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
             >
               <span className="sr-only">View notifications</span>
 
@@ -182,7 +182,7 @@ const Header = ({ handleToggleMessages }) => {
                   <div ref={menuRef}>
                     <div
                       ref={ref}
-                      className=" origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
+                      className=" origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
                       role="menu"
                       aria-orientation="vertical"
                       aria-labelledby="user-menu"
@@ -205,14 +205,14 @@ const Header = ({ handleToggleMessages }) => {
                         300 Karma
                       </span>
                       <Link href="/user/posts" role="menuitem">
-                        <a className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                        <a className="block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                           Profile
                         </a>
                       </Link>
 
                       <a
                         href="#"
-                        className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
+                        className="block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
                         role="menuitem"
                       >
                         Settings
@@ -220,12 +220,12 @@ const Header = ({ handleToggleMessages }) => {
 
                       <a
                         href="#"
-                        className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
+                        className="block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
                         role="menuitem"
                       >
                         Sign out
                       </a>
-                      <div className="block py-2 px-4 ">
+                      <div className="block py-2 px-4 mt-1">
                         <ToggleTheme />
                       </div>
                     </div>
