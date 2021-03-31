@@ -2,7 +2,7 @@ import useOutsideClick from "hooks/useOutsideClick";
 import React, { useRef, useState } from "react";
 import { Transition } from "@tailwindui/react";
 import ToggleTheme from "./Header/ToggleTheme";
-
+import Link from "next/Link";
 const Header = ({ handleToggleMessages }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const handleOpenMenu = () => {
@@ -22,13 +22,13 @@ const Header = ({ handleToggleMessages }) => {
         <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
           <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
             <div className="flex-shrink-0 flex items-center">
-              <a href="#">
+              <Link href="/">
                 <img
-                  className="block h-8 w-auto"
+                  className="block h-8 w-auto cursor-pointer"
                   src="https://tailwindui.com/img/logos/workflow-mark.svg?color=orange&shade=500"
                   alt="Workflow"
                 />
-              </a>
+              </Link>
             </div>
           </div>
           <div className="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
@@ -204,13 +204,11 @@ const Header = ({ handleToggleMessages }) => {
                         </svg>
                         300 Karmas
                       </span>
-                      <a
-                        href="#"
-                        className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
-                        role="menuitem"
-                      >
-                        Your Profile
-                      </a>
+                      <Link href="/user/posts" role="menuitem">
+                        <a className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                          Profile
+                        </a>
+                      </Link>
 
                       <a
                         href="#"

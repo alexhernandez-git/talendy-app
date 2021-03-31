@@ -63,10 +63,10 @@ const OpportunitiesFeed = () => {
       <div className="mt-4">
         <h1 className="sr-only">Recent questions</h1>
         <ul className="space-y-4">
-          <li className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
+          <li>
             <Opportunity />
           </li>
-          <li className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
+          <li>
             <Opportunity />
           </li>
         </ul>
