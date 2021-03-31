@@ -1,10 +1,10 @@
 import React from "react";
-import Opportunity from "components/Layout/Oportunity";
+import Post from "components/Layout/Post";
 import Link from "next/link";
 import User from "components/Layout/User";
 import ProfileMenu from "components/Pages/Profile/ProfileMenu";
 import IndexMenu from "components/Pages/Index/IndexMenu";
-const OpportunitiesFeed = ({ page, profile }) => {
+const PostsFeed = ({ page, profile }) => {
   return (
     <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
       {profile ? <ProfileMenu page={page} /> : <IndexMenu page={page} />}
@@ -24,4 +24,4 @@ const OpportunitiesFeed = ({ page, profile }) => {
   );
 };
 
-export default OpportunitiesFeed;
+export default PostsFeed;

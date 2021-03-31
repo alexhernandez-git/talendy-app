@@ -1,4 +1,9 @@
 import Link from "next/link";
+import {
+  FOLLOWED_USERS_POSTS_PAGE,
+  HOME_PAGE,
+  MOST_KARMA_POSTS_PAGE,
+} from "pages";
 import React from "react";
 
 const IndexMenu = ({ page }) => {
@@ -27,10 +32,14 @@ const IndexMenu = ({ page }) => {
           <Link href="/">
             <a
               aria-current="page"
-              className="text-gray-900 rounded-l-lg group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
+              className={`${
+                page === HOME_PAGE
+                  ? "text-gray-900"
+                  : "text-gray-500 hover:text-gray-700 dark:hover:bg-gray-800"
+              }  dark:text-white rounded-l-lg group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10`}
             >
               <span>Recent</span>
-              {page === "INDEX" ? (
+              {page === HOME_PAGE ? (
                 <span
                   aria-hidden="true"
                   className="bg-orange-500 absolute inset-x-0 bottom-0 h-0.5"
@@ -44,9 +53,15 @@ const IndexMenu = ({ page }) => {
             </a>
           </Link>
           <Link href="/most-karmas">
-            <a className="text-gray-500 hover:text-gray-700 group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10">
+            <a
+              className={`${
+                page === MOST_KARMA_POSTS_PAGE
+                  ? "text-gray-900"
+                  : "text-gray-500 hover:text-gray-700"
+              } dark:text-white group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700 dark:hover:bg-gray-800 py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10`}
+            >
               <span>Most Karmas</span>
-              {page === "MOST_KARMAS" ? (
+              {page === MOST_KARMA_POSTS_PAGE ? (
                 <span
                   aria-hidden="true"
                   className="bg-orange-500 absolute inset-x-0 bottom-0 h-0.5"
@@ -60,9 +75,15 @@ const IndexMenu = ({ page }) => {
             </a>
           </Link>
           <Link href="/followed">
-            <a className="text-gray-500 hover:text-gray-700 rounded-r-lg group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10">
+            <a
+              className={`${
+                page === FOLLOWED_USERS_POSTS_PAGE
+                  ? "text-gray-900"
+                  : "text-gray-500 hover:text-gray-700"
+              }  dark:text-white hover:text-gray-700 rounded-r-lg group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700 dark:hover:bg-gray-800 py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10`}
+            >
               <span>Followed</span>
-              {page === "FOLLOWED" ? (
+              {page === FOLLOWED_USERS_POSTS_PAGE ? (
                 <span
                   aria-hidden="true"
                   className="bg-orange-500 absolute inset-x-0 bottom-0 h-0.5"
