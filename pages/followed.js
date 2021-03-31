@@ -4,7 +4,7 @@ import OpportunitiesFeed from "components/Layout/OpportunitiesFeed";
 import RightSidebar from "components/Pages/Index/RightSidebar";
 
 export default function Home() {
-  const page = "INDEX";
+  const page = "FOLLOWED";
   return (
     <Layout>
       <div className="py-10">

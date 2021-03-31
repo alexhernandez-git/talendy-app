@@ -1,8 +1,12 @@
 import React from "react";
 
-const ProfileSidebar = () => {
+const ProfileCard = ({ mobile }) => {
   return (
-    <aside className="lg:block lg:col-span-4 order-1 lg:order-2 mb-10 lg:mb-0 ">
+    <aside
+      className={`lg:col-span-4  mb-10 lg:mb-0 ${
+        mobile ? "block lg:hidden" : "hidden lg:block"
+      }`}
+    >
       <div className="sticky top-4 space-y-4">
         <section aria-labelledby="who-to-follow-heading" className="">
           <div className="bg-white rounded-lg shadow relative overflow-hidden">
@@ -106,4 +110,4 @@ const ProfileSidebar = () => {
   );
 };
 
-export default ProfileSidebar;
+export default ProfileCard;

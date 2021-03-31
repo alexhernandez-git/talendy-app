@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
 import { Transition } from "@tailwindui/react";
 
-const Oportunity = ({ myOpportunity }) => {
+const Oportunity = ({ page }) => {
   const [optionsOpen, setOptionsOpen] = useState(false);
   const handleOpenOptions = () => {
     setOptionsOpen(true);
@@ -44,7 +44,7 @@ const Oportunity = ({ myOpportunity }) => {
               </a>
             </p>
           </div>
-          {myOpportunity && (
+          {page === "POSTS" && (
             <div className="flex-shrink-0 self-center flex">
               <div className="relative inline-block text-left">
                 <div>
@@ -200,7 +200,7 @@ const Oportunity = ({ myOpportunity }) => {
           </span>
         </div>
       </div>
-      {!myOpportunity && (
+      {!page == "POSTS" && (
         <div className="mt-6 flex justify-between space-x-8">
           <input
             type="text"
