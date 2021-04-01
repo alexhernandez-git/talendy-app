@@ -64,9 +64,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
       --> */}
                 <div
                   ref={messagesRef}
-                  className={`w-screen  ${
-                    chatOpen ? "max-w-4xl" : " sm:w-80"
-                  } `}
+                  className={`w-screen ${chatOpen ? "max-w-4xl" : " sm:w-80"} `}
                 >
                   <div className="h-full flex flex-col pt-6 bg-white dark:bg-gray-700 shadow-xl">
                     <div className="p-6">
@@ -156,96 +154,107 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                           </li>
                         </ul>
                       </div>
-
-                      <div className={`w-full ${!chatOpen && "hidden"}`}>
-                        <div className="min-h-0 flex-1 ">
-                          <div className="bg-gray-200 dark:bg-gray-600 pt-5 pb-6 rounded-t-lg">
-                            <div className="px-4 flex sm:justify-between items-center ">
-                              <div
-                                onClick={handleCloseChat}
-                                className="mr-4 bg-gray-600 hover:bg-gray-500
+                      <Transition
+                        show={chatOpen}
+                        enter="transform transition ease-in-out duration-500 sm:duration-700"
+                        enterFrom="translate-x-full"
+                        enterTo="translate-x-0"
+                        leave="transform transition ease-in-out duration-500 sm:duration-700"
+                        leaveFrom="translate-x-0"
+                        leaveTo="translate-x-full"
+                      >
+                        {(ref) => (
+                          <div className={`w-full`} ref={ref}>
+                            <div className="min-h-0 flex-1 ">
+                              <div className="bg-gray-200 dark:bg-gray-600 pt-5 pb-6 rounded-t-lg">
+                                <div className="px-4 flex sm:justify-between items-center ">
+                                  <div
+                                    onClick={handleCloseChat}
+                                    className="mr-4 bg-gray-600 hover:bg-gray-500
                                 dark:bg-gray-800 dark:hover:bg-gray-900 h-8 w-8
                                 flex justify-center items-center rounded-full
                                 cursor-pointer"
-                              >
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                  className="text-white w-5 h-5"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M15 19l-7-7 7-7"
-                                  />
-                                </svg>
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                      className="text-white w-5 h-5"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M15 19l-7-7 7-7"
+                                      />
+                                    </svg>
+                                  </div>
+                                  <div className="sm:w-0 sm:flex-1">
+                                    <h1
+                                      id="message-heading"
+                                      className="text-lg font-medium text-gray-900 dark:text-white"
+                                    >
+                                      Leslie Alexander
+                                    </h1>
+                                    <p className="mt-1 text-sm text-gray-500 truncate dark:text-gray-200">
+                                      joearmstrong@example.com
+                                    </p>
+                                  </div>
+                                </div>
                               </div>
-                              <div className="sm:w-0 sm:flex-1">
-                                <h1
-                                  id="message-heading"
-                                  className="text-lg font-medium text-gray-900 dark:text-white"
-                                >
-                                  Leslie Alexander
-                                </h1>
-                                <p className="mt-1 text-sm text-gray-500 truncate dark:text-gray-200">
-                                  joearmstrong@example.com
-                                </p>
-                              </div>
-                            </div>
-                          </div>
 
-                          <ul
-                            className="p-4  overflow-y-auto shadow-inner bg-gray-100 dark:bg-gray-800 flex flex-col-reverse"
-                            style={{ height: "calc(100vh - 256px)" }}
-                          >
-                            <li>
-                              <Message myMessage />
-                            </li>
-                            <li>
-                              <Message />
-                            </li>
-                            <li>
-                              <Message myMessage />
-                            </li>
-                          </ul>
-                          <div className="h-20 bg-gray-200 dark:bg-gray-800">
-                            <div className="p-3 flex justify-between">
-                              <button
-                                type="button"
-                                class="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                              <ul
+                                className="p-4  overflow-y-auto shadow-inner bg-gray-100 dark:bg-gray-800 flex flex-col-reverse"
+                                style={{ height: "calc(100vh - 256px)" }}
                               >
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  className="h-6 w-6"
-                                  stroke="currentColor"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
+                                <li>
+                                  <Message myMessage />
+                                </li>
+                                <li>
+                                  <Message />
+                                </li>
+                                <li>
+                                  <Message myMessage />
+                                </li>
+                              </ul>
+                              <div className="h-20 bg-gray-200 dark:bg-gray-800">
+                                <div className="p-3 flex justify-between">
+                                  <button
+                                    type="button"
+                                    class="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      className="h-6 w-6"
+                                      stroke="currentColor"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
+                                      />
+                                    </svg>
+                                  </button>
+                                  <input
+                                    type="text"
+                                    id="message"
+                                    name="message"
+                                    class="block w-full bg-white dark:bg-gray-600 border border-gray-300 rounded-md p-2 text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                                    placeholder="Mesasage"
                                   />
-                                </svg>
-                              </button>
-                              <input
-                                type="text"
-                                id="message"
-                                name="message"
-                                class="block w-full bg-white dark:bg-gray-600 border border-gray-300 rounded-md p-2 text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                                placeholder="Mesasage"
-                              />
-                              <button class="ml-3 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
-                                Send
-                              </button>
+                                  <button class="ml-3 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
+                                    Send
+                                  </button>
+                                </div>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
+                        )}
+                      </Transition>
                     </div>
                   </div>
                 </div>
