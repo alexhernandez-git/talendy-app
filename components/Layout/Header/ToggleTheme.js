@@ -24,7 +24,7 @@ const ToggleTheme = () => {
     <button
       onClick={handleToggleIsDark}
       type="button"
-      className={`bg-gray-200 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 outline-none ring-2 ring-offset-2 ${
+      className={`bg-gray-200  dark:bg-gray-800 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 outline-none ring-2 ring-offset-2 ${
         isDark ? "ring-blue-600" : "ring-yellow-300"
       }`}
       aria-pressed="false"
@@ -33,7 +33,7 @@ const ToggleTheme = () => {
       <span
         className={`${
           isDark ? "translate-x-5" : "translate-x-0"
-        } pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200`}
+        } pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white  shadow transform ring-0 transition ease-in-out duration-200`}
       >
         <span
           className={`${
@@ -65,7 +65,7 @@ const ToggleTheme = () => {
           aria-hidden="true"
         >
           <svg
-            className="bg-white h-3 w-3 text-blue-600"
+            className="bg-white h-3 w-3 text-blue-600 "
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"

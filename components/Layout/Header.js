@@ -109,7 +109,7 @@ const Header = ({ handleToggleMessages }) => {
             <a
               href="#"
               onClick={handleToggleMessages}
-              className="ml-5 flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+              className="ml-5 flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200"
             >
               <span className="sr-only">View Messages</span>
 
@@ -130,7 +130,7 @@ const Header = ({ handleToggleMessages }) => {
             </a>
             <a
               href="#"
-              className="ml-5 flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+              className="ml-5 flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200"
             >
               <span className="sr-only">View notifications</span>
 
@@ -156,7 +156,7 @@ const Header = ({ handleToggleMessages }) => {
                 <button
                   onMouseDown={handleToggleMenu}
                   type="button"
-                  className="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                  className="bg-white rounded-full flex"
                   id="user-menu"
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -235,7 +235,7 @@ const Header = ({ handleToggleMessages }) => {
             </div>
             <a
               href="#"
-              className="ml-6 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+              className="ml-6 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
             >
               Post
             </a>
@@ -293,7 +293,7 @@ const Header = ({ handleToggleMessages }) => {
             </div>
             <button
               type="button"
-              className="ml-auto flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+              className="ml-auto flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500"
             >
               <span className="sr-only">View notifications</span>
 

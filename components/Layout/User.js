@@ -56,19 +56,11 @@ const Oportunity = ({ page }) => {
             </span>
           </div>
         </div>
-        <button className="inline-flex items-center space-x-2 text-gray-400 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-100">
-          <svg
-            className="h-5 w-5"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
-          </svg>
-          <span className="font-medium text-gray-900 dark:text-white">
-            Share
-          </span>
+        <button
+          type="button"
+          className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+        >
+          Unfollow
         </button>
       </div>
     </article>

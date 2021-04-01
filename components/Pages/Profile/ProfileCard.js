@@ -10,7 +10,7 @@ const ProfileCard = ({ mobile }) => {
       <div className="sticky top-4 space-y-4">
         <section aria-labelledby="who-to-follow-heading" className="">
           <div className="bg-white rounded-lg shadow relative overflow-hidden">
-            <div className="absolute inset-0 h-2/4 bg-gray-500"></div>
+            <div className="absolute inset-0 h-2/4 bg-gray-500 dark:bg-gray-700"></div>
             <div className="space-y-6 p-6 relative">
               <img
                 className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56 z-20"

@@ -15,13 +15,13 @@ const PostsFeed = ({ page, profile }) => {
             <Post page={page} />
           </li>
           <li>
-            <Post page={page} />
+            <Post page={page} image />
           </li>
           <li>
             <Post page={page} />
           </li>
           <li>
-            <Post page={page} />
+            <Post page={page} image />
           </li>
         </ul>
       </div>

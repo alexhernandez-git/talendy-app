@@ -9,7 +9,7 @@ import {
   USER_POSTS_PAGE,
 } from "pages";
 
-const Oportunity = ({ page }) => {
+const Post = ({ page, image }) => {
   const [optionsOpen, setOptionsOpen] = useState(false);
   const handleOpenOptions = () => {
     setOptionsOpen(true);
@@ -25,7 +25,7 @@ const Oportunity = ({ page }) => {
   return (
     <article
       aria-labelledby="question-title-81614"
-      className="bg-white dark:bg-gray-700 px-4 py-6 shadow sm:p-6 sm:rounded-lg"
+      className="bg-white dark:bg-gray-700 px-4 py-6 shadow sm:p-6 sm:rounded-lg hover:shadow-xl hover:opacity-90 cursor-pointer"
     >
       <div>
         <div className="flex space-x-3">
@@ -157,9 +157,11 @@ const Oportunity = ({ page }) => {
           <span className="ml-1 hover:underline cursor-pointer">Read more</span>
         </p>
       </div>
-      <div className="mt-4">
-        <img src="/static/images/freelaniumsc.png" />
-      </div>
+      {image && (
+        <div className="mt-4">
+          <img src="/static/images/freelaniumsc.png" />
+        </div>
+      )}
       <div className="mt-6 flex justify-between space-x-8">
         <div className="flex space-x-6">
           <span className="inline-flex items-center text-sm">
@@ -183,24 +185,31 @@ const Oportunity = ({ page }) => {
             </button>
           </span>
         </div>
-        <div className="flex text-sm">
-          <span className="inline-flex items-center text-sm">
-            <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-100">
-              <svg
-                className="h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
-              </svg>
-              <span className="font-medium text-gray-900 dark:text-white">
-                Share
+        {(page === HOME_PAGE ||
+          page === MOST_KARMA_POSTS_PAGE ||
+          page === FOLLOWED_USERS_POSTS_PAGE ||
+          page === USER_POSTS_PAGE) && (
+          <>
+            <div className="flex text-sm">
+              <span className="inline-flex items-center text-sm">
+                <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-100">
+                  <svg
+                    className="h-5 w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
+                  </svg>
+                  <span className="font-medium text-gray-900 dark:text-white">
+                    Share
+                  </span>
+                </button>
               </span>
-            </button>
-          </span>
-        </div>
+            </div>
+          </>
+        )}
       </div>
       {(page === HOME_PAGE ||
         page === MOST_KARMA_POSTS_PAGE ||
@@ -217,7 +226,7 @@ const Oportunity = ({ page }) => {
           />
           <button
             type="submit"
-            className="w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+            className="w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
           >
             Request to help
           </button>
@@ -227,4 +236,4 @@ const Oportunity = ({ page }) => {
   );
 };
 
-export default Oportunity;
+export default Post;
