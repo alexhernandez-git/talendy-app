@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "components/Layout/Header";
 import { useRef, useState } from "react";
 import useOutsideClick from "../../hooks/useOutsideClick";
@@ -17,6 +17,16 @@ const Layout = ({ children }) => {
   };
   const messagesRef = useRef();
   useOutsideClick(messagesRef, () => handleCloseMessages());
+  useEffect(() => {
+    if (messagesOpen) {
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.body.style.top = `-${window.scrollY}px`;
+    } else {
+      document.body.style.position = "";
+      document.body.style.top = "";
+    }
+  }, [messagesOpen]);
   return (
     <>
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900">

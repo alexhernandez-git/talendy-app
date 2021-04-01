@@ -164,14 +164,52 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                           </div>
 
                           <ul
-                            className="py-4 space-y-2 sm:px-6 sm:space-y-4 lg:px-8 overflow-y-auto shadow-inner bg-gray-100 dark:bg-gray-800"
-                            style={{ height: "calc(100vh - 196px)" }}
+                            className="p-4  overflow-y-auto shadow-inner bg-gray-100 dark:bg-gray-800 flex flex-col-reverse"
+                            style={{ height: "calc(100vh - 256px)" }}
                           >
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
+                            <li>
+                              <Message myMessage />
+                            </li>
+                            <li>
+                              <Message />
+                            </li>
+                            <li>
+                              <Message myMessage />
+                            </li>
                           </ul>
+                          <div className="h-20 bg-gray-200 dark:bg-gray-800">
+                            <div className="p-3 flex justify-between">
+                              <button
+                                type="button"
+                                class="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  className="h-6 w-6"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
+                                  />
+                                </svg>
+                              </button>
+                              <input
+                                type="text"
+                                id="message"
+                                name="message"
+                                class="block w-full bg-white dark:bg-gray-600 border border-gray-300 rounded-md p-2 text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                                placeholder="Mesasage"
+                              />
+                              <button class="ml-3 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
+                                Post
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
