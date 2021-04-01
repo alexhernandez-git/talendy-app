@@ -22,10 +22,15 @@ const Post = ({ page, image }) => {
   };
   const optionsRef = useRef();
   useOutsideClick(optionsRef, () => handleCloseOptions());
+  const handleClickPost = () => {
+    alert("entra");
+    console.log("click post");
+  };
   return (
     <article
+      onClick={handleClickPost}
       aria-labelledby="question-title-81614"
-      className="bg-white dark:bg-gray-700 px-4 py-6 shadow sm:p-6 sm:rounded-lg hover:shadow-xl hover:opacity-80 cursor-pointer"
+      className="bg-white dark:bg-gray-700 px-4 py-6 shadow sm:p-6 sm:rounded-lg hover:shadow-xl cursor-pointer"
     >
       <div>
         <div className="flex space-x-3">
@@ -218,6 +223,7 @@ const Post = ({ page, image }) => {
           <input
             type="text"
             name="title"
+            onClick={(e) => e.stopPropagation()}
             id="title"
             className="block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-100  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
             placeholder="Message"

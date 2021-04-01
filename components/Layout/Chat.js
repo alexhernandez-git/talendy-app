@@ -26,7 +26,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
         {(ref) => (
           <div
             ref={ref}
-            className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+            className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity z-50"
             aria-hidden="true"
           ></div>
         )}
