@@ -24,6 +24,7 @@
     "babel-plugin-emotion": "^11.0.0",
     "currency-symbol-map": "^5.0.1",
     "formik": "^2.2.6",
+    "json-server": "^0.16.3",
     "moment": "^2.29.1",
     "next": "10.1.2",
     "next-redux-saga": "^4.1.2",

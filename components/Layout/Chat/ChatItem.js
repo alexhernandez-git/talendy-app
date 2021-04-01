@@ -2,7 +2,7 @@ import React from "react";
 
 const ChatItem = () => {
   return (
-    <li className="px-6 py-5 relative">
+    <div className="px-6 py-5 relative">
       <div className="group flex justify-between items-center">
         <span className="-m-1 p-1 block w-full cursor-pointer">
           <div
@@ -34,7 +34,7 @@ const ChatItem = () => {
           </div>
         </span>
       </div>
-    </li>
+    </div>
   );
 };
 

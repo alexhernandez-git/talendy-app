@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Transition } from "@tailwindui/react";
 import ChatItem from "./Chat/ChatItem";
 import Message from "./Chat/Message";
 
 const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
+  const [chatOpen, setChatOpen] = useState(false);
+  const handleOpenChat = () => {
+    setChatOpen(true);
+  };
+  const handleCloseChat = () => {
+    setChatOpen(false);
+  };
+
   return (
     <>
       <Transition
@@ -54,7 +62,12 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
           From: "translate-x-0"
           To: "translate-x-full"
       --> */}
-                <div ref={messagesRef} className="w-screen max-w-4xl">
+                <div
+                  ref={messagesRef}
+                  className={`w-screen  ${
+                    chatOpen ? "max-w-4xl" : " sm:w-80"
+                  } `}
+                >
                   <div className="h-full flex flex-col pt-6 bg-white dark:bg-gray-700 shadow-xl">
                     <div className="p-6">
                       <div className="flex items-start justify-between">
@@ -89,8 +102,13 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                         </div>
                       </div>
                     </div>
+
                     <div className="flex h-full">
-                      <div className=" w-full sm:w-80 ">
+                      <div
+                        className={` w-full sm:w-80 ${
+                          chatOpen && "hidden sm:block"
+                        }`}
+                      >
                         <div class="flex-1 flex px-4 py-3 ">
                           <form
                             class="w-full flex md:ml-0 "
@@ -133,22 +151,38 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                           className="divide-y divide-gray-200 dark:divide-gray-600 overflow-y-auto h-full"
                           style={{ height: "calc(100vh - 100px);" }}
                         >
-                          <ChatItem />
-                          <ChatItem />
-                          <ChatItem />
-                          <ChatItem />
-                          <ChatItem />
-                          <ChatItem />
-                          <ChatItem />
-                          <ChatItem />
-                          <ChatItem />
+                          <li onClick={handleOpenChat}>
+                            <ChatItem />
+                          </li>
                         </ul>
                       </div>
 
-                      <div className="w-full ">
+                      <div className={`w-full ${!chatOpen && "hidden"}`}>
                         <div className="min-h-0 flex-1 ">
                           <div className="bg-gray-200 dark:bg-gray-600 pt-5 pb-6 rounded-t-lg">
-                            <div className="px-4 sm:flex sm:justify-between sm:items-baseline sm:px-6 lg:px-8">
+                            <div className="px-4 flex sm:justify-between items-center ">
+                              <div
+                                onClick={handleCloseChat}
+                                className="mr-4 bg-gray-600 hover:bg-gray-500
+                                dark:bg-gray-800 dark:hover:bg-gray-900 h-8 w-8
+                                flex justify-center items-center rounded-full
+                                cursor-pointer"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                  className="text-white w-5 h-5"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M15 19l-7-7 7-7"
+                                  />
+                                </svg>
+                              </div>
                               <div className="sm:w-0 sm:flex-1">
                                 <h1
                                   id="message-heading"
@@ -206,7 +240,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                                 placeholder="Mesasage"
                               />
                               <button class="ml-3 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
-                                Post
+                                Send
                               </button>
                             </div>
                           </div>
