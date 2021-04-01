@@ -26,7 +26,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
         {(ref) => (
           <div
             ref={ref}
-            className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity z-50"
+            className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity z-40"
             aria-hidden="true"
           ></div>
         )}
@@ -43,7 +43,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
         {(ref) => (
           <section
             ref={ref}
-            className="fixed inset-0 overflow-hidden z-10"
+            className="fixed inset-0 overflow-hidden z-50"
             aria-labelledby="slide-over-title"
             role="dialog"
             aria-modal="true"
