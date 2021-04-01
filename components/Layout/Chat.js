@@ -55,11 +55,11 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
           To: "translate-x-full"
       --> */}
                 <div ref={messagesRef} className="w-screen max-w-4xl">
-                  <div className="h-full flex flex-col pt-6 bg-white shadow-xl">
+                  <div className="h-full flex flex-col pt-6 bg-white dark:bg-gray-700 shadow-xl">
                     <div className="p-6">
                       <div className="flex items-start justify-between">
                         <h2
-                          className="text-lg font-medium text-gray-900"
+                          className="text-lg font-medium text-gray-900 dark:text-white"
                           id="slide-over-title"
                         >
                           Messages
@@ -67,7 +67,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                         <div className="ml-3 h-7 flex items-center">
                           <button
                             onClick={handleToggleMessages}
-                            className="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-orange-500"
+                            className="bg-white dark:bg-gray-700 rounded-md text-gray-400 hover:text-gray-500 dark:text-gray-100 dark:hover:text-gray-200 focus:ring-2 focus:ring-orange-500"
                           >
                             <span className="sr-only">Close panel</span>
                             <svg
@@ -90,19 +90,19 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                       </div>
                     </div>
                     <div className="flex h-full">
-                      <div className=" w-full sm:w-80">
-                        <div class="flex-1 flex px-4 py-3">
+                      <div className=" w-full sm:w-80 ">
+                        <div class="flex-1 flex px-4 py-3 ">
                           <form
-                            class="w-full flex md:ml-0"
+                            class="w-full flex md:ml-0 "
                             action="#"
                             method="GET"
                           >
                             <label for="search_field" class="sr-only">
                               Search
                             </label>
-                            <div class="relative w-full text-gray-400 focus-within:text-gray-600">
+                            <div class="relative w-full text-gray-400 focus-within:text-gray-600 dark:text-gray-100 dark:focus-within:text-gray-200 ">
                               <div
-                                class="absolute inset-y-0 left-0 flex items-center pointer-events-none"
+                                class="absolute inset-y-0 left-0 flex items-center pointer-events-none dark:bg-gray-700"
                                 aria-hidden="true"
                               >
                                 <svg
@@ -122,7 +122,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                               <input
                                 id="search_field"
                                 name="search_field"
-                                class="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm"
+                                class="dark:bg-gray-700 block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm"
                                 placeholder="Search chats"
                                 type="search"
                               />
@@ -130,7 +130,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                           </form>
                         </div>
                         <ul
-                          className="divide-y divide-gray-200 overflow-y-auto h-full"
+                          className="divide-y divide-gray-200 dark:divide-gray-600 overflow-y-auto h-full"
                           style={{ height: "calc(100vh - 100px);" }}
                         >
                           <ChatItem />
@@ -145,18 +145,18 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                         </ul>
                       </div>
 
-                      <div className="w-full bg-gray-100 ">
-                        <div className="min-h-0 flex-1">
-                          <div className="bg-white pt-5 pb-6">
+                      <div className="w-full ">
+                        <div className="min-h-0 flex-1 ">
+                          <div className="bg-gray-200 dark:bg-gray-600 pt-5 pb-6 rounded-t-lg">
                             <div className="px-4 sm:flex sm:justify-between sm:items-baseline sm:px-6 lg:px-8">
                               <div className="sm:w-0 sm:flex-1">
                                 <h1
                                   id="message-heading"
-                                  className="text-lg font-medium text-gray-900"
+                                  className="text-lg font-medium text-gray-900 dark:text-white"
                                 >
                                   Leslie Alexander
                                 </h1>
-                                <p className="mt-1 text-sm text-gray-500 truncate">
+                                <p className="mt-1 text-sm text-gray-500 truncate dark:text-gray-200">
                                   joearmstrong@example.com
                                 </p>
                               </div>
@@ -164,7 +164,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                           </div>
 
                           <ul
-                            className="py-4 space-y-2 sm:px-6 sm:space-y-4 lg:px-8 overflow-y-auto shadow-inner"
+                            className="py-4 space-y-2 sm:px-6 sm:space-y-4 lg:px-8 overflow-y-auto shadow-inner bg-gray-100 dark:bg-gray-800"
                             style={{ height: "calc(100vh - 196px)" }}
                           >
                             <Message />

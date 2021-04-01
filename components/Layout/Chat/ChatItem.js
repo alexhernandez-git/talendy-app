@@ -6,7 +6,7 @@ const ChatItem = () => {
       <div className="group flex justify-between items-center">
         <span className="-m-1 p-1 block w-full cursor-pointer">
           <div
-            className="absolute inset-0 group-hover:bg-gray-50"
+            className="absolute inset-0 group-hover:bg-gray-50 dark:group-hover:bg-gray-800"
             aria-hidden="true"
           ></div>
           <div className="flex-1 flex items-center min-w-0 relative w-full">
@@ -19,12 +19,12 @@ const ChatItem = () => {
             </span>
             <div className="ml-4 truncate">
               <div className=" flex justify-between">
-                <p className="text-sm font-medium text-gray-900 truncate">
+                <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
                   Leslie Alexander
                 </p>
-                <p className="text-xs text-gray-500">Now</p>
+                <p className="text-xs text-gray-500 dark:text-gray-200">Now</p>
               </div>
-              <p className="text-xs text-gray-500 truncate">
+              <p className="text-xs text-gray-500 dark:text-gray-200 truncate">
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque
                 sit illum placeat enim quae dolorum ipsa, debitis exercitationem
                 tenetur praesentium minima, sapiente provident magnam assumenda
