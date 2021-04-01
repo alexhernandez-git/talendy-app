@@ -14,11 +14,15 @@ module.exports = {
       animation: {
         "animate-spin": "spin 1s linear infinite",
       },
+      spacing: {
+        chat: "56rem",
+      },
       maxWidth: {
         "1/4": "25%",
         "1/2": "50%",
         "3/4": "75%",
       },
+
       transitionProperty: {
         width: "width",
       },

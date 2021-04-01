@@ -25,7 +25,7 @@ const Post = ({ page, image }) => {
   return (
     <article
       aria-labelledby="question-title-81614"
-      className="bg-white dark:bg-gray-700 px-4 py-6 shadow sm:p-6 sm:rounded-lg hover:shadow-xl hover:opacity-90 cursor-pointer"
+      className="bg-white dark:bg-gray-700 px-4 py-6 shadow sm:p-6 sm:rounded-lg hover:shadow-xl hover:opacity-80 cursor-pointer"
     >
       <div>
         <div className="flex space-x-3">

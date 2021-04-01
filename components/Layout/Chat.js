@@ -64,7 +64,9 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
       --> */}
                 <div
                   ref={messagesRef}
-                  className={`w-screen ${chatOpen ? "max-w-4xl" : " sm:w-80"} `}
+                  className={`w-screen transition-width  transform ease-in-out duration-500 sm:duration-700 ${
+                    chatOpen ? "sm:w-chat max-w-4xl " : " sm:w-80"
+                  } `}
                 >
                   <div className="h-full flex flex-col pt-6 bg-white dark:bg-gray-700 shadow-xl">
                     <div className="p-6">
