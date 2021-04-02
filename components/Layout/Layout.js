@@ -19,12 +19,9 @@ const Layout = ({ children }) => {
   useOutsideClick(messagesRef, () => handleCloseMessages());
   useEffect(() => {
     if (messagesOpen) {
-      document.body.style.position = "fixed";
-      document.body.style.width = "100%";
-      document.body.style.top = `-${window.scrollY}px`;
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.position = "";
-      document.body.style.top = "";
+      document.body.style.overflow = "";
     }
   }, [messagesOpen]);
   return (

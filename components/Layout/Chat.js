@@ -154,6 +154,18 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                           <li onClick={handleOpenChat}>
                             <ChatItem />
                           </li>
+                          <li onClick={handleOpenChat}>
+                            <ChatItem />
+                          </li>
+                          <li onClick={handleOpenChat}>
+                            <ChatItem />
+                          </li>
+                          <li onClick={handleOpenChat}>
+                            <ChatItem />
+                          </li>
+                          <li onClick={handleOpenChat}>
+                            <ChatItem />
+                          </li>
                         </ul>
                       </div>
                       <Transition
