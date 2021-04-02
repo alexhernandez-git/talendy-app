@@ -163,7 +163,7 @@ const Post = ({ page, image }) => {
           </div>
           <h2
             id="question-title-81614"
-            className="mt-4 text-base font-medium text-gray-900 dark:text-white"
+            className="mt-4 text-xl font-medium text-gray-900 dark:text-white"
           >
             What would you have done differently if you ran Jurassic Park?
           </h2>
