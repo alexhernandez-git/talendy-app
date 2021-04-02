@@ -109,22 +109,22 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                           chatOpen && "hidden sm:block"
                         }`}
                       >
-                        <div class="flex-1 flex px-4 py-3 ">
+                        <div className="flex-1 flex px-4 py-3 ">
                           <form
-                            class="w-full flex md:ml-0 "
+                            className="w-full flex md:ml-0 "
                             action="#"
                             method="GET"
                           >
-                            <label for="search_field" class="sr-only">
+                            <label for="search_field" className="sr-only">
                               Search
                             </label>
-                            <div class="relative w-full text-gray-400 focus-within:text-gray-600 dark:text-gray-100 dark:focus-within:text-gray-200 ">
+                            <div className="relative w-full text-gray-400 focus-within:text-gray-600 dark:text-gray-100 dark:focus-within:text-gray-200 ">
                               <div
-                                class="absolute inset-y-0 left-0 flex items-center pointer-events-none dark:bg-gray-700"
+                                className="absolute inset-y-0 left-0 flex items-center pointer-events-none dark:bg-gray-700"
                                 aria-hidden="true"
                               >
                                 <svg
-                                  class="h-5 w-5"
+                                  className="h-5 w-5"
                                   xmlns="http://www.w3.org/2000/svg"
                                   viewBox="0 0 20 20"
                                   fill="currentColor"
@@ -140,7 +140,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                               <input
                                 id="search_field"
                                 name="search_field"
-                                class="dark:bg-gray-700 block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm"
+                                className="dark:bg-gray-700 block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm"
                                 placeholder="Search chats"
                                 type="search"
                               />
@@ -236,7 +236,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                                 <div className="p-3 flex justify-between">
                                   <button
                                     type="button"
-                                    class="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                                    className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                                   >
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
@@ -257,10 +257,10 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                                     type="text"
                                     id="message"
                                     name="message"
-                                    class="block w-full bg-white dark:bg-gray-600 border border-gray-300 rounded-md p-2 text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                                    className="block w-full bg-white dark:bg-gray-600 border border-gray-300 rounded-md p-2 text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                                     placeholder="Mesasage"
                                   />
-                                  <button class="ml-3 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
+                                  <button className="ml-3 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
                                     Send
                                   </button>
                                 </div>

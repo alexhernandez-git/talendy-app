@@ -37,12 +37,12 @@ const PostModal = ({ page, image, modalOpen, handleToggleModal, modalRef }) => {
       {(ref) => (
         <div
           ref={ref}
-          class="fixed z-10 inset-0 overflow-y-auto"
+          className="fixed z-10 inset-0 overflow-y-auto"
           aria-labelledby="modal-title"
           role="dialog"
           aria-modal="true"
         >
-          <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             {/* <!--
       Background overlay, show/hide based on modal state.
 
@@ -71,7 +71,7 @@ const PostModal = ({ page, image, modalOpen, handleToggleModal, modalRef }) => {
                   ></div>
 
                   <span
-                    class="hidden sm:inline-block sm:align-middle sm:h-screen"
+                    className="hidden sm:inline-block sm:align-middle sm:h-screen"
                     aria-hidden="true"
                   >
                     &#8203;
@@ -93,7 +93,7 @@ const PostModal = ({ page, image, modalOpen, handleToggleModal, modalRef }) => {
             <article
               ref={modalRef}
               aria-labelledby="question-title-81614"
-              class="inline-block align-bottom bg-white dark:bg-gray-700 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full sm:p-6"
+              className="inline-block align-bottom bg-white dark:bg-gray-700 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full sm:p-6"
             >
               <div className=" grid grid-cols-1 gap-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
                 <div className="space-y-6 lg:col-start-1 lg:col-span-2">
@@ -327,6 +327,37 @@ const PostModal = ({ page, image, modalOpen, handleToggleModal, modalRef }) => {
                       </button>
                     </div>
                   )}
+                  <div className="mt-5">
+                    <h3 className="font-medium text-gray-900 dark:text-white">
+                      Members Helping
+                    </h3>
+                    <ul className="mt-2 border-t border-gray-200 dark:border-gray-800 divide-y divide-gray-200 dark:divide-gray-800">
+                      <li className="py-3 flex justify-between items-center">
+                        <div className="flex items-center">
+                          <img
+                            src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
+                            alt=""
+                            className="w-8 h-8 rounded-full"
+                          />
+                          <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
+                            Aimee Douglas
+                          </p>
+                        </div>
+                      </li>
+                      <li className="py-3 flex justify-between items-center">
+                        <div className="flex items-center">
+                          <img
+                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=oilqXxSqey&ixqx=9XbzAMvCeF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                            alt=""
+                            className="w-8 h-8 rounded-full"
+                          />
+                          <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
+                            Andrea McMillan
+                          </p>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </article>
