@@ -9,6 +9,7 @@ import {
   MOST_KARMA_POSTS_PAGE,
   MY_POSTS_PAGE,
 } from "pages";
+import Link from "next/link";
 
 const PostModal = ({ page, image, modalOpen, handleToggleModal, modalRef }) => {
   return (
@@ -110,8 +111,29 @@ const PostModal = ({ page, image, modalOpen, handleToggleModal, modalRef }) => {
                     </p>
                   </div>
                   {image && (
-                    <div className="mt-4">
+                    <div className="mt-4 relative">
                       <img src="/static/images/freelaniumsc.png" />
+                      <div className="absolute bottom-4 right-4">
+                        <a
+                          target="_blank"
+                          href={"/static/images/freelaniumsc.png"}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6 text-gray-500"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
+                          </svg>
+                        </a>
+                      </div>
                     </div>
                   )}
                   <div className="mt-6 flex justify-between space-x-8">
@@ -212,12 +234,14 @@ const PostModal = ({ page, image, modalOpen, handleToggleModal, modalRef }) => {
                   </div>
                   {(page === MY_POSTS_PAGE || page === HELPED_IN_PAGE) && (
                     <div className="mt-5">
-                      <button
-                        type="submit"
-                        className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
-                      >
-                        Enter
-                      </button>
+                      <Link href="/help/123">
+                        <button
+                          type="button"
+                          className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
+                        >
+                          Enter
+                        </button>
+                      </Link>
                     </div>
                   )}
                   <div className="mt-5">
@@ -232,6 +256,7 @@ const PostModal = ({ page, image, modalOpen, handleToggleModal, modalRef }) => {
                             alt=""
                             className="w-8 h-8 rounded-full"
                           />
+
                           <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
                             Aimee Douglas
                           </p>

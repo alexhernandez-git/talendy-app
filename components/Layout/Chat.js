@@ -222,15 +222,9 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                                 className="p-4  overflow-y-auto shadow-inner bg-gray-100 dark:bg-gray-800 flex flex-col-reverse"
                                 style={{ height: "calc(100vh - 256px)" }}
                               >
-                                <li>
-                                  <Message myMessage />
-                                </li>
-                                <li>
-                                  <Message />
-                                </li>
-                                <li>
-                                  <Message myMessage />
-                                </li>
+                                <Message myMessage />
+                                <Message />
+                                <Message myMessage />
                               </ul>
                               <div className="h-20 bg-gray-200 dark:bg-gray-800">
                                 <div className="p-3 flex justify-between">

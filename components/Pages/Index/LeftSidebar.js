@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { changeCommunity } from "redux/actions/user";
 
-const LeftSidebar = ({ community, handleSetCommunity }) => {
+const LeftSidebar = ({ page }) => {
+  const dispatch = useDispatch();
+  const userReducer = useSelector((state) => state.userReducer);
+  const { community } = userReducer;
+  const handleSetCommunity = (selectedCommunity) => {
+    if (selectedCommunity === community) {
+      dispatch(changeCommunity(null));
+      return;
+    }
+    dispatch(changeCommunity(selectedCommunity));
+  };
   return (
     <div className="hidden lg:block lg:col-span-3 xl:col-span-2">
       <nav
