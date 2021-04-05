@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CONNECTIONS_PAGE, PEOPLE_I_FOLLOW_PAGE } from "pages";
+import { ACTIVE_HELPED_IN_PAGE, CLOSED_HELPED_IN_PAGE } from "pages";
 import React from "react";
 
 const LeftSidebar = ({ page }) => {
@@ -14,35 +14,35 @@ const LeftSidebar = ({ page }) => {
             className="px-3 text-xs font-semibold text-gray-500 dark:text-white uppercase tracking-wider"
             id="communities-headline"
           >
-            Manage my network
+            Helped in posts
           </p>
           <div
             className="mt-3 space-y-2"
             aria-labelledby="communities-headline"
           >
-            <Link href="/user/mynetwork/connections">
+            <Link href="/user/helpedin/active">
               <span
                 className={`
                   ${
-                    page === CONNECTIONS_PAGE
+                    page === ACTIVE_HELPED_IN_PAGE
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
               >
-                <span className="truncate">Connections</span>
+                <span className="truncate">Active</span>
                 <span>10</span>
               </span>
             </Link>
-            <Link href="/user/mynetwork/following">
+            <Link href="/user/helpedin/closed">
               <span
                 className={`
                   ${
-                    page === PEOPLE_I_FOLLOW_PAGE
+                    page === CLOSED_HELPED_IN_PAGE
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
               >
-                <span className="truncate">People I Follow</span>
+                <span className="truncate">Closed</span>
                 <span>20</span>
               </span>
             </Link>

@@ -6,7 +6,7 @@ import {
   FOLLOWED_USERS_POSTS_PAGE,
   HOME_PAGE,
   MOST_KARMA_POSTS_PAGE,
-  USER_POSTS_PAGE,
+  MY_POSTS_PAGE,
 } from "pages";
 import PostModal from "./PostModal";
 
@@ -47,7 +47,7 @@ const Post = ({ page, image }) => {
       <article
         onClick={handleOpenModal}
         aria-labelledby="question-title-81614"
-        className="bg-white dark:bg-gray-700 px-4 py-6 shadow sm:p-6 sm:rounded-lg hover:shadow-xl cursor-pointer"
+        className="bg-white dark:bg-gray-700 px-4 py-6 shadow sm:p-6 sm:rounded-lg cursor-pointer"
       >
         <div>
           <div className="flex space-x-3">
@@ -70,7 +70,7 @@ const Post = ({ page, image }) => {
                 </time>
               </p>
             </div>
-            {page === USER_POSTS_PAGE && (
+            {page === MY_POSTS_PAGE && (
               <div className="flex-shrink-0 self-center flex">
                 <div className="relative inline-block text-left">
                   <div>
@@ -215,7 +215,7 @@ const Post = ({ page, image }) => {
           {(page === HOME_PAGE ||
             page === MOST_KARMA_POSTS_PAGE ||
             page === FOLLOWED_USERS_POSTS_PAGE ||
-            page === USER_POSTS_PAGE) && (
+            page === MY_POSTS_PAGE) && (
             <>
               <div className="flex text-sm">
                 <span className="inline-flex items-center text-sm">
