@@ -1,6 +1,6 @@
 import React from "react";
 
-const LeftSidebar = () => {
+const LeftSidebar = ({ community, handleSetCommunity }) => {
   return (
     <div className="hidden lg:block lg:col-span-3 xl:col-span-2">
       <nav
@@ -18,74 +18,124 @@ const LeftSidebar = () => {
             className="mt-3 space-y-2"
             aria-labelledby="communities-headline"
           >
-            <a
-              href="#"
-              className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-100 rounded-md hover:text-gray-900 dark:hover:text-gray-900 hover:bg-gray-50"
+            <span
+              onClick={handleSetCommunity.bind(this, 0)}
+              className={`
+                  ${
+                    community === 0
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
             >
               <span className="truncate">Development</span>
-            </a>
+            </span>
 
-            <a
-              href="#"
-              className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-100 rounded-md hover:text-gray-900 dark:hover:text-gray-900 hover:bg-gray-50"
+            <span
+              onClick={handleSetCommunity.bind(this, 1)}
+              className={`
+                  ${
+                    community === 1
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
             >
               <span className="truncate">Business</span>
-            </a>
+            </span>
 
-            <a
-              href="#"
-              className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-100 rounded-md hover:text-gray-900 dark:hover:text-gray-900 hover:bg-gray-50"
+            <span
+              onClick={handleSetCommunity.bind(this, 2)}
+              className={`
+                  ${
+                    community === 2
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
             >
               <span className="truncate">Finance & Accounting</span>
-            </a>
+            </span>
 
-            <a
-              href="#"
-              className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-100 rounded-md hover:text-gray-900 dark:hover:text-gray-900 hover:bg-gray-50"
+            <span
+              onClick={handleSetCommunity.bind(this, 3)}
+              className={`
+                  ${
+                    community === 3
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
             >
               <span className="truncate">IT & Software</span>
-            </a>
+            </span>
 
-            <a
-              href="#"
-              className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-100 rounded-md hover:text-gray-900 dark:hover:text-gray-900 hover:bg-gray-50"
+            <span
+              onClick={handleSetCommunity.bind(this, 4)}
+              className={`
+                  ${
+                    community === 4
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
             >
               <span className="truncate">Office Productivity</span>
-            </a>
+            </span>
 
-            <a
-              href="#"
-              className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-100 rounded-md hover:text-gray-900 dark:hover:text-gray-900 hover:bg-gray-50"
+            <span
+              onClick={handleSetCommunity.bind(this, 5)}
+              className={`
+                  ${
+                    community === 5
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
             >
               <span className="truncate">Personal Development</span>
-            </a>
+            </span>
 
-            <a
-              href="#"
-              className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-100 rounded-md hover:text-gray-900 dark:hover:text-gray-900 hover:bg-gray-50"
+            <span
+              onClick={handleSetCommunity.bind(this, 6)}
+              className={`
+                  ${
+                    community === 6
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
             >
               <span className="truncate">Design</span>
-            </a>
+            </span>
 
-            <a
-              href="#"
-              className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-100 rounded-md hover:text-gray-900 dark:hover:text-gray-900 hover:bg-gray-50"
+            <span
+              onClick={handleSetCommunity.bind(this, 7)}
+              className={`
+                  ${
+                    community === 7
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
             >
               <span className="truncate">Marketing</span>
-            </a>
+            </span>
 
-            <a
-              href="#"
-              className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-100 rounded-md hover:text-gray-900 dark:hover:text-gray-900 hover:bg-gray-50"
+            <span
+              onClick={handleSetCommunity.bind(this, 8)}
+              className={`
+                  ${
+                    community === 8
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
             >
               <span className="truncate">Health & Fitness</span>
-            </a>
-            <a
-              href="#"
-              className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-100 rounded-md hover:text-gray-900 dark:hover:text-gray-900 hover:bg-gray-50"
+            </span>
+            <span
+              onClick={handleSetCommunity.bind(this, 9)}
+              className={`
+                  ${
+                    community === 9
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
             >
               <span className="truncate">Music</span>
-            </a>
+            </span>
           </div>
         </div>
       </nav>
