@@ -1,6 +1,6 @@
 import React from "react";
 
-const Message = ({ myMessage }) => {
+const Message = ({ myMessage, isAdmin }) => {
   return (
     <li>
       <div className={`${myMessage ? "float-right " : "float-left "}  w-11/12`}>
@@ -17,10 +17,12 @@ const Message = ({ myMessage }) => {
           )}
           <div
             className={`${
-              myMessage
-                ? "bg-gray-200 dark:bg-gray-600"
-                : " bg-white dark:bg-gray-700"
-            } text-sm text-gray-600 dark:text-gray-100  p-3 shadow rounded-lg mt-4`}
+              isAdmin
+                ? "bg-gradient-to-r from-orange-500 to-pink-500 text-gray-100"
+                : myMessage
+                ? "bg-gray-200 dark:bg-gray-600 dark:text-gray-100"
+                : " bg-white dark:bg-gray-700 dark:text-gray-100"
+            } text-sm p-3 shadow rounded-lg mt-4`}
           >
             <p>
               Nec malesuada sed sit ut aliquet. Cras ac pharetra, sapien purus

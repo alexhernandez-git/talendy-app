@@ -93,7 +93,7 @@ const Help = () => {
                         <Message />
                         <Message myMessage />
                         <Message myMessage />
-                        <Message />
+                        <Message isAdmin />
                         <Message myMessage />
                         <Message myMessage />
                         <Message />

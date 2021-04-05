@@ -64,7 +64,7 @@ const ProfileMenu = ({ page }) => {
                   : "text-gray-500"
               } dark:text-white group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10  hover:text-gray-700 dark:hover:bg-gray-800`}
             >
-              <span>Helped in</span>
+              <span>Helped In</span>
               {page === HELPED_IN_PAGE ||
               page === ACTIVE_HELPED_IN_PAGE ||
               page === CLOSED_HELPED_IN_PAGE ? (
