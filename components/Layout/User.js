@@ -2,8 +2,9 @@ import React from "react";
 import { useRef, useState } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
 import { Transition } from "@tailwindui/react";
+import { CONNECTIONS_PAGE, PEOPLE_I_FOLLOW_PAGE } from "pages";
 
-const Oportunity = ({ page }) => {
+const User = ({ page }) => {
   const [optionsOpen, setOptionsOpen] = useState(false);
   const handleOpenOptions = () => {
     setOptionsOpen(true);
@@ -56,15 +57,25 @@ const Oportunity = ({ page }) => {
             </span>
           </div>
         </div>
-        <button
-          type="button"
-          className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-        >
-          Unfollow
-        </button>
+        {page === PEOPLE_I_FOLLOW_PAGE && (
+          <button
+            type="button"
+            className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+          >
+            Unfollow
+          </button>
+        )}
+        {page === CONNECTIONS_PAGE && (
+          <button
+            type="button"
+            className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+          >
+            Message
+          </button>
+        )}
       </div>
     </article>
   );
 };
 
-export default Oportunity;
+export default User;

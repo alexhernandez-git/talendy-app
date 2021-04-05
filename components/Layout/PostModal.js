@@ -11,19 +11,6 @@ import {
 } from "pages";
 
 const PostModal = ({ page, image, modalOpen, handleToggleModal, modalRef }) => {
-  const [optionsOpen, setOptionsOpen] = useState(false);
-  const handleOpenOptions = () => {
-    setOptionsOpen(true);
-  };
-  const handleCloseOptions = () => {
-    setOptionsOpen(false);
-  };
-  const handleToggleOptions = () => {
-    setOptionsOpen(!optionsOpen);
-  };
-  const optionsRef = useRef();
-  useOutsideClick(optionsRef, () => handleCloseOptions());
-
   return (
     <Transition
       show={modalOpen}
@@ -34,9 +21,9 @@ const PostModal = ({ page, image, modalOpen, handleToggleModal, modalRef }) => {
       leaveFrom="opacity-100 translate-y-0 sm:scale-100"
       leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
     >
-      {(ref) => (
+      {(refModal) => (
         <div
-          ref={ref}
+          ref={refModal}
           className="fixed z-10 inset-0 overflow-y-auto"
           aria-labelledby="modal-title"
           role="dialog"
@@ -89,7 +76,6 @@ const PostModal = ({ page, image, modalOpen, handleToggleModal, modalRef }) => {
         From: "opacity-100 translate-y-0 sm:scale-100"
         To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
     --> */}
-
             <article
               ref={modalRef}
               aria-labelledby="question-title-81614"
@@ -105,97 +91,6 @@ const PostModal = ({ page, image, modalOpen, handleToggleModal, modalRef }) => {
                       What would you have done differently if you ran Jurassic
                       Park?
                     </h2>
-                    {page === USER_POSTS_PAGE && (
-                      <div className="relative inline-block text-left">
-                        <div>
-                          <button
-                            onMouseDown={handleToggleOptions}
-                            type="button"
-                            className="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-100"
-                            id="options-menu-0"
-                            aria-expanded="false"
-                            aria-haspopup="true"
-                          >
-                            <span className="sr-only">Open options</span>
-
-                            <svg
-                              className="h-5 w-5"
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              aria-hidden="true"
-                            >
-                              <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-                            </svg>
-                          </button>
-                        </div>
-                        <Transition
-                          show={optionsOpen}
-                          enter="transition ease-out duration-100"
-                          enterFrom="transform opacity-0 scale-95"
-                          enterTo="transform opacity-100 scale-100"
-                          leave="transition ease-out duration-100"
-                          leaveFrom="transform opacity-100 scale-100"
-                          leaveTo="transform opacity-0 scale-95"
-                        >
-                          {(ref) => (
-                            <div
-                              ref={ref}
-                              className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none"
-                              role="menu"
-                              aria-orientation="vertical"
-                              aria-labelledby="options-menu-0"
-                            >
-                              <div
-                                className="py-1"
-                                role="none"
-                                ref={optionsRef}
-                              >
-                                <a
-                                  href="#"
-                                  className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-                                  role="menuitem"
-                                >
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="mr-3 h-5 w-5 text-gray-400"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                  >
-                                    <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                  <span>Edit</span>
-                                </a>
-                                <a
-                                  href="#"
-                                  className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-                                  role="menuitem"
-                                >
-                                  <svg
-                                    className="mr-3 h-5 w-5 text-gray-400"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                  <span>Delete</span>
-                                </a>
-                              </div>
-                            </div>
-                          )}
-                        </Transition>
-                      </div>
-                    )}
                   </div>
                   <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4">
                     <p>
