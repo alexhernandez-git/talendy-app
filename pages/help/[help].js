@@ -8,6 +8,7 @@ import Message from "components/Pages/Help/Message";
 import { IconContext } from "react-icons";
 import { MdHeadset, MdMic, MdScreenShare } from "react-icons/md";
 import { useRouter } from "next/router";
+import Editor from "components/Editor/Editor";
 const Help = () => {
   const page = HELP_PAGE;
   const image = true;
@@ -117,19 +118,13 @@ const Help = () => {
                           alt=""
                         />
                       </div>
-                      <div className="min-w-0 flex-1">
+                      <div className="min-w-0 flex-1 relative">
                         <form onSubmit={(e) => e.preventDefault()}>
                           <div>
                             <label for="comment" className="sr-only">
                               About
                             </label>
-                            <textarea
-                              id="comment"
-                              name="comment"
-                              rows="3"
-                              className="resize-none shadow-sm block w-full focus:ring-orange-500 focus:border-orange-500 sm:text-sm border-gray-300 dark:bg-gray-600 dark:placeholder-gray-100 dark:text-white rounded-md"
-                              placeholder="Add a note"
-                            ></textarea>
+                            <Editor />
                           </div>
                           <div className="mt-3 sm:flex items-center justify-between">
                             <div className="flex items-center justify-end sm:justify-start">

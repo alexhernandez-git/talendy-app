@@ -1,5 +1,5 @@
 import Layout from "components/Layout/Layout";
-import LeftSidebar from "components/Pages/Index/LeftSidebar";
+
 import Feed from "components/Layout/Feed";
 import RightSidebar from "components/Pages/Index/RightSidebar";
 import { SEARCH_USERS_PAGE } from "pages";
