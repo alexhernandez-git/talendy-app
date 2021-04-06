@@ -34,7 +34,6 @@ const Feed = ({ page }) => {
 
       {/* Profile menu */}
       {(page === MY_POSTS_PAGE ||
-        page === SEARCH_POSTS_PAGE ||
         page === HELPED_IN_PAGE ||
         page === ACTIVE_HELPED_IN_PAGE ||
         page === CONNECTIONS_PAGE ||
