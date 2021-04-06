@@ -5,7 +5,8 @@ import PostModal from "components/Layout/PostModal";
 import Layout from "components/Layout/Layout";
 import { HELP_PAGE } from "pages";
 import Message from "components/Pages/Help/Message";
-
+import { IconContext } from "react-icons";
+import { MdHeadset, MdMic, MdScreenShare } from "react-icons/md";
 const Help = () => {
   const page = HELP_PAGE;
   const image = true;
@@ -48,7 +49,7 @@ const Help = () => {
               <button
                 onClick={handleOpenModal}
                 type="button"
-                className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +112,7 @@ const Help = () => {
                         />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <form action="#">
+                        <form onSubmit={(e) => e.preventDefault()}>
                           <div>
                             <label for="comment" className="sr-only">
                               About
@@ -124,32 +125,57 @@ const Help = () => {
                               placeholder="Add a note"
                             ></textarea>
                           </div>
-                          <div className="mt-3 flex items-center justify-end">
-                            <button
-                              type="button"
-                              class="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                class="h-6 w-6"
-                                stroke="currentColor"
+                          <div className="mt-3 flex items-center justify-between">
+                            <div className="flex items-center">
+                              <button
+                                type="button"
+                                class="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                               >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
-                                ></path>
-                              </svg>
-                            </button>
-                            <button
-                              type="submit"
-                              className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm  text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
-                            >
-                              Send
-                            </button>
+                                <IconContext.Provider
+                                  value={{ size: 18, className: "mr-2" }}
+                                >
+                                  <MdScreenShare />
+                                </IconContext.Provider>
+                                Screen
+                              </button>
+                              <button class="inline-flex items-center px-4 py-2 font-medium rounded-md text-orange-500 dark:text-gray-100 ">
+                                <IconContext.Provider value={{ size: 23 }}>
+                                  <MdMic />
+                                </IconContext.Provider>
+                              </button>
+                              <button class="mr-3 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 ">
+                                <IconContext.Provider value={{ size: 23 }}>
+                                  <MdHeadset />
+                                </IconContext.Provider>
+                              </button>
+                            </div>
+                            <div className="flex items-center">
+                              <button
+                                type="button"
+                                class="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  class="h-5 w-5"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
+                                  ></path>
+                                </svg>
+                              </button>
+                              <button
+                                type="submit"
+                                className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm  text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                              >
+                                Send
+                              </button>
+                            </div>
                           </div>
                         </form>
                       </div>
@@ -194,246 +220,6 @@ const Help = () => {
                         />
                         <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
                           Andrea McMillan
-                        </p>
-                      </div>
-                    </li>
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=oilqXxSqey&ixqx=9XbzAMvCeF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Andrea McMillan
-                        </p>
-                      </div>
-                    </li>
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=oilqXxSqey&ixqx=9XbzAMvCeF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Andrea McMillan
-                        </p>
-                      </div>
-                    </li>
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=oilqXxSqey&ixqx=9XbzAMvCeF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Andrea McMillan
-                        </p>
-                      </div>
-                    </li>
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=oilqXxSqey&ixqx=9XbzAMvCeF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Andrea McMillan
-                        </p>
-                      </div>
-                    </li>
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=oilqXxSqey&ixqx=9XbzAMvCeF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Andrea McMillan
-                        </p>
-                      </div>
-                    </li>
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=oilqXxSqey&ixqx=9XbzAMvCeF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Andrea McMillan
-                        </p>
-                      </div>
-                    </li>
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Aimee Douglas
-                        </p>
-                      </div>
-                    </li>
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Aimee Douglas
-                        </p>
-                      </div>
-                    </li>
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Aimee Douglas
-                        </p>
-                      </div>
-                    </li>
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Aimee Douglas
-                        </p>
-                      </div>
-                    </li>{" "}
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Aimee Douglas
-                        </p>
-                      </div>
-                    </li>{" "}
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Aimee Douglas
-                        </p>
-                      </div>
-                    </li>{" "}
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Aimee Douglas
-                        </p>
-                      </div>
-                    </li>{" "}
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Aimee Douglas
-                        </p>
-                      </div>
-                    </li>
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Aimee Douglas
-                        </p>
-                      </div>
-                    </li>{" "}
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Aimee Douglas
-                        </p>
-                      </div>
-                    </li>
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Aimee Douglas
-                        </p>
-                      </div>
-                    </li>{" "}
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Aimee Douglas
-                        </p>
-                      </div>
-                    </li>
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Aimee Douglas
-                        </p>
-                      </div>
-                    </li>{" "}
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Aimee Douglas
                         </p>
                       </div>
                     </li>
