@@ -41,11 +41,6 @@ const Feed = ({ page }) => {
         page === MY_NETWORK_PAGE ||
         page === CLOSED_HELPED_IN_PAGE) && <ProfileMenu page={page} />}
 
-      {/* Home menu */}
-      {(page === HOME_PAGE ||
-        page === MOST_KARMA_POSTS_PAGE ||
-        page === FOLLOWED_USERS_POSTS_PAGE) && <HomeMenu page={page} />}
-
       {page === MY_POSTS_PAGE && <HelpRequestsFeed />}
 
       {(page === HOME_PAGE ||

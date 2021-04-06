@@ -11,10 +11,7 @@ import React from "react";
 const LeftSidebar = ({ page }) => {
   return (
     <div className="hidden xl:block  xl:col-span-2">
-      <nav
-        aria-label="Sidebar"
-        className="sticky top-4 divide-y divide-gray-300"
-      >
+      <nav aria-label="Sidebar" className="divide-y divide-gray-300">
         <div className="">
           <p
             className="px-3 text-xs font-semibold text-gray-500 dark:text-white uppercase tracking-wider"
