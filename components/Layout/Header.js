@@ -4,7 +4,7 @@ import { Transition } from "@tailwindui/react";
 import ToggleTheme from "./Header/ToggleTheme";
 import Link from "next/Link";
 import * as Yup from "yup";
-import { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/router";
 import { useFormik } from "formik";
 const Header = ({ handleToggleMessages }) => {
   const [menuOpen, setMenuOpen] = useState(false);

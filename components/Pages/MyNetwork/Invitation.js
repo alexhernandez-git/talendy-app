@@ -1,9 +1,14 @@
 import React from "react";
-import { useRef, useState } from "react";
-import useOutsideClick from "hooks/useOutsideClick";
-import { Transition } from "@tailwindui/react";
+
+import { useRouter } from "next/router";
 
 const Invitation = ({ page }) => {
+  const router = useRouter();
+
+  const handleGoToProfile = (e) => {
+    e.stopPropagation();
+    router.push("/profile/123");
+  };
   return (
     <div className="flex items-center py-4 space-x-3">
       <div className="flex-shrink-0">
@@ -15,7 +20,9 @@ const Invitation = ({ page }) => {
       </div>
       <div className="min-w-0 flex-1">
         <p className="text-sm font-medium text-gray-900 dark:text-white">
-          <a href="#">Leonard Krasner</a>
+          <span onClick={handleGoToProfile} className="cursor-pointer">
+            Leonard Krasner
+          </span>
         </p>
         <p className="text-sm text-orange-500 flex items-center font-medium">
           <svg

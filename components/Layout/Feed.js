@@ -16,22 +16,39 @@ import {
   FOLLOWED_USERS_POSTS_PAGE,
   ACTIVE_HELPED_IN_PAGE,
   CLOSED_HELPED_IN_PAGE,
+  PROFILE_PAGE,
+  ACTIVE_POSTS_PROFILE_PAGE,
+  CLOSED_POSTS_PROFILE_PAGE,
 } from "pages";
 import HelpRequest from "components/Pages/MyPosts/HelpRequest";
 import HelpRequestsFeed from "components/Pages/MyPosts/HelpRequestsFeed";
 import Invitation from "components/Pages/MyNetwork/Invitation";
 import User from "./User";
-const Feed = ({ page, profile }) => {
+const Feed = ({ page }) => {
   return (
     <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
-      {page === SEARCH_POSTS_PAGE || page === SEARCH_USERS_PAGE ? (
+      {/* Search menu */}
+      {(page === SEARCH_POSTS_PAGE || page === SEARCH_USERS_PAGE) && (
         <SearchMenu page={page} />
-      ) : profile ? (
-        <ProfileMenu page={page} />
-      ) : (
-        <HomeMenu page={page} />
       )}
+
+      {/* Profile menu */}
+      {(page === MY_POSTS_PAGE ||
+        page === SEARCH_POSTS_PAGE ||
+        page === HELPED_IN_PAGE ||
+        page === ACTIVE_HELPED_IN_PAGE ||
+        page === CONNECTIONS_PAGE ||
+        page === PEOPLE_I_FOLLOW_PAGE ||
+        page === MY_NETWORK_PAGE ||
+        page === CLOSED_HELPED_IN_PAGE) && <ProfileMenu page={page} />}
+
+      {/* Home menu */}
+      {(page === HOME_PAGE ||
+        page === MOST_KARMA_POSTS_PAGE ||
+        page === FOLLOWED_USERS_POSTS_PAGE) && <HomeMenu page={page} />}
+
       {page === MY_POSTS_PAGE && <HelpRequestsFeed />}
+
       {(page === HOME_PAGE ||
         page === MY_POSTS_PAGE ||
         page === SEARCH_POSTS_PAGE ||
@@ -39,8 +56,18 @@ const Feed = ({ page, profile }) => {
         page === MOST_KARMA_POSTS_PAGE ||
         page === FOLLOWED_USERS_POSTS_PAGE ||
         page === ACTIVE_HELPED_IN_PAGE ||
-        page === CLOSED_HELPED_IN_PAGE) && (
-        <div className="mt-4">
+        page === CLOSED_HELPED_IN_PAGE ||
+        page === PROFILE_PAGE ||
+        page === ACTIVE_POSTS_PROFILE_PAGE ||
+        page === CLOSED_POSTS_PROFILE_PAGE) && (
+        <div
+          className={`${
+            page !== PROFILE_PAGE &&
+            page !== CLOSED_POSTS_PROFILE_PAGE &&
+            page !== ACTIVE_POSTS_PROFILE_PAGE &&
+            "mt-4"
+          }`}
+        >
           <h1 className="sr-only">Recent questions</h1>
           <ul className="space-y-4">
             <li>

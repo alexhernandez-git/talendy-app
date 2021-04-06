@@ -4,17 +4,25 @@ import useOutsideClick from "hooks/useOutsideClick";
 import { Transition } from "@tailwindui/react";
 import {
   ACTIVE_HELPED_IN_PAGE,
+  ACTIVE_POSTS_PROFILE_PAGE,
   CLOSED_HELPED_IN_PAGE,
   FOLLOWED_USERS_POSTS_PAGE,
   HELPED_IN_PAGE,
   HOME_PAGE,
   MOST_KARMA_POSTS_PAGE,
   MY_POSTS_PAGE,
+  PROFILE_PAGE,
   SEARCH_POSTS_PAGE,
 } from "pages";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const PostModal = ({ page, image, modalOpen, modalRef }) => {
+  const router = useRouter();
+  const handleGoToProfile = (e) => {
+    e.stopPropagation();
+    router.push("/profile/123");
+  };
   return (
     <Transition
       show={modalOpen}
@@ -168,6 +176,7 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
                       page === MOST_KARMA_POSTS_PAGE ||
                       page === FOLLOWED_USERS_POSTS_PAGE ||
                       page === MY_POSTS_PAGE ||
+                      page === ACTIVE_POSTS_PROFILE_PAGE ||
                       page === ACTIVE_HELPED_IN_PAGE) && (
                       <>
                         <div className="flex text-sm">
@@ -194,6 +203,8 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
                   {(page === HOME_PAGE ||
                     page === MOST_KARMA_POSTS_PAGE ||
                     page === FOLLOWED_USERS_POSTS_PAGE ||
+                    page === PROFILE_PAGE ||
+                    page === ACTIVE_POSTS_PROFILE_PAGE ||
                     page === SEARCH_POSTS_PAGE) && (
                     <div className="mt-6 flex justify-between space-x-8">
                       <input
@@ -226,9 +237,12 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
                     </div>
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-medium text-gray-900 dark:text-white">
-                        <a href="#" className="hover:underline">
+                        <span
+                          onClick={handleGoToProfile}
+                          className="hover:underline cursor-pointer"
+                        >
                           Dries Vincent
-                        </a>
+                        </span>
                       </p>
                       <p className="text-sm text-gray-500 dark:text-gray-100">
                         <time dateTime="2020-12-09T11:43:00">
