@@ -17,6 +17,12 @@ export default function Editor() {
       e.preventDefault();
       return false;
     }
+    console.log(e.key);
+    if (e.ctrlKey && e.keyCode === 13) {
+      alert("Submit");
+      e.preventDefault();
+      return false;
+    }
   };
 
   return (
