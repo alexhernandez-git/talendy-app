@@ -7,7 +7,7 @@ import ProfileMenu from "components/Pages/Profile/ProfileMenu";
 import HomeMenu from "components/Pages/Index/HomeMenu";
 import TopKarmaCoinsUser from "components/Pages/Index/TopKarmaUser";
 import { CONNECTIONS_PAGE, MY_NETWORK_PAGE, PEOPLE_I_FOLLOW_PAGE } from "pages";
-const PostsFeed = ({ page, profile }) => {
+const Feed = ({ page, profile }) => {
   return (
     <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
       {profile ? <ProfileMenu page={page} /> : <HomeMenu page={page} />}
@@ -55,4 +55,4 @@ const PostsFeed = ({ page, profile }) => {
   );
 };
 
-export default PostsFeed;
+export default Feed;

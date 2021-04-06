@@ -3,6 +3,9 @@ import React, { useRef, useState } from "react";
 import { Transition } from "@tailwindui/react";
 import ToggleTheme from "./Header/ToggleTheme";
 import Link from "next/Link";
+import * as Yup from "yup";
+import { useRouter } from "next/dist/client/router";
+import { useFormik } from "formik";
 const Header = ({ handleToggleMessages }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const handleOpenMenu = () => {
@@ -16,6 +19,21 @@ const Header = ({ handleToggleMessages }) => {
   };
   const menuRef = useRef();
   useOutsideClick(menuRef, () => handleCloseMenu());
+
+  const router = useRouter();
+
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      search: router?.query?.search ? router.query.search : "",
+    },
+    validationSchema: Yup.object({
+      search: Yup.string().required(),
+    }),
+    onSubmit: async (values) => {
+      router.push(`/search/${values.search}`);
+    },
+  });
   return (
     <header className="bg-white dark:bg-gray-700 shadow-sm lg:static lg:overflow-y-visible">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,33 +52,37 @@ const Header = ({ handleToggleMessages }) => {
           <div className="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
             <div className="flex items-center px-6 py-4 md:max-w-3xl md:mx-auto lg:max-w-none lg:mx-0 xl:px-0">
               <div className="w-full">
-                <label htmlFor="search" className="sr-only">
-                  Search
-                </label>
-                <div className="relative">
-                  <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
-                    <svg
-                      className="h-5 w-5 text-gray-400 dark:text-gray-100"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                <form onSubmit={formik.handleSubmit}>
+                  <label htmlFor="search" className="sr-only">
+                    Search
+                  </label>
+                  <div className="relative">
+                    <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
+                      <svg
+                        className="h-5 w-5 text-gray-400 dark:text-gray-100"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <input
+                      id="search"
+                      value={formik.values.search}
+                      onChange={formik.handleChange}
+                      name="search"
+                      className="block w-full bg-white dark:bg-gray-600 border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      placeholder="Search"
+                      type="text"
+                    />
                   </div>
-                  <input
-                    id="search"
-                    name="search"
-                    className="block w-full bg-white dark:bg-gray-600 border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                    placeholder="Search"
-                    type="search"
-                  />
-                </div>
+                </form>
               </div>
             </div>
           </div>

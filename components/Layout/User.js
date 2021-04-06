@@ -2,7 +2,11 @@ import React from "react";
 import { useRef, useState } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
 import { Transition } from "@tailwindui/react";
-import { CONNECTIONS_PAGE, PEOPLE_I_FOLLOW_PAGE } from "pages";
+import {
+  CONNECTIONS_PAGE,
+  PEOPLE_I_FOLLOW_PAGE,
+  SEARCH_USERS_PAGE,
+} from "pages";
 
 const User = ({ page }) => {
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -57,6 +61,14 @@ const User = ({ page }) => {
             </span>
           </div>
         </div>
+        {page === SEARCH_USERS_PAGE && (
+          <button
+            type="button"
+            className="inline-flex items-center px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+          >
+            Follow
+          </button>
+        )}
         {page === PEOPLE_I_FOLLOW_PAGE && (
           <button
             type="button"

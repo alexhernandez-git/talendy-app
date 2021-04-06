@@ -1,10 +1,10 @@
 import Layout from "components/Layout/Layout";
-import PostsFeed from "components/Layout/PostsFeed";
+import Feed from "components/Layout/Feed";
 import LeftSidebar from "components/Pages/HelpedIn/LeftSidebar";
 import ProfileCard from "components/Pages/Profile/ProfileCard";
 import { CLOSED_HELPED_IN_PAGE } from "pages";
 // import LeftSidebar from "components/Pages/Index/LeftSidebar";
-// import PostsFeed from "components/Pages/Index/PostsFeed";
+// import Feed from "components/Pages/Index/Feed";
 // import RightSidebar from "components/Pages/Index/RightSidebar";
 
 export default function Posts() {
@@ -17,7 +17,7 @@ export default function Posts() {
           <LeftSidebar page={page} />
           <ProfileCard mobile />
 
-          <PostsFeed page={page} profile />
+          <Feed page={page} profile />
           <ProfileCard />
         </div>
       </div>
