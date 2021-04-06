@@ -180,12 +180,11 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                         {(ref) => (
                           <div className={`w-full`} ref={ref}>
                             <div className="min-h-0 flex-1 ">
-                              <div className="bg-gray-200 dark:bg-gray-600 pt-5 pb-6 rounded-t-lg">
+                              <div className="bg-gradient-to-r from-orange-500 to-pink-500 pt-5 pb-6 rounded-t-lg">
                                 <div className="px-4 flex sm:justify-between items-center ">
                                   <div
                                     onClick={handleCloseChat}
-                                    className="mr-4 bg-gray-600 hover:bg-gray-500
-                                dark:bg-gray-800 dark:hover:bg-gray-900 h-8 w-8
+                                    className="mr-4 bg-gray-100 h-8 w-8 text-orange-500 
                                 flex justify-center items-center rounded-full
                                 cursor-pointer"
                                   >
@@ -194,7 +193,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                                       fill="none"
                                       viewBox="0 0 24 24"
                                       stroke="currentColor"
-                                      className="text-white w-5 h-5"
+                                      className="w-5 h-5"
                                     >
                                       <path
                                         strokeLinecap="round"
@@ -207,11 +206,11 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                                   <div className="sm:w-0 sm:flex-1">
                                     <h1
                                       id="message-heading"
-                                      className="text-lg font-medium text-gray-900 dark:text-white"
+                                      className="text-lg font-medium text-white"
                                     >
                                       Leslie Alexander
                                     </h1>
-                                    <p className="mt-1 text-sm text-gray-500 truncate dark:text-gray-200">
+                                    <p className="mt-1 text-sm truncate text-gray-200">
                                       joearmstrong@example.com
                                     </p>
                                   </div>

@@ -125,8 +125,8 @@ const Help = () => {
                               placeholder="Add a note"
                             ></textarea>
                           </div>
-                          <div className="mt-3 flex items-center justify-between">
-                            <div className="flex items-center">
+                          <div className="mt-3 sm:flex items-center justify-between">
+                            <div className="flex items-center justify-end sm:justify-start">
                               <button
                                 type="button"
                                 class="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
@@ -143,13 +143,13 @@ const Help = () => {
                                   <MdMic />
                                 </IconContext.Provider>
                               </button>
-                              <button class="mr-3 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 ">
+                              <button class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 ">
                                 <IconContext.Provider value={{ size: 23 }}>
                                   <MdHeadset />
                                 </IconContext.Provider>
                               </button>
                             </div>
-                            <div className="flex items-center">
+                            <div className="mt-4 sm:mt-0 flex items-center justify-end">
                               <button
                                 type="button"
                                 class="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
