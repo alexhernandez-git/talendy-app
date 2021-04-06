@@ -14,6 +14,8 @@ import {
   HELPED_IN_PAGE,
   MOST_KARMA_POSTS_PAGE,
   FOLLOWED_USERS_POSTS_PAGE,
+  ACTIVE_HELPED_IN_PAGE,
+  CLOSED_HELPED_IN_PAGE,
 } from "pages";
 import HelpRequest from "components/Pages/MyPosts/HelpRequest";
 import HelpRequestsFeed from "components/Pages/MyPosts/HelpRequestsFeed";
@@ -35,7 +37,9 @@ const Feed = ({ page, profile }) => {
         page === SEARCH_POSTS_PAGE ||
         page === HELPED_IN_PAGE ||
         page === MOST_KARMA_POSTS_PAGE ||
-        page === FOLLOWED_USERS_POSTS_PAGE) && (
+        page === FOLLOWED_USERS_POSTS_PAGE ||
+        page === ACTIVE_HELPED_IN_PAGE ||
+        page === CLOSED_HELPED_IN_PAGE) && (
         <div className="mt-4">
           <h1 className="sr-only">Recent questions</h1>
           <ul className="space-y-4">

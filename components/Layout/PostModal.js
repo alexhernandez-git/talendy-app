@@ -3,15 +3,18 @@ import { useRef, useState } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
 import { Transition } from "@tailwindui/react";
 import {
+  ACTIVE_HELPED_IN_PAGE,
+  CLOSED_HELPED_IN_PAGE,
   FOLLOWED_USERS_POSTS_PAGE,
   HELPED_IN_PAGE,
   HOME_PAGE,
   MOST_KARMA_POSTS_PAGE,
   MY_POSTS_PAGE,
+  SEARCH_POSTS_PAGE,
 } from "pages";
 import Link from "next/link";
 
-const PostModal = ({ page, image, modalOpen, handleToggleModal, modalRef }) => {
+const PostModal = ({ page, image, modalOpen, modalRef }) => {
   return (
     <Transition
       show={modalOpen}
@@ -164,7 +167,8 @@ const PostModal = ({ page, image, modalOpen, handleToggleModal, modalRef }) => {
                     {(page === HOME_PAGE ||
                       page === MOST_KARMA_POSTS_PAGE ||
                       page === FOLLOWED_USERS_POSTS_PAGE ||
-                      page === MY_POSTS_PAGE) && (
+                      page === MY_POSTS_PAGE ||
+                      page === ACTIVE_HELPED_IN_PAGE) && (
                       <>
                         <div className="flex text-sm">
                           <span className="inline-flex items-center text-sm">
@@ -189,7 +193,8 @@ const PostModal = ({ page, image, modalOpen, handleToggleModal, modalRef }) => {
                   </div>
                   {(page === HOME_PAGE ||
                     page === MOST_KARMA_POSTS_PAGE ||
-                    page === FOLLOWED_USERS_POSTS_PAGE) && (
+                    page === FOLLOWED_USERS_POSTS_PAGE ||
+                    page === SEARCH_POSTS_PAGE) && (
                     <div className="mt-6 flex justify-between space-x-8">
                       <input
                         type="text"
@@ -232,7 +237,10 @@ const PostModal = ({ page, image, modalOpen, handleToggleModal, modalRef }) => {
                       </p>
                     </div>
                   </div>
-                  {(page === MY_POSTS_PAGE || page === HELPED_IN_PAGE) && (
+                  {(page === MY_POSTS_PAGE ||
+                    page === HELPED_IN_PAGE ||
+                    page === ACTIVE_HELPED_IN_PAGE ||
+                    page === CLOSED_HELPED_IN_PAGE) && (
                     <div className="mt-5">
                       <Link href="/help/123">
                         <button
