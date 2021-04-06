@@ -22,8 +22,8 @@ export default function Toolbar() {
     const codeBlock = document.createElement("pre");
     const target = document.getSelection();
     if (
-      target.focusNode.nodeName.includes("#text") ||
-      target.focusNode.className.includes("codeBlock")
+      target?.focusNode?.nodeName?.includes("#text") ||
+      target?.focusNode?.className?.includes("codeBlock")
     ) {
       return;
     }
@@ -38,15 +38,6 @@ export default function Toolbar() {
 
   return (
     <div className="flex justify-end">
-      {/* <button onClick={(e) => format("bold")}>Bold</button>
-      <button onClick={(e) => format("italic")}>Italics</button>
-      <button onClick={(e) => format("insertUnorderedList")}>List</button>
-      <button onClick={(e) => addLink()}>Link</button>
-      <div id="url-input" className="hidden">
-        <input id="txtFormatUrl" placeholder="url" />
-        <button onClick={(e) => setUrl(e)}>Create Link</button>
-      </div>
-      <button onClick={(e) => setHeader()}>Header</button> */}
       <button
         className="bg-gray-800 p-2 rounded cursor-pointer"
         onClick={(e) => addCodeBlock()}

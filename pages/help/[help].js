@@ -86,7 +86,7 @@ const Help = () => {
           <div className="mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
             <div className="space-y-6 lg:col-start-1 lg:col-span-2">
               <section aria-labelledby="notes-title" className=" sticky top-4">
-                <div className="bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 dark:bg-gray-700 shadow sm:rounded-lg sm:overflow-hidden">
+                <div className="bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg sm:overflow-hidden">
                   <div className=" ">
                     <div className="px-4 py-5 sm:px-6">
                       <h2
