@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from "react";
 
 const ToggleTheme = () => {
-  const [isDark, setIsDark] = useState(false);
+  const [isLight, setIsLight] = useState(false);
   useEffect(() => {
-    if (localStorage.theme === "dark") {
-      setIsDark(true);
+    if (localStorage.theme === "light") {
+      setIsLight(true);
     }
   }, []);
   const handleToggleIsDark = () => {
-    console.log("entra");
-    if (isDark) {
-      document.documentElement.classList.remove("dark");
-      localStorage.removeItem("theme");
-      setIsDark(false);
-    } else {
+    if (isLight) {
       document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
+      localStorage.removeItem("theme");
+      setIsLight(false);
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
 
-      setIsDark(true);
+      setIsLight(true);
     }
   };
   return (
@@ -25,21 +24,21 @@ const ToggleTheme = () => {
       onClick={handleToggleIsDark}
       type="button"
       className={`bg-gray-200  dark:bg-gray-800 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 outline-none ring-2 ring-offset-2 ${
-        isDark ? "ring-blue-600" : "ring-yellow-300"
+        isLight ? "ring-yellow-300" : "ring-blue-600"
       }`}
       aria-pressed="false"
     >
       <span className="sr-only">Use setting</span>
       <span
         className={`${
-          isDark ? "translate-x-5" : "translate-x-0"
+          isLight ? "translate-x-0" : "translate-x-5"
         } pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white  shadow transform ring-0 transition ease-in-out duration-200`}
       >
         <span
           className={`${
-            isDark
-              ? "opacity-0 ease-out duration-100"
-              : "opacity-100 ease-in duration-200"
+            isLight
+              ? "opacity-100 ease-in duration-200"
+              : "opacity-0 ease-out duration-100"
           } absolute inset-0 h-full w-full flex items-center justify-center transition-opacity`}
           aria-hidden="true"
         >
@@ -58,9 +57,9 @@ const ToggleTheme = () => {
         </span>
         <span
           className={`${
-            isDark
-              ? "opacity-100 ease-in duration-200"
-              : "opacity-0 ease-out duration-100"
+            isLight
+              ? "opacity-0 ease-out duration-100"
+              : "opacity-100 ease-in duration-200"
           } absolute inset-0 h-full w-full flex items-center justify-center transition-opacity`}
           aria-hidden="true"
         >

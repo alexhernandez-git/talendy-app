@@ -180,7 +180,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                         {(ref) => (
                           <div className={`w-full`} ref={ref}>
                             <div className="min-h-0 flex-1 ">
-                              <div className="bg-gradient-to-r from-orange-500 to-pink-500 pt-5 pb-6 rounded-t-lg">
+                              <div className="bg-gradient-to-r from-orange-500 to-pink-500 py-5 rounded-t-lg">
                                 <div className="px-4 flex sm:justify-between items-center ">
                                   <div
                                     onClick={handleCloseChat}
@@ -210,9 +210,6 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                                     >
                                       Leslie Alexander
                                     </h1>
-                                    <p className="mt-1 text-sm truncate text-gray-200">
-                                      joearmstrong@example.com
-                                    </p>
                                   </div>
                                 </div>
                               </div>

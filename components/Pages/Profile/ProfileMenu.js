@@ -12,7 +12,7 @@ import {
 
 const ProfileMenu = ({ page }) => {
   return (
-    <div className="px-4 sm:px-0">
+    <div className="px-4 mb-4 sm:px-0">
       <div className="sm:hidden">
         <label htmlFor="question-tabs" className="sr-only">
           Select a tab

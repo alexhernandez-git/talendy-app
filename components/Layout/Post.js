@@ -81,96 +81,94 @@ const Post = ({ page, image }) => {
                 </time>
               </p>
             </div>
-            {page === MY_POSTS_PAGE && (
-              <div className="flex-shrink-0 self-center flex">
-                <div className="relative inline-block text-left">
-                  <div>
-                    <button
-                      onMouseDown={handleToggleOptions}
-                      onClick={(e) => e.stopPropagation()}
-                      type="button"
-                      className="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-100"
-                      id="options-menu-0"
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                    >
-                      <span className="sr-only">Open options</span>
-
-                      <svg
-                        className="h-5 w-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-                      </svg>
-                    </button>
-                  </div>
-                  <Transition
-                    show={optionsOpen}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-out duration-100"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
+            <div className="flex-shrink-0 self-center flex">
+              <div className="relative inline-block text-left">
+                <div>
+                  <button
+                    onMouseDown={handleToggleOptions}
+                    onClick={(e) => e.stopPropagation()}
+                    type="button"
+                    className="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-100"
+                    id="options-menu-0"
+                    aria-expanded="false"
+                    aria-haspopup="true"
                   >
-                    {(ref) => (
-                      <div
-                        ref={ref}
-                        className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none"
-                        role="menu"
-                        aria-orientation="vertical"
-                        aria-labelledby="options-menu-0"
-                      >
-                        <div className="py-1" role="none" ref={optionsRef}>
-                          <a
-                            href="#"
-                            className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-                            role="menuitem"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="mr-3 h-5 w-5 text-gray-400"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                              <path
-                                fillRule="evenodd"
-                                d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            <span>Edit</span>
-                          </a>
-                          <a
-                            href="#"
-                            className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-                            role="menuitem"
-                          >
-                            <svg
-                              className="mr-3 h-5 w-5 text-gray-400"
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            <span>Delete</span>
-                          </a>
-                        </div>
-                      </div>
-                    )}
-                  </Transition>
+                    <span className="sr-only">Open options</span>
+
+                    <svg
+                      className="h-5 w-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                    </svg>
+                  </button>
                 </div>
+                <Transition
+                  show={optionsOpen}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-out duration-100"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  {(ref) => (
+                    <div
+                      ref={ref}
+                      className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                      role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="options-menu-0"
+                    >
+                      <div className="py-1" role="none" ref={optionsRef}>
+                        <a
+                          href="#"
+                          className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                          role="menuitem"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="mr-3 h-5 w-5 text-gray-400"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                            <path
+                              fillRule="evenodd"
+                              d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <span>Edit</span>
+                        </a>
+                        <a
+                          href="#"
+                          className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                          role="menuitem"
+                        >
+                          <svg
+                            className="mr-3 h-5 w-5 text-gray-400"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <span>Delete</span>
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                </Transition>
               </div>
-            )}
+            </div>
           </div>
           <h2
             id="question-title-81614"
@@ -223,59 +221,61 @@ const Post = ({ page, image }) => {
               </button>
             </span>
           </div>
-          {(page === HOME_PAGE ||
-            page === MOST_KARMA_POSTS_PAGE ||
-            page === FOLLOWED_USERS_POSTS_PAGE ||
-            page === MY_POSTS_PAGE ||
-            page === ACTIVE_HELPED_IN_PAGE ||
-            page === ACTIVE_POSTS_PROFILE_PAGE) && (
-            <>
-              <div className="flex text-sm">
-                <span className="inline-flex items-center text-sm">
-                  <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-100">
-                    <svg
-                      className="h-5 w-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
-                    </svg>
-                    <span className="font-medium text-gray-900 dark:text-white">
-                      Share
-                    </span>
-                  </button>
+
+          <div className="flex text-sm">
+            <span className="inline-flex items-center text-sm">
+              <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-100">
+                <svg
+                  className="h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
+                </svg>
+                <span className="font-medium text-gray-900 dark:text-white">
+                  Share
                 </span>
-              </div>
-            </>
-          )}
-        </div>
-        {(page === HOME_PAGE ||
-          page === MOST_KARMA_POSTS_PAGE ||
-          page === FOLLOWED_USERS_POSTS_PAGE ||
-          page === PROFILE_PAGE ||
-          page === ACTIVE_POSTS_PROFILE_PAGE ||
-          page === SEARCH_POSTS_PAGE) && (
-          <div className="mt-6 flex justify-between space-x-8">
-            <input
-              type="text"
-              name="title"
-              onClick={(e) => e.stopPropagation()}
-              id="title"
-              className="block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-100  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-              placeholder="Message"
-              aria-describedby="title-description"
-              value=""
-            />
-            <button
-              type="submit"
-              className="w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
-            >
-              Request to help
-            </button>
+              </button>
+            </span>
           </div>
-        )}
+        </div>
+        <div className="mt-6 flex justify-between space-x-8">
+          <span class="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-white bg-white dark:bg-gray-700 ">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 mr-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+            Private
+          </span>
+        </div>
+        <div className="mt-6 flex justify-between space-x-8">
+          <input
+            type="text"
+            name="title"
+            onClick={(e) => e.stopPropagation()}
+            id="title"
+            className="block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-100  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+            placeholder="Message"
+            aria-describedby="title-description"
+            value=""
+          />
+          <button
+            type="submit"
+            className="w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
+          >
+            Request to help
+          </button>
+        </div>
       </article>
       <PostModal
         page={page}

@@ -10,10 +10,10 @@ export default function Profile() {
     <Layout>
       <div className="py-10">
         <div className="max-w-3xl mx-auto sm:px-6 flex flex-col lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
-          <ProfileCard mobile />
+          <ProfileCard mobile page={page} />
           <LeftSidebar page={page} />
           <Feed page={page} />
-          <ProfileCard />
+          <ProfileCard page={page} />
         </div>
       </div>
     </Layout>

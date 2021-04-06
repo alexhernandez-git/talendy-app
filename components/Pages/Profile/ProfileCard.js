@@ -1,6 +1,11 @@
+import {
+  ACTIVE_POSTS_PROFILE_PAGE,
+  CLOSED_POSTS_PROFILE_PAGE,
+  PROFILE_PAGE,
+} from "pages";
 import React from "react";
 
-const ProfileCard = ({ mobile }) => {
+const ProfileCard = ({ mobile, page }) => {
   return (
     <aside
       className={`lg:col-span-4  mb-10 lg:mb-0 ${
@@ -44,34 +49,38 @@ const ProfileCard = ({ mobile }) => {
             </div>
           </div>
         </section>
-        <section aria-labelledby="trending-heading">
-          <div className="bg-white dark:bg-gray-700 rounded-lg shadow">
-            <div className="p-6">
-              <div>
-                <button
-                  type="button"
-                  class="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
-                >
-                  Follow
-                </button>
-                <button
-                  type="button"
-                  class="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 mr-2"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
+        {(page === PROFILE_PAGE ||
+          page === ACTIVE_POSTS_PROFILE_PAGE ||
+          page === CLOSED_POSTS_PROFILE_PAGE) && (
+          <section aria-labelledby="trending-heading">
+            <div className="bg-white dark:bg-gray-700 rounded-lg shadow">
+              <div className="p-6">
+                <div>
+                  <button
+                    type="button"
+                    class="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
                   >
-                    <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
-                  </svg>
-                  Connect
-                </button>
+                    Follow
+                  </button>
+                  <button
+                    type="button"
+                    class="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
+                    </svg>
+                    Connect
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
       </div>
     </aside>
   );

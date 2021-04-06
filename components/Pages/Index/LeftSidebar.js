@@ -19,9 +19,57 @@ const LeftSidebar = ({ page }) => {
         aria-label="Sidebar"
         className="sticky top-4 divide-y divide-gray-300"
       >
-        <div className="">
+        <div className="pb-3">
           <p
-            className="px-3 text-xs font-semibold text-gray-500 dark:text-white uppercase tracking-wider"
+            className="px-3 text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+            id="communities-headline"
+          >
+            Posts
+          </p>
+          <div
+            className="mt-3 space-y-2"
+            aria-labelledby="communities-headline"
+          >
+            <span
+              onClick={handleSetCommunity.bind(this, 0)}
+              className={`
+                  ${
+                    true
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
+            >
+              <span className="truncate">All</span>
+            </span>
+
+            <span
+              onClick={handleSetCommunity.bind(this, 1)}
+              className={`
+                  ${
+                    community === 1
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
+            >
+              <span className="truncate">Public</span>
+            </span>
+            <span
+              onClick={handleSetCommunity.bind(this, 2)}
+              className={`
+                  ${
+                    community === 2
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
+            >
+              <span className="truncate">Private</span>
+            </span>
+          </div>
+        </div>
+
+        <div className="pt-3">
+          <p
+            className="px-3 text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider"
             id="communities-headline"
           >
             Communities

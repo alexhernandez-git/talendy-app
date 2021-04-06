@@ -14,7 +14,7 @@ const HelpRequestsFeed = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <div className="mt-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+    <div className="my-4 bg-white dark:bg-gray-700 rounded-lg shadow">
       <div
         className="flex justify-between cursor-pointer p-6"
         onClick={handleToggle}

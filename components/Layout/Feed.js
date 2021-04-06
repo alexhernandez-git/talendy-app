@@ -59,14 +59,7 @@ const Feed = ({ page }) => {
         page === PROFILE_PAGE ||
         page === ACTIVE_POSTS_PROFILE_PAGE ||
         page === CLOSED_POSTS_PROFILE_PAGE) && (
-        <div
-          className={`${
-            page !== PROFILE_PAGE &&
-            page !== CLOSED_POSTS_PROFILE_PAGE &&
-            page !== ACTIVE_POSTS_PROFILE_PAGE &&
-            "mt-4"
-          }`}
-        >
+        <div>
           <h1 className="sr-only">Recent questions</h1>
           <ul className="space-y-4">
             <li>
