@@ -7,6 +7,7 @@ import { HELP_PAGE } from "pages";
 import Message from "components/Pages/Help/Message";
 import { IconContext } from "react-icons";
 import { MdHeadset, MdMic, MdScreenShare } from "react-icons/md";
+import { useRouter } from "next/router";
 const Help = () => {
   const page = HELP_PAGE;
   const image = true;
@@ -30,6 +31,11 @@ const Help = () => {
       document.body.style.overflow = "";
     }
   }, [modalOpen]);
+  const router = useRouter();
+  const handleGoToProfile = (e) => {
+    e.stopPropagation();
+    router.push("/profile/123");
+  };
   return (
     <>
       <Layout>
@@ -207,7 +213,12 @@ const Help = () => {
                           className="w-8 h-8 rounded-full"
                         />
                         <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Aimee Douglas
+                          <span
+                            onClick={handleGoToProfile}
+                            className="hover:underline cursor-pointer"
+                          >
+                            Aimee Douglas
+                          </span>
                         </p>
                       </div>
                     </li>
@@ -219,7 +230,12 @@ const Help = () => {
                           className="w-8 h-8 rounded-full"
                         />
                         <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          Andrea McMillan
+                          <span
+                            onClick={handleGoToProfile}
+                            className="hover:underline cursor-pointer"
+                          >
+                            Andrea McMillan
+                          </span>
                         </p>
                       </div>
                     </li>

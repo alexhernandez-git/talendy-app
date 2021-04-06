@@ -6,7 +6,7 @@ import Link from "next/Link";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
-const Header = ({ handleToggleMessages }) => {
+const Header = ({ handleToggleMessages, handleOpenModal }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const handleOpenMenu = () => {
     setMenuOpen(true);
@@ -255,12 +255,12 @@ const Header = ({ handleToggleMessages }) => {
                 )}
               </Transition>
             </div>
-            <a
-              href="#"
-              className="ml-6 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+            <span
+              onClick={handleOpenModal}
+              className="cursor-pointer ml-6 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
             >
               Post
-            </a>
+            </span>
           </div>
         </div>
       </div>

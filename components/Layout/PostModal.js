@@ -2,22 +2,11 @@ import React from "react";
 import { useRef, useState } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
 import { Transition } from "@tailwindui/react";
-import {
-  ACTIVE_HELPED_IN_PAGE,
-  ACTIVE_POSTS_PROFILE_PAGE,
-  CLOSED_HELPED_IN_PAGE,
-  FOLLOWED_USERS_POSTS_PAGE,
-  HELPED_IN_PAGE,
-  HOME_PAGE,
-  MOST_KARMA_POSTS_PAGE,
-  MY_POSTS_PAGE,
-  PROFILE_PAGE,
-  SEARCH_POSTS_PAGE,
-} from "pages";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const PostModal = ({ page, image, modalOpen, modalRef }) => {
+const NewPostModal = ({ modalOpen, modalRef }) => {
   const router = useRouter();
   const handleGoToProfile = (e) => {
     e.stopPropagation();
@@ -121,32 +110,30 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
                       soluta veritatis nisi id?
                     </p>
                   </div>
-                  {image && (
-                    <div className="mt-4 relative">
-                      <img src="/static/images/freelaniumsc.png" />
-                      <div className="absolute bottom-4 right-4">
-                        <a
-                          target="_blank"
-                          href={"/static/images/freelaniumsc.png"}
+                  <div className="mt-4 relative">
+                    <img src="/static/images/freelaniumsc.png" />
+                    <div className="absolute bottom-4 right-4">
+                      <a
+                        target="_blank"
+                        href={"/static/images/freelaniumsc.png"}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 text-gray-500"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
                         >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6 text-gray-500"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                            />
-                          </svg>
-                        </a>
-                      </div>
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          />
+                        </svg>
+                      </a>
                     </div>
-                  )}
+                  </div>
                   <div className="mt-6 flex justify-between space-x-8">
                     <div className="flex space-x-6">
                       <span className="inline-flex items-center text-sm">
@@ -306,4 +293,4 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
   );
 };
 
-export default PostModal;
+export default NewPostModal;
