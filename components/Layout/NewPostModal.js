@@ -92,53 +92,178 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
 
             <section
               ref={modalRef}
-              className="inline-block align-bottom bg-white dark:bg-gray-700 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full"
+              className="inline-block align-bottom bg-white dark:bg-gray-700 rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full"
             >
               <div class="shadow sm:rounded-lg">
-                <div class="px-4 py-5 sm:px-6">
+                <div class="px-4 py-5 sm:px-6 bg-gradient-to-r from-orange-500 to-pink-500  sm:rounded-t-lg">
                   <h2
                     id="applicant-information-title"
-                    class="text-lg leading-6 font-medium text-gray-900 dark:text-white"
+                    class="text-lg leading-6 font-medium text-white"
                   >
                     Create Post
                   </h2>
                 </div>
-                <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
-                  <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-                    {/* <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">
-                        Application for
-                      </dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        Backend Developer
+                <div class=" px-4 py-5 sm:px-6">
+                  <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div class="sm:col-start-2">
+                      <dd class="mt-1 text-sm text-gray-900 flex justify-end">
+                        <div>
+                          <label id="listbox-label" class="sr-only">
+                            Change published status
+                          </label>
+                          <div class="relative">
+                            <div class="inline-flex shadow-sm rounded-md divide-x divide-gray-900">
+                              <div class="relative z-0 inline-flex shadow-sm rounded-md divide-x divide-gray-200 dark:divide-gray-900">
+                                <div class="relative inline-flex items-center dark:bg-gray-800 py-2 pl-3 pr-4 border border-transparent rounded-l-md shadow-sm text-gray-900 dark:text-white">
+                                  <svg
+                                    class="h-5 w-5"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                      clip-rule="evenodd"
+                                    />
+                                  </svg>
+                                  <p class="ml-2.5 text-sm font-medium">
+                                    Anyone
+                                  </p>
+                                </div>
+                                <button
+                                  type="button"
+                                  class="relative inline-flex items-center dark:bg-gray-800 p-2 rounded-l-none rounded-r-md text-sm font-medium text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-900"
+                                  aria-haspopup="listbox"
+                                  aria-expanded="true"
+                                  aria-labelledby="listbox-label"
+                                >
+                                  <span class="sr-only">
+                                    Change published status
+                                  </span>
+                                  <svg
+                                    class="h-5 w-5 "
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                      clip-rule="evenodd"
+                                    />
+                                  </svg>
+                                </button>
+                              </div>
+                            </div>
+
+                            {/* <!--
+      Select popover, show/hide based on select state.
+
+      Entering: ""
+        From: ""
+        To: ""
+      Leaving: "transition ease-in duration-100"
+        From: "opacity-100"
+        To: "opacity-0"
+    --> */}
+                            <ul
+                              class="origin-top-right absolute right-0 mt-2 w-72 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-900 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                              tabindex="-1"
+                              role="listbox"
+                              aria-labelledby="listbox-label"
+                              aria-activedescendant="listbox-option-0"
+                            >
+                              {/* <!--
+        Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
+
+        Highlighted: "text-white bg-gray-800", Not Highlighted: "text-gray-900"
+      --> */}
+                              <li
+                                class="text-gray-900 dark:text-white cursor-default select-none relative p-4 text-sm"
+                                id="listbox-option-0"
+                                role="option"
+                              >
+                                <div class="flex flex-col">
+                                  <div class="flex justify-between">
+                                    {/* <!-- Selected: "font-semibold", Not Selected: "font-normal" --> */}
+                                    <p class="font-semibold">Anyone</p>
+                                    {/* <!--
+              Checkmark, only display for selected option.
+
+              Highlighted: "text-white", Not Highlighted: "text-orange-500"
+            --> */}
+                                    <span class="text-gray-900 dark:text-white">
+                                      <svg
+                                        class="h-5 w-5"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                      >
+                                        <path
+                                          fill-rule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"
+                                        />
+                                      </svg>
+                                    </span>
+                                  </div>
+                                  {/* <!-- Highlighted: "text-orange-200", Not Highlighted: "text-gray-500" --> */}
+                                  <p class="text-gray-500 dark:text-gray-300 mt-2">
+                                    Everyone can ask to help you.
+                                  </p>
+                                </div>
+                              </li>
+                              <li
+                                class="text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-600 cursor-pointer select-none relative p-4 text-sm"
+                                id="listbox-option-0"
+                                role="option"
+                              >
+                                <div class="flex flex-col">
+                                  <div class="flex justify-between">
+                                    {/* <!-- Selected: "font-semibold", Not Selected: "font-normal" --> */}
+                                    <p class="font-normal">Connections only</p>
+                                    {/* <!--
+              Checkmark, only display for selected option.
+
+              Highlighted: "text-white", Not Highlighted: "text-orange-500"
+            --> */}
+                                    <span class="text-orange-500 hidden">
+                                      <svg
+                                        class="h-5 w-5"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                      >
+                                        <path
+                                          fill-rule="evenodd"
+                                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"
+                                        />
+                                      </svg>
+                                    </span>
+                                  </div>
+                                  {/* <!-- Highlighted: "text-orange-200", Not Highlighted: "text-gray-500" --> */}
+                                  <p class="text-gray-500 dark:text-gray-300 mt-2">
+                                    Only your connections can ask to help you.
+                                  </p>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
                       </dd>
                     </div>
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">
-                        Email address
-                      </dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        ricardocooper@example.com
-                      </dd>
-                    </div>
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">
-                        Salary expectation
-                      </dt>
-                      <dd class="mt-1 text-sm text-gray-900">$120,000</dd>
-                    </div>
-                    <div class="sm:col-span-1">
-                      <dt class="text-sm font-medium text-gray-500">Phone</dt>
-                      <dd class="mt-1 text-sm text-gray-900">
-                        +1 555-555-5555
-                      </dd>
-                    </div> */}
                     <div class="sm:col-span-2">
                       <dd class="mt-1 text-sm text-gray-900">
                         <Editor title />
                       </dd>
                     </div>
-                    <div class="sm:col-span-2">
+                    {/* <div class="sm:col-span-2">
                       <dt class="text-sm font-medium text-gray-500">
                         Attachments
                       </dt>
@@ -203,10 +328,10 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
                           </li>
                         </ul>
                       </dd>
-                    </div>
+                    </div>*/}
                   </dl>
                 </div>
-                <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                <div class="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-right sm:px-6">
                   <button
                     type="submit"
                     class="bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 "

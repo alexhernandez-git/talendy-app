@@ -34,17 +34,13 @@ const ProfileMenu = ({ page }) => {
             <a
               aria-current="page"
               className={`${
-                page === PROFILE_PAGE ||
-                page === ACTIVE_POSTS_PROFILE_PAGE ||
-                page === CLOSED_POSTS_PROFILE_PAGE
+                page === PROFILE_PORTFOLIO_PAGE
                   ? "text-gray-900"
                   : "text-gray-500"
               }  dark:text-white rounded-l-lg group relative  hover:text-gray-700 dark:hover:bg-gray-800 min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10`}
             >
-              <span>Posts</span>
-              {page === PROFILE_PAGE ||
-              page === ACTIVE_POSTS_PROFILE_PAGE ||
-              page === CLOSED_POSTS_PROFILE_PAGE ? (
+              <span>Portfolio</span>
+              {page === PROFILE_PORTFOLIO_PAGE ? (
                 <span
                   aria-hidden="true"
                   className="bg-orange-500 absolute inset-x-0 bottom-0 h-0.5"
@@ -58,16 +54,20 @@ const ProfileMenu = ({ page }) => {
             </a>
           </Link>
 
-          <Link href="/profile/portfolio/123">
+          <Link href="/profile/posts/123">
             <a
               className={`${
-                page === PROFILE_PORTFOLIO_PAGE
+                page === PROFILE_PAGE ||
+                page === ACTIVE_POSTS_PROFILE_PAGE ||
+                page === CLOSED_POSTS_PROFILE_PAGE
                   ? "text-gray-900"
                   : "text-gray-500"
               }  dark:text-white  rounded-r-lg group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10  hover:text-gray-700 dark:hover:bg-gray-800`}
             >
-              <span>Portfolio</span>
-              {page === PROFILE_PORTFOLIO_PAGE ? (
+              <span>Posts</span>
+              {page === PROFILE_PAGE ||
+              page === ACTIVE_POSTS_PROFILE_PAGE ||
+              page === CLOSED_POSTS_PROFILE_PAGE ? (
                 <span
                   aria-hidden="true"
                   className="bg-orange-500 absolute inset-x-0 bottom-0 h-0.5"
