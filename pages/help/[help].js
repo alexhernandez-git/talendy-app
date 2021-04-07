@@ -130,7 +130,7 @@ const Help = () => {
                             <div className="flex items-center justify-end sm:justify-start">
                               <button
                                 type="button"
-                                class="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                                className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                               >
                                 <IconContext.Provider
                                   value={{ size: 18, className: "mr-2" }}
@@ -139,12 +139,12 @@ const Help = () => {
                                 </IconContext.Provider>
                                 Screen
                               </button>
-                              <button class="inline-flex items-center px-4 py-2 font-medium rounded-md text-orange-500 dark:text-gray-100 ">
+                              <button className="inline-flex items-center px-4 py-2 font-medium rounded-md text-orange-500 dark:text-gray-100 ">
                                 <IconContext.Provider value={{ size: 23 }}>
                                   <MdMic />
                                 </IconContext.Provider>
                               </button>
-                              <button class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 ">
+                              <button className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 ">
                                 <IconContext.Provider value={{ size: 23 }}>
                                   <MdHeadset />
                                 </IconContext.Provider>
@@ -153,13 +153,13 @@ const Help = () => {
                             <div className="mt-4 sm:mt-0 flex items-center justify-end">
                               <button
                                 type="button"
-                                class="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                                className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                               >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
                                   fill="none"
                                   viewBox="0 0 24 24"
-                                  class="h-5 w-5"
+                                  className="h-5 w-5"
                                   stroke="currentColor"
                                 >
                                   <path

@@ -242,7 +242,7 @@ const Post = ({ page, image }) => {
           </div>
         </div>
         <div className="mt-6 flex justify-between space-x-8">
-          <span class="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-white bg-white dark:bg-gray-700 ">
+          <span className="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-white bg-white dark:bg-gray-700 ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 mr-2"
@@ -259,7 +259,7 @@ const Post = ({ page, image }) => {
           </span>
         </div>
         <div className="mt-6 flex justify-between space-x-8">
-          <span class="mt-2 flex w-full items-center justify-center px-4 py-2 border dark:border-green-300 border-green-500 shadow-sm text-sm font-medium rounded-md dark:text-green-300 text-green-500 bg-white dark:bg-gray-700 ">
+          <span className="mt-2 flex w-full items-center justify-center px-4 py-2 border dark:border-green-300 border-green-500 shadow-sm text-sm font-medium rounded-md dark:text-green-300 text-green-500 bg-white dark:bg-gray-700 ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 mr-2"

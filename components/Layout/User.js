@@ -7,6 +7,7 @@ import {
   PEOPLE_I_FOLLOW_PAGE,
   SEARCH_USERS_PAGE,
 } from "pages";
+import { useRouter } from "next/router";
 
 const User = ({ page }) => {
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -21,6 +22,12 @@ const User = ({ page }) => {
   };
   const optionsRef = useRef();
   useOutsideClick(optionsRef, () => handleCloseOptions());
+  const router = useRouter();
+
+  const handleGoToProfile = (e) => {
+    e.stopPropagation();
+    router.push("/profile/123");
+  };
   return (
     <article
       aria-labelledby="question-title-81614"
@@ -37,9 +44,12 @@ const User = ({ page }) => {
           </div>
           <div className="min-w-0 flex-1">
             <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">
-              <a href="#" className="hover:underline">
+              <span
+                onClick={handleGoToProfile}
+                className="hover:underline cursor-pointer"
+              >
                 Dries Vincent
-              </a>
+              </span>
             </p>
             <span className="inline-flex items-center text-sm">
               <svg
