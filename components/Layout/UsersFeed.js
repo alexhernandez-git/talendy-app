@@ -3,7 +3,7 @@ import Post from "components/Layout/Post";
 import Link from "next/link";
 import User from "components/Layout/User";
 import Invitation from "components/Pages/MyNetwork/Invitation";
-import ProfileMenu from "components/Pages/Profile/ProfileMenu";
+import ProfileMenu from "components/Pages/User/UserMenu";
 import HomeMenu from "components/Pages/Index/HomeMenu";
 import TopKarmaCoinsUser from "components/Pages/Index/TopKarmaUser";
 import { CONNECTIONS_PAGE, MY_NETWORK_PAGE, PEOPLE_I_FOLLOW_PAGE } from "pages";

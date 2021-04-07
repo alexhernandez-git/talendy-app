@@ -26,10 +26,14 @@ a {
 /* Editor */
 .editor {
   min-height: 100px;
-  font-size: 20px;
 }
 
-#title:empty:before,
+.editor:focus,
+#editor-title:focus {
+  outline: none;
+}
+
+#editor-title:empty:before,
 .editor:empty:before {
   content: attr(data-placeholder);
   color: gray;

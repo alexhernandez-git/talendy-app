@@ -16,6 +16,7 @@ import {
 } from "pages";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Editor from "components/Editor/Editor";
 
 const PostModal = ({ page, image, modalOpen, modalRef }) => {
   const router = useRouter();
@@ -93,18 +94,18 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
               ref={modalRef}
               className="inline-block align-bottom bg-white dark:bg-gray-700 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full"
             >
-              <div class="bg-white shadow sm:rounded-lg">
+              <div class="shadow sm:rounded-lg">
                 <div class="px-4 py-5 sm:px-6">
                   <h2
                     id="applicant-information-title"
-                    class="text-lg leading-6 font-medium text-gray-900"
+                    class="text-lg leading-6 font-medium text-gray-900 dark:text-white"
                   >
                     Create Post
                   </h2>
                 </div>
                 <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
                   <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-                    <div class="sm:col-span-1">
+                    {/* <div class="sm:col-span-1">
                       <dt class="text-sm font-medium text-gray-500">
                         Application for
                       </dt>
@@ -131,15 +132,10 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
                       <dd class="mt-1 text-sm text-gray-900">
                         +1 555-555-5555
                       </dd>
-                    </div>
+                    </div> */}
                     <div class="sm:col-span-2">
-                      <dt class="text-sm font-medium text-gray-500">About</dt>
                       <dd class="mt-1 text-sm text-gray-900">
-                        Fugiat ipsum ipsum deserunt culpa aute sint do nostrud
-                        anim incididunt cillum culpa consequat. Excepteur qui
-                        ipsum aliquip consequat sint. Sit id mollit nulla mollit
-                        nostrud in ea officia proident. Irure nostrud pariatur
-                        mollit ad adipisicing reprehenderit deserunt qui eu.
+                        <Editor title />
                       </dd>
                     </div>
                     <div class="sm:col-span-2">

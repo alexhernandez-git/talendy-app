@@ -2,6 +2,7 @@ import {
   ACTIVE_POSTS_PROFILE_PAGE,
   CLOSED_POSTS_PROFILE_PAGE,
   PROFILE_PAGE,
+  PROFILE_PORTFOLIO_PAGE,
 } from "pages";
 import React from "react";
 
@@ -51,7 +52,8 @@ const ProfileCard = ({ mobile, page }) => {
         </section>
         {(page === PROFILE_PAGE ||
           page === ACTIVE_POSTS_PROFILE_PAGE ||
-          page === CLOSED_POSTS_PROFILE_PAGE) && (
+          page === CLOSED_POSTS_PROFILE_PAGE ||
+          page === PROFILE_PORTFOLIO_PAGE) && (
           <section aria-labelledby="trending-heading">
             <div className="bg-white dark:bg-gray-700 rounded-lg shadow">
               <div className="p-6">

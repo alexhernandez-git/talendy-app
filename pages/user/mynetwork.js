@@ -1,6 +1,6 @@
 import Layout from "components/Layout/Layout";
 import Feed from "components/Layout/Feed";
-import ProfileCard from "components/Pages/Profile/ProfileCard";
+import ProfileCard from "components/Pages/User/UserCard";
 import { MY_NETWORK_PAGE } from "pages";
 import LeftSidebar from "components/Pages/MyNetwork/LeftSidebar";
 export default function Posts() {

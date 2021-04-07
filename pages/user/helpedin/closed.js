@@ -1,7 +1,7 @@
 import Layout from "components/Layout/Layout";
 import Feed from "components/Layout/Feed";
 import LeftSidebar from "components/Pages/HelpedIn/LeftSidebar";
-import ProfileCard from "components/Pages/Profile/ProfileCard";
+import ProfileCard from "components/Pages/User/UserCard";
 import { CLOSED_HELPED_IN_PAGE } from "pages";
 // import LeftSidebar from "components/Pages/Index/LeftSidebar";
 // import Feed from "components/Pages/Index/Feed";

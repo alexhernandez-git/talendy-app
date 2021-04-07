@@ -1,5 +1,5 @@
 import Layout from "components/Layout/Layout";
-import ProfileCard from "components/Pages/Profile/ProfileCard";
+import ProfileCard from "components/Pages/User/UserCard";
 import Feed from "components/Layout/Feed";
 import { PEOPLE_I_FOLLOW_PAGE } from "pages";
 import LeftSidebar from "components/Pages/MyNetwork/LeftSidebar";

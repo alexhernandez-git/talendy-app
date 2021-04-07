@@ -1,6 +1,6 @@
 import React from "react";
 import Toolbar from "./Toolbar";
-export default function Editor() {
+export default function Editor({ title }) {
   function paste(e) {
     e.preventDefault();
     const open = new RegExp("<", "gi");
@@ -11,6 +11,12 @@ export default function Editor() {
       .replace(close, "&gt");
     document.execCommand("insertHTML", false, text);
   }
+  const handleTitleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      return false;
+    }
+  };
   const handleKeyDown = (e) => {
     if (e.key === "Tab" && !e.shiftKey) {
       document.execCommand("insertText", false, "\t");
@@ -27,12 +33,20 @@ export default function Editor() {
 
   return (
     <div>
+      {title && (
+        <div
+          id="editor-title"
+          contentEditable="true"
+          data-placeholder="Title"
+          onKeyDown={handleTitleKeyDown}
+          className="title my-4 text-gray-600 dark:text-white text-xl bg-gray-200 dark:bg-gray-900 p-3 rounded"
+        ></div>
+      )}
       <Toolbar />
-
       <div
-        className="editor mt-4 text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded"
+        className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l"
         id="editor"
-        onKeyDown={(e) => handleKeyDown(e)}
+        onKeyDown={handleKeyDown}
         contentEditable="true"
         data-placeholder="Message"
         onPaste={(e) => paste(e)}

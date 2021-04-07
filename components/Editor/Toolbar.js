@@ -23,6 +23,7 @@ export default function Toolbar() {
     const target = document.getSelection();
     if (
       target?.focusNode?.nodeName?.includes("#text") ||
+      target?.focusNode?.classList?.contains("title") ||
       target?.focusNode?.className?.includes("codeBlock")
     ) {
       return;
@@ -37,14 +38,17 @@ export default function Toolbar() {
   }
 
   return (
-    <div className="flex justify-end">
+    <div className="flex justify-end rounded-t">
       <button
-        className="bg-gray-800 p-2 rounded cursor-pointer"
+        className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center"
         onClick={(e) => addCodeBlock()}
       >
-        <IconContext.Provider value={{ size: 18, className: "text-white" }}>
+        <IconContext.Provider
+          value={{ size: 18, className: "text-white mr-1" }}
+        >
           <MdCode />
         </IconContext.Provider>
+        <span className="text-white text-xs">Inline code</span>
       </button>
     </div>
   );
