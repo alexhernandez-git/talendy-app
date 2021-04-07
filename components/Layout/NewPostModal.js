@@ -265,7 +265,7 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
                       </dd>
                     </div>
                     <div className="mt-2 sm:col-span-2">
-                      <button className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
+                      <button className="inline-flex items-center py-2 shadow-sm text-sm font-medium rounded-md text-gray-500 dark:text-white bg-white dark:bg-gray-700">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-5 w-5 mr-1"

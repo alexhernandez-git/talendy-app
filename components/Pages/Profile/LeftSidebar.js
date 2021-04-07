@@ -14,7 +14,7 @@ const LeftSidebar = ({ page }) => {
       <nav aria-label="Sidebar" className="divide-y divide-gray-300">
         <div className="">
           <p
-            className="px-3 text-xs font-semibold text-gray-500 dark:text-white uppercase tracking-wider"
+            className="px-3 text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider"
             id="communities-headline"
           >
             Posts
