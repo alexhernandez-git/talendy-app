@@ -92,7 +92,7 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
 
             <section
               ref={modalRef}
-              className="inline-block align-bottom bg-white dark:bg-gray-700 rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full"
+              className="inline-block align-bottom bg-white dark:bg-gray-700 rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-middle max-w-full sm:max-w-2xl w-full"
             >
               <div class="shadow sm:rounded-lg">
                 <div class="px-4 py-5 sm:px-6 bg-gradient-to-r from-orange-500 to-pink-500  sm:rounded-t-lg">
@@ -134,7 +134,7 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
                                 </div>
                                 <button
                                   type="button"
-                                  class="relative inline-flex items-center dark:bg-gray-800 p-2 rounded-l-none rounded-r-md text-sm font-medium text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-900"
+                                  class="relative inline-flex items-center dark:bg-gray-800 p-2 rounded-l-none rounded-r-md text-sm font-medium text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
                                   aria-haspopup="listbox"
                                   aria-expanded="true"
                                   aria-labelledby="listbox-label"
@@ -170,7 +170,7 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
         To: "opacity-0"
     --> */}
                             <ul
-                              class="origin-top-right absolute right-0 mt-2 w-72 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-900 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                              class="origin-top-right absolute right-0 mt-2 w-full sm:w-72 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-900 ring-1 ring-black ring-opacity-5 focus:outline-none"
                               tabindex="-1"
                               role="listbox"
                               aria-labelledby="listbox-label"
@@ -182,7 +182,7 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
         Highlighted: "text-white bg-gray-800", Not Highlighted: "text-gray-900"
       --> */}
                               <li
-                                class="text-gray-900 dark:text-white cursor-default select-none relative p-4 text-sm"
+                                class="text-gray-900 dark:text-white  dark:hover:bg-gray-900 hover:bg-gray-100 dark:hover:text-white cursor-pointer select-none relative p-4 text-sm"
                                 id="listbox-option-0"
                                 role="option"
                               >
@@ -218,7 +218,7 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
                                 </div>
                               </li>
                               <li
-                                class="text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-600 cursor-pointer select-none relative p-4 text-sm"
+                                class="text-gray-900 dark:text-white  dark:hover:bg-gray-900 hover:bg-gray-100 dark:hover:text-white cursor-pointer select-none relative p-4 text-sm"
                                 id="listbox-option-0"
                                 role="option"
                               >
