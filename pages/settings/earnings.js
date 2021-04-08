@@ -55,10 +55,10 @@ const earnings = () => {
           {/* Asside */}
           <SettingsLayout>
             <div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
-              <div className="bg-gray-50 pt-12 sm:pt-16 shadow sm:rounded-md sm:overflow-hidden">
+              <div className="bg-gray-50 dark:bg-gray-800 pt-12 sm:pt-16 shadow sm:rounded-md sm:overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
                       Earnings
                     </h2>
                     {/* <p className="mt-3 text-xl text-gray-500 sm:mt-4">
@@ -67,41 +67,41 @@ const earnings = () => {
                 </p> */}
                   </div>
                 </div>
-                <div className="mt-10 pb-12 bg-white sm:pb-16">
+                <div className="mt-10 pb-12 bg-white dark:bg-gray-600 sm:pb-16">
                   <div className="relative">
-                    <div className="absolute inset-0 h-1/2 bg-gray-50"></div>
+                    <div className="absolute inset-0 h-1/2 bg-gray-50 dark:bg-gray-800"></div>
                     <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                       <div className="max-w-4xl mx-auto">
-                        <dl className="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-5">
+                        <dl className="rounded-lg bg-white dark:bg-gray-700 shadow-lg sm:grid sm:grid-cols-5">
                           <div className="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
-                            <dt className="order-2 mt-2 text-sm leading-6 font-medium text-gray-500">
+                            <dt className="order-2 mt-2 text-sm leading-6 font-medium text-gray-500 dark:text-gray-100">
                               Net income
                             </dt>
-                            <dd className="order-1 text-3xl font-extrabold text-orange-600">
+                            <dd className="order-1 text-3xl font-extrabold text-orange-600 dark:text-orange-500">
                               ${userReducer?.user?.net_income}
                             </dd>
                           </div>
                           <div className="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
-                            <dt className="order-2 mt-2 text-sm leading-6 font-medium text-gray-500">
+                            <dt className="order-2 mt-2 text-sm leading-6 font-medium text-gray-500 dark:text-gray-100">
                               Withdrawn
                             </dt>
-                            <dd className="order-1 text-3xl font-extrabold text-orange-600">
+                            <dd className="order-1 text-3xl font-extrabold text-orange-600 dark:text-orange-500">
                               ${userReducer?.user?.withdrawn}
                             </dd>
                           </div>
                           <div className="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
-                            <dt className="order-2 mt-2 text-sm leading-6 font-medium text-gray-500">
+                            <dt className="order-2 mt-2 text-sm leading-6 font-medium text-gray-500 dark:text-gray-100">
                               Used for purchases
                             </dt>
-                            <dd className="order-1 text-3xl font-extrabold text-orange-600">
+                            <dd className="order-1 text-3xl font-extrabold text-orange-600 dark:text-orange-500">
                               ${userReducer?.user?.used_for_purchases}
                             </dd>
                           </div>
                           <div className="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
-                            <dt className="order-2 mt-2 text-sm leading-6 font-medium text-gray-500">
+                            <dt className="order-2 mt-2 text-sm leading-6 font-medium text-gray-500 dark:text-gray-100">
                               Available funds
                             </dt>
-                            <dd className="order-1 text-3xl font-extrabold text-orange-600">
+                            <dd className="order-1 text-3xl font-extrabold text-orange-600 dark:text-orange-500">
                               $
                               {userReducer?.user?.available_for_withdrawal
                                 ? userReducer?.user?.available_for_withdrawal
@@ -109,10 +109,10 @@ const earnings = () => {
                             </dd>
                           </div>
                           <div className="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
-                            <dt className="order-2 mt-2 text-sm leading-6 font-medium text-gray-500">
+                            <dt className="order-2 mt-2 text-sm leading-6 font-medium text-gray-500 dark:text-gray-100">
                               Pending clearance
                             </dt>
-                            <dd className="order-1 text-3xl font-extrabold text-orange-600">
+                            <dd className="order-1 text-3xl font-extrabold text-orange-600 dark:text-orange-500">
                               $
                               {userReducer?.user?.pending_clearance
                                 ? userReducer?.user?.pending_clearance

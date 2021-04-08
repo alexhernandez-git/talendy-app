@@ -158,12 +158,12 @@ const settings = () => {
             <div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
               <form onSubmit={profileForm.handleSubmit}>
                 <div className="shadow sm:rounded-md sm:overflow-hidden">
-                  <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
+                  <div className="bg-white dark:bg-gray-700 py-6 px-4 space-y-6 sm:p-6">
                     <div>
-                      <h3 className="text-lg leading-6 font-medium text-gray-900">
+                      <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
                         Profile
                       </h3>
-                      <p className="mt-1 text-sm text-gray-500">
+                      <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
                         This information will be displayed publicly so be
                         careful what you share.
                       </p>
@@ -173,16 +173,17 @@ const settings = () => {
                       <div className="col-span-3 sm:col-span-2">
                         <label
                           htmlFor="company_website"
-                          className="block text-sm font-medium text-gray-700"
+                          className="block text-sm font-medium text-gray-700 dark:text-gray-100"
                         >
                           Username
                         </label>
+
                         <input
                           type="text"
                           name="username"
                           id="username"
                           autoComplete="username"
-                          className="focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300"
+                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                           onChange={profileForm.handleChange}
                           onBlur={profileForm.handleBlur}
                           value={profileForm.values.username}
@@ -219,7 +220,7 @@ const settings = () => {
                       <div className="col-span-3">
                         <label
                           htmlFor="about"
-                          className="block text-sm font-medium text-gray-700"
+                          className="block text-sm font-medium text-gray-700 dark:text-gray-100"
                         >
                           About
                         </label>
@@ -228,7 +229,7 @@ const settings = () => {
                             id="about"
                             name="about"
                             rows="3"
-                            className="shadow-sm focus:ring-orange-500 focus:border-orange-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
+                            className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                             onChange={profileForm.handleChange}
                             onBlur={profileForm.handleBlur}
                             value={profileForm.values.about}
@@ -244,7 +245,7 @@ const settings = () => {
                       </div>
 
                       <div className="col-span-3">
-                        <label className="block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-100">
                           Photo
                         </label>
                         <div className="mt-1 flex items-center">
@@ -274,7 +275,7 @@ const settings = () => {
                           )}
 
                           <label
-                            className="cursor-pointer ml-5 bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                            className="ml-3 cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                             htmlFor="profile-img"
                           >
                             Change
@@ -295,7 +296,7 @@ const settings = () => {
                     </div>
                   </div>
 
-                  <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                  <div className="px-4 py-3 bg-gray-50 dark:bg-gray-800 text-right sm:px-6">
                     <button
                       type="submit"
                       className=" text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium"
@@ -308,9 +309,9 @@ const settings = () => {
 
               <form onSubmit={personalInfoForm.handleSubmit}>
                 <div className="shadow sm:rounded-md sm:overflow-hidden">
-                  <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
+                  <div className="bg-white dark:bg-gray-700 py-6 px-4 space-y-6 sm:p-6">
                     <div>
-                      <h3 className="text-lg leading-6 font-medium text-gray-900">
+                      <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
                         Personal Information
                       </h3>
                       {/* <p className="mt-1 text-sm text-gray-500">
@@ -322,7 +323,7 @@ const settings = () => {
                       <div className="col-span-6 sm:col-span-3">
                         <label
                           htmlFor="first_name"
-                          className="block text-sm font-medium text-gray-700"
+                          className="block text-sm font-medium text-gray-700 dark:text-gray-100"
                         >
                           First name
                         </label>
@@ -331,7 +332,7 @@ const settings = () => {
                           name="first_name"
                           id="first_name"
                           autoComplete="given-name"
-                          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                           onChange={personalInfoForm.handleChange}
                           onBlur={personalInfoForm.handleBlur}
                           value={personalInfoForm.values.first_name}
@@ -347,7 +348,7 @@ const settings = () => {
                       <div className="col-span-6 sm:col-span-3">
                         <label
                           htmlFor="last_name"
-                          className="block text-sm font-medium text-gray-700"
+                          className="block text-sm font-medium text-gray-700 dark:text-gray-100"
                         >
                           Last name
                         </label>
@@ -356,7 +357,7 @@ const settings = () => {
                           name="last_name"
                           id="last_name"
                           autoComplete="family-name"
-                          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                           onChange={personalInfoForm.handleChange}
                           onBlur={personalInfoForm.handleBlur}
                           value={personalInfoForm.values.last_name}
@@ -372,7 +373,7 @@ const settings = () => {
                       <div className="col-span-6 sm:col-span-3">
                         <label
                           htmlFor="country"
-                          className="block text-sm font-medium text-gray-700"
+                          className="block text-sm font-medium text-gray-700 dark:text-gray-100"
                         >
                           Country / Region
                         </label>
@@ -380,7 +381,7 @@ const settings = () => {
                           id="country"
                           name="country"
                           autoComplete="country"
-                          className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                           onChange={personalInfoForm.handleChange}
                           onBlur={personalInfoForm.handleBlur}
                           value={personalInfoForm.values.country}
@@ -406,7 +407,7 @@ const settings = () => {
                       <div className="col-span-6 sm:col-span-3">
                         <label
                           htmlFor="currency"
-                          className="block text-sm font-medium text-gray-700"
+                          className="block text-sm font-medium text-gray-700 dark:text-gray-100"
                         >
                           Currency
                         </label>
@@ -414,7 +415,7 @@ const settings = () => {
                           id="currency"
                           name="currency"
                           autoComplete="currency"
-                          className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                           onChange={personalInfoForm.handleChange}
                           onBlur={personalInfoForm.handleBlur}
                           value={personalInfoForm.values.currency}
@@ -433,7 +434,7 @@ const settings = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                  <div className="px-4 py-3 bg-gray-50  dark:bg-gray-800 text-right sm:px-6">
                     <button
                       type="submit"
                       className="text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium"
@@ -447,7 +448,7 @@ const settings = () => {
                 <div className="shadow sm:rounded-md sm:overflow-hidden">
                   <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
                     <div>
-                      <h3 className="text-lg leading-6 font-medium text-gray-900">
+                      <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
                         Change email
                       </h3>
                       <p className="mt-1 text-sm text-gray-500">
@@ -468,7 +469,7 @@ const settings = () => {
                           name="email"
                           id="email_address"
                           autoComplete="email"
-                          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                           onChange={emailForm.handleChange}
                           onBlur={emailForm.handleBlur}
                           value={emailForm.values.email}
@@ -574,7 +575,7 @@ const settings = () => {
                         </div>
                         <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                           <h3
-                            className="text-lg leading-6 font-medium text-gray-900"
+                            className="text-lg leading-6 font-medium text-gray-900 dark:text-white"
                             id="modal-headline"
                           >
                             Remove account

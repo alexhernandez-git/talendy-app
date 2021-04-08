@@ -13,16 +13,16 @@ const SettingsSidebar = () => {
           <a
             className={
               router.pathname === "/settings"
-                ? "bg-gray-50 text-orange-700 hover:text-orange-700 hover:bg-white group rounded-md px-3 py-2 flex items-center text-sm font-medium"
-                : "text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+                ? "bg-gray-50 text-orange-700 hover:text-orange-700 dark:text-gray-900 dark:hover:text-gray-900 hover:bg-white group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+                : "text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
             }
             aria-current="page"
           >
             <svg
               className={
                 router.pathname === "/settings"
-                  ? "text-orange-500 group-hover:text-orange-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
-                  : "text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+                  ? "text-orange-500 group-hover:text-orange-500 dark:text-gray-900 dark:group-hover:text-gray-900 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+                  : "text-gray-400 group-hover:text-gray-500 dark:group-hover:text-gray-900 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
               }
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -44,15 +44,15 @@ const SettingsSidebar = () => {
           <a
             className={
               router.pathname === "/settings/security"
-                ? "bg-gray-50 text-orange-700 hover:text-orange-700 hover:bg-white group rounded-md px-3 py-2 flex items-center text-sm font-medium"
-                : "text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+                ? "bg-gray-50 text-orange-700 hover:text-orange-700 dark:text-gray-900 dark:hover:text-gray-900 hover:bg-white group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+                : "text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
             }
           >
             <svg
               className={
                 router.pathname === "/settings/security"
-                  ? "text-orange-500 group-hover:text-orange-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
-                  : "text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+                  ? "text-orange-500 group-hover:text-orange-500 dark:text-gray-900 dark:group-hover:text-gray-900 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+                  : "text-gray-400 group-hover:text-gray-500 dark:group-hover:text-gray-900 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
               }
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -75,15 +75,15 @@ const SettingsSidebar = () => {
           <a
             className={
               router.pathname === "/settings/earnings"
-                ? "bg-gray-50 text-orange-700 hover:text-orange-700 hover:bg-white group rounded-md px-3 py-2 flex items-center text-sm font-medium"
-                : "text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+                ? "bg-gray-50 text-orange-700 hover:text-orange-700 dark:text-gray-900 dark:hover:text-gray-900 hover:bg-white group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+                : "text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
             }
           >
             <svg
               className={
                 router.pathname === "/settings/earnings"
-                  ? "text-orange-500 group-hover:text-orange-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
-                  : "text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+                  ? "text-orange-500 group-hover:text-orange-500 dark:text-gray-900 dark:group-hover:text-gray-900 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+                  : "text-gray-400 group-hover:text-gray-500 dark:group-hover:text-gray-900 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
               }
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
