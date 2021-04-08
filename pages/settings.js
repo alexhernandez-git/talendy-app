@@ -446,12 +446,12 @@ const settings = () => {
               </form>
               <form onSubmit={emailForm.handleSubmit}>
                 <div className="shadow sm:rounded-md sm:overflow-hidden">
-                  <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
+                  <div className="bg-white dark:bg-gray-700 py-6 px-4 space-y-6 sm:p-6">
                     <div>
                       <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
                         Change email
                       </h3>
-                      <p className="mt-1 text-sm text-gray-500">
+                      <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
                         Use a permanent address where you can recieve mail.
                       </p>
                     </div>
@@ -460,7 +460,7 @@ const settings = () => {
                       <div className="col-span-6 sm:col-span-4">
                         <label
                           htmlFor="email_address"
-                          className="block text-sm font-medium text-gray-700"
+                          className="block text-sm font-medium text-gray-700  dark:text-gray-100"
                         >
                           Email address
                         </label>
@@ -508,7 +508,7 @@ const settings = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                  <div className="px-4 py-3 bg-gray-50  dark:bg-gray-800 text-right sm:px-6">
                     <button
                       type="submit"
                       className="text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600  border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium"
