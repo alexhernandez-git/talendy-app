@@ -232,13 +232,11 @@ const Header = ({ handleToggleMessages, handleOpenModal }) => {
                         </span>
                       </Link>
 
-                      <a
-                        href="#"
-                        className="block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
-                        role="menuitem"
-                      >
-                        Settings
-                      </a>
+                      <Link href="/settings" role="menuitem">
+                        <span className="block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                          Settings
+                        </span>
+                      </Link>
 
                       <a
                         href="#"
