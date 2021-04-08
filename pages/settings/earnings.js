@@ -127,7 +127,7 @@ const earnings = () => {
               </div>
               <form action="#" method="POST">
                 <div className="shadow sm:rounded-md sm:overflow-hidden">
-                  <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
+                  <div className="bg-white dark:bg-gray-700 py-6 px-4 space-y-6 sm:p-6">
                     {/* <div>
                   <h3 className="text-lg leading-6 font-medium text-gray-900">
                     Plan
@@ -136,16 +136,16 @@ const earnings = () => {
 
                     <div>
                       <div className="max-w-md mx-auto lg:max-w-5xl">
-                        <div className="rounded-lg bg-gray-100 px-6 py-8 sm:p-10 lg:flex lg:items-center">
+                        <div className="rounded-lg bg-gray-100 dark:bg-gray-800 px-6 py-8 sm:p-10 lg:flex lg:items-center">
                           <div className="flex-1">
                             <div>
-                              <h3 className="inline-flex px-4 py-1 rounded-full text-sm font-semibold tracking-wide uppercase bg-white text-gray-800">
+                              <h3 className="inline-flex px-4 py-1 rounded-full text-sm font-semibold tracking-wide uppercase bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
                                 Withdrawn your money
                               </h3>
                             </div>
 
                             {!userReducer?.user?.paypal_email && (
-                              <div className="mt-4 text-sm text-gray-600">
+                              <div className="mt-4 text-sm text-gray-600 dark:text-gray-200">
                                 Connect to PayPal to withdraw your money
                               </div>
                             )}
@@ -173,7 +173,7 @@ const earnings = () => {
                                   <>
                                     <span
                                       onMouseDown={handleToggleWithdrawFunds}
-                                      className="cursor-pointer  flex items-center justify-center border-gray-300 shadow-sm bg-white text-base font-medium text-gray-700 hover:bg-gray-50  px-5 py-3 border border-transparent rounded-md"
+                                      className="cursor-pointer  flex items-center justify-center border-gray-300 shadow-sm bg-white dark:bg-gray-900 text-base font-medium text-gray-700 dark:text-gray-100 hover:bg-gray-50  px-5 py-3 border border-transparent rounded-md"
                                     >
                                       <img
                                         src="/static/images/paypal-logo.png"
@@ -188,7 +188,7 @@ const earnings = () => {
                                       onMouseDown={
                                         handleTogglePaypalConnectForm
                                       }
-                                      className="cursor-pointer  flex items-center justify-center border-gray-300 shadow-sm bg-white text-base font-medium text-gray-700 hover:bg-gray-50  px-5 py-3 border border-transparent rounded-md"
+                                      className="cursor-pointer  flex items-center justify-center border-gray-300 shadow-sm bg-white dark:bg-gray-900 text-base font-medium text-gray-700 dark:text-gray-100 hover:bg-gray-50  px-5 py-3 border border-transparent rounded-md"
                                     >
                                       <img
                                         src="/static/images/paypal-logo.png"
