@@ -44,7 +44,7 @@ const PaypalConnectModal = ({
         </span>
         <div
           ref={paypalConnectModalRef}
-          className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full sm:p-6"
+          className="inline-block align-bottom bg-white dark:bg-gray-700 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full sm:p-6"
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-headline"
@@ -53,22 +53,22 @@ const PaypalConnectModal = ({
             <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
               <div>
                 <div className="sm:pb-5">
-                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
                     Configure Your PayPal Account
                   </h3>
                 </div>
-                <div className="mb-3 text-sm text-gray-500">
+                <div className="mb-3 text-sm text-gray-500 dark:text-gray-300">
                   <span>
                     We will use this PayPal account to send you money when you
                     initiate a withdrawal.
                   </span>
                 </div>
-                <div className="bg-white space-y-6">
+                <div className="space-y-6">
                   <div className="grid grid-cols-3 gap-6">
                     <div className="col-span-3">
                       <label
                         for="company_website"
-                        className="block text-sm font-medium text-gray-700"
+                        className="block text-sm font-medium text-gray-700 dark:text-gray-100"
                       >
                         Email
                       </label>
@@ -80,8 +80,8 @@ const PaypalConnectModal = ({
                           id="email"
                           className={
                             formik.touched.email && formik.errors.email
-                              ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
-                              : "shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                              ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md dark:bg-gray-600"
+                              : "shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                           }
                           placeholder="johndoe@gmail.com"
                           aria-describedby="email-description"
@@ -121,7 +121,7 @@ const PaypalConnectModal = ({
                     <div className="col-span-3">
                       <label
                         for="company_website"
-                        className="block text-sm font-medium text-gray-700"
+                        className="block text-sm font-medium text-gray-700 dark:text-gray-100"
                       >
                         Email confirmation
                       </label>
@@ -134,8 +134,8 @@ const PaypalConnectModal = ({
                           className={
                             formik.touched.email_confirmation &&
                             formik.errors.email_confirmation
-                              ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
-                              : "shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                              ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md dark:bg-gray-600"
+                              : "shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                           }
                           placeholder="johndoe@gmail.com"
                           aria-describedby="email_confirmation-description"
@@ -177,7 +177,7 @@ const PaypalConnectModal = ({
               </div>
             </div>
           </div>
-          <div className="mt-3 text-sm text-gray-500">
+          <div className="mt-3 text-sm text-gray-500 dark:text-gray-300">
             <span>
               We will not be able to recover funds sent to the wrong address,
               please make sure the information you enter is correct.
@@ -187,14 +187,14 @@ const PaypalConnectModal = ({
             <button
               type="submit"
               form="paypal-connect-form"
-              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gradient-to-r from-teal-500 to-orange-600 text-base font-medium text-white hover:from-teal-600 hover:to-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 sm:col-start-2 sm:text-sm"
+              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 sm:col-start-2 sm:text-sm"
             >
               Connect with Paypal
             </button>
             <button
               type="button"
               onClick={handleClosePaypalConnectModal}
-              className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 sm:mt-0 sm:col-start-1 sm:text-sm"
+              className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 text-base font-medium text-gray-700 sm:mt-0 sm:col-start-1 sm:text-sm bg-white dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
             >
               Cancel
             </button>
