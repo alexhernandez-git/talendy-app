@@ -51,7 +51,7 @@ const WithdrawFundsModal = ({
           </span>
           <div
             ref={withdrawFundsRef}
-            className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full sm:p-6"
+            className="inline-block align-bottom bg-white dark:text-gray-700 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full sm:p-6"
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-headline"
@@ -65,7 +65,7 @@ const WithdrawFundsModal = ({
               <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                 <div>
                   <div className="sm:pb-5">
-                    <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
                       Withdraw Funds
                     </h3>
                   </div>
@@ -74,7 +74,7 @@ const WithdrawFundsModal = ({
                     <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-gray-200">
                       <label
                         for="first_name"
-                        className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                        className="block text-sm font-medium text-gray-700 dark:text-gray-100 sm:mt-px sm:pt-2"
                       >
                         Transfer to
                       </label>
@@ -88,7 +88,7 @@ const WithdrawFundsModal = ({
                               alt=""
                             />
                           </div>
-                          <div className="relative text-gray-500 ml-2">
+                          <div className="relative text-gray-500 dark:text-gray-300 ml-2">
                             PayPal Account
                           </div>
                         </div>
@@ -97,7 +97,7 @@ const WithdrawFundsModal = ({
                     <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-gray-200">
                       <label
                         for="first_name"
-                        className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                        className="block text-sm font-medium text-gray-700 dark:text-gray-100 sm:mt-px sm:pt-2"
                       >
                         Paypal account
                       </label>
@@ -114,7 +114,7 @@ const WithdrawFundsModal = ({
                     <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-gray-200">
                       <label
                         for="first_name"
-                        className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                        className="block text-sm font-medium text-gray-700 dark:text-gray-100 sm:mt-px sm:pt-2"
                       >
                         Amount
                       </label>
@@ -128,8 +128,8 @@ const WithdrawFundsModal = ({
                               id="amount"
                               className={
                                 formik.touched.amount && formik.errors.amount
-                                  ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
-                                  : "shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                  ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md dark:bg-gray-600"
+                                  : "shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm  border-gray-300 rounded-md dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                               }
                               placeholder={`$300`}
                               form={"withdraw-funds-form"}
@@ -177,19 +177,19 @@ const WithdrawFundsModal = ({
               <button
                 type="submit"
                 form={"withdraw-funds-form"}
-                className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gradient-to-r from-teal-500 to-orange-600 text-base font-medium text-white hover:from-teal-600 hover:to-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 sm:col-start-2 sm:text-sm"
+                className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 sm:col-start-2 sm:text-sm"
               >
                 ​ Withdraw Funds
               </button>
               <button
                 type="button"
                 onClick={handleCloseWithdrawFunds}
-                className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 sm:mt-0 sm:col-start-1 sm:text-sm"
+                className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 text-base font-medium text-gray-700 sm:mt-0 sm:col-start-1 sm:text-sm bg-white dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
               >
                 Cancel
               </button>
             </div>
-            <div className="mt-4 text-sm text-gray-500">
+            <div className="mt-4 text-sm text-gray-500 dark:text-gray-300">
               <span>
                 Currency conversion fees are included. Please note{" "}
                 <span className="text-bold">
