@@ -184,7 +184,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                                 <div className="px-4 flex sm:justify-between items-center ">
                                   <div
                                     onClick={handleCloseChat}
-                                    className="mr-4 bg-gray-100 h-8 w-8 text-orange-500 
+                                    className="mr-4  h-8 w-8 text-white 
                                 flex justify-center items-center rounded-full
                                 cursor-pointer"
                                   >
