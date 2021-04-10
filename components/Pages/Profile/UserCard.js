@@ -1,19 +1,21 @@
+import Link from "next/link";
 import {
   ACTIVE_POSTS_PROFILE_PAGE,
   CLOSED_POSTS_PROFILE_PAGE,
+  DONATION_PAGE,
   PROFILE_PAGE,
   PROFILE_PORTFOLIO_PAGE,
 } from "pages";
 import React from "react";
 
-const ProfileCard = ({ mobile, page, profile }) => {
+const UserCard = ({ mobile, page, profile }) => {
   return (
     <aside
       className={`lg:col-span-4  mb-4 lg:mb-0 ${
         mobile ? "block lg:hidden" : "hidden lg:block"
       }`}
     >
-      <div className="">
+      <div className={""}>
         <section aria-labelledby="who-to-follow-heading" className="mb-4">
           <div className="bg-white rounded-lg shadow relative overflow-hidden">
             <div className="absolute inset-0 h-2/4 bg-gray-500 dark:bg-gray-700"></div>
@@ -51,11 +53,9 @@ const ProfileCard = ({ mobile, page, profile }) => {
           </div>
         </section>
       </div>
+
       <div className="sticky top-4">
-        {(page === PROFILE_PAGE ||
-          page === ACTIVE_POSTS_PROFILE_PAGE ||
-          page === CLOSED_POSTS_PROFILE_PAGE ||
-          page === PROFILE_PORTFOLIO_PAGE) && (
+        {!profile && page !== DONATION_PAGE && (
           <>
             <section aria-labelledby="trending-heading" className="mb-4">
               <div className="bg-white dark:bg-gray-700 rounded-lg shadow">
@@ -63,41 +63,34 @@ const ProfileCard = ({ mobile, page, profile }) => {
                   <div>
                     <div className="mb-5 flex justify-center">
                       <span className="text-gray-500 dark:text-gray-300 text-sm">
-                        Show your appreciation by leaving a tip
+                        Show your appreciation by leaving a donation
                       </span>
                     </div>
-                    <input
-                      type="text"
-                      name="title"
-                      id="title"
-                      className="mb-5 text-center block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                      placeholder="$5"
-                      aria-describedby="title-description"
-                      value=""
-                    ></input>
-                    <button
-                      type="button"
-                      className="w-full bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 mr-2"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
+                    <Link href="/donation/123">
+                      <button
+                        type="button"
+                        className="w-full bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
                       >
-                        <path
-                          fillRule="evenodd"
-                          d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      Tip now
-                    </button>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 mr-2"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        Donate
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
             </section>
-            <section aria-labelledby="trending-heading">
+            <section aria-labelledby="trending-heading" className="mb-4">
               <div className="bg-white dark:bg-gray-700 rounded-lg shadow">
                 <div className="p-6">
                   <div>
@@ -127,9 +120,48 @@ const ProfileCard = ({ mobile, page, profile }) => {
             </section>
           </>
         )}
+        <div className={profile ? "sticky top-4" : ""}>
+          <section aria-labelledby="trending-heading" className="mb-4">
+            <div className="bg-white dark:bg-gray-700 rounded-lg shadow">
+              <div className="p-6">
+                <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+                  <div class="sm:col-span-1">
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-300">
+                      Full name
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 dark:text-white">
+                      Margot Foster
+                    </dd>
+                  </div>
+                  <div class="sm:col-span-1">
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-300">
+                      Posts Helped
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 dark:text-white">
+                      300
+                    </dd>
+                  </div>
+
+                  <div class="sm:col-span-2">
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-300">
+                      About
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 dark:text-white">
+                      Fugiat ipsum ipsum deserunt culpa aute sint do nostrud
+                      anim incididunt cillum culpa consequat. Excepteur qui
+                      ipsum aliquip consequat sint. Sit id mollit nulla mollit
+                      nostrud in ea officia proident. Irure nostrud pariatur
+                      mollit ad adipisicing reprehenderit deserunt qui eu.
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     </aside>
   );
 };
 
-export default ProfileCard;
+export default UserCard;

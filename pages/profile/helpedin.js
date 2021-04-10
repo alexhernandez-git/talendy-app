@@ -15,10 +15,10 @@ export default function Posts() {
       <div className="py-10 ">
         <div className="max-w-3xl mx-auto sm:px-6 flex flex-col lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
           <LeftSidebar page={page} />
-          <ProfileCard mobile page={page} />
+          <ProfileCard mobile page={page} profile />
 
           <Feed page={page} profile />
-          <ProfileCard page={page} />
+          <ProfileCard page={page} profile />
         </div>
       </div>
     </Layout>

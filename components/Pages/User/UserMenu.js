@@ -54,7 +54,7 @@ const ProfileMenu = ({ page }) => {
             </a>
           </Link>
 
-          <Link href="/profile/posts/123">
+          <Link href="/user/posts/123">
             <a
               className={`${
                 page === PROFILE_PAGE ||
