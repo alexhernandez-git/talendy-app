@@ -6,7 +6,8 @@ import Link from "next/Link";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
-const Header = ({ handleToggleMessages, handleOpenModal }) => {
+import { SEARCH_USERS_PAGE } from "pages";
+const Header = ({ handleToggleMessages, handleOpenModal, page }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const handleOpenMenu = () => {
     setMenuOpen(true);
@@ -31,6 +32,11 @@ const Header = ({ handleToggleMessages, handleOpenModal }) => {
       search: Yup.string().required(),
     }),
     onSubmit: async (values) => {
+      console.log("page", page);
+      if (page == SEARCH_USERS_PAGE) {
+        router.push(`/search/users/${values.search}`);
+        return;
+      }
       router.push(`/search/${values.search}`);
     },
   });

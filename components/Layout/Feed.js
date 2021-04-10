@@ -1,6 +1,6 @@
 import React from "react";
 import Post from "components/Layout/Post";
-import UserMenu from "components/Pages/User/UserMenu";
+import UserMenu from "components/Pages/Profile/UserMenu";
 import SearchMenu from "components/Pages/Search/SearchMenu";
 import HomeMenu from "components/Pages/Index/HomeMenu";
 import {
@@ -25,7 +25,7 @@ import HelpRequest from "components/Pages/MyPosts/HelpRequest";
 import HelpRequestsFeed from "components/Pages/MyPosts/HelpRequestsFeed";
 import Invitation from "components/Pages/MyNetwork/Invitation";
 import User from "./User";
-import ProfileMenu from "components/Pages/Profile/ProfileMenu";
+import ProfileMenu from "components/Pages/User/UserMenu";
 const Feed = ({ page }) => {
   return (
     <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>

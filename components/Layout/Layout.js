@@ -5,7 +5,7 @@ import useOutsideClick from "../../hooks/useOutsideClick";
 import Chat from "./Chat";
 import NewPostModal from "./NewPostModal";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, page }) => {
   const [messagesOpen, setMessagesOpen] = useState(false);
   const handleOpenMessages = () => {
     setMessagesOpen(true);
@@ -52,6 +52,7 @@ const Layout = ({ children }) => {
         <Header
           handleToggleMessages={handleToggleMessages}
           handleOpenModal={handleOpenModal}
+          page={page}
         />
         {children}
       </div>

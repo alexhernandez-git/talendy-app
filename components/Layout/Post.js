@@ -51,7 +51,7 @@ const Post = ({ page, image }) => {
   }, [modalOpen]);
   const handleGoToProfile = (e) => {
     e.stopPropagation();
-    router.push("/profile/123");
+    router.push("/user/123");
   };
   return (
     <>

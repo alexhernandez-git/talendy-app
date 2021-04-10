@@ -1,11 +1,11 @@
 import Layout from "components/Layout/Layout";
 import Feed from "components/Layout/Feed";
-import ProfileCard from "components/Pages/User/UserCard";
-import { PROFILE_PAGE } from "pages";
-import LeftSidebar from "components/Pages/Profile/LeftSidebar";
+import ProfileCard from "components/Pages/Profile/UserCard";
+import { ACTIVE_POSTS_PROFILE_PAGE } from "pages";
+import LeftSidebar from "components/Pages/User/LeftSidebar";
 
 export default function Profile() {
-  const page = PROFILE_PAGE;
+  const page = ACTIVE_POSTS_PROFILE_PAGE;
   return (
     <Layout>
       <div className="py-10">

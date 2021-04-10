@@ -22,7 +22,7 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
   const router = useRouter();
   const handleGoToProfile = (e) => {
     e.stopPropagation();
-    router.push("/profile/123");
+    router.push("/user/123");
   };
   return (
     <Transition
