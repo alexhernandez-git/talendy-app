@@ -10,7 +10,7 @@ export default function Donation() {
   const page = DONATION_PAGE;
   const router = useRouter();
   const handleGoBack = () => {
-    router.back();
+    router.push("/user/123");
   };
   return (
     <Layout>
@@ -36,7 +36,7 @@ export default function Donation() {
                   d="M15 19l-7-7 7-7"
                 />
               </svg>{" "}
-              Go back
+              Profile
             </span>
           </div>
           <DonationForm />
