@@ -33,7 +33,7 @@ const ProfileMenu = ({ page }) => {
           className="relative z-0 rounded-lg shadow flex divide-x divide-gray-200"
           aria-label="Tabs"
         >
-          <Link href="/user/posts">
+          <Link href="/profile/posts">
             <a
               aria-current="page"
               className={`${
@@ -54,7 +54,7 @@ const ProfileMenu = ({ page }) => {
               )}
             </a>
           </Link>
-          <Link href="/user/helpedin">
+          <Link href="/profile/helpedin">
             <a
               className={`${
                 page === HELPED_IN_PAGE ||
@@ -81,7 +81,7 @@ const ProfileMenu = ({ page }) => {
             </a>
           </Link>
 
-          <Link href="/user/mynetwork">
+          <Link href="/profile/mynetwork">
             <a
               className={`${
                 page === MY_NETWORK_PAGE ||

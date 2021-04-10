@@ -6,15 +6,15 @@ import {
 } from "pages";
 import React from "react";
 
-const ProfileCard = ({ mobile, page }) => {
+const ProfileCard = ({ mobile, page, profile }) => {
   return (
     <aside
-      className={`lg:col-span-4  mb-10 lg:mb-0 ${
+      className={`lg:col-span-4  mb-4 lg:mb-0 ${
         mobile ? "block lg:hidden" : "hidden lg:block"
       }`}
     >
-      <div className="sticky top-4 space-y-4">
-        <section aria-labelledby="who-to-follow-heading" className="">
+      <div className="">
+        <section aria-labelledby="who-to-follow-heading" className="mb-4">
           <div className="bg-white rounded-lg shadow relative overflow-hidden">
             <div className="absolute inset-0 h-2/4 bg-gray-500 dark:bg-gray-700"></div>
             <div className="space-y-6 p-6 relative">
@@ -50,12 +50,14 @@ const ProfileCard = ({ mobile, page }) => {
             </div>
           </div>
         </section>
+      </div>
+      <div className="sticky top-4">
         {(page === PROFILE_PAGE ||
           page === ACTIVE_POSTS_PROFILE_PAGE ||
           page === CLOSED_POSTS_PROFILE_PAGE ||
           page === PROFILE_PORTFOLIO_PAGE) && (
           <>
-            <section aria-labelledby="trending-heading">
+            <section aria-labelledby="trending-heading" className="mb-4">
               <div className="bg-white dark:bg-gray-700 rounded-lg shadow">
                 <div className="p-6">
                   <div>

@@ -9,6 +9,8 @@ import { IconContext } from "react-icons";
 import { MdHeadset, MdMic, MdScreenShare } from "react-icons/md";
 import { useRouter } from "next/router";
 import Editor from "components/Editor/Editor";
+import Link from "next/link";
+import Member from "components/Pages/Help/Member";
 const Help = () => {
   const page = HELP_PAGE;
   const image = true;
@@ -32,11 +34,7 @@ const Help = () => {
       document.body.style.overflow = "";
     }
   }, [modalOpen]);
-  const router = useRouter();
-  const handleGoToProfile = (e) => {
-    e.stopPropagation();
-    router.push("/user/123");
-  };
+
   return (
     <>
       <Layout>
@@ -200,40 +198,27 @@ const Help = () => {
 
                 <div className="mt-3 flow-root">
                   <ul className=" divide-y divide-gray-200 dark:divide-gray-400">
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          <span
-                            onClick={handleGoToProfile}
-                            className="hover:underline cursor-pointer"
-                          >
-                            Aimee Douglas
-                          </span>
-                        </p>
-                      </div>
-                    </li>
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
-                        <img
-                          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=oilqXxSqey&ixqx=9XbzAMvCeF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white">
-                          <span
-                            onClick={handleGoToProfile}
-                            className="hover:underline cursor-pointer"
-                          >
-                            Andrea McMillan
-                          </span>
-                        </p>
-                      </div>
-                    </li>
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
+                    <Member />
                   </ul>
                 </div>
                 {/* <div className="mt-6 flex flex-col justify-stretch">

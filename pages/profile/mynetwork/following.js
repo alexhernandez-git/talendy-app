@@ -1,5 +1,5 @@
 import Layout from "components/Layout/Layout";
-import ProfileCard from "components/Pages/Profile/UserCard";
+import UserCard from "components/Pages/Profile/UserCard";
 import Feed from "components/Layout/Feed";
 import { PEOPLE_I_FOLLOW_PAGE } from "pages";
 import LeftSidebar from "components/Pages/MyNetwork/LeftSidebar";
@@ -10,10 +10,10 @@ export default function Posts() {
       <div className="py-10">
         <div className="max-w-3xl mx-auto sm:px-6 flex flex-col lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
           <LeftSidebar page={page} />
-          <ProfileCard mobile page={page} />
+          <UserCard mobile page={page} profile />
           <Feed page={page} profile />
 
-          <ProfileCard page={page} />
+          <UserCard page={page} profile />
         </div>
       </div>
     </Layout>

@@ -17,7 +17,7 @@ const LeftSidebar = ({ page }) => {
             className="mt-3 space-y-2"
             aria-labelledby="communities-headline"
           >
-            <Link href="/user/mynetwork">
+            <Link href="/profile/mynetwork">
               <span
                 className={`
                   ${
@@ -30,7 +30,7 @@ const LeftSidebar = ({ page }) => {
                 <span>5</span>
               </span>
             </Link>
-            <Link href="/user/mynetwork/connections">
+            <Link href="/profile/mynetwork/connections">
               <span
                 className={`
                   ${
@@ -43,7 +43,7 @@ const LeftSidebar = ({ page }) => {
                 <span>10</span>
               </span>
             </Link>
-            <Link href="/user/mynetwork/following">
+            <Link href="/profile/mynetwork/following">
               <span
                 className={`
                   ${

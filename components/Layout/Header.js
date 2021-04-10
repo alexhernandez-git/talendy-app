@@ -232,7 +232,7 @@ const Header = ({ handleToggleMessages, handleOpenModal, page }) => {
                         </svg>
                         300 Karma
                       </span>
-                      <Link href="/user/posts" role="menuitem">
+                      <Link href="/profile/posts" role="menuitem">
                         <span className="block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                           Profile
                         </span>
