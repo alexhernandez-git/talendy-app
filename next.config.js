@@ -1,4 +1,7 @@
 module.exports = {
+  future: {
+    webpack5: true,
+  },
   env: {
     HOST: process.env.HOST,
     WS: process.env.WS,

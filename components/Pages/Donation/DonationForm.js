@@ -233,7 +233,7 @@ const DonationForm = () => {
                             className="font-medium  flex items-center"
                           >
                             <IconContext.Provider
-                              value={{ size: 18, className: "mr-1" }}
+                              value={{ size: 18, className: "mr-2" }}
                             >
                               <FaCoffee />
                             </IconContext.Provider>
@@ -269,7 +269,7 @@ const DonationForm = () => {
                             className="font-medium flex items-center"
                           >
                             <IconContext.Provider
-                              value={{ size: 18, className: "mr-1" }}
+                              value={{ size: 18, className: "mr-2" }}
                             >
                               <GiCroissant />
                             </IconContext.Provider>
@@ -305,7 +305,7 @@ const DonationForm = () => {
                             className="font-medium  flex items-center"
                           >
                             <IconContext.Provider
-                              value={{ size: 18, className: "mr-1" }}
+                              value={{ size: 18, className: "mr-2" }}
                             >
                               <FaPizzaSlice />
                             </IconContext.Provider>
@@ -341,7 +341,7 @@ const DonationForm = () => {
                             className="font-medium  flex items-center"
                           >
                             <IconContext.Provider
-                              value={{ size: 18, className: "mr-1" }}
+                              value={{ size: 18, className: "mr-2" }}
                             >
                               <SiNetflix />
                             </IconContext.Provider>
