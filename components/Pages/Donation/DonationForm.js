@@ -9,10 +9,10 @@ const DonationForm = () => {
           <dl class="sm:divide-y sm:divide-gray-200">
             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 items-center">
               <dt class="text-sm font-medium text-gray-500">Payment</dt>
-              {false ? (
+              {true ? (
                 <>
                   {false ? (
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 flex justify-between items-center">
+                    <dd class="text-sm text-gray-900 sm:mt-0 sm:col-span-2 flex justify-between items-center">
                       <div className="flex justify-between w-full mr-3">
                         <span className="text-gray-500 font-bold">Visa</span>
                         <span className="text-gray-500">
@@ -44,105 +44,105 @@ const DonationForm = () => {
                           <div
                             className={`relative border ${
                               true && "rounded-tl-md rounded-tr-md"
-                            } p-4 flex justify-between`}
+                            } flex justify-between`}
                           >
-                            <label className="flex items-center text-sm cursor-pointer">
+                            <label className="flex items-center justify-between text-sm cursor-pointer w-full  p-4">
                               <input
                                 name="payment_method_id"
                                 type="radio"
-                                className="focus:ring-cyan-500 h-4 w-4 text-cyan-600 cursor-pointer border-gray-300"
+                                className="focus:ring-orange-500 h-4 w-4 text-orange-600 cursor-pointer border-gray-300"
                                 aria-describedby="plan-option-pricing-0 plan-option-limit-0"
                               />
-                            </label>
-                            <p
-                              id="plan-option-pricing-1"
-                              className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center"
-                            >
-                              <span className="font-medium">
-                                **** **** **** 4325
-                              </span>
-                            </p>
-                            <div
-                              id="plan-option-limit-1"
-                              className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:flex justify-end items-center"
-                            >
                               <p
-                                id="plan-option-limit-2"
-                                className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right "
+                                id="plan-option-pricing-1"
+                                className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center"
                               >
-                                Visa
+                                <span className="font-medium">
+                                  **** **** **** 4325
+                                </span>
                               </p>
-                            </div>
+                              <div
+                                id="plan-option-limit-1"
+                                className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:flex justify-end items-center"
+                              >
+                                <p
+                                  id="plan-option-limit-2"
+                                  className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right "
+                                >
+                                  Visa
+                                </p>
+                              </div>
+                            </label>
                           </div>
                         </li>
                         <li>
                           <div
                             className={`relative border ${
                               false && "rounded-tl-md rounded-tr-md"
-                            } p-4 flex justify-between`}
+                            } flex justify-between`}
                           >
-                            <label className="flex items-center text-sm cursor-pointer">
+                            <label className="flex items-center justify-between text-sm cursor-pointer w-full  p-4">
                               <input
                                 name="payment_method_id"
                                 type="radio"
-                                className="focus:ring-cyan-500 h-4 w-4 text-cyan-600 cursor-pointer border-gray-300"
+                                className="focus:ring-orange-500 h-4 w-4 text-orange-600 cursor-pointer border-gray-300"
                                 aria-describedby="plan-option-pricing-0 plan-option-limit-0"
                               />
-                            </label>
-                            <p
-                              id="plan-option-pricing-1"
-                              className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center"
-                            >
-                              <span className="font-medium">
-                                **** **** **** 4325
-                              </span>
-                            </p>
-                            <div
-                              id="plan-option-limit-1"
-                              className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:flex justify-end items-center"
-                            >
                               <p
-                                id="plan-option-limit-2"
-                                className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right "
+                                id="plan-option-pricing-1"
+                                className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center"
                               >
-                                Visa
+                                <span className="font-medium">
+                                  **** **** **** 4325
+                                </span>
                               </p>
-                            </div>
+                              <div
+                                id="plan-option-limit-1"
+                                className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:flex justify-end items-center"
+                              >
+                                <p
+                                  id="plan-option-limit-2"
+                                  className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right "
+                                >
+                                  Visa
+                                </p>
+                              </div>
+                            </label>
                           </div>
                         </li>
                         <li>
                           <div
                             className={`relative border ${
                               true && "rounded-bl-md rounded-br-md"
-                            } p-4 flex justify-between`}
+                            } flex justify-between`}
                           >
-                            <label className="flex items-center text-sm cursor-pointer">
+                            <label className="flex items-center justify-between text-sm cursor-pointer w-full  p-4">
                               <input
                                 name="payment_method_id"
                                 type="radio"
-                                className="focus:ring-cyan-500 h-4 w-4 text-cyan-600 cursor-pointer border-gray-300"
+                                className="focus:ring-orange-500 h-4 w-4 text-orange-600 cursor-pointer border-gray-300"
                                 aria-describedby="plan-option-pricing-0 plan-option-limit-0"
                               />
-                            </label>
-                            <p
-                              id="plan-option-pricing-1"
-                              className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center"
-                            >
-                              <span className="font-medium">
-                                **** **** **** 4325
-                              </span>
-                            </p>
-                            <div
-                              id="plan-option-limit-1"
-                              className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:flex justify-end items-center"
-                            >
                               <p
-                                id="plan-option-limit-2"
-                                className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right "
+                                id="plan-option-pricing-1"
+                                className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center"
                               >
-                                Visa
+                                <span className="font-medium">
+                                  **** **** **** 4325
+                                </span>
                               </p>
-                            </div>
+                              <div
+                                id="plan-option-limit-1"
+                                className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:flex justify-end items-center"
+                              >
+                                <p
+                                  id="plan-option-limit-2"
+                                  className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right "
+                                >
+                                  Visa
+                                </p>
+                              </div>
+                            </label>
                           </div>
                         </li>
                       </ul>
@@ -159,7 +159,7 @@ const DonationForm = () => {
                 </>
               ) : (
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:flex justify-between items-center col-span-2">
-                  <CardElement className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm" />
+                  <CardElement className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm" />
 
                   <button className="w-full sm:w-auto mt-2 sm:mt-0 sm:ml-2 justify-center inline-flex items-center px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
                     <svg
