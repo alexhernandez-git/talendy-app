@@ -2,7 +2,7 @@ import useOutsideClick from "hooks/useOutsideClick";
 import React, { useRef, useState } from "react";
 import { Transition } from "@tailwindui/react";
 import ToggleTheme from "./Header/ToggleTheme";
-import Link from "next/Link";
+import Link from "next/link";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
