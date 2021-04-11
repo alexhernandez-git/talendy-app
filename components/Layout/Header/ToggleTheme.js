@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { changeTheme } from "redux/actions/user";
 
 const ToggleTheme = () => {
   const [isLight, setIsLight] = useState(false);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (localStorage.theme === "light") {
       setIsLight(true);
@@ -12,9 +15,12 @@ const ToggleTheme = () => {
       document.documentElement.classList.add("dark");
       localStorage.removeItem("theme");
       setIsLight(false);
+      dispatch(changeTheme(null));
     } else {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
+
+      dispatch(changeTheme("light"));
 
       setIsLight(true);
     }

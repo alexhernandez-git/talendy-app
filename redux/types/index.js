@@ -6,6 +6,7 @@ export const CREATE_ALERT = "CREATE_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
 
 // Auth
+export const CHANGE_THEME = "CHANGE_THEME";
 export const CHANGE_COMMUNITY = "CHANGE_COMMUNITY";
 export const USER_LOADING = "USER_LOADING";
 export const USER_LOADED = "USER_LOADED";

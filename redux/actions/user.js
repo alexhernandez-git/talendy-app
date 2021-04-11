@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import {
+  CHANGE_THEME,
   CHANGE_COMMUNITY,
   USER_LOADED,
   USER_LOADING,
@@ -89,6 +90,10 @@ import {
   LEAVE_FEEDBACK_SUCCESS,
   LEAVE_FEEDBACK_FAIL,
 } from "../types";
+
+export const changeTheme = (theme) => async (dispatch, getState) => {
+  await dispatch({ type: CHANGE_THEME, payload: theme });
+};
 
 export const changeCommunity = (community) => async (dispatch, getState) => {
   await dispatch({ type: CHANGE_COMMUNITY, payload: community });

@@ -261,7 +261,7 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
                     </div>
                     <div className="sm:col-span-2">
                       <dd className="text-sm text-gray-900">
-                        <Editor title privateDesc />
+                        <Editor />
                       </dd>
                     </div>
 

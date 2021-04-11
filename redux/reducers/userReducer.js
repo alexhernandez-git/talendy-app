@@ -1,4 +1,5 @@
 import {
+  CHANGE_THEME,
   USER_LOADED,
   USER_LOADING,
   AUTH_ERROR,
@@ -93,6 +94,7 @@ import {
 } from "../types";
 
 const initialState = {
+  theme: process.browser && localStorage.getItem("theme"),
   community: null,
   access_token: process.browser && localStorage.getItem("access_token"),
   is_authenticated: null,
@@ -156,6 +158,11 @@ const initialState = {
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
+    case CHANGE_THEME:
+      return {
+        ...state,
+        theme: action.payload,
+      };
     case CHANGE_COMMUNITY:
       return {
         ...state,
