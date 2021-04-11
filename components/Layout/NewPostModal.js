@@ -1,20 +1,6 @@
 import React from "react";
-import { useRef, useState } from "react";
-import useOutsideClick from "hooks/useOutsideClick";
 import { Transition } from "@tailwindui/react";
-import {
-  ACTIVE_HELPED_IN_PAGE,
-  ACTIVE_POSTS_PROFILE_PAGE,
-  CLOSED_HELPED_IN_PAGE,
-  FOLLOWED_USERS_POSTS_PAGE,
-  HELPED_IN_PAGE,
-  HOME_PAGE,
-  MOST_KARMA_POSTS_PAGE,
-  MY_POSTS_PAGE,
-  PROFILE_PAGE,
-  SEARCH_POSTS_PAGE,
-} from "pages";
-import Link from "next/link";
+
 import { useRouter } from "next/router";
 import Editor from "components/Editor/Editor";
 
