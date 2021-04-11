@@ -1,6 +1,6 @@
 import React from "react";
 import Toolbar from "./Toolbar";
-export default function Editor({ title }) {
+export default function Editor({ chat }) {
   function paste(e) {
     e.preventDefault();
     const open = new RegExp("<", "gi");
@@ -33,7 +33,7 @@ export default function Editor({ title }) {
 
   return (
     <div>
-      {title && (
+      {!chat && (
         <div
           id="editor-title"
           contentEditable="true"
@@ -42,15 +42,54 @@ export default function Editor({ title }) {
           className="title my-4 text-gray-600 dark:text-white text-xl bg-gray-200 dark:bg-gray-900 p-3 rounded"
         ></div>
       )}
-      <Toolbar />
-      <div
-        className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l"
-        id="editor"
-        onKeyDown={handleKeyDown}
-        contentEditable="true"
-        data-placeholder="Message"
-        onPaste={(e) => paste(e)}
-      ></div>
+      {chat && (
+        <>
+          <Toolbar />
+          <div
+            className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l"
+            id="editor"
+            onKeyDown={handleKeyDown}
+            contentEditable="true"
+            data-placeholder="Message"
+            onPaste={(e) => paste(e)}
+          ></div>
+        </>
+      )}
+
+      {!chat && (
+        <>
+          <Toolbar />
+
+          <div
+            className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l"
+            id="editor"
+            onKeyDown={handleKeyDown}
+            contentEditable="true"
+            data-placeholder="Explanation"
+            onPaste={(e) => paste(e)}
+          ></div>
+          <div class="relative py-4">
+            <div class="absolute inset-0 flex items-center" aria-hidden="true">
+              <div class="w-full border-t border-gray-300"></div>
+            </div>
+            <div class="relative flex justify-center">
+              <span class="px-2 bg-white text-sm text-gray-500">
+                Private data
+              </span>
+            </div>
+          </div>
+          <Toolbar />
+
+          <div
+            className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l"
+            id="editor"
+            onKeyDown={handleKeyDown}
+            contentEditable="true"
+            data-placeholder="Write here any data that you do not want to be public, only the members that you accept will be able to see it"
+            onPaste={(e) => paste(e)}
+          ></div>
+        </>
+      )}
     </div>
   );
 }

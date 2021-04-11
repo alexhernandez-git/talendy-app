@@ -122,7 +122,7 @@ const Help = () => {
                             <label for="comment" className="sr-only">
                               About
                             </label>
-                            <Editor />
+                            <Editor chat />
                           </div>
                           <div className="mt-3 sm:flex items-center justify-between">
                             <div className="flex items-center justify-end sm:justify-start">

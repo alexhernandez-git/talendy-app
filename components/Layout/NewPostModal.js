@@ -261,11 +261,12 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
                     </div>
                     <div className="sm:col-span-2">
                       <dd className="text-sm text-gray-900">
-                        <Editor title />
+                        <Editor title privateDesc />
                       </dd>
                     </div>
+
                     <div className="mt-2 sm:col-span-2">
-                      <button className="inline-flex items-center py-2 shadow-sm text-sm font-medium rounded-md text-gray-500 dark:text-white bg-white dark:bg-gray-700">
+                      <button className="inline-flex items-center py-2 text-sm font-medium rounded-md text-gray-500 dark:text-white bg-white dark:bg-gray-700">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-5 w-5 mr-1"
@@ -282,8 +283,8 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
                       </button>
                     </div>
                     <div className="sm:col-span-2">
-                      <div className="border border-dashed border-white px-4 py-10 w-100 rounded-lg flex justify-center items-center cursor-pointer">
-                        <div className="flex items-center text-white">
+                      <div className="border border-dashed border-gray-500 dark:border-white px-4 py-10 w-100 rounded-lg flex justify-center items-center cursor-pointer">
+                        <div className="flex items-center text-gray-500 dark:text-white">
                           <span className="mr-2">Drag and drop images or </span>
                           <button className="inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
                             Upload
