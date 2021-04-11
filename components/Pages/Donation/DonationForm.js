@@ -1,5 +1,9 @@
 import React from "react";
 import { CardElement } from "@stripe/react-stripe-js";
+import { IconContext } from "react-icons/lib";
+import { FaCoffee, FaPizzaSlice } from "react-icons/fa";
+import { GiCroissant } from "react-icons/gi";
+import { SiNetflix } from "react-icons/si";
 
 const DonationForm = () => {
   return (
@@ -203,8 +207,13 @@ const DonationForm = () => {
                         <div className="text-sm">
                           <p
                             id="server-size-0-label"
-                            className="font-medium text-gray-900"
+                            className="font-medium text-gray-900 flex items-center"
                           >
+                            <IconContext.Provider
+                              value={{ size: 18, className: "mr-1" }}
+                            >
+                              <FaCoffee />
+                            </IconContext.Provider>
                             A Coffe
                           </p>
                         </div>
@@ -213,7 +222,7 @@ const DonationForm = () => {
                         id="server-size-0-description-1"
                         className="mt-2 flex text-sm sm:mt-0 sm:block sm:ml-4 sm:text-right"
                       >
-                        <div className="font-medium text-gray-900">$3</div>
+                        <div className="font-medium text-gray-900">$4</div>
                       </div>
                       <div
                         className="border-transparent absolute -inset-px rounded-lg border-2 pointer-events-none"
@@ -233,9 +242,14 @@ const DonationForm = () => {
                       <div className="flex items-center">
                         <div className="text-sm">
                           <p
-                            id="server-size-1-label"
-                            className="font-medium text-gray-900"
+                            id="server-size-2-label"
+                            className="font-medium text-gray-900 flex items-center"
                           >
+                            <IconContext.Provider
+                              value={{ size: 18, className: "mr-1" }}
+                            >
+                              <GiCroissant />
+                            </IconContext.Provider>
                             A Breakfast
                           </p>
                         </div>
@@ -244,7 +258,7 @@ const DonationForm = () => {
                         id="server-size-1-description-1"
                         className="mt-2 flex text-sm sm:mt-0 sm:block sm:ml-4 sm:text-right"
                       >
-                        <div className="font-medium text-gray-900">$6</div>
+                        <div className="font-medium text-gray-900">$8</div>
                       </div>
                       <div
                         className="border-transparent absolute -inset-px rounded-lg border-2 pointer-events-none"
@@ -265,8 +279,13 @@ const DonationForm = () => {
                         <div className="text-sm">
                           <p
                             id="server-size-2-label"
-                            className="font-medium text-gray-900"
+                            className="font-medium text-gray-900 flex items-center"
                           >
+                            <IconContext.Provider
+                              value={{ size: 18, className: "mr-1" }}
+                            >
+                              <FaPizzaSlice />
+                            </IconContext.Provider>
                             A Pizza
                           </p>
                         </div>
@@ -295,9 +314,14 @@ const DonationForm = () => {
                       <div className="flex items-center">
                         <div className="text-sm">
                           <p
-                            id="server-size-3-label"
-                            className="font-medium text-gray-900"
+                            id="server-size-2-label"
+                            className="font-medium text-gray-900 flex items-center"
                           >
+                            <IconContext.Provider
+                              value={{ size: 18, className: "mr-1" }}
+                            >
+                              <SiNetflix />
+                            </IconContext.Provider>
                             A Netflix subscription
                           </p>
                         </div>
@@ -315,18 +339,29 @@ const DonationForm = () => {
                     </label>
                   </div>
                 </fieldset>
-                <div className="mt-4">
-                  <div>
-                    <input
-                      type="text"
-                      name="title"
-                      id="title"
-                      class="mt-2 text-center block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                      placeholder="Other amount"
-                      aria-describedby="title-description"
-                      value=""
-                    ></input>
+                <div class="relative my-4">
+                  <div
+                    class="absolute inset-0 flex items-center"
+                    aria-hidden="true"
+                  >
+                    <div class="w-full border-t border-gray-300"></div>
                   </div>
+                  <div class="relative flex justify-center">
+                    <span class="px-2 bg-white text-sm text-gray-500">
+                      Other amount
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    class="text-center block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                    placeholder="$ Other"
+                    aria-describedby="title-description"
+                    value=""
+                  ></input>
                 </div>
               </dd>
             </div>
