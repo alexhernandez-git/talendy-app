@@ -124,29 +124,29 @@ const UserCard = ({ mobile, page, profile }) => {
           <section aria-labelledby="trending-heading" className="mb-4">
             <div className="bg-white dark:bg-gray-700 rounded-lg shadow">
               <div className="p-6">
-                <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-300">
+                <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+                  <div className="sm:col-span-1">
+                    <dt className="text-sm font-medium text-gray-500 dark:text-gray-300">
                       Full name
                     </dt>
-                    <dd class="mt-1 text-sm text-gray-900 dark:text-white">
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">
                       Margot Foster
                     </dd>
                   </div>
-                  <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-300">
+                  <div className="sm:col-span-1">
+                    <dt className="text-sm font-medium text-gray-500 dark:text-gray-300">
                       Posts Helped
                     </dt>
-                    <dd class="mt-1 text-sm text-gray-900 dark:text-white">
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">
                       300
                     </dd>
                   </div>
 
-                  <div class="sm:col-span-2">
-                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-300">
+                  <div className="sm:col-span-2">
+                    <dt className="text-sm font-medium text-gray-500 dark:text-gray-300">
                       About
                     </dt>
-                    <dd class="mt-1 text-sm text-gray-900 dark:text-white">
+                    <dd className="mt-1 text-sm text-gray-900 dark:text-white">
                       Fugiat ipsum ipsum deserunt culpa aute sint do nostrud
                       anim incididunt cillum culpa consequat. Excepteur qui
                       ipsum aliquip consequat sint. Sit id mollit nulla mollit
