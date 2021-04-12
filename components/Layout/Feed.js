@@ -19,7 +19,7 @@ import {
   PROFILE_PAGE,
   ACTIVE_POSTS_PROFILE_PAGE,
   CLOSED_POSTS_PROFILE_PAGE,
-  PROFILE_PORTFOLIO_PAGE,
+  USER_HELPED_IN_PAGE,
 } from "pages";
 import HelpRequest from "components/Pages/MyPosts/HelpRequest";
 import HelpRequestsFeed from "components/Pages/MyPosts/HelpRequestsFeed";
@@ -46,7 +46,7 @@ const Feed = ({ page }) => {
       {(page === PROFILE_PAGE ||
         page === ACTIVE_POSTS_PROFILE_PAGE ||
         page === CLOSED_POSTS_PROFILE_PAGE ||
-        page === PROFILE_PORTFOLIO_PAGE) && <ProfileMenu page={page} />}
+        page === USER_HELPED_IN_PAGE) && <ProfileMenu page={page} />}
 
       {page === MY_POSTS_PAGE && <HelpRequestsFeed />}
 
@@ -61,7 +61,7 @@ const Feed = ({ page }) => {
         page === PROFILE_PAGE ||
         page === ACTIVE_POSTS_PROFILE_PAGE ||
         page === CLOSED_POSTS_PROFILE_PAGE ||
-        page === PROFILE_PORTFOLIO_PAGE) && (
+        page === USER_HELPED_IN_PAGE) && (
         <div>
           <h1 className="sr-only">Recent questions</h1>
           <ul className="space-y-4">

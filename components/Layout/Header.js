@@ -13,7 +13,9 @@ const Header = ({ handleToggleMessages, handleOpenModal, page }) => {
     setMenuOpen(true);
   };
   const handleCloseMenu = () => {
-    setMenuOpen(false);
+    if (menuOpen) {
+      setMenuOpen(false);
+    }
   };
   const handleToggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -40,6 +42,20 @@ const Header = ({ handleToggleMessages, handleOpenModal, page }) => {
       router.push(`/search/${values.search}`);
     },
   });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const handleOpenMobileMenu = () => {
+    setMobileMenuOpen(true);
+  };
+  const handleCloseMobileMenu = () => {
+    if (mobileMenuOpen) {
+      setMobileMenuOpen(false);
+    }
+  };
+  const handleToggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+  const mobileMenuRef = useRef();
+  useOutsideClick(mobileMenuRef, () => handleCloseMobileMenu());
   return (
     <header className="bg-white dark:bg-gray-700 shadow-sm lg:static lg:overflow-y-visible">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -95,13 +111,16 @@ const Header = ({ handleToggleMessages, handleOpenModal, page }) => {
           <div className="flex items-center md:absolute md:right-0 md:inset-y-0 lg:hidden">
             <button
               type="button"
+              onMouseDown={handleToggleMobileMenu}
               className="-mx-2 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500"
               aria-expanded="false"
             >
               <span className="sr-only">Open menu</span>
 
               <svg
-                className="block h-6 w-6"
+                className={`${
+                  mobileMenuOpen ? "hidden" : "block"
+                } block h-6 w-6`}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -117,7 +136,9 @@ const Header = ({ handleToggleMessages, handleOpenModal, page }) => {
               </svg>
 
               <svg
-                className="hidden h-6 w-6"
+                className={`${
+                  mobileMenuOpen ? "block" : "hidden"
+                } block h-6 w-6`}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -269,7 +290,13 @@ const Header = ({ handleToggleMessages, handleOpenModal, page }) => {
         </div>
       </div>
 
-      <nav className="lg:hidden" aria-label="Global">
+      <nav
+        className={`${
+          mobileMenuOpen ? "block" : "hidden"
+        } lg:hidden absolute w-full bg-white dark:bg-gray-700 z-50`}
+        aria-label="Global"
+        ref={mobileMenuRef}
+      >
         <div className="border-t border-gray-200 pt-4 pb-3">
           <div className="max-w-3xl mx-auto px-4 flex items-center sm:px-6">
             <div className="flex-shrink-0">
