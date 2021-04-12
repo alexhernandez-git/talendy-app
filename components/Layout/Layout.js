@@ -3,7 +3,7 @@ import Header from "components/Layout/Header";
 import { useRef, useState } from "react";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import Chat from "./Chat";
-import NewPostModal from "./NewPostModal";
+import NewPostModal from "./CreateEditPostModal";
 
 const Layout = ({ children, page }) => {
   const [messagesOpen, setMessagesOpen] = useState(false);

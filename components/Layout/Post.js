@@ -15,7 +15,7 @@ import {
 import PostModal from "./PostModal";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+import CreateEditPostModal from "components/Layout/CreateEditPostModal";
 const Post = ({ page, image }) => {
   const router = useRouter();
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -32,6 +32,7 @@ const Post = ({ page, image }) => {
   useOutsideClick(optionsRef, () => handleCloseOptions());
   const [modalOpen, setModalOpen] = useState(false);
   const handleOpenModal = () => {
+    handleCloseOptions();
     setModalOpen(true);
   };
   const handleCloseModal = () => {
@@ -49,6 +50,29 @@ const Post = ({ page, image }) => {
       document.body.style.overflow = "";
     }
   }, [modalOpen]);
+  const [editOpen, setEditOpen] = useState(false);
+  const handleOpenEdit = (e) => {
+    if (e) {
+      e.stopPropagation();
+    }
+    handleCloseOptions();
+    setEditOpen(true);
+  };
+  const handleCloseEdit = () => {
+    setEditOpen(false);
+  };
+  const handleToggleEdit = () => {
+    setEditOpen(!editOpen);
+  };
+  const editRef = useRef();
+  useOutsideClick(editRef, () => handleCloseEdit());
+  useEffect(() => {
+    if (editOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [editOpen]);
   const handleGoToProfile = (e) => {
     e.stopPropagation();
     router.push("/user/123");
@@ -124,9 +148,9 @@ const Post = ({ page, image }) => {
                       aria-labelledby="options-menu-0"
                     >
                       <div className="py-1" role="none" ref={optionsRef}>
-                        <a
-                          href="#"
-                          className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                        <span
+                          onMouseDown={handleOpenEdit}
+                          className="cursor-pointer flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                           role="menuitem"
                         >
                           <svg
@@ -143,7 +167,7 @@ const Post = ({ page, image }) => {
                             />
                           </svg>
                           <span>Edit</span>
-                        </a>
+                        </span>
                         <a
                           href="#"
                           className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
@@ -302,6 +326,14 @@ const Post = ({ page, image }) => {
         modalOpen={modalOpen}
         handleToggleModal={handleToggleModal}
         modalRef={modalRef}
+      />
+      <CreateEditPostModal
+        isEdit
+        page={page}
+        image={image}
+        modalOpen={editOpen}
+        handleToggleModal={handleToggleEdit}
+        modalRef={editRef}
       />
     </>
   );

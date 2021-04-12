@@ -4,7 +4,7 @@ import { Transition } from "@tailwindui/react";
 import { useRouter } from "next/router";
 import Editor from "components/Editor/Editor";
 
-const PostModal = ({ page, image, modalOpen, modalRef }) => {
+const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
   const router = useRouter();
   const handleGoToProfile = (e) => {
     e.stopPropagation();
@@ -86,7 +86,7 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
                     id="applicant-information-title"
                     className="text-lg leading-6 font-medium text-white"
                   >
-                    Create Post
+                    {isEdit ? "Edit Post" : "Create Post"}
                   </h2>
                 </div>
                 <div className=" px-4 py-5 sm:px-6">
@@ -363,4 +363,4 @@ const PostModal = ({ page, image, modalOpen, modalRef }) => {
   );
 };
 
-export default PostModal;
+export default CreateEditPostModal;
