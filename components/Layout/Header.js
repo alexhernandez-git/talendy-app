@@ -6,7 +6,7 @@ import Link from "next/link";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
-import { SEARCH_USERS_PAGE } from "pages";
+import { HOME_PAGE, SEARCH_USERS_PAGE } from "pages";
 const Header = ({ handleToggleMessages, handleOpenModal, page }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const handleOpenMenu = () => {
@@ -95,7 +95,7 @@ const Header = ({ handleToggleMessages, handleOpenModal, page }) => {
           <div className="flex items-center md:absolute md:right-0 md:inset-y-0 lg:hidden">
             <button
               type="button"
-              className="-mx-2 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500"
+              className="-mx-2 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500"
               aria-expanded="false"
             >
               <span className="sr-only">Open menu</span>
@@ -270,36 +270,6 @@ const Header = ({ handleToggleMessages, handleOpenModal, page }) => {
       </div>
 
       <nav className="lg:hidden" aria-label="Global">
-        <div className="max-w-3xl mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-4">
-          <a
-            href="#"
-            aria-current="page"
-            className="bg-gray-100 block rounded-md py-2 px-3 text-base font-medium text-gray-900"
-          >
-            Home
-          </a>
-
-          <a
-            href="#"
-            className="hover:bg-gray-50 block rounded-md py-2 px-3 text-base font-medium text-gray-900"
-          >
-            Popular
-          </a>
-
-          <a
-            href="#"
-            className="hover:bg-gray-50 block rounded-md py-2 px-3 text-base font-medium text-gray-900"
-          >
-            Communities
-          </a>
-
-          <a
-            href="#"
-            className="hover:bg-gray-50 block rounded-md py-2 px-3 text-base font-medium text-gray-900"
-          >
-            Trending
-          </a>
-        </div>
         <div className="border-t border-gray-200 pt-4 pb-3">
           <div className="max-w-3xl mx-auto px-4 flex items-center sm:px-6">
             <div className="flex-shrink-0">
@@ -310,16 +280,39 @@ const Header = ({ handleToggleMessages, handleOpenModal, page }) => {
               />
             </div>
             <div className="ml-3">
-              <div className="text-base font-medium text-gray-800">
+              <div className="text-base font-medium text-gray-800 dark:text-gray-100">
                 Chelsea Hagon
               </div>
-              <div className="text-sm font-medium text-gray-500">
+              <div className="text-sm font-medium text-gray-500 dark:text-gray-200">
                 chelseahagon@example.com
               </div>
             </div>
+
             <button
               type="button"
-              className="ml-auto flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500"
+              onClick={handleToggleMessages}
+              className="ml-auto flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200"
+            >
+              <span className="sr-only">View Messages</span>
+
+              <svg
+                className="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                />
+              </svg>
+            </button>
+            <button
+              type="button"
+              className="ml-5 flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200"
             >
               <span className="sr-only">View notifications</span>
 
@@ -341,26 +334,19 @@ const Header = ({ handleToggleMessages, handleOpenModal, page }) => {
             </button>
           </div>
           <div className="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
-            <a
-              href="#"
-              className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-            >
-              Your Profile
-            </a>
-
-            <a
-              href="#"
-              className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-            >
+            <Link href="/profile/posts" role="menuitem">
+              <span className="cursor-pointer block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover-text-gray-300">
+                Your Profile
+              </span>
+            </Link>
+            <span className="cursor-pointer block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover-text-gray-300">
               Settings
-            </a>
-
-            <a
-              href="#"
-              className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-            >
-              Sign out
-            </a>
+            </span>
+            <Link href="/settings" role="menuitem">
+              <span className="cursor-pointer block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover-text-gray-300">
+                Sign out
+              </span>
+            </Link>
           </div>
         </div>
       </nav>
