@@ -217,7 +217,7 @@ const DonationForm = () => {
                 <fieldset>
                   <legend className="sr-only">Amount options</legend>
                   <div className="space-y-4">
-                    <label className="relative block rounded-lg border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between focus-within:ring-1 focus-within:ring-offset-2 focus-within:ring-orange-500">
+                    <label className="relative block rounded-lg border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between">
                       <input
                         type="radio"
                         name="server_size"
@@ -247,13 +247,14 @@ const DonationForm = () => {
                       >
                         <div className="font-medium">$4</div>
                       </div>
+                      {/* Border selected */}
                       <div
-                        className="border-transparent absolute -inset-px rounded-lg border-2 pointer-events-none"
+                        className="border-orange-500 absolute -inset-px rounded-lg border-2 pointer-events-none"
                         aria-hidden="true"
                       ></div>
                     </label>
 
-                    <label className="relative block rounded-lg border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between focus-within:ring-1 focus-within:ring-offset-2 focus-within:ring-orange-500">
+                    <label className="relative block rounded-lg border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between">
                       <input
                         type="radio"
                         name="server_size"
@@ -289,7 +290,7 @@ const DonationForm = () => {
                       ></div>
                     </label>
 
-                    <label className="relative block rounded-lg border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between focus-within:ring-1 focus-within:ring-offset-2 focus-within:ring-orange-500">
+                    <label className="relative block rounded-lg border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between">
                       <input
                         type="radio"
                         name="server_size"
@@ -325,7 +326,7 @@ const DonationForm = () => {
                       ></div>
                     </label>
 
-                    <label className="relative block rounded-lg border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between focus-within:ring-1 focus-within:ring-offset-2 focus-within:ring-orange-500">
+                    <label className="relative block rounded-lg border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between">
                       <input
                         type="radio"
                         name="server_size"
