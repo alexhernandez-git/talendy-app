@@ -170,7 +170,7 @@ export default function PostPage() {
                     type="submit"
                     className="w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
                   >
-                    Request to help
+                    Request to contribute
                   </button>
                 </div>
               </div>

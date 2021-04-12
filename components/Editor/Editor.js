@@ -74,7 +74,7 @@ export default function Editor({ chat }) {
             </div>
             <div class="relative flex justify-center">
               <span class="px-2 bg-white dark:bg-gray-700 text-sm text-gray-500 dark:text-gray-100">
-                Private data
+                Private information
               </span>
             </div>
           </div>
@@ -85,7 +85,7 @@ export default function Editor({ chat }) {
             id="editor"
             onKeyDown={handleKeyDown}
             contentEditable="true"
-            data-placeholder="Write here any data that you do not want to be public, only the members that you accept will be able to see it"
+            data-placeholder="Write here any information that you do not want to be public, only the members that you accept will be able to see it"
             onPaste={(e) => paste(e)}
           ></div>
         </>

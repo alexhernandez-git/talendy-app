@@ -248,7 +248,7 @@ const NewPostModal = ({ modalOpen, modalRef }) => {
                       type="submit"
                       className="w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
                     >
-                      Request to help
+                      Request to contribute
                     </button>
                   </div>
                 </div>
@@ -279,18 +279,18 @@ const NewPostModal = ({ modalOpen, modalRef }) => {
                   </div>
 
                   <div className="mt-5">
-                    <Link href="/help/123">
+                    <Link href="/contribute/123">
                       <button
                         type="button"
                         className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
                       >
-                        Help
+                        Contribute
                       </button>
                     </Link>
                   </div>
                   <div className="mt-5">
                     <h3 className="font-medium text-gray-900 dark:text-white">
-                      Members Helping
+                      Members Contributing
                     </h3>
                     <ul className="mt-2 border-t border-gray-200 dark:border-gray-400 divide-y divide-gray-200 dark:divide-gray-400">
                       <li className="py-3 flex justify-between items-center">
