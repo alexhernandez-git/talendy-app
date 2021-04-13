@@ -26,14 +26,17 @@ const Member = () => {
             <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-5 md:gap-4">
               <div class="flex items-center">
                 <Link href="/user/123">
-                  <p class="text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 truncate rounded-2xl px-3 py-1">
+                  <p class="text-sm font-medium text-gray-500 dark:text-gray-100 truncate rounded-2xl px-3 py-1">
                     Ricardo Cooper
                   </p>
                 </Link>
               </div>
               <div class="hidden md:flex items-center">
                 <Link href="/donation/123">
-                  <p class="text-sm font-medium text-white bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700  truncate rounded-2xl px-3 py-1">
+                  <p
+                    onClick={(e) => e.stopPropagation()}
+                    class="text-sm font-medium text-white bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700  truncate rounded-2xl px-3 py-1"
+                  >
                     Donate
                   </p>
                 </Link>
@@ -131,6 +134,7 @@ const Member = () => {
             </div>
           </div>
         </div>
+
         <div className={`${isFormOpen ? "block" : "hidden"}`}>
           <form action="#" method="POST">
             <div class="sm:overflow-hidden">

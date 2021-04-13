@@ -8,7 +8,7 @@ const Notifications = () => {
     <Layout>
       <div className="py-10">
         <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
-          <div className="lg:col-span-8 xl:col-span-6 xl:col-start-3 bg-gray-100 dark:bg-gray-700 px-4 py-5 shadow sm:rounded-lg sm:px-6">
+          <div className="lg:col-span-8 xl:col-span-6 xl:col-start-3 bg-white dark:bg-gray-700 px-4 py-5 shadow sm:rounded-lg sm:px-6">
             <ul class="divide-y divide-gray-200">
               <li class="py-4">
                 <div class="flex space-x-3">

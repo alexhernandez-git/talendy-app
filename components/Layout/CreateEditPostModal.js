@@ -23,7 +23,7 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
       {(refModal) => (
         <div
           ref={refModal}
-          className="fixed z-10 inset-0 overflow-y-auto"
+          className="fixed z-40 inset-0 overflow-y-auto"
           aria-labelledby="modal-title"
           role="dialog"
           aria-modal="true"
