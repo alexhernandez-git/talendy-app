@@ -20,14 +20,41 @@ const UserCard = ({ mobile, page, profile }) => {
           <div className="bg-white rounded-lg shadow relative overflow-hidden">
             <div className="absolute inset-0 h-2/4 bg-gray-500 dark:bg-gray-700"></div>
             <div className="space-y-6 p-6 relative">
-              <img
-                className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56 z-20"
-                src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
-                alt=""
-              />
+              <div className="relative  flex justify-center">
+                <div className=" h-40 w-40 rounded-full overflow-hidden xl:w-56 xl:h-56">
+                  <img
+                    className="mx-auto z-20"
+                    src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
+                    alt=""
+                  />
+                  {profile && (
+                    <>
+                      <div
+                        className="absolute m-auto h-40 w-40 rounded-full overflow-hidden xl:w-56 xl:h-56 inset-0 bg-gray-500 bg-opacity-75 transition-opacity z-20 cursor-default"
+                        aria-hidden="true"
+                      ></div>
+                      <div className="absolute m-auto h-40 w-40 rounded-full xl:w-56 xl:h-56 z-30  inset-0 cursor-pointer flex justify-center items-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-10 w-10 text-white"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                          <path
+                            fillRule="evenodd"
+                            d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
               <div className="space-y-2">
                 <div className="text-lg leading-6 font-medium text-center">
-                  <Link href={profile ? "/profile/123" : "/user/123"}>
+                  <Link href={profile ? "/profile/tasks" : "/user/123"}>
                     <h3 className="mb-3 cursor-pointer">Whitney Francis</h3>
                   </Link>
                   <div className=" flex justify-center items-center">

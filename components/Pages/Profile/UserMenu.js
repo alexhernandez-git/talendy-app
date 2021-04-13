@@ -33,7 +33,7 @@ const ProfileMenu = ({ page }) => {
           className="relative z-0 rounded-lg shadow flex divide-x divide-gray-200"
           aria-label="Tabs"
         >
-          <Link href="/profile/posts">
+          <Link href="/profile/tasks">
             <a
               aria-current="page"
               className={`${
