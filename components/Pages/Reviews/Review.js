@@ -8,7 +8,7 @@ const Review = () => {
         <div class="relative flex items-start space-x-3">
           <div class="relative">
             <img
-              class="h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white"
+              class="h-10 w-10 rounded-full flex items-center justify-center"
               src="https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
               alt=""
             />
@@ -17,12 +17,12 @@ const Review = () => {
             <div>
               <div class="text-sm">
                 <Link href="/user/123">
-                  <span class="font-medium text-gray-900 cursor-pointer">
+                  <span class="font-medium text-gray-900 dark:text-white cursor-pointer">
                     Eduardo Benz
                   </span>
                 </Link>
               </div>
-              <p class="mt-0.5 text-sm text-gray-500 flex items-center">
+              <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-100 flex items-center">
                 <div className="flex mr-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,7 @@ const Review = () => {
                   </svg>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 text-gray-500"
+                    className="h-4 w-4 text-gray-500 dark:text-gray-100"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -68,7 +68,7 @@ const Review = () => {
                 6 days ago
               </p>
             </div>
-            <div class="mt-2 text-sm text-gray-700">
+            <div class="mt-2 text-sm text-gray-700 dark:text-gray-50">
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum

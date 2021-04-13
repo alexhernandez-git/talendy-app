@@ -72,12 +72,14 @@ const Help = () => {
                 </svg>
                 Info
               </button>
-              <button
-                type="button"
-                className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm  text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
-              >
-                Finalize
-              </button>
+              <Link href="/finalize/123">
+                <button
+                  type="button"
+                  className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm  text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                >
+                  Finalize
+                </button>
+              </Link>
             </div>
           </div>
 
