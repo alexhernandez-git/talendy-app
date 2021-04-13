@@ -35,7 +35,12 @@ const ProfileMenu = ({ page }) => {
                 page === USER_CONTRIBUTED ? "text-gray-900" : "text-gray-500"
               }  dark:text-white rounded-l-lg group relative  hover:text-gray-700 dark:hover:bg-gray-800 min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10`}
             >
-              <span>Contributed</span>
+              <div className="flex items-center justify-center">
+                <span>Contributed</span>
+                <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white">
+                  20
+                </span>
+              </div>
               {page === USER_CONTRIBUTED ? (
                 <span
                   aria-hidden="true"
@@ -60,7 +65,12 @@ const ProfileMenu = ({ page }) => {
                   : "text-gray-500"
               }  dark:text-white  rounded-r-lg group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10  hover:text-gray-700 dark:hover:bg-gray-800`}
             >
-              <span>Tasks</span>
+              <div className="flex items-center justify-center">
+                <span>Tasks</span>
+                <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white">
+                  3
+                </span>
+              </div>
               {page === PROFILE_PAGE ||
               page === ACTIVE_POSTS_PROFILE_PAGE ||
               page === CLOSED_POSTS_PROFILE_PAGE ? (

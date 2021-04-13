@@ -53,7 +53,7 @@ const Invitation = ({ page }) => {
       <div className="flex-shrink-0">
         <button
           type="button"
-          className="inline-flex items-center px-3 py-0.5 rounded-full bg-orange-50 text-sm font-medium text-orange-500 hover:bg-orange-100 dark:text-orange-100 dark:bg-orange-600 dark:hover:bg-orange-500"
+          className="inline-flex items-center px-3 py-0.5 rounded-full bg-orange-50 text-sm font-medium  bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 text-white"
         >
           <span>Accept</span>
         </button>

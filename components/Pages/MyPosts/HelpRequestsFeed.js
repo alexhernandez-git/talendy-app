@@ -26,7 +26,7 @@ const HelpRequestsFeed = () => {
           Help Requests
           <button
             type="button"
-            className="ml-2 inline-flex items-center px-3 py-0.5 rounded-full bg-orange-100 text-sm font-medium text-orange-500 dark:text-orange-100 dark:bg-orange-500 "
+            className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white"
           >
             <span>12</span>
           </button>
