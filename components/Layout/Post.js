@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
 import { Transition } from "@tailwindui/react";
 import {
-  ACTIVE_HELPED_IN_PAGE,
+  ACTIVE_CONTRIBUTED,
   ACTIVE_POSTS_PROFILE_PAGE,
   FOLLOWED_USERS_POSTS_PAGE,
   HOME_PAGE,

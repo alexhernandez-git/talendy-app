@@ -2,13 +2,13 @@ import Layout from "components/Layout/Layout";
 import Feed from "components/Layout/Feed";
 import LeftSidebar from "components/Pages/HelpedIn/LeftSidebar";
 import UserCard from "components/Pages/Profile/UserCard";
-import { ACTIVE_HELPED_IN_PAGE } from "pages";
+import { ACTIVE_CONTRIBUTED } from "pages";
 // import LeftSidebar from "components/Pages/Index/LeftSidebar";
 // import Feed from "components/Pages/Index/Feed";
 // import RightSidebar from "components/Pages/Index/RightSidebar";
 
 export default function Posts() {
-  const page = ACTIVE_HELPED_IN_PAGE;
+  const page = ACTIVE_CONTRIBUTED;
 
   return (
     <Layout>

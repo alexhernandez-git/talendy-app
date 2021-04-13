@@ -11,15 +11,15 @@ import {
   MY_NETWORK_PAGE,
   PEOPLE_I_FOLLOW_PAGE,
   HOME_PAGE,
-  HELPED_IN_PAGE,
+  CONTRIBUTED,
   MOST_KARMA_POSTS_PAGE,
   FOLLOWED_USERS_POSTS_PAGE,
-  ACTIVE_HELPED_IN_PAGE,
-  CLOSED_HELPED_IN_PAGE,
+  ACTIVE_CONTRIBUTED,
+  CLOSED_CONTRIBUTED,
   PROFILE_PAGE,
   ACTIVE_POSTS_PROFILE_PAGE,
   CLOSED_POSTS_PROFILE_PAGE,
-  USER_HELPED_IN_PAGE,
+  USER_CONTRIBUTED,
 } from "pages";
 import HelpRequest from "components/Pages/MyPosts/HelpRequest";
 import HelpRequestsFeed from "components/Pages/MyPosts/HelpRequestsFeed";
@@ -36,32 +36,32 @@ const Feed = ({ page }) => {
 
       {/* User menu */}
       {(page === MY_POSTS_PAGE ||
-        page === HELPED_IN_PAGE ||
-        page === ACTIVE_HELPED_IN_PAGE ||
+        page === CONTRIBUTED ||
+        page === ACTIVE_CONTRIBUTED ||
         page === CONNECTIONS_PAGE ||
         page === PEOPLE_I_FOLLOW_PAGE ||
         page === MY_NETWORK_PAGE ||
-        page === CLOSED_HELPED_IN_PAGE) && <UserMenu page={page} />}
+        page === CLOSED_CONTRIBUTED) && <UserMenu page={page} />}
       {/* Profile menu */}
       {(page === PROFILE_PAGE ||
         page === ACTIVE_POSTS_PROFILE_PAGE ||
         page === CLOSED_POSTS_PROFILE_PAGE ||
-        page === USER_HELPED_IN_PAGE) && <ProfileMenu page={page} />}
+        page === USER_CONTRIBUTED) && <ProfileMenu page={page} />}
 
       {page === MY_POSTS_PAGE && <HelpRequestsFeed />}
 
       {(page === HOME_PAGE ||
         page === MY_POSTS_PAGE ||
         page === SEARCH_POSTS_PAGE ||
-        page === HELPED_IN_PAGE ||
+        page === CONTRIBUTED ||
         page === MOST_KARMA_POSTS_PAGE ||
         page === FOLLOWED_USERS_POSTS_PAGE ||
-        page === ACTIVE_HELPED_IN_PAGE ||
-        page === CLOSED_HELPED_IN_PAGE ||
+        page === ACTIVE_CONTRIBUTED ||
+        page === CLOSED_CONTRIBUTED ||
         page === PROFILE_PAGE ||
         page === ACTIVE_POSTS_PROFILE_PAGE ||
         page === CLOSED_POSTS_PROFILE_PAGE ||
-        page === USER_HELPED_IN_PAGE) && (
+        page === USER_CONTRIBUTED) && (
         <div>
           <h1 className="sr-only">Recent questions</h1>
           <ul className="space-y-4">

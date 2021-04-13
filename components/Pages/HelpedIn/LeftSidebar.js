@@ -1,9 +1,5 @@
 import Link from "next/link";
-import {
-  ACTIVE_HELPED_IN_PAGE,
-  CLOSED_HELPED_IN_PAGE,
-  HELPED_IN_PAGE,
-} from "pages";
+import { ACTIVE_CONTRIBUTED, CLOSED_CONTRIBUTED, CONTRIBUTED } from "pages";
 import React from "react";
 
 const LeftSidebar = ({ page }) => {
@@ -21,11 +17,11 @@ const LeftSidebar = ({ page }) => {
             className="mt-3 space-y-2"
             aria-labelledby="communities-headline"
           >
-            <Link href="/profile/helpedin">
+            <Link href="/profile/contributed">
               <span
                 className={`
                   ${
-                    page === HELPED_IN_PAGE
+                    page === CONTRIBUTED
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
@@ -34,11 +30,11 @@ const LeftSidebar = ({ page }) => {
                 <span>30</span>
               </span>
             </Link>
-            <Link href="/profile/helpedin/active">
+            <Link href="/profile/contributed/active">
               <span
                 className={`
                   ${
-                    page === ACTIVE_HELPED_IN_PAGE
+                    page === ACTIVE_CONTRIBUTED
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
@@ -47,11 +43,11 @@ const LeftSidebar = ({ page }) => {
                 <span>10</span>
               </span>
             </Link>
-            <Link href="/profile/helpedin/closed">
+            <Link href="/profile/contributed/closed">
               <span
                 className={`
                   ${
-                    page === CLOSED_HELPED_IN_PAGE
+                    page === CLOSED_CONTRIBUTED
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}

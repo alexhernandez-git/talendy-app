@@ -1,11 +1,11 @@
 import Layout from "components/Layout/Layout";
 import Feed from "components/Layout/Feed";
 import ProfileCard from "components/Pages/Profile/UserCard";
-import { USER_HELPED_IN_PAGE } from "pages";
+import { USER_CONTRIBUTED } from "pages";
 import LeftSidebar from "components/Pages/User/LeftSidebar";
 
 export default function Profile() {
-  const page = USER_HELPED_IN_PAGE;
+  const page = USER_CONTRIBUTED;
   return (
     <Layout>
       <div className="py-10">

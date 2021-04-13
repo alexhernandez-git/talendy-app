@@ -2,12 +2,12 @@ import React from "react";
 import Link from "next/link";
 import {
   MY_NETWORK_PAGE,
-  HELPED_IN_PAGE,
+  CONTRIBUTED,
   MY_POSTS_PAGE,
   PEOPLE_I_FOLLOW_PAGE,
   CONNECTIONS_PAGE,
-  ACTIVE_HELPED_IN_PAGE,
-  CLOSED_HELPED_IN_PAGE,
+  ACTIVE_CONTRIBUTED,
+  CLOSED_CONTRIBUTED,
 } from "pages";
 
 const ProfileMenu = ({ page }) => {
@@ -40,7 +40,7 @@ const ProfileMenu = ({ page }) => {
                 page === MY_POSTS_PAGE ? "text-gray-900" : "text-gray-500"
               }  dark:text-white rounded-l-lg group relative  hover:text-gray-700 dark:hover:bg-gray-800 min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10`}
             >
-              <span>My Posts</span>
+              <span>My Tasks</span>
               {page === MY_POSTS_PAGE ? (
                 <span
                   aria-hidden="true"
@@ -54,20 +54,20 @@ const ProfileMenu = ({ page }) => {
               )}
             </a>
           </Link>
-          <Link href="/profile/helpedin">
+          <Link href="/profile/contributed">
             <a
               className={`${
-                page === HELPED_IN_PAGE ||
-                page === ACTIVE_HELPED_IN_PAGE ||
-                page === CLOSED_HELPED_IN_PAGE
+                page === CONTRIBUTED ||
+                page === ACTIVE_CONTRIBUTED ||
+                page === CLOSED_CONTRIBUTED
                   ? "text-gray-900"
                   : "text-gray-500"
               } dark:text-white group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10  hover:text-gray-700 dark:hover:bg-gray-800`}
             >
-              <span>Helped In</span>
-              {page === HELPED_IN_PAGE ||
-              page === ACTIVE_HELPED_IN_PAGE ||
-              page === CLOSED_HELPED_IN_PAGE ? (
+              <span>Contributed</span>
+              {page === CONTRIBUTED ||
+              page === ACTIVE_CONTRIBUTED ||
+              page === CLOSED_CONTRIBUTED ? (
                 <span
                   aria-hidden="true"
                   className="bg-orange-500 absolute inset-x-0 bottom-0 h-0.5"

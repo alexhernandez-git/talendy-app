@@ -4,7 +4,7 @@ import {
   CLOSED_POSTS_PROFILE_PAGE,
   DONATION_PAGE,
   PROFILE_PAGE,
-  USER_HELPED_IN_PAGE,
+  USER_CONTRIBUTED,
 } from "pages";
 import React from "react";
 
