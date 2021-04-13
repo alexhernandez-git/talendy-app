@@ -336,7 +336,7 @@ const Header = ({ handleToggleMessages, handleOpenModal, page }) => {
                   <div ref={menuRef}>
                     <div
                       ref={ref}
-                      className=" origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
+                      className=" origin-top-right absolute z-40 right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
                       role="menu"
                       aria-orientation="vertical"
                       aria-labelledby="user-menu"

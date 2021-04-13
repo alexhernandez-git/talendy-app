@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useState } from "react";
 import StarRatings from "react-star-ratings";
 
@@ -22,13 +23,22 @@ const Member = () => {
                 alt=""
               />
             </div>
-            <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+            <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-5 md:gap-4">
               <div class="flex items-center">
-                <p class="text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 truncate rounded-2xl px-3 py-1">
-                  Ricardo Cooper
-                </p>
+                <Link href="/user/123">
+                  <p class="text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 truncate rounded-2xl px-3 py-1">
+                    Ricardo Cooper
+                  </p>
+                </Link>
               </div>
-              <div class="hidden md:block">
+              <div class="hidden md:flex items-center">
+                <Link href="/donation/123">
+                  <p class="text-sm font-medium text-white bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700  truncate rounded-2xl px-3 py-1">
+                    Donate
+                  </p>
+                </Link>
+              </div>
+              <div class="hidden md:block col-start-4">
                 <div>
                   <p class="text-sm text-gray-900 dark:text-white">
                     Applied on{" "}
