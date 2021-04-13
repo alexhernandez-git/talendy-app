@@ -1,5 +1,6 @@
+import useOutsideClick from "hooks/useOutsideClick";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import StarRatings from "react-star-ratings";
 
 const Member = () => {
@@ -8,12 +9,23 @@ const Member = () => {
   const handleToggleForm = () => {
     setIsFormOpen(!isFormOpen);
   };
+  const handleOpenForm = () => {
+    setIsFormOpen(true);
+  };
+  const handleCloseForm = () => {
+    if (isFormOpen) {
+      setIsFormOpen(false);
+    }
+  };
+
+  const formRef = useRef();
+  useOutsideClick(formRef, () => handleCloseForm());
   return (
     <li>
       <div class="block ">
         <div
           class="flex items-center px-4 py-4 sm:px-6 cursor-pointer bg-gray-50 dark:bg-gray-700"
-          onClick={handleToggleForm}
+          onMouseDown={handleToggleForm}
         >
           <div class="min-w-0 flex-1 flex items-center">
             <div class="flex-shrink-0">
@@ -26,21 +38,12 @@ const Member = () => {
             <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-5 md:gap-4">
               <div class="flex items-center">
                 <Link href="/user/123">
-                  <p class="text-sm font-medium text-gray-500 dark:text-gray-100 truncate rounded-2xl px-3 py-1">
+                  <p class="text-sm font-medium text-gray-500 dark:text-gray-100 truncate rounded-2xl px-3 py-1 hover:underline">
                     Ricardo Cooper
                   </p>
                 </Link>
               </div>
-              <div class="hidden md:flex items-center">
-                <Link href="/donation/123">
-                  <p
-                    onClick={(e) => e.stopPropagation()}
-                    class="text-sm font-medium text-white bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700  truncate rounded-2xl px-3 py-1"
-                  >
-                    Donate
-                  </p>
-                </Link>
-              </div>
+
               <div class="hidden md:block col-start-4">
                 <div>
                   <p class="text-sm text-gray-900 dark:text-white">
@@ -135,10 +138,41 @@ const Member = () => {
           </div>
         </div>
 
-        <div className={`${isFormOpen ? "block" : "hidden"}`}>
+        <div className={`${isFormOpen ? "block" : "hidden"}`} ref={formRef}>
           <form action="#" method="POST">
             <div class="sm:overflow-hidden">
               <div class="px-4 py-5 bg-white dark:bg-gray-800 space-y-6 sm:p-6">
+                <div>
+                  <label
+                    for="about"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    And if you invite him to a coffee?
+                  </label>
+                  <div class="mt-1">
+                    <Link href="/donation/123">
+                      <button
+                        type="button"
+                        class="bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5 mr-2"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
+                            clip-rule="evenodd"
+                          ></path>
+                        </svg>
+                        Donate
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+
                 <div class="grid grid-cols-3 gap-6">
                   <div class="col-span-3 sm:col-span-2">
                     <label
