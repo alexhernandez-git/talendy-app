@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import HelpRequest from "components/Pages/MyPosts/HelpRequest";
 import { Transition } from "@tailwindui/react";
+import Link from "next/link";
 
 const HelpRequestsFeed = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -69,7 +70,7 @@ const HelpRequestsFeed = () => {
       <div
         className={`${isOpen ? "block" : "hidden"} mt-6 flow-root pb-6 px-6`}
       >
-        <ul className="-my-4 divide-y divide-gray-200">
+        <ul className="divide-y divide-gray-200">
           <li>
             <HelpRequest />
           </li>
@@ -83,6 +84,13 @@ const HelpRequestsFeed = () => {
             <HelpRequest />
           </li>
         </ul>
+        <div className="mt-2">
+          <Link href={"/requests/123"}>
+            <span class="cursor-pointer w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md  text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
+              See all
+            </span>
+          </Link>
+        </div>
       </div>
     </div>
   );
