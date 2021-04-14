@@ -77,7 +77,7 @@ const Header = ({
   };
   const notificationsRef = useRef();
   useOutsideClick(notificationsRef, () => handleCloseNotifications());
-  const is_authenticated = false;
+  const is_authenticated = true;
 
   const [loginOpen, setLoginOpen] = useState(false);
   const handleOpenLogin = () => {

@@ -349,7 +349,7 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
                 <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-right sm:px-6 rounded-b-xl">
                   <button
                     type="submit"
-                    className="cursor-pointer inline-flex items-center px-4 py-2 text-md font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                    className="cursor-pointer inline-flex items-center px-4 py-2 text-md font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
                   >
                     Save
                   </button>

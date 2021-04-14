@@ -236,6 +236,7 @@ const Help = () => {
         image={image}
         modalOpen={modalOpen}
         handleToggleModal={handleToggleModal}
+        handleCloseModal={handleCloseModal}
         modalRef={modalRef}
       />
     </>

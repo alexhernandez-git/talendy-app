@@ -88,12 +88,10 @@ const RegisterModal = ({
               <div className="absolute top-2 right-2">
                 <button
                   type="button"
-                  onMouseDown={handleCloseRegister}
+                  onClick={handleCloseRegister}
                   className="rounded-3xl p-1 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 dark:hover:bg-gray-700 focus:outline-none ring-1 ring-inset ring-white"
                   aria-expanded="false"
                 >
-                  <span className="sr-only">Open menu</span>
-
                   <svg
                     className={`block h-4 w-4`}
                     xmlns="http://www.w3.org/2000/svg"

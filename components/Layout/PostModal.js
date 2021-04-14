@@ -6,7 +6,7 @@ import { Transition } from "@tailwindui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const NewPostModal = ({ modalOpen, modalRef, handleCloseModal }) => {
+const PostModal = ({ modalOpen, modalRef, handleCloseModal }) => {
   const router = useRouter();
   const handleGoToProfile = (e) => {
     e.stopPropagation();
@@ -85,12 +85,10 @@ const NewPostModal = ({ modalOpen, modalRef, handleCloseModal }) => {
               <div className="flex justify-end mb-2">
                 <button
                   type="button"
-                  onMouseDown={handleCloseModal}
+                  onClick={handleCloseModal}
                   className="rounded-3xl p-1 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 dark:hover:bg-gray-700 focus:outline-none ring-1 ring-inset ring-white"
                   aria-expanded="false"
                 >
-                  <span className="sr-only">Open menu</span>
-
                   <svg
                     className={`block h-4 w-4`}
                     xmlns="http://www.w3.org/2000/svg"
@@ -347,4 +345,4 @@ const NewPostModal = ({ modalOpen, modalRef, handleCloseModal }) => {
   );
 };
 
-export default NewPostModal;
+export default PostModal;

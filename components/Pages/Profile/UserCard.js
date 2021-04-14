@@ -77,7 +77,7 @@ const UserCard = ({ mobile, page, profile }) => {
                     </span>
                   </div>
                   <div className="mt-4 flex justify-center">
-                    <Link href="/reviews/123">
+                    <Link href={profile ? "/profile/reviews" : "/reviews/123"}>
                       <button className="cursor-pointer">
                         <div className="flex">
                           <svg
