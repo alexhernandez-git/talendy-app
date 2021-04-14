@@ -199,7 +199,7 @@ const DonationForm = () => {
                 <fieldset>
                   <legend className="sr-only">Amount options</legend>
                   <div className="space-y-4">
-                    <label className="relative block rounded-lg border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between">
+                    <label className="relative block rounded-3xl border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between">
                       <input
                         type="radio"
                         name="server_size"
@@ -231,12 +231,12 @@ const DonationForm = () => {
                       </div>
                       {/* Border selected */}
                       <div
-                        className="border-orange-500 absolute -inset-px rounded-lg border-2 pointer-events-none"
+                        className="border-orange-500 absolute -inset-px rounded-3xl border-2 pointer-events-none"
                         aria-hidden="true"
                       ></div>
                     </label>
 
-                    <label className="relative block rounded-lg border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between">
+                    <label className="relative block rounded-3xl border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between">
                       <input
                         type="radio"
                         name="server_size"
@@ -267,12 +267,12 @@ const DonationForm = () => {
                         <div className="font-medium">$8</div>
                       </div>
                       <div
-                        className="border-transparent absolute -inset-px rounded-lg border-2 pointer-events-none"
+                        className="border-transparent absolute -inset-px rounded-3xl border-2 pointer-events-none"
                         aria-hidden="true"
                       ></div>
                     </label>
 
-                    <label className="relative block rounded-lg border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between">
+                    <label className="relative block rounded-3xl border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between">
                       <input
                         type="radio"
                         name="server_size"
@@ -303,12 +303,12 @@ const DonationForm = () => {
                         <div className="font-medium ">$12</div>
                       </div>
                       <div
-                        className="border-transparent absolute -inset-px rounded-lg border-2 pointer-events-none"
+                        className="border-transparent absolute -inset-px rounded-3xl border-2 pointer-events-none"
                         aria-hidden="true"
                       ></div>
                     </label>
 
-                    <label className="relative block rounded-lg border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between">
+                    <label className="relative block rounded-3xl border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between">
                       <input
                         type="radio"
                         name="server_size"
@@ -339,7 +339,7 @@ const DonationForm = () => {
                         <div className="font-medium ">$16</div>
                       </div>
                       <div
-                        className="border-transparent absolute -inset-px rounded-lg border-2 pointer-events-none"
+                        className="border-transparent absolute -inset-px rounded-3xl border-2 pointer-events-none"
                         aria-hidden="true"
                       ></div>
                     </label>

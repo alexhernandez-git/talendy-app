@@ -11,6 +11,20 @@ import { useRouter } from "next/router";
 import Editor from "components/Editor/Editor";
 import Link from "next/link";
 import Member from "components/Pages/Help/Member";
+
+const user = {
+  name: "Chelsea Hagon",
+  email: "chelseahagon@example.com",
+  role: "Human Resources Manager",
+  imageUrl:
+    "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+};
+
+const stats = [
+  { label: "Chat", value: 12 },
+  { label: "Shared document", value: 4 },
+];
+
 const Help = () => {
   const page = HELP_PAGE;
   const image = true;
@@ -39,52 +53,101 @@ const Help = () => {
     <>
       <Layout>
         <div className="py-10">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
-            <div className="flex items-center space-x-5">
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                  What would you have done differently if you ran Jurassic Park?
-                </h3>
-                <p className="text-sm font-medium text-gray-500">
-                  Created at <time datetime="2020-08-25">August 25, 2020</time>
-                </p>
-              </div>
-            </div>
-            <div className="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
-              <button
-                onClick={handleOpenModal}
-                type="button"
-                className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mr-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                Info
-              </button>
-              <Link href="/finalize/123">
-                <button
-                  type="button"
-                  className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm  text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
-                >
-                  Finalize
-                </button>
-              </Link>
-            </div>
-          </div>
-
-          <div className="mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
+          <div className="max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
             <div className="space-y-6 lg:col-start-1 lg:col-span-2">
+              <section aria-labelledby="profile-overview-title">
+                <div className="rounded-lg bg-white dark:bg-gray-700 overflow-hidden shadow">
+                  <h2 className="sr-only" id="profile-overview-title">
+                    Profile Overview
+                  </h2>
+                  <div className="bg-white dark:bg-gray-700 p-6">
+                    <div className="sm:flex sm:items-center sm:justify-between">
+                      <div className="sm:flex sm:space-x-5">
+                        <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
+                          {/* <p className="text-sm font-medium text-gray-600">
+                            Welcome back,
+                          </p> */}
+                          <p className="text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">
+                            What would you have done differently if you ran
+                            Jurassic Park?
+                          </p>
+                          <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                            Created at{" "}
+                            <time datetime="2020-08-25">August 25, 2020</time>
+                          </p>
+                        </div>
+                      </div>
+                      <div className="mt-5 flex justify-center sm:mt-0 flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
+                        <button
+                          onClick={handleOpenModal}
+                          type="button"
+                          className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5 mr-2"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                          Info
+                        </button>
+                        <Link href="/finalize/123">
+                          <button
+                            type="button"
+                            className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm  text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                          >
+                            Finalize
+                          </button>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="border-t border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 grid grid-cols-1 divide-y divide-gray-200 dark:divide-gray-600 sm:grid-cols-2 sm:divide-y-0 sm:divide-x">
+                    <div className="px-6 py-5 text-sm font-medium text-center cursor-pointer flex justify-center items-center hover:opacity-70">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 mr-2 text-gray-600 dark:text-gray-100"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      <span className="text-gray-600 dark:text-gray-100">
+                        Chat
+                      </span>
+                    </div>
+                    <div className="px-6 py-5 text-sm font-medium text-center cursor-pointer flex justify-center items-center hover:opacity-70">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 mr-2 text-gray-600 dark:text-gray-100"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      <span className="text-gray-600 dark:text-gray-100">
+                        Shared document
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </section>
               <section aria-labelledby="notes-title" className=" sticky top-4">
                 <div className="bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg sm:overflow-hidden">
                   <div className=" ">
