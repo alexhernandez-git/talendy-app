@@ -247,7 +247,7 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
                     </div>
                     <div className="sm:col-span-2">
                       <dd className="text-sm text-gray-900">
-                        <Editor />
+                        <Editor postForm />
                       </dd>
                     </div>
 

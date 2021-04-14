@@ -1,6 +1,6 @@
 import React from "react";
 import Toolbar from "./Toolbar";
-export default function Editor({ chat }) {
+export default function Editor({ chat, postForm, solveIssueForm }) {
   function paste(e) {
     e.preventDefault();
     const open = new RegExp("<", "gi");
@@ -33,15 +33,6 @@ export default function Editor({ chat }) {
 
   return (
     <div>
-      {!chat && (
-        <div
-          id="editor-title"
-          contentEditable="true"
-          data-placeholder="Title"
-          onKeyDown={handleTitleKeyDown}
-          className="title my-4 text-gray-600 dark:text-white text-xl bg-gray-200 dark:bg-gray-900 p-3 rounded"
-        ></div>
-      )}
       {chat && (
         <>
           <Toolbar />
@@ -55,8 +46,29 @@ export default function Editor({ chat }) {
           ></div>
         </>
       )}
-
-      {!chat && (
+      {solveIssueForm && (
+        <>
+          <Toolbar />
+          <div
+            className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l h-60"
+            id="editor"
+            onKeyDown={handleKeyDown}
+            contentEditable="true"
+            data-placeholder="Write the solution of your issue"
+            onPaste={(e) => paste(e)}
+          ></div>
+        </>
+      )}
+      {postForm && (
+        <div
+          id="editor-title"
+          contentEditable="true"
+          data-placeholder="Title"
+          onKeyDown={handleTitleKeyDown}
+          className="title my-4 text-gray-600 dark:text-white text-xl bg-gray-200 dark:bg-gray-900 p-3 rounded"
+        ></div>
+      )}
+      {postForm && (
         <>
           <Toolbar />
 

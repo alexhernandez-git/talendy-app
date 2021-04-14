@@ -1,3 +1,4 @@
+import Editor from "components/Editor/Editor";
 import Layout from "components/Layout/Layout";
 import Pagination from "components/Layout/Pagination";
 import Member from "components/Pages/Finalize/Member";
@@ -34,6 +35,10 @@ const Finalize = () => {
       </div>
       <div className="py-10">
         <div className="max-w-3xl mx-auto sm:px-6 flex flex-col lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
+          <div className="shadow overflow-hidden sm:rounded-md col-span-12 mb-4 p-4">
+            <Editor solveIssueForm />
+          </div>
+
           <div className="shadow overflow-hidden sm:rounded-md col-span-12">
             <ul className="divide-y divide-gray-200">
               <Member />

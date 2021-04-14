@@ -33,10 +33,7 @@ export default function Toolbar() {
     }`;
     codeBlock.classList.add("codeBlock");
 
-    format(
-      "insertHTML",
-      `<pre className='codeBlock' id='${id}'>${target}</pre>`
-    );
+    format("insertHTML", `<pre class='codeBlock' id='${id}'>${target}</pre>`);
     addLineAfterBlock(id);
   }
 
