@@ -217,11 +217,24 @@ const Post = ({ page, image }) => {
             </span>
           </p>
         </div>
+
         {image && (
           <div className="mt-4">
             <img src="/static/images/freelaniumsc.png" />
           </div>
         )}
+        <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 bg-gray-200 dark:bg-gray-500 p-3 rounded shadow">
+          <span className="font-medium">Solution</span>
+          <p>
+            Jurassic Park was an incredible idea and a magnificent feat of
+            engineering, but poor protocols and a disregard for human safety
+            killed what could have otherwise been one of the best businesses of
+            our generation.&hellip;
+            <span className="ml-1 hover:underline cursor-pointer">
+              Read more
+            </span>
+          </p>
+        </div>
         <div className="mt-6 flex justify-between space-x-8">
           <div className="flex space-x-6">
             <span className="inline-flex items-center text-sm">
@@ -298,7 +311,7 @@ const Post = ({ page, image }) => {
                 d="M5 13l4 4L19 7"
               />
             </svg>
-            Finalized
+            Solved
           </span>
         </div>
         <div className="mt-6 flex justify-between space-x-8">

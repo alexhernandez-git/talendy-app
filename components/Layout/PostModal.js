@@ -272,7 +272,7 @@ const PostModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                           d="M5 13l4 4L19 7"
                         />
                       </svg>
-                      Finalized
+                      Solved
                     </span>
                   </div>
                   <div className="mt-6 flex justify-between space-x-8">
