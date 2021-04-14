@@ -1,4 +1,5 @@
 import Layout from "components/Layout/Layout";
+import Pagination from "components/Layout/Pagination";
 import Member from "components/Pages/Finalize/Member";
 import Link from "next/link";
 import React from "react";
@@ -32,8 +33,8 @@ const Finalize = () => {
         </div>
       </div>
       <div className="py-10">
-        <div className="max-w-3xl mx-auto sm:px-6 flex flex-col lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
-          <div className="shadow overflow-hidden sm:rounded-3xl col-span-12">
+        <div className="max-w-3xl mx-auto sm:px-6 flex flex-col lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
+          <div className="shadow overflow-hidden sm:rounded-md col-span-12">
             <ul className="divide-y divide-gray-200">
               <Member />
               <Member />
@@ -60,7 +61,10 @@ const Finalize = () => {
               <Member />
               <Member />
             </ul>
-          </div>{" "}
+          </div>
+          <div className="col-span-12">
+            <Pagination next={true} />
+          </div>
         </div>
       </div>
     </Layout>
