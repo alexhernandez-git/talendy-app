@@ -13,8 +13,8 @@ const SettingsSidebar = () => {
           <a
             className={
               router.pathname === "/settings"
-                ? "bg-gray-50 text-orange-700 hover:text-orange-700 dark:text-gray-900 dark:hover:text-gray-900 hover:bg-white group rounded-md px-3 py-2 flex items-center text-sm font-medium"
-                : "text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+                ? "bg-gray-50 text-orange-700 hover:text-orange-700 dark:text-gray-900 dark:hover:text-gray-900 hover:bg-white group rounded-3xl px-3 py-2 flex items-center text-sm font-medium"
+                : "text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-900 hover:bg-gray-50 group rounded-3xl px-3 py-2 flex items-center text-sm font-medium"
             }
             aria-current="page"
           >
@@ -44,8 +44,8 @@ const SettingsSidebar = () => {
           <a
             className={
               router.pathname === "/settings/security"
-                ? "bg-gray-50 text-orange-700 hover:text-orange-700 dark:text-gray-900 dark:hover:text-gray-900 hover:bg-white group rounded-md px-3 py-2 flex items-center text-sm font-medium"
-                : "text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+                ? "bg-gray-50 text-orange-700 hover:text-orange-700 dark:text-gray-900 dark:hover:text-gray-900 hover:bg-white group rounded-3xl px-3 py-2 flex items-center text-sm font-medium"
+                : "text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-900 hover:bg-gray-50 group rounded-3xl px-3 py-2 flex items-center text-sm font-medium"
             }
           >
             <svg
@@ -75,8 +75,8 @@ const SettingsSidebar = () => {
           <a
             className={
               router.pathname === "/settings/earnings"
-                ? "bg-gray-50 text-orange-700 hover:text-orange-700 dark:text-gray-900 dark:hover:text-gray-900 hover:bg-white group rounded-md px-3 py-2 flex items-center text-sm font-medium"
-                : "text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium"
+                ? "bg-gray-50 text-orange-700 hover:text-orange-700 dark:text-gray-900 dark:hover:text-gray-900 hover:bg-white group rounded-3xl px-3 py-2 flex items-center text-sm font-medium"
+                : "text-gray-900 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-900 hover:bg-gray-50 group rounded-3xl px-3 py-2 flex items-center text-sm font-medium"
             }
           >
             <svg

@@ -80,7 +80,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                         <div className="ml-3 h-7 flex items-center">
                           <button
                             onClick={handleToggleMessages}
-                            className="bg-white dark:bg-gray-700 rounded-md text-gray-400 hover:text-gray-500 dark:text-gray-100 dark:hover:text-gray-200 focus:ring-2 focus:ring-orange-500"
+                            className="bg-white dark:bg-gray-700 rounded-3xl text-gray-400 hover:text-gray-500 dark:text-gray-100 dark:hover:text-gray-200 focus:ring-2 focus:ring-orange-500"
                           >
                             <span className="sr-only">Close panel</span>
                             <svg
@@ -226,7 +226,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                                 <div className="p-3 flex justify-between">
                                   <button
                                     type="button"
-                                    className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                                    className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                                   >
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
@@ -247,10 +247,10 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                                     type="text"
                                     id="message"
                                     name="message"
-                                    className="block w-full bg-white dark:bg-gray-600 border border-gray-300 rounded-md p-2 text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                                    className="block w-full bg-white dark:bg-gray-600 border border-gray-300 rounded-3xl p-2 text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                                     placeholder="Mesasage"
                                   />
-                                  <button className="ml-3 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
+                                  <button className="ml-3 inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
                                     Send
                                   </button>
                                 </div>

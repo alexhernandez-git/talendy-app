@@ -30,7 +30,7 @@ const LeftSidebar = ({ page }) => {
                     page === PROFILE_PAGE
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
               >
                 <span className="truncate">All</span>
                 <span>30</span>
@@ -43,7 +43,7 @@ const LeftSidebar = ({ page }) => {
                     page === ACTIVE_POSTS_PROFILE_PAGE
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
               >
                 <span className="truncate">Active</span>
                 <span>10</span>
@@ -56,7 +56,7 @@ const LeftSidebar = ({ page }) => {
                     page === CLOSED_POSTS_PROFILE_PAGE
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md hover:text-gray-900 dark:hover:text-gray-900`}
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
               >
                 <span className="truncate">Closed</span>
                 <span>20</span>

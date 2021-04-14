@@ -10,7 +10,7 @@ const Finalize = () => {
         <div className="max-w-3xl mx-auto  flex flex-col lg:max-w-7xl lg:grid lg:grid-cols-12 lg:gap-8  sm:px-6 lg:px-8">
           <div className=" sm:flex justify-between w-full items-center col-span-12">
             <Link href="/contribute/123">
-              <button className="cursor-pointer w-auto mt-2 sm:mt-0 inline-flex justify-center items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm border border-gray-300 text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
+              <button className="cursor-pointer w-auto mt-2 sm:mt-0 inline-flex justify-center items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm border border-gray-300 text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -25,7 +25,7 @@ const Finalize = () => {
                 </svg>
               </button>
             </Link>
-            <button className="cursor-pointer w-full sm:w-auto mt-2 sm:mt-0 inline-flex justify-center items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
+            <button className="cursor-pointer w-full sm:w-auto mt-2 sm:mt-0 inline-flex justify-center items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
               Finalize Task
             </button>
           </div>
@@ -33,7 +33,7 @@ const Finalize = () => {
       </div>
       <div className="py-10">
         <div className="max-w-3xl mx-auto sm:px-6 flex flex-col lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
-          <div class="shadow overflow-hidden sm:rounded-md col-span-12">
+          <div class="shadow overflow-hidden sm:rounded-3xl col-span-12">
             <ul class="divide-y divide-gray-200">
               <Member />
               <Member />

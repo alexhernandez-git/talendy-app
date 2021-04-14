@@ -153,7 +153,7 @@ const Member = () => {
                     <Link href="/donation/123">
                       <button
                         type="button"
-                        class="bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
+                        class="bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -208,7 +208,7 @@ const Member = () => {
                       id="about"
                       name="about"
                       rows="3"
-                      className="focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                      className="focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                       placeholder="Message"
                     ></textarea>
                   </div>

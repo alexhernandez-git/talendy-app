@@ -42,7 +42,7 @@ const EarningsHistory = () => {
   };
   return (
     <section aria-labelledby="billing_history_heading">
-      <div className="bg-white dark:bg-gray-700 pt-6 shadow sm:rounded-md sm:overflow-hidden">
+      <div className="bg-white dark:bg-gray-700 pt-6 shadow sm:rounded-3xl sm:overflow-hidden">
         <div className="px-4 sm:px-6">
           <h2
             id="billing_history_heading"

@@ -55,7 +55,7 @@ const earnings = () => {
           {/* Asside */}
           <SettingsLayout>
             <div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
-              <div className="bg-gray-50 dark:bg-gray-800 pt-12 sm:pt-16 shadow sm:rounded-md sm:overflow-hidden">
+              <div className="bg-gray-50 dark:bg-gray-800 pt-12 sm:pt-16 shadow sm:rounded-3xl sm:overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
@@ -126,7 +126,7 @@ const earnings = () => {
                 </div>
               </div>
               <form action="#" method="POST">
-                <div className="shadow sm:rounded-md sm:overflow-hidden">
+                <div className="shadow sm:rounded-3xl sm:overflow-hidden">
                   <div className="bg-white dark:bg-gray-700 py-6 px-4 space-y-6 sm:p-6">
                     {/* <div>
                   <h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -163,7 +163,7 @@ const earnings = () => {
 
                             {userReducer.stripe_connecting ? (
                               <>
-                                <span className="flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-orange-600  hover:bg-orange-700">
+                                <span className="flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-3xl text-white bg-orange-600  hover:bg-orange-700">
                                   <Spinner />
                                 </span>
                               </>
@@ -173,7 +173,7 @@ const earnings = () => {
                                   <>
                                     <span
                                       onMouseDown={handleToggleWithdrawFunds}
-                                      className="cursor-pointer  flex items-center justify-center border-gray-300 shadow-sm bg-white dark:bg-gray-900 text-base font-medium text-gray-700 dark:text-gray-100 hover:bg-gray-50  px-5 py-3 border border-transparent rounded-md"
+                                      className="cursor-pointer  flex items-center justify-center border-gray-300 shadow-sm bg-white dark:bg-gray-900 text-base font-medium text-gray-700 dark:text-gray-100 hover:bg-gray-50  px-5 py-3 border border-transparent rounded-3xl"
                                     >
                                       <img
                                         src="/static/images/paypal-logo.png"
@@ -188,7 +188,7 @@ const earnings = () => {
                                       onMouseDown={
                                         handleTogglePaypalConnectForm
                                       }
-                                      className="cursor-pointer  flex items-center justify-center border-gray-300 shadow-sm bg-white dark:bg-gray-900 text-base font-medium text-gray-700 dark:text-gray-100 hover:bg-gray-50  px-5 py-3 border border-transparent rounded-md"
+                                      className="cursor-pointer  flex items-center justify-center border-gray-300 shadow-sm bg-white dark:bg-gray-900 text-base font-medium text-gray-700 dark:text-gray-100 hover:bg-gray-50  px-5 py-3 border border-transparent rounded-3xl"
                                     >
                                       <img
                                         src="/static/images/paypal-logo.png"
@@ -208,7 +208,7 @@ const earnings = () => {
                   {/* <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                 <button
                   type="submit"
-                  className="bg-orange-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                  className="bg-orange-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
                 >
                   Save
                 </button>

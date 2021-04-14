@@ -30,7 +30,7 @@ const DonationForm = () => {
                           **** **** **** 4344
                         </span>
                       </div>
-                      <button className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
+                      <button className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-5 w-5 mr-2"
@@ -50,7 +50,7 @@ const DonationForm = () => {
                     </dd>
                   ) : (
                     <dd className="text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
-                      <ul className="relative bg-white dark:bg-gray-700 rounded-md -space-y-px w-full">
+                      <ul className="relative bg-white dark:bg-gray-700 rounded-3xl -space-y-px w-full">
                         <li>
                           <div
                             className={`relative border ${
@@ -158,10 +158,10 @@ const DonationForm = () => {
                         </li>
                       </ul>
                       <div className="flex justify-end mt-2">
-                        <button className="mr-2 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
+                        <button className="mr-2 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
                           Cancel
                         </button>
-                        <button className="justify-center inline-flex items-center px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
+                        <button className="justify-center inline-flex items-center px-4 py-2 shadow-sm text-sm font-medium rounded-3xl text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
                           Select
                         </button>
                       </div>
@@ -185,10 +185,10 @@ const DonationForm = () => {
                         },
                       },
                     }}
-                    className="block w-full border bg-white dark:bg-gray-600 border-gray-300  rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                    className="block w-full border bg-white dark:bg-gray-600 border-gray-300  rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                   />
 
-                  <button className="w-full sm:w-auto mt-2 sm:mt-0 sm:ml-2 justify-center inline-flex items-center px-4 py-2 shadow-sm text-sm font-medium rounded-md text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
+                  <button className="w-full sm:w-auto mt-2 sm:mt-0 sm:ml-2 justify-center inline-flex items-center px-4 py-2 shadow-sm text-sm font-medium rounded-3xl text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-5 w-5 mr-2"
@@ -382,7 +382,7 @@ const DonationForm = () => {
                     type="text"
                     name="title"
                     id="title"
-                    class="text-center block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                    class="text-center block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     placeholder="$ Other"
                     aria-describedby="title-description"
                     value=""
@@ -395,7 +395,7 @@ const DonationForm = () => {
         <div class="pb-6">
           <button
             type="button"
-            className="w-full uppercase bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
+            className="w-full uppercase bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
           >
             DONATE NOW
           </button>

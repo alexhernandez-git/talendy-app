@@ -54,7 +54,7 @@ const Help = () => {
               <button
                 onClick={handleOpenModal}
                 type="button"
-                className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +75,7 @@ const Help = () => {
               <Link href="/finalize/123">
                 <button
                   type="button"
-                  className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm  text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                  className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm  text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
                 >
                   Finalize
                 </button>
@@ -130,7 +130,7 @@ const Help = () => {
                             <div className="flex items-center justify-end sm:justify-start">
                               {/* <button
                                 type="button"
-                                className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                                className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                               >
                                 <IconContext.Provider
                                   value={{ size: 18, className: "mr-2" }}
@@ -139,12 +139,12 @@ const Help = () => {
                                 </IconContext.Provider>
                                 Screen
                               </button>
-                              <button className="inline-flex items-center px-4 py-2 font-medium rounded-md text-orange-500 dark:text-gray-100 ">
+                              <button className="inline-flex items-center px-4 py-2 font-medium rounded-3xl text-orange-500 dark:text-gray-100 ">
                                 <IconContext.Provider value={{ size: 23 }}>
                                   <MdMic />
                                 </IconContext.Provider>
                               </button>
-                              <button className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 ">
+                              <button className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 ">
                                 <IconContext.Provider value={{ size: 23 }}>
                                   <MdHeadset />
                                 </IconContext.Provider>
@@ -153,7 +153,7 @@ const Help = () => {
                             <div className="mt-4 sm:mt-0 flex items-center justify-end">
                               <button
                                 type="button"
-                                className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                                className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                               >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +172,7 @@ const Help = () => {
                               </button>
                               <button
                                 type="submit"
-                                className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm  text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                                className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm  text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
                               >
                                 Send
                               </button>
@@ -200,7 +200,7 @@ const Help = () => {
 
                 <div className="mt-3 flow-root">
                   <ul className=" divide-y divide-gray-200 dark:divide-gray-400">
-                    <Member />
+                    <Member admin />
                     <Member />
                     <Member />
                     <Member />

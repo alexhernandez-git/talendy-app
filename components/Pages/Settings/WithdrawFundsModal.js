@@ -128,8 +128,8 @@ const WithdrawFundsModal = ({
                               id="amount"
                               className={
                                 formik.touched.amount && formik.errors.amount
-                                  ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md dark:bg-gray-600"
-                                  : "shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm  border-gray-300 rounded-md dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                                  ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-3xl dark:bg-gray-600"
+                                  : "shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm  border-gray-300 rounded-3xl dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                               }
                               placeholder={`$300`}
                               form={"withdraw-funds-form"}
@@ -177,14 +177,14 @@ const WithdrawFundsModal = ({
               <button
                 type="submit"
                 form={"withdraw-funds-form"}
-                className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 sm:col-start-2 sm:text-sm"
+                className="w-full inline-flex justify-center rounded-3xl border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 sm:col-start-2 sm:text-sm"
               >
                 ​ Withdraw Funds
               </button>
               <button
                 type="button"
                 onClick={handleCloseWithdrawFunds}
-                className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 text-base font-medium text-gray-700 sm:mt-0 sm:col-start-1 sm:text-sm bg-white dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                className="mt-3 w-full inline-flex justify-center rounded-3xl border border-gray-300 shadow-sm px-4 py-2 text-base font-medium text-gray-700 sm:mt-0 sm:col-start-1 sm:text-sm bg-white dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
               >
                 Cancel
               </button>

@@ -50,7 +50,7 @@ const security = () => {
           <SettingsLayout>
             <div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
               <form onSubmit={changePasswordForm.handleSubmit}>
-                <div className="shadow sm:rounded-md sm:overflow-hidden">
+                <div className="shadow sm:rounded-3xl sm:overflow-hidden">
                   <div className="bg-white dark:bg-gray-700 py-6 px-4 space-y-6 sm:p-6">
                     <div>
                       <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
@@ -73,7 +73,7 @@ const security = () => {
                           name="password"
                           id="password"
                           autoComplete="password"
-                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                           onChange={changePasswordForm.handleChange}
                           onBlur={changePasswordForm.handleBlur}
                           value={changePasswordForm.values.password}
@@ -115,7 +115,7 @@ const security = () => {
                           name="new_password"
                           id="new_password"
                           autoComplete="email"
-                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                           onChange={changePasswordForm.handleChange}
                           onBlur={changePasswordForm.handleBlur}
                           value={changePasswordForm.values.new_password}
@@ -142,7 +142,7 @@ const security = () => {
                           name="repeat_password"
                           id="repeat_password"
                           autoComplete="email"
-                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                           onChange={changePasswordForm.handleChange}
                           onBlur={changePasswordForm.handleBlur}
                           value={changePasswordForm.values.repeat_password}
@@ -161,7 +161,7 @@ const security = () => {
                   <div className="px-4 py-3 bg-gray-50 dark:bg-gray-800 text-right sm:px-6">
                     <button
                       type="submit"
-                      className="text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium"
+                      className="text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium"
                     >
                       Save
                     </button>

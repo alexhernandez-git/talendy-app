@@ -157,7 +157,7 @@ const settings = () => {
           <SettingsLayout>
             <div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
               <form onSubmit={profileForm.handleSubmit}>
-                <div className="shadow sm:rounded-md sm:overflow-hidden">
+                <div className="shadow sm:rounded-3xl sm:overflow-hidden">
                   <div className="bg-white dark:bg-gray-700 py-6 px-4 space-y-6 sm:p-6">
                     <div>
                       <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
@@ -183,7 +183,7 @@ const settings = () => {
                           name="username"
                           id="username"
                           autoComplete="username"
-                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                           onChange={profileForm.handleChange}
                           onBlur={profileForm.handleBlur}
                           value={profileForm.values.username}
@@ -229,7 +229,7 @@ const settings = () => {
                             id="about"
                             name="about"
                             rows="3"
-                            className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                            className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                             onChange={profileForm.handleChange}
                             onBlur={profileForm.handleBlur}
                             value={profileForm.values.about}
@@ -299,7 +299,7 @@ const settings = () => {
                   <div className="px-4 py-3 bg-gray-50 dark:bg-gray-800 text-right sm:px-6">
                     <button
                       type="submit"
-                      className=" text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium"
+                      className=" text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium"
                     >
                       Save
                     </button>
@@ -308,7 +308,7 @@ const settings = () => {
               </form>
 
               <form onSubmit={personalInfoForm.handleSubmit}>
-                <div className="shadow sm:rounded-md sm:overflow-hidden">
+                <div className="shadow sm:rounded-3xl sm:overflow-hidden">
                   <div className="bg-white dark:bg-gray-700 py-6 px-4 space-y-6 sm:p-6">
                     <div>
                       <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
@@ -332,7 +332,7 @@ const settings = () => {
                           name="first_name"
                           id="first_name"
                           autoComplete="given-name"
-                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                           onChange={personalInfoForm.handleChange}
                           onBlur={personalInfoForm.handleBlur}
                           value={personalInfoForm.values.first_name}
@@ -357,7 +357,7 @@ const settings = () => {
                           name="last_name"
                           id="last_name"
                           autoComplete="family-name"
-                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                           onChange={personalInfoForm.handleChange}
                           onBlur={personalInfoForm.handleBlur}
                           value={personalInfoForm.values.last_name}
@@ -381,7 +381,7 @@ const settings = () => {
                           id="country"
                           name="country"
                           autoComplete="country"
-                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                           onChange={personalInfoForm.handleChange}
                           onBlur={personalInfoForm.handleBlur}
                           value={personalInfoForm.values.country}
@@ -415,7 +415,7 @@ const settings = () => {
                           id="currency"
                           name="currency"
                           autoComplete="currency"
-                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                           onChange={personalInfoForm.handleChange}
                           onBlur={personalInfoForm.handleBlur}
                           value={personalInfoForm.values.currency}
@@ -437,7 +437,7 @@ const settings = () => {
                   <div className="px-4 py-3 bg-gray-50  dark:bg-gray-800 text-right sm:px-6">
                     <button
                       type="submit"
-                      className="text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium"
+                      className="text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium"
                     >
                       Save
                     </button>
@@ -445,7 +445,7 @@ const settings = () => {
                 </div>
               </form>
               <form onSubmit={emailForm.handleSubmit}>
-                <div className="shadow sm:rounded-md sm:overflow-hidden">
+                <div className="shadow sm:rounded-3xl sm:overflow-hidden">
                   <div className="bg-white dark:bg-gray-700 py-6 px-4 space-y-6 sm:p-6">
                     <div>
                       <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
@@ -469,7 +469,7 @@ const settings = () => {
                           name="email"
                           id="email_address"
                           autoComplete="email"
-                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                          className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                           onChange={emailForm.handleChange}
                           onBlur={emailForm.handleBlur}
                           value={emailForm.values.email}
@@ -511,7 +511,7 @@ const settings = () => {
                   <div className="px-4 py-3 bg-gray-50  dark:bg-gray-800 text-right sm:px-6">
                     <button
                       type="submit"
-                      className="text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600  border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium"
+                      className="text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600  border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium"
                     >
                       Save
                     </button>
@@ -522,7 +522,7 @@ const settings = () => {
                 <button
                   type="button"
                   onMouseDown={handleModalToggle}
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                 >
                   Remove account
                 </button>
@@ -592,14 +592,14 @@ const settings = () => {
                       <button
                         onClick={handleDeleteAccount}
                         type="button"
-                        className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 sm:ml-3 sm:w-auto sm:text-sm"
+                        className="w-full inline-flex justify-center rounded-3xl border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 sm:ml-3 sm:w-auto sm:text-sm"
                       >
                         Remove
                       </button>
                       <button
                         onClick={handleModalClose}
                         type="button"
-                        className="mt-3 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 text-base font-medium text-gray-700 sm:mt-0 sm:col-start-1 sm:text-sm bg-white dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                        className="mt-3 inline-flex justify-center rounded-3xl border border-gray-300 shadow-sm px-4 py-2 text-base font-medium text-gray-700 sm:mt-0 sm:col-start-1 sm:text-sm bg-white dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                       >
                         Cancel
                       </button>
