@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Transition } from "@tailwindui/react";
 
 const Login = ({ loginOpen, loginRef, mobile }) => {
+  const [isForgotPasswordOpen, setIsForgotPassowrdOpen] = useState(false);
+  const handleOpenForgotPassword = () => {
+    setIsForgotPassowrdOpen(true);
+  };
+  const handleCloseForgotPassword = () => {
+    setIsForgotPassowrdOpen(false);
+  };
   return (
     <Transition
       show={loginOpen}
@@ -25,65 +32,111 @@ const Login = ({ loginOpen, loginRef, mobile }) => {
           >
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
               <div className="bg-white dark:bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                <form className="space-y-6" action="#" method="POST">
-                  <div>
-                    {/* <label
+                {isForgotPasswordOpen ? (
+                  <form className="space-y-6" action="#" method="POST">
+                    <div>
+                      <span
+                        className="text-gray-500 dark:text-gray-100 text-sm flex items-center cursor-pointer"
+                        onClick={handleCloseForgotPassword}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 mr-1"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        Back
+                      </span>
+                    </div>
+                    <div>
+                      <div className="mt-1">
+                        <input
+                          id="email"
+                          name="email"
+                          type="email"
+                          autocomplete="email"
+                          placeholder="Email"
+                          className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <button
+                        type="submit"
+                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-3xl shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                      >
+                        Reset password
+                      </button>
+                    </div>
+                  </form>
+                ) : (
+                  <form className="space-y-6" action="#" method="POST">
+                    <div>
+                      {/* <label
                                   for="email"
                                   className="block text-sm font-medium text-gray-700"
-                                >
+                                  >
                                   Email address
                                 </label> */}
-                    <div className="mt-1">
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        autocomplete="email"
-                        placeholder="Email"
-                        className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                      />
+                      <div className="mt-1">
+                        <input
+                          id="email"
+                          name="email"
+                          type="email"
+                          autocomplete="email"
+                          placeholder="Email"
+                          className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div>
-                    {/* <label
+                    <div>
+                      {/* <label
                                   for="password"
                                   className="block text-sm font-medium text-gray-700"
-                                >
+                                  >
                                   Password
                                 </label> */}
-                    <div className="mt-1">
-                      <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        autocomplete="current-password"
-                        placeholder="Password"
-                        className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                      />
+                      <div className="mt-1">
+                        <input
+                          id="password"
+                          name="password"
+                          type="password"
+                          autocomplete="current-password"
+                          placeholder="Password"
+                          className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm">
-                      <a
-                        href="#"
-                        className="font-medium text-orange-600 hover:text-orange-500"
+                    <div className="flex items-center justify-between">
+                      <div className="text-sm">
+                        <span
+                          onClick={handleOpenForgotPassword}
+                          className="cursor-pointer font-medium text-orange-600 hover:text-orange-500"
+                        >
+                          Forgot your password?
+                        </span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <button
+                        type="submit"
+                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-3xl shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
                       >
-                        Forgot your password?
-                      </a>
+                        Sign in
+                      </button>
                     </div>
-                  </div>
-
-                  <div>
-                    <button
-                      type="submit"
-                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-3xl shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
-                    >
-                      Sign in
-                    </button>
-                  </div>
-                </form>
+                  </form>
+                )}
               </div>
             </div>
           </div>
