@@ -157,10 +157,10 @@ const RegisterModal = ({
                       onBlur={formik.handleBlur}
                       value={formik.values.first_name}
                       placeholder="First Name"
-                      className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm  bg-white border-gray-300  text-sm placeholder-gray-500   focus:placeholder-gray-400  dark:bg-gray-600 ${
+                      className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm  bg-white border-gray-300  text-sm  focus:placeholder-gray-400  dark:bg-gray-600 ${
                         formik.touched.first_name && formik.errors.first_name
                           ? "pr-10 border-red-300 text-red-900 focus:text-gray-900 dark:focus:text-white placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
-                          : " text-sm placeholder-gray-500 dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
+                          : " text-sm placeholder-gray-500  dark:placeholder-gray-200 dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
                       }`}
                     />
                     {formik.touched.first_name && formik.errors.first_name && (
@@ -200,10 +200,10 @@ const RegisterModal = ({
                       onBlur={formik.handleBlur}
                       value={formik.values.last_name}
                       placeholder="Last Name"
-                      className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm  bg-white border-gray-300  text-sm placeholder-gray-500   focus:placeholder-gray-400  dark:bg-gray-600 ${
+                      className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm  bg-white border-gray-300  text-sm  focus:placeholder-gray-400  dark:bg-gray-600 ${
                         formik.touched.last_name && formik.errors.last_name
                           ? "pr-10 border-red-300 text-red-900 focus:text-gray-900 dark:focus:text-white placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
-                          : " text-sm placeholder-gray-500 dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
+                          : " text-sm placeholder-gray-500  dark:placeholder-gray-200 dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
                       }`}
                     />
                     {formik.touched.last_name && formik.errors.last_name && (
@@ -244,11 +244,11 @@ const RegisterModal = ({
                       onBlur={formik.handleBlur}
                       value={formik.values.email}
                       placeholder="Email"
-                      className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm  bg-white border-gray-300  text-sm placeholder-gray-500   focus:placeholder-gray-400  dark:bg-gray-600 ${
+                      className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm  bg-white border-gray-300  text-sm  focus:placeholder-gray-400  dark:bg-gray-600 ${
                         (formik.touched.email && formik.errors.email) ||
                         email_available_error
                           ? "pr-10 border-red-300 text-red-900 focus:text-gray-900 dark:focus:text-white placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
-                          : " text-sm placeholder-gray-500 dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
+                          : " text-sm placeholder-gray-500  dark:placeholder-gray-200 dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
                       }`}
                     />
                     {((formik.touched.email && formik.errors.email) ||
@@ -298,10 +298,10 @@ const RegisterModal = ({
                       onBlur={formik.handleBlur}
                       value={formik.values.password}
                       placeholder="Password"
-                      className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm  bg-white border-gray-300  text-sm placeholder-gray-500   focus:placeholder-gray-400  dark:bg-gray-600 ${
+                      className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm  bg-white border-gray-300  text-sm  focus:placeholder-gray-400  dark:bg-gray-600 ${
                         formik.touched.password && formik.errors.password
                           ? "pr-10 border-red-300 text-red-900 focus:text-gray-900 dark:focus:text-white placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
-                          : " text-sm placeholder-gray-500 dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
+                          : " text-sm placeholder-gray-500  dark:placeholder-gray-200 dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
                       }`}
                     />
                     {formik.touched.password && formik.errors.password && (

@@ -175,7 +175,7 @@ const DonationForm = () => {
                       hidePostalCode: true,
                       style: {
                         base: {
-                          color: userReducer.theme ? "#424770" : "#fff",
+                          color: userReducer.theme ? "#fff" : "#424770",
                           "::placeholder": {
                             color: "#aab7c4",
                           },

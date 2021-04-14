@@ -46,7 +46,7 @@ export const SuccessAlert = ({ message, handleHideAlert }) => {
                   <div className="ml-4 flex-shrink-0 flex">
                     <button
                       onClick={handleHideAlert}
-                      className="bg-white dark:bg-gray-700 rounded-md inline-flex text-gray-400 dark:text-gray-300 dark:hover:text-gray-100 hover:text-gray-500"
+                      className="bg-white dark:bg-gray-800 rounded-md inline-flex text-gray-400 dark:text-gray-300 dark:hover:text-gray-100 hover:text-gray-500"
                     >
                       <span className="sr-only">Close</span>
                       <svg
@@ -118,7 +118,7 @@ export const ErrorAlert = ({ message, handleHideAlert }) => {
                   <div className="ml-4 flex-shrink-0 flex">
                     <button
                       onClick={handleHideAlert}
-                      className="bg-white dark:bg-gray-700 rounded-md inline-flex text-gray-400 dark:text-gray-300 dark:hover:text-gray-100 hover:text-gray-500"
+                      className="bg-white dark:bg-gray-800 rounded-md inline-flex text-gray-400 dark:text-gray-300 dark:hover:text-gray-100 hover:text-gray-500"
                     >
                       <span className="sr-only">Close</span>
                       <svg
