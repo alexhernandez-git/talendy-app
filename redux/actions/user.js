@@ -217,36 +217,12 @@ export const resetCouponAvailable = () => async (dispatch, getState) => {
   dispatch({ type: RESET_COUPON_AVAILABLE });
 };
 
-export const register_seller = (data) => async (dispatch, getState) => {
-  await dispatch({
-    type: REGISTER,
-  });
-  const currency = getState().userReducer.currency;
-  if (currency) {
-    data.currency = currency;
-  }
-  await axios
-    .post(`${process.env.HOST}/api/users/signup_seller/`, data)
-    .then(async (res) => {
-      await dispatch({
-        type: REGISTER_SUCCESS,
-        payload: res.data,
-      });
-    })
-    .catch(async (err) => {
-      await dispatch({
-        type: REGISTER_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
-    });
-};
-
-export const register_buyer = (data) => async (dispatch, getState) => {
+export const register = (data) => async (dispatch, getState) => {
   await dispatch({
     type: REGISTER,
   });
   await axios
-    .post(`${process.env.HOST}/api/users/signup_buyer/`, data)
+    .post(`${process.env.HOST}/api/users/signup/`, data)
     .then(async (res) => {
       await dispatch({
         type: REGISTER_SUCCESS,

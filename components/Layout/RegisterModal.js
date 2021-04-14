@@ -3,7 +3,10 @@ import { Transition } from "@tailwindui/react";
 
 import { useRouter } from "next/router";
 import Editor from "components/Editor/Editor";
-
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { register } from "redux/actions/user";
+import { useSelector } from "react-redux";
 const RegisterModal = ({
   registerOpen,
   registerRef,
@@ -11,10 +14,33 @@ const RegisterModal = ({
   handleCloseRegister,
 }) => {
   const router = useRouter();
-  const handleGoToProfile = (e) => {
-    e.stopPropagation();
-    router.push("/user/123");
-  };
+  const userReducer = useSelector((state) => state.userReducer);
+
+  const { email_available_error } = userReducer;
+
+  const formik = useFormik({
+    initialValues: {
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      first_name: Yup.string().required("First name is required"),
+      last_name: Yup.string().required("Last name is required"),
+      email: Yup.string()
+        .email("Email is not valid")
+        .required("Email is required"),
+      password: Yup.string()
+        .min(8, "Password must be at least 8 characters long ")
+        .required("Password is required"),
+    }),
+    onSubmit: async (values) => {
+      // console.log(valores);
+      console.log(values);
+      dispatch(register(values));
+    },
+  });
   return (
     <Transition
       show={registerOpen}
@@ -122,7 +148,7 @@ const RegisterModal = ({
                   </h2>
                 </div>
                 <div>
-                  <div className="mt-1">
+                  <div className="mt-1 relative">
                     <input
                       id="first_name"
                       name="first_name"
@@ -133,7 +159,7 @@ const RegisterModal = ({
                   </div>
                 </div>
                 <div>
-                  <div className="mt-1">
+                  <div className="mt-1 relative">
                     <input
                       id="last_name"
                       name="last_name"
@@ -144,20 +170,62 @@ const RegisterModal = ({
                   </div>
                 </div>
                 <div>
-                  <div className="mt-1">
+                  <div className="mt-1 relative">
                     <input
                       id="email"
                       name="email"
                       type="email"
                       autocomplete="email"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.email}
                       placeholder="Email"
-                      className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm  dark:placeholder-gray-200  bg-white border-gray-300  text-sm placeholder-gray-500   focus:placeholder-gray-400  dark:bg-gray-600 ${
+                        (formik.touched.email && formik.errors.email) ||
+                        email_available_error
+                          ? "pr-10 border-red-300 text-red-900 focus:text-white placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500"
+                          : " text-sm placeholder-gray-500 dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 "
+                      }`}
                     />
+                    {((formik.touched.email && formik.errors.email) ||
+                      email_available_error) && (
+                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <svg
+                          className="h-5 w-5 text-red-500"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    )}
                   </div>
+                  {formik.touched.email && formik.errors.email && (
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {formik.errors.email}
+                    </p>
+                  )}
+                  {email_available_error &&
+                    email_available_error.data.non_field_errors.map(
+                      (message, i) => (
+                        <p
+                          className="mt-2 text-sm text-red-600"
+                          id="email-error"
+                        >
+                          {message}
+                        </p>
+                      )
+                    )}
                 </div>
 
                 <div>
-                  <div className="mt-1">
+                  <div className="mt-1 relative">
                     <input
                       id="password"
                       name="password"
