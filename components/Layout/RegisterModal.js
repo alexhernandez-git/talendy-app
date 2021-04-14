@@ -153,10 +153,42 @@ const RegisterModal = ({
                       id="first_name"
                       name="first_name"
                       type="text"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.first_name}
                       placeholder="First Name"
-                      className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm  dark:placeholder-gray-200  bg-white border-gray-300  text-sm placeholder-gray-500   focus:placeholder-gray-400  dark:bg-gray-600 ${
+                        formik.touched.first_name && formik.errors.first_name
+                          ? "pr-10 border-red-300 text-red-900 focus:text-gray-900 dark:focus:text-white placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
+                          : " text-sm placeholder-gray-500 dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
+                      }`}
                     />
+                    {formik.touched.first_name && formik.errors.first_name && (
+                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <svg
+                          className="h-5 w-5 text-red-500"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    )}
                   </div>
+                  {formik.touched.first_name && formik.errors.first_name && (
+                    <p
+                      className="mt-2 text-sm text-red-600"
+                      id="first_name-error"
+                    >
+                      {formik.errors.first_name}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <div className="mt-1 relative">
@@ -164,10 +196,42 @@ const RegisterModal = ({
                       id="last_name"
                       name="last_name"
                       type="text"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.last_name}
                       placeholder="Last Name"
-                      className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm  dark:placeholder-gray-200  bg-white border-gray-300  text-sm placeholder-gray-500   focus:placeholder-gray-400  dark:bg-gray-600 ${
+                        formik.touched.last_name && formik.errors.last_name
+                          ? "pr-10 border-red-300 text-red-900 focus:text-gray-900 dark:focus:text-white placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
+                          : " text-sm placeholder-gray-500 dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
+                      }`}
                     />
+                    {formik.touched.last_name && formik.errors.last_name && (
+                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <svg
+                          className="h-5 w-5 text-red-500"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    )}
                   </div>
+                  {formik.touched.last_name && formik.errors.last_name && (
+                    <p
+                      className="mt-2 text-sm text-red-600"
+                      id="last_name-error"
+                    >
+                      {formik.errors.last_name}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <div className="mt-1 relative">
@@ -180,11 +244,11 @@ const RegisterModal = ({
                       onBlur={formik.handleBlur}
                       value={formik.values.email}
                       placeholder="Email"
-                      className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm  dark:placeholder-gray-200  bg-white border-gray-300  text-sm placeholder-gray-500   focus:placeholder-gray-400  dark:bg-gray-600 ${
+                      className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm  dark:placeholder-gray-200  bg-white border-gray-300  text-sm placeholder-gray-500   focus:placeholder-gray-400  dark:bg-gray-600 ${
                         (formik.touched.email && formik.errors.email) ||
                         email_available_error
-                          ? "pr-10 border-red-300 text-red-900 focus:text-white placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500"
-                          : " text-sm placeholder-gray-500 dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 "
+                          ? "pr-10 border-red-300 text-red-900 focus:text-gray-900 dark:focus:text-white placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
+                          : " text-sm placeholder-gray-500 dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
                       }`}
                     />
                     {((formik.touched.email && formik.errors.email) ||
@@ -229,12 +293,43 @@ const RegisterModal = ({
                     <input
                       id="password"
                       name="password"
-                      type="password"
-                      autocomplete="current-password"
+                      type="text"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.password}
                       placeholder="Password"
-                      className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm  dark:placeholder-gray-200  bg-white border-gray-300  text-sm placeholder-gray-500   focus:placeholder-gray-400  dark:bg-gray-600 ${
+                        formik.touched.password && formik.errors.password
+                          ? "pr-10 border-red-300 text-red-900 focus:text-gray-900 dark:focus:text-white placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
+                          : " text-sm placeholder-gray-500 dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
+                      }`}
                     />
+                    {formik.touched.password && formik.errors.password && (
+                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <svg
+                          className="h-5 w-5 text-red-500"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    )}
                   </div>
+                  {formik.touched.password && formik.errors.password && (
+                    <p
+                      className="mt-2 text-sm text-red-600"
+                      id="password-error"
+                    >
+                      {formik.errors.password}
+                    </p>
+                  )}
                 </div>
 
                 <div>
