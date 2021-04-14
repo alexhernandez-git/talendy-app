@@ -1,10 +1,14 @@
 import useOutsideClick from "hooks/useOutsideClick";
 import Link from "next/link";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import StarRatings from "react-star-ratings";
 
 const Member = () => {
   const [rating, setRating] = useState(0);
+
+  const handleChangeRating = (rating) => {
+    setRating(rating);
+  };
   const [isFormOpen, setIsFormOpen] = useState(false);
   const handleToggleForm = () => {
     setIsFormOpen(!isFormOpen);
@@ -44,7 +48,7 @@ const Member = () => {
                 </Link>
               </div>
 
-              <div className="hidden md:block col-start-4">
+              <div className="hidden md:block col-start-3 col-span-2">
                 <div>
                   <p className="text-sm text-gray-900 dark:text-white">
                     Applied on{" "}
@@ -61,7 +65,7 @@ const Member = () => {
             <div className="sm:flex items-end">
               <div className=" mr-2">
                 <StarRatings
-                  rating={rating / 2}
+                  rating={rating}
                   starRatedColor="#e5c07b"
                   numberOfStars={5}
                   starHoverColor="#e5c07b"
@@ -153,9 +157,9 @@ const Member = () => {
                     <div className="mt-1 flex">
                       <StarRatings
                         rating={rating}
-                        changeRating={(rating) => setRating(rating)}
+                        changeRating={(rating) => handleChangeRating(rating)}
                         starRatedColor="#e5c07b"
-                        numberOfStars={10}
+                        numberOfStars={5}
                         starHoverColor="#e5c07b"
                         starDimension="25px"
                         starSpacing="0px"

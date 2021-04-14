@@ -81,7 +81,7 @@ const UserCard = ({ mobile, page, profile }) => {
                     <Link href={profile ? "/profile/reviews" : "/reviews/123"}>
                       <button className="cursor-pointer">
                         <StarRatings
-                          rating={3.2}
+                          rating={3.5}
                           starRatedColor="#e5c07b"
                           numberOfStars={5}
                           starHoverColor="#e5c07b"
