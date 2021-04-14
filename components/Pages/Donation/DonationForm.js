@@ -13,7 +13,7 @@ const DonationForm = () => {
     <div className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
       <div className="bg-white dark:bg-gray-700 px-4 shadow sm:px-6 sm:rounded-lg">
         <div className="px-4 py-5 sm:p-0">
-          <dl className="sm:divide-y sm:divide-gray-200">
+          <dl className="sm:divide-y sm:divide-gray-400">
             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 items-center">
               <dt className="text-sm font-medium text-gray-500 dark:text-gray-300">
                 Payment
@@ -190,7 +190,7 @@ const DonationForm = () => {
                 </dd>
               )}
             </div>
-            <div className="py-4 sm:py-5 sm:col-span-2">
+            <div className="py-4 sm:pt-5 pb-6 sm:col-span-2">
               <dt className="text-sm font-medium text-gray-500 dark:text-gray-300">
                 Invite him to
               </dt>
@@ -359,18 +359,29 @@ const DonationForm = () => {
                     </span>
                   </div>
                 </div>
-                <div>
+                <div className="flex justify-center">
                   <input
                     type="text"
                     name="title"
                     id="title"
-                    className="text-center block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                    className="text-center w-full block border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     placeholder="$ Other"
                     aria-describedby="title-description"
                     value=""
                   ></input>
                 </div>
               </dd>
+            </div>
+            <div className="mb-4 sm:mb-5 pt-5">
+              <div className="">
+                <textarea
+                  id="about"
+                  name="about"
+                  rows="3"
+                  className="focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-300"
+                  placeholder="Message"
+                ></textarea>
+              </div>
             </div>
           </dl>
         </div>
