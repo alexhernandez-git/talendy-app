@@ -20,7 +20,7 @@ const ProfileMenu = ({ page }) => {
         >
           <option>Contributed</option>
 
-          <option>Tasks</option>
+          <option>Issues</option>
         </select>
       </div>
       <div className="hidden sm:block">
@@ -66,7 +66,7 @@ const ProfileMenu = ({ page }) => {
               }  dark:text-white  rounded-r-lg group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10  hover:text-gray-700 dark:hover:bg-gray-800`}
             >
               <div className="flex items-center justify-center">
-                <span>Tasks</span>
+                <span>Issues</span>
                 <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white">
                   3
                 </span>

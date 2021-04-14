@@ -3,7 +3,7 @@ import Feed from "components/Layout/Feed";
 import ProfileCard from "components/Pages/Profile/UserCard";
 import { MY_POSTS_PAGE } from "pages";
 
-export default function Tasks() {
+export default function Issues() {
   const page = MY_POSTS_PAGE;
   return (
     <Layout>

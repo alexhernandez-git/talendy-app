@@ -27,7 +27,7 @@ const Finalize = () => {
               </button>
             </Link>
             <button className="cursor-pointer w-full sm:w-auto mt-2 sm:mt-0 inline-flex justify-center items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
-              Finalize Task
+              Finalize Issue
             </button>
           </div>
         </div>

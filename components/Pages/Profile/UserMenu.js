@@ -33,14 +33,14 @@ const ProfileMenu = ({ page }) => {
           className="relative z-0 rounded-lg shadow flex divide-x divide-gray-200"
           aria-label="Tabs"
         >
-          <Link href="/profile/tasks">
+          <Link href="/profile/issues">
             <a
               aria-current="page"
               className={`${
                 page === MY_POSTS_PAGE ? "text-gray-900" : "text-gray-500"
               }  dark:text-white rounded-l-lg group relative  hover:text-gray-700 dark:hover:bg-gray-800 min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10`}
             >
-              <span>My Tasks</span>
+              <span>My Issues</span>
               {page === MY_POSTS_PAGE ? (
                 <span
                   aria-hidden="true"
