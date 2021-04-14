@@ -6,7 +6,7 @@ import { Transition } from "@tailwindui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const NewPostModal = ({ modalOpen, modalRef }) => {
+const NewPostModal = ({ modalOpen, modalRef, handleCloseModal }) => {
   const router = useRouter();
   const handleGoToProfile = (e) => {
     e.stopPropagation();
@@ -80,8 +80,34 @@ const NewPostModal = ({ modalOpen, modalRef }) => {
             <article
               ref={modalRef}
               aria-labelledby="question-title-81614"
-              className="inline-block align-bottom bg-white dark:bg-gray-700 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full sm:p-6"
+              className="inline-block align-bottom relative bg-white dark:bg-gray-700 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full sm:p-6"
             >
+              <div className="flex justify-end mb-2">
+                <button
+                  type="button"
+                  onMouseDown={handleCloseModal}
+                  className="rounded-3xl p-1 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 dark:hover:bg-gray-700 focus:outline-none ring-1 ring-inset ring-white"
+                  aria-expanded="false"
+                >
+                  <span className="sr-only">Open menu</span>
+
+                  <svg
+                    className={`block h-4 w-4`}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
               <div className=" grid grid-cols-1 gap-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
                 <div className="space-y-6 lg:col-start-1 lg:col-span-2">
                   <div className="flex justify-between items-baseline">
@@ -239,7 +265,7 @@ const NewPostModal = ({ modalOpen, modalRef }) => {
                       name="title"
                       onClick={(e) => e.stopPropagation()}
                       id="title"
-                      className="block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      className="block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                       placeholder="Message"
                       aria-describedby="title-description"
                       value=""

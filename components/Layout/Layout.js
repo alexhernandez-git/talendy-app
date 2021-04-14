@@ -82,7 +82,11 @@ const Layout = ({ children, page }) => {
         messagesRef={messagesRef}
       />
       <NewPostModal modalOpen={modalOpen} modalRef={modalRef} />
-      <RegisterModal registerOpen={registerOpen} registerRef={registerRef} />
+      <RegisterModal
+        registerOpen={registerOpen}
+        registerRef={registerRef}
+        handleCloseRegister={handleCloseRegister}
+      />
     </>
   );
 };

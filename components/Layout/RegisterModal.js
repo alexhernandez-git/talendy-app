@@ -4,7 +4,12 @@ import { Transition } from "@tailwindui/react";
 import { useRouter } from "next/router";
 import Editor from "components/Editor/Editor";
 
-const RegisterModal = ({ registerOpen, registerRef, isEdit }) => {
+const RegisterModal = ({
+  registerOpen,
+  registerRef,
+  isEdit,
+  handleCloseRegister,
+}) => {
   const router = useRouter();
   const handleGoToProfile = (e) => {
     e.stopPropagation();
@@ -78,8 +83,35 @@ const RegisterModal = ({ registerOpen, registerRef, isEdit }) => {
 
             <section
               ref={registerRef}
-              className="inline-block align-bottom bg-white dark:bg-gray-700 rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-middle max-w-full sm:max-w-md w-full py-8 px-4  sm:px-10"
+              className="inline-block align-bottom bg-white dark:bg-gray-700 rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-middle max-w-full sm:max-w-md w-full py-8 px-4  sm:px-10 relative"
             >
+              <div className="absolute top-2 right-2">
+                <button
+                  type="button"
+                  onMouseDown={handleCloseRegister}
+                  className="rounded-3xl p-1 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 dark:hover:bg-gray-700 focus:outline-none ring-1 ring-inset ring-white"
+                  aria-expanded="false"
+                >
+                  <span className="sr-only">Open menu</span>
+
+                  <svg
+                    className={`block h-4 w-4`}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+
               <form className="space-y-6" action="#" method="POST">
                 <div className="sm:mx-auto sm:w-full sm:max-w-md ">
                   <img
@@ -98,7 +130,7 @@ const RegisterModal = ({ registerOpen, registerRef, isEdit }) => {
                       name="first_name"
                       type="text"
                       placeholder="First Name"
-                      className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -109,7 +141,7 @@ const RegisterModal = ({ registerOpen, registerRef, isEdit }) => {
                       name="last_name"
                       type="text"
                       placeholder="Last Name"
-                      className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -121,7 +153,7 @@ const RegisterModal = ({ registerOpen, registerRef, isEdit }) => {
                       type="email"
                       autocomplete="email"
                       placeholder="Email"
-                      className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -134,7 +166,7 @@ const RegisterModal = ({ registerOpen, registerRef, isEdit }) => {
                       type="password"
                       autocomplete="current-password"
                       placeholder="Password"
-                      className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     />
                   </div>
                 </div>
