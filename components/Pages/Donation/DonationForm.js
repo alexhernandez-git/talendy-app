@@ -13,7 +13,7 @@ const DonationForm = () => {
     <div className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
       <div className="bg-white dark:bg-gray-700 px-4 shadow sm:px-6 sm:rounded-lg">
         <div className="px-4 py-5 sm:p-0">
-          <dl className="sm:divide-y sm:divide-gray-400">
+          <dl className="sm:divide-y divide-gray-200 dark:sm:divide-gray-400">
             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 items-center">
               <dt className="text-sm font-medium text-gray-500 dark:text-gray-300">
                 Payment
