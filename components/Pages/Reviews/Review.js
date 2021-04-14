@@ -4,25 +4,25 @@ import React from "react";
 const Review = () => {
   return (
     <li>
-      <div class="relative py-4">
-        <div class="relative flex items-start space-x-3">
-          <div class="relative">
+      <div className="relative py-4">
+        <div className="relative flex items-start space-x-3">
+          <div className="relative">
             <img
-              class="h-10 w-10 rounded-full flex items-center justify-center"
+              className="h-10 w-10 rounded-full flex items-center justify-center"
               src="https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
               alt=""
             />
           </div>
-          <div class="min-w-0 flex-1">
+          <div className="min-w-0 flex-1">
             <div>
-              <div class="text-sm">
+              <div className="text-sm">
                 <Link href="/user/123">
-                  <span class="font-medium text-gray-900 dark:text-white cursor-pointer">
+                  <span className="font-medium text-gray-900 dark:text-white cursor-pointer">
                     Eduardo Benz
                   </span>
                 </Link>
               </div>
-              <p class="mt-0.5 text-sm text-gray-500 dark:text-gray-100 flex items-center">
+              <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-100 flex items-center">
                 <div className="flex mr-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +68,7 @@ const Review = () => {
                 6 days ago
               </p>
             </div>
-            <div class="mt-2 text-sm text-gray-700 dark:text-gray-50">
+            <div className="mt-2 text-sm text-gray-700 dark:text-gray-50">
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum

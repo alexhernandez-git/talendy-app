@@ -68,12 +68,15 @@ export default function Editor({ chat }) {
             data-placeholder="Explanation"
             onPaste={(e) => paste(e)}
           ></div>
-          <div class="relative py-4">
-            <div class="absolute inset-0 flex items-center" aria-hidden="true">
-              <div class="w-full border-t border-gray-300"></div>
+          <div className="relative py-4">
+            <div
+              className="absolute inset-0 flex items-center"
+              aria-hidden="true"
+            >
+              <div className="w-full border-t border-gray-300"></div>
             </div>
-            <div class="relative flex justify-center">
-              <span class="px-2 bg-white dark:bg-gray-700 text-sm text-gray-500 dark:text-gray-100">
+            <div className="relative flex justify-center">
+              <span className="px-2 bg-white dark:bg-gray-700 text-sm text-gray-500 dark:text-gray-100">
                 Private information
               </span>
             </div>

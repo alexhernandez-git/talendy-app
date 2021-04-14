@@ -22,35 +22,35 @@ const Member = () => {
   useOutsideClick(formRef, () => handleCloseForm());
   return (
     <li>
-      <div class="block ">
+      <div className="block ">
         <div
-          class="flex items-center px-4 py-4 sm:px-6 cursor-pointer bg-gray-50 dark:bg-gray-700"
+          className="flex items-center px-4 py-4 sm:px-6 cursor-pointer bg-gray-50 dark:bg-gray-700"
           onMouseDown={handleToggleForm}
         >
-          <div class="min-w-0 flex-1 flex items-center">
-            <div class="flex-shrink-0">
+          <div className="min-w-0 flex-1 flex items-center">
+            <div className="flex-shrink-0">
               <img
-                class="h-12 w-12 rounded-full"
+                className="h-12 w-12 rounded-full"
                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=9XbzAMvCeF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                 alt=""
               />
             </div>
-            <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-5 md:gap-4">
-              <div class="flex items-center">
+            <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-5 md:gap-4">
+              <div className="flex items-center">
                 <Link href="/user/123">
-                  <p class="text-sm font-medium text-gray-500 dark:text-gray-100 truncate rounded-2xl px-3 py-1 hover:underline">
+                  <p className="text-sm font-medium text-gray-500 dark:text-gray-100 truncate rounded-2xl px-3 py-1 hover:underline">
                     Ricardo Cooper
                   </p>
                 </Link>
               </div>
 
-              <div class="hidden md:block col-start-4">
+              <div className="hidden md:block col-start-4">
                 <div>
-                  <p class="text-sm text-gray-900 dark:text-white">
+                  <p className="text-sm text-gray-900 dark:text-white">
                     Applied on{" "}
                     <time datetime="2020-01-07">January 7, 2020</time>
                   </p>
-                  <p class="mt-2 flex items-center text-sm text-gray-500 dark:text-gray-100">
+                  <p className="mt-2 flex items-center text-sm text-gray-500 dark:text-gray-100">
                     Completed phone screening
                   </p>
                 </div>
@@ -107,7 +107,7 @@ const Member = () => {
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class={`${
+                  className={`${
                     isFormOpen ? "hidden" : "block"
                   } h-5 w-5 text-gray-400`}
                   viewBox="0 0 20 20"
@@ -121,7 +121,7 @@ const Member = () => {
                 </svg>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class={`${
+                  className={`${
                     isFormOpen ? "block" : "hidden"
                   } h-5 w-5 text-gray-400`}
                   viewBox="0 0 20 20"
@@ -140,24 +140,24 @@ const Member = () => {
 
         <div className={`${isFormOpen ? "block" : "hidden"}`} ref={formRef}>
           <form action="#" method="POST">
-            <div class="sm:overflow-hidden">
-              <div class="px-4 py-5 bg-white dark:bg-gray-800 space-y-6 sm:p-6">
+            <div className="sm:overflow-hidden">
+              <div className="px-4 py-5 bg-white dark:bg-gray-800 space-y-6 sm:p-6">
                 <div>
                   <label
                     for="about"
-                    class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                   >
                     And if you invite him to a coffee?
                   </label>
-                  <div class="mt-1">
+                  <div className="mt-1">
                     <Link href="/donation/123">
                       <button
                         type="button"
-                        class="bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
+                        className="bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          class="h-5 w-5 mr-2"
+                          className="h-5 w-5 mr-2"
                           viewBox="0 0 20 20"
                           fill="currentColor"
                         >
@@ -173,15 +173,15 @@ const Member = () => {
                   </div>
                 </div>
 
-                <div class="grid grid-cols-3 gap-6">
-                  <div class="col-span-3 sm:col-span-2">
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="col-span-3 sm:col-span-2">
                     <label
                       for="company_website"
-                      class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                      className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                     >
                       Rate
                     </label>
-                    <div class="mt-1 flex">
+                    <div className="mt-1 flex">
                       <StarRatings
                         rating={rating}
                         changeRating={(rating) => setRating(rating)}
@@ -199,11 +199,11 @@ const Member = () => {
                 <div>
                   <label
                     for="about"
-                    class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                   >
                     Comment
                   </label>
-                  <div class="mt-1">
+                  <div className="mt-1">
                     <textarea
                       id="about"
                       name="about"
@@ -212,7 +212,7 @@ const Member = () => {
                       placeholder="Message"
                     ></textarea>
                   </div>
-                  <p class="mt-2 text-sm text-gray-500 dark:text-gray-100">
+                  <p className="mt-2 text-sm text-gray-500 dark:text-gray-100">
                     Leave a respectful and constructive comment
                   </p>
                 </div>

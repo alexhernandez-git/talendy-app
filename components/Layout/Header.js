@@ -1,12 +1,13 @@
 import useOutsideClick from "hooks/useOutsideClick";
 import React, { useRef, useState } from "react";
 import { Transition } from "@tailwindui/react";
-import ToggleTheme from "./Header/ToggleTheme";
+import ToggleTheme from "./ToggleTheme";
 import Link from "next/link";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import { HOME_PAGE, SEARCH_USERS_PAGE } from "pages";
+import Login from "./Login";
 const Header = ({
   handleToggleMessages,
   handleOpenModal,
@@ -76,7 +77,7 @@ const Header = ({
   };
   const notificationsRef = useRef();
   useOutsideClick(notificationsRef, () => handleCloseNotifications());
-  const is_authenticated = true;
+  const is_authenticated = false;
 
   const [loginOpen, setLoginOpen] = useState(false);
   const handleOpenLogin = () => {
@@ -191,118 +192,6 @@ const Header = ({
             </button>
           </div>
           {is_authenticated ? (
-            <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
-              <div className="flex-shrink-0 relative flex items-center">
-                <ToggleTheme />
-              </div>
-              <div className="flex-shrink-0 relative ml-5">
-                <div>
-                  <span
-                    onMouseDown={handleToggleLogin}
-                    className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                  >
-                    Sign in
-                  </span>
-                </div>
-                <Transition
-                  show={loginOpen}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-out duration-100"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
-                >
-                  {(ref) => (
-                    <div ref={loginRef}>
-                      <div
-                        ref={ref}
-                        className=" origin-top-right absolute z-40 right-0 mt-2 w-64 ring-opacity-5 py-1 focus:outline-none"
-                        role="menu"
-                        aria-orientation="vertical"
-                        aria-labelledby="user-menu"
-                      >
-                        <div class="sm:mx-auto sm:w-full sm:max-w-md">
-                          <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                            <form class="space-y-6" action="#" method="POST">
-                              <div>
-                                {/* <label
-                                  for="email"
-                                  class="block text-sm font-medium text-gray-700"
-                                >
-                                  Email address
-                                </label> */}
-                                <div class="mt-1">
-                                  <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    autocomplete="email"
-                                    placeholder="email"
-                                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-3xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                                  />
-                                </div>
-                              </div>
-
-                              <div>
-                                {/* <label
-                                  for="password"
-                                  class="block text-sm font-medium text-gray-700"
-                                >
-                                  Password
-                                </label> */}
-                                <div class="mt-1">
-                                  <input
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    autocomplete="current-password"
-                                    placeholder="Password"
-                                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-3xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                                  />
-                                </div>
-                              </div>
-
-                              <div class="flex items-center justify-between">
-                                <div class="text-sm">
-                                  <a
-                                    href="#"
-                                    class="font-medium text-orange-600 hover:text-orange-500"
-                                  >
-                                    Forgot your password?
-                                  </a>
-                                </div>
-                              </div>
-
-                              <div>
-                                <button
-                                  type="submit"
-                                  class="w-full flex justify-center py-2 px-4 border border-transparent rounded-3xl shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
-                                >
-                                  Sign in
-                                </button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </Transition>
-              </div>
-
-              <div className="flex-shrink-0 relative ml-3">
-                <div>
-                  <span
-                    onMouseDown={handleToggleRegister}
-                    className="cursor-pointer inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
-                  >
-                    Register
-                  </span>
-                </div>
-              </div>
-            </div>
-          ) : (
             <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
               <span
                 onClick={handleToggleMessages}
@@ -525,6 +414,34 @@ const Header = ({
                 Post
               </span>
             </div>
+          ) : (
+            <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
+              <div className="flex-shrink-0 relative flex items-center">
+                <ToggleTheme />
+              </div>
+              <div className="flex-shrink-0 relative ml-5">
+                <div>
+                  <span
+                    onMouseDown={handleToggleLogin}
+                    className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                  >
+                    Sign in
+                  </span>
+                </div>
+                <Login loginOpen={loginOpen} loginRef={loginRef} />
+              </div>
+
+              <div className="flex-shrink-0 relative ml-3">
+                <div>
+                  <span
+                    onMouseDown={handleToggleRegister}
+                    className="cursor-pointer inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                  >
+                    Register
+                  </span>
+                </div>
+              </div>
+            </div>
           )}
         </div>
       </div>
@@ -536,52 +453,31 @@ const Header = ({
         aria-label="Global"
         ref={mobileMenuRef}
       >
-        <div className="border-t border-gray-200 pt-4 pb-3">
-          <div className="max-w-3xl mx-auto px-4 flex items-center sm:px-6">
-            <div className="flex-shrink-0">
-              <img
-                className="h-10 w-10 rounded-full"
-                src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixqx=9XbzAMvCeF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-              />
-            </div>
-            <div className="ml-3">
-              <div className="text-base font-medium text-gray-800 dark:text-gray-100">
-                Chelsea Hagon
-              </div>
-              <div className="text-sm font-medium text-gray-500 dark:text-gray-200">
-                chelseahagon@example.com
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={handleToggleMessages}
-              className="ml-auto flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200"
-            >
-              <span className="sr-only">View Messages</span>
-
-              <svg
-                className="h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+        {is_authenticated ? (
+          <div className="border-t border-gray-200 pt-4 pb-3">
+            <div className="max-w-3xl mx-auto px-4 flex items-center sm:px-6">
+              <div className="flex-shrink-0">
+                <img
+                  className="h-10 w-10 rounded-full"
+                  src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixqx=9XbzAMvCeF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  alt=""
                 />
-              </svg>
-            </button>
-            <Link href="/notifications">
+              </div>
+              <div className="ml-3">
+                <div className="text-base font-medium text-gray-800 dark:text-gray-100">
+                  Chelsea Hagon
+                </div>
+                <div className="text-sm font-medium text-gray-500 dark:text-gray-200">
+                  chelseahagon@example.com
+                </div>
+              </div>
+
               <button
                 type="button"
-                className="ml-5 flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200"
+                onClick={handleToggleMessages}
+                className="ml-auto flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200"
               >
-                <span className="sr-only">View notifications</span>
+                <span className="sr-only">View Messages</span>
 
                 <svg
                   className="h-6 w-6"
@@ -589,35 +485,83 @@ const Header = ({
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                    strokeWidth={2}
+                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
                   />
                 </svg>
               </button>
-            </Link>
-          </div>
+              <Link href="/notifications">
+                <button
+                  type="button"
+                  className="ml-5 flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200"
+                >
+                  <span className="sr-only">View notifications</span>
 
-          <div className="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
-            <Link href="/profile/tasks" role="menuitem">
+                  <svg
+                    className="h-6 w-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                    />
+                  </svg>
+                </button>
+              </Link>
+            </div>
+
+            <div className="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
+              <Link href="/profile/tasks" role="menuitem">
+                <span className="cursor-pointer block rounded-3xl py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover-text-gray-300">
+                  Your Profile
+                </span>
+              </Link>
               <span className="cursor-pointer block rounded-3xl py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover-text-gray-300">
-                Your Profile
+                Settings
               </span>
-            </Link>
-            <span className="cursor-pointer block rounded-3xl py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover-text-gray-300">
-              Settings
-            </span>
-            <Link href="/settings" role="menuitem">
-              <span className="cursor-pointer block rounded-3xl py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover-text-gray-300">
-                Sign out
-              </span>
-            </Link>
+              <Link href="/settings" role="menuitem">
+                <span className="cursor-pointer block rounded-3xl py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover-text-gray-300">
+                  Sign out
+                </span>
+              </Link>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="p-3">
+            <div className="flex-shrink-0 relative mb-3">
+              <div>
+                <span
+                  onMouseDown={handleToggleLogin}
+                  className="cursor-pointer w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                >
+                  Sign in
+                </span>
+              </div>
+              <Login loginOpen={loginOpen} loginRef={loginRef} mobile />
+            </div>
+
+            <div className="flex-shrink-0 relative">
+              <div>
+                <span
+                  onMouseDown={handleToggleRegister}
+                  className="cursor-pointer w-full inline-flex justify-center items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                >
+                  Register
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
       </nav>
     </header>
   );

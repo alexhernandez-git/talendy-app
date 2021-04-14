@@ -33,8 +33,8 @@ const Finalize = () => {
       </div>
       <div className="py-10">
         <div className="max-w-3xl mx-auto sm:px-6 flex flex-col lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
-          <div class="shadow overflow-hidden sm:rounded-3xl col-span-12">
-            <ul class="divide-y divide-gray-200">
+          <div className="shadow overflow-hidden sm:rounded-3xl col-span-12">
+            <ul className="divide-y divide-gray-200">
               <Member />
               <Member />
               <Member />

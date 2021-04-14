@@ -80,61 +80,61 @@ const RegisterModal = ({ registerOpen, registerRef, isEdit }) => {
               ref={registerRef}
               className="inline-block align-bottom bg-white dark:bg-gray-700 rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-middle max-w-full sm:max-w-md w-full py-8 px-4  sm:px-10"
             >
-              <form class="space-y-6" action="#" method="POST">
-                <div class="sm:mx-auto sm:w-full sm:max-w-md ">
+              <form className="space-y-6" action="#" method="POST">
+                <div className="sm:mx-auto sm:w-full sm:max-w-md ">
                   <img
-                    class="mx-auto h-8 w-auto"
+                    className="mx-auto h-8 w-auto"
                     src="https://tailwindui.com/img/logos/workflow-mark-orange-500.svg"
                     alt="Workflow"
                   />
-                  <h2 class="mt-3 text-center text-2xl font-extrabold text-gray-900">
+                  <h2 className="mt-3 text-center text-2xl font-extrabold text-gray-900">
                     Join the community
                   </h2>
                 </div>
                 <div>
-                  <div class="mt-1">
+                  <div className="mt-1">
                     <input
                       id="first_name"
                       name="first_name"
                       type="text"
                       placeholder="First Name"
-                      class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-3xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-3xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     />
                   </div>
                 </div>
                 <div>
-                  <div class="mt-1">
+                  <div className="mt-1">
                     <input
                       id="last_name"
                       name="last_name"
                       type="text"
                       placeholder="Last Name"
-                      class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-3xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-3xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     />
                   </div>
                 </div>
                 <div>
-                  <div class="mt-1">
+                  <div className="mt-1">
                     <input
                       id="email"
                       name="email"
                       type="email"
                       autocomplete="email"
                       placeholder="Email"
-                      class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-3xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-3xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <div class="mt-1">
+                  <div className="mt-1">
                     <input
                       id="password"
                       name="password"
                       type="password"
                       autocomplete="current-password"
                       placeholder="Password"
-                      class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-3xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-3xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -142,17 +142,17 @@ const RegisterModal = ({ registerOpen, registerRef, isEdit }) => {
                 <div>
                   <button
                     type="submit"
-                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-3xl shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-3xl shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
                   >
                     Register
                   </button>
-                  <div class="pt-5">
-                    <p class="text-xs leading-5 text-gray-500">
+                  <div className="pt-5">
+                    <p className="text-xs leading-5 text-gray-500">
                       By signing up, you agree to our{" "}
                       <a
                         href="/terms"
                         target="_blank"
-                        class="font-medium text-gray-900 hover:underline"
+                        className="font-medium text-gray-900 hover:underline"
                       >
                         Terms
                       </a>{" "}
@@ -160,7 +160,7 @@ const RegisterModal = ({ registerOpen, registerRef, isEdit }) => {
                       <a
                         href="/privacy"
                         target="_blank"
-                        class="font-medium text-gray-900 hover:underline"
+                        className="font-medium text-gray-900 hover:underline"
                       >
                         Privacy Policy
                       </a>

@@ -364,15 +364,15 @@ const DonationForm = () => {
                   </div>
                 </fieldset>
 
-                <div class="relative my-4">
+                <div className="relative my-4">
                   <div
-                    class="absolute inset-0 flex items-center"
+                    className="absolute inset-0 flex items-center"
                     aria-hidden="true"
                   >
-                    <div class="w-full border-t border-gray-300"></div>
+                    <div className="w-full border-t border-gray-300"></div>
                   </div>
-                  <div class="relative flex justify-center">
-                    <span class="px-2 bg-white dark:bg-gray-700 text-sm text-gray-500 dark:text-gray-100">
+                  <div className="relative flex justify-center">
+                    <span className="px-2 bg-white dark:bg-gray-700 text-sm text-gray-500 dark:text-gray-100">
                       Other amount
                     </span>
                   </div>
@@ -382,7 +382,7 @@ const DonationForm = () => {
                     type="text"
                     name="title"
                     id="title"
-                    class="text-center block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                    className="text-center block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     placeholder="$ Other"
                     aria-describedby="title-description"
                     value=""
@@ -392,7 +392,7 @@ const DonationForm = () => {
             </div>
           </dl>
         </div>
-        <div class="pb-6">
+        <div className="pb-6">
           <button
             type="button"
             className="w-full uppercase bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"

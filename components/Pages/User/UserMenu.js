@@ -37,7 +37,7 @@ const ProfileMenu = ({ page }) => {
             >
               <div className="flex items-center justify-center">
                 <span>Contributed</span>
-                <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white">
+                <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white">
                   20
                 </span>
               </div>
@@ -67,7 +67,7 @@ const ProfileMenu = ({ page }) => {
             >
               <div className="flex items-center justify-center">
                 <span>Tasks</span>
-                <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white">
+                <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white">
                   3
                 </span>
               </div>
