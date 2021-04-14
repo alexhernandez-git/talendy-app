@@ -35,7 +35,7 @@ const Finalize = () => {
       </div>
       <div className="py-10">
         <div className="max-w-3xl mx-auto sm:px-6 flex flex-col lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
-          <div className="shadow overflow-hidden sm:rounded-md col-span-12 mb-4 p-4 bg-white">
+          <div className="shadow overflow-hidden sm:rounded-md col-span-12 mb-4 p-4 bg-white dark:bg-gray-700">
             <Editor solveIssueForm />
           </div>
 

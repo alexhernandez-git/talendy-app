@@ -19,14 +19,14 @@ export default function PostPage() {
   };
   return (
     <Layout>
-      <div className="py-10">
-        <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-5xl lg:px-8">
+      <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-5xl lg:px-8 bg-white dark:bg-gray-700">
+        <div className="py-10">
           <article
             aria-labelledby="question-title-81614"
             className="inline-block align-bottom  rounded-lg text-left overflow-hidden transform transition-all sm:mb-8 sm:align-middle sm:w-full"
           >
             <div className=" grid grid-cols-1 gap-6 lg:max-w-5xl lg:grid-flow-col-dense lg:grid-cols-3">
-              <div className="space-y-6 lg:col-start-1 lg:col-span-2">
+              <div className="space-y-6 lg:col-start-1 lg:col-span-2 rounded-lg bg-gray-100 dark:bg-gray-800 p-4">
                 <div className="flex justify-between items-baseline">
                   <h2
                     id="question-title-81614"

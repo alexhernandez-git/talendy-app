@@ -37,7 +37,7 @@ export default function Editor({ chat, postForm, solveIssueForm }) {
         <>
           <Toolbar />
           <div
-            className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l"
+            className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l cursor-text"
             id="editor"
             onKeyDown={handleKeyDown}
             contentEditable="true"
@@ -50,11 +50,11 @@ export default function Editor({ chat, postForm, solveIssueForm }) {
         <>
           <Toolbar />
           <div
-            className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l h-60"
+            className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l cursor-text"
             id="editor"
             onKeyDown={handleKeyDown}
             contentEditable="true"
-            data-placeholder="Write the solution of your issue"
+            data-placeholder="Write the solution that you found"
             onPaste={(e) => paste(e)}
           ></div>
         </>
@@ -65,7 +65,7 @@ export default function Editor({ chat, postForm, solveIssueForm }) {
           contentEditable="true"
           data-placeholder="Title"
           onKeyDown={handleTitleKeyDown}
-          className="title my-4 text-gray-600 dark:text-white text-xl bg-gray-200 dark:bg-gray-900 p-3 rounded"
+          className="title my-4 text-gray-600 dark:text-white text-xl bg-gray-200 dark:bg-gray-900 p-3 rounded cursor-text"
         ></div>
       )}
       {postForm && (
@@ -73,7 +73,7 @@ export default function Editor({ chat, postForm, solveIssueForm }) {
           <Toolbar />
 
           <div
-            className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l"
+            className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l cursor-text"
             id="editor"
             onKeyDown={handleKeyDown}
             contentEditable="true"
@@ -96,7 +96,7 @@ export default function Editor({ chat, postForm, solveIssueForm }) {
           <Toolbar />
 
           <div
-            className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l"
+            className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l cursor-text"
             id="editor"
             onKeyDown={handleKeyDown}
             contentEditable="true"
