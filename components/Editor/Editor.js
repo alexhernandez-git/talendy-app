@@ -100,9 +100,15 @@ export default function Editor({ chat, postForm, solveIssueForm }) {
             id="editor"
             onKeyDown={handleKeyDown}
             contentEditable="true"
-            data-placeholder="Write here any information that you do not want to be public, only the members that you accept will be able to see it"
+            data-placeholder="Private explanation"
             onPaste={(e) => paste(e)}
           ></div>
+          <div className="mt-2">
+            <span className="text-gray-500 dark:text-gray-300 text-sm">
+              Write here any information that you do not want to be public, only
+              the members that you accept will be able to see it
+            </span>
+          </div>
         </>
       )}
     </div>
