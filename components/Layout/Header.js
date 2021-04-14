@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import { HOME_PAGE, SEARCH_USERS_PAGE } from "pages";
 import Login from "./Login";
+import { useSelector } from "react-redux";
 const Header = ({
   handleToggleMessages,
   handleOpenModal,
@@ -77,7 +78,6 @@ const Header = ({
   };
   const notificationsRef = useRef();
   useOutsideClick(notificationsRef, () => handleCloseNotifications());
-  const is_authenticated = true;
 
   const [loginOpen, setLoginOpen] = useState(false);
   const handleOpenLogin = () => {
@@ -108,6 +108,8 @@ const Header = ({
   };
   const loginMobileRef = useRef();
   useOutsideClick(loginMobileRef, () => handleCloseLoginMobile());
+
+  const userReducer = useSelector((state) => state.userReducer);
   return (
     <header className="bg-white dark:bg-gray-700 shadow-sm lg:static lg:overflow-y-visible">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -206,7 +208,7 @@ const Header = ({
               </svg>
             </button>
           </div>
-          {is_authenticated ? (
+          {userReducer.is_authenticated ? (
             <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
               <span
                 onClick={handleToggleMessages}
@@ -468,7 +470,7 @@ const Header = ({
         aria-label="Global"
         ref={mobileMenuRef}
       >
-        {is_authenticated ? (
+        {userReducer.is_authenticated ? (
           <div className="border-t border-gray-200 pt-4 pb-3">
             <div className="max-w-3xl mx-auto px-4 flex items-center sm:px-6">
               <div className="flex-shrink-0">
