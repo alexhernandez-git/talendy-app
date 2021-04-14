@@ -5,12 +5,23 @@ import { Transition } from "@tailwindui/react";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { createAlert } from "redux/actions/alerts";
 
 const PostModal = ({ modalOpen, modalRef, handleCloseModal }) => {
   const router = useRouter();
   const handleGoToProfile = (e) => {
     e.stopPropagation();
     router.push("/user/123");
+  };
+  const dispatch = useDispatch();
+
+  const userReducer = useSelector((state) => state.userReducer);
+  const handleRequestToContribute = () => {
+    if (!userReducer.is_authenticated) {
+      dispatch(createAlert("ERROR", "You are not authenticated"));
+    }
   };
   return (
     <Transition
@@ -134,7 +145,7 @@ const PostModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                       soluta veritatis nisi id?
                     </p>
                   </div>
-                  <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 bg-gray-200 dark:bg-gray-700 p-3 rounded shadow">
+                  <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 bg-gray-200 dark:bg-gray-800 p-3 rounded shadow">
                     <span className="font-medium">Private information</span>
                     <p>
                       Jurassic Park was an incredible idea and a magnificent
@@ -288,7 +299,8 @@ const PostModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                       value=""
                     />
                     <button
-                      type="submit"
+                      type="button"
+                      onClick={handleRequestToContribute}
                       className="w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
                     >
                       Request to contribute

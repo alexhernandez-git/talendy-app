@@ -15,7 +15,7 @@ const TopKarmaCoinsUser = () => {
   const userReducer = useSelector((state) => state.userReducer);
   const handleFollowUser = () => {
     if (!userReducer.is_authenticated) {
-      dispatch(createAlert("INFO", "You need to be authenticated"));
+      dispatch(createAlert("ERROR", "You are not authenticated"));
     }
   };
   return (

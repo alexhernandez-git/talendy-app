@@ -384,7 +384,7 @@ const DonationForm = () => {
           {!userReducer.is_authenticated && (
             <div className="mt-4 flex justify-center">
               <span className="text-sm text-gray-400 dark:text-gray-300">
-                Anonymous donation enabled
+                Anonymous donation enabled, no sign in required
               </span>
             </div>
           )}

@@ -16,6 +16,9 @@ import PostModal from "./PostModal";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import CreateEditPostModal from "components/Layout/CreateEditPostModal";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { createAlert } from "redux/actions/alerts";
 const Post = ({ page, image }) => {
   const router = useRouter();
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -76,6 +79,15 @@ const Post = ({ page, image }) => {
   const handleGoToProfile = (e) => {
     e.stopPropagation();
     router.push("/user/123");
+  };
+  const dispatch = useDispatch();
+
+  const userReducer = useSelector((state) => state.userReducer);
+  const handleRequestToContribute = (e) => {
+    e.stopPropagation();
+    if (!userReducer.is_authenticated) {
+      dispatch(createAlert("ERROR", "You are not authenticated"));
+    }
   };
   return (
     <>
@@ -326,7 +338,8 @@ const Post = ({ page, image }) => {
             value=""
           />
           <button
-            type="submit"
+            type="button"
+            onClick={handleRequestToContribute}
             className="w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
           >
             Request to contribute

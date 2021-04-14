@@ -36,7 +36,7 @@ export const SuccessAlert = ({ message, handleHideAlert }) => {
                     </svg>
                   </div>
                   <div className="ml-3 w-0 flex-1 pt-0.5">
-                    <p className="text-sm font-medium text-gray-900 dark:text-white">
+                    <p className="text-sm font-normal text-gray-700 dark:text-white">
                       {message}
                     </p>
                     {/* <p className="mt-1 text-sm text-gray-500">
@@ -108,7 +108,7 @@ export const ErrorAlert = ({ message, handleHideAlert }) => {
                     </svg>
                   </div>
                   <div className="ml-3 w-0 flex-1 pt-0.5">
-                    <p className="text-sm font-medium text-gray-900 dark:text-white">
+                    <p className="text-sm font-normal text-gray-700 dark:text-white">
                       {message}
                     </p>
                     {/* <p className="mt-1 text-sm text-gray-500">
@@ -180,7 +180,7 @@ export const InfoAlert = ({ message, handleHideAlert }) => {
                     </svg>
                   </div>
                   <div className="ml-3 w-0 flex-1 pt-0.5">
-                    <p className="text-sm font-medium text-gray-900 dark:text-white">
+                    <p className="text-sm font-normal text-gray-700 dark:text-white">
                       {message}
                     </p>
                     {/* <p className="mt-1 text-sm text-gray-500">

@@ -7,6 +7,9 @@ import { useState } from "react";
 import Post from "components/Layout/Post";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { createAlert } from "redux/actions/alerts";
 
 export default function PostPage() {
   const page = POST_PAGE;
@@ -16,6 +19,14 @@ export default function PostPage() {
   const handleGoToProfile = (e) => {
     e.stopPropagation();
     router.push("/user/123");
+  };
+  const dispatch = useDispatch();
+
+  const userReducer = useSelector((state) => state.userReducer);
+  const handleRequestToContribute = () => {
+    if (!userReducer.is_authenticated) {
+      dispatch(createAlert("ERROR", "You are not authenticated"));
+    }
   };
   return (
     <Layout>
@@ -199,7 +210,8 @@ export default function PostPage() {
                   value=""
                 />
                 <button
-                  type="submit"
+                  type="button"
+                  onClick={handleRequestToContribute}
                   className="w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
                 >
                   Request to contribute
@@ -233,7 +245,7 @@ export default function PostPage() {
               </div>
 
               <div className="mt-5">
-                <Link href="/help/123">
+                <Link href="/contribute/123">
                   <button
                     type="button"
                     className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
