@@ -1,12 +1,22 @@
 import { useRouter } from "next/router";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { createAlert } from "redux/actions/alerts";
 
 const TopKarmaCoinsUser = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const handleGoToProfile = (e) => {
     e.stopPropagation();
     router.push("/user/123");
+  };
+  const userReducer = useSelector((state) => state.userReducer);
+  const handleFollowUser = () => {
+    if (!userReducer.is_authenticated) {
+      dispatch(createAlert("INFO", "You need to be authenticated"));
+    }
   };
   return (
     <div className="flex items-center py-4 space-x-3">
@@ -43,6 +53,7 @@ const TopKarmaCoinsUser = () => {
       </div>
       <div className="flex-shrink-0">
         <button
+          onClick={handleFollowUser}
           type="button"
           className="inline-flex items-center px-3 py-0.5 rounded-full bg-orange-50 text-sm font-medium text-orange-700 hover:bg-orange-100 dark:text-orange-100 dark:bg-orange-600 dark:hover:bg-orange-500"
         >

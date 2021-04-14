@@ -5,6 +5,7 @@ import useOutsideClick from "../../hooks/useOutsideClick";
 import Chat from "./Chat";
 import NewPostModal from "./CreateEditPostModal";
 import RegisterModal from "./RegisterModal";
+import { useAlert } from "hooks/useAlert";
 
 const Layout = ({ children, page }) => {
   const [messagesOpen, setMessagesOpen] = useState(false);
@@ -65,8 +66,10 @@ const Layout = ({ children, page }) => {
       document.body.style.overflow = "";
     }
   }, [registerOpen]);
+  const alert = useAlert();
   return (
     <>
+      {alert}
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 relative">
         <Header
           handleToggleMessages={handleToggleMessages}

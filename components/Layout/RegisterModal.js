@@ -293,7 +293,7 @@ const RegisterModal = ({
                     <input
                       id="password"
                       name="password"
-                      type="text"
+                      type="password"
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.password}
