@@ -7,7 +7,12 @@ import * as Yup from "yup";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import { HOME_PAGE, SEARCH_USERS_PAGE } from "pages";
-const Header = ({ handleToggleMessages, handleOpenModal, page }) => {
+const Header = ({
+  handleToggleMessages,
+  handleOpenModal,
+  page,
+  handleToggleRegister,
+}) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const handleOpenMenu = () => {
     setMenuOpen(true);
@@ -72,20 +77,7 @@ const Header = ({ handleToggleMessages, handleOpenModal, page }) => {
   const notificationsRef = useRef();
   useOutsideClick(notificationsRef, () => handleCloseNotifications());
   const is_authenticated = true;
-  const [registerOpen, setRegisterOpen] = useState(false);
-  const handleOpenRegister = () => {
-    setRegisterOpen(true);
-  };
-  const handleCloseRegister = () => {
-    if (registerOpen) {
-      setRegisterOpen(false);
-    }
-  };
-  const handleToggleRegister = () => {
-    setRegisterOpen(!registerOpen);
-  };
-  const registerRef = useRef();
-  useOutsideClick(registerRef, () => handleCloseRegister());
+
   const [loginOpen, setLoginOpen] = useState(false);
   const handleOpenLogin = () => {
     setLoginOpen(true);
@@ -209,7 +201,7 @@ const Header = ({ handleToggleMessages, handleOpenModal, page }) => {
                     onMouseDown={handleToggleLogin}
                     className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                   >
-                    Login
+                    Sign in
                   </span>
                 </div>
                 <Transition
@@ -225,7 +217,7 @@ const Header = ({ handleToggleMessages, handleOpenModal, page }) => {
                     <div ref={loginRef}>
                       <div
                         ref={ref}
-                        className=" origin-top-right absolute z-40 right-0 mt-2 w-64 rounded-3xl shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
+                        className=" origin-top-right absolute z-40 right-0 mt-2 w-64 ring-opacity-5 py-1 focus:outline-none"
                         role="menu"
                         aria-orientation="vertical"
                         aria-labelledby="user-menu"

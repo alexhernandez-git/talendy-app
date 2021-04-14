@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import Chat from "./Chat";
 import NewPostModal from "./CreateEditPostModal";
+import RegisterModal from "./RegisterModal";
 
 const Layout = ({ children, page }) => {
   const [messagesOpen, setMessagesOpen] = useState(false);
@@ -45,7 +46,25 @@ const Layout = ({ children, page }) => {
       document.body.style.overflow = "";
     }
   }, [modalOpen]);
-
+  const [registerOpen, setRegisterOpen] = useState(false);
+  const handleOpenRegister = () => {
+    setRegisterOpen(true);
+  };
+  const handleCloseRegister = () => {
+    setRegisterOpen(false);
+  };
+  const handleToggleRegister = () => {
+    setRegisterOpen(!registerOpen);
+  };
+  const registerRef = useRef();
+  useOutsideClick(registerRef, () => handleCloseRegister());
+  useEffect(() => {
+    if (registerOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [registerOpen]);
   return (
     <>
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 relative">
@@ -53,6 +72,7 @@ const Layout = ({ children, page }) => {
           handleToggleMessages={handleToggleMessages}
           handleOpenModal={handleOpenModal}
           page={page}
+          handleToggleRegister={handleToggleRegister}
         />
         {children}
       </div>
@@ -62,6 +82,7 @@ const Layout = ({ children, page }) => {
         messagesRef={messagesRef}
       />
       <NewPostModal modalOpen={modalOpen} modalRef={modalRef} />
+      <RegisterModal registerOpen={registerOpen} registerRef={registerRef} />
     </>
   );
 };

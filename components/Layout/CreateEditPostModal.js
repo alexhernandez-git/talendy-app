@@ -98,8 +98,8 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
                             Change published status
                           </label>
                           <div className="relative">
-                            <div className="inline-flex shadow-sm rounded-3xl divide-x divide-gray-900">
-                              <div className="relative z-0 inline-flex shadow-sm rounded-3xl divide-x divide-gray-200 dark:divide-gray-900">
+                            <div className="inline-flex shadow-sm rounded-md divide-x divide-gray-900">
+                              <div className="relative z-0 inline-flex shadow-sm rounded-md divide-x divide-gray-200 dark:divide-gray-900">
                                 <div className="relative inline-flex items-center dark:bg-gray-800 py-2 pl-3 pr-4 border border-transparent rounded-l-md shadow-sm text-gray-900 dark:text-white">
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -155,7 +155,7 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
         To: "opacity-0"
     --> */}
                             <ul
-                              className="hidden origin-top-right absolute right-0 mt-2 w-full sm:w-72 rounded-3xl shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-900 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                              className="hidden origin-top-right absolute right-0 mt-2 w-full sm:w-72 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-900 ring-1 ring-black ring-opacity-5 focus:outline-none"
                               tabindex="-1"
                               role="listbox"
                               aria-labelledby="listbox-label"
@@ -252,7 +252,7 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
                     </div>
 
                     <div className="mt-2 sm:col-span-2">
-                      <button className="inline-flex items-center py-2 text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700">
+                      <button className="inline-flex items-center py-2 text-sm font-medium rounded-md text-gray-500 dark:text-white bg-white dark:bg-gray-700">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-5 w-5 mr-1"
@@ -283,7 +283,7 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
                         Attachments
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900">
-                        <ul className="border border-gray-200 rounded-3xl divide-y divide-gray-200">
+                        <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
                           <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
                             <div className="w-0 flex-1 flex items-center">
                               <svg
@@ -349,7 +349,7 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
                 <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-right sm:px-6 rounded-b-xl">
                   <button
                     type="submit"
-                    className="cursor-pointer inline-flex items-center px-4 py-2 text-md font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                    className="cursor-pointer inline-flex items-center px-4 py-2 text-md font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
                   >
                     Save
                   </button>
