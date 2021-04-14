@@ -7,10 +7,10 @@ import { Elements } from "@stripe/react-stripe-js";
 import getStripe from "utils/get-stripejs";
 function WrappedApp({ Component, pageProps }) {
   useEffect(() => {
-    if (localStorage.theme === "light") {
-      document.documentElement.classList.remove("dark");
-    } else {
+    if (localStorage.theme === "dark") {
       document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
     }
   }, []);
   return (

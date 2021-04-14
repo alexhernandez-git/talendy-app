@@ -223,7 +223,7 @@ const Post = ({ page, image }) => {
             <img src="/static/images/freelaniumsc.png" />
           </div>
         )}
-        <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 bg-gray-200 dark:bg-gray-500 p-3 rounded shadow">
+        <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 bg-gray-100 dark:bg-gray-800 p-3 rounded shadow">
           <span className="font-medium">Solution</span>
           <p>
             Jurassic Park was an incredible idea and a magnificent feat of

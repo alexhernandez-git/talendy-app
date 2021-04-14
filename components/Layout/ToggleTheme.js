@@ -3,26 +3,26 @@ import { useDispatch } from "react-redux";
 import { changeTheme } from "redux/actions/user";
 
 const ToggleTheme = () => {
-  const [isLight, setIsLight] = useState(false);
+  const [isDark, setIsDark] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (localStorage.theme === "light") {
-      setIsLight(true);
+    if (localStorage.theme === "dark") {
+      setIsDark(true);
     }
   }, []);
   const handleToggleIsDark = () => {
-    if (isLight) {
-      document.documentElement.classList.add("dark");
+    if (isDark) {
+      document.documentElement.classList.remove("dark");
       localStorage.removeItem("theme");
-      setIsLight(false);
+      setIsDark(false);
       dispatch(changeTheme(null));
     } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
 
-      dispatch(changeTheme("light"));
+      dispatch(changeTheme("dark"));
 
-      setIsLight(true);
+      setIsDark(true);
     }
   };
   return (
@@ -35,14 +35,14 @@ const ToggleTheme = () => {
       <span className="sr-only">Use setting</span>
       <span
         className={`${
-          isLight ? "translate-x-0" : "translate-x-5"
+          isDark ? "translate-x-5" : "translate-x-0"
         } pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white  shadow transform ring-0 transition ease-in-out duration-200`}
       >
         <span
           className={`${
-            isLight
-              ? "opacity-100 ease-in duration-200"
-              : "opacity-0 ease-out duration-100"
+            isDark
+              ? "opacity-0 ease-out duration-100"
+              : "opacity-100 ease-in duration-200"
           } absolute inset-0 h-full w-full flex items-center justify-center transition-opacity`}
           aria-hidden="true"
         >
@@ -61,9 +61,9 @@ const ToggleTheme = () => {
         </span>
         <span
           className={`${
-            isLight
-              ? "opacity-0 ease-out duration-100"
-              : "opacity-100 ease-in duration-200"
+            isDark
+              ? "opacity-100 ease-in duration-200"
+              : "opacity-0 ease-out duration-100"
           } absolute inset-0 h-full w-full flex items-center justify-center transition-opacity`}
           aria-hidden="true"
         >
