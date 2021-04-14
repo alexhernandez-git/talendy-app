@@ -86,7 +86,7 @@ const PostModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                 <button
                   type="button"
                   onClick={handleCloseModal}
-                  className="rounded-3xl p-1 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 dark:hover:bg-gray-700 focus:outline-none ring-1 ring-inset ring-white"
+                  className="rounded-3xl p-1 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 dark:hover:bg-gray-700 outline-none ring-1 ring-inset ring-white"
                   aria-expanded="false"
                 >
                   <svg
