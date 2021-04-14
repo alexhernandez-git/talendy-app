@@ -89,7 +89,7 @@ export default function PostPage() {
                   </a>
                 </div>
               </div>
-              <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 bg-green-50 dark:bg-green-900 p-3 rounded shadow">
+              <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 bg-green-50 dark:bg-green-800 p-3 rounded shadow">
                 <span className="font-medium">Solution</span>
                 <p>
                   Jurassic Park was an incredible idea and a magnificent feat of
