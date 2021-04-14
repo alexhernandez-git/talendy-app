@@ -187,24 +187,6 @@ const DonationForm = () => {
                     }}
                     className="block w-full border bg-white dark:bg-gray-600 border-gray-300  rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                   />
-
-                  <button className="w-full sm:w-auto mt-2 sm:mt-0 sm:ml-2 justify-center inline-flex items-center px-4 py-2 shadow-sm text-sm font-medium rounded-3xl text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 mr-2"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                      />
-                    </svg>
-                    Add
-                  </button>
                 </dd>
               )}
             </div>
@@ -399,6 +381,13 @@ const DonationForm = () => {
           >
             DONATE NOW
           </button>
+          {!userReducer.is_authenticated && (
+            <div className="mt-4 flex justify-center">
+              <span className="text-sm text-gray-400 dark:text-gray-300">
+                Anonymous donation enabled
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </div>
