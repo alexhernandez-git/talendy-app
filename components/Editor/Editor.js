@@ -54,7 +54,7 @@ export default function Editor({ chat, postForm, solveIssueForm }) {
             id="editor"
             onKeyDown={handleKeyDown}
             contentEditable="true"
-            data-placeholder="Write the solution that you found"
+            data-placeholder="Solution"
             onPaste={(e) => paste(e)}
           ></div>
         </>

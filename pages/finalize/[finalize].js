@@ -35,8 +35,23 @@ const Finalize = () => {
       </div>
       <div className="py-10">
         <div className="max-w-3xl mx-auto sm:px-6 flex flex-col lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
+          <div className="flex items-center space-x-5 col-span-12 mb-6">
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                What would you have done differently if you ran Jurassic Park?
+              </h3>
+              <p className="text-sm font-medium text-gray-500">
+                Created at <time datetime="2020-08-25">August 25, 2020</time>
+              </p>
+            </div>
+          </div>
           <div className="shadow overflow-hidden sm:rounded-md col-span-12 mb-4 p-4 bg-white dark:bg-gray-700">
             <Editor solveIssueForm />
+            <div className="mt-3">
+              <span className="text-gray-500 dark:text-gray-300 text-sm">
+                Help the community by sharing the solution you have found
+              </span>
+            </div>
           </div>
 
           <div className="shadow overflow-hidden sm:rounded-md col-span-12">
