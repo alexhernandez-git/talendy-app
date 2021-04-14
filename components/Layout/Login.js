@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Transition } from "@tailwindui/react";
 
 const Login = ({ loginOpen, loginRef, mobile }) => {
@@ -24,7 +24,7 @@ const Login = ({ loginOpen, loginRef, mobile }) => {
             aria-labelledby="user-menu"
           >
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
-              <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+              <div className="bg-white dark:bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
                 <form className="space-y-6" action="#" method="POST">
                   <div>
                     {/* <label
@@ -40,7 +40,7 @@ const Login = ({ loginOpen, loginRef, mobile }) => {
                         type="email"
                         autocomplete="email"
                         placeholder="email"
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-3xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                        className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -59,7 +59,7 @@ const Login = ({ loginOpen, loginRef, mobile }) => {
                         type="password"
                         autocomplete="current-password"
                         placeholder="Password"
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-3xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                        className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                       />
                     </div>
                   </div>

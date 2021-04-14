@@ -93,6 +93,21 @@ const Header = ({
   };
   const loginRef = useRef();
   useOutsideClick(loginRef, () => handleCloseLogin());
+
+  const [loginMobileOpen, setLoginMobileOpen] = useState(false);
+  const handleOpenLoginMobile = () => {
+    setLoginMobileOpen(true);
+  };
+  const handleCloseLoginMobile = () => {
+    if (loginMobileOpen) {
+      setLoginMobileOpen(false);
+    }
+  };
+  const handleToggleLoginMobile = () => {
+    setLoginMobileOpen(!loginMobileOpen);
+  };
+  const loginMobileRef = useRef();
+  useOutsideClick(loginMobileRef, () => handleCloseLoginMobile());
   return (
     <header className="bg-white dark:bg-gray-700 shadow-sm lg:static lg:overflow-y-visible">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -541,13 +556,17 @@ const Header = ({
             <div className="flex-shrink-0 relative mb-3">
               <div>
                 <span
-                  onMouseDown={handleToggleLogin}
+                  onMouseDown={handleToggleLoginMobile}
                   className="cursor-pointer w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                 >
                   Sign in
                 </span>
               </div>
-              <Login loginOpen={loginOpen} loginRef={loginRef} mobile />
+              <Login
+                loginOpen={loginMobileOpen}
+                loginRef={loginMobileRef}
+                mobile
+              />
             </div>
 
             <div className="flex-shrink-0 relative">

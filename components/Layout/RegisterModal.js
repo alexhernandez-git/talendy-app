@@ -87,7 +87,7 @@ const RegisterModal = ({ registerOpen, registerRef, isEdit }) => {
                     src="https://tailwindui.com/img/logos/workflow-mark-orange-500.svg"
                     alt="Workflow"
                   />
-                  <h2 className="mt-3 text-center text-2xl font-extrabold text-gray-900">
+                  <h2 className="mt-3 text-center text-2xl font-extrabold text-gray-900 dark:text-white">
                     Join the community
                   </h2>
                 </div>
@@ -98,7 +98,7 @@ const RegisterModal = ({ registerOpen, registerRef, isEdit }) => {
                       name="first_name"
                       type="text"
                       placeholder="First Name"
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-3xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -109,7 +109,7 @@ const RegisterModal = ({ registerOpen, registerRef, isEdit }) => {
                       name="last_name"
                       type="text"
                       placeholder="Last Name"
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-3xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -121,7 +121,7 @@ const RegisterModal = ({ registerOpen, registerRef, isEdit }) => {
                       type="email"
                       autocomplete="email"
                       placeholder="Email"
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-3xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -134,7 +134,7 @@ const RegisterModal = ({ registerOpen, registerRef, isEdit }) => {
                       type="password"
                       autocomplete="current-password"
                       placeholder="Password"
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-3xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-200  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -147,12 +147,12 @@ const RegisterModal = ({ registerOpen, registerRef, isEdit }) => {
                     Register
                   </button>
                   <div className="pt-5">
-                    <p className="text-xs leading-5 text-gray-500">
+                    <p className="text-xs leading-5 text-gray-500 dark:text-gray-300">
                       By signing up, you agree to our{" "}
                       <a
                         href="/terms"
                         target="_blank"
-                        className="font-medium text-gray-900 hover:underline"
+                        className="font-medium text-gray-900 dark:text-white hover:underline"
                       >
                         Terms
                       </a>{" "}
@@ -160,7 +160,7 @@ const RegisterModal = ({ registerOpen, registerRef, isEdit }) => {
                       <a
                         href="/privacy"
                         target="_blank"
-                        className="font-medium text-gray-900 hover:underline"
+                        className="font-medium text-gray-900 dark:text-white hover:underline"
                       >
                         Privacy Policy
                       </a>
