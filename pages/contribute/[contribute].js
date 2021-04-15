@@ -1,7 +1,7 @@
 import React from "react";
 import Message from "components/Pages/Help/Message";
 import Editor from "components/Editor/Editor";
-import ContributeLayout from "components/pages/Contribute/ContributeLayout";
+import ContributeLayout from "components/Pages/Contribute/ContributeLayout";
 const Contribute = () => {
   return (
     <ContributeLayout>

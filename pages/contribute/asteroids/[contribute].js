@@ -1,4 +1,4 @@
-import ContributeLayout from "components/pages/Contribute/ContributeLayout";
+import ContributeLayout from "components/Pages/Contribute/ContributeLayout";
 import React, { useEffect, useState } from "react";
 import { Reacteroids } from "components/Reacteroids/Reacteroids";
 
