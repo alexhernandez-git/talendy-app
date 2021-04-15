@@ -29,16 +29,24 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
   var text = {
     text: "",
   };
+  const socketRef = useRef(null);
   useEffect(() => {
     var target = document.querySelector("#editor");
 
-    const socket = io("ws://127.0.0.1:8080");
+    socketRef.current = io("http://localhost:5000");
+    socketRef.current.emit("sendMessage", "data");
+    socketRef.current.on("connect", () => {
+      console.log("connected!!!!!!!!!!");
+    });
+    socketRef.current.on("connect_error", (err) => {
+      console.log(`connect_error due to ${err.message}`);
+    });
+    console.log(socketRef.current);
     const handleTextChange = () => {
       var data = {
         text: target.innerHTML,
       };
       console.log(data);
-      socket.emit("text", data);
     };
 
     const handleRecievedText = (data) => {
@@ -47,15 +55,20 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
       target.innerHTML = data.text;
     };
 
-    socket.on("text", handleRecievedText);
-    socket.on("newUser", handleRecievedText);
+    socketRef.current.on("text", handleRecievedText);
+    socketRef.current.on("newUser", handleRecievedText);
 
     target.addEventListener("DOMSubtreeModified", handleTextChange);
     return () => {
       target.removeEventListener("DOMSubtreeModified", handleTextChange);
-      socket.disconnect();
+      socketRef.current.disconnect();
     };
   }, []);
+
+  const handleSendMessage = () => {
+    console.log(socketRef.current);
+    socketRef.current.emit("message", "data");
+  };
 
   return (
     <>

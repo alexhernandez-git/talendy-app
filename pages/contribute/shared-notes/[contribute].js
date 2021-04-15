@@ -1,7 +1,9 @@
 import ContributeLayout from "components/Pages/Contribute/ContributeLayout";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Reacteroids } from "components/Reacteroids/Reacteroids";
 import SharedEditor from "components/Editor/SharedEditor";
+import { io } from "socket.io-client";
+
 const SharedNotes = () => {
   return (
     <ContributeLayout>
