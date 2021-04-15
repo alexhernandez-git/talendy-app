@@ -67,7 +67,7 @@ const PaypalConnectModal = ({
                   <div className="grid grid-cols-3 gap-6">
                     <div className="col-span-3">
                       <label
-                        for="company_website"
+                        htmlFor="company_website"
                         className="block text-sm font-medium text-gray-700 dark:text-gray-100"
                       >
                         Email
@@ -120,7 +120,7 @@ const PaypalConnectModal = ({
                   <div className="grid grid-cols-3 gap-6">
                     <div className="col-span-3">
                       <label
-                        for="company_website"
+                        htmlFor="company_website"
                         className="block text-sm font-medium text-gray-700 dark:text-gray-100"
                       >
                         Email confirmation

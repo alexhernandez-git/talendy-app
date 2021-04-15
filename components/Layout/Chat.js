@@ -115,7 +115,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                             action="#"
                             method="GET"
                           >
-                            <label for="search_field" className="sr-only">
+                            <label htmlFor="search_field" className="sr-only">
                               Search
                             </label>
                             <div className="relative w-full text-gray-400 focus-within:text-gray-600 dark:text-gray-100 dark:focus-within:text-gray-200 ">
@@ -131,9 +131,9 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                                   aria-hidden="true"
                                 >
                                   <path
-                                    fill-rule="evenodd"
+                                    fillRule="evenodd"
                                     d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                    clip-rule="evenodd"
+                                    clipRule="evenodd"
                                   />
                                 </svg>
                               </div>

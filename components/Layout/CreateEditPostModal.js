@@ -135,9 +135,9 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
                                     aria-hidden="true"
                                   >
                                     <path
-                                      fill-rule="evenodd"
+                                      fillRule="evenodd"
                                       d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                      clip-rule="evenodd"
+                                      clipRule="evenodd"
                                     />
                                   </svg>
                                 </button>
@@ -189,9 +189,9 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
                                         aria-hidden="true"
                                       >
                                         <path
-                                          fill-rule="evenodd"
+                                          fillRule="evenodd"
                                           d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                          clip-rule="evenodd"
+                                          clipRule="evenodd"
                                         />
                                       </svg>
                                     </span>
@@ -227,9 +227,9 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
                                         aria-hidden="true"
                                       >
                                         <path
-                                          fill-rule="evenodd"
+                                          fillRule="evenodd"
                                           d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                          clip-rule="evenodd"
+                                          clipRule="evenodd"
                                         />
                                       </svg>
                                     </span>
@@ -294,9 +294,9 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
                                 aria-hidden="true"
                               >
                                 <path
-                                  fill-rule="evenodd"
+                                  fillRule="evenodd"
                                   d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-                                  clip-rule="evenodd"
+                                  clipRule="evenodd"
                                 />
                               </svg>
                               <span className="ml-2 flex-1 w-0 truncate">
@@ -323,9 +323,9 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
                                 aria-hidden="true"
                               >
                                 <path
-                                  fill-rule="evenodd"
+                                  fillRule="evenodd"
                                   d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-                                  clip-rule="evenodd"
+                                  clipRule="evenodd"
                                 />
                               </svg>
                               <span className="ml-2 flex-1 w-0 truncate">

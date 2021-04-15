@@ -117,7 +117,7 @@ const Member = () => {
               <div className="px-4 py-5 bg-white dark:bg-gray-800 space-y-6 sm:p-6">
                 <div>
                   <label
-                    for="about"
+                    htmlFor="about"
                     className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                   >
                     And if you invite him to a coffee?
@@ -135,9 +135,9 @@ const Member = () => {
                           fill="currentColor"
                         >
                           <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                           ></path>
                         </svg>
                         Donate
@@ -149,7 +149,7 @@ const Member = () => {
                 <div className="grid grid-cols-3 gap-6">
                   <div className="col-span-3 sm:col-span-2">
                     <label
-                      for="company_website"
+                      htmlFor="company_website"
                       className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                     >
                       Rate
@@ -171,7 +171,7 @@ const Member = () => {
 
                 <div>
                   <label
-                    for="about"
+                    htmlFor="about"
                     className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                   >
                     Comment

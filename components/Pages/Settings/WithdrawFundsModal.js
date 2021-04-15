@@ -73,7 +73,7 @@ const WithdrawFundsModal = ({
                   <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
                     <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-gray-200">
                       <label
-                        for="first_name"
+                        htmlFor="first_name"
                         className="block text-sm font-medium text-gray-700 dark:text-gray-100 sm:mt-px sm:pt-2"
                       >
                         Transfer to
@@ -96,7 +96,7 @@ const WithdrawFundsModal = ({
                     </div>
                     <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-gray-200">
                       <label
-                        for="first_name"
+                        htmlFor="first_name"
                         className="block text-sm font-medium text-gray-700 dark:text-gray-100 sm:mt-px sm:pt-2"
                       >
                         Paypal account
@@ -113,7 +113,7 @@ const WithdrawFundsModal = ({
 
                     <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-gray-200">
                       <label
-                        for="first_name"
+                        htmlFor="first_name"
                         className="block text-sm font-medium text-gray-700 dark:text-gray-100 sm:mt-px sm:pt-2"
                       >
                         Amount

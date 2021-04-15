@@ -80,7 +80,7 @@ const Login = ({ loginOpen, loginRef, mobile }) => {
                   <form className="space-y-6" action="#" method="POST">
                     <div>
                       {/* <label
-                                  for="email"
+                                  htmlFor="email"
                                   className="block text-sm font-medium text-gray-700"
                                   >
                                   Email address
@@ -99,7 +99,7 @@ const Login = ({ loginOpen, loginRef, mobile }) => {
 
                     <div>
                       {/* <label
-                                  for="password"
+                                  htmlFor="password"
                                   className="block text-sm font-medium text-gray-700"
                                   >
                                   Password
