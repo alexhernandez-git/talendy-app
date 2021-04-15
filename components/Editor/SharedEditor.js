@@ -58,7 +58,6 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
 
   const handleOnKeyUp = () => {
     var target = document.querySelector("#editor");
-
     socketRef.current.emit("text", target.innerHTML);
   };
 
