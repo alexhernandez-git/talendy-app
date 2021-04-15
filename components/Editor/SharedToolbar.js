@@ -6,14 +6,6 @@ export default function Toolbar() {
     document.execCommand(com, false, val);
   }
 
-  function setHeader() {
-    const target = document.getSelection();
-    document.designMode = "on";
-
-    format("insertHTML", `<h2 class="text-lg">${target}</h2>`);
-    document.designMode = "off";
-  }
-
   function addLineAfterBlock(id) {
     const block = document.getElementById(`${id}`);
     const div = document.createElement("div");
@@ -61,13 +53,6 @@ export default function Toolbar() {
         onClick={(e) => format("italic")}
       >
         Italics
-      </button>
-
-      <button
-        className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center text-white mr-1 text-xs"
-        onClick={(e) => setHeader()}
-      >
-        Header
       </button>
 
       <button

@@ -46,6 +46,7 @@
     "redux-thunk": "2.3.0",
     "rich-text": "^4.1.0",
     "sharedb": "^1.8.1",
+    "socket.io-client": "^4.0.1",
     "sweetalert2": "^10.12.6",
     "sweetalert2-react-content": "^3.2.2",
     "tailwindcss": "^2.0.2",

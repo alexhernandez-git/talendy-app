@@ -90,7 +90,7 @@ const ContributeLayout = ({ children }) => {
                           </p>
                           <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
                             Created at{" "}
-                            <time datetime="2020-08-25">August 25, 2020</time>
+                            <time dateTime="2020-08-25">August 25, 2020</time>
                           </p>
                         </div>
                       </div>

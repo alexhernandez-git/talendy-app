@@ -21,9 +21,7 @@ const PaypalConnectModal = ({
         .oneOf([Yup.ref("email"), null], "Emails must match")
         .required("PayPal email confirmation is required"),
     }),
-    onSubmit: async (values, { resetForm }) => {
-      console.log(values);
-    },
+    onSubmit: async (values, { resetForm }) => {},
   });
   return (
     <div

@@ -41,7 +41,6 @@ const Header = ({
       search: Yup.string().required(),
     }),
     onSubmit: async (values) => {
-      console.log("page", page);
       if (page == SEARCH_USERS_PAGE) {
         router.push(`/search/users/${values.search}`);
         return;

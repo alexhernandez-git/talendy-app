@@ -52,7 +52,7 @@ const Member = () => {
                 <div>
                   <p className="text-sm text-gray-900 dark:text-white">
                     Applied on{" "}
-                    <time datetime="2020-01-07">January 7, 2020</time>
+                    <time dateTime="2020-01-07">January 7, 2020</time>
                   </p>
                   <p className="mt-2 flex items-center text-sm text-gray-500 dark:text-gray-100">
                     Completed phone screening

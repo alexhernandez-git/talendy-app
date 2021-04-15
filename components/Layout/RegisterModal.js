@@ -37,7 +37,6 @@ const RegisterModal = ({
     }),
     onSubmit: async (values) => {
       // console.log(valores);
-      console.log(values);
       dispatch(register(values));
     },
   });

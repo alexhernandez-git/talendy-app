@@ -41,7 +41,7 @@ const Finalize = () => {
                 What would you have done differently if you ran Jurassic Park?
               </h3>
               <p className="text-sm font-medium text-gray-500">
-                Created at <time datetime="2020-08-25">August 25, 2020</time>
+                Created at <time dateTime="2020-08-25">August 25, 2020</time>
               </p>
             </div>
           </div>
