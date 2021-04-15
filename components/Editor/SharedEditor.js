@@ -34,7 +34,6 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
     var target = document.querySelector("#editor");
 
     socketRef.current = io("http://localhost:5000");
-    socketRef.current.emit("sendMessage", "data");
     socketRef.current.on("connect", () => {
       console.log("connected!!!!!!!!!!");
     });
@@ -64,11 +63,6 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
       socketRef.current.disconnect();
     };
   }, []);
-
-  const handleSendMessage = () => {
-    console.log(socketRef.current);
-    socketRef.current.emit("message", "data");
-  };
 
   return (
     <>

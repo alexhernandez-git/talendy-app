@@ -265,7 +265,12 @@ export class Reacteroids extends Component {
         <div className="endgame">
           <p>Game over, man!</p>
           <p>{message}</p>
-          <button onClick={this.startGame.bind(this)}>try again?</button>
+          <button
+            onClick={this.startGame.bind(this)}
+            className="border border-white rounded-3xl px-3 py-1 mt-2"
+          >
+            try again?
+          </button>
         </div>
       );
     }
