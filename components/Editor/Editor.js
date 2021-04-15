@@ -80,35 +80,6 @@ export default function Editor({ chat, postForm, solveIssueForm }) {
             data-placeholder="Explanation"
             onPaste={(e) => paste(e)}
           ></div>
-          <div className="relative py-4">
-            <div
-              className="absolute inset-0 flex items-center"
-              aria-hidden="true"
-            >
-              <div className="w-full border-t border-gray-300"></div>
-            </div>
-            <div className="relative flex justify-center">
-              <span className="px-2 bg-white dark:bg-gray-700 text-sm text-gray-500 dark:text-gray-100">
-                Private information
-              </span>
-            </div>
-          </div>
-          <Toolbar />
-
-          <div
-            className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l cursor-text"
-            id="editor"
-            onKeyDown={handleKeyDown}
-            contentEditable="true"
-            data-placeholder="Private explanation"
-            onPaste={(e) => paste(e)}
-          ></div>
-          <div className="mt-2">
-            <span className="text-gray-500 dark:text-gray-300 text-sm">
-              Write here any information that you do not want to be public, only
-              the members that you accept will be able to see it
-            </span>
-          </div>
         </>
       )}
     </div>

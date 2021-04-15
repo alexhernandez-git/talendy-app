@@ -145,24 +145,6 @@ const PostModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                       soluta veritatis nisi id?
                     </p>
                   </div>
-                  <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 bg-gray-200 dark:bg-gray-800 p-3 rounded shadow">
-                    <span className="font-medium">Private information</span>
-                    <p>
-                      Jurassic Park was an incredible idea and a magnificent
-                      feat of engineering, but poor protocols and a disregard
-                      for human safety killed what could have otherwise been one
-                      of the best businesses of our generation.
-                    </p>
-                    <p>
-                      Ultimately, I think that if you wanted to run the park
-                      successfully and keep visitors safe, the most important
-                      thing to prioritize would be Lorem ipsum dolor sit amet
-                      consectetur adipisicing elit. Cumque dolor eligendi,
-                      culpa, quaerat earum possimus porro nam perspiciatis
-                      tempora temporibus tenetur optio ipsa distinctio cum! Sunt
-                      soluta veritatis nisi id?
-                    </p>
-                  </div>
 
                   <div className="mt-4 relative">
                     <img src="/static/images/freelaniumsc.png" />
