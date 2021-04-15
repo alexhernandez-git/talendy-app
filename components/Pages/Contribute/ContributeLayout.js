@@ -171,7 +171,7 @@ const ContributeLayout = ({ children }) => {
                       </Link>
                     </div>
 
-                    <div class="relative inline-block text-left">
+                    <div className="relative inline-block text-left">
                       <div>
                         <button
                           type="button"
@@ -183,7 +183,7 @@ const ContributeLayout = ({ children }) => {
                         >
                           More
                           <svg
-                            class="-mr-1 ml-2 h-5 w-5"
+                            className="-mr-1 ml-2 h-5 w-5"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
@@ -210,23 +210,23 @@ const ContributeLayout = ({ children }) => {
                           <div ref={moreOptionsRef}>
                             <ul
                               ref={ref}
-                              class="origin-top-right absolute right-0 mt-2 w-72 z-30 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                              className="origin-top-right absolute right-0 mt-2 w-72 z-30 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none"
                               tabindex="-1"
                               role="listbox"
                               aria-labelledby="listbox-label"
                               aria-activedescendant="listbox-option-0"
                             >
                               <li
-                                class="text-gray-900 dark:text-white cursor-pointer select-none relative p-4 text-sm hover:opacity-70"
+                                className="text-gray-900 dark:text-white cursor-pointer select-none relative p-4 text-sm hover:opacity-70"
                                 id="listbox-option-0"
                                 role="option"
                               >
                                 <Link href="/contribute/asteroids/123">
-                                  <div class="flex flex-col">
-                                    <div class="flex justify-between">
-                                      <p class="font-normal">Asteroids</p>
+                                  <div className="flex flex-col">
+                                    <div className="flex justify-between">
+                                      <p className="font-normal">Asteroids</p>
                                     </div>
-                                    <p class="text-gray-500 mt-2">
+                                    <p className="text-gray-500 mt-2">
                                       Psst.. waiting for someone? Let's shoot
                                       some asteroids in the meantime. This game
                                       is only loaded for you.
