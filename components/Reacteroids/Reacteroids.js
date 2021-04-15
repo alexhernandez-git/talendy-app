@@ -70,8 +70,8 @@ export class Reacteroids extends Component {
         this.startGame();
       } else {
         keys.space = value;
-        e.preventDefault();
       }
+      e.preventDefault();
     }
     this.setState({
       keys: keys,

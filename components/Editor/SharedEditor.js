@@ -41,28 +41,26 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
       console.log(`connect_error due to ${err.message}`);
     });
     console.log(socketRef.current);
-    const handleTextChange = () => {
-      var data = {
-        text: target.innerHTML,
-      };
-      console.log(data);
-    };
 
     const handleRecievedText = (data) => {
-      console.log("data revieved", data);
+      console.log("data recieved", data);
       text.text = data.text;
-      target.innerHTML = data.text;
+      target.innerHTML = text.text;
     };
-
+    socketRef.current.on("message", (msg) => console.log("msg", msg));
     socketRef.current.on("text", handleRecievedText);
     socketRef.current.on("newUser", handleRecievedText);
 
-    target.addEventListener("DOMSubtreeModified", handleTextChange);
     return () => {
-      target.removeEventListener("DOMSubtreeModified", handleTextChange);
       socketRef.current.disconnect();
     };
   }, []);
+
+  const handleOnKeyUp = () => {
+    var target = document.querySelector("#editor");
+
+    socketRef.current.emit("text", target.innerHTML);
+  };
 
   return (
     <>
@@ -70,6 +68,7 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
       <div
         className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l cursor-text"
         id="editor"
+        onKeyUp={handleOnKeyUp}
         onKeyDown={handleKeyDown}
         onChange={(e) => console.log(e.target)}
         contentEditable="true"
