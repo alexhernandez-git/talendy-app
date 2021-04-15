@@ -1,7 +1,7 @@
 import React from "react";
 import { IconContext } from "react-icons/lib";
 import { MdCode } from "react-icons/md";
-export default function Toolbar() {
+export default function Toolbar({ editorTextLength }) {
   function format(com, val) {
     document.execCommand(com, false, val);
   }
@@ -41,31 +41,36 @@ export default function Toolbar() {
   }
 
   return (
-    <div className="flex justify-end rounded-t">
-      <button
-        className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center text-white mr-1 text-xs"
-        onClick={(e) => format("bold")}
-      >
-        Bold
-      </button>
-      <button
-        className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center text-white mr-1 text-xs"
-        onClick={(e) => format("italic")}
-      >
-        Italics
-      </button>
-
-      <button
-        className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center text-white  text-xs"
-        onClick={(e) => addCodeBlock()}
-      >
-        <IconContext.Provider
-          value={{ size: 18, className: "text-white mr-1" }}
+    <div className="flex justify-between items-center rounded-t">
+      <div className="flex mx-2 items-center text-white">
+        {editorTextLength} / 2500
+      </div>
+      <div className="flex ">
+        <button
+          className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center text-white mr-1 text-xs"
+          onClick={(e) => format("bold")}
         >
-          <MdCode />
-        </IconContext.Provider>
-        <span className="text-white text-xs">Inline code</span>
-      </button>
+          Bold
+        </button>
+        <button
+          className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center text-white mr-1 text-xs"
+          onClick={(e) => format("italic")}
+        >
+          Italics
+        </button>
+
+        <button
+          className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center text-white  text-xs"
+          onClick={(e) => addCodeBlock()}
+        >
+          <IconContext.Provider
+            value={{ size: 18, className: "text-white mr-1" }}
+          >
+            <MdCode />
+          </IconContext.Provider>
+          <span className="text-white text-xs">Inline code</span>
+        </button>
+      </div>
     </div>
   );
 }

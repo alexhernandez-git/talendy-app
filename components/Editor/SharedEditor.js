@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SharedToolbar from "./SharedToolbar";
 import { io } from "socket.io-client";
 export default function SharedEditor({ chat, postForm, solveIssueForm }) {
@@ -30,6 +30,8 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
     text: "",
   };
   const socketRef = useRef(null);
+  const [editorTextLength, setEditorTextLength] = useState(false);
+  const [editorText, setEditorText] = useState(false);
   useEffect(() => {
     var target = document.querySelector("#editor");
 
@@ -45,7 +47,10 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
     const handleRecievedText = (data) => {
       console.log("data recieved", data);
       text.text = data.text;
+
       target.innerHTML = text.text;
+      setEditorTextLength(target.innerText.length);
+      setEditorText(target.innerHTML);
     };
     socketRef.current.on("message", (msg) => console.log("msg", msg));
     socketRef.current.on("text", handleRecievedText);
@@ -58,12 +63,25 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
 
   const handleOnKeyUp = () => {
     var target = document.querySelector("#editor");
-    socketRef.current.emit("text", target.innerHTML);
+    console.log(editorTextLength);
+    if (target.innerText.length <= 2500) {
+      setEditorTextLength(target.innerText.length);
+      setEditorText(target.innerHTML);
+    } else {
+      target.innerText = target.innerText.slice(-2500);
+      setEditorText(target.innerText);
+    }
   };
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      socketRef.current.emit("text", editorText);
+    }, 1000);
+    return () => clearTimeout(timeoutId);
+  }, [editorText]);
 
   return (
     <>
-      <SharedToolbar />
+      <SharedToolbar editorTextLength={editorTextLength} />
       <div
         className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l cursor-text"
         id="editor"
@@ -73,7 +91,7 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
         contentEditable="true"
         data-placeholder="Notes"
         onPaste={(e) => paste(e)}
-        style={{ minHeight: "50rem" }}
+        style={{ minHeight: "40rem" }}
       ></div>
     </>
   );
