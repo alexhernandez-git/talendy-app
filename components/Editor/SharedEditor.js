@@ -1,7 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
 import SharedToolbar from "./SharedToolbar";
 import { io } from "socket.io-client";
+
 export default function SharedEditor({ chat, postForm, solveIssueForm }) {
+  function setEndOfContenteditable(contentEditableElement) {
+    var range, selection;
+    if (document.createRange) {
+      //Firefox, Chrome, Opera, Safari, IE 9+
+      range = document.createRange(); //Create a range (a range is a like the selection but invisible)
+      range.selectNodeContents(contentEditableElement); //Select the entire contents of the element with the range
+      range.collapse(false); //collapse the range to the end point. false means collapse to end rather than the start
+      selection = window.getSelection(); //get the selection object (allows you to change selection)
+      selection.removeAllRanges(); //remove any selections already made
+      selection.addRange(range); //make the range you have just created the visible selection
+    } else if (document.selection) {
+      //IE 8 and lower
+      range = document.body.createTextRange(); //Create a range (a range is a like the selection but invisible)
+      range.moveToElementText(contentEditableElement); //Select the entire contents of the element with the range
+      range.collapse(false); //collapse the range to the end point. false means collapse to end rather than the start
+      range.select(); //Select the range (make it the visible selection
+    }
+  }
   function paste(e) {
     e.preventDefault();
     const open = new RegExp("<", "gi");
@@ -52,7 +71,6 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
       setEditorTextLength(target.innerText.length);
       setEditorText(target.innerHTML);
     };
-    socketRef.current.on("message", (msg) => console.log("msg", msg));
     socketRef.current.on("text", handleRecievedText);
     socketRef.current.on("newUser", handleRecievedText);
 
@@ -60,15 +78,17 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
       socketRef.current.disconnect();
     };
   }, []);
-
+  const [onKeyUpCounter, setOnkeyUpCounter] = useState(false);
   const handleOnKeyUp = () => {
+    setOnkeyUpCounter(!onKeyUpCounter);
     var target = document.querySelector("#editor");
     console.log(editorTextLength);
     if (target.innerText.length <= 2500) {
       setEditorTextLength(target.innerText.length);
       setEditorText(target.innerHTML);
     } else {
-      target.innerText = target.innerText.slice(-2500);
+      target.innerText = target.innerText.slice(0, 2500);
+      setEndOfContenteditable(target);
       setEditorText(target.innerText);
     }
   };
@@ -77,7 +97,7 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
       socketRef.current.emit("text", editorText);
     }, 1000);
     return () => clearTimeout(timeoutId);
-  }, [editorText]);
+  }, [onKeyUpCounter]);
 
   return (
     <>
@@ -87,6 +107,7 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
         id="editor"
         onKeyUp={handleOnKeyUp}
         onKeyDown={handleKeyDown}
+        onFocus={(e) => console.log(e.target.selectionStart)}
         onChange={(e) => console.log(e.target)}
         contentEditable="true"
         data-placeholder="Notes"
