@@ -17,7 +17,6 @@ const Audio = (props) => {
 
   useEffect(() => {
     props.peer.on("stream", (stream) => {
-      console.log(stream);
       ref.current.srcObject = stream;
     });
   }, []);
@@ -31,10 +30,16 @@ const ContributeLayout = ({ children }) => {
 
   // Webrtc
   const [peers, setPeers] = useState([]);
+  const [myStream, setMyStream] = useState();
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
   const roomID = "room1";
+  const [isMicOn, setIsMicOn] = useState(false);
+  const handleToggleMic = () => {
+    setIsMicOn(!isMicOn);
+    myStream.getAudioTracks()[0].enabled = !isMicOn;
+  };
 
   useEffect(() => {
     socketRef.current = io.connect("http://localhost:5500");
@@ -82,7 +87,8 @@ const ContributeLayout = ({ children }) => {
     navigator.mediaDevices
       .getUserMedia({ video: false, audio: true })
       .then((stream) => {
-        // userVideo.current.srcObject = stream;
+        setMyStream(stream);
+        stream.getAudioTracks()[0].enabled = isMicOn;
         socketRef.current.emit("join room", roomID);
         socketRef.current.on("all users", (users) => {
           const peers = [];
@@ -109,8 +115,10 @@ const ContributeLayout = ({ children }) => {
         });
 
         socketRef.current.on("receiving returned signal", (payload) => {
+          console.log("payload", payload);
           const item = peersRef.current.find((p) => p.peerID === payload.id);
-          item.peer.signal(payload.signal);
+          console.log(peersRef.current);
+          item?.peer.signal(payload.signal);
         });
       });
   }, []);
@@ -148,10 +156,7 @@ const ContributeLayout = ({ children }) => {
   };
   const moreOptionsRef = useRef();
   useOutsideClick(moreOptionsRef, () => handleCloseMoreOptions());
-  const [isMicOn, setIsMicOn] = useState(false);
-  const handleToggleMic = () => {
-    setIsMicOn(!isMicOn);
-  };
+
   return (
     <>
       {peers.map((peer, index) => {
