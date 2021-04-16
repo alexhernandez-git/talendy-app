@@ -87,7 +87,7 @@ const ContributeLayout = ({ children }) => {
             {isMicOn ? (
               <button
                 onClick={handleToggleMic}
-                className="inline-flex items-center px-4 py-2 font-medium rounded-3xl text-orange-500 dark:text-gray-100 "
+                className="inline-flex items-center px-4 py-2 font-medium rounded-3xl text-gray-500 dark:text-gray-100 "
               >
                 <IconContext.Provider value={{ size: 25 }}>
                   <MdMic />
@@ -96,7 +96,7 @@ const ContributeLayout = ({ children }) => {
             ) : (
               <button
                 onClick={handleToggleMic}
-                className="inline-flex items-center px-4 py-2 font-medium rounded-3xl text-red-500 "
+                className="inline-flex items-center px-4 py-2 font-medium rounded-3xl text-red-600 dark:text-red-500"
               >
                 <IconContext.Provider value={{ size: 25 }}>
                   <MdMicOff />
