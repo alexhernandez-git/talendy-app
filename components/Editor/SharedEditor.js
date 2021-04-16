@@ -69,6 +69,9 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
     const handleRecievedText = (data) => {
       console.log("data recieved", data);
       if (data) {
+        if (!data.text) {
+          data.text = "";
+        }
         text.text = data.text;
 
         target.innerHTML = text.text;
@@ -79,7 +82,6 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
       setEditorTextLength(target.innerText.length);
     };
     socketRef.current.on("text", handleRecievedText);
-    socketRef.current.on("newUser", handleRecievedText);
 
     return () => {
       socketRef.current.disconnect();

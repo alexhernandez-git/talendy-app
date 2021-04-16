@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
 import PostModal from "components/Layout/PostModal";
 import Layout from "components/Layout/Layout";
@@ -10,28 +9,111 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Member from "components/Pages/Help/Member";
 import { Transition } from "@tailwindui/react";
+import { io } from "socket.io-client";
+import Peer from "simple-peer";
 
-const user = {
-  name: "Chelsea Hagon",
-  email: "chelseahagon@example.com",
-  role: "Human Resources Manager",
-  imageUrl:
-    "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+const Audio = (props) => {
+  const ref = useRef();
+
+  useEffect(() => {
+    props.peer.on("stream", (stream) => {
+      console.log(stream);
+      ref.current.srcObject = stream;
+    });
+  }, []);
+
+  return <audio playsInline autoPlay ref={ref} />;
 };
-
-const tabs = [
-  { name: "Chat", href: "#", current: true },
-  { name: "Shared document", href: "#", current: false },
-  { name: "Asteroids", href: "#", current: false },
-];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 const ContributeLayout = ({ children }) => {
   const page = HELP_PAGE;
   const image = true;
+
+  // Webrtc
+  const [peers, setPeers] = useState([]);
+  const socketRef = useRef();
+  const userVideo = useRef();
+  const peersRef = useRef([]);
+  const roomID = "room1";
+
+  useEffect(() => {
+    socketRef.current = io.connect("http://localhost:5500");
+    socketRef.current.on("connect", () => {
+      console.log("connected layout!!!!!!!!!!");
+    });
+    socketRef.current.on("connect_error", (err) => {
+      console.log(`connect_error due to ${err.message}`);
+    });
+
+    function createPeer(userToSignal, callerID, stream) {
+      const peer = new Peer({
+        initiator: true,
+        trickle: false,
+        stream,
+      });
+
+      peer.on("signal", (signal) => {
+        socketRef.current.emit("sending signal", {
+          userToSignal,
+          callerID,
+          signal,
+        });
+      });
+
+      return peer;
+    }
+
+    function addPeer(incomingSignal, callerID, stream) {
+      const peer = new Peer({
+        initiator: false,
+        trickle: false,
+        stream,
+      });
+
+      peer.on("signal", (signal) => {
+        socketRef.current.emit("returning signal", { signal, callerID });
+      });
+
+      peer.signal(incomingSignal);
+
+      return peer;
+    }
+
+    navigator.mediaDevices
+      .getUserMedia({ video: false, audio: true })
+      .then((stream) => {
+        // userVideo.current.srcObject = stream;
+        socketRef.current.emit("join room", roomID);
+        socketRef.current.on("all users", (users) => {
+          const peers = [];
+          users.forEach((userID) => {
+            const peer = createPeer(userID, socketRef.current.id, stream);
+            peersRef.current.push({
+              peerID: userID,
+              peer,
+            });
+            peers.push(peer);
+          });
+          setPeers(peers);
+        });
+
+        socketRef.current.on("user joined", (payload) => {
+          console.log("user joined", payload);
+          const peer = addPeer(payload.signal, payload.callerID, stream);
+          peersRef.current.push({
+            peerID: payload.callerID,
+            peer,
+          });
+
+          setPeers((users) => [...users, peer]);
+        });
+
+        socketRef.current.on("receiving returned signal", (payload) => {
+          const item = peersRef.current.find((p) => p.peerID === payload.id);
+          item.peer.signal(payload.signal);
+        });
+      });
+  }, []);
 
   const [modalOpen, setModalOpen] = useState(false);
   const handleOpenModal = () => {
@@ -72,9 +154,12 @@ const ContributeLayout = ({ children }) => {
   };
   return (
     <>
+      {peers.map((peer, index) => {
+        return <Audio key={index} peer={peer} />;
+      })}
       <Layout>
         <div className="fixed bottom-0 w-full z-40 flex items-center justify-center">
-          <div className="flex items-center dark:bg-gray-800 bg-white px-2 pb-1 pt-2 rounded-t-3xl border-t border-l border-r border-orange-500">
+          <div className="flex items-center dark:bg-gray-800 bg-white rounded-t-lg border-t border-l border-r border-orange-500 dark:border-white shadow">
             {/* <button
               type="button"
               className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
@@ -87,7 +172,7 @@ const ContributeLayout = ({ children }) => {
             {isMicOn ? (
               <button
                 onClick={handleToggleMic}
-                className="inline-flex items-center px-4 py-2 font-medium rounded-3xl text-gray-500 dark:text-gray-100 "
+                className="inline-flex items-center px-4 py-1 font-medium rounded-3xl text-orange-500 dark:text-gray-100 "
               >
                 <IconContext.Provider value={{ size: 25 }}>
                   <MdMic />
@@ -96,7 +181,7 @@ const ContributeLayout = ({ children }) => {
             ) : (
               <button
                 onClick={handleToggleMic}
-                className="inline-flex items-center px-4 py-2 font-medium rounded-3xl text-red-600 dark:text-red-500"
+                className="inline-flex items-center px-4 py-1 font-medium rounded-3xl text-red-600 dark:text-red-500"
               >
                 <IconContext.Provider value={{ size: 25 }}>
                   <MdMicOff />
