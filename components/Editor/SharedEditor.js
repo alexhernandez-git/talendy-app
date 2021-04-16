@@ -49,7 +49,7 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
     text: "",
   };
   const socketRef = useRef(null);
-  const [editorTextLength, setEditorTextLength] = useState(false);
+  const [editorTextLength, setEditorTextLength] = useState(0);
   const [editorText, setEditorText] = useState(false);
   useEffect(() => {
     var target = document.querySelector("#editor");
@@ -61,17 +61,22 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
     socketRef.current.on("connect_error", (err) => {
       console.log(`connect_error due to ${err.message}`);
     });
+
+    socketRef.current.emit("create", "room1");
+
     console.log(socketRef.current);
 
     const handleRecievedText = (data) => {
       console.log("data recieved", data);
-      text.text = data.text;
+      if (data) {
+        text.text = data.text;
 
-      target.innerHTML = text.text;
-      setEndOfContenteditable(target);
+        target.innerHTML = text.text;
+        setEndOfContenteditable(target);
 
+        setEditorText(target.innerHTML);
+      }
       setEditorTextLength(target.innerText.length);
-      setEditorText(target.innerHTML);
     };
     socketRef.current.on("text", handleRecievedText);
     socketRef.current.on("newUser", handleRecievedText);

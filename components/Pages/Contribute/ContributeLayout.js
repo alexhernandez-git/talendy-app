@@ -5,7 +5,7 @@ import PostModal from "components/Layout/PostModal";
 import Layout from "components/Layout/Layout";
 import { HELP_PAGE } from "pages";
 import { IconContext } from "react-icons";
-import { MdHeadset, MdMic, MdScreenShare } from "react-icons/md";
+import { MdHeadset, MdMic, MdScreenShare, MdMicOff } from "react-icons/md";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Member from "components/Pages/Help/Member";
@@ -66,45 +66,50 @@ const ContributeLayout = ({ children }) => {
   };
   const moreOptionsRef = useRef();
   useOutsideClick(moreOptionsRef, () => handleCloseMoreOptions());
+  const [isMicOn, setIsMicOn] = useState(false);
+  const handleToggleMic = () => {
+    setIsMicOn(!isMicOn);
+  };
   return (
     <>
       <Layout>
-        <div className="bg-gray-50 dark:bg-gray-800 shadow-sm p-3 sticky top-0 z-30">
-          <div className="max-w-3xl mx-auto  flex lg:max-w-7xl lg:grid lg:grid-cols-12 lg:gap-8  sm:px-6 lg:px-8">
-            <div className=" sm:flex justify-start lg:justify-center w-full items-center lg:col-start-5 lg:col-span-4">
-              {/* <button
-                type="button"
-                className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+        <div className="fixed bottom-0 w-full z-40 flex items-center justify-center">
+          <div className="flex items-center dark:bg-gray-800 bg-white px-2 pb-1 pt-2 rounded-t-3xl border-t border-l border-r border-orange-500">
+            {/* <button
+              type="button"
+              className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+            >
+              <IconContext.Provider value={{ size: 18, className: "mr-2" }}>
+                <MdScreenShare />
+              </IconContext.Provider>
+              Screen
+            </button> */}
+            {isMicOn ? (
+              <button
+                onClick={handleToggleMic}
+                className="inline-flex items-center px-4 py-2 font-medium rounded-3xl text-orange-500 dark:text-gray-100 "
               >
-                <IconContext.Provider value={{ size: 18, className: "mr-2" }}>
-                  <MdScreenShare />
-                </IconContext.Provider>
-                Screen
-              </button> */}
-              <button className="inline-flex items-center px-4 py-2 font-medium rounded-3xl text-orange-500 dark:text-gray-100 ">
-                <IconContext.Provider value={{ size: 23 }}>
+                <IconContext.Provider value={{ size: 25 }}>
                   <MdMic />
                 </IconContext.Provider>
               </button>
-              <button className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 ">
-                <IconContext.Provider value={{ size: 23 }}>
-                  <MdHeadset />
+            ) : (
+              <button
+                onClick={handleToggleMic}
+                className="inline-flex items-center px-4 py-2 font-medium rounded-3xl text-red-500 "
+              >
+                <IconContext.Provider value={{ size: 25 }}>
+                  <MdMicOff />
                 </IconContext.Provider>
               </button>
-            </div>
-            <div className="flex justify-end w-full items-center col-span-4">
-              <Link href="/finalize/123">
-                <button
-                  type="button"
-                  className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm  text-white hover:text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
-                >
-                  Finalize
-                </button>
-              </Link>
-            </div>
+            )}
+            {/* <button className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 ">
+              <IconContext.Provider value={{ size: 25 }}>
+                <MdHeadset />
+              </IconContext.Provider>
+            </button> */}
           </div>
         </div>
-
         <div className="py-10">
           <div className="max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
             <div className="space-y-6 lg:col-start-1 lg:col-span-2">
@@ -152,14 +157,14 @@ const ContributeLayout = ({ children }) => {
                           </svg>
                           Info
                         </button>
-                        {/* <Link href="/finalize/123">
+                        <Link href="/finalize/123">
                           <button
                             type="button"
                             className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm  text-white hover:text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
                           >
                             Finalize
                           </button>
-                        </Link> */}
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -247,7 +252,7 @@ const ContributeLayout = ({ children }) => {
                             <ul
                               ref={ref}
                               className="origin-top-right absolute right-0 mt-2 w-72 z-30 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none"
-                              tabindex="-1"
+                              tabIndex="-1"
                               role="listbox"
                               aria-labelledby="listbox-label"
                               aria-activedescendant="listbox-option-0"

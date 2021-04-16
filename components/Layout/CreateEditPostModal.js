@@ -156,7 +156,7 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
     --> */}
                             <ul
                               className="hidden origin-top-right absolute right-0 mt-2 w-full sm:w-72 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-900 ring-1 ring-black ring-opacity-5 focus:outline-none"
-                              tabindex="-1"
+                              tabIndex="-1"
                               role="listbox"
                               aria-labelledby="listbox-label"
                               aria-activedescendant="listbox-option-0"
