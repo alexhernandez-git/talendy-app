@@ -69,6 +69,42 @@ const ContributeLayout = ({ children }) => {
   return (
     <>
       <Layout>
+        <div className="bg-gray-50 dark:bg-gray-800 shadow-sm p-3 sticky top-0 z-30">
+          <div className="max-w-3xl mx-auto  flex lg:max-w-7xl lg:grid lg:grid-cols-12 lg:gap-8  sm:px-6 lg:px-8">
+            <div className=" sm:flex justify-start lg:justify-center w-full items-center lg:col-start-5 lg:col-span-4">
+              {/* <button
+                type="button"
+                className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+              >
+                <IconContext.Provider value={{ size: 18, className: "mr-2" }}>
+                  <MdScreenShare />
+                </IconContext.Provider>
+                Screen
+              </button> */}
+              <button className="inline-flex items-center px-4 py-2 font-medium rounded-3xl text-orange-500 dark:text-gray-100 ">
+                <IconContext.Provider value={{ size: 23 }}>
+                  <MdMic />
+                </IconContext.Provider>
+              </button>
+              <button className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 ">
+                <IconContext.Provider value={{ size: 23 }}>
+                  <MdHeadset />
+                </IconContext.Provider>
+              </button>
+            </div>
+            <div className="flex justify-end w-full items-center col-span-4">
+              <Link href="/finalize/123">
+                <button
+                  type="button"
+                  className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm  text-white hover:text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                >
+                  Finalize
+                </button>
+              </Link>
+            </div>
+          </div>
+        </div>
+
         <div className="py-10">
           <div className="max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
             <div className="space-y-6 lg:col-start-1 lg:col-span-2">
@@ -116,14 +152,14 @@ const ContributeLayout = ({ children }) => {
                           </svg>
                           Info
                         </button>
-                        <Link href="/finalize/123">
+                        {/* <Link href="/finalize/123">
                           <button
                             type="button"
                             className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm  text-white hover:text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
                           >
                             Finalize
                           </button>
-                        </Link>
+                        </Link> */}
                       </div>
                     </div>
                   </div>

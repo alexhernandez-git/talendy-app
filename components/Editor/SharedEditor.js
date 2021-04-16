@@ -68,6 +68,8 @@ export default function SharedEditor({ chat, postForm, solveIssueForm }) {
       text.text = data.text;
 
       target.innerHTML = text.text;
+      setEndOfContenteditable(target);
+
       setEditorTextLength(target.innerText.length);
       setEditorText(target.innerHTML);
     };
