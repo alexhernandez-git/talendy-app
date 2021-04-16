@@ -1,8 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import SharedToolbar from "./SharedToolbar";
+import SharedToolbar from "components/Editor/SharedToolbar";
 import { io } from "socket.io-client";
 
-export default function SharedEditor({ chat, postForm, solveIssueForm }) {
+export default function ContributeSharedNotes({
+  chat,
+  postForm,
+  solveIssueForm,
+}) {
   function setEndOfContenteditable(contentEditableElement) {
     var range, selection;
     if (document.createRange) {

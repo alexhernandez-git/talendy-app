@@ -39,6 +39,8 @@ export class Reacteroids extends Component {
     this.asteroids = [];
     this.bullets = [];
     this.particles = [];
+    this.handleKeys = this.handleKeys.bind(this);
+    this._isMounted = false;
   }
 
   handleResize(value, e) {
@@ -52,33 +54,37 @@ export class Reacteroids extends Component {
   }
 
   handleKeys(value, e) {
-    let keys = this.state.keys;
-    if (e.keyCode === KEY.LEFT || e.keyCode === KEY.A) {
-      keys.left = value;
-      e.preventDefault();
-    }
-    if (e.keyCode === KEY.RIGHT || e.keyCode === KEY.D) {
-      keys.right = value;
-      e.preventDefault();
-    }
-    if (e.keyCode === KEY.UP || e.keyCode === KEY.W) {
-      keys.up = value;
-      e.preventDefault();
-    }
-    if (e.keyCode === KEY.SPACE) {
-      if (!this.state.inGame) {
-        this.startGame();
-      } else {
-        keys.space = value;
+    if (this._isMounted) {
+      let keys = this.state.keys;
+      if (e.keyCode === KEY.LEFT || e.keyCode === KEY.A) {
+        keys.left = value;
+        e.preventDefault();
       }
-      e.preventDefault();
+      if (e.keyCode === KEY.RIGHT || e.keyCode === KEY.D) {
+        keys.right = value;
+        e.preventDefault();
+      }
+      if (e.keyCode === KEY.UP || e.keyCode === KEY.W) {
+        keys.up = value;
+        e.preventDefault();
+      }
+      if (e.keyCode === KEY.SPACE) {
+        if (!this.state.inGame) {
+          this.startGame();
+        } else {
+          keys.space = value;
+        }
+        e.preventDefault();
+      }
+      this.setState({
+        keys: keys,
+      });
     }
-    this.setState({
-      keys: keys,
-    });
   }
 
   componentDidMount() {
+    this._isMounted = true;
+
     process.browser &&
       window.addEventListener("keyup", this.handleKeys.bind(this, false));
     process.browser &&
@@ -95,6 +101,7 @@ export class Reacteroids extends Component {
   }
 
   componentWillUnmount() {
+    this._isMounted = false;
     process.browser && window.removeEventListener("keyup", this.handleKeys);
     process.browser && window.removeEventListener("keydown", this.handleKeys);
     process.browser && window.removeEventListener("resize", this.handleResize);
