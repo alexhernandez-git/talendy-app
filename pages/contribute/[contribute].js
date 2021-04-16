@@ -14,10 +14,18 @@ import Peer from "simple-peer";
 import ContributeChat from "components/Pages/Contribute/ContributeChat";
 import ContributeSharedNotes from "components/Pages/Contribute/ContributeSharedNotes";
 import ContributeAsteroids from "components/Pages/Contribute/ContributeAsteroids";
+import { FaDeaf } from "react-icons/fa";
 
 const Audio = (props) => {
   const ref = useRef();
-
+  useEffect(() => {
+    console.log(ref.current);
+    if (props.isDeafen) {
+      ref.current.muted = true;
+    } else {
+      ref.current.muted = false;
+    }
+  }, [props.isDeafen]);
   useEffect(() => {
     props.peer.on("stream", (stream) => {
       ref.current.srcObject = stream;
@@ -41,7 +49,13 @@ const Contribute = () => {
   const [isMicOn, setIsMicOn] = useState(false);
   const handleToggleMic = () => {
     setIsMicOn(!isMicOn);
+    setDeafen(!isDeafen);
+
     myStream.getAudioTracks()[0].enabled = !isMicOn;
+  };
+  const [isDeafen, setDeafen] = useState(false);
+  const handleToggleDeafen = () => {
+    setDeafen(!isDeafen);
   };
 
   useEffect(() => {
@@ -167,7 +181,7 @@ const Contribute = () => {
   return (
     <>
       {peers.map((peer, index) => {
-        return <Audio key={index} peer={peer} />;
+        return <Audio key={index} peer={peer} isDeafen={isDeafen} />;
       })}
       <Layout>
         <div className="fixed bottom-0 w-full z-40 flex items-center justify-center">
@@ -184,7 +198,7 @@ const Contribute = () => {
             {isMicOn ? (
               <button
                 onClick={handleToggleMic}
-                className="inline-flex items-center px-4 py-1 font-medium rounded-3xl text-orange-500 dark:text-gray-100 "
+                className="inline-flex items-center px-4 py-2 font-medium rounded-3xl text-orange-500 dark:text-gray-100 "
               >
                 <IconContext.Provider value={{ size: 25 }}>
                   <MdMic />
@@ -193,18 +207,32 @@ const Contribute = () => {
             ) : (
               <button
                 onClick={handleToggleMic}
-                className="inline-flex items-center px-4 py-1 font-medium rounded-3xl text-red-600 dark:text-red-500"
+                className="inline-flex items-center px-4 py-2 font-medium rounded-3xl text-red-600 dark:text-red-500"
               >
                 <IconContext.Provider value={{ size: 25 }}>
                   <MdMicOff />
                 </IconContext.Provider>
               </button>
             )}
-            {/* <button className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 ">
-              <IconContext.Provider value={{ size: 25 }}>
-                <MdHeadset />
-              </IconContext.Provider>
-            </button> */}
+            {isDeafen ? (
+              <button
+                onClick={handleToggleDeafen}
+                className="inline-flex items-center px-4 py-2 font-medium rounded-3xl text-red-600 dark:text-red-500"
+              >
+                <IconContext.Provider value={{ size: 25 }}>
+                  <MdHeadset />
+                </IconContext.Provider>
+              </button>
+            ) : (
+              <button
+                onClick={handleToggleDeafen}
+                className="inline-flex items-center px-4 py-2 font-medium rounded-3xl text-orange-500 dark:text-gray-100 "
+              >
+                <IconContext.Provider value={{ size: 25 }}>
+                  <MdHeadset />
+                </IconContext.Provider>
+              </button>
+            )}
           </div>
         </div>
         <div className="py-10">
