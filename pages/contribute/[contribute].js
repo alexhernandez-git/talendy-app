@@ -49,13 +49,18 @@ const Contribute = () => {
   const [isMicOn, setIsMicOn] = useState(false);
   const handleToggleMic = () => {
     setIsMicOn(!isMicOn);
-    setDeafen(!isDeafen);
+    if (!isMicOn) {
+      setDeafen(false);
+    }
 
     myStream.getAudioTracks()[0].enabled = !isMicOn;
   };
   const [isDeafen, setDeafen] = useState(false);
   const handleToggleDeafen = () => {
     setDeafen(!isDeafen);
+    if (!isDeafen) {
+      setIsMicOn(false);
+    }
   };
 
   useEffect(() => {
