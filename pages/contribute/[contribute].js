@@ -47,6 +47,9 @@ const Contribute = () => {
   const peersRef = useRef([]);
   const roomID = "room1";
   const [isMicOn, setIsMicOn] = useState(false);
+  useEffect(() => {
+    console.log("peers", peers);
+  }, [peers]);
   const handleToggleMic = () => {
     setIsMicOn(!isMicOn);
     if (!isMicOn) {
@@ -60,6 +63,7 @@ const Contribute = () => {
     setDeafen(!isDeafen);
     if (!isDeafen) {
       setIsMicOn(false);
+      myStream.getAudioTracks()[0].enabled = false;
     }
   };
 
