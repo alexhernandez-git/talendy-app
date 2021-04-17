@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { forgetPassword, login } from "redux/actions/user";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-const Login = ({ loginOpen, loginRef, mobile }) => {
+const Login = ({ loginOpen, loginRef, mobile, handleClose }) => {
   const userReducer = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const [isForgotPasswordOpen, setIsForgotPassowrdOpen] = useState(false);
@@ -41,8 +41,7 @@ const Login = ({ loginOpen, loginRef, mobile }) => {
         .required("Email can't be empty"),
     }),
     onSubmit: async (values, { resetForm }) => {
-      dispatch(forgetPassword(values));
-      resetForm({});
+      dispatch(forgetPassword(values, handleClose, resetForm));
     },
   });
   return (

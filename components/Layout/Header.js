@@ -452,7 +452,11 @@ const Header = ({
                     Sign in
                   </span>
                 </div>
-                <Login loginOpen={loginOpen} loginRef={loginRef} />
+                <Login
+                  loginOpen={loginOpen}
+                  loginRef={loginRef}
+                  handleClose={handleCloseLogin}
+                />
               </div>
 
               <div className="flex-shrink-0 relative ml-3">
@@ -577,6 +581,7 @@ const Header = ({
               <Login
                 loginOpen={loginMobileOpen}
                 loginRef={loginMobileRef}
+                handleClose={handleCloseLoginMobile}
                 mobile
               />
             </div>

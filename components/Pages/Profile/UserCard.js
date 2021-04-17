@@ -1,11 +1,5 @@
 import Link from "next/link";
-import {
-  ACTIVE_POSTS_PROFILE_PAGE,
-  CLOSED_POSTS_PROFILE_PAGE,
-  DONATION_PAGE,
-  PROFILE_PAGE,
-  USER_CONTRIBUTED,
-} from "pages";
+import { DONATION_PAGE } from "pages";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -200,7 +194,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
                       Full name
                     </dt>
                     <dd className="mt-1 text-sm text-gray-900 dark:text-white">
-                      Margot Foster
+                      {user?.first_name} {user?.last_name}
                     </dd>
                   </div>
                   <div className="sm:col-span-1">
@@ -217,11 +211,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
                       About
                     </dt>
                     <dd className="mt-1 text-sm text-gray-900 dark:text-white">
-                      Fugiat ipsum ipsum deserunt culpa aute sint do nostrud
-                      anim incididunt cillum culpa consequat. Excepteur qui
-                      ipsum aliquip consequat sint. Sit id mollit nulla mollit
-                      nostrud in ea officia proident. Irure nostrud pariatur
-                      mollit ad adipisicing reprehenderit deserunt qui eu.
+                      {user?.about ? user.about : "Not about info"}
                     </dd>
                   </div>
                 </dl>

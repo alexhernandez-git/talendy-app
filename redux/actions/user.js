@@ -314,15 +314,20 @@ export const validateChangeEmail = (token, router) => async (
       router.push("/");
     });
 };
-export const forgetPassword = (values) => async (dispatch, getState) => {
+export const forgetPassword = (values, handleClose, resetForm) => async (
+  dispatch,
+  getState
+) => {
   dispatch({ type: FORGET_PASSWORD });
   await axios
     .post(`${process.env.HOST}/api/users/forget_password/`, values)
-    .then((res) => {
-      dispatch({
+    .then(async (res) => {
+      await dispatch({
         type: FORGET_PASSWORD_SUCCESS,
         payload: res.data,
       });
+      await handleClose();
+      await resetForm({});
     })
     .catch((err) => {
       dispatch({
@@ -342,7 +347,7 @@ export const resetPassword = (values, router) => async (dispatch, getState) => {
         payload: res.data,
       });
 
-      router.push("/login");
+      router.push("/");
     })
     .catch((err) => {
       dispatch({
@@ -350,7 +355,7 @@ export const resetPassword = (values, router) => async (dispatch, getState) => {
         payload: { data: err.response?.data, status: err.response?.status },
       });
 
-      router.push("/login");
+      router.push("/");
     });
 };
 
