@@ -90,6 +90,7 @@ import {
   LEAVE_FEEDBACK_SUCCESS,
   LEAVE_FEEDBACK_FAIL,
 } from "../types";
+import { createAlert } from "./alerts";
 
 export const changeTheme = (theme) => async (dispatch, getState) => {
   await dispatch({ type: CHANGE_THEME, payload: theme });
@@ -367,14 +368,15 @@ export const updateUser = (user) => async (dispatch, getState) => {
       user,
       tokenConfig(getState)
     )
-    .then((res) => {
+    .then(async (res) => {
       console.log(res);
-      dispatch({
+      await dispatch({
         type: UPDATE_USER_SUCCESS,
         payload: res.data,
       });
 
-      dispatch(resetUsernameAvailable());
+      await dispatch(resetUsernameAvailable());
+      await dispatch(createAlert("SUCCESS", "User succesfully updated"));
     })
     .catch((err) => {
       dispatch({

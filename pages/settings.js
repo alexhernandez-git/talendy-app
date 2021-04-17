@@ -12,21 +12,35 @@ import Head from "next/head";
 import SettingsLayout from "components/Layout/SettingsLayout";
 import CropperModal from "components/Pages/Settings/CropperModal";
 import { useSelector } from "react-redux";
+import useAuthRequired from "hooks/useAuthRequired";
+import { SETTINGS_PAGE } from "pages";
+import {
+  changeEmail,
+  isEmailAvailable,
+  removeAccount,
+  resetEmailAvailable,
+  resetUsernameAvailable,
+  isUsernameAvailable,
+  updateUser,
+} from "redux/actions/user";
 const settings = () => {
+  const page = SETTINGS_PAGE;
   const router = useRouter();
   const dispatch = useDispatch();
-  const userReducer = useSelector((state) => state.userReducer);
+  const [canRender, userReducer, initialDataFetched] = useAuthRequired(page);
+
   const {
     username_available_error,
     username_available,
     email_available,
     email_available_error,
+    user,
   } = userReducer;
   const profileForm = useFormik({
     enableReinitialize: true,
     initialValues: {
-      username: "user && user.username",
-      about: "user && user.about",
+      username: user && user.username,
+      about: user && user.about,
     },
     validationSchema: Yup.object({
       username: Yup.string().required("Username is required"),
@@ -37,19 +51,19 @@ const settings = () => {
       dispatch(updateUser(values));
     },
   });
-  // React.useEffect(() => {
-  //   if (user) {
-  //     dispatch(resetUsernameAvailable());
-  //     if (profileForm.values.username != user.username) {
-  //       const timeoutId = setTimeout(() => {
-  //         dispatch(
-  //           isUsernameAvailable({ username: profileForm.values.username })
-  //         );
-  //       }, 500);
-  //       return () => clearTimeout(timeoutId);
-  //     }
-  //   }
-  // }, [profileForm.values.username]);
+  React.useEffect(() => {
+    if (user) {
+      dispatch(resetUsernameAvailable());
+      if (profileForm.values.username != user.username) {
+        const timeoutId = setTimeout(() => {
+          dispatch(
+            isUsernameAvailable({ username: profileForm.values.username })
+          );
+        }, 500);
+        return () => clearTimeout(timeoutId);
+      }
+    }
+  }, [profileForm.values.username]);
 
   const [showCropper, setShowCropper] = React.useState(false);
   const [newImage, setNewImage] = React.useState({
@@ -109,21 +123,21 @@ const settings = () => {
       email: Yup.string().email().required("Email is required"),
     }),
     onSubmit: async (values) => {
-      // console.log(valores);
-      // dispatch(changeEmail(values));
+      console.log(valores);
+      dispatch(changeEmail(values));
     },
   });
-  // React.useEffect(() => {
-  //   if (user) {
-  //     dispatch(resetEmailAvailable());
-  //     if (emailForm.values.email != user.email) {
-  //       const timeoutId = setTimeout(() => {
-  //         dispatch(isEmailAvailable({ email: emailForm.values.email }));
-  //       }, 500);
-  //       return () => clearTimeout(timeoutId);
-  //     }
-  //   }
-  // }, [emailForm.values.email]);
+  React.useEffect(() => {
+    if (user) {
+      dispatch(resetEmailAvailable());
+      if (emailForm.values.email != user.email) {
+        const timeoutId = setTimeout(() => {
+          dispatch(isEmailAvailable({ email: emailForm.values.email }));
+        }, 500);
+        return () => clearTimeout(timeoutId);
+      }
+    }
+  }, [emailForm.values.email]);
   // Modal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleModalToggle = () => {
@@ -138,16 +152,14 @@ const settings = () => {
   useOutsideClick(modalRef, () => handleModalClose());
 
   const handleDeleteAccount = () => {
-    // dispatch(removeAccount(router));
+    dispatch(removeAccount(router));
   };
-  const cantRender = true;
-  const user = null;
   return (
     <>
       <Head>
         <title>Account</title>
       </Head>
-      {!cantRender ? (
+      {!canRender ? (
         <div className="flex justify-center items-center h-screen">
           <Spinner />
         </div>
@@ -202,7 +214,7 @@ const settings = () => {
                             (message, i) => (
                               <p
                                 key={i}
-                                className="mt-2 text-sm text-red-600"
+                                className="mt-2 text-sm text-green-600"
                                 id="email-error"
                               >
                                 {message}
@@ -211,10 +223,12 @@ const settings = () => {
                           )}
                         {profileForm.touched.username &&
                         profileForm.errors.username ? (
-                          <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
-                            <p className="font-bold">Error</p>
-                            <p>{profileForm.errors.username}</p>
-                          </div>
+                          <p
+                            className="mt-2 text-sm text-red-600"
+                            id="email-error"
+                          >
+                            {profileForm.errors.username}
+                          </p>
                         ) : null}
                       </div>
                       <div className="col-span-3">
@@ -229,7 +243,7 @@ const settings = () => {
                             id="about"
                             name="about"
                             rows="3"
-                            className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                            className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-lg sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                             onChange={profileForm.handleChange}
                             onBlur={profileForm.handleBlur}
                             value={profileForm.values.about}
@@ -254,8 +268,7 @@ const settings = () => {
                               className="inline-block h-12 w-12 rounded-full"
                               src={
                                 new RegExp(
-                                  process.env.HOST |
-                                    "https://freelanium.s3.amazonaws.com"
+                                  `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
                                 ).test(user.picture)
                                   ? user.picture
                                   : process.env.HOST + user.picture

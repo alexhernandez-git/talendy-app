@@ -112,7 +112,7 @@ const Header = ({
   useOutsideClick(loginMobileRef, () => handleCloseLoginMobile());
 
   const userReducer = useSelector((state) => state.userReducer);
-
+  const { user } = userReducer;
   const handleSignOut = () => {
     router.push("/");
     dispatch(logout());
@@ -362,11 +362,30 @@ const Header = ({
                     aria-haspopup="true"
                   >
                     <span className="sr-only">Open user menu</span>
-                    <img
-                      className="h-8 w-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixqx=9XbzAMvCeF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt=""
-                    />
+
+                    {user && user.picture ? (
+                      <img
+                        className="h-8 w-8 rounded-full"
+                        src={
+                          new RegExp(
+                            `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                          ).test(user.picture)
+                            ? user.picture
+                            : process.env.HOST + user.picture
+                        }
+                        alt=""
+                      ></img>
+                    ) : (
+                      <span className="bg-gray-100 rounded-full overflow-hidden h-8 w-8">
+                        <svg
+                          className="h-full w-full text-gray-300"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                      </span>
+                    )}
                   </button>
                 </div>
                 <Transition
@@ -485,11 +504,29 @@ const Header = ({
           <div className="border-t border-gray-200 pt-4 pb-3">
             <div className="max-w-3xl mx-auto px-4 flex items-center sm:px-6">
               <div className="flex-shrink-0">
-                <img
-                  className="h-10 w-10 rounded-full"
-                  src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixqx=9XbzAMvCeF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                  alt=""
-                />
+                {user && user.picture ? (
+                  <img
+                    className="h-10 w-10 rounded-full"
+                    src={
+                      new RegExp(
+                        `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                      ).test(user.picture)
+                        ? user.picture
+                        : process.env.HOST + user.picture
+                    }
+                    alt=""
+                  ></img>
+                ) : (
+                  <span className="bg-gray-100 rounded-full overflow-hidden h-10 w-10">
+                    <svg
+                      className="h-full w-full text-gray-300"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                  </span>
+                )}
               </div>
               <div className="ml-3">
                 <div className="text-base font-medium text-gray-800 dark:text-gray-100">

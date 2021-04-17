@@ -3,6 +3,7 @@ import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import { useDispatch } from "react-redux";
 import { dataURLtoFile } from "helpers";
+import { updateUserPicture } from "redux/actions/user";
 
 const CropperModal = ({ show, handleClose, newImage }) => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const CropperModal = ({ show, handleClose, newImage }) => {
         cropper.getCroppedCanvas().toDataURL(),
         Math.random().toString(36) + newImage.name
       );
-      // dispatch(updateUserPicture(file));
+      dispatch(updateUserPicture(file));
       handleClose();
     }
   };
@@ -75,7 +76,7 @@ const CropperModal = ({ show, handleClose, newImage }) => {
             <button
               onClick={getCropData}
               type="button"
-              className="w-full inline-flex justify-center rounded-3xl border border-transparent shadow-sm px-4 py-2 bg-gradient-to-r from-teal-500 to-orange-600 hover:from-teal-600 hover:to-orange-700 text-base font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 sm:col-start-2 sm:text-sm"
+              className="w-full inline-flex justify-center rounded-3xl border border-transparent shadow-sm px-4 py-2 bg-gradient-to-r from-orange-500 to-pink-600 hover:to-pink-600 text-base font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 sm:col-start-2 sm:text-sm"
             >
               Save
             </button>
