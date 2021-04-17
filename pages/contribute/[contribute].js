@@ -147,6 +147,9 @@ const Contribute = () => {
           item?.peer.signal(payload.signal);
         });
       });
+    return () => {
+      socketRef.current.disconnect();
+    };
   }, []);
 
   const [modalOpen, setModalOpen] = useState(false);
