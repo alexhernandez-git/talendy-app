@@ -3,7 +3,7 @@ import Message from "components/Pages/Help/Message";
 import Editor from "components/Editor/Editor";
 const ContributeChat = () => {
   return (
-    <section aria-labelledby="notes-title" className=" sticky top-4">
+    <section aria-labelledby="notes-title" className="">
       <div className="bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg sm:overflow-hidden">
         <div className=" ">
           <div className="px-4 py-5 sm:px-6">

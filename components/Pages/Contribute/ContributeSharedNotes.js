@@ -113,7 +113,7 @@ export default function ContributeSharedNotes({
   }, [onKeyUpCounter]);
 
   return (
-    <section aria-labelledby="notes-title" className=" sticky top-4">
+    <section aria-labelledby="notes-title" className="">
       <div className="bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg p-1">
         <SharedToolbar editorTextLength={editorTextLength} />
         <div

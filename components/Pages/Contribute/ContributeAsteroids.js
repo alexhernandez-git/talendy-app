@@ -7,7 +7,7 @@ const ContributeAsteroids = () => {
     setCanLoad(true);
   }, []);
   return (
-    <section aria-labelledby="notes-title" className=" sticky top-4">
+    <section aria-labelledby="notes-title" className="">
       <div className="shadow sm:rounded-lg relative">
         {canLoad && <Reacteroids />}
       </div>

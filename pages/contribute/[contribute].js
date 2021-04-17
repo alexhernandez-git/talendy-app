@@ -244,181 +244,186 @@ const Contribute = () => {
             )}
           </div>
         </div>
+        <section aria-labelledby="profile-overview-title">
+          <div className="bg-white dark:bg-gray-700 shadow ">
+            <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl">
+              <h2 className="sr-only" id="profile-overview-title">
+                Profile Overview
+              </h2>
+              <div className="bg-white dark:bg-gray-700 p-3">
+                <div className="sm:flex sm:items-center sm:justify-between">
+                  <div className="sm:flex sm:space-x-5">
+                    <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
+                      {/* <p className="text-sm font-medium text-gray-600">
+                            Welcome back,
+                          </p> */}
+                      <p className="text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">
+                        What would you have done differently if you ran Jurassic
+                        Park?
+                      </p>
+                      <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                        Created at{" "}
+                        <time dateTime="2020-08-25">August 25, 2020</time>
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-5 flex justify-center sm:mt-0 flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
+                    <button
+                      onClick={handleOpenModal}
+                      type="button"
+                      className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 hover:text-gray-500 dark:hover:text-white dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 mr-2"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      Info
+                    </button>
+                    <Link href="/finalize/123">
+                      <button
+                        type="button"
+                        className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm  text-white hover:text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                      >
+                        Finalize
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="border-t border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800  p-3">
+              <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl flex justify-between items-center ">
+                <div className="  flex justify-center sm:justify-start sm:mt-0 flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
+                  <button
+                    onClick={handleChangeFeature.bind(this, "CHAT")}
+                    type="button"
+                    className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Chat
+                  </button>
+                  <button
+                    onClick={handleChangeFeature.bind(this, "SHAREDNOTES")}
+                    type="button"
+                    className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Shared notes
+                  </button>
+                </div>
+
+                <div className="relative inline-block text-left">
+                  <div>
+                    <button
+                      type="button"
+                      onMouseDown={handleOpenMoreOptions}
+                      className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                      id="menu-button"
+                      aria-expanded="true"
+                      aria-haspopup="true"
+                    >
+                      More
+                      <svg
+                        className="-mr-1 ml-2 h-5 w-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  <Transition
+                    show={moreOptionsOpen}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-out duration-100"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    {(ref) => (
+                      <div ref={moreOptionsRef}>
+                        <ul
+                          ref={ref}
+                          className="origin-top-right absolute right-0 mt-2 w-72 z-30 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                          tabIndex="-1"
+                          role="listbox"
+                          aria-labelledby="listbox-label"
+                          aria-activedescendant="listbox-option-0"
+                        >
+                          <li
+                            className="text-gray-900 dark:text-white cursor-pointer select-none relative p-4 text-sm hover:opacity-70"
+                            id="listbox-option-0"
+                            role="option"
+                          >
+                            <button
+                              onClick={handleChangeFeature.bind(
+                                this,
+                                "ASTEROIDS"
+                              )}
+                              className="flex flex-col"
+                            >
+                              <div className="flex justify-between">
+                                <p className="font-normal">Asteroids</p>
+                              </div>
+                              <p className="text-gray-500 mt-2">
+                                Psst.. waiting for someone? Let's shoot some
+                                asteroids in the meantime. This game is only
+                                loaded for you.
+                              </p>
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    )}
+                  </Transition>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <div className="py-10">
           <div className="max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
             <div className="space-y-6 lg:col-start-1 lg:col-span-2">
-              <section aria-labelledby="profile-overview-title">
-                <div className="rounded-lg bg-white dark:bg-gray-700 shadow">
-                  <h2 className="sr-only" id="profile-overview-title">
-                    Profile Overview
-                  </h2>
-                  <div className="bg-white dark:bg-gray-700 p-6 rounded-t-lg">
-                    <div className="sm:flex sm:items-center sm:justify-between">
-                      <div className="sm:flex sm:space-x-5">
-                        <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
-                          {/* <p className="text-sm font-medium text-gray-600">
-                            Welcome back,
-                          </p> */}
-                          <p className="text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">
-                            What would you have done differently if you ran
-                            Jurassic Park?
-                          </p>
-                          <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                            Created at{" "}
-                            <time dateTime="2020-08-25">August 25, 2020</time>
-                          </p>
-                        </div>
-                      </div>
-                      <div className="mt-5 flex justify-center sm:mt-0 flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
-                        <button
-                          onClick={handleOpenModal}
-                          type="button"
-                          className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 hover:text-gray-500 dark:hover:text-white dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5 mr-2"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                          </svg>
-                          Info
-                        </button>
-                        <Link href="/finalize/123">
-                          <button
-                            type="button"
-                            className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm  text-white hover:text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
-                          >
-                            Finalize
-                          </button>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="border-t rounded-b-lg border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 flex justify-between items-center  p-3">
-                    <div className="  flex justify-center sm:justify-start sm:mt-0 flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
-                      <button
-                        onClick={handleChangeFeature.bind(this, "CHAT")}
-                        type="button"
-                        className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5 mr-2"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        Chat
-                      </button>
-                      <button
-                        onClick={handleChangeFeature.bind(this, "SHAREDNOTES")}
-                        type="button"
-                        className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5 mr-2"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        Shared notes
-                      </button>
-                    </div>
-
-                    <div className="relative inline-block text-left">
-                      <div>
-                        <button
-                          type="button"
-                          onMouseDown={handleOpenMoreOptions}
-                          className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                          id="menu-button"
-                          aria-expanded="true"
-                          aria-haspopup="true"
-                        >
-                          More
-                          <svg
-                            className="-mr-1 ml-2 h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </button>
-                      </div>
-                      <Transition
-                        show={moreOptionsOpen}
-                        enter="transition ease-out duration-100"
-                        enterFrom="transform opacity-0 scale-95"
-                        enterTo="transform opacity-100 scale-100"
-                        leave="transition ease-out duration-100"
-                        leaveFrom="transform opacity-100 scale-100"
-                        leaveTo="transform opacity-0 scale-95"
-                      >
-                        {(ref) => (
-                          <div ref={moreOptionsRef}>
-                            <ul
-                              ref={ref}
-                              className="origin-top-right absolute right-0 mt-2 w-72 z-30 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none"
-                              tabIndex="-1"
-                              role="listbox"
-                              aria-labelledby="listbox-label"
-                              aria-activedescendant="listbox-option-0"
-                            >
-                              <li
-                                className="text-gray-900 dark:text-white cursor-pointer select-none relative p-4 text-sm hover:opacity-70"
-                                id="listbox-option-0"
-                                role="option"
-                              >
-                                <button
-                                  onClick={handleChangeFeature.bind(
-                                    this,
-                                    "ASTEROIDS"
-                                  )}
-                                  className="flex flex-col"
-                                >
-                                  <div className="flex justify-between">
-                                    <p className="font-normal">Asteroids</p>
-                                  </div>
-                                  <p className="text-gray-500 mt-2">
-                                    Psst.. waiting for someone? Let's shoot some
-                                    asteroids in the meantime. This game is only
-                                    loaded for you.
-                                  </p>
-                                </button>
-                              </li>
-                            </ul>
-                          </div>
-                        )}
-                      </Transition>
-                    </div>
-                  </div>
-                </div>
-              </section>
               {feature.toUpperCase() === "CHAT" && <ContributeChat />}
               {feature.toUpperCase() === "SHAREDNOTES" && (
                 <ContributeSharedNotes />
@@ -428,9 +433,9 @@ const Contribute = () => {
 
             <section
               aria-labelledby="timeline-title"
-              className="lg:col-start-3 lg:col-span-1"
+              className="lg:col-start-3 lg:col-span-1 "
             >
-              <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6  dark:bg-gray-700">
+              <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6  dark:bg-gray-700  sticky top-4">
                 <h2
                   id="timeline-title"
                   className="text-lg font-medium text-gray-900 dark:text-white"
@@ -439,24 +444,8 @@ const Contribute = () => {
                 </h2>
 
                 <div className="mt-3 flow-root">
-                  <ul className=" divide-y divide-gray-200 dark:divide-gray-400">
+                  <ul className=" divide-y divide-gray-200 dark:divide-gray-400 ">
                     <Member admin />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
                     <Member />
                     <Member />
                     <Member />
