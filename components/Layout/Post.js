@@ -8,7 +8,7 @@ import {
   FOLLOWED_USERS_POSTS_PAGE,
   HOME_PAGE,
   MOST_KARMA_POSTS_PAGE,
-  MY_POSTS_PAGE,
+  MY_ISSUES_PAGE,
   PROFILE_PAGE,
   SEARCH_POSTS_PAGE,
 } from "pages";
@@ -326,13 +326,13 @@ const Post = ({ page, image }) => {
             Solved
           </span>
         </div>
-        <div className="mt-6 flex justify-between space-x-8">
+        <div className="mt-6 sm:flex justify-between sm:space-x-8">
           <input
             type="text"
             name="title"
             onClick={(e) => e.stopPropagation()}
-            id="title"
-            className="block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+            id="post-title"
+            className="block mb-2 sm:mb-0 w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
             placeholder="Message"
             aria-describedby="title-description"
             value=""
@@ -340,7 +340,7 @@ const Post = ({ page, image }) => {
           <button
             type="button"
             onClick={handleRequestToContribute}
-            className="w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
+            className="w-full sm:w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
           >
             Request to contribute
           </button>

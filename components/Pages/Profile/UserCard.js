@@ -12,10 +12,11 @@ import { useSelector } from "react-redux";
 import StarRatings from "react-star-ratings";
 import { createAlert } from "redux/actions/alerts";
 
-const UserCard = ({ mobile, page, profile }) => {
+const UserCard = ({ mobile, page, profile, user }) => {
   const dispatch = useDispatch();
 
   const userReducer = useSelector((state) => state.userReducer);
+
   const handleFollowUser = () => {
     if (!userReducer.is_authenticated) {
       dispatch(createAlert("ERROR", "You are not authenticated"));
@@ -26,6 +27,7 @@ const UserCard = ({ mobile, page, profile }) => {
       dispatch(createAlert("ERROR", "You are not authenticated"));
     }
   };
+
   return (
     <aside
       className={`lg:col-span-4  mb-4 lg:mb-0 ${
@@ -72,7 +74,9 @@ const UserCard = ({ mobile, page, profile }) => {
               <div className="space-y-2">
                 <div className="text-lg leading-6 font-medium text-center">
                   <Link href={profile ? "/profile/issues" : "/user/123"}>
-                    <h3 className="mb-3 cursor-pointer">Whitney Francis</h3>
+                    <h3 className="mb-3 cursor-pointer">
+                      {user?.first_name} {user?.last_name}
+                    </h3>
                   </Link>
                   <div className=" flex justify-center items-center">
                     <span className="bg-gradient-to-r from-orange-500 to-pink-500 text-white text-sm flex justify-center items-center py-1 px-4 rounded-xl">
@@ -90,7 +94,7 @@ const UserCard = ({ mobile, page, profile }) => {
                           d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                         />
                       </svg>
-                      300 Karma
+                      {user?.karma_amount} Karma
                     </span>
                   </div>
                   <div className="mt-4 flex justify-center">

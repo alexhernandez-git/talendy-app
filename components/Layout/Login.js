@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { Transition } from "@tailwindui/react";
-
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { forgetPassword, login } from "redux/actions/user";
+import { useSelector } from "react-redux";
 const Login = ({ loginOpen, loginRef, mobile }) => {
+  const userReducer = useSelector((state) => state.userReducer);
+
   const [isForgotPasswordOpen, setIsForgotPassowrdOpen] = useState(false);
   const handleOpenForgotPassword = () => {
     setIsForgotPassowrdOpen(true);
@@ -9,6 +14,36 @@ const Login = ({ loginOpen, loginRef, mobile }) => {
   const handleCloseForgotPassword = () => {
     setIsForgotPassowrdOpen(false);
   };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Email is not valid")
+        .required("Email can't be empty"),
+      password: Yup.string().required("Password is required"),
+    }),
+    onSubmit: async (values) => {
+      // console.log(valores);
+      dispatch(login(values));
+    },
+  });
+  const resetPasswordForm = useFormik({
+    initialValues: {
+      email: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Email is not valid")
+        .required("Email can't be empty"),
+    }),
+    onSubmit: async (values, { resetForm }) => {
+      dispatch(forgetPassword(values));
+      resetForm({});
+    },
+  });
   return (
     <Transition
       show={loginOpen}
@@ -54,17 +89,66 @@ const Login = ({ loginOpen, loginRef, mobile }) => {
                         Back
                       </span>
                     </div>
+                    {userReducer.forget_password_error &&
+                      userReducer.forget_password_error?.data
+                        ?.non_field_errors &&
+                      userReducer.forget_password_error?.data?.non_field_errors.map(
+                        (message, i) => (
+                          <div
+                            key={i}
+                            className="mb-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4"
+                          >
+                            <p>{message}</p>
+                          </div>
+                        )
+                      )}
                     <div>
-                      <div className="mt-1">
+                      <div className="mt-1 relative">
                         <input
                           id="email"
                           name="email"
                           type="text"
-                          autocomplete="email"
+                          autoComplete="email"
+                          onChange={resetPasswordForm.handleChange}
+                          onBlur={resetPasswordForm.handleBlur}
+                          value={resetPasswordForm.values.email}
                           placeholder="Email"
-                          className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                          className={`appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm focus:text-gray-900 dark:focus:text-white rounded-3xl shadow-sm py-2 px-4 focus:outline-none sm:text-sm
+                           ${
+                             resetPasswordForm.touched.email &&
+                             resetPasswordForm.errors.email
+                               ? "pr-10 border-red-300 text-red-600  placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
+                               : " text-sm placeholder-gray-500  dark:placeholder-gray-300 dark:text-white  focus:placeholder-gray-400  focus:ring-orange-500  focus:border-orange-500"
+                           }`}
                         />
+                        {resetPasswordForm.touched.email &&
+                          resetPasswordForm.errors.email && (
+                            <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                              <svg
+                                className="h-5 w-5 text-red-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </div>
+                          )}
                       </div>
+                      {resetPasswordForm.touched.email &&
+                        resetPasswordForm.errors.email && (
+                          <p
+                            className="mt-2 text-sm text-red-600"
+                            id="email-error"
+                          >
+                            {resetPasswordForm.errors.email}
+                          </p>
+                        )}
                     </div>
 
                     <div>
@@ -78,6 +162,23 @@ const Login = ({ loginOpen, loginRef, mobile }) => {
                   </form>
                 ) : (
                   <form className="space-y-6" action="#" method="POST">
+                    {userReducer.error &&
+                      userReducer.error.data.non_field_errors &&
+                      userReducer.error.data.non_field_errors.map(
+                        (message, i) => (
+                          <div
+                            key={i}
+                            className="mb-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4"
+                          >
+                            <p>{message}</p>
+                          </div>
+                        )
+                      )}
+                    {userReducer.error && userReducer.error.data.detail && (
+                      <div className="mb-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+                        <p>Invalid credentials</p>
+                      </div>
+                    )}
                     <div>
                       {/* <label
                                   htmlFor="email"
@@ -85,16 +186,49 @@ const Login = ({ loginOpen, loginRef, mobile }) => {
                                   >
                                   Email address
                                 </label> */}
-                      <div className="mt-1">
+                      <div className="mt-1 relative">
                         <input
                           id="email"
                           name="email"
                           type="text"
-                          autocomplete="email"
+                          autoComplete="email"
                           placeholder="Email"
-                          className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                          className={`appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm focus:text-gray-900 dark:focus:text-white rounded-3xl shadow-sm py-2 px-4 focus:outline-none sm:text-sm
+                           ${
+                             formik.touched.email && formik.errors.email
+                               ? "pr-10 border-red-300 text-red-600  placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
+                               : " text-sm placeholder-gray-500  dark:placeholder-gray-300 dark:text-white  focus:placeholder-gray-400  focus:ring-orange-500  focus:border-orange-500"
+                           }`}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          value={formik.values.email}
                         />
+                        {formik.touched.email && formik.errors.email && (
+                          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <svg
+                              className="h-5 w-5 text-red-500"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                        )}
                       </div>
+                      {formik.touched.email && formik.errors.email && (
+                        <p
+                          className="mt-2 text-sm text-red-600"
+                          id="email-error"
+                        >
+                          {formik.errors.email}
+                        </p>
+                      )}
                     </div>
 
                     <div>
@@ -104,16 +238,50 @@ const Login = ({ loginOpen, loginRef, mobile }) => {
                                   >
                                   Password
                                 </label> */}
-                      <div className="mt-1">
+                      <div className="mt-1 relative">
                         <input
                           id="password"
                           name="password"
                           type="password"
-                          autocomplete="current-password"
+                          autoComplete="current-password"
                           placeholder="Password"
-                          className="appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                          className={`appearance-none block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm focus:text-gray-900 dark:focus:text-white rounded-3xl shadow-sm py-2 px-4 focus:outline-none sm:text-sm
+                           ${
+                             formik.touched.password && formik.errors.password
+                               ? "pr-10 border-red-300 text-red-600  placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
+                               : " text-sm placeholder-gray-500  dark:placeholder-gray-300 dark:text-white  focus:placeholder-gray-400  focus:ring-orange-500  focus:border-orange-500"
+                           }`}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          value={formik.values.password}
                         />
+
+                        {formik.touched.password && formik.errors.password && (
+                          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <svg
+                              className="h-5 w-5 text-red-500"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                        )}
                       </div>
+                      {formik.touched.password && formik.errors.password && (
+                        <p
+                          className="mt-2 text-sm text-red-600"
+                          id="password-error"
+                        >
+                          {formik.errors.password}
+                        </p>
+                      )}
                     </div>
 
                     <div className="flex items-center justify-between">

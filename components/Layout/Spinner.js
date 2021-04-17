@@ -6,7 +6,7 @@ const Spinner = () => {
       <style css>
         {`
           .loader {
-            border-top-color: #3498db;
+            border-top-color: #f97316;
             -webkit-animation: spinner 1.5s linear infinite;
             animation: spinner 1.5s linear infinite;
           }

@@ -217,7 +217,10 @@ export const resetCouponAvailable = () => async (dispatch, getState) => {
   dispatch({ type: RESET_COUPON_AVAILABLE });
 };
 
-export const register = (data) => async (dispatch, getState) => {
+export const register = (data, handleClose, resetForm) => async (
+  dispatch,
+  getState
+) => {
   await dispatch({
     type: REGISTER,
   });
@@ -228,6 +231,8 @@ export const register = (data) => async (dispatch, getState) => {
         type: REGISTER_SUCCESS,
         payload: res.data,
       });
+      await handleClose();
+      await resetForm();
     })
     .catch(async (err) => {
       await dispatch({
@@ -631,7 +636,7 @@ export const addBillingInformation = (values, payment_method) => async (
     });
 };
 
-export const loadCurrency = () => async (dispatch, getState) => {
+export const loadCurrency = () => async (dispatch) => {
   // User Loading
   const currency = localStorage.getItem("currency");
   if (currency) return;
