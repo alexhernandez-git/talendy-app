@@ -248,12 +248,12 @@ const Contribute = () => {
           </div>
         </div>
         <section aria-labelledby="profile-overview-title">
-          <div className="bg-white dark:bg-gray-700 shadow ">
+          <div className="bg-white dark:bg-gray-700 shadow border-t border-gray-200 dark:border-gray-600">
             <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl">
               <h2 className="sr-only" id="profile-overview-title">
                 Profile Overview
               </h2>
-              <div className="bg-white dark:bg-gray-700 p-3">
+              <div className="bg-white dark:bg-gray-700  p-3 sm:px-0">
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="sm:flex sm:space-x-5">
                     <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
@@ -407,7 +407,7 @@ const Contribute = () => {
                               <div className="flex justify-between">
                                 <p className="font-normal">Asteroids</p>
                               </div>
-                              <p className="text-gray-500 mt-2">
+                              <p className="text-gray-500 text-left mt-2">
                                 Psst.. waiting for someone? Let's shoot some
                                 asteroids in the meantime. This game is only
                                 loaded for you.

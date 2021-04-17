@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { Transition } from "@tailwindui/react";
 
-import { useRouter } from "next/router";
-import Editor from "components/Editor/Editor";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
@@ -12,14 +10,8 @@ import {
 } from "redux/actions/user";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-const RegisterModal = ({
-  registerOpen,
-  registerRef,
-  isEdit,
-  handleCloseRegister,
-}) => {
+const RegisterModal = ({ registerOpen, registerRef, handleCloseRegister }) => {
   const dispatch = useDispatch();
-  const router = useRouter();
   const userReducer = useSelector((state) => state.userReducer);
 
   const { email_available_error } = userReducer;
@@ -74,16 +66,6 @@ const RegisterModal = ({
           aria-modal="true"
         >
           <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            {/* <!--
-      Background overlay, show/hide based on modal state.
-
-      Entering: "ease-out duration-300"
-        From: "opacity-0"
-        To: "opacity-100"
-      Leaving: "ease-in duration-200"
-        From: "opacity-100"
-        To: "opacity-0"
-    --> */}
             <Transition
               show={registerOpen}
               enter="ease-out duration-300"
