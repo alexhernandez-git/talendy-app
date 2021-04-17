@@ -9,12 +9,15 @@ import { useFormik } from "formik";
 import { HOME_PAGE, SEARCH_USERS_PAGE } from "pages";
 import Login from "./Login";
 import { useSelector } from "react-redux";
+import { logout } from "redux/actions/user";
+import { useDispatch } from "react-redux";
 const Header = ({
   handleToggleMessages,
   handleOpenModal,
   page,
   handleToggleRegister,
 }) => {
+  const dispatch = useDispatch();
   const [menuOpen, setMenuOpen] = useState(false);
   const handleOpenMenu = () => {
     setMenuOpen(true);
@@ -109,6 +112,11 @@ const Header = ({
   useOutsideClick(loginMobileRef, () => handleCloseLoginMobile());
 
   const userReducer = useSelector((state) => state.userReducer);
+
+  const handleSignOut = () => {
+    router.push("/");
+    dispatch(logout());
+  };
   return (
     <header className="bg-white dark:bg-gray-700 shadow-sm lg:static lg:overflow-y-visible">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -408,13 +416,13 @@ const Header = ({
                           </span>
                         </Link>
 
-                        <a
-                          href="#"
-                          className="block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
+                        <button
+                          onClick={handleSignOut}
+                          className="w-full text-left block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
                           role="menuitem"
                         >
                           Sign out
-                        </a>
+                        </button>
                         <div className="block py-2 px-4 mt-1">
                           <ToggleTheme />
                         </div>
@@ -542,14 +550,17 @@ const Header = ({
                   Your Profile
                 </span>
               </Link>
-              <span className="cursor-pointer block rounded-3xl py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover-text-gray-300">
-                Settings
-              </span>
               <Link href="/settings" role="menuitem">
                 <span className="cursor-pointer block rounded-3xl py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover-text-gray-300">
-                  Sign out
+                  Settings
                 </span>
               </Link>
+              <button
+                onClick={handleSignOut}
+                className="w-full text-left cursor-pointer block rounded-3xl py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover-text-gray-300"
+              >
+                Sign out
+              </button>
             </div>
           </div>
         ) : (

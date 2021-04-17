@@ -4,9 +4,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { forgetPassword, login } from "redux/actions/user";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 const Login = ({ loginOpen, loginRef, mobile }) => {
   const userReducer = useSelector((state) => state.userReducer);
-
+  const dispatch = useDispatch();
   const [isForgotPasswordOpen, setIsForgotPassowrdOpen] = useState(false);
   const handleOpenForgotPassword = () => {
     setIsForgotPassowrdOpen(true);
@@ -68,7 +69,11 @@ const Login = ({ loginOpen, loginRef, mobile }) => {
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
               <div className="bg-white dark:bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
                 {isForgotPasswordOpen ? (
-                  <form className="space-y-6" action="#" method="POST">
+                  <form
+                    className="space-y-6"
+                    onSubmit={resetPasswordForm.handleSubmit}
+                    method="POST"
+                  >
                     <div>
                       <span
                         className="text-gray-500 dark:text-gray-100 text-sm flex items-center cursor-pointer"
@@ -161,7 +166,11 @@ const Login = ({ loginOpen, loginRef, mobile }) => {
                     </div>
                   </form>
                 ) : (
-                  <form className="space-y-6" action="#" method="POST">
+                  <form
+                    className="space-y-6"
+                    onSubmit={formik.handleSubmit}
+                    method="POST"
+                  >
                     {userReducer.error &&
                       userReducer.error.data.non_field_errors &&
                       userReducer.error.data.non_field_errors.map(
