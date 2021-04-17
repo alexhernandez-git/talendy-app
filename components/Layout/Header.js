@@ -465,7 +465,7 @@ const Header = ({
       <nav
         className={`${
           mobileMenuOpen ? "block" : "hidden"
-        } lg:hidden absolute w-full bg-white dark:bg-gray-700 z-50`}
+        } lg:hidden absolute w-full bg-white dark:bg-gray-700 z-30`}
         aria-label="Global"
         ref={mobileMenuRef}
       >
@@ -569,8 +569,7 @@ const Header = ({
                 mobile
               />
             </div>
-
-            <div className="flex-shrink-0 relative">
+            <div className="flex-shrink-0 relative mb-3">
               <div>
                 <span
                   onMouseDown={handleToggleRegister}
@@ -579,6 +578,9 @@ const Header = ({
                   Register
                 </span>
               </div>
+            </div>{" "}
+            <div className="flex-shrink-0 relative flex justify-center w-full">
+              <ToggleTheme />
             </div>
           </div>
         )}

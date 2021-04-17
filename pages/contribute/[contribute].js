@@ -51,10 +51,10 @@ const Contribute = () => {
     console.log("peers", peers);
   }, [peers]);
   const handleToggleMic = () => {
-    setIsMicOn(!isMicOn);
     if (!isMicOn) {
       setDeafen(false);
     }
+    setIsMicOn(!isMicOn);
 
     myStream.getAudioTracks()[0].enabled = !isMicOn;
   };
