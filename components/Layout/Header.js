@@ -338,7 +338,7 @@ const Header = ({
                             </ul>
                           </div>
                           <div className="p-4">
-                            <Link href="/notifications">
+                            <Link href="/profile/notifications">
                               <span className="cursor-pointer w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl  text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
                                 See all
                               </span>
