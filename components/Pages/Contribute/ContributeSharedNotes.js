@@ -2,11 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import SharedToolbar from "components/Editor/SharedToolbar";
 import { io } from "socket.io-client";
 
-export default function ContributeSharedNotes({
-  chat,
-  postForm,
-  solveIssueForm,
-}) {
+export default function ContributeSharedNotes({ socketRef, roomID }) {
   function setEndOfContenteditable(contentEditableElement) {
     var range, selection;
     if (document.createRange) {
@@ -49,36 +45,15 @@ export default function ContributeSharedNotes({
     }
   };
 
-  var text = {
-    text: "",
-  };
-  const socketRef = useRef(null);
   const [editorTextLength, setEditorTextLength] = useState(0);
   const [editorText, setEditorText] = useState(false);
   useEffect(() => {
     var target = document.querySelector("#editor");
 
-    socketRef.current = io("http://localhost:5000");
-    socketRef.current.on("connect", () => {
-      console.log("connected!!!!!!!!!!");
-    });
-    socketRef.current.on("connect_error", (err) => {
-      console.log(`connect_error due to ${err.message}`);
-    });
-
-    socketRef.current.emit("create", "room1");
-
-    console.log(socketRef.current);
-
     const handleRecievedText = (data) => {
       console.log("data recieved", data);
       if (data) {
-        if (!data.text) {
-          data.text = "";
-        }
-        text.text = data.text;
-
-        target.innerHTML = text.text;
+        target.innerHTML = data;
         setEndOfContenteditable(target);
 
         setEditorText(target.innerHTML);
@@ -87,10 +62,9 @@ export default function ContributeSharedNotes({
     };
     socketRef.current.on("text", handleRecievedText);
 
-    return () => {
-      socketRef.current.disconnect();
-    };
+    return () => {};
   }, []);
+
   const [onKeyUpCounter, setOnkeyUpCounter] = useState(false);
   const handleOnKeyUp = () => {
     setOnkeyUpCounter(!onKeyUpCounter);
@@ -107,7 +81,9 @@ export default function ContributeSharedNotes({
   };
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      socketRef.current.emit("text", editorText);
+      const payload = { text: editorText, roomID: roomID };
+      console.log(payload);
+      socketRef.current.emit("text", payload);
     }, 1000);
     return () => clearTimeout(timeoutId);
   }, [onKeyUpCounter]);

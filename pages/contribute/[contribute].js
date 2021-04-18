@@ -47,6 +47,7 @@ const Contribute = () => {
   const peersRef = useRef([]);
   const roomID = "room1";
   const [isMicOn, setIsMicOn] = useState(false);
+
   useEffect(() => {
     console.log("peers", peers);
   }, [peers]);
@@ -75,6 +76,8 @@ const Contribute = () => {
     socketRef.current.on("connect_error", (err) => {
       console.log(`connect_error due to ${err.message}`);
     });
+
+    socketRef.current.emit("create", roomID);
 
     function createPeer(userToSignal, callerID, stream) {
       const peer = new Peer({
@@ -149,6 +152,10 @@ const Contribute = () => {
       });
     return () => {
       socketRef.current.disconnect();
+      console.log(myStream);
+      // myStream.getTracks().forEach(function (track) {
+      //   track.stop();
+      // });
     };
   }, []);
 
@@ -429,7 +436,7 @@ const Contribute = () => {
             <div className="space-y-6 lg:col-start-1 lg:col-span-2">
               {feature.toUpperCase() === "CHAT" && <ContributeChat />}
               {feature.toUpperCase() === "SHAREDNOTES" && (
-                <ContributeSharedNotes />
+                <ContributeSharedNotes socketRef={socketRef} roomID={roomID} />
               )}
               {feature.toUpperCase() === "ASTEROIDS" && <ContributeAsteroids />}
             </div>
