@@ -254,10 +254,11 @@ export const sendVerificationEmail = () => async (dispatch, getState) => {
       `${process.env.HOST}/api/users/send_verification_email/`,
       tokenConfig(getState)
     )
-    .then((res) => {
-      dispatch({
+    .then(async (res) => {
+      await dispatch({
         type: SEND_VERIFICATION_EMAIL_SUCCESS,
       });
+      await dispatch(createAlert("SUCCESS", "Validation email sent"));
     })
     .catch((err) => {
       dispatch({
@@ -272,12 +273,13 @@ export const verifyAccount = (token, router) => async (dispatch, getState) => {
   console.log(token);
   await axios
     .post(`${process.env.HOST}/api/users/verify/`, { token: token })
-    .then((res) => {
-      dispatch({
+    .then(async (res) => {
+      await dispatch({
         type: VERIFY_ACCOUNT_SUCCESS,
       });
+      await dispatch(createAlert("SUCCESS", "Account succesfully validated"));
 
-      router.push("/");
+      await router.push("/");
     })
     .catch((err) => {
       dispatch({
@@ -453,12 +455,13 @@ export const changeEmail = (data) => async (dispatch, getState) => {
       data,
       tokenConfig(getState)
     )
-    .then((res) => {
+    .then(async (res) => {
       console.log(res.data);
 
-      dispatch({
+      await dispatch({
         type: CHANGE_EMAIL_SUCCESS,
       });
+      await dispatch(createAlert("SUCCESS", "Email succesfully updated"));
     })
     .catch((err) => {
       dispatch({

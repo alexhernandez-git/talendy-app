@@ -22,6 +22,7 @@ import {
   resetUsernameAvailable,
   isUsernameAvailable,
   updateUser,
+  sendVerificationEmail,
 } from "redux/actions/user";
 const settings = () => {
   const page = SETTINGS_PAGE;
@@ -98,10 +99,10 @@ const settings = () => {
   const personalInfoForm = useFormik({
     enableReinitialize: true,
     initialValues: {
-      first_name: "",
-      last_name: "",
-      country: "",
-      currency: "",
+      first_name: user && user.first_name,
+      last_name: user && user.last_name,
+      country: user && user.country,
+      currency: user && user.currency,
     },
     validationSchema: Yup.object({
       first_name: Yup.string().max(150).nullable(),
@@ -110,20 +111,20 @@ const settings = () => {
       currency: Yup.string().max(3).nullable(),
     }),
     onSubmit: async (values) => {
-      // console.log(valores);
-      // dispatch(updateUser(values));
+      console.log(values);
+      dispatch(updateUser(values));
     },
   });
   const emailForm = useFormik({
     enableReinitialize: true,
     initialValues: {
-      email: "",
+      email: user && user.email,
     },
     validationSchema: Yup.object({
       email: Yup.string().email().required("Email is required"),
     }),
     onSubmit: async (values) => {
-      console.log(valores);
+      console.log(values);
       dispatch(changeEmail(values));
     },
   });
@@ -154,6 +155,9 @@ const settings = () => {
   const handleDeleteAccount = () => {
     dispatch(removeAccount(router));
   };
+  const handleSendVerificationEmail = () => {
+    dispatch(sendVerificationEmail());
+  };
   return (
     <>
       <Head>
@@ -171,6 +175,39 @@ const settings = () => {
               <form onSubmit={profileForm.handleSubmit}>
                 <div className="shadow sm:rounded-3xl sm:overflow-hidden">
                   <div className="bg-white dark:bg-gray-700 py-6 px-4 space-y-6 sm:p-6">
+                    {!user?.is_verified && (
+                      <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 ">
+                        <div className="flex">
+                          <div className="flex-shrink-0">
+                            <svg
+                              className="h-5 w-5 text-yellow-400"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          <div className="ml-3">
+                            <p className="text-sm text-yellow-700">
+                              Account not validated.{" "}
+                              <span
+                                onClick={handleSendVerificationEmail}
+                                className="cursor-pointer font-medium underline text-yellow-700 hover:text-yellow-600"
+                              >
+                                Resend validation email.
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                     <div>
                       <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
                         Profile
@@ -489,10 +526,12 @@ const settings = () => {
                         />
 
                         {emailForm.touched.email && emailForm.errors.email ? (
-                          <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
-                            <p className="font-bold">Error</p>
-                            <p>{emailForm.errors.email}</p>
-                          </div>
+                          <p
+                            className="mt-2 text-sm text-red-600"
+                            id="email-error"
+                          >
+                            {emailForm.errors.email}
+                          </p>
                         ) : (
                           <>
                             {email_available && (

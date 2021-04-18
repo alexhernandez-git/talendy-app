@@ -79,7 +79,7 @@ const PaypalConnectModal = ({
                           className={
                             formik.touched.email && formik.errors.email
                               ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-3xl dark:bg-gray-600"
-                              : "shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-3xl dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                              : "shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-3xl dark:bg-gray-600 dark:text-white dark:placeholder-gray-300"
                           }
                           placeholder="johndoe@gmail.com"
                           aria-describedby="email-description"
@@ -133,7 +133,7 @@ const PaypalConnectModal = ({
                             formik.touched.email_confirmation &&
                             formik.errors.email_confirmation
                               ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-3xl dark:bg-gray-600"
-                              : "shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-3xl dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                              : "shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-3xl dark:bg-gray-600 dark:text-white dark:placeholder-gray-300"
                           }
                           placeholder="johndoe@gmail.com"
                           aria-describedby="email_confirmation-description"
