@@ -4,9 +4,13 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import Head from "next/head";
 import { useSelector } from "react-redux";
-import Spinner from "components/Layout/Spinner";
 import SettingsLayout from "components/Layout/SettingsLayout";
+import { changePassword, resetChangePasswordErrors } from "redux/actions/user";
+import useAuthRequired from "hooks/useAuthRequired";
+import Spinner from "components/Layout/Spinner";
 const security = () => {
+  const [canRender, authReducer] = useAuthRequired();
+
   const userReducer = useSelector((state) => state.userReducer);
   const { user } = userReducer;
   const dispatch = useDispatch();
@@ -29,18 +33,18 @@ const security = () => {
         .oneOf([Yup.ref("new_password"), null], "Passwords must match"),
     }),
     onSubmit: async (values, { resetForm }) => {
-      // console.log(valores);
-      resetForm({});
+      dispatch(changePassword(values, resetForm));
     },
   });
-  useEffect(() => {}, [changePasswordForm.values.password]);
-  const cantRender = true;
+  useEffect(() => {
+    dispatch(resetChangePasswordErrors());
+  }, [changePasswordForm.values.password]);
   return (
     <>
       <Head>
         <title>Security</title>
       </Head>
-      {!cantRender ? (
+      {!canRender ? (
         <div className="flex justify-center items-center h-screen">
           <Spinner />
         </div>
@@ -80,10 +84,9 @@ const security = () => {
                         />
                         {changePasswordForm.touched.password &&
                         changePasswordForm.errors.password ? (
-                          <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
-                            <p className="font-bold">Error</p>
-                            <p>{changePasswordForm.errors.password}</p>
-                          </div>
+                          <p className="mt-2 text-sm text-red-600">
+                            {changePasswordForm.errors.password}
+                          </p>
                         ) : null}
 
                         {userReducer.change_password_error &&
@@ -91,13 +94,9 @@ const security = () => {
                             .non_field_errors &&
                           userReducer.change_password_error.data.non_field_errors.map(
                             (message, i) => (
-                              <div
-                                key={i}
-                                className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4"
-                              >
-                                <p className="font-bold">Error</p>
-                                <p>{message}</p>
-                              </div>
+                              <p key={i} className="mt-2 text-sm text-red-600">
+                                {message}
+                              </p>
                             )
                           )}
                       </div>
@@ -122,10 +121,9 @@ const security = () => {
                         />
                         {changePasswordForm.touched.new_password &&
                         changePasswordForm.errors.new_password ? (
-                          <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
-                            <p className="font-bold">Error</p>
-                            <p>{changePasswordForm.errors.new_password}</p>
-                          </div>
+                          <p className="mt-2 text-sm text-red-600">
+                            {changePasswordForm.errors.new_password}
+                          </p>
                         ) : null}
                       </div>
                     </div>
@@ -149,10 +147,9 @@ const security = () => {
                         />
                         {changePasswordForm.touched.repeat_password &&
                         changePasswordForm.errors.repeat_password ? (
-                          <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
-                            <p className="font-bold">Error</p>
-                            <p>{changePasswordForm.errors.repeat_password}</p>
-                          </div>
+                          <p className="mt-2 text-sm text-red-600">
+                            {changePasswordForm.errors.repeat_password}
+                          </p>
                         ) : null}
                       </div>
                     </div>

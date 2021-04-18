@@ -415,7 +415,10 @@ export const updateUserPicture = (picture) => async (dispatch, getState) => {
     });
 };
 
-export const changePassword = (data) => async (dispatch, getState) => {
+export const changePassword = (data, resetForm) => async (
+  dispatch,
+  getState
+) => {
   console.log(data);
   dispatch({
     type: CHANGE_PASSWORD,
@@ -426,15 +429,17 @@ export const changePassword = (data) => async (dispatch, getState) => {
       data,
       tokenConfig(getState)
     )
-    .then((res) => {
+    .then(async (res) => {
       console.log(res.data);
 
-      dispatch({
+      await dispatch({
         type: CHANGE_PASSWORD_SUCCESS,
       });
+      await resetForm({});
+      await dispatch(createAlert("SUCCESS", "Password successfully changed"));
     })
-    .catch((err) => {
-      dispatch({
+    .catch(async (err) => {
+      await dispatch({
         type: CHANGE_PASSWORD_FAIL,
         payload: { data: err.response?.data, status: err.response?.status },
       });
