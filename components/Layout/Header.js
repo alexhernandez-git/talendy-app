@@ -423,7 +423,7 @@ const Header = ({
                           </svg>
                           300 Karma
                         </span>
-                        <Link href="/profile/issues" role="menuitem">
+                        <Link href="/profile/posts" role="menuitem">
                           <span className="block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                             Profile
                           </span>
@@ -586,7 +586,7 @@ const Header = ({
             </div>
 
             <div className="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
-              <Link href="/profile/issues" role="menuitem">
+              <Link href="/profile/posts" role="menuitem">
                 <span className="cursor-pointer block rounded-3xl py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover-text-gray-300">
                   Your Profile
                 </span>

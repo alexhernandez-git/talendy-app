@@ -155,7 +155,6 @@ const Contribute = () => {
       console.log("myStreamRef.current", myStreamRef.current);
       socketRef.current.disconnect();
       myStreamRef.current.getTracks().forEach(function (track) {
-        console.log("track", track);
         track.stop();
       });
     };

@@ -4,7 +4,7 @@ import UserMenu from "components/Pages/Profile/UserMenu";
 import SearchMenu from "components/Pages/Search/SearchMenu";
 import HomeMenu from "components/Pages/Index/HomeMenu";
 import {
-  MY_ISSUES_PAGE,
+  MY_POSTS_PAGE,
   SEARCH_POSTS_PAGE,
   SEARCH_USERS_PAGE,
   CONNECTIONS_PAGE,
@@ -21,8 +21,8 @@ import {
   CLOSED_POSTS_PROFILE_PAGE,
   USER_CONTRIBUTED,
 } from "pages";
-import HelpRequest from "components/Pages/MyPosts/HelpRequest";
-import HelpRequestsFeed from "components/Pages/MyPosts/HelpRequestsFeed";
+import HelpRequest from "components/Pages/MyPosts/ContributeRequest";
+import HelpRequestsFeed from "components/Pages/MyPosts/ContributeRequestsFeed";
 import Invitation from "components/Pages/MyNetwork/Invitation";
 import User from "./User";
 import ProfileMenu from "components/Pages/User/UserMenu";
@@ -35,7 +35,7 @@ const Feed = ({ page }) => {
       )}
 
       {/* User menu */}
-      {(page === MY_ISSUES_PAGE ||
+      {(page === MY_POSTS_PAGE ||
         page === CONTRIBUTED ||
         page === ACTIVE_CONTRIBUTED ||
         page === CONNECTIONS_PAGE ||
@@ -48,10 +48,10 @@ const Feed = ({ page }) => {
         page === CLOSED_POSTS_PROFILE_PAGE ||
         page === USER_CONTRIBUTED) && <ProfileMenu page={page} />}
 
-      {page === MY_ISSUES_PAGE && <HelpRequestsFeed />}
+      {page === MY_POSTS_PAGE && <HelpRequestsFeed />}
 
       {(page === HOME_PAGE ||
-        page === MY_ISSUES_PAGE ||
+        page === MY_POSTS_PAGE ||
         page === SEARCH_POSTS_PAGE ||
         page === CONTRIBUTED ||
         page === MOST_KARMA_POSTS_PAGE ||

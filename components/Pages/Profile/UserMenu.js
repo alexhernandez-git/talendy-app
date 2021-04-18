@@ -3,7 +3,7 @@ import Link from "next/link";
 import {
   MY_NETWORK_PAGE,
   CONTRIBUTED,
-  MY_ISSUES_PAGE,
+  MY_POSTS_PAGE,
   PEOPLE_I_FOLLOW_PAGE,
   CONNECTIONS_PAGE,
   ACTIVE_CONTRIBUTED,
@@ -33,15 +33,15 @@ const ProfileMenu = ({ page }) => {
           className="relative z-0 rounded-lg shadow flex divide-x divide-gray-200"
           aria-label="Tabs"
         >
-          <Link href="/profile/issues">
+          <Link href="/profile/posts">
             <a
               aria-current="page"
               className={`${
-                page === MY_ISSUES_PAGE ? "text-gray-900" : "text-gray-500"
+                page === MY_POSTS_PAGE ? "text-gray-900" : "text-gray-500"
               }  dark:text-white rounded-l-lg group relative  hover:text-gray-700 dark:hover:bg-gray-800 min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10`}
             >
-              <span>My Issues</span>
-              {page === MY_ISSUES_PAGE ? (
+              <span>My Posts</span>
+              {page === MY_POSTS_PAGE ? (
                 <span
                   aria-hidden="true"
                   className="bg-orange-500 absolute inset-x-0 bottom-0 h-0.5"

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
-import HelpRequest from "../MyPosts/HelpRequest";
+import HelpRequest from "../MyPosts/ContributeRequest";
 
 const RequestsFeed = () => {
   return (
@@ -41,7 +41,7 @@ const RequestsFeed = () => {
                   clip-rule="evenodd"
                 />
               </svg>
-              <Link href="/profile/issues">
+              <Link href="/profile/posts">
                 <span class="cursor-pointer ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
                   Profile
                 </span>

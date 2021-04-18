@@ -1,12 +1,12 @@
 import Layout from "components/Layout/Layout";
 import Feed from "components/Layout/Feed";
 import ProfileCard from "components/Pages/Profile/UserCard";
-import { MY_ISSUES_PAGE } from "pages";
+import { MY_POSTS_PAGE } from "pages";
 import useAuthRequired from "hooks/useAuthRequired";
 import Spinner from "components/Layout/Spinner";
 
-export default function Issues() {
-  const page = MY_ISSUES_PAGE;
+export default function Posts() {
+  const page = MY_POSTS_PAGE;
   const [canRender, userReducer, initialDataFetched] = useAuthRequired(page);
   return !canRender ? (
     <div className="flex justify-center items-center h-screen dark:bg-gray-800">

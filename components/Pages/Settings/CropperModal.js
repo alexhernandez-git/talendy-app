@@ -66,7 +66,7 @@ const CropperModal = ({ show, handleClose, newImage }) => {
               background={false}
               responsive={true}
               autoCropArea={1}
-              checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
+              checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/posts/671
               onInitialized={(instance) => {
                 setCropper(instance);
               }}

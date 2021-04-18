@@ -67,7 +67,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
               </div>
               <div className="space-y-2">
                 <div className="text-lg leading-6 font-medium text-center">
-                  <Link href={profile ? "/profile/issues" : "/user/123"}>
+                  <Link href={profile ? "/profile/posts" : "/user/123"}>
                     <h3 className="mb-3 cursor-pointer">
                       {user?.first_name} {user?.last_name}
                     </h3>

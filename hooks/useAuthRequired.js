@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { MY_ISSUES_PAGE } from "pages";
+import { MY_POSTS_PAGE } from "pages";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -10,7 +10,7 @@ const useAuthRequired = (page) => {
   const { is_authenticated } = userReducer;
   const router = useRouter();
   const [canRender, setCanRender] = useState(false);
-  const privatePages = [MY_ISSUES_PAGE];
+  const privatePages = [MY_POSTS_PAGE];
   const matches = privatePages.some((privPage) => privPage === page);
   useEffect(() => {
     if (initialDataReducer.initial_data_fetched) {
