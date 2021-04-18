@@ -35,11 +35,34 @@ const UserCard = ({ mobile, page, profile, user }) => {
             <div className="space-y-6 p-6 relative">
               <div className="relative  flex justify-center">
                 <div className=" h-40 w-40 rounded-full overflow-hidden xl:w-56 xl:h-56">
-                  <img
+                  {/* <img
                     className="mx-auto z-20"
                     src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
                     alt=""
-                  />
+                  /> */}
+                  {user && user.picture ? (
+                    <img
+                      className="h-40 w-40 overflow-hidden xl:w-56 xl:h-56 rounded-full"
+                      src={
+                        new RegExp(
+                          `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                        ).test(user.picture)
+                          ? user.picture
+                          : process.env.HOST + user.picture
+                      }
+                      alt=""
+                    ></img>
+                  ) : (
+                    <span className="bg-gray-100 rounded-full overflow-hidden h-40 w-40 ">
+                      <svg
+                        className="h-full w-full text-gray-300 bg-gray-100"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                      </svg>
+                    </span>
+                  )}
                   {/* {profile && (
                     <>
                       <div

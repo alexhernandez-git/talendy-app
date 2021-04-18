@@ -47,7 +47,7 @@ const CropperModal = ({ show, handleClose, newImage }) => {
         </span>
 
         <div
-          className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
+          className="inline-block align-bottom bg-white dark:bg-gray-700 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-headline"
@@ -76,14 +76,14 @@ const CropperModal = ({ show, handleClose, newImage }) => {
             <button
               onClick={getCropData}
               type="button"
-              className="w-full inline-flex justify-center rounded-3xl border border-transparent shadow-sm px-4 py-2 bg-gradient-to-r from-orange-500 to-pink-600 hover:to-pink-600 text-base font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 sm:col-start-2 sm:text-sm"
+              className="w-full inline-flex justify-center rounded-3xl border border-transparent shadow-sm px-4 py-2 bg-gradient-to-r from-orange-500 to-pink-600 hover:to-pink-600 text-base font-medium text-white  sm:col-start-2 sm:text-sm"
             >
               Save
             </button>
             <button
               type="button"
               onClick={handleClose}
-              className="mt-3 w-full inline-flex justify-center rounded-3xl border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 sm:mt-0 sm:col-start-1 sm:text-sm"
+              className="mt-3 w-full inline-flex justify-center rounded-3xl border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 sm:mt-0 sm:col-start-1 sm:text-sm"
             >
               Cancel
             </button>
