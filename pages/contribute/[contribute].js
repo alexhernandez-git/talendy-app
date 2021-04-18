@@ -41,7 +41,7 @@ const Contribute = () => {
 
   // Webrtc
   const [peers, setPeers] = useState([]);
-  const [myStream, setMyStream] = useState();
+  const myStreamRef = useRef();
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
@@ -57,14 +57,15 @@ const Contribute = () => {
     }
     setIsMicOn(!isMicOn);
 
-    myStream.getAudioTracks()[0].enabled = !isMicOn;
+    myStreamRef.current.getAudioTracks()[0].enabled = !isMicOn;
   };
   const [isDeafen, setDeafen] = useState(false);
   const handleToggleDeafen = () => {
     setDeafen(!isDeafen);
     if (!isDeafen) {
       setIsMicOn(false);
-      myStream.getAudioTracks()[0].enabled = false;
+      console.log("myStreamRef.current", myStreamRef.current);
+      myStreamRef.current.getAudioTracks()[0].enabled = false;
     }
   };
 
@@ -116,7 +117,7 @@ const Contribute = () => {
     navigator.mediaDevices
       .getUserMedia({ video: false, audio: true })
       .then((stream) => {
-        setMyStream(stream);
+        myStreamRef.current = stream;
         stream.getAudioTracks()[0].enabled = isMicOn;
         socketRef.current.emit("join room", roomID);
         socketRef.current.on("all users", (users) => {
@@ -151,11 +152,12 @@ const Contribute = () => {
         });
       });
     return () => {
+      console.log("myStreamRef.current", myStreamRef.current);
       socketRef.current.disconnect();
-      console.log(myStream);
-      // myStream.getTracks().forEach(function (track) {
-      //   track.stop();
-      // });
+      myStreamRef.current.getTracks().forEach(function (track) {
+        console.log("track", track);
+        track.stop();
+      });
     };
   }, []);
 
