@@ -434,7 +434,11 @@ const Header = ({
                             Settings
                           </span>
                         </Link>
-
+                        <Link href="/settings/earnings" role="menuitem">
+                          <span className="block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                            Earnings
+                          </span>
+                        </Link>
                         <button
                           onClick={handleSignOut}
                           className="w-full text-left block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
@@ -594,6 +598,12 @@ const Header = ({
               <Link href="/settings" role="menuitem">
                 <span className="cursor-pointer block rounded-3xl py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover-text-gray-300">
                   Settings
+                </span>
+              </Link>
+
+              <Link href="/settings/earnings" role="menuitem">
+                <span className="cursor-pointer block rounded-3xl py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover-text-gray-300">
+                  Earnings
                 </span>
               </Link>
               <button

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
 import PostModal from "components/Layout/PostModal";
 import Layout from "components/Layout/Layout";
-import { HELP_PAGE } from "pages";
+import { CONTRIBUTE_PAGE } from "pages";
 import { IconContext } from "react-icons";
 import { MdHeadset, MdMic, MdScreenShare, MdMicOff } from "react-icons/md";
 import { useRouter } from "next/router";
@@ -15,6 +15,10 @@ import ContributeChat from "components/Pages/Contribute/ContributeChat";
 import ContributeSharedNotes from "components/Pages/Contribute/ContributeSharedNotes";
 import ContributeAsteroids from "components/Pages/Contribute/ContributeAsteroids";
 import { FaDeaf } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { createAlert } from "redux/actions/alerts";
+import useAuthRequired from "hooks/useAuthRequired";
 
 const Audio = (props) => {
   const ref = useRef();
@@ -36,9 +40,11 @@ const Audio = (props) => {
 };
 
 const Contribute = () => {
-  const page = HELP_PAGE;
+  const page = CONTRIBUTE_PAGE;
   const image = true;
-
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const [canRender, userReducer, initialDataFetched] = useAuthRequired(page);
   // Webrtc
   const [peers, setPeers] = useState([]);
   const myStreamRef = useRef();
@@ -70,87 +76,101 @@ const Contribute = () => {
   };
 
   useEffect(() => {
-    socketRef.current = io.connect("http://localhost:5500");
-    socketRef.current.on("connect", () => {
-      console.log("connected layout!!!!!!!!!!");
-    });
-    socketRef.current.on("connect_error", (err) => {
-      console.log(`connect_error due to ${err.message}`);
-    });
-
-    socketRef.current.emit("create", roomID);
-
-    function createPeer(userToSignal, callerID, stream) {
-      const peer = new Peer({
-        initiator: true,
-        trickle: false,
-        stream,
+    if (initialDataFetched) {
+      socketRef.current = io.connect("http://localhost:5500");
+      socketRef.current.on("connect", () => {
+        console.log("connected layout!!!!!!!!!!");
+      });
+      socketRef.current.on("connect_error", (err) => {
+        console.log(`connect_error due to ${err.message}`);
       });
 
-      peer.on("signal", (signal) => {
-        socketRef.current.emit("sending signal", {
-          userToSignal,
-          callerID,
-          signal,
+      socketRef.current.emit("join room", {
+        roomID: roomID,
+        userID: userReducer.user?.id,
+      });
+
+      socketRef.current.on("not allowed", () => {
+        dispatch(createAlert("ERROR", "You are already in this room"));
+        router.push("/");
+      });
+      socketRef.current.on("no user id", () => {
+        dispatch(createAlert("ERROR", "There is not user id"));
+        router.push("/");
+      });
+      function createPeer(userToSignal, callerID, stream) {
+        const peer = new Peer({
+          initiator: true,
+          trickle: false,
+          stream,
         });
-      });
 
-      return peer;
-    }
+        peer.on("signal", (signal) => {
+          socketRef.current.emit("sending signal", {
+            userToSignal,
+            callerID,
+            signal,
+          });
+        });
 
-    function addPeer(incomingSignal, callerID, stream) {
-      const peer = new Peer({
-        initiator: false,
-        trickle: false,
-        stream,
-      });
+        return peer;
+      }
 
-      peer.on("signal", (signal) => {
-        socketRef.current.emit("returning signal", { signal, callerID });
-      });
+      function addPeer(incomingSignal, callerID, stream) {
+        const peer = new Peer({
+          initiator: false,
+          trickle: false,
+          stream,
+        });
 
-      peer.signal(incomingSignal);
+        peer.on("signal", (signal) => {
+          socketRef.current.emit("returning signal", { signal, callerID });
+        });
 
-      return peer;
-    }
+        peer.signal(incomingSignal);
 
-    navigator.mediaDevices
-      .getUserMedia({ video: false, audio: true })
-      .then((stream) => {
-        myStreamRef.current = stream;
-        stream.getAudioTracks()[0].enabled = isMicOn;
-        socketRef.current.emit("join room", roomID);
-        socketRef.current.on("all users", (users) => {
-          const peers = [];
-          users.forEach((userID) => {
-            const peer = createPeer(userID, socketRef.current.id, stream);
+        return peer;
+      }
+
+      navigator.mediaDevices
+        .getUserMedia({ video: false, audio: true })
+        .then((stream) => {
+          myStreamRef.current = stream;
+          stream.getAudioTracks()[0].enabled = isMicOn;
+          socketRef.current.on("all users", (users) => {
+            const peers = [];
+            users.forEach((userID) => {
+              const peer = createPeer(userID, socketRef.current.id, stream);
+              peersRef.current.push({
+                peerID: userID,
+                peer,
+              });
+              peers.push(peer);
+            });
+            setPeers(peers);
+          });
+
+          socketRef.current.on("user joined", (payload) => {
+            console.log("user joined", payload);
+            const peer = addPeer(payload.signal, payload.callerID, stream);
             peersRef.current.push({
-              peerID: userID,
+              peerID: payload.callerID,
               peer,
             });
-            peers.push(peer);
-          });
-          setPeers(peers);
-        });
 
-        socketRef.current.on("user joined", (payload) => {
-          console.log("user joined", payload);
-          const peer = addPeer(payload.signal, payload.callerID, stream);
-          peersRef.current.push({
-            peerID: payload.callerID,
-            peer,
+            setPeers((users) => [...users, peer]);
           });
 
-          setPeers((users) => [...users, peer]);
+          socketRef.current.on("receiving returned signal", (payload) => {
+            console.log("payload", payload);
+            const item = peersRef.current.find((p) => p.peerID === payload.id);
+            console.log(peersRef.current);
+            item?.peer.signal(payload.signal);
+          });
         });
-
-        socketRef.current.on("receiving returned signal", (payload) => {
-          console.log("payload", payload);
-          const item = peersRef.current.find((p) => p.peerID === payload.id);
-          console.log(peersRef.current);
-          item?.peer.signal(payload.signal);
-        });
-      });
+    }
+  }, [initialDataFetched]);
+  useEffect(() => {
     return () => {
       console.log("myStreamRef.current", myStreamRef.current);
       socketRef.current.disconnect();
@@ -159,7 +179,6 @@ const Contribute = () => {
       });
     };
   }, []);
-
   const [modalOpen, setModalOpen] = useState(false);
   const handleOpenModal = () => {
     setModalOpen(true);

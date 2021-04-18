@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
 import PostModal from "components/Layout/PostModal";
 import Layout from "components/Layout/Layout";
-import { HELP_PAGE } from "pages";
+import { CONTRIBUTE_PAGE } from "pages";
 import { IconContext } from "react-icons";
 import { MdHeadset, MdMic, MdScreenShare, MdMicOff } from "react-icons/md";
 import { useRouter } from "next/router";
@@ -25,7 +25,7 @@ const Audio = (props) => {
 };
 
 const ContributeLayout = ({ children }) => {
-  const page = HELP_PAGE;
+  const page = CONTRIBUTE_PAGE;
   const image = true;
 
   // Webrtc
