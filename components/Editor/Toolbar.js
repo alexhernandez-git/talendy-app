@@ -35,7 +35,7 @@ export default function Toolbar() {
 
     format(
       "insertHTML",
-      `<pre className='codeBlock whitespace-pre-line' id='${id}'>${target}</pre>`
+      `<pre class='codeBlock whitespace-pre-line' id='${id}'>${target}</pre>`
     );
     addLineAfterBlock(id);
   }
