@@ -40,7 +40,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
                     src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
                     alt=""
                   />
-                  {profile && (
+                  {/* {profile && (
                     <>
                       <div
                         className="absolute m-auto h-40 w-40 rounded-full overflow-hidden xl:w-56 xl:h-56 inset-0 bg-gray-500 bg-opacity-75 transition-opacity z-20 cursor-default"
@@ -62,7 +62,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
                         </svg>
                       </div>
                     </>
-                  )}
+                  )} */}
                 </div>
               </div>
               <div className="space-y-2">

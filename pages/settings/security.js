@@ -45,7 +45,7 @@ const security = () => {
         <title>Security</title>
       </Head>
       {!canRender ? (
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex justify-center items-center h-screen dark:bg-gray-800">
           <Spinner />
         </div>
       ) : (

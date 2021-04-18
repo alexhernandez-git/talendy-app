@@ -9,7 +9,7 @@ export default function Issues() {
   const page = MY_ISSUES_PAGE;
   const [canRender, userReducer, initialDataFetched] = useAuthRequired(page);
   return !canRender ? (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen dark:bg-gray-800">
       <Spinner />
     </div>
   ) : (

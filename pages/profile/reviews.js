@@ -5,10 +5,12 @@ import { PROFILE_REVIEWS_PAGE } from "pages";
 import LeftSidebar from "components/Pages/User/LeftSidebar";
 import ReviewsFeed from "components/Pages/Reviews/ReviewsFeed";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 export default function Reviews() {
   const page = PROFILE_REVIEWS_PAGE;
   const router = useRouter();
+  const userReducer = useSelector((state) => state.userReducer);
   const handleGoBack = () => {
     router.push("/user/123");
   };
@@ -16,11 +18,11 @@ export default function Reviews() {
     <Layout>
       <div className="py-10">
         <div className="max-w-3xl mx-auto sm:px-6 flex flex-col lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
-          <UserCard mobile page={page} profile />
+          <UserCard mobile page={page} profile user={userReducer.user} />
 
           <ReviewsFeed />
           {/* <Feed page={page} /> */}
-          <UserCard page={page} profile />
+          <UserCard page={page} profile user={userReducer.user} />
         </div>
       </div>
     </Layout>
