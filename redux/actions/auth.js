@@ -114,6 +114,7 @@ export const loadUser = () => async (dispatch, getState) => {
       });
     })
     .catch(async (err) => {
+      console.log(err.response);
       await dispatch({
         type: LOAD_USER_ERROR,
       });

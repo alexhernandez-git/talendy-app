@@ -28,9 +28,6 @@ const TopKarmaUser = ({ user }) => {
     }
     dispatch(followTopKarmaUser(user.id));
   };
-  const handleUnfollowUser = () => {
-    dispatch(unfollowTopKarmaUser(user.id));
-  };
 
   return (
     <li>
@@ -87,13 +84,9 @@ const TopKarmaUser = ({ user }) => {
         {authReducer.user?.id !== user.id && (
           <div className="flex-shrink-0">
             {user?.is_followed ? (
-              <button
-                onClick={handleUnfollowUser}
-                type="button"
-                className="inline-flex items-center px-3 py-0.5 rounded-full text-orange-50 text-sm font-medium bg-orange-700 hover:text-orange-100 dark:bg-orange-100 dark:text-orange-600 dark:hover:text-orange-500"
-              >
-                <span>Unfollow</span>
-              </button>
+              <span className="inline-flex items-center px-3 py-0.5 rounded-full text-orange-50 text-sm font-medium bg-orange-600 dark:bg-orange-100 dark:text-orange-600">
+                <span>Following</span>
+              </span>
             ) : (
               <button
                 onClick={handleFollowUser}
@@ -101,7 +94,7 @@ const TopKarmaUser = ({ user }) => {
                 className="inline-flex items-center px-3 py-0.5 rounded-full bg-orange-50 text-sm font-medium text-orange-700 hover:bg-orange-100 dark:text-orange-100 dark:bg-orange-600 dark:hover:bg-orange-500"
               >
                 <svg
-                  className="-ml-1 mr-0.5 h-5 w-5 text-orange-400 dark:text-orange-100"
+                  className="-ml-1 mr-0.5 h-4 w-4 text-orange-400 dark:text-orange-100"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                   fill="currentColor"

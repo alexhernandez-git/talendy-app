@@ -11,6 +11,7 @@ import {
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import Spinner from "./Spinner";
 const RegisterModal = ({ registerOpen, registerRef, handleCloseRegister }) => {
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
@@ -336,8 +337,9 @@ const RegisterModal = ({ registerOpen, registerRef, handleCloseRegister }) => {
                 <div>
                   <button
                     type="submit"
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-3xl shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                    className="w-full flex items-center justify-center py-2 px-4 border border-transparent rounded-3xl shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
                   >
+                    {authReducer.registing && <Spinner className="mr-2" />}
                     Register
                   </button>
                   <div className="pt-5">
