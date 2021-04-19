@@ -48,7 +48,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
                   /> */}
                   {user && user.picture ? (
                     <img
-                      className="h-40 w-40 overflow-hidden xl:w-56 xl:h-56 rounded-full"
+                      className="h-32 w-32 overflow-hidden xl:w-56 xl:h-56 rounded-full"
                       src={
                         new RegExp(
                           `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
@@ -59,7 +59,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
                       alt=""
                     ></img>
                   ) : (
-                    <span className="bg-gray-100 rounded-full overflow-hidden h-40 w-40 ">
+                    <span className="bg-gray-100 rounded-full overflow-hidden h-40 w-40  xl:w-56 xl:h-56">
                       <svg
                         className="h-full w-full text-gray-300 bg-gray-100"
                         fill="currentColor"

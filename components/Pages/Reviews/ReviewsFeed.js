@@ -55,7 +55,7 @@ const ReviewsFeed = ({ profile }) => {
                   </span>
                 </Link>
               ) : (
-                <Link href="/user/posts">
+                <Link href={`/user/${userReducer.user?.id}`}>
                   <span class="cursor-pointer ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
                     {userReducer.user?.username}
                   </span>
