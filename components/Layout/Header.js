@@ -357,7 +357,7 @@ const Header = ({
                   <button
                     onMouseDown={handleToggleMenu}
                     type="button"
-                    className="bg-white rounded-full flex"
+                    className="rounded-full flex"
                     id="user-menu"
                     aria-expanded="false"
                     aria-haspopup="true"
