@@ -8,8 +8,8 @@ import { useSelector } from "react-redux";
 import Review from "./Review";
 import Link from "next/link";
 
-const ReviewsFeed = () => {
-  const authReducer = useSelector((state) => state.authReducer);
+const ReviewsFeed = ({ profile }) => {
+  const userReducer = useSelector((state) => state.userReducer);
 
   return (
     <div className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
@@ -33,7 +33,6 @@ const ReviewsFeed = () => {
               </Link>
             </div>
           </li>
-
           <li>
             <div class="flex items-center">
               <svg
@@ -49,11 +48,19 @@ const ReviewsFeed = () => {
                   clip-rule="evenodd"
                 />
               </svg>
-              <Link href="/profile/posts">
-                <span class="cursor-pointer ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
-                  Profile
-                </span>
-              </Link>
+              {profile ? (
+                <Link href="/profile/posts">
+                  <span class="cursor-pointer ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
+                    Profile
+                  </span>
+                </Link>
+              ) : (
+                <Link href="/user/posts">
+                  <span class="cursor-pointer ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
+                    {userReducer.user?.username}
+                  </span>
+                </Link>
+              )}
             </div>
           </li>
 

@@ -119,7 +119,13 @@ const UserCard = ({ mobile, page, profile, user }) => {
                     </span>
                   </div>
                   <div className="mt-4 flex justify-center">
-                    <Link href={profile ? "/profile/reviews" : "/reviews/123"}>
+                    <Link
+                      href={
+                        profile
+                          ? "/profile/reviews"
+                          : "/user/reviews/" + user?.id
+                      }
+                    >
                       <button className="cursor-pointer">
                         <StarRatings
                           rating={3.5}
