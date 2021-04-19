@@ -30,7 +30,7 @@ const Login = ({ loginOpen, loginRef, mobile, handleClose }) => {
     }),
     onSubmit: async (values, { resetForm }) => {
       // console.log(valores);
-      dispatch(login(values, handleClose, resetForm, router));
+      dispatch(login(values, handleClose, resetForm));
     },
   });
   const resetPasswordForm = useFormik({

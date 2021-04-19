@@ -36,7 +36,7 @@ const RegisterModal = ({ registerOpen, registerRef, handleCloseRegister }) => {
     }),
     onSubmit: async (values, { resetForm }) => {
       // console.log(valores);
-      dispatch(register(values, handleCloseRegister, resetForm, router));
+      dispatch(register(values, handleCloseRegister, resetForm));
     },
   });
   useEffect(() => {

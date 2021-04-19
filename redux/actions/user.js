@@ -149,7 +149,6 @@ export const login = (data, handleClose, resetForm, router) => async (
       });
       await handleClose();
       await resetForm({});
-      await router.push("/");
     })
     .catch((err) => {
       dispatch({
@@ -223,7 +222,7 @@ export const resetCouponAvailable = () => async (dispatch, getState) => {
   dispatch({ type: RESET_COUPON_AVAILABLE });
 };
 
-export const register = (data, handleClose, resetForm, router) => async (
+export const register = (data, handleClose, resetForm) => async (
   dispatch,
   getState
 ) => {
@@ -239,7 +238,6 @@ export const register = (data, handleClose, resetForm, router) => async (
       });
       await handleClose();
       await resetForm();
-      await router.push("/");
     })
     .catch(async (err) => {
       await dispatch({
