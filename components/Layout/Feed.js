@@ -1,6 +1,6 @@
 import React from "react";
 import Post from "components/Layout/Post";
-import UserMenu from "components/Pages/Profile/UserMenu";
+import UserMenu from "components/Pages/Profile/ProfileMenu";
 import SearchMenu from "components/Pages/Search/SearchMenu";
 import HomeMenu from "components/Pages/Index/HomeMenu";
 import {

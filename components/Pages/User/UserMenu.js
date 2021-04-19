@@ -6,8 +6,11 @@ import {
   PROFILE_PAGE,
   USER_CONTRIBUTED,
 } from "pages";
+import { useRouter } from "next/router";
 
-const ProfileMenu = ({ page }) => {
+const UserMenu = ({ page }) => {
+  const router = useRouter();
+  const userId = router.query?.user;
   return (
     <div className="px-4 mb-4 sm:px-0">
       <div className="sm:hidden">
@@ -28,7 +31,7 @@ const ProfileMenu = ({ page }) => {
           className="relative z-0 rounded-lg shadow flex divide-x divide-gray-200"
           aria-label="Tabs"
         >
-          <Link href="/user/123">
+          <Link href={`/user/${userId}`}>
             <a
               aria-current="page"
               className={`${
@@ -55,7 +58,7 @@ const ProfileMenu = ({ page }) => {
             </a>
           </Link>
 
-          <Link href="/user/posts/123">
+          <Link href={`/user/posts/${userId}`}>
             <a
               className={`${
                 page === PROFILE_PAGE ||
@@ -92,4 +95,4 @@ const ProfileMenu = ({ page }) => {
   );
 };
 
-export default ProfileMenu;
+export default UserMenu;

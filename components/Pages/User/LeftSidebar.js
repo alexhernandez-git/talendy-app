@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   ACTIVE_CONTRIBUTED,
   ACTIVE_POSTS_PROFILE_PAGE,
@@ -9,6 +10,8 @@ import {
 import React from "react";
 
 const LeftSidebar = ({ page }) => {
+  const router = useRouter();
+  const userId = router.query?.user;
   return (
     <div className="hidden xl:block  xl:col-span-2">
       <nav aria-label="Sidebar" className="divide-y divide-gray-300">
@@ -23,7 +26,7 @@ const LeftSidebar = ({ page }) => {
             className="mt-3 space-y-2"
             aria-labelledby="communities-headline"
           >
-            <Link href="/user/posts/123">
+            <Link href={`/user/posts/${userId}`}>
               <span
                 className={`
                   ${
@@ -36,7 +39,7 @@ const LeftSidebar = ({ page }) => {
                 <span>30</span>
               </span>
             </Link>
-            <Link href="/user/posts/active/123">
+            <Link href={`/user/posts/active/${userId}`}>
               <span
                 className={`
                   ${
@@ -49,7 +52,7 @@ const LeftSidebar = ({ page }) => {
                 <span>10</span>
               </span>
             </Link>
-            <Link href="/user/posts/closed/123">
+            <Link href={`/user/posts/closed/${userId}`}>
               <span
                 className={`
                   ${
