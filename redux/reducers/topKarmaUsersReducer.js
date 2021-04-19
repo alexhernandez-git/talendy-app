@@ -2,9 +2,9 @@ import {
   FETCH_TOP_KARMA_USERS,
   FETCH_TOP_KARMA_USERS_SUCCESS,
   FETCH_TOP_KARMA_USERS_FAIL,
-  FOLLOW_TOP_KARMA_USERS,
-  FOLLOW_TOP_KARMA_USERS_SUCCESS,
-  FOLLOW_TOP_KARMA_USERS_FAIL,
+  FOLLOW_TOP_KARMA_USER,
+  FOLLOW_TOP_KARMA_USER_SUCCESS,
+  FOLLOW_TOP_KARMA_USER_FAIL,
 } from "../types";
 import { HYDRATE } from "next-redux-wrapper";
 
@@ -40,12 +40,12 @@ export default function topKarmaUsersReducer(state = initialState, action) {
         is_loading: false,
         error: action.payload,
       };
-    case FOLLOW_TOP_KARMA_USERS:
+    case FOLLOW_TOP_KARMA_USER:
       return {
         ...state,
         is_following_user: true,
       };
-    case FOLLOW_TOP_KARMA_USERS_SUCCESS:
+    case FOLLOW_TOP_KARMA_USER_SUCCESS:
       console.log(action.payload);
 
       return {
@@ -59,18 +59,18 @@ export default function topKarmaUsersReducer(state = initialState, action) {
         },
         follow_user_error: null,
       };
-    case FOLLOW_TOP_KARMA_USERS_FAIL:
+    case FOLLOW_TOP_KARMA_USER_FAIL:
       return {
         ...state,
         is_following_user: false,
         follow_user_error: action.payload,
       };
-    // case UNFOLLOW_TOP_KARMA_USERS:
+    // case UNFOLLOW_TOP_KARMA_USER:
     //   return {
     //     ...state,
     //     is_unfollowing_user: true,
     //   };
-    // case UNFOLLOW_TOP_KARMA_USERS_SUCCESS:
+    // case UNFOLLOW_TOP_KARMA_USER_SUCCESS:
     //   return {
     //     ...state,
     //     is_unfollowing_user: false,
@@ -82,7 +82,7 @@ export default function topKarmaUsersReducer(state = initialState, action) {
     //     },
     //     unfollow_user_error: null,
     //   };
-    // case UNFOLLOW_TOP_KARMA_USERS_FAIL:
+    // case UNFOLLOW_TOP_KARMA_USER_FAIL:
     //   return {
     //     ...state,
     //     is_unfollowing_user: false,

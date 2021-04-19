@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import StarRatings from "react-star-ratings";
 import { createAlert } from "redux/actions/alerts";
+import { unfollowUser, followUser } from "redux/actions/user";
 
 const UserCard = ({ mobile, page, profile, user }) => {
   const dispatch = useDispatch();
@@ -14,7 +15,12 @@ const UserCard = ({ mobile, page, profile, user }) => {
   const handleFollowUser = () => {
     if (!authReducer.is_authenticated) {
       dispatch(createAlert("ERROR", "You are not authenticated"));
+      return;
     }
+    dispatch(followUser());
+  };
+  const handleUnfollowUser = () => {
+    dispatch(unfollowUser());
   };
   const handleConnectUser = () => {
     if (!authReducer.is_authenticated) {
@@ -177,13 +183,23 @@ const UserCard = ({ mobile, page, profile, user }) => {
               <div className="bg-white dark:bg-gray-700 rounded-lg shadow">
                 <div className="p-6">
                   <div>
-                    <button
-                      type="button"
-                      onClick={handleFollowUser}
-                      className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
-                    >
-                      Follow
-                    </button>
+                    {user?.is_followed ? (
+                      <button
+                        onClick={handleUnfollowUser}
+                        type="button"
+                        className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
+                      >
+                        Unfollow
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={handleFollowUser}
+                        className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
+                      >
+                        Follow
+                      </button>
+                    )}
                     <button
                       onClick={handleConnectUser}
                       type="button"
