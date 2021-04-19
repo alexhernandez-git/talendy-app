@@ -276,7 +276,7 @@ const RegisterModal = ({ registerOpen, registerRef, handleCloseRegister }) => {
                     </p>
                   )}
                   {email_available_error &&
-                    email_available_error.data.non_field_errors.map(
+                    email_available_error?.data?.non_field_errors.map(
                       (message, i) => (
                         <p
                           className="mt-2 text-sm text-red-600"

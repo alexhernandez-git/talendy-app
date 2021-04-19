@@ -1,5 +1,9 @@
 import { useRouter } from "next/router";
-import { CONTRIBUTE_PAGE, MY_POSTS_PAGE } from "pages";
+import {
+  CONTRIBUTE_PAGE,
+  FOLLOWED_USERS_POSTS_PAGE,
+  MY_POSTS_PAGE,
+} from "pages";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 

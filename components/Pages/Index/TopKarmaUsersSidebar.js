@@ -1,7 +1,13 @@
-import React from "react";
-import TopKarmaCoinsUser from "./TopKarmaUser";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import TopKarmaUser from "./TopKarmaUser";
+import { fetchTopKarmaUsers } from "redux/actions/topKarmaUsers";
+const TopKarmaUsersSidebar = () => {
+  const topKarmaUsersReducer = useSelector(
+    (state) => state.topKarmaUsersReducer
+  );
 
-const RightSidebar = () => {
   return (
     <aside className="hidden xl:block xl:col-span-4">
       <div className="sticky top-4 space-y-4">
@@ -16,18 +22,9 @@ const RightSidebar = () => {
               </h2>
               <div className="mt-6 flow-root">
                 <ul className="-my-4 divide-y divide-gray-200">
-                  <li>
-                    <TopKarmaCoinsUser />
-                  </li>
-                  <li>
-                    <TopKarmaCoinsUser />
-                  </li>
-                  <li>
-                    <TopKarmaCoinsUser />
-                  </li>
-                  <li>
-                    <TopKarmaCoinsUser />
-                  </li>
+                  {topKarmaUsersReducer.users.results.map((user) => (
+                    <TopKarmaUser key={user.id} user={user} />
+                  ))}
                 </ul>
               </div>
               {/* <div className="mt-6">
@@ -107,4 +104,4 @@ const RightSidebar = () => {
   );
 };
 
-export default RightSidebar;
+export default TopKarmaUsersSidebar;

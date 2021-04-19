@@ -543,8 +543,8 @@ const settings = () => {
                               </p>
                             )}
                             {email_available_error &&
-                              email_available_error.data.non_field_errors &&
-                              email_available_error.data.non_field_errors.map(
+                              email_available_error?.data?.non_field_errors &&
+                              email_available_error?.data?.non_field_errors.map(
                                 (message, i) => (
                                   <p
                                     key={i}

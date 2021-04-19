@@ -1,11 +1,23 @@
 import Layout from "components/Layout/Layout";
 import LeftSidebar from "components/Pages/Index/LeftSidebar";
 import Feed from "components/Layout/Feed";
-import RightSidebar from "components/Pages/Index/RightSidebar";
+import RightSidebar from "components/Pages/Index/TopKarmaUsersSidebar";
 import { MOST_KARMA_POSTS_PAGE } from "pages";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { fetchTopKarmaUsers } from "redux/actions/topKarmaUsers";
+import { useDispatch } from "react-redux";
 
-export default function Home() {
+export default function MostKarma() {
   const page = MOST_KARMA_POSTS_PAGE;
+  const dispatch = useDispatch();
+  const initialDataReducer = useSelector((state) => state.initialDataReducer);
+
+  useEffect(() => {
+    if (initialDataReducer.initial_data_fetched) {
+      dispatch(fetchTopKarmaUsers());
+    }
+  }, [initialDataReducer.initial_data_fetched]);
   return (
     <Layout>
       <div className="py-10">
