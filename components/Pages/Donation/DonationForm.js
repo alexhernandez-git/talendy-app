@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 
 const DonationForm = () => {
-  const userReducer = useSelector((state) => state.userReducer);
+  const authReducer = useSelector((state) => state.authReducer);
 
   return (
     <div className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
@@ -246,7 +246,7 @@ const DonationForm = () => {
                       hidePostalCode: true,
                       style: {
                         base: {
-                          color: userReducer.theme ? "#fff" : "#424770",
+                          color: authReducer.theme ? "#fff" : "#424770",
                           "::placeholder": {
                             color: "#aab7c4",
                           },
@@ -463,7 +463,7 @@ const DonationForm = () => {
           >
             DONATE NOW
           </button>
-          {!userReducer.is_authenticated && (
+          {!authReducer.is_authenticated && (
             <div className="mt-4 flex justify-center">
               <span className="text-sm text-gray-400 dark:text-gray-300">
                 Anonymous donation enabled, no sign in required

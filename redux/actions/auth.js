@@ -370,7 +370,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
   dispatch({ type: UPDATE_USER });
   await axios
     .patch(
-      `${process.env.HOST}/api/users/${getState().userReducer.user.id}/`,
+      `${process.env.HOST}/api/users/${getState().authReducer.user.id}/`,
       user,
       tokenConfig(getState)
     )
@@ -398,7 +398,7 @@ export const updateUserPicture = (picture) => async (dispatch, getState) => {
   dispatch({ type: UPDATE_USER });
   await axios
     .patch(
-      `${process.env.HOST}/api/users/${getState().userReducer.user.id}/`,
+      `${process.env.HOST}/api/users/${getState().authReducer.user.id}/`,
       fd,
       tokenConfig(getState)
     )
@@ -538,11 +538,11 @@ export const paypalConnect = (
 };
 
 export const toggleView = () => async (dispatch, getState) => {
-  const view = getState().userReducer.user.seller_view;
+  const view = getState().authReducer.user.seller_view;
 
   await axios
     .patch(
-      `${process.env.HOST}/api/users/${getState().userReducer.user.id}/`,
+      `${process.env.HOST}/api/users/${getState().authReducer.user.id}/`,
       { seller_view: !view },
       tokenConfig(getState)
     )
@@ -680,7 +680,7 @@ export const changeCurrency = (currency) => async (dispatch, getState) => {
     type: CHANGE_CURRENCY,
     payload: currency,
   });
-  if (getState().userReducer.is_authenticated) {
+  if (getState().authReducer.is_authenticated) {
     await dispatch(updateUser({ currency: currency }));
   }
 };
@@ -864,7 +864,7 @@ export const removeAccount = (router) => async (dispatch, getState) => {
   });
   await axios
     .delete(
-      `${process.env.HOST}/api/users/${getState().userReducer.user.id}/`,
+      `${process.env.HOST}/api/users/${getState().authReducer.user.id}/`,
       tokenConfig(getState)
     )
     .then(async (res) => {
@@ -918,7 +918,7 @@ export const sendFeedback = (
 // Setup config with token - helper function
 export const tokenConfig = (getState) => {
   // Get token from state
-  let token = getState().userReducer.access_token;
+  let token = getState().authReducer.access_token;
 
   // Headers
   const config = {

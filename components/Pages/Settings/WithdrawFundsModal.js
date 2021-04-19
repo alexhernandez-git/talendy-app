@@ -9,7 +9,7 @@ const WithdrawFundsModal = ({
   openWithdrawFunds,
   handleCloseWithdrawFunds,
 }) => {
-  const userReducer = useSelector((state) => state.userReducer);
+  const authReducer = useSelector((state) => state.authReducer);
   const earningsReducer = useSelector((state) => state.earningsReducer);
   const dispatch = useDispatch();
   const formik = useFormik({
@@ -23,8 +23,8 @@ const WithdrawFundsModal = ({
         .required("Amount is required")
         .moreThan(1, "Amount must be greater than $1.00")
         .lessThan(
-          userReducer.user?.available_for_withdrawal + 1,
-          `Amount can not exceed total available for withdrawal ($${userReducer.user?.available_for_withdrawal})`
+          authReducer.user?.available_for_withdrawal + 1,
+          `Amount can not exceed total available for withdrawal ($${authReducer.user?.available_for_withdrawal})`
         ),
     }),
     onSubmit: async (values, { resetForm }) => {
@@ -105,7 +105,7 @@ const WithdrawFundsModal = ({
                       <div className="mt-1   sm:mt-0 sm:col-span-2">
                         <div className="flex items-center">
                           <div className="relative text-gray-500">
-                            {userReducer.user?.paypal_email}
+                            {authReducer.user?.paypal_email}
                           </div>
                         </div>
                       </div>

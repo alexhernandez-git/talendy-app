@@ -82,10 +82,10 @@ const Post = ({ page, image }) => {
   };
   const dispatch = useDispatch();
 
-  const userReducer = useSelector((state) => state.userReducer);
+  const authReducer = useSelector((state) => state.authReducer);
   const handleRequestToContribute = (e) => {
     e.stopPropagation();
-    if (!userReducer.is_authenticated) {
+    if (!authReducer.is_authenticated) {
       dispatch(createAlert("ERROR", "You are not authenticated"));
     }
   };

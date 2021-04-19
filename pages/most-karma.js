@@ -12,12 +12,13 @@ export default function MostKarma() {
   const page = MOST_KARMA_POSTS_PAGE;
   const dispatch = useDispatch();
   const initialDataReducer = useSelector((state) => state.initialDataReducer);
+  const authReducer = useSelector((state) => state.authReducer);
 
   useEffect(() => {
     if (initialDataReducer.initial_data_fetched) {
       dispatch(fetchTopKarmaUsers());
     }
-  }, [initialDataReducer.initial_data_fetched]);
+  }, [initialDataReducer.initial_data_fetched, authReducer.is_authenticated]);
   return (
     <Layout>
       <div className="py-10">

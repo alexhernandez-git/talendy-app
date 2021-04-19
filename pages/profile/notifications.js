@@ -8,13 +8,13 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 const Notifications = () => {
   const page = NOTIFICATIONS_PAGE;
-  const userReducer = useSelector((state) => state.userReducer);
+  const authReducer = useSelector((state) => state.authReducer);
 
   return (
     <Layout>
       <div className="py-10">
         <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
-          <UserCard mobile page={page} profile user={userReducer.user} />
+          <UserCard mobile page={page} profile user={authReducer.user} />
 
           <div className="lg:col-span-8 xl:col-span-6 xl:col-start-3 ">
             <nav class="flex mb-4" aria-label="Breadcrumb">
@@ -180,7 +180,7 @@ const Notifications = () => {
               </li>
             </ul>
           </div>
-          <UserCard page={page} profile user={userReducer.user} />
+          <UserCard page={page} profile user={authReducer.user} />
         </div>
       </div>
     </Layout>

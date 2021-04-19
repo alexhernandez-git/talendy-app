@@ -9,15 +9,15 @@ import { createAlert } from "redux/actions/alerts";
 const UserCard = ({ mobile, page, profile, user }) => {
   const dispatch = useDispatch();
 
-  const userReducer = useSelector((state) => state.userReducer);
+  const authReducer = useSelector((state) => state.authReducer);
 
   const handleFollowUser = () => {
-    if (!userReducer.is_authenticated) {
+    if (!authReducer.is_authenticated) {
       dispatch(createAlert("ERROR", "You are not authenticated"));
     }
   };
   const handleConnectUser = () => {
-    if (!userReducer.is_authenticated) {
+    if (!authReducer.is_authenticated) {
       dispatch(createAlert("ERROR", "You are not authenticated"));
     }
   };

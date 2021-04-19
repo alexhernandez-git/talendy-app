@@ -3,8 +3,15 @@ import {
   FETCH_TOP_KARMA_USERS,
   FETCH_TOP_KARMA_USERS_SUCCESS,
   FETCH_TOP_KARMA_USERS_FAIL,
+  FOLLOW_TOP_KARMA_USERS,
+  FOLLOW_TOP_KARMA_USERS_SUCCESS,
+  FOLLOW_TOP_KARMA_USERS_FAIL,
+  UNFOLLOW_TOP_KARMA_USERS,
+  UNFOLLOW_TOP_KARMA_USERS_SUCCESS,
+  UNFOLLOW_TOP_KARMA_USERS_FAIL,
 } from "../types";
-import { tokenConfig } from "./user";
+import { tokenConfig } from "./auth";
+
 export const fetchTopKarmaUsers = () => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_TOP_KARMA_USERS,
@@ -23,6 +30,56 @@ export const fetchTopKarmaUsers = () => async (dispatch, getState) => {
     .catch(async (err) => {
       await dispatch({
         type: FETCH_TOP_KARMA_USERS_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
+};
+
+export const followTopKarmaUser = (id) => async (dispatch, getState) => {
+  await dispatch({
+    type: FOLLOW_TOP_KARMA_USERS,
+  });
+  const values = {
+    followed_user: id,
+  };
+  await axios
+    .post(`${process.env.HOST}/api/follows/`, values, tokenConfig(getState))
+    .then(async (res) => {
+      await dispatch({
+        type: FOLLOW_TOP_KARMA_USERS_SUCCESS,
+        payload: id,
+      });
+    })
+    .catch(async (err) => {
+      await dispatch({
+        type: FOLLOW_TOP_KARMA_USERS_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
+};
+
+export const unfollowTopKarmaUser = (id) => async (dispatch, getState) => {
+  await dispatch({
+    type: UNFOLLOW_TOP_KARMA_USERS,
+  });
+  const values = {
+    followed_user: id,
+  };
+  await axios
+    .post(
+      `${process.env.HOST}/api/follows/unfollow/`,
+      values,
+      tokenConfig(getState)
+    )
+    .then(async (res) => {
+      await dispatch({
+        type: UNFOLLOW_TOP_KARMA_USERS_SUCCESS,
+        payload: id,
+      });
+    })
+    .catch(async (err) => {
+      await dispatch({
+        type: UNFOLLOW_TOP_KARMA_USERS_FAIL,
         payload: { data: err.response?.data, status: err.response?.status },
       });
     });

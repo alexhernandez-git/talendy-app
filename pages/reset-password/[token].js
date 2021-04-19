@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { resetPassword } from "redux/actions/user";
+import { resetPassword } from "redux/actions/auth";
 import { useAlert } from "hooks/useAlert";
 const loginPage = () => {
   const dispatch = useDispatch();
-  const userReducer = useSelector((state) => state.userReducer);
-  const { isLoading, isAuthenticated } = userReducer;
+  const authReducer = useSelector((state) => state.authReducer);
+  const { isLoading, isAuthenticated } = authReducer;
   const router = useRouter();
   const { token } = router.query;
 

@@ -15,7 +15,7 @@ const earnings = () => {
   const router = useRouter();
   const code = router.query.code ? router.query.code : null;
   const dispatch = useDispatch();
-  const userReducer = useSelector((state) => state.userReducer);
+  const authReducer = useSelector((state) => state.authReducer);
   const withdrawFundsRef = useRef();
   const [openWithdrawFunds, setOpenWithdrawFunds] = useState(false);
   const handleToggleWithdrawFunds = () => {
@@ -78,7 +78,7 @@ const earnings = () => {
                               Net income
                             </dt>
                             <dd className="order-1 text-3xl font-extrabold text-orange-600 dark:text-orange-500">
-                              ${userReducer?.user?.net_income}
+                              ${authReducer?.user?.net_income}
                             </dd>
                           </div>
                           <div className="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
@@ -86,7 +86,7 @@ const earnings = () => {
                               Withdrawn
                             </dt>
                             <dd className="order-1 text-3xl font-extrabold text-orange-600 dark:text-orange-500">
-                              ${userReducer?.user?.withdrawn}
+                              ${authReducer?.user?.withdrawn}
                             </dd>
                           </div>
 
@@ -96,8 +96,8 @@ const earnings = () => {
                             </dt>
                             <dd className="order-1 text-3xl font-extrabold text-orange-600 dark:text-orange-500">
                               $
-                              {userReducer?.user?.available_for_withdrawal
-                                ? userReducer?.user?.available_for_withdrawal
+                              {authReducer?.user?.available_for_withdrawal
+                                ? authReducer?.user?.available_for_withdrawal
                                 : "0.00"}
                             </dd>
                           </div>
@@ -107,8 +107,8 @@ const earnings = () => {
                             </dt>
                             <dd className="order-1 text-3xl font-extrabold text-orange-600 dark:text-orange-500">
                               $
-                              {userReducer?.user?.pending_clearance
-                                ? userReducer?.user?.pending_clearance
+                              {authReducer?.user?.pending_clearance
+                                ? authReducer?.user?.pending_clearance
                                 : "0.00"}
                             </dd>
                           </div>
@@ -137,7 +137,7 @@ const earnings = () => {
                               </h3>
                             </div>
 
-                            {!userReducer?.user?.paypal_email && (
+                            {!authReducer?.user?.paypal_email && (
                               <div className="mt-4 text-sm text-gray-600 dark:text-gray-200">
                                 Connect to PayPal to withdraw your money
                               </div>
@@ -154,7 +154,7 @@ const earnings = () => {
                                 </a>
                               </Link> */}
 
-                            {userReducer.stripe_connecting ? (
+                            {authReducer.stripe_connecting ? (
                               <>
                                 <span className="flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-3xl text-white bg-orange-600  hover:bg-orange-700">
                                   <Spinner />
@@ -162,7 +162,7 @@ const earnings = () => {
                               </>
                             ) : (
                               <>
-                                {userReducer?.user?.paypal_email ? (
+                                {authReducer?.user?.paypal_email ? (
                                   <>
                                     <span
                                       onMouseDown={handleToggleWithdrawFunds}

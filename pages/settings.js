@@ -23,12 +23,12 @@ import {
   isUsernameAvailable,
   updateUser,
   sendVerificationEmail,
-} from "redux/actions/user";
+} from "redux/actions/auth";
 const settings = () => {
   const page = SETTINGS_PAGE;
   const router = useRouter();
   const dispatch = useDispatch();
-  const [canRender, userReducer, initialDataFetched] = useAuthRequired(page);
+  const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
 
   const {
     username_available_error,
@@ -36,7 +36,7 @@ const settings = () => {
     email_available,
     email_available_error,
     user,
-  } = userReducer;
+  } = authReducer;
   const profileForm = useFormik({
     enableReinitialize: true,
     initialValues: {

@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Transition } from "@tailwindui/react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { forgetPassword, login } from "redux/actions/user";
+import { forgetPassword, login } from "redux/actions/auth";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 const Login = ({ loginOpen, loginRef, mobile, handleClose }) => {
-  const userReducer = useSelector((state) => state.userReducer);
+  const authReducer = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
   const router = useRouter();
   const [isForgotPasswordOpen, setIsForgotPassowrdOpen] = useState(false);
@@ -95,10 +95,10 @@ const Login = ({ loginOpen, loginRef, mobile, handleClose }) => {
                         Back
                       </span>
                     </div>
-                    {userReducer.forget_password_error &&
-                      userReducer.forget_password_error?.data
+                    {authReducer.forget_password_error &&
+                      authReducer.forget_password_error?.data
                         ?.non_field_errors &&
-                      userReducer.forget_password_error?.data?.non_field_errors.map(
+                      authReducer.forget_password_error?.data?.non_field_errors.map(
                         (message, i) => (
                           <div
                             key={i}
@@ -172,9 +172,9 @@ const Login = ({ loginOpen, loginRef, mobile, handleClose }) => {
                     onSubmit={formik.handleSubmit}
                     method="POST"
                   >
-                    {userReducer.error &&
-                      userReducer.error.data.non_field_errors &&
-                      userReducer.error.data.non_field_errors.map(
+                    {authReducer.error &&
+                      authReducer.error.data.non_field_errors &&
+                      authReducer.error.data.non_field_errors.map(
                         (message, i) => (
                           <div
                             key={i}
@@ -184,7 +184,7 @@ const Login = ({ loginOpen, loginRef, mobile, handleClose }) => {
                           </div>
                         )
                       )}
-                    {userReducer.error && userReducer.error.data.detail && (
+                    {authReducer.error && authReducer.error.data.detail && (
                       <div className="mb-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
                         <p>Invalid credentials</p>
                       </div>

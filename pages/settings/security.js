@@ -5,14 +5,14 @@ import { useDispatch } from "react-redux";
 import Head from "next/head";
 import { useSelector } from "react-redux";
 import SettingsLayout from "components/Layout/SettingsLayout";
-import { changePassword, resetChangePasswordErrors } from "redux/actions/user";
+import { changePassword, resetChangePasswordErrors } from "redux/actions/auth";
 import useAuthRequired from "hooks/useAuthRequired";
 import Spinner from "components/Layout/Spinner";
 const security = () => {
   const [canRender, authReducer] = useAuthRequired();
 
-  const userReducer = useSelector((state) => state.userReducer);
-  const { user } = userReducer;
+  const authReducer = useSelector((state) => state.authReducer);
+  const { user } = authReducer;
   const dispatch = useDispatch();
   const changePasswordForm = useFormik({
     initialValues: {
@@ -89,10 +89,10 @@ const security = () => {
                           </p>
                         ) : null}
 
-                        {userReducer.change_password_error &&
-                          userReducer.change_password_error.data
+                        {authReducer.change_password_error &&
+                          authReducer.change_password_error.data
                             .non_field_errors &&
-                          userReducer.change_password_error.data.non_field_errors.map(
+                          authReducer.change_password_error.data.non_field_errors.map(
                             (message, i) => (
                               <p key={i} className="mt-2 text-sm text-red-600">
                                 {message}

@@ -22,9 +22,9 @@ export default function PostPage() {
   };
   const dispatch = useDispatch();
 
-  const userReducer = useSelector((state) => state.userReducer);
+  const authReducer = useSelector((state) => state.authReducer);
   const handleRequestToContribute = () => {
-    if (!userReducer.is_authenticated) {
+    if (!authReducer.is_authenticated) {
       dispatch(createAlert("ERROR", "You are not authenticated"));
     }
   };

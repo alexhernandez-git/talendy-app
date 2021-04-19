@@ -9,7 +9,7 @@ import { useFormik } from "formik";
 import { HOME_PAGE, SEARCH_USERS_PAGE } from "pages";
 import Login from "./Login";
 import { useSelector } from "react-redux";
-import { logout } from "redux/actions/user";
+import { logout } from "redux/actions/auth";
 import { useDispatch } from "react-redux";
 const Header = ({
   handleToggleMessages,
@@ -111,12 +111,11 @@ const Header = ({
   const loginMobileRef = useRef();
   useOutsideClick(loginMobileRef, () => handleCloseLoginMobile());
 
-  const userReducer = useSelector((state) => state.userReducer);
-  const { user } = userReducer;
+  const authReducer = useSelector((state) => state.authReducer);
+  const { user } = authReducer;
   const handleSignOut = () => {
     handleCloseMenu();
     handleCloseMobileMenu();
-    router.push("/");
     dispatch(logout());
   };
   return (
@@ -217,7 +216,7 @@ const Header = ({
               </svg>
             </button>
           </div>
-          {userReducer.is_authenticated ? (
+          {authReducer.is_authenticated ? (
             <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
               <span
                 onClick={handleToggleMessages}
@@ -423,7 +422,7 @@ const Header = ({
                               d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                             />
                           </svg>
-                          300 Karma
+                          {user?.karma_amount} Karma
                         </span>
                         <Link href="/profile/posts" role="menuitem">
                           <span className="block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
@@ -506,7 +505,7 @@ const Header = ({
         aria-label="Global"
         ref={mobileMenuRef}
       >
-        {userReducer.is_authenticated ? (
+        {authReducer.is_authenticated ? (
           <div className="border-t border-gray-200 pt-4 pb-3">
             <div className="max-w-3xl mx-auto px-4 flex items-center sm:px-6">
               <div className="flex-shrink-0">

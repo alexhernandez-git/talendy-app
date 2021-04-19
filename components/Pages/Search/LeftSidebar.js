@@ -6,12 +6,12 @@ import {
 } from "pages";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeCommunity } from "redux/actions/user";
+import { changeCommunity } from "redux/actions/auth";
 
 const LeftSidebar = ({ page }) => {
   const dispatch = useDispatch();
-  const userReducer = useSelector((state) => state.userReducer);
-  const { community } = userReducer;
+  const authReducer = useSelector((state) => state.authReducer);
+  const { community } = authReducer;
   const handleSetCommunity = (selectedCommunity) => {
     if (selectedCommunity === community) {
       dispatch(changeCommunity(null));

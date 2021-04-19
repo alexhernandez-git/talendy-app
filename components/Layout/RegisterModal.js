@@ -7,15 +7,15 @@ import {
   register,
   isEmailAvailable,
   resetEmailAvailable,
-} from "redux/actions/user";
+} from "redux/actions/auth";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 const RegisterModal = ({ registerOpen, registerRef, handleCloseRegister }) => {
   const dispatch = useDispatch();
-  const userReducer = useSelector((state) => state.userReducer);
+  const authReducer = useSelector((state) => state.authReducer);
   const router = useRouter();
-  const { email_available_error } = userReducer;
+  const { email_available_error } = authReducer;
 
   const formik = useFormik({
     initialValues: {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { changeTheme } from "redux/actions/user";
+import { changeTheme } from "redux/actions/auth";
 
 const ToggleTheme = () => {
   const [isDarkLoading, setIsDarkLoading] = useState(true);

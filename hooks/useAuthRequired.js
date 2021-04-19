@@ -8,10 +8,10 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const useAuthRequired = (page) => {
-  const userReducer = useSelector((state) => state.userReducer);
+  const authReducer = useSelector((state) => state.authReducer);
   const initialDataReducer = useSelector((state) => state.initialDataReducer);
 
-  const { is_authenticated } = userReducer;
+  const { is_authenticated } = authReducer;
   const router = useRouter();
   const [canRender, setCanRender] = useState(false);
   const privatePages = [MY_POSTS_PAGE, CONTRIBUTE_PAGE];
@@ -25,7 +25,7 @@ const useAuthRequired = (page) => {
       }
     }
   }, [initialDataReducer.initial_data_fetched]);
-  return [canRender, userReducer, initialDataReducer.initial_data_fetched];
+  return [canRender, authReducer, initialDataReducer.initial_data_fetched];
 };
 
 export default useAuthRequired;

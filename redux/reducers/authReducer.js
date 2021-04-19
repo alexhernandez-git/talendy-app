@@ -156,7 +156,7 @@ const initialState = {
   leave_feedback_error: null,
 };
 
-export default function userReducer(state = initialState, action) {
+export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case CHANGE_THEME:
       return {

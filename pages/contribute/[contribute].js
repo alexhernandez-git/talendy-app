@@ -44,7 +44,7 @@ const Contribute = () => {
   const image = true;
   const router = useRouter();
   const dispatch = useDispatch();
-  const [canRender, userReducer, initialDataFetched] = useAuthRequired(page);
+  const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
   // Webrtc
   const [peers, setPeers] = useState([]);
   const myStreamRef = useRef();
@@ -87,7 +87,7 @@ const Contribute = () => {
 
       socketRef.current.emit("join room", {
         roomID: roomID,
-        userID: userReducer.user?.id,
+        userID: authReducer.user?.id,
       });
 
       socketRef.current.on("not allowed", () => {
@@ -174,9 +174,11 @@ const Contribute = () => {
     return () => {
       console.log("myStreamRef.current", myStreamRef.current);
       socketRef.current.disconnect();
-      myStreamRef.current.getTracks().forEach(function (track) {
-        track.stop();
-      });
+      if (myStreamRef.current) {
+        myStreamRef.current.getTracks().forEach(function (track) {
+          track.stop();
+        });
+      }
     };
   }, []);
   const [modalOpen, setModalOpen] = useState(false);

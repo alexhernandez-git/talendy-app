@@ -3,7 +3,7 @@ import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import { useDispatch } from "react-redux";
 import { dataURLtoFile } from "helpers";
-import { updateUserPicture } from "redux/actions/user";
+import { updateUserPicture } from "redux/actions/auth";
 
 const CropperModal = ({ show, handleClose, newImage }) => {
   const dispatch = useDispatch();

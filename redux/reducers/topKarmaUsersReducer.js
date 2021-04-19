@@ -2,6 +2,12 @@ import {
   FETCH_TOP_KARMA_USERS,
   FETCH_TOP_KARMA_USERS_SUCCESS,
   FETCH_TOP_KARMA_USERS_FAIL,
+  FOLLOW_TOP_KARMA_USERS,
+  FOLLOW_TOP_KARMA_USERS_SUCCESS,
+  FOLLOW_TOP_KARMA_USERS_FAIL,
+  UNFOLLOW_TOP_KARMA_USERS,
+  UNFOLLOW_TOP_KARMA_USERS_SUCCESS,
+  UNFOLLOW_TOP_KARMA_USERS_FAIL,
 } from "../types";
 import { HYDRATE } from "next-redux-wrapper";
 
@@ -14,6 +20,10 @@ const initialState = {
     results: [],
   },
   error: null,
+  is_following_user: false,
+  follow_user_error: null,
+  is_unfollowing_user: false,
+  unfollow_user_error: null,
 };
 export default function topKarmaUsersReducer(state = initialState, action) {
   switch (action.type) {
@@ -35,7 +45,54 @@ export default function topKarmaUsersReducer(state = initialState, action) {
         is_loading: false,
         error: action.payload,
       };
+    case FOLLOW_TOP_KARMA_USERS:
+      return {
+        ...state,
+        is_following_user: true,
+      };
+    case FOLLOW_TOP_KARMA_USERS_SUCCESS:
+      console.log(action.payload);
 
+      return {
+        ...state,
+        is_following_user: false,
+        users: {
+          ...state.users,
+          results: state.users.results.map((user) =>
+            user.id === action.payload ? { ...user, is_followed: true } : user
+          ),
+        },
+        follow_user_error: null,
+      };
+    case FOLLOW_TOP_KARMA_USERS_FAIL:
+      return {
+        ...state,
+        is_following_user: false,
+        follow_user_error: action.payload,
+      };
+    case UNFOLLOW_TOP_KARMA_USERS:
+      return {
+        ...state,
+        is_unfollowing_user: true,
+      };
+    case UNFOLLOW_TOP_KARMA_USERS_SUCCESS:
+      return {
+        ...state,
+        is_unfollowing_user: false,
+        users: {
+          ...state.users,
+          results: state.users.results.map((user) =>
+            user.id === action.payload ? { ...user, is_followed: false } : user
+          ),
+        },
+        unfollow_user_error: null,
+      };
+    case UNFOLLOW_TOP_KARMA_USERS_FAIL:
+      return {
+        ...state,
+        is_unfollowing_user: false,
+        unfollow_user_error: action.payload,
+      };
     default:
       return state;
   }

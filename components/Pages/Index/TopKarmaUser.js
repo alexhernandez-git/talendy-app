@@ -3,6 +3,10 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { createAlert } from "redux/actions/alerts";
+import {
+  followTopKarmaUser,
+  unfollowTopKarmaUser,
+} from "redux/actions/topKarmaUsers";
 
 const TopKarmaUser = ({ user }) => {
   const dispatch = useDispatch();
@@ -10,17 +14,22 @@ const TopKarmaUser = ({ user }) => {
 
   const handleGoToProfile = (e) => {
     e.stopPropagation();
-    if (userReducer.user?.id === user.id) {
+    if (authReducer.user?.id === user.id) {
       router.push(`/profile/posts`);
     } else {
       router.push(`/user/${user.id}`);
     }
   };
-  const userReducer = useSelector((state) => state.userReducer);
+  const authReducer = useSelector((state) => state.authReducer);
   const handleFollowUser = () => {
-    if (!userReducer.is_authenticated) {
+    if (!authReducer.is_authenticated) {
       dispatch(createAlert("ERROR", "You are not authenticated"));
+      return;
     }
+    dispatch(followTopKarmaUser(user.id));
+  };
+  const handleUnfollowUser = () => {
+    dispatch(unfollowTopKarmaUser(user.id));
   };
 
   return (
@@ -75,26 +84,14 @@ const TopKarmaUser = ({ user }) => {
             {user?.karma_amount} Karma
           </p>
         </div>
-        {userReducer.user?.id !== user.id && (
+        {authReducer.user?.id !== user.id && (
           <div className="flex-shrink-0">
             {user?.is_followed ? (
               <button
-                onClick={handleFollowUser}
+                onClick={handleUnfollowUser}
                 type="button"
                 className="inline-flex items-center px-3 py-0.5 rounded-full text-orange-50 text-sm font-medium bg-orange-700 hover:text-orange-100 dark:bg-orange-100 dark:text-orange-600 dark:hover:text-orange-500"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="-ml-1 mr-0.5 h-5 w-5 bg-orange-400 dark:bg-orange-100"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                    clipRule="evenodd"
-                  />
-                </svg>
                 <span>Unfollow</span>
               </button>
             ) : (
