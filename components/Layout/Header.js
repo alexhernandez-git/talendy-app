@@ -114,6 +114,8 @@ const Header = ({
   const userReducer = useSelector((state) => state.userReducer);
   const { user } = userReducer;
   const handleSignOut = () => {
+    handleCloseMenu();
+    handleCloseMobileMenu();
     router.push("/");
     dispatch(logout());
   };

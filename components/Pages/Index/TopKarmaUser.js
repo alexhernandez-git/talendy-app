@@ -77,26 +77,48 @@ const TopKarmaUser = ({ user }) => {
         </div>
         {userReducer.user?.id !== user.id && (
           <div className="flex-shrink-0">
-            <button
-              onClick={handleFollowUser}
-              type="button"
-              className="inline-flex items-center px-3 py-0.5 rounded-full bg-orange-50 text-sm font-medium text-orange-700 hover:bg-orange-100 dark:text-orange-100 dark:bg-orange-600 dark:hover:bg-orange-500"
-            >
-              <svg
-                className="-ml-1 mr-0.5 h-5 w-5 text-orange-400 dark:text-orange-100"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
+            {user?.is_followed ? (
+              <button
+                onClick={handleFollowUser}
+                type="button"
+                className="inline-flex items-center px-3 py-0.5 rounded-full text-orange-50 text-sm font-medium bg-orange-700 hover:text-orange-100 dark:bg-orange-100 dark:text-orange-600 dark:hover:text-orange-500"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span>Follow</span>
-            </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="-ml-1 mr-0.5 h-5 w-5 bg-orange-400 dark:bg-orange-100"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span>Unfollow</span>
+              </button>
+            ) : (
+              <button
+                onClick={handleFollowUser}
+                type="button"
+                className="inline-flex items-center px-3 py-0.5 rounded-full bg-orange-50 text-sm font-medium text-orange-700 hover:bg-orange-100 dark:text-orange-100 dark:bg-orange-600 dark:hover:bg-orange-500"
+              >
+                <svg
+                  className="-ml-1 mr-0.5 h-5 w-5 text-orange-400 dark:text-orange-100"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span>Follow</span>
+              </button>
+            )}
           </div>
         )}
       </div>

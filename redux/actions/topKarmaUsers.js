@@ -23,7 +23,7 @@ export const fetchTopKarmaUsers = () => async (dispatch, getState) => {
     .catch(async (err) => {
       await dispatch({
         type: FETCH_TOP_KARMA_USERS_FAIL,
-        payload: { data: err.response.data, status: err.response.status },
+        payload: { data: err.response?.data, status: err.response?.status },
       });
     });
 };

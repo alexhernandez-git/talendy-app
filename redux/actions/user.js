@@ -135,16 +135,21 @@ export const getUserByJwt = (token) => async (dispatch, getState) => {
     })
     .catch(async (err) => {});
 };
-export const login = (data) => async (dispatch, getState) => {
+export const login = (data, handleClose, resetForm, router) => async (
+  dispatch,
+  getState
+) => {
   console.log(data);
   await axios
     .post(`${process.env.HOST}/api/users/login/`, data)
-    .then((res) => {
-      console.log(res.data);
-      dispatch({
+    .then(async (res) => {
+      await dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data,
       });
+      await handleClose();
+      await resetForm({});
+      await router.push("/");
     })
     .catch((err) => {
       dispatch({
@@ -218,7 +223,7 @@ export const resetCouponAvailable = () => async (dispatch, getState) => {
   dispatch({ type: RESET_COUPON_AVAILABLE });
 };
 
-export const register = (data, handleClose, resetForm) => async (
+export const register = (data, handleClose, resetForm, router) => async (
   dispatch,
   getState
 ) => {
@@ -234,6 +239,7 @@ export const register = (data, handleClose, resetForm) => async (
       });
       await handleClose();
       await resetForm();
+      await router.push("/");
     })
     .catch(async (err) => {
       await dispatch({

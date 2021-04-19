@@ -10,10 +10,11 @@ import {
 } from "redux/actions/user";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 const RegisterModal = ({ registerOpen, registerRef, handleCloseRegister }) => {
   const dispatch = useDispatch();
   const userReducer = useSelector((state) => state.userReducer);
-
+  const router = useRouter();
   const { email_available_error } = userReducer;
 
   const formik = useFormik({
@@ -35,7 +36,7 @@ const RegisterModal = ({ registerOpen, registerRef, handleCloseRegister }) => {
     }),
     onSubmit: async (values, { resetForm }) => {
       // console.log(valores);
-      dispatch(register(values, handleCloseRegister, resetForm));
+      dispatch(register(values, handleCloseRegister, resetForm, router));
     },
   });
   useEffect(() => {

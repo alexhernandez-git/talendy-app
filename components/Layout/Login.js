@@ -5,9 +5,11 @@ import * as Yup from "yup";
 import { forgetPassword, login } from "redux/actions/user";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 const Login = ({ loginOpen, loginRef, mobile, handleClose }) => {
   const userReducer = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
+  const router = useRouter();
   const [isForgotPasswordOpen, setIsForgotPassowrdOpen] = useState(false);
   const handleOpenForgotPassword = () => {
     setIsForgotPassowrdOpen(true);
@@ -26,9 +28,9 @@ const Login = ({ loginOpen, loginRef, mobile, handleClose }) => {
         .required("Email can't be empty"),
       password: Yup.string().required("Password is required"),
     }),
-    onSubmit: async (values) => {
+    onSubmit: async (values, { resetForm }) => {
       // console.log(valores);
-      dispatch(login(values));
+      dispatch(login(values, handleClose, resetForm, router));
     },
   });
   const resetPasswordForm = useFormik({
