@@ -9,6 +9,7 @@ import Link from "next/link";
 
 const DonationForm = () => {
   const authReducer = useSelector((state) => state.authReducer);
+  const userReducer = useSelector((state) => state.userReducer);
 
   return (
     <div className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
@@ -48,9 +49,9 @@ const DonationForm = () => {
                   clip-rule="evenodd"
                 />
               </svg>
-              <Link href="/user/123">
+              <Link href={`/user/${userReducer.user?.id}`}>
                 <span class="cursor-pointer ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
-                  Alex
+                  {userReducer.user?.username}
                 </span>
               </Link>
             </div>

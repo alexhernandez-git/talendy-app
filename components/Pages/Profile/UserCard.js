@@ -161,7 +161,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
                         Show your appreciation by leaving a donation
                       </span>
                     </div>
-                    <Link href="/donation/123">
+                    <Link href={`/user/donation/${user?.id}`}>
                       <button
                         type="button"
                         className="w-full bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
