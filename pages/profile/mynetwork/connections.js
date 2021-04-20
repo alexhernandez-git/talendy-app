@@ -22,14 +22,12 @@ export default function Posts() {
           <UserCard mobile page={page} profile user={authReducer.user} />
           <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
             <ProfileMenu page={page} />
+            <LeftSidebar page={page} mobile />
+
             <div className="mt-4">
               <ul className="space-y-4">
-                <li>
-                  <User page={page} />
-                </li>
-                <li>
-                  <User page={page} />
-                </li>
+                <User page={page} />
+                <User page={page} />
               </ul>
             </div>
           </main>

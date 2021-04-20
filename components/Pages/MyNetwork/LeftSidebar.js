@@ -3,11 +3,15 @@ import { CONNECTIONS_PAGE, MY_NETWORK_PAGE, PEOPLE_I_FOLLOW_PAGE } from "pages";
 import React from "react";
 import { useSelector } from "react-redux";
 
-const LeftSidebar = ({ page }) => {
+const LeftSidebar = ({ page, mobile }) => {
   const invitationsReducer = useSelector((state) => state.invitationsReducer);
 
   return (
-    <div className="hidden xl:block  xl:col-span-2">
+    <div
+      className={`${
+        mobile ? "mx-2 xl:hidden" : "hidden xl:block  xl:col-span-2"
+      }`}
+    >
       <nav aria-label="Sidebar" className="divide-y divide-gray-300">
         <div className="">
           <p
