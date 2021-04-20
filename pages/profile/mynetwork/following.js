@@ -6,7 +6,6 @@ import LeftSidebar from "components/Pages/MyNetwork/LeftSidebar";
 import useAuthRequired from "hooks/useAuthRequired";
 import Spinner from "components/Layout/Spinner";
 import ProfileMenu from "components/Pages/Profile/ProfileMenu";
-import UsersFeed from "components/Layout/UsersFeed";
 import User from "components/Layout/User";
 export default function Posts() {
   const page = PEOPLE_I_FOLLOW_PAGE;
