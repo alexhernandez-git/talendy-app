@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { CONNECTIONS_PAGE, MY_NETWORK_PAGE, PEOPLE_I_FOLLOW_PAGE } from "pages";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const LeftSidebar = ({ page }) => {
+  const invitationsReducer = useSelector((state) => state.invitationsReducer);
+
   return (
     <div className="hidden xl:block  xl:col-span-2">
       <nav aria-label="Sidebar" className="divide-y divide-gray-300">
@@ -27,7 +30,7 @@ const LeftSidebar = ({ page }) => {
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
               >
                 <span className="truncate">Invitations</span>
-                <span>5</span>
+                <span>{invitationsReducer.invitations.results.length}</span>
               </span>
             </Link>
             <Link href="/profile/mynetwork/connections">

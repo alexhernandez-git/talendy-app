@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import {
   MY_NETWORK_PAGE,
-  CONTRIBUTED,
+  CONTRIBUTED_PAGE,
   MY_POSTS_PAGE,
   PEOPLE_I_FOLLOW_PAGE,
   CONNECTIONS_PAGE,
@@ -57,7 +57,7 @@ const ProfileMenu = ({ page }) => {
           <Link href="/profile/contributed">
             <a
               className={`${
-                page === CONTRIBUTED ||
+                page === CONTRIBUTED_PAGE ||
                 page === ACTIVE_CONTRIBUTED ||
                 page === CLOSED_CONTRIBUTED
                   ? "text-gray-900"
@@ -65,7 +65,7 @@ const ProfileMenu = ({ page }) => {
               } dark:text-white group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10  hover:text-gray-700 dark:hover:bg-gray-800`}
             >
               <span>Contributed</span>
-              {page === CONTRIBUTED ||
+              {page === CONTRIBUTED_PAGE ||
               page === ACTIVE_CONTRIBUTED ||
               page === CLOSED_CONTRIBUTED ? (
                 <span
