@@ -1,0 +1,93 @@
+import axios from "axios";
+import {
+  FETCH_INVITATIONS,
+  FETCH_INVITATIONS_SUCCESS,
+  FETCH_INVITATIONS_FAIL,
+  ACCEPT_INVITATION,
+  ACCEPT_INVITATION_SUCCESS,
+  ACCEPT_INVITATION_FAIL,
+  IGNORE_INVITATION,
+  IGNORE_INVITATION_SUCCESS,
+  IGNORE_INVITATION_FAIL,
+} from "../types";
+import { tokenConfig } from "./auth";
+
+export const fetchInvitations = () => async (dispatch, getState) => {
+  await dispatch({
+    type: FETCH_INVITATIONS,
+  });
+
+  await axios
+    .get(
+      `${process.env.HOST}/api/connections/list_invitations/`,
+      tokenConfig(getState)
+    )
+    .then(async (res) => {
+      await dispatch({
+        type: FETCH_INVITATIONS_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(async (err) => {
+      await dispatch({
+        type: FETCH_INVITATIONS_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
+};
+
+export const acceptInvitation = (id) => async (dispatch, getState) => {
+  await dispatch({
+    type: ACCEPT_INVITATION,
+  });
+  const values = {
+    requester: id,
+  };
+  console.log(values);
+  await axios
+    .post(
+      `${process.env.HOST}/api/connections/accept/`,
+      values,
+      tokenConfig(getState)
+    )
+    .then(async (res) => {
+      await dispatch({
+        type: ACCEPT_INVITATION_SUCCESS,
+        payload: id,
+      });
+    })
+    .catch(async (err) => {
+      await dispatch({
+        type: ACCEPT_INVITATION_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
+};
+
+export const ignoreInvitation = (id) => async (dispatch, getState) => {
+  await dispatch({
+    type: IGNORE_INVITATION,
+  });
+  const values = {
+    requester: id,
+  };
+  console.log(values);
+  await axios
+    .post(
+      `${process.env.HOST}/api/connections/ignore/`,
+      values,
+      tokenConfig(getState)
+    )
+    .then(async (res) => {
+      await dispatch({
+        type: IGNORE_INVITATION_SUCCESS,
+        payload: id,
+      });
+    })
+    .catch(async (err) => {
+      await dispatch({
+        type: IGNORE_INVITATION_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
+};

@@ -1,7 +1,7 @@
 import {
-  LIST_INVITATIONS,
-  LIST_INVITATIONS_SUCCESS,
-  LIST_INVITATIONS_FAIL,
+  FETCH_INVITATIONS,
+  FETCH_INVITATIONS_SUCCESS,
+  FETCH_INVITATIONS_FAIL,
   ACCEPT_INVITATION,
   ACCEPT_INVITATION_SUCCESS,
   ACCEPT_INVITATION_FAIL,
@@ -26,50 +26,74 @@ const initialState = {
 };
 export default function invitationsReducer(state = initialState, action) {
   switch (action.type) {
-    case FETCH_TOP_KARMA_USERS:
+    case FETCH_INVITATIONS:
       return {
         ...state,
         is_loading: true,
       };
-    case FETCH_TOP_KARMA_USERS_SUCCESS:
+    case FETCH_INVITATIONS_SUCCESS:
       return {
         ...state,
         is_loading: false,
-        users: action.payload,
+        invitations: action.payload,
         error: null,
       };
-    case FETCH_TOP_KARMA_USERS_FAIL:
+    case FETCH_INVITATIONS_FAIL:
       return {
         ...state,
         is_loading: false,
         error: action.payload,
       };
-    case FOLLOW_TOP_KARMA_USER:
+    case ACCEPT_INVITATION:
       return {
         ...state,
-        is_following_user: true,
+        is_accepting_invitation: true,
       };
-    case FOLLOW_TOP_KARMA_USER_SUCCESS:
+    case ACCEPT_INVITATION_SUCCESS:
       console.log(action.payload);
 
       return {
         ...state,
-        is_following_user: false,
-        users: {
-          ...state.users,
-          results: state.users.results.map((user) =>
-            user.id === action.payload ? { ...user, is_followed: true } : user
+        is_accepting_invitation: false,
+        invitations: {
+          ...state.invitations,
+          results: state.invitations.results.filter(
+            (invitation) => invitation.requester.id !== action.payload
           ),
         },
-        follow_user_error: null,
+        accept_invitation_error: null,
       };
-    case FOLLOW_TOP_KARMA_USER_FAIL:
+    case ACCEPT_INVITATION_FAIL:
       return {
         ...state,
-        is_following_user: false,
-        follow_user_error: action.payload,
+        is_accepting_invitation: false,
+        accept_invitation_error: action.payload,
       };
+    case IGNORE_INVITATION:
+      return {
+        ...state,
+        is_ignoring_invitation: true,
+      };
+    case IGNORE_INVITATION_SUCCESS:
+      console.log(action.payload);
 
+      return {
+        ...state,
+        is_ignoring_invitation: false,
+        invitations: {
+          ...state.invitations,
+          results: state.invitations.results.filter(
+            (invitation) => invitation.requester.id !== action.payload
+          ),
+        },
+        ignore_invitation_error: null,
+      };
+    case IGNORE_INVITATION_FAIL:
+      return {
+        ...state,
+        is_ignoring_invitation: false,
+        ignore_invitation_error: action.payload,
+      };
     default:
       return state;
   }
