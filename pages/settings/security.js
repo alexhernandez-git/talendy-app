@@ -11,7 +11,6 @@ import Spinner from "components/Layout/Spinner";
 const security = () => {
   const [canRender, authReducer] = useAuthRequired();
 
-  const authReducer = useSelector((state) => state.authReducer);
   const { user } = authReducer;
   const dispatch = useDispatch();
   const changePasswordForm = useFormik({

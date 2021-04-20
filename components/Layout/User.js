@@ -9,7 +9,7 @@ import {
 } from "pages";
 import { useRouter } from "next/router";
 
-const User = ({ page }) => {
+const User = ({ page, user }) => {
   const [optionsOpen, setOptionsOpen] = useState(false);
   const handleOpenOptions = () => {
     setOptionsOpen(true);
@@ -34,11 +34,27 @@ const User = ({ page }) => {
         <div className="flex items-center justify-between">
           <div className="flex space-x-3 items-center">
             <div className="flex-shrink-0">
-              <img
-                className="h-10 w-10 rounded-full"
-                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixqx=9XbzAMvCeF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-              />
+              {user?.picture ? (
+                <img
+                  className="h-10 w-10 rounded-full"
+                  src={
+                    new RegExp(
+                      `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                    ).test(user.picture)
+                      ? user.picture
+                      : process.env.HOST + user.picture
+                  }
+                  alt=""
+                ></img>
+              ) : (
+                <svg
+                  className="bg-gray-100 text-gray-300 rounded-full overflow-hidden h-10 w-10"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              )}
             </div>
             <div className="min-w-0 flex-1">
               <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">
@@ -46,7 +62,7 @@ const User = ({ page }) => {
                   onClick={handleGoToProfile}
                   className="hover:underline cursor-pointer"
                 >
-                  Dries Vincent
+                  {user?.username}
                 </span>
               </p>
               <span className="inline-flex items-center text-sm">
@@ -64,7 +80,9 @@ const User = ({ page }) => {
                     d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span className="font-medium text-orange-500">10000 Karma</span>
+                <span className="font-medium text-orange-500">
+                  {user?.karma_amount} Karma
+                </span>
                 <span className="sr-only">karmas amount</span>
               </span>
             </div>

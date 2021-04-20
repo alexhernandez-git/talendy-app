@@ -9,7 +9,7 @@ import {
 } from "../types";
 import { tokenConfig } from "./auth";
 
-export const fetchInvitations = () => async (dispatch, getState) => {
+export const fetchConnections = () => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_CONNECTIONS,
   });

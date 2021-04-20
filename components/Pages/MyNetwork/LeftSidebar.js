@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 
 const LeftSidebar = ({ page, mobile }) => {
   const invitationsReducer = useSelector((state) => state.invitationsReducer);
+  const connectionsReducer = useSelector((state) => state.connectionsReducer);
+  const followingReducer = useSelector((state) => state.followingReducer);
 
   return (
     <div
@@ -30,8 +32,8 @@ const LeftSidebar = ({ page, mobile }) => {
                   ${
                     page === MY_NETWORK_PAGE
                       ? "bg-gray-200 text-gray-900 "
-                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
+                      : "text-gray-600 xl:hover:bg-gray-50 dark:text-gray-100"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl xl:hover:text-gray-900 xl:dark:hover:text-gray-900`}
               >
                 <span className="truncate">Invitations</span>
                 <span>{invitationsReducer.invitations.results.length}</span>
@@ -43,11 +45,11 @@ const LeftSidebar = ({ page, mobile }) => {
                   ${
                     page === CONNECTIONS_PAGE
                       ? "bg-gray-200 text-gray-900 "
-                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
+                      : "text-gray-600 xl:hover:bg-gray-50 dark:text-gray-100"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl xl:hover:text-gray-900 xl:dark:hover:text-gray-900`}
               >
                 <span className="truncate">Connections</span>
-                <span>10</span>
+                <span>{connectionsReducer.connections.results.length}</span>
               </span>
             </Link>
             <Link href="/profile/mynetwork/following">
@@ -56,11 +58,11 @@ const LeftSidebar = ({ page, mobile }) => {
                   ${
                     page === PEOPLE_I_FOLLOW_PAGE
                       ? "bg-gray-200 text-gray-900 "
-                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
+                      : "text-gray-600 xl:hover:bg-gray-50 dark:text-gray-100"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl xl:hover:text-gray-900 xl:dark:hover:text-gray-900`}
               >
                 <span className="truncate">People I Follow</span>
-                <span>20</span>
+                <span>{followingReducer.following.results.length}</span>
               </span>
             </Link>
           </div>
