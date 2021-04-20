@@ -6,9 +6,9 @@ import {
   FOLLOW_USER,
   FOLLOW_USER_SUCCESS,
   FOLLOW_USER_FAIL,
-  UNFOLLOW_USER,
-  UNFOLLOW_USER_SUCCESS,
-  UNFOLLOW_USER_FAIL,
+  STOP_FOLLOWING_USER,
+  STOP_FOLLOWING_USER_SUCCESS,
+  STOP_FOLLOWING_USER_FAIL,
 } from "../types";
 import { tokenConfig } from "./auth";
 
@@ -57,7 +57,7 @@ export const followUser = () => async (dispatch, getState) => {
 
 export const unfollowUser = () => async (dispatch, getState) => {
   await dispatch({
-    type: UNFOLLOW_USER,
+    type: STOP_FOLLOWING_USER,
   });
   const values = {
     followed_user: getState().userReducer.user?.id,
@@ -70,12 +70,12 @@ export const unfollowUser = () => async (dispatch, getState) => {
     )
     .then(async (res) => {
       await dispatch({
-        type: UNFOLLOW_USER_SUCCESS,
+        type: STOP_FOLLOWING_USER_SUCCESS,
       });
     })
     .catch(async (err) => {
       await dispatch({
-        type: UNFOLLOW_USER_FAIL,
+        type: STOP_FOLLOWING_USER_FAIL,
         payload: { data: err.response?.data, status: err.response?.status },
       });
     });

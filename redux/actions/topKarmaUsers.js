@@ -58,7 +58,7 @@ export const followTopKarmaUser = (id) => async (dispatch, getState) => {
 
 // export const unfollowTopKarmaUser = (id) => async (dispatch, getState) => {
 //   await dispatch({
-//     type: UNFOLLOW_TOP_KARMA_USER,
+//     type: STOP_FOLLOWING_TOP_KARMA_USER,
 //   });
 //   const values = {
 //     followed_user: id,
@@ -71,13 +71,13 @@ export const followTopKarmaUser = (id) => async (dispatch, getState) => {
 //     )
 //     .then(async (res) => {
 //       await dispatch({
-//         type: UNFOLLOW_TOP_KARMA_USER_SUCCESS,
+//         type: STOP_FOLLOWING_TOP_KARMA_USER_SUCCESS,
 //         payload: id,
 //       });
 //     })
 //     .catch(async (err) => {
 //       await dispatch({
-//         type: UNFOLLOW_TOP_KARMA_USER_FAIL,
+//         type: STOP_FOLLOWING_TOP_KARMA_USER_FAIL,
 //         payload: { data: err.response?.data, status: err.response?.status },
 //       });
 //     });

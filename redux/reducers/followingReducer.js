@@ -2,9 +2,9 @@ import {
   FETCH_FOLLOWING,
   FETCH_FOLLOWING_SUCCESS,
   FETCH_FOLLOWING_FAIL,
-  UNFOLLOW,
-  UNFOLLOW_SUCCESS,
-  UNFOLLOW_FAIL,
+  STOP_FOLLOWING,
+  STOP_FOLLOWING_SUCCESS,
+  STOP_FOLLOWING_FAIL,
 } from "../types";
 
 const initialState = {
@@ -39,12 +39,12 @@ export default function followingReducer(state = initialState, action) {
         is_loading: false,
         error: action.payload,
       };
-    case UNFOLLOW:
+    case STOP_FOLLOWING:
       return {
         ...state,
         is_unfollowing: true,
       };
-    case UNFOLLOW_SUCCESS:
+    case STOP_FOLLOWING_SUCCESS:
       console.log(action.payload);
 
       return {
@@ -58,7 +58,7 @@ export default function followingReducer(state = initialState, action) {
         },
         unfollow_error: null,
       };
-    case UNFOLLOW_FAIL:
+    case STOP_FOLLOWING_FAIL:
       return {
         ...state,
         is_unfollowing: false,

@@ -5,9 +5,9 @@ import {
   FOLLOW_USER,
   FOLLOW_USER_SUCCESS,
   FOLLOW_USER_FAIL,
-  UNFOLLOW_USER,
-  UNFOLLOW_USER_SUCCESS,
-  UNFOLLOW_USER_FAIL,
+  STOP_FOLLOWING_USER,
+  STOP_FOLLOWING_USER_SUCCESS,
+  STOP_FOLLOWING_USER_FAIL,
 } from "../types";
 import { HYDRATE } from "next-redux-wrapper";
 
@@ -61,12 +61,12 @@ export default function userReducer(state = initialState, action) {
         is_following_user: false,
         follow_user_error: action.payload,
       };
-    case UNFOLLOW_USER:
+    case STOP_FOLLOWING_USER:
       return {
         ...state,
         is_unfollowing_user: true,
       };
-    case UNFOLLOW_USER_SUCCESS:
+    case STOP_FOLLOWING_USER_SUCCESS:
       return {
         ...state,
         is_unfollowing_user: false,
@@ -76,7 +76,7 @@ export default function userReducer(state = initialState, action) {
         },
         unfollow_user_error: null,
       };
-    case UNFOLLOW_USER_FAIL:
+    case STOP_FOLLOWING_USER_FAIL:
       return {
         ...state,
         is_unfollowing_user: false,

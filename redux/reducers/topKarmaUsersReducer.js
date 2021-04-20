@@ -65,12 +65,12 @@ export default function topKarmaUsersReducer(state = initialState, action) {
         is_following_user: false,
         follow_user_error: action.payload,
       };
-    // case UNFOLLOW_TOP_KARMA_USER:
+    // case STOP_FOLLOWING_TOP_KARMA_USER:
     //   return {
     //     ...state,
     //     is_unfollowing_user: true,
     //   };
-    // case UNFOLLOW_TOP_KARMA_USER_SUCCESS:
+    // case STOP_FOLLOWING_TOP_KARMA_USER_SUCCESS:
     //   return {
     //     ...state,
     //     is_unfollowing_user: false,
@@ -82,7 +82,7 @@ export default function topKarmaUsersReducer(state = initialState, action) {
     //     },
     //     unfollow_user_error: null,
     //   };
-    // case UNFOLLOW_TOP_KARMA_USER_FAIL:
+    // case STOP_FOLLOWING_TOP_KARMA_USER_FAIL:
     //   return {
     //     ...state,
     //     is_unfollowing_user: false,

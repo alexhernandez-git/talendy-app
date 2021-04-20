@@ -45,7 +45,7 @@ export const acceptInvitation = (id) => async (dispatch, getState) => {
   };
   console.log(values);
   await axios
-    .post(
+    .patch(
       `${process.env.HOST}/api/connections/accept/`,
       values,
       tokenConfig(getState)
@@ -73,7 +73,7 @@ export const ignoreInvitation = (id) => async (dispatch, getState) => {
   };
   console.log(values);
   await axios
-    .post(
+    .patch(
       `${process.env.HOST}/api/connections/ignore/`,
       values,
       tokenConfig(getState)
