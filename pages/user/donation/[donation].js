@@ -1,5 +1,5 @@
 import Layout from "components/Layout/Layout";
-import Feed from "components/Layout/Feed";
+
 import UserCard from "components/Pages/Profile/UserCard";
 import { DONATION_PAGE } from "pages";
 import LeftSidebar from "components/Pages/User/LeftSidebar";

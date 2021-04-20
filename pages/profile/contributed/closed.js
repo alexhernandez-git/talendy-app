@@ -1,5 +1,5 @@
 import Layout from "components/Layout/Layout";
-import Feed from "components/Layout/Feed";
+
 import LeftSidebar from "components/Pages/HelpedIn/LeftSidebar";
 import UserCard from "components/Pages/Profile/UserCard";
 import { CLOSED_CONTRIBUTED } from "pages";
@@ -9,7 +9,7 @@ import UserMenu from "components/Pages/User/UserMenu";
 import ProfileMenu from "components/Pages/Profile/ProfileMenu";
 import Post from "components/Layout/Post";
 // import LeftSidebar from "components/Pages/Index/LeftSidebar";
-// import Feed from "components/Pages/Index/Feed";
+
 // import RightSidebar from "components/Pages/Index/RightSidebar";
 
 export default function Posts() {

@@ -1,6 +1,6 @@
 import Layout from "components/Layout/Layout";
 import LeftSidebar from "components/Pages/Index/LeftSidebar";
-import Feed from "components/Layout/Feed";
+
 import RightSidebar from "components/Pages/Index/TopKarmaUsersSidebar";
 import { FOLLOWED_USERS_POSTS_PAGE } from "pages";
 import { useEffect, useState } from "react";

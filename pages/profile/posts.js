@@ -1,5 +1,5 @@
 import Layout from "components/Layout/Layout";
-import Feed from "components/Layout/Feed";
+
 import ProfileCard from "components/Pages/Profile/UserCard";
 import { MY_POSTS_PAGE } from "pages";
 import useAuthRequired from "hooks/useAuthRequired";

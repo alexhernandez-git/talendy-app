@@ -1,5 +1,5 @@
 import Layout from "components/Layout/Layout";
-import Feed from "components/Layout/Feed";
+
 import ProfileCard from "components/Pages/Profile/UserCard";
 import { USER_CONTRIBUTED } from "pages";
 import LeftSidebar from "components/Pages/User/LeftSidebar";

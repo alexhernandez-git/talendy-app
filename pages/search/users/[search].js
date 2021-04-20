@@ -1,6 +1,5 @@
 import Layout from "components/Layout/Layout";
 
-import Feed from "components/Layout/Feed";
 import RightSidebar from "components/Pages/Index/TopKarmaUsersSidebar";
 import { SEARCH_USERS_PAGE } from "pages";
 import { useState } from "react";

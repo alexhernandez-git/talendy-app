@@ -1,6 +1,6 @@
 import Layout from "components/Layout/Layout";
 import UserCard from "components/Pages/Profile/UserCard";
-import Feed from "components/Layout/Feed";
+
 import { CONNECTIONS_PAGE } from "pages";
 import LeftSidebar from "components/Pages/MyNetwork/LeftSidebar";
 import useAuthRequired from "hooks/useAuthRequired";

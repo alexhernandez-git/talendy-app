@@ -1,6 +1,6 @@
 import Layout from "components/Layout/Layout";
 import LeftSidebar from "components/Pages/Index/LeftSidebar";
-import Feed from "components/Layout/Feed";
+
 import RightSidebar from "components/Pages/Index/TopKarmaUsersSidebar";
 import { HOME_PAGE } from "pages";
 import { useEffect, useState } from "react";
