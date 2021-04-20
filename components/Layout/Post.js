@@ -90,7 +90,7 @@ const Post = ({ page, image }) => {
     }
   };
   return (
-    <>
+    <li>
       <article
         onClick={handleOpenModal}
         aria-labelledby="question-title-81614"
@@ -362,7 +362,7 @@ const Post = ({ page, image }) => {
         handleToggleModal={handleToggleEdit}
         modalRef={editRef}
       />
-    </>
+    </li>
   );
 };
 

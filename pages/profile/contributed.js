@@ -6,6 +6,7 @@ import { CONTRIBUTED_PAGE } from "pages";
 import useAuthRequired from "hooks/useAuthRequired";
 import Spinner from "components/Layout/Spinner";
 import ProfileMenu from "components/Pages/Profile/ProfileMenu";
+import Post from "components/Layout/Post";
 
 export default function Posts() {
   const page = CONTRIBUTED_PAGE;
@@ -23,7 +24,15 @@ export default function Posts() {
           <ProfileCard mobile page={page} profile user={authReducer.user} />
           <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
             <ProfileMenu page={page} />
-            <PostsFeed page={page} />
+            <div>
+              <h1 className="sr-only">Recent questions</h1>
+              <ul className="space-y-4">
+                <Post page={page} />
+                <Post page={page} image />
+                <Post page={page} />
+                <Post page={page} image />
+              </ul>
+            </div>
           </main>
           <ProfileCard page={page} profile user={authReducer.user} />
         </div>

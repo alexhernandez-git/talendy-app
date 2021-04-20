@@ -5,6 +5,9 @@ import UserCard from "components/Pages/Profile/UserCard";
 import { ACTIVE_CONTRIBUTED } from "pages";
 import useAuthRequired from "hooks/useAuthRequired";
 import Spinner from "components/Layout/Spinner";
+import UserMenu from "components/Pages/User/UserMenu";
+import Post from "components/Layout/Post";
+import ProfileMenu from "components/Pages/Profile/ProfileMenu";
 // import LeftSidebar from "components/Pages/Index/LeftSidebar";
 // import Feed from "components/Pages/Index/Feed";
 // import RightSidebar from "components/Pages/Index/RightSidebar";
@@ -24,7 +27,18 @@ export default function Posts() {
           <LeftSidebar page={page} />
           <UserCard mobile page={page} profile user={authReducer.user} />
 
-          <Feed page={page} profile />
+          <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
+            <ProfileMenu page={page} />
+            <div>
+              <h1 className="sr-only">Recent questions</h1>
+              <ul className="space-y-4">
+                <Post page={page} />
+                <Post page={page} image />
+                <Post page={page} />
+                <Post page={page} image />
+              </ul>
+            </div>
+          </main>
           <UserCard page={page} profile user={authReducer.user} />
         </div>
       </div>

@@ -2,7 +2,6 @@ import React from "react";
 import Post from "components/Layout/Post";
 import UserMenu from "components/Pages/Profile/ProfileMenu";
 import SearchMenu from "components/Pages/Search/SearchMenu";
-import HomeMenu from "components/Pages/Index/HomeMenu";
 import {
   MY_POSTS_PAGE,
   SEARCH_POSTS_PAGE,
@@ -21,13 +20,8 @@ import {
   CLOSED_POSTS_PROFILE_PAGE,
   USER_CONTRIBUTED,
 } from "pages";
-import HelpRequest from "components/Pages/MyPosts/ContributeRequest";
 import HelpRequestsFeed from "components/Pages/MyPosts/ContributeRequestsFeed";
-import Invitation from "components/Pages/MyNetwork/Invitation";
-import User from "./User";
 import ProfileMenu from "components/Pages/User/UserMenu";
-import InvitationsFeed from "components/Pages/MyNetwork/InvitationsFeed";
-import ConnectionsFeed from "components/Pages/MyNetwork/ConnectionsFeed";
 const Feed = ({ page }) => {
   return (
     <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
@@ -82,10 +76,6 @@ const Feed = ({ page }) => {
           </ul>
         </div>
       )}
-      {page === MY_NETWORK_PAGE && <InvitationsFeed />}
-      {page === CONNECTIONS_PAGE && <ConnectionsFeed page={page} />}
-      {page === PEOPLE_I_FOLLOW_PAGE && <ConnectionsFeed page={page} />}
-      {page === SEARCH_USERS_PAGE && <ConnectionsFeed page={page} />}
     </main>
   );
 };

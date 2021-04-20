@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { fetchTopKarmaUsers } from "redux/actions/topKarmaUsers";
 import { useDispatch } from "react-redux";
+import Post from "components/Layout/Post";
 export default function Followed() {
   const page = FOLLOWED_USERS_POSTS_PAGE;
   const dispatch = useDispatch();
@@ -23,7 +24,17 @@ export default function Followed() {
       <div className="py-10">
         <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
           <LeftSidebar page={page} />
-          <Feed page={page} />
+          <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
+            <div>
+              <h1 className="sr-only">Recent questions</h1>
+              <ul className="space-y-4">
+                <Post page={page} />
+                <Post page={page} image />
+                <Post page={page} />
+                <Post page={page} image />
+              </ul>
+            </div>
+          </main>
           <RightSidebar />
         </div>
       </div>
