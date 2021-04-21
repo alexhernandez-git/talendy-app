@@ -232,6 +232,9 @@ const Contribute = () => {
     setFeature(newFeature);
     handleCloseMoreOptions();
   };
+  const handleShareScreen = () => {
+    dispatch(createAlert("INFO", "Feature not ready"));
+  };
   return (
     <>
       {peers.map((peer, index) => {
@@ -241,6 +244,7 @@ const Contribute = () => {
         <div className="fixed bottom-0 w-full z-40 flex items-center justify-center">
           <div className="mr-2 flex items-center dark:bg-gray-800 bg-white rounded-t-lg border-t border-l border-r border-orange-500 dark:border-white shadow">
             <button
+              onClick={handleShareScreen}
               type="button"
               className="inline-flex items-center px-4 py-2 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 "
             >
