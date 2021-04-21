@@ -8,7 +8,7 @@ import {
   REMOVE_CONNECTION_FAIL,
 } from "../types";
 import { createAlert } from "./alerts";
-import { tokenConfig } from "./auth";
+import { substractConnection, tokenConfig } from "./auth";
 
 export const fetchConnections = () => async (dispatch, getState) => {
   await dispatch({
@@ -50,6 +50,7 @@ export const removeConnection = (id) => async (dispatch, getState) => {
         type: REMOVE_CONNECTION_SUCCESS,
         payload: id,
       });
+      await dispatch(substractConnection());
       await dispatch(createAlert("SUCCESS", "Connection removed"));
     })
     .catch(async (err) => {

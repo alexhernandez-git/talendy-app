@@ -7,7 +7,7 @@ import {
   STOP_FOLLOWING_SUCCESS,
   STOP_FOLLOWING_FAIL,
 } from "../types";
-import { tokenConfig } from "./auth";
+import { substractFollow, tokenConfig } from "./auth";
 
 export const fetchFollowing = () => async (dispatch, getState) => {
   await dispatch({
@@ -48,6 +48,7 @@ export const unfollow = (id) => async (dispatch, getState) => {
         type: STOP_FOLLOWING_SUCCESS,
         payload: id,
       });
+      await dispatch(substractFollow());
     })
     .catch(async (err) => {
       await dispatch({

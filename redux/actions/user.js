@@ -16,7 +16,7 @@ import {
   ACCEPT_USER_INVITATION_SUCCESS,
   ACCEPT_USER_INVITATION_FAIL,
 } from "../types";
-import { tokenConfig } from "./auth";
+import { tokenConfig, addConnection, substractFollow, addFollow } from "./auth";
 
 export const fetchUser = (id) => async (dispatch, getState) => {
   await dispatch({
@@ -45,13 +45,13 @@ export const followUser = () => async (dispatch, getState) => {
   const values = {
     followed_user: getState().userReducer.user?.id,
   };
-  console.log(values);
   await axios
     .post(`${process.env.HOST}/api/follows/`, values, tokenConfig(getState))
     .then(async (res) => {
       await dispatch({
         type: FOLLOW_USER_SUCCESS,
       });
+      await dispatch(addFollow());
     })
     .catch(async (err) => {
       await dispatch({
@@ -78,6 +78,7 @@ export const unfollowUser = () => async (dispatch, getState) => {
       await dispatch({
         type: STOP_FOLLOWING_USER_SUCCESS,
       });
+      await dispatch(substractFollow());
     })
     .catch(async (err) => {
       await dispatch({
@@ -126,6 +127,7 @@ export const acceptUserInvitation = () => async (dispatch, getState) => {
       await dispatch({
         type: ACCEPT_USER_INVITATION_SUCCESS,
       });
+      await dispatch(addConnection());
     })
     .catch(async (err) => {
       await dispatch({

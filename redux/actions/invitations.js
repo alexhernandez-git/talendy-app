@@ -11,7 +11,7 @@ import {
   IGNORE_INVITATION_FAIL,
 } from "../types";
 import { createAlert } from "./alerts";
-import { tokenConfig } from "./auth";
+import { substractInvitation, tokenConfig } from "./auth";
 
 export const fetchInvitations = () => async (dispatch, getState) => {
   await dispatch({
@@ -55,6 +55,7 @@ export const acceptInvitation = (id) => async (dispatch, getState) => {
         type: ACCEPT_INVITATION_SUCCESS,
         payload: id,
       });
+      await dispatch(substractInvitation());
       await dispatch(createAlert("SUCCESS", "Invitation accepted"));
     })
     .catch(async (err) => {
@@ -84,6 +85,7 @@ export const ignoreInvitation = (id) => async (dispatch, getState) => {
         type: IGNORE_INVITATION_SUCCESS,
         payload: id,
       });
+      await dispatch(substractInvitation());
     })
     .catch(async (err) => {
       await dispatch({
