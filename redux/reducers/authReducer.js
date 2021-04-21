@@ -91,6 +91,11 @@ import {
   LEAVE_FEEDBACK_SUCCESS,
   LEAVE_FEEDBACK_FAIL,
   CHANGE_COMMUNITY,
+  SUBSTRACT_INVITATION,
+  ADD_CONNECTION,
+  SUBSTRACT_CONNECTION,
+  ADD_FOLLOW,
+  SUBSTRACT_FOLLOW,
 } from "../types";
 
 const initialState = {
@@ -777,6 +782,46 @@ export default function authReducer(state = initialState, action) {
         ...state,
         leaving_feedback: false,
         leave_feedback_error: action.payload,
+      };
+    case SUBSTRACT_INVITATION:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          invitations: --state.user.invitations,
+        },
+      };
+    case ADD_CONNECTION:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          connections: ++state.user.connections,
+        },
+      };
+    case SUBSTRACT_CONNECTION:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          connections: --state.user.connections,
+        },
+      };
+    case ADD_FOLLOW:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          following: ++state.user.following,
+        },
+      };
+    case SUBSTRACT_FOLLOW:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          following: --state.user.following,
+        },
       };
     default:
       return state;

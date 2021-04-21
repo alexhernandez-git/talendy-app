@@ -4,6 +4,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const LeftSidebar = ({ page, mobile }) => {
+  const authReducer = useSelector((state) => state.authReducer);
   return (
     <div
       className={`${
@@ -32,7 +33,7 @@ const LeftSidebar = ({ page, mobile }) => {
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl xl:hover:text-gray-900 xl:dark:hover:text-gray-900`}
               >
                 <span className="truncate">Invitations</span>
-                <span>23</span>
+                <span>{authReducer.user?.invitations}</span>
               </span>
             </Link>
             <Link href="/profile/mynetwork/connections">
@@ -45,7 +46,7 @@ const LeftSidebar = ({ page, mobile }) => {
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl xl:hover:text-gray-900 xl:dark:hover:text-gray-900`}
               >
                 <span className="truncate">Connections</span>
-                <span>35</span>
+                <span>{authReducer.user?.connections}</span>
               </span>
             </Link>
             <Link href="/profile/mynetwork/following">
@@ -58,7 +59,7 @@ const LeftSidebar = ({ page, mobile }) => {
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl xl:hover:text-gray-900 xl:dark:hover:text-gray-900`}
               >
                 <span className="truncate">People I Follow</span>
-                <span>32</span>
+                <span>{authReducer.user?.following}</span>
               </span>
             </Link>
           </div>

@@ -89,6 +89,11 @@ import {
   LEAVE_FEEDBACK,
   LEAVE_FEEDBACK_SUCCESS,
   LEAVE_FEEDBACK_FAIL,
+  SUBSTRACT_INVITATION,
+  ADD_CONNECTION,
+  SUBSTRACT_CONNECTION,
+  ADD_FOLLOW,
+  SUBSTRACT_FOLLOW,
 } from "../types";
 import { createAlert } from "./alerts";
 
@@ -916,6 +921,31 @@ export const sendFeedback = (
     });
 };
 
+export const substractInvitation = () => async (dispatch, getState) => {
+  dispatch({
+    type: SUBSTRACT_INVITATION,
+  });
+};
+export const addConnection = () => async (dispatch, getState) => {
+  dispatch({
+    type: ADD_CONNECTION,
+  });
+};
+export const substractConnection = () => async (dispatch, getState) => {
+  dispatch({
+    type: SUBSTRACT_CONNECTION,
+  });
+};
+export const addFollow = () => async (dispatch, getState) => {
+  dispatch({
+    type: ADD_FOLLOW,
+  });
+};
+export const substractFollow = () => async (dispatch, getState) => {
+  dispatch({
+    type: SUBSTRACT_FOLLOW,
+  });
+};
 // Setup config with token - helper function
 export const tokenConfig = (getState) => {
   // Get token from state
