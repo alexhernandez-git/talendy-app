@@ -238,7 +238,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                                 type="text"
                                 id="message"
                                 name="message"
-                                className="block w-full bg-white dark:bg-gray-600 border border-gray-300 rounded-3xl p-2 text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                                className="block w-full bg-white dark:bg-gray-600 border border-gray-300 rounded-3xl py-2 px-4 text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                                 placeholder="Mesasage"
                               />
                               <button className="ml-3 inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">

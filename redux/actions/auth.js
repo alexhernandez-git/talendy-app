@@ -94,6 +94,7 @@ import {
   SUBSTRACT_CONNECTION,
   ADD_FOLLOW,
   SUBSTRACT_FOLLOW,
+  ADD_INVITATION,
 } from "../types";
 import { createAlert } from "./alerts";
 
@@ -920,7 +921,11 @@ export const sendFeedback = (
       });
     });
 };
-
+export const addInvitation = () => async (dispatch, getState) => {
+  dispatch({
+    type: ADD_INVITATION,
+  });
+};
 export const substractInvitation = () => async (dispatch, getState) => {
   dispatch({
     type: SUBSTRACT_INVITATION,
