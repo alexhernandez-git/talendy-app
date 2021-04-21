@@ -11,7 +11,7 @@ import {
   IGNORE_INVITATION_FAIL,
 } from "../types";
 import { createAlert } from "./alerts";
-import { substractInvitation, tokenConfig } from "./auth";
+import { addConnection, substractInvitation, tokenConfig } from "./auth";
 
 export const fetchInvitations = () => async (dispatch, getState) => {
   await dispatch({
@@ -56,6 +56,7 @@ export const acceptInvitation = (id) => async (dispatch, getState) => {
         payload: id,
       });
       await dispatch(substractInvitation());
+      await dispatch(addConnection());
       await dispatch(createAlert("SUCCESS", "Invitation accepted"));
     })
     .catch(async (err) => {
