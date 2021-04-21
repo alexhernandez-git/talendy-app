@@ -9,6 +9,9 @@ import {
   STOP_FOLLOWING_USER,
   STOP_FOLLOWING_USER_SUCCESS,
   STOP_FOLLOWING_USER_FAIL,
+  CONNECT_USER,
+  CONNECT_USER_SUCCESS,
+  CONNECT_USER_FAIL,
 } from "../types";
 import { tokenConfig } from "./auth";
 
@@ -76,6 +79,28 @@ export const unfollowUser = () => async (dispatch, getState) => {
     .catch(async (err) => {
       await dispatch({
         type: STOP_FOLLOWING_USER_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
+};
+
+export const connectUser = () => async (dispatch, getState) => {
+  await dispatch({
+    type: CONNECT_USER,
+  });
+  const values = {
+    addressee: getState().userReducer.user?.id,
+  };
+  await axios
+    .post(`${process.env.HOST}/api/connections/`, values, tokenConfig(getState))
+    .then(async (res) => {
+      await dispatch({
+        type: CONNECT_USER_SUCCESS,
+      });
+    })
+    .catch(async (err) => {
+      await dispatch({
+        type: CONNECT_USER_FAIL,
         payload: { data: err.response?.data, status: err.response?.status },
       });
     });

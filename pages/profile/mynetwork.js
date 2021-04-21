@@ -52,7 +52,10 @@ export default function Posts() {
                     <ul className="-my-4 divide-y divide-gray-200">
                       {invitationsReducer.invitations.results.map(
                         (invitation) => (
-                          <Invitation />
+                          <Invitation
+                            key={invitation.id}
+                            user={invitation.requester}
+                          />
                         )
                       )}
                     </ul>

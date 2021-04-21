@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import StarRatings from "react-star-ratings";
 import { createAlert } from "redux/actions/alerts";
-import { unfollowUser, followUser } from "redux/actions/user";
+import { unfollowUser, followUser, connectUser } from "redux/actions/user";
 
 const UserCard = ({ mobile, page, profile, user }) => {
   const dispatch = useDispatch();
@@ -25,7 +25,9 @@ const UserCard = ({ mobile, page, profile, user }) => {
   const handleConnectUser = () => {
     if (!authReducer.is_authenticated) {
       dispatch(createAlert("ERROR", "You are not authenticated"));
+      return;
     }
+    dispatch(connectUser());
   };
 
   return (
@@ -206,21 +208,28 @@ const UserCard = ({ mobile, page, profile, user }) => {
                         Follow
                       </button>
                     )}
-                    <button
-                      onClick={handleConnectUser}
-                      type="button"
-                      className="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 mr-2"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
+                    {user?.connection_invitation_sent && (
+                      <span className="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-white dark:bg-gray-600 bg-gray-50">
+                        Invitation sent
+                      </span>
+                    )}
+                    {!user?.connection_invitation_sent && (
+                      <button
+                        onClick={handleConnectUser}
+                        type="button"
+                        className="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                       >
-                        <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
-                      </svg>
-                      Connect
-                    </button>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 mr-2"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
+                        </svg>
+                        Connect
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

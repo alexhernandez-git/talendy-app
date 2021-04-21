@@ -8,6 +8,9 @@ import {
   SEARCH_USERS_PAGE,
 } from "pages";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { removeConnection } from "redux/actions/connections";
 
 const User = ({ page, user }) => {
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -22,11 +25,11 @@ const User = ({ page, user }) => {
   };
   const optionsRef = useRef();
   useOutsideClick(optionsRef, () => handleCloseOptions());
-  const router = useRouter();
 
-  const handleGoToProfile = (e) => {
-    e.stopPropagation();
-    router.push("/user/123");
+  const dispatch = useDispatch();
+
+  const handleRemoveConnection = () => {
+    dispatch(removeConnection(user?.id));
   };
   return (
     <li>
@@ -58,12 +61,11 @@ const User = ({ page, user }) => {
             </div>
             <div className="min-w-0 flex-1">
               <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">
-                <span
-                  onClick={handleGoToProfile}
-                  className="hover:underline cursor-pointer"
-                >
-                  {user?.username}
-                </span>
+                <Link href={`/user/${user?.id}`}>
+                  <span className="hover:underline cursor-pointer">
+                    {user?.username}
+                  </span>
+                </Link>
               </p>
               <span className="inline-flex items-center text-sm">
                 <svg
@@ -155,6 +157,7 @@ const User = ({ page, user }) => {
                       >
                         <div className="py-1" role="none" ref={optionsRef}>
                           <span
+                            onClick={handleRemoveConnection}
                             className="cursor-pointer flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                             role="menuitem"
                           >

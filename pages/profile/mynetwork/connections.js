@@ -43,7 +43,14 @@ export default function Posts() {
               ) : (
                 <ul className="space-y-4">
                   {connectionsReducer.connections.results.map((connection) => (
-                    <User page={page} />
+                    <User
+                      page={page}
+                      user={
+                        authReducer.user?.id !== connection.addressee.id
+                          ? connection.addressee
+                          : connection.requester
+                      }
+                    />
                   ))}
                 </ul>
               )}

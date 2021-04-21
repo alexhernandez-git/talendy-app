@@ -7,6 +7,7 @@ import {
   REMOVE_CONNECTION_SUCCESS,
   REMOVE_CONNECTION_FAIL,
 } from "../types";
+import { createAlert } from "./alerts";
 import { tokenConfig } from "./auth";
 
 export const fetchConnections = () => async (dispatch, getState) => {
@@ -39,7 +40,7 @@ export const removeConnection = (id) => async (dispatch, getState) => {
   };
   console.log(values);
   await axios
-    .delete(
+    .patch(
       `${process.env.HOST}/api/connections/remove/`,
       values,
       tokenConfig(getState)
@@ -49,6 +50,7 @@ export const removeConnection = (id) => async (dispatch, getState) => {
         type: REMOVE_CONNECTION_SUCCESS,
         payload: id,
       });
+      await dispatch(createAlert("SUCCESS", "Connection removed"));
     })
     .catch(async (err) => {
       await dispatch({

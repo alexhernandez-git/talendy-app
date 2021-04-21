@@ -8,6 +8,9 @@ import {
   STOP_FOLLOWING_USER,
   STOP_FOLLOWING_USER_SUCCESS,
   STOP_FOLLOWING_USER_FAIL,
+  CONNECT_USER,
+  CONNECT_USER_SUCCESS,
+  CONNECT_USER_FAIL,
 } from "../types";
 import { HYDRATE } from "next-redux-wrapper";
 
@@ -19,6 +22,8 @@ const initialState = {
   follow_user_error: null,
   is_unfollowing_user: false,
   unfollow_user_error: null,
+  is_connecting_user: false,
+  connect_user_error: null,
 };
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
@@ -81,6 +86,27 @@ export default function userReducer(state = initialState, action) {
         ...state,
         is_unfollowing_user: false,
         unfollow_user_error: action.payload,
+      };
+    case CONNECT_USER:
+      return {
+        ...state,
+        is_connecting_user: true,
+      };
+    case CONNECT_USER_SUCCESS:
+      return {
+        ...state,
+        is_connecting_user: false,
+        user: {
+          ...state.user,
+          connection_invitation_sent: true,
+        },
+        connect_user_error: null,
+      };
+    case CONNECT_USER_FAIL:
+      return {
+        ...state,
+        is_connecting_user: false,
+        connect_user_error: action.payload,
       };
     default:
       return state;

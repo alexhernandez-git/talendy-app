@@ -4,10 +4,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const LeftSidebar = ({ page, mobile }) => {
-  const invitationsReducer = useSelector((state) => state.invitationsReducer);
-  const connectionsReducer = useSelector((state) => state.connectionsReducer);
-  const followingReducer = useSelector((state) => state.followingReducer);
-
   return (
     <div
       className={`${
@@ -36,7 +32,7 @@ const LeftSidebar = ({ page, mobile }) => {
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl xl:hover:text-gray-900 xl:dark:hover:text-gray-900`}
               >
                 <span className="truncate">Invitations</span>
-                <span>{invitationsReducer.invitations.results.length}</span>
+                <span>23</span>
               </span>
             </Link>
             <Link href="/profile/mynetwork/connections">
@@ -49,7 +45,7 @@ const LeftSidebar = ({ page, mobile }) => {
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl xl:hover:text-gray-900 xl:dark:hover:text-gray-900`}
               >
                 <span className="truncate">Connections</span>
-                <span>{connectionsReducer.connections.results.length}</span>
+                <span>35</span>
               </span>
             </Link>
             <Link href="/profile/mynetwork/following">
@@ -62,7 +58,7 @@ const LeftSidebar = ({ page, mobile }) => {
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl xl:hover:text-gray-900 xl:dark:hover:text-gray-900`}
               >
                 <span className="truncate">People I Follow</span>
-                <span>{followingReducer.following.results.length}</span>
+                <span>32</span>
               </span>
             </Link>
           </div>

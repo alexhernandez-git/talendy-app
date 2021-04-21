@@ -10,6 +10,7 @@ import {
   IGNORE_INVITATION_SUCCESS,
   IGNORE_INVITATION_FAIL,
 } from "../types";
+import { createAlert } from "./alerts";
 import { tokenConfig } from "./auth";
 
 export const fetchInvitations = () => async (dispatch, getState) => {
@@ -43,7 +44,6 @@ export const acceptInvitation = (id) => async (dispatch, getState) => {
   const values = {
     requester: id,
   };
-  console.log(values);
   await axios
     .patch(
       `${process.env.HOST}/api/connections/accept/`,
@@ -55,6 +55,7 @@ export const acceptInvitation = (id) => async (dispatch, getState) => {
         type: ACCEPT_INVITATION_SUCCESS,
         payload: id,
       });
+      await dispatch(createAlert("SUCCESS", "Invitation accepted"));
     })
     .catch(async (err) => {
       await dispatch({

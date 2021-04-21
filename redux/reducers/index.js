@@ -14,6 +14,6 @@ export default combineReducers({
   topKarmaUsersReducer: topKarmaUsersReducer,
   userReducer: userReducer,
   invitationsReducer: invitationsReducer,
-  connectionsReducer: connectionsReducer,
   followingReducer: followingReducer,
+  connectionsReducer: connectionsReducer,
 });
