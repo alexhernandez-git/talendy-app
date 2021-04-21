@@ -53,7 +53,9 @@ export default function connectionsReducer(state = initialState, action) {
         connections: {
           ...state.connections,
           results: state.connections.results.filter(
-            (connection) => connection.requester.id !== action.payload
+            (connection) =>
+              connection.requester.id !== action.payload &&
+              connection.addressee.id !== action.payload
           ),
         },
         remove_connection_error: null,
