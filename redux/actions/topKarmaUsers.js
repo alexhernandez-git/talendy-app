@@ -7,7 +7,7 @@ import {
   FOLLOW_TOP_KARMA_USER_SUCCESS,
   FOLLOW_TOP_KARMA_USER_FAIL,
 } from "../types";
-import { tokenConfig } from "./auth";
+import { addFollow, tokenConfig } from "./auth";
 
 export const fetchTopKarmaUsers = () => async (dispatch, getState) => {
   await dispatch({
@@ -39,7 +39,6 @@ export const followTopKarmaUser = (id) => async (dispatch, getState) => {
   const values = {
     followed_user: id,
   };
-  console.log(values);
   await axios
     .post(`${process.env.HOST}/api/follows/`, values, tokenConfig(getState))
     .then(async (res) => {
@@ -47,6 +46,7 @@ export const followTopKarmaUser = (id) => async (dispatch, getState) => {
         type: FOLLOW_TOP_KARMA_USER_SUCCESS,
         payload: id,
       });
+      await dispatch(addFollow());
     })
     .catch(async (err) => {
       await dispatch({
