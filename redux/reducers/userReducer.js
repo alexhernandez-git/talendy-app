@@ -11,8 +11,10 @@ import {
   CONNECT_USER,
   CONNECT_USER_SUCCESS,
   CONNECT_USER_FAIL,
+  ACCEPT_USER_INVITATION,
+  ACCEPT_USER_INVITATION_SUCCESS,
+  ACCEPT_USER_INVITATION_FAIL,
 } from "../types";
-import { HYDRATE } from "next-redux-wrapper";
 
 const initialState = {
   is_loading: false,
@@ -24,6 +26,8 @@ const initialState = {
   unfollow_user_error: null,
   is_connecting_user: false,
   connect_user_error: null,
+  is_accepting_invitation: false,
+  accept_invitation_error: null,
 };
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
@@ -107,6 +111,28 @@ export default function userReducer(state = initialState, action) {
         ...state,
         is_connecting_user: false,
         connect_user_error: action.payload,
+      };
+    case ACCEPT_USER_INVITATION:
+      return {
+        ...state,
+        is_accepting_invitation: true,
+      };
+    case ACCEPT_USER_INVITATION_SUCCESS:
+      return {
+        ...state,
+        is_accepting_invitation: false,
+        user: {
+          ...state.user,
+          accept_invitation: false,
+          is_connection: true,
+        },
+        accept_invitation_error: null,
+      };
+    case ACCEPT_USER_INVITATION_FAIL:
+      return {
+        ...state,
+        is_accepting_invitation: false,
+        accept_invitation_error: action.payload,
       };
     default:
       return state;

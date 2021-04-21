@@ -12,6 +12,9 @@ import {
   CONNECT_USER,
   CONNECT_USER_SUCCESS,
   CONNECT_USER_FAIL,
+  ACCEPT_USER_INVITATION,
+  ACCEPT_USER_INVITATION_SUCCESS,
+  ACCEPT_USER_INVITATION_FAIL,
 } from "../types";
 import { tokenConfig } from "./auth";
 
@@ -101,6 +104,32 @@ export const connectUser = () => async (dispatch, getState) => {
     .catch(async (err) => {
       await dispatch({
         type: CONNECT_USER_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
+};
+
+export const acceptUserInvitation = () => async (dispatch, getState) => {
+  await dispatch({
+    type: ACCEPT_USER_INVITATION,
+  });
+  const values = {
+    requester: getState().userReducer.user?.id,
+  };
+  await axios
+    .patch(
+      `${process.env.HOST}/api/connections/accept/`,
+      values,
+      tokenConfig(getState)
+    )
+    .then(async (res) => {
+      await dispatch({
+        type: ACCEPT_USER_INVITATION_SUCCESS,
+      });
+    })
+    .catch(async (err) => {
+      await dispatch({
+        type: ACCEPT_USER_INVITATION_FAIL,
         payload: { data: err.response?.data, status: err.response?.status },
       });
     });

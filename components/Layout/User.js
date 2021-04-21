@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { removeConnection } from "redux/actions/connections";
+import { unfollow } from "redux/actions/following";
 
 const User = ({ page, user }) => {
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -30,6 +31,9 @@ const User = ({ page, user }) => {
 
   const handleRemoveConnection = () => {
     dispatch(removeConnection(user?.id));
+  };
+  const handleUnfollow = () => {
+    dispatch(unfollow(user?.id));
   };
   return (
     <li>
@@ -99,6 +103,7 @@ const User = ({ page, user }) => {
           )}
           {page === PEOPLE_I_FOLLOW_PAGE && (
             <button
+              onClick={handleUnfollow}
               type="button"
               className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
             >

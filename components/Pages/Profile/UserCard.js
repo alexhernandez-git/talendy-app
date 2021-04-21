@@ -5,7 +5,12 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import StarRatings from "react-star-ratings";
 import { createAlert } from "redux/actions/alerts";
-import { unfollowUser, followUser, connectUser } from "redux/actions/user";
+import {
+  unfollowUser,
+  followUser,
+  connectUser,
+  acceptUserInvitation,
+} from "redux/actions/user";
 
 const UserCard = ({ mobile, page, profile, user }) => {
   const dispatch = useDispatch();
@@ -28,6 +33,10 @@ const UserCard = ({ mobile, page, profile, user }) => {
       return;
     }
     dispatch(connectUser());
+  };
+
+  const handleAcceptInvitation = () => {
+    dispatch(acceptUserInvitation());
   };
 
   return (
@@ -213,9 +222,9 @@ const UserCard = ({ mobile, page, profile, user }) => {
                         Invitation sent
                       </span>
                     )}
-                    {!user?.connection_invitation_sent && (
+                    {user?.accept_invitation && (
                       <button
-                        onClick={handleConnectUser}
+                        onClick={handleAcceptInvitation}
                         type="button"
                         className="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                       >
@@ -227,9 +236,49 @@ const UserCard = ({ mobile, page, profile, user }) => {
                         >
                           <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
                         </svg>
-                        Connect
+                        Accept invitation
                       </button>
                     )}
+                    {user?.is_connection && (
+                      <button
+                        // onClick={handleAcceptInvitation}
+                        type="button"
+                        className="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 mr-2"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        Message
+                      </button>
+                    )}
+                    {!user?.connection_invitation_sent &&
+                      !user?.accept_invitation &&
+                      !user?.is_connection && (
+                        <button
+                          onClick={handleConnectUser}
+                          type="button"
+                          className="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5 mr-2"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
+                          </svg>
+                          Connect
+                        </button>
+                      )}
                   </div>
                 </div>
               </div>

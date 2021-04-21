@@ -53,7 +53,7 @@ export default function followingReducer(state = initialState, action) {
         following: {
           ...state.following,
           results: state.following.results.filter(
-            (follow) => follow.requester.id !== action.payload
+            (follow) => follow.followed_user.id !== action.payload
           ),
         },
         unfollow_error: null,

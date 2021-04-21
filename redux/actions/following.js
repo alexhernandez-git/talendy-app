@@ -30,16 +30,15 @@ export const fetchFollowing = () => async (dispatch, getState) => {
     });
 };
 
-export const removeConnection = (id) => async (dispatch, getState) => {
+export const unfollow = (id) => async (dispatch, getState) => {
   await dispatch({
     type: STOP_FOLLOWING,
   });
   const values = {
     followed_user: id,
   };
-  console.log(values);
   await axios
-    .delete(
+    .post(
       `${process.env.HOST}/api/follows/unfollow/`,
       values,
       tokenConfig(getState)
