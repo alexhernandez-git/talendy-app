@@ -99,6 +99,7 @@ const Contribute = () => {
         router.push("/");
       });
       function createPeer(userToSignal, callerID, stream) {
+        console.log("createPeer", stream);
         const peer = new Peer({
           initiator: true,
           trickle: false,
@@ -106,6 +107,9 @@ const Contribute = () => {
         });
 
         peer.on("signal", (signal) => {
+          console.log("signal", signal);
+          console.log("signal callerId", callerID);
+          console.log("signal signal", signal);
           socketRef.current.emit("sending signal", {
             userToSignal,
             callerID,
@@ -124,6 +128,7 @@ const Contribute = () => {
         });
 
         peer.on("signal", (signal) => {
+          console.log("returning signal", signal);
           socketRef.current.emit("returning signal", { signal, callerID });
         });
 
@@ -137,17 +142,25 @@ const Contribute = () => {
         .then((stream) => {
           myStreamRef.current = stream;
           stream.getAudioTracks()[0].enabled = isMicOn;
+          socketRef.current.emit("user media getted", roomID);
+
           socketRef.current.on("all users", (users) => {
             const peers = [];
-            users.forEach((userID) => {
-              const peer = createPeer(userID, socketRef.current.id, stream);
+            users.forEach((user) => {
+              console.log(user);
+              const peer = createPeer(
+                user.socketID,
+                socketRef.current.id,
+                stream
+              );
               peersRef.current.push({
-                peerID: userID,
+                peerID: user.socketID,
                 peer,
               });
               peers.push(peer);
             });
             setPeers(peers);
+            console.log("all users user", users);
           });
 
           socketRef.current.on("user joined", (payload) => {
@@ -226,6 +239,17 @@ const Contribute = () => {
       })}
       <Layout>
         <div className="fixed bottom-0 w-full z-40 flex items-center justify-center">
+          <div className="mr-2 flex items-center dark:bg-gray-800 bg-white rounded-t-lg border-t border-l border-r border-orange-500 dark:border-white shadow">
+            <button
+              type="button"
+              className="inline-flex items-center px-4 py-2 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 "
+            >
+              <IconContext.Provider value={{ size: 25, className: "mr-2" }}>
+                <MdScreenShare />
+              </IconContext.Provider>
+              Screen
+            </button>
+          </div>
           <div className="flex items-center dark:bg-gray-800 bg-white rounded-t-lg border-t border-l border-r border-orange-500 dark:border-white shadow">
             {/* <button
               type="button"
