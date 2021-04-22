@@ -17,10 +17,10 @@ export default function Home() {
   const authReducer = useSelector((state) => state.authReducer);
 
   useEffect(() => {
-    if (initialDataReducer.initial_data_fetched) {
+    if (initialDataReducer.data_fetched) {
       dispatch(fetchTopKarmaUsers());
     }
-  }, [initialDataReducer.initial_data_fetched, authReducer.is_authenticated]);
+  }, [initialDataReducer.data_fetched]);
   return (
     <Layout>
       <div className="py-10">

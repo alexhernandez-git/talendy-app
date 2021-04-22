@@ -6,6 +6,11 @@ import { forgetPassword, login } from "redux/actions/auth";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import { fetchNotifications } from "redux/actions/notifications";
+import {
+  initialDataFetched,
+  resetDataFetched,
+} from "redux/actions/initialData";
 const Login = ({ loginOpen, loginRef, mobile, handleClose }) => {
   const authReducer = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
@@ -30,7 +35,10 @@ const Login = ({ loginOpen, loginRef, mobile, handleClose }) => {
     }),
     onSubmit: async (values, { resetForm }) => {
       // console.log(valores);
-      dispatch(login(values, handleClose, resetForm));
+      await dispatch(resetDataFetched());
+      await dispatch(login(values, handleClose, resetForm));
+      await dispatch(fetchNotifications());
+      await dispatch(initialDataFetched());
     },
   });
   const resetPasswordForm = useFormik({

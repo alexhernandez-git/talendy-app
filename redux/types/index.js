@@ -1,5 +1,6 @@
 // Dispatch control reducers
 export const INITIAL_DATA_FETCHED = "INITIAL_DATA_FETCHED";
+export const RESET_DATA_FETCHED = "RESET_DATA_FETCHED";
 
 // Alerts
 export const CREATE_ALERT = "CREATE_ALERT";

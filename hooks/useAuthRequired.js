@@ -17,15 +17,15 @@ const useAuthRequired = (page) => {
   const privatePages = [MY_POSTS_PAGE, CONTRIBUTE_PAGE];
   const matches = privatePages.some((privPage) => privPage === page);
   useEffect(() => {
-    if (initialDataReducer.initial_data_fetched) {
+    if (initialDataReducer.data_fetched) {
       if (!is_authenticated && matches) {
         router.push("/");
       } else {
         setCanRender(true);
       }
     }
-  }, [initialDataReducer.initial_data_fetched]);
-  return [canRender, authReducer, initialDataReducer.initial_data_fetched];
+  }, [initialDataReducer.data_fetched]);
+  return [canRender, authReducer, initialDataReducer.data_fetched];
 };
 
 export default useAuthRequired;

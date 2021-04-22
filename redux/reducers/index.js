@@ -7,6 +7,7 @@ import userReducer from "./userReducer";
 import invitationsReducer from "./invitationsReducer";
 import connectionsReducer from "./connectionsReducer";
 import followingReducer from "./followingReducer";
+import notificationsReducer from "./notificationsReducer";
 export default combineReducers({
   authReducer: authReducer,
   alertsReducer: alertsReducer,
@@ -16,4 +17,5 @@ export default combineReducers({
   invitationsReducer: invitationsReducer,
   followingReducer: followingReducer,
   connectionsReducer: connectionsReducer,
+  notificationsReducer: notificationsReducer,
 });

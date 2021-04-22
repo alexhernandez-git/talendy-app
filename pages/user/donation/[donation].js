@@ -18,11 +18,11 @@ export default function Donation() {
   const authReducer = useSelector((state) => state.authReducer);
   const userReducer = useSelector((state) => state.userReducer);
   useEffect(() => {
-    if (initialDataReducer.initial_data_fetched) {
+    if (initialDataReducer.data_fetched) {
       const userId = router.query?.user;
       dispatch(fetchUser(userId));
     }
-  }, [initialDataReducer.initial_data_fetched, authReducer.is_authenticated]);
+  }, [initialDataReducer.data_fetched]);
   return (
     <Layout>
       <div className="py-10">

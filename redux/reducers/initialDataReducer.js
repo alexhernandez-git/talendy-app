@@ -1,8 +1,8 @@
-import { INITIAL_DATA_FETCHED } from "../types";
+import { INITIAL_DATA_FETCHED, RESET_DATA_FETCHED } from "../types";
 import { HYDRATE } from "next-redux-wrapper";
 
 const initialState = {
-  initial_data_fetched: false,
+  data_fetched: false,
 };
 export default function initialDataReducer(state = initialState, action) {
   switch (action.type) {
@@ -12,9 +12,13 @@ export default function initialDataReducer(state = initialState, action) {
     case INITIAL_DATA_FETCHED:
       return {
         ...state,
-        initial_data_fetched: true,
+        data_fetched: true,
       };
-
+    case RESET_DATA_FETCHED:
+      return {
+        ...state,
+        data_fetched: false,
+      };
     default:
       return state;
   }

@@ -157,8 +157,8 @@ export const login = (data, handleClose, resetForm, router) => async (
       await handleClose();
       await resetForm({});
     })
-    .catch((err) => {
-      dispatch({
+    .catch(async (err) => {
+      await dispatch({
         type: AUTH_ERROR,
         payload: { data: err.response?.data, status: err.response?.status },
       });
