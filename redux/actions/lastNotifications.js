@@ -1,12 +1,9 @@
 import axios from "axios";
 import { tokenConfig } from "./auth";
 import {
-  FETCH_NOTIFICATIONS,
-  FETCH_NOTIFICATIONS_SUCCESS,
-  FETCH_NOTIFICATIONS_FAIL,
-  FETCH_MORE_NOTIFICATIONS,
-  FETCH_MORE_NOTIFICATIONS_SUCCESS,
-  FETCH_MORE_NOTIFICATIONS_FAIL,
+  FETCH_LAST_NOTIFICATIONS,
+  FETCH_LAST_NOTIFICATIONS_SUCCESS,
+  FETCH_LAST_NOTIFICATIONS_FAIL,
   ADD_NOTIFICATION_TO_FEED,
   ADD_NOTIFICATION_TO_FEED_SUCCESS,
   ADD_NOTIFICATION_TO_FEED_FAIL,
@@ -16,48 +13,24 @@ import {
   SET_ALL_NOTIFICATIONS_READ_FAIL,
 } from "../types";
 
-export const fetchNotifications = () => async (dispatch, getState) => {
+export const fetchLastNotifications = () => async (dispatch, getState) => {
   await dispatch({
-    type: FETCH_NOTIFICATIONS,
+    type: FETCH_LAST_NOTIFICATIONS,
   });
   await axios
     .get(`${process.env.HOST}/api/notifications/`, tokenConfig(getState))
     .then(async (res) => {
       await dispatch({
-        type: FETCH_NOTIFICATIONS_SUCCESS,
+        type: FETCH_LAST_NOTIFICATIONS_SUCCESS,
         payload: res.data,
       });
     })
     .catch(async (err) => {
       await dispatch({
-        type: FETCH_NOTIFICATIONS_FAIL,
+        type: FETCH_LAST_NOTIFICATIONS_FAIL,
         payload: { data: err.response?.data, status: err.response?.status },
       });
     });
-};
-
-export const fetchMoreNotifications = () => async (dispatch, getState) => {
-  const url = getState().lastNotificationsReducer.notifications.next;
-  if (url) {
-    dispatch({
-      type: FETCH_MORE_NOTIFICATIONS,
-    });
-    await axios
-      .get(url, tokenConfig(getState))
-      .then(async (res) => {
-        console.log(res.data);
-        await dispatch({
-          type: FETCH_MORE_NOTIFICATIONS_SUCCESS,
-          payload: res.data,
-        });
-      })
-      .catch((err) => {
-        dispatch({
-          type: FETCH_MORE_NOTIFICATIONS_FAIL,
-          payload: { data: err.response?.data, status: err.response?.status },
-        });
-      });
-  }
 };
 
 export const addOrUpdateNotificationToFeed = (id) => async (

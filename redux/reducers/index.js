@@ -8,6 +8,7 @@ import invitationsReducer from "./invitationsReducer";
 import connectionsReducer from "./connectionsReducer";
 import followingReducer from "./followingReducer";
 import notificationsReducer from "./notificationsReducer";
+import lastNotificationsReducer from "./lastNotificationsReducer";
 export default combineReducers({
   authReducer: authReducer,
   alertsReducer: alertsReducer,
@@ -18,4 +19,5 @@ export default combineReducers({
   followingReducer: followingReducer,
   connectionsReducer: connectionsReducer,
   notificationsReducer: notificationsReducer,
+  lastNotificationsReducer: lastNotificationsReducer,
 });

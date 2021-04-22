@@ -11,6 +11,7 @@ import Login from "./Login";
 import { useSelector } from "react-redux";
 import { logout } from "redux/actions/auth";
 import { useDispatch } from "react-redux";
+import NotificationsDropdown from "./Header/NotificationsDropdown";
 const Header = ({
   handleToggleMessages,
   handleOpenModal,
@@ -262,94 +263,10 @@ const Header = ({
                     />
                   </svg>
                 </button>
-                <Transition
-                  show={notificationsOpen}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-out duration-100"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
-                >
-                  {(ref) => (
-                    <div ref={notificationsRef}>
-                      <div
-                        ref={ref}
-                        className={`
-                   origin-top-right absolute right-0 mt-2 w-80 rounded-3xl shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 z-40 overflow-hidden`}
-                      >
-                        <div className="bg-white dark:bg-gray-800 px-4 py-3 border-b border-gray-200 ">
-                          <div className="flex items-center space-x-4">
-                            <div className="flex-shrink-0">
-                              <svg
-                                className="h-6 w-6 text-gray-400 dark:text-gray-100"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                aria-hidden="true"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth="2"
-                                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                                />
-                              </svg>
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
-                                Notifications
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="">
-                          <div className="flow-root px-4 max-h-72 overflow-auto">
-                            <ul className="divide-y divide-gray-200">
-                              <li
-                                className={`py-4 hover:opacity-70 cursor-pointer `}
-                              >
-                                <div className="flex items-center space-x-4">
-                                  <div className="flex-shrink-0">
-                                    <span className="inline-block h-8 w-8 rounded-full overflow-hidden bg-gray-100">
-                                      <svg
-                                        className="h-full w-full text-gray-300"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                      >
-                                        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                                      </svg>
-                                    </span>
-                                  </div>
-                                  <div className="flex-1 min-w-0">
-                                    <p className="text-xs font-medium text-gray-900 dark:text-white truncate">
-                                      efwawef
-                                    </p>
-
-                                    <p className="text-xs text-gray-500 dark:text-gray-100 truncate">
-                                      fewafaweefew
-                                    </p>
-                                    <p className="float-right text-xs text-gray-400 dark:text-gray-200 truncate">
-                                      3s
-                                    </p>
-                                  </div>
-                                </div>
-                              </li>
-                            </ul>
-                          </div>
-                          <div className="p-4">
-                            <Link href="/profile/notifications">
-                              <span className="cursor-pointer w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl  text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
-                                See all
-                              </span>
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </Transition>
+                <NotificationsDropdown
+                  notificationsOpen={notificationsOpen}
+                  notificationsRef={notificationsRef}
+                />
               </div>
 
               <div className="flex-shrink-0 relative ml-5">

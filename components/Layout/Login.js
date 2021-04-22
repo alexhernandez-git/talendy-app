@@ -11,6 +11,7 @@ import {
   initialDataFetched,
   resetDataFetched,
 } from "redux/actions/initialData";
+import { fetchLastNotifications } from "redux/actions/lastNotifications";
 const Login = ({ loginOpen, loginRef, mobile, handleClose }) => {
   const authReducer = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const Login = ({ loginOpen, loginRef, mobile, handleClose }) => {
       // console.log(valores);
       await dispatch(resetDataFetched());
       await dispatch(login(values, handleClose, resetForm));
-      await dispatch(fetchNotifications());
+      await dispatch(fetchLastNotifications());
       await dispatch(initialDataFetched());
     },
   });
