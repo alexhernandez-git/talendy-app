@@ -8,7 +8,10 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import useAuthRequired from "hooks/useAuthRequired";
 import { useDispatch } from "react-redux";
-import { fetchNotifications } from "redux/actions/notifications";
+import {
+  fetchMoreNotifications,
+  fetchNotifications,
+} from "redux/actions/notifications";
 import { useEffect } from "react";
 import NotificationItem from "components/Pages/Notifications/NotificationItem";
 import Spinner from "components/Layout/Spinner";
@@ -24,6 +27,10 @@ const Notifications = () => {
   const notificationsReducer = useSelector(
     (state) => state.notificationsReducer
   );
+
+  const handleLoadMoreNotifications = () => {
+    dispatch(fetchMoreNotifications());
+  };
 
   return !canRender ? (
     <div className="flex justify-center items-center h-screen dark:bg-gray-800">
@@ -118,6 +125,16 @@ const Notifications = () => {
                     notification={notification.notification}
                   />
                 )
+              )}
+              {notificationsReducer.notifications.next && (
+                <div class="p-4">
+                  <span
+                    onClick={handleLoadMoreNotifications}
+                    class="cursor-pointer w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl  text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                  >
+                    Load more
+                  </span>
+                </div>
               )}
             </ul>
           </div>

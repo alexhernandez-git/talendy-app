@@ -3,6 +3,7 @@ import {
   CONTRIBUTE_PAGE,
   FOLLOWED_USERS_POSTS_PAGE,
   MY_POSTS_PAGE,
+  NOTIFICATIONS_PAGE,
 } from "pages";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -14,7 +15,7 @@ const useAuthRequired = (page) => {
   const { is_authenticated } = authReducer;
   const router = useRouter();
   const [canRender, setCanRender] = useState(false);
-  const privatePages = [MY_POSTS_PAGE, CONTRIBUTE_PAGE];
+  const privatePages = [MY_POSTS_PAGE, CONTRIBUTE_PAGE, NOTIFICATIONS_PAGE];
   const matches = privatePages.some((privPage) => privPage === page);
   useEffect(() => {
     if (initialDataReducer.data_fetched) {

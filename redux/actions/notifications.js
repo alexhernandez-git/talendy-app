@@ -37,7 +37,7 @@ export const fetchNotifications = () => async (dispatch, getState) => {
 };
 
 export const fetchMoreNotifications = () => async (dispatch, getState) => {
-  const url = getState().lastNotificationsReducer.notifications.next;
+  const url = getState().notificationsReducer.notifications.next;
   if (url) {
     dispatch({
       type: FETCH_MORE_NOTIFICATIONS,
