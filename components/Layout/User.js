@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { removeConnection } from "redux/actions/connections";
 import { unfollow } from "redux/actions/following";
+import { getOrCreateChat } from "redux/actions/chats";
 
 const User = ({ page, user }) => {
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -34,6 +35,9 @@ const User = ({ page, user }) => {
   };
   const handleUnfollow = () => {
     dispatch(unfollow(user?.id));
+  };
+  const handleGetOrCreateChat = () => {
+    dispatch(getOrCreateChat(user?.id));
   };
   return (
     <li>
@@ -113,6 +117,7 @@ const User = ({ page, user }) => {
           {page === CONNECTIONS_PAGE && (
             <div className="flex items-center">
               <button
+                onClick={handleGetOrCreateChat}
                 type="button"
                 className="inline-flex items-center mr-2 px-4 py-2 shadow-sm text-sm font-medium rounded-3xl text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
               >

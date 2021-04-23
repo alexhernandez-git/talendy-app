@@ -8,6 +8,24 @@ const ChatItem = ({ chat }) => {
   const handleGetChat = () => {
     dispatch(fetchChat(chat.id));
   };
+  moment.locale("en", {
+    relativeTime: {
+      future: "in %s",
+      past: "%s ago",
+      s: "seconds",
+      ss: "%ss",
+      m: "a minute",
+      mm: "%dm",
+      h: "an hour",
+      hh: "%dh",
+      d: "a day",
+      dd: "%dd",
+      M: "a month",
+      MM: "%dM",
+      y: "a year",
+      yy: "%dY",
+    },
+  });
   return (
     <li onClick={handleGetChat}>
       <div className="px-6 py-5 relative">
@@ -18,17 +36,36 @@ const ChatItem = ({ chat }) => {
               aria-hidden="true"
             ></div>
             <div className="flex-1 flex items-center min-w-0 relative w-full">
-              <span className="flex-shrink-0 inline-block relative">
+              {chat?.picture ? (
                 <img
-                  className="h-10 w-10 rounded-full"
-                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=9XbzAMvCeF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  className="h-10 w-10 rounded-full "
+                  src={
+                    new RegExp(
+                      `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                    ).test(chat?.picture)
+                      ? chat?.picture
+                      : process.env.HOST + chat?.picture
+                  }
                   alt=""
-                />
-              </span>
+                ></img>
+              ) : (
+                <span
+                  className="bg-gray-100 rounded-full overflow-hidden h-10 w-10"
+                  style={{ minWidth: "2.5rem" }}
+                >
+                  <svg
+                    className="h-10 w-10 text-gray-300"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                </span>
+              )}
               <div className="ml-4 truncate">
                 <div className=" flex justify-between">
                   <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
-                    Leslie Alexander
+                    {chat?.room_name}
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-200">
                     {moment(chat?.last_message_created)

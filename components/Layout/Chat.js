@@ -186,11 +186,36 @@ const Chat = () => {
                       <div className={`w-full`}>
                         <div className="min-h-0 flex-1 ">
                           <div className="bg-gradient-to-r from-orange-500 to-pink-500 py-5 rounded-t-lg">
-                            <div className="px-4 flex sm:justify-between items-center ">
+                            <div className="px-4 hidden sm:flex sm:justify-between items-center ">
+                              {chatReducer.chat?.to_user?.picture ? (
+                                <img
+                                  className="h-10 w-10 rounded-full  mr-4"
+                                  src={
+                                    new RegExp(
+                                      `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                                    ).test(chatReducer.chat?.to_user?.picture)
+                                      ? chatReducer.chat?.to_user?.picture
+                                      : process.env.HOST +
+                                        chatReducer.chat?.to_user?.picture
+                                  }
+                                  alt=""
+                                ></img>
+                              ) : (
+                                <span className="hidden sm:block bg-gray-100 rounded-full overflow-hidden h-10 w-10 mr-4">
+                                  <svg
+                                    className="h-full w-full text-gray-300"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                  </svg>
+                                </span>
+                              )}
+
                               <div
                                 onClick={handleCloseChat}
                                 className="mr-4  h-8 w-8 text-white 
-                                flex justify-center items-center rounded-full
+                                flex sm:hidden justify-center items-center rounded-full
                                 cursor-pointer"
                               >
                                 <svg
@@ -213,7 +238,7 @@ const Chat = () => {
                                   id="message-heading"
                                   className="text-lg font-medium text-white"
                                 >
-                                  Leslie Alexander
+                                  {chatReducer.chat?.to_user?.username}
                                 </h1>
                               </div>
                             </div>
