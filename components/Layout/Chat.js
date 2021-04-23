@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Transition } from "@tailwindui/react";
 import ChatItem from "./Chat/ChatItem";
 import Message from "./Chat/Message";
+import { useDispatch } from "react-redux";
+import { fetchChats } from "redux/actions/chats";
 
 const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
+  const dispatch = useDispatch();
   const [chatOpen, setChatOpen] = useState(false);
   const handleOpenChat = () => {
     setChatOpen(true);
@@ -12,6 +15,15 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
     setChatOpen(false);
   };
 
+  useEffect(() => {
+    if (messagesOpen) {
+      console.log("entra");
+      const handleFetchChats = async () => {
+        await dispatch(fetchChats());
+      };
+      handleFetchChats();
+    }
+  }, [messagesOpen]);
   return (
     <>
       <Transition

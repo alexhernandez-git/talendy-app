@@ -9,6 +9,11 @@ import connectionsReducer from "./connectionsReducer";
 import followingReducer from "./followingReducer";
 import notificationsReducer from "./notificationsReducer";
 import lastNotificationsReducer from "./lastNotificationsReducer";
+import lastMessagesReducer from "./lastMessagesReducer";
+import chatsReducer from "./chatsReducer";
+import chatReducer from "./chatReducer";
+import messagesReducer from "./messagesReducer";
+
 export default combineReducers({
   authReducer: authReducer,
   alertsReducer: alertsReducer,
@@ -18,6 +23,10 @@ export default combineReducers({
   invitationsReducer: invitationsReducer,
   followingReducer: followingReducer,
   connectionsReducer: connectionsReducer,
-  lastNotificationsReducer: lastNotificationsReducer,
   notificationsReducer: notificationsReducer,
+  lastNotificationsReducer: lastNotificationsReducer,
+  lastMessagesReducer: lastMessagesReducer,
+  chatsReducer: chatsReducer,
+  chatReducer: chatReducer,
+  messagesReducer: messagesReducer,
 });
