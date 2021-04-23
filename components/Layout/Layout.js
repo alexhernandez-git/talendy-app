@@ -6,28 +6,11 @@ import Chat from "./Chat";
 import NewPostModal from "./CreateEditPostModal";
 import RegisterModal from "./RegisterModal";
 import { useAlert } from "hooks/useAlert";
+import { closeChats } from "redux/actions/chats";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Layout = ({ children, page }) => {
-  const [messagesOpen, setMessagesOpen] = useState(false);
-  const handleOpenMessages = () => {
-    setMessagesOpen(true);
-  };
-  const handleCloseMessages = () => {
-    setMessagesOpen(false);
-  };
-  const handleToggleMessages = () => {
-    setMessagesOpen(!messagesOpen);
-  };
-  const messagesRef = useRef();
-  useOutsideClick(messagesRef, () => handleCloseMessages());
-  useEffect(() => {
-    if (messagesOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-  }, [messagesOpen]);
-
   const [modalOpen, setModalOpen] = useState(false);
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -72,18 +55,13 @@ const Layout = ({ children, page }) => {
       {alert}
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 relative">
         <Header
-          handleToggleMessages={handleToggleMessages}
           handleOpenModal={handleOpenModal}
           page={page}
           handleToggleRegister={handleToggleRegister}
         />
         {children}
       </div>
-      <Chat
-        messagesOpen={messagesOpen}
-        handleToggleMessages={handleToggleMessages}
-        messagesRef={messagesRef}
-      />
+      <Chat />
       <NewPostModal modalOpen={modalOpen} modalRef={modalRef} />
       <RegisterModal
         registerOpen={registerOpen}

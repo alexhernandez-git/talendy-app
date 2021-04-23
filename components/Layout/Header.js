@@ -12,12 +12,8 @@ import { useSelector } from "react-redux";
 import { logout } from "redux/actions/auth";
 import { useDispatch } from "react-redux";
 import NotificationsDropdown from "./Header/NotificationsDropdown";
-const Header = ({
-  handleToggleMessages,
-  handleOpenModal,
-  page,
-  handleToggleRegister,
-}) => {
+import { openChats } from "redux/actions/chats";
+const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
   const dispatch = useDispatch();
   const [menuOpen, setMenuOpen] = useState(false);
   const handleOpenMenu = () => {
@@ -118,6 +114,9 @@ const Header = ({
     handleCloseMenu();
     handleCloseMobileMenu();
     dispatch(logout());
+  };
+  const handleOpenChats = () => {
+    dispatch(openChats());
   };
   return (
     <header className="bg-white dark:bg-gray-700 shadow-sm lg:static lg:overflow-y-visible">
@@ -220,7 +219,7 @@ const Header = ({
           {authReducer.is_authenticated ? (
             <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
               <span
-                onClick={handleToggleMessages}
+                onClick={handleOpenChats}
                 className="ml-5 cursor-pointer flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200"
               >
                 <span className="sr-only">View Messages</span>
@@ -461,7 +460,7 @@ const Header = ({
 
               <button
                 type="button"
-                onClick={handleToggleMessages}
+                onClick={handleOpenChats}
                 className="ml-auto flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200"
               >
                 <span className="sr-only">View Messages</span>

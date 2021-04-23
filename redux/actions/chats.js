@@ -13,9 +13,19 @@ import {
   ADD_CHAT_TO_FEED,
   ADD_CHAT_TO_FEED_SUCCESS,
   ADD_CHAT_TO_FEED_FAIL,
+  OPEN_CHATS,
+  CLOSE_CHATS,
 } from "../types";
 import { createAlert } from "./alerts";
 import { fetchChat } from "./chat";
+
+export const openChats = () => async (dispatch, getState) => {
+  dispatch({ type: OPEN_CHATS });
+};
+
+export const closeChats = () => async (dispatch, getState) => {
+  dispatch({ type: CLOSE_CHATS });
+};
 
 export const fetchChats = () => async (dispatch, getState) => {
   await dispatch({

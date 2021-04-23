@@ -8,7 +8,7 @@ const useGetNotification = (notification) => {
   switch (notification.type) {
     case "NC":
       connection = notification.connection;
-      connectedUser =
+      const connectedUser =
         connection.addressee.id === authReducer.user?.id
           ? connection.addressee
           : connection.requester;

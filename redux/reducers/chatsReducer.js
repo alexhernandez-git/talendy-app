@@ -13,10 +13,13 @@ import {
   ADD_CHAT_TO_FEED,
   ADD_CHAT_TO_FEED_SUCCESS,
   ADD_CHAT_TO_FEED_FAIL,
+  OPEN_CHATS,
+  CLOSE_CHATS,
 } from "../types";
 import { HYDRATE } from "next-redux-wrapper";
 
 const initialState = {
+  is_open: false,
   is_loading: false,
   chats: {
     count: 0,
@@ -36,6 +39,16 @@ export default function chatsReducer(state = initialState, action) {
     // case HYDRATE:
     //   // Attention! This will overwrite client state! Real apps should use proper reconciliation.
     //   return { ...state, ...action.payload.chatsReducer };
+    case OPEN_CHATS:
+      return {
+        ...state,
+        is_open: true,
+      };
+    case CLOSE_CHATS:
+      return {
+        ...state,
+        is_open: false,
+      };
     case FETCH_CHATS:
       return {
         ...state,
@@ -45,7 +58,9 @@ export default function chatsReducer(state = initialState, action) {
       return {
         ...state,
         is_loading: false,
-        chats: action.payload,
+        chats: {
+          ...action.payload,
+        },
         error: null,
       };
     case FETCH_CHATS_FAIL:

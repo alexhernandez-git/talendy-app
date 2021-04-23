@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Transition } from "@tailwindui/react";
 import ChatItem from "./Chat/ChatItem";
 import Message from "./Chat/Message";
 import { useDispatch } from "react-redux";
-import { fetchChats } from "redux/actions/chats";
+import { closeChats, fetchChats } from "redux/actions/chats";
+import useOutsideClick from "hooks/useOutsideClick";
+import { useSelector } from "react-redux";
 
-const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
+const Chat = () => {
   const dispatch = useDispatch();
   const [chatOpen, setChatOpen] = useState(false);
   const handleOpenChat = () => {
@@ -14,20 +16,32 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
   const handleCloseChat = () => {
     setChatOpen(false);
   };
-
+  const messagesRef = useRef();
+  useOutsideClick(messagesRef, () => dispatch(closeChats()));
+  const chatsReducer = useSelector((state) => state.chatsReducer);
   useEffect(() => {
-    if (messagesOpen) {
+    if (chatsReducer.is_open) {
       console.log("entra");
       const handleFetchChats = async () => {
         await dispatch(fetchChats());
       };
       handleFetchChats();
     }
-  }, [messagesOpen]);
+  }, [chatsReducer.is_open]);
+  useEffect(() => {
+    if (chatsReducer.is_open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [chatsReducer.is_open]);
+  const handleCloseChats = () => {
+    dispatch(closeChats());
+  };
   return (
     <>
       <Transition
-        show={messagesOpen}
+        show={chatsReducer.is_open}
         enter="ease-in-out duration-500"
         enterFrom="opacity-0"
         enterTo="opacity-100"
@@ -44,7 +58,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
         )}
       </Transition>
       <Transition
-        show={messagesOpen}
+        show={chatsReducer.is_open}
         enter="transform transition ease-in-out duration-500 sm:duration-700"
         enterFrom="translate-x-full"
         enterTo="translate-x-0"
@@ -91,7 +105,7 @@ const Chat = ({ messagesOpen, messagesRef, handleToggleMessages }) => {
                         </h2>
                         <div className="ml-3 h-7 flex items-center">
                           <button
-                            onClick={handleToggleMessages}
+                            onClick={handleCloseChats}
                             className="bg-white dark:bg-gray-700 rounded-3xl text-gray-400 hover:text-gray-500 dark:text-gray-100 dark:hover:text-gray-200 focus:ring-2 focus:ring-orange-500"
                           >
                             <span className="sr-only">Close panel</span>
