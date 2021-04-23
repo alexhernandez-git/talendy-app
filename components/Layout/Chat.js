@@ -23,12 +23,15 @@ const Chat = () => {
       handleFetchChats();
     }
   }, [chatsReducer.is_open]);
+  const [search, setSearch] = useState("");
+
   useEffect(() => {
     if (chatsReducer.is_open) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
+    setSearch("");
   }, [chatsReducer.is_open]);
   const handleCloseChats = () => {
     dispatch(closeChats());
@@ -38,6 +41,21 @@ const Chat = () => {
     dispatch(resetChat());
   };
 
+  const [firstLoad, setFirstLoad] = useState(true);
+  useEffect(() => {
+    setFirstLoad(false);
+    if (!firstLoad && chatsReducer.is_open) {
+      const timeoutId = setTimeout(() => {
+        console.log("entra");
+        dispatch(fetchChats(search));
+      }, 500);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [search]);
+  const handleChangeSearch = (e) => {
+    e.preventDefault();
+    setSearch(e.target.value);
+  };
   return (
     <>
       <Transition
@@ -164,6 +182,8 @@ const Chat = () => {
                                 </svg>
                               </div>
                               <input
+                                value={search}
+                                onChange={handleChangeSearch}
                                 id="search_field"
                                 name="search_field"
                                 className="dark:bg-gray-700 block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm"

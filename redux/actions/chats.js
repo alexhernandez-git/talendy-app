@@ -27,13 +27,16 @@ export const closeChats = () => async (dispatch, getState) => {
   dispatch({ type: CLOSE_CHATS });
 };
 
-export const fetchChats = () => async (dispatch, getState) => {
+export const fetchChats = (search = "") => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_CHATS,
   });
-  console.log(`${process.env.HOST}/api/chats/`);
+  console.log(`${process.env.HOST}/api/chats/?search=${search}`);
   await axios
-    .get(`${process.env.HOST}/api/chats/`, tokenConfig(getState))
+    .get(
+      `${process.env.HOST}/api/chats/?search=${search}`,
+      tokenConfig(getState)
+    )
     .then(async (res) => {
       console.log("chats", res.data);
       await dispatch({
