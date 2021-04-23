@@ -295,7 +295,7 @@ const Chat = () => {
                           </div>
 
                           <ul
-                            className="p-4  overflow-y-auto shadow-inner bg-gray-100 dark:bg-gray-800 flex flex-col-reverse"
+                            className="p-4  overflow-y-auto shadow-inner bg-gray-100 dark:bg-gray-800 flex flex-col-reverse overflow-hidden q"
                             style={{ height: "calc(100vh - 238px)" }}
                             ref={chatRef}
                           >
@@ -312,31 +312,11 @@ const Chat = () => {
                               )}
                             {messagesReducer.messages.results.map((message) =>
                               message?.sent_by.id == authReducer.user?.id ? (
-                                <Message myMessage />
+                                <Message message={message} myMessage />
                               ) : (
-                                <Message />
+                                <Message message={message} />
                               )
                             )}
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
-                            <Message />
                           </ul>
                           <div className="h-18 bg-gray-200 dark:bg-gray-800">
                             <div className="p-3 flex justify-between">
