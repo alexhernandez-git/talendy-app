@@ -6,19 +6,14 @@ import { useDispatch } from "react-redux";
 import { closeChats, fetchChats } from "redux/actions/chats";
 import useOutsideClick from "hooks/useOutsideClick";
 import { useSelector } from "react-redux";
+import { resetChat } from "redux/actions/chat";
 
 const Chat = () => {
   const dispatch = useDispatch();
-  const [chatOpen, setChatOpen] = useState(false);
-  const handleOpenChat = () => {
-    setChatOpen(true);
-  };
-  const handleCloseChat = () => {
-    setChatOpen(false);
-  };
   const messagesRef = useRef();
   useOutsideClick(messagesRef, () => dispatch(closeChats()));
   const chatsReducer = useSelector((state) => state.chatsReducer);
+  const chatReducer = useSelector((state) => state.chatReducer);
   useEffect(() => {
     if (chatsReducer.is_open) {
       console.log("entra");
@@ -38,6 +33,11 @@ const Chat = () => {
   const handleCloseChats = () => {
     dispatch(closeChats());
   };
+
+  const handleCloseChat = () => {
+    dispatch(resetChat());
+  };
+
   return (
     <>
       <Transition
@@ -91,7 +91,7 @@ const Chat = () => {
                 <div
                   ref={messagesRef}
                   className={`w-screen transition-width  transform ease-in-out duration-500 sm:duration-700 ${
-                    chatOpen ? "sm:w-chat max-w-4xl " : " sm:w-80"
+                    chatReducer.chat ? "sm:w-chat max-w-4xl " : " sm:w-80"
                   } `}
                 >
                   <div className="h-full flex flex-col pt-6 bg-white dark:bg-gray-700 shadow-xl">
@@ -132,7 +132,7 @@ const Chat = () => {
                     <div className="flex h-full">
                       <div
                         className={` w-full sm:w-80 ${
-                          chatOpen && "hidden sm:block"
+                          chatReducer.chat && "hidden sm:block"
                         }`}
                       >
                         <div className="flex-1 flex px-4 py-3 ">
@@ -177,21 +177,9 @@ const Chat = () => {
                           className="divide-y divide-gray-200 dark:divide-gray-600 overflow-y-auto h-full"
                           style={{ height: "calc(100vh - 100px);" }}
                         >
-                          <li onClick={handleOpenChat}>
-                            <ChatItem />
-                          </li>
-                          <li onClick={handleOpenChat}>
-                            <ChatItem />
-                          </li>
-                          <li onClick={handleOpenChat}>
-                            <ChatItem />
-                          </li>
-                          <li onClick={handleOpenChat}>
-                            <ChatItem />
-                          </li>
-                          <li onClick={handleOpenChat}>
-                            <ChatItem />
-                          </li>
+                          {chatsReducer.chats.results.map((chat) => (
+                            <ChatItem key={chat.id} chat={chat} />
+                          ))}
                         </ul>
                       </div>
 

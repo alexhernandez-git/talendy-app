@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import StarRatings from "react-star-ratings";
 import { createAlert } from "redux/actions/alerts";
+import { getOrCreateChat } from "redux/actions/chats";
 import {
   unfollowUser,
   followUser,
@@ -38,7 +39,9 @@ const UserCard = ({ mobile, page, profile, user }) => {
   const handleAcceptInvitation = () => {
     dispatch(acceptUserInvitation());
   };
-
+  const handleGetOrCreateChat = () => {
+    dispatch(getOrCreateChat(user?.id));
+  };
   return (
     <aside
       className={`lg:col-span-4  mb-4 lg:mb-0 ${
@@ -241,7 +244,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
                     )}
                     {user?.is_connection && (
                       <button
-                        // onClick={handleAcceptInvitation}
+                        onClick={handleGetOrCreateChat}
                         type="button"
                         className="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                       >

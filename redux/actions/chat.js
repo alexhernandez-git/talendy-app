@@ -6,13 +6,15 @@ import {
   FETCH_CHAT_FAIL,
   REMOVE_CURRENT_CHAT,
   SET_SEEN_CHAT,
+  RESET_CHAT,
 } from "../types";
 import { fetchMessages } from "./messages";
 
-export const fetchChat = (id, handleCloseProfile = false) => async (
-  dispatch,
-  getState
-) => {
+export const resetChat = () => async (dispatch) => {
+  dispatch({ type: RESET_CHAT });
+};
+
+export const fetchChat = (id) => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_CHAT,
   });
@@ -39,13 +41,6 @@ export const fetchChat = (id, handleCloseProfile = false) => async (
       }
       try {
         await dispatch({ type: SET_SEEN_CHAT, payload: res.data.id });
-      } catch (error) {
-        console.log(error);
-      }
-      try {
-        if (handleCloseProfile) {
-          await handleCloseProfile();
-        }
       } catch (error) {
         console.log(error);
       }

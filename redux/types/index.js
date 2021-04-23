@@ -227,6 +227,7 @@ export const FETCH_CHAT = "FETCH_CHAT";
 export const FETCH_CHAT_SUCCESS = "FETCH_CHAT_SUCCESS";
 export const FETCH_CHAT_FAIL = "FETCH_CHAT_FAIL";
 export const REMOVE_CURRENT_CHAT = "REMOVE_CURRENT_CHAT";
+export const RESET_CHAT = "RESET_CHAT";
 
 // Messages
 export const FETCH_MESSAGES = "FETCH_MESSAGES";

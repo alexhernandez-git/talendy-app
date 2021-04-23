@@ -56,10 +56,7 @@ export const fetchChats = () => async (dispatch, getState) => {
     });
 };
 
-export const getOrCreateChat = (user_id, push) => async (
-  dispatch,
-  getState
-) => {
+export const getOrCreateChat = (user_id) => async (dispatch, getState) => {
   dispatch({
     type: CREATE_CHAT,
   });
@@ -78,7 +75,7 @@ export const getOrCreateChat = (user_id, push) => async (
         });
       }
       await dispatch({ type: SET_CURRENT_CHAT, payload: res.data.id });
-      push("/dashboard/messages");
+      await dispatch(openChats());
     })
     .catch((err) => {
       console.log(err.response);

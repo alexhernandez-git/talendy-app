@@ -132,7 +132,7 @@ export default function chatsReducer(state = initialState, action) {
         ...state,
         chats: {
           ...state.chats,
-          results: state.chats.map((chat) =>
+          results: state.chats.results.map((chat) =>
             chat.id == action.payload
               ? { ...chat, last_message_seen: true }
               : chat
