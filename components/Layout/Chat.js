@@ -59,12 +59,11 @@ const Chat = () => {
     e.preventDefault();
     setSearch(e.target.value);
   };
-  const messagesEndRef = useRef(null);
 
   const chatRef = useRef();
   const handleScrollToBottom = () => {
     if (chatRef.current) {
-      messagesEndRef.current?.scrollIntoView();
+      chatRef.current.scrollTop = 0;
     }
   };
 
@@ -300,8 +299,6 @@ const Chat = () => {
                             style={{ height: "calc(100vh - 238px)" }}
                             ref={chatRef}
                           >
-                            <div ref={messagesEndRef} />
-
                             {messagesReducer.messages.results.length > 0 &&
                               messagesReducer.messages.next && (
                                 <li className="text-center mb-10">
@@ -320,6 +317,26 @@ const Chat = () => {
                                 <Message />
                               )
                             )}
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
+                            <Message />
                           </ul>
                           <div className="h-18 bg-gray-200 dark:bg-gray-800">
                             <div className="p-3 flex justify-between">
