@@ -18,6 +18,6 @@ export default combineReducers({
   invitationsReducer: invitationsReducer,
   followingReducer: followingReducer,
   connectionsReducer: connectionsReducer,
-  notificationsReducer: notificationsReducer,
   lastNotificationsReducer: lastNotificationsReducer,
+  notificationsReducer: notificationsReducer,
 });

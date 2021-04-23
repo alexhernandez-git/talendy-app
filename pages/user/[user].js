@@ -17,7 +17,6 @@ export default function Profile() {
   const dispatch = useDispatch();
   const router = useRouter();
   const initialDataReducer = useSelector((state) => state.initialDataReducer);
-  const authReducer = useSelector((state) => state.authReducer);
   const userReducer = useSelector((state) => state.userReducer);
   useEffect(() => {
     if (initialDataReducer.data_fetched) {

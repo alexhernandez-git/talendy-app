@@ -13,6 +13,8 @@ import {
   addInvitation,
   substractConnection,
 } from "redux/actions/auth";
+import { addOrUpdateNotificationToFeed } from "redux/actions/lastNotifications";
+import { createAlert } from "redux/actions/alerts";
 function WrappedApp({ Component, pageProps }) {
   // Dispatch initial data
   useDispatchInitialData();
@@ -40,9 +42,15 @@ function WrappedApp({ Component, pageProps }) {
         switch (data.event) {
           case "NEW_INVITATION":
             await dispatch(addInvitation());
+            await dispatch(createAlert("SUCCESS", "New invitation"));
+            await dispatch(addOrUpdateNotificationToFeed());
             break;
           case "NEW_CONNECTION":
             await dispatch(addConnection());
+            await dispatch(createAlert("SUCCESS", "New connection"));
+
+            await dispatch(addOrUpdateNotificationToFeed());
+
             break;
           case "CONNECTION_REMOVED":
             await dispatch(substractConnection());
