@@ -7,6 +7,7 @@ import { closeChats, fetchChats } from "redux/actions/chats";
 import useOutsideClick from "hooks/useOutsideClick";
 import { useSelector } from "react-redux";
 import { resetChat } from "redux/actions/chat";
+import { fetchMoreMessages } from "redux/actions/messages";
 
 const Chat = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,8 @@ const Chat = () => {
   useOutsideClick(messagesRef, () => dispatch(closeChats()));
   const chatsReducer = useSelector((state) => state.chatsReducer);
   const chatReducer = useSelector((state) => state.chatReducer);
+  const messagesReducer = useSelector((state) => state.messagesReducer);
+  const authReducer = useSelector((state) => state.authReducer);
   useEffect(() => {
     if (chatsReducer.is_open) {
       console.log("entra");
@@ -56,6 +59,34 @@ const Chat = () => {
     e.preventDefault();
     setSearch(e.target.value);
   };
+  const messagesEndRef = useRef(null);
+
+  const chatRef = useRef();
+  const handleScrollToBottom = () => {
+    if (chatRef.current) {
+      messagesEndRef.current?.scrollIntoView();
+    }
+  };
+
+  const handleScroll = () => {
+    if (chatRef.current.scrollTop == 0 && !messagesReducer.is_loading) {
+      dispatch(fetchMoreMessages(chatRef, chatRef.current.scrollHeight));
+    }
+  };
+
+  useEffect(() => {
+    if (messagesReducer.first_loading) {
+      setTimeout(() => {
+        handleScrollToBottom();
+      }, 1);
+      if (chatRef.current) {
+        chatRef.current.addEventListener("scroll", handleScroll);
+        return () =>
+          chatRef.current &&
+          chatRef.current.removeEventListener("scroll", handleScroll);
+      }
+    }
+  }, [messagesReducer.first_loading]);
   return (
     <>
       <Transition
@@ -150,7 +181,7 @@ const Chat = () => {
                     <div className="flex h-full">
                       <div
                         className={` w-full sm:w-80 ${
-                          chatReducer.chat && "hidden sm:block"
+                          chatReducer.chat && "min-w-auto hidden sm:block"
                         }`}
                       >
                         <div className="flex-1 flex px-4 py-3 ">
@@ -206,7 +237,7 @@ const Chat = () => {
                       <div className={`w-full`}>
                         <div className="min-h-0 flex-1 ">
                           <div className="bg-gradient-to-r from-orange-500 to-pink-500 py-5 rounded-t-lg">
-                            <div className="px-4 hidden sm:flex sm:justify-between items-center ">
+                            <div className="px-4 flex sm:justify-between items-center ">
                               {chatReducer.chat?.to_user?.picture ? (
                                 <img
                                   className="h-10 w-10 rounded-full  mr-4"
@@ -267,10 +298,28 @@ const Chat = () => {
                           <ul
                             className="p-4  overflow-y-auto shadow-inner bg-gray-100 dark:bg-gray-800 flex flex-col-reverse"
                             style={{ height: "calc(100vh - 238px)" }}
+                            ref={chatRef}
                           >
-                            <Message myMessage />
-                            <Message />
-                            <Message myMessage />
+                            <div ref={messagesEndRef} />
+
+                            {messagesReducer.messages.results.length > 0 &&
+                              messagesReducer.messages.next && (
+                                <li className="text-center mb-10">
+                                  <span
+                                    className="text-gray-500 dark:text-gray-100 text-sm cursor-pointer underline"
+                                    onClick={handleScroll}
+                                  >
+                                    Load more messages
+                                  </span>
+                                </li>
+                              )}
+                            {messagesReducer.messages.results.map((message) =>
+                              message?.sent_by.id == authReducer.user?.id ? (
+                                <Message myMessage />
+                              ) : (
+                                <Message />
+                              )
+                            )}
                           </ul>
                           <div className="h-18 bg-gray-200 dark:bg-gray-800">
                             <div className="p-3 flex justify-between">
