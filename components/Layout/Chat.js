@@ -224,9 +224,14 @@ const Chat = () => {
                           </form>
                         </div>
                         <ul
-                          className="divide-y divide-gray-200 dark:divide-gray-600 overflow-y-auto h-full"
+                          className="w-full sm:w-80 divide-y divide-gray-200 dark:divide-gray-600 overflow-y-auto h-full"
                           style={{ height: "calc(100vh - 100px);" }}
                         >
+                          {chatsReducer.chats.results.length === 0 && (
+                            <span className="text-sm text-gray-500 dark:text-gray-100 px-4 text-center block">
+                              No chats found
+                            </span>
+                          )}
                           {chatsReducer.chats.results.map((chat) => (
                             <ChatItem key={chat.id} chat={chat} />
                           ))}
@@ -296,7 +301,7 @@ const Chat = () => {
 
                           <ul
                             className="p-4  overflow-y-auto shadow-inner bg-gray-100 dark:bg-gray-800 flex flex-col-reverse overflow-hidden q"
-                            style={{ height: "calc(100vh - 238px)" }}
+                            style={{ height: "calc(100vh - 246px)" }}
                             ref={chatRef}
                           >
                             {messagesReducer.messages.results.length > 0 &&

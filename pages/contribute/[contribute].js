@@ -139,10 +139,11 @@ const Contribute = () => {
 
       navigator.mediaDevices
         .getUserMedia({ video: false, audio: true })
-        .then((stream) => {
+        .then(async (stream) => {
           myStreamRef.current = stream;
           stream.getAudioTracks()[0].enabled = isMicOn;
-          socketRef.current.emit("user media getted", roomID);
+          console.log(socketRef.current);
+          socketRef.current.emit("media ready", roomID);
 
           socketRef.current.on("all users", (users) => {
             const peers = [];
