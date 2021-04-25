@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Transition } from "@tailwindui/react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import ChatItem from "./Chat/ChatItem";
 import Message from "./Chat/Message";
 import { useDispatch } from "react-redux";
@@ -11,7 +10,7 @@ import { addMessage, fetchMoreMessages } from "redux/actions/messages";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { io } from "socket.io-client";
-
+import { Dialog, Transition } from "@headlessui/react";
 const Chat = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -135,6 +134,10 @@ const Chat = () => {
   };
   const handleSendMessage = (e) => {
     e.preventDefault();
+    console.log(message.length);
+    if (!message || message.trim().length === 0) {
+      return;
+    }
     const payload = {
       roomID: chatReducer.chat?.id,
       text: {
@@ -149,46 +152,56 @@ const Chat = () => {
     socketRef.current.emit("text", payload);
     setMessage("");
   };
-  return (
-    <>
-      <Transition
-        show={chatsReducer.is_open}
-        enter="ease-in-out duration-500"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="ease-in-out duration-500"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      >
-        {(ref) => (
-          <div
-            ref={ref}
-            className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity z-40"
-            aria-hidden="true"
-          ></div>
-        )}
-      </Transition>
-      <Transition
-        show={chatsReducer.is_open}
-        enter="transform transition ease-in-out duration-500 sm:duration-700"
-        enterFrom="translate-x-full"
-        enterTo="translate-x-0"
-        leave="transform transition ease-in-out duration-500 sm:duration-700"
-        leaveFrom="translate-x-0"
-        leaveTo="translate-x-full"
-      >
-        {(ref) => (
-          <section
-            ref={ref}
-            className="fixed inset-0 overflow-hidden z-50"
-            aria-labelledby="slide-over-title"
-            role="dialog"
-            aria-modal="true"
-          >
-            <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute inset-0" aria-hidden="true"></div>
+  const [open, setOpen] = useState(true);
 
-              <div className="absolute inset-y-0 right-0 pl-0 max-w-full flex sm:pl-16">
+  return (
+    <Transition.Root show={chatsReducer.is_open} as={Fragment}>
+      <Dialog
+        as="div"
+        static
+        className="fixed inset-0 overflow-hidden"
+        open={open}
+        onClose={setOpen}
+      >
+        <Transition.Child
+          as={Fragment}
+          enter="ease-in-out duration-500"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in-out duration-500"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <Dialog.Overlay className="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+        </Transition.Child>
+
+        <section
+          className="fixed inset-0 overflow-hidden z-50"
+          aria-labelledby="slide-over-title"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute inset-0" aria-hidden="true"></div>
+
+            <div className="absolute inset-y-0 right-0 pl-0 max-w-full flex sm:pl-16">
+              {/* <!--
+              Slide-over panel, show/hide based on slide-over state.
+              Entering: "transform transition ease-in-out duration-500 sm:duration-700"
+                From: "translate-x-full"
+                To: "translate-x-0"
+              Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
+                From: "translate-x-0"
+                To: "translate-x-full"
+            --> */}
+              <Transition.Child
+                enter="transform transition ease-in-out duration-500 sm:duration-700"
+                enterFrom="translate-x-full"
+                enterTo="translate-x-0"
+                leave="transform transition ease-in-out duration-500 sm:duration-700"
+                leaveFrom="translate-x-0"
+                leaveTo="translate-x-full"
+              >
                 <div
                   ref={messagesRef}
                   className={`w-screen transition-width  transform ease-in-out duration-500 sm:duration-700 ${
@@ -355,8 +368,8 @@ const Chat = () => {
                           </div>
 
                           <ul
-                            className="p-4  overflow-y-auto shadow-inner bg-gray-100 dark:bg-gray-800 flex flex-col-reverse overflow-hidden q"
-                            style={{ height: "calc(100vh - 246px)" }}
+                            className="p-4  overflow-y-auto shadow-inner bg-gray-100 dark:bg-gray-800 flex flex-col-reverse overflow-hidden"
+                            style={{ height: "calc(100vh - 242px)" }}
                             ref={chatRef}
                           >
                             {messagesReducer.messages.results.length > 0 &&
@@ -383,7 +396,7 @@ const Chat = () => {
                               className="p-3 flex justify-between"
                               onSubmit={handleSendMessage}
                             >
-                              <button
+                              {/* <button
                                 type="button"
                                 className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                               >
@@ -401,7 +414,7 @@ const Chat = () => {
                                     d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
                                   />
                                 </svg>
-                              </button>
+                              </button> */}
                               <input
                                 type="text"
                                 value={message}
@@ -424,12 +437,12 @@ const Chat = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Transition.Child>
             </div>
-          </section>
-        )}
-      </Transition>
-    </>
+          </div>
+        </section>
+      </Dialog>
+    </Transition.Root>
   );
 };
 
