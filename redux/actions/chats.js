@@ -119,7 +119,7 @@ export const newMessageEvent = (chat__id, message__text) => async (
   dispatch,
   getState
 ) => {
-  const result = getState().chatsReducer.chats.some(
+  const result = getState().chatsReducer.chats.results.some(
     (chat) => chat.id === chat__id
   );
   if (result) {
@@ -136,7 +136,7 @@ export const changeLastMessage = (chat__id, message__text) => async (
   dispatch,
   getState
 ) => {
-  const result = getState().chatsReducer.chats.some(
+  const result = getState().chatsReducer.chats.results.some(
     (chat) => chat.id === chat__id
   );
   console.log("is result", result);

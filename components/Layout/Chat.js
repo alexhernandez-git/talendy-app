@@ -3,13 +3,14 @@ import { Transition } from "@tailwindui/react";
 import ChatItem from "./Chat/ChatItem";
 import Message from "./Chat/Message";
 import { useDispatch } from "react-redux";
-import { closeChats, fetchChats } from "redux/actions/chats";
+import { changeLastMessage, closeChats, fetchChats } from "redux/actions/chats";
 import useOutsideClick from "hooks/useOutsideClick";
 import { useSelector } from "react-redux";
 import { resetChat } from "redux/actions/chat";
-import { fetchMoreMessages } from "redux/actions/messages";
+import { addMessage, fetchMoreMessages } from "redux/actions/messages";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { io } from "socket.io-client";
 
 const Chat = () => {
   const dispatch = useDispatch();
@@ -20,9 +21,9 @@ const Chat = () => {
   const chatReducer = useSelector((state) => state.chatReducer);
   const messagesReducer = useSelector((state) => state.messagesReducer);
   const authReducer = useSelector((state) => state.authReducer);
+  const initialDataReducer = useSelector((state) => state.initialDataReducer);
   useEffect(() => {
     if (chatsReducer.is_open) {
-      console.log("entra");
       const handleFetchChats = async () => {
         await dispatch(fetchChats());
       };
@@ -52,7 +53,6 @@ const Chat = () => {
     setFirstLoad(false);
     if (!firstLoad && chatsReducer.is_open) {
       const timeoutId = setTimeout(() => {
-        console.log("entra");
         dispatch(fetchChats(search));
       }, 500);
       return () => clearTimeout(timeoutId);
@@ -76,6 +76,11 @@ const Chat = () => {
     }
   };
 
+  const handleAddMessage = async (payload) => {
+    await dispatch(addMessage(payload.text));
+    await dispatch(changeLastMessage(payload.roomID, payload.text.text));
+  };
+
   useEffect(() => {
     if (messagesReducer.first_loading) {
       setTimeout(() => {
@@ -89,9 +94,60 @@ const Chat = () => {
       }
     }
   }, [messagesReducer.first_loading]);
-  const handleGoToProfile = (e) => {
+  const handleGoToProfile = () => {
     router.push(`/user/${chatReducer.chat?.to_user?.id}`);
     dispatch(closeChats());
+  };
+  const socketRef = useRef();
+
+  useEffect(() => {
+    if (initialDataReducer.data_fetched && chatReducer.chat) {
+      if (socketRef.current) {
+        socketRef.current.disconnect();
+      }
+      socketRef.current = io.connect("http://localhost:5400");
+      socketRef.current.on("connect", () => {
+        console.log("connected chat!!!!!!!!!!");
+      });
+      socketRef.current.on("connect_error", (err) => {
+        console.log(`connect_error due to ${err.message}`);
+      });
+      socketRef.current.emit("join room", chatReducer.chat?.id);
+
+      socketRef.current.on("text", (payload) => {
+        console.log("payload", payload);
+        handleAddMessage(payload);
+      });
+    }
+  }, [initialDataReducer.data_fetched, chatReducer.chat]);
+
+  useEffect(() => {
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.disconnect();
+      }
+    };
+  }, []);
+  const [message, setMessage] = useState("");
+  const handleChangeMessage = (e) => {
+    e.preventDefault();
+    setMessage(e.target.value);
+  };
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    const payload = {
+      roomID: chatReducer.chat?.id,
+      text: {
+        text: message,
+        sent_by: authReducer.user,
+        files: [],
+        created: Date.now(),
+      },
+    };
+    handleAddMessage(payload);
+
+    socketRef.current.emit("text", payload);
+    setMessage("");
   };
   return (
     <>
@@ -133,16 +189,6 @@ const Chat = () => {
               <div className="absolute inset-0" aria-hidden="true"></div>
 
               <div className="absolute inset-y-0 right-0 pl-0 max-w-full flex sm:pl-16">
-                {/* <!--
-        Slide-over panel, show/hide based on slide-over state.
-
-        Entering: "transform transition ease-in-out duration-500 sm:duration-700"
-          From: "translate-x-full"
-          To: "translate-x-0"
-        Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
-          From: "translate-x-0"
-          To: "translate-x-full"
-      --> */}
                 <div
                   ref={messagesRef}
                   className={`w-screen transition-width  transform ease-in-out duration-500 sm:duration-700 ${
@@ -221,6 +267,7 @@ const Chat = () => {
                               <input
                                 value={search}
                                 onChange={handleChangeSearch}
+                                autoFocus
                                 id="search_field"
                                 name="search_field"
                                 className="dark:bg-gray-700 block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm"
@@ -324,7 +371,7 @@ const Chat = () => {
                                 </li>
                               )}
                             {messagesReducer.messages.results.map((message) =>
-                              message?.sent_by.id == authReducer.user?.id ? (
+                              message?.sent_by?.id == authReducer.user?.id ? (
                                 <Message message={message} myMessage />
                               ) : (
                                 <Message message={message} />
@@ -332,7 +379,10 @@ const Chat = () => {
                             )}
                           </ul>
                           <div className="h-18 bg-gray-200 dark:bg-gray-800">
-                            <div className="p-3 flex justify-between">
+                            <form
+                              className="p-3 flex justify-between"
+                              onSubmit={handleSendMessage}
+                            >
                               <button
                                 type="button"
                                 className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
@@ -354,15 +404,20 @@ const Chat = () => {
                               </button>
                               <input
                                 type="text"
+                                value={message}
+                                onChange={handleChangeMessage}
                                 id="message"
                                 name="message"
                                 className="block w-full bg-white dark:bg-gray-600 border border-gray-300 rounded-3xl py-2 px-4 text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                                 placeholder="Mesasage"
                               />
-                              <button className="ml-3 inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
+                              <button
+                                type="submit"
+                                className="ml-3 inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                              >
                                 Send
                               </button>
-                            </div>
+                            </form>
                           </div>
                         </div>
                       </div>

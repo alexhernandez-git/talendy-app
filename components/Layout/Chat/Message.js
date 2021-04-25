@@ -1,7 +1,6 @@
 import React from "react";
 
 const Message = ({ myMessage, message }) => {
-  console.log(message);
   return (
     <li>
       <div

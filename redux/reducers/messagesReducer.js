@@ -56,7 +56,7 @@ export default function messagesReducer(state = initialState, action) {
         ...state,
         messages: {
           ...state.messages,
-          results: [...state.messages.results, action.payload],
+          results: [action.payload, ...state.messages.results],
         },
       };
     case FETCH_MESSAGE:
@@ -69,7 +69,7 @@ export default function messagesReducer(state = initialState, action) {
         ...state,
         messages: {
           ...state.messages,
-          results: [...state.messages.results, action.payload],
+          results: [action.payload, ...state.messages.results],
         },
         fetching_message: false,
         fetch_message_error: null,
@@ -91,7 +91,7 @@ export default function messagesReducer(state = initialState, action) {
         is_loading: false,
         messages: {
           next: action.payload.next,
-          results: [...action.payload.results, ...state.messages.results],
+          results: [...state.messages.results, ...action.payload.results],
         },
         error: null,
       };

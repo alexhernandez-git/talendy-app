@@ -62,7 +62,7 @@ const ChatItem = ({ chat }) => {
                   </svg>
                 </span>
               )}
-              <div className="ml-4 truncate">
+              <div className="ml-4 truncate w-full">
                 <div className=" flex justify-between">
                   <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
                     {chat?.room_name}
