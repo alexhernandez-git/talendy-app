@@ -6,9 +6,6 @@ import Chat from "./Chat";
 import NewPostModal from "./CreateEditPostModal";
 import RegisterModal from "./RegisterModal";
 import { useAlert } from "hooks/useAlert";
-import { closeChats } from "redux/actions/chats";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 
 const Layout = ({ children, page }) => {
   const [modalOpen, setModalOpen] = useState(false);
