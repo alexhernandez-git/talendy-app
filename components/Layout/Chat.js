@@ -8,9 +8,12 @@ import useOutsideClick from "hooks/useOutsideClick";
 import { useSelector } from "react-redux";
 import { resetChat } from "redux/actions/chat";
 import { fetchMoreMessages } from "redux/actions/messages";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Chat = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const messagesRef = useRef();
   useOutsideClick(messagesRef, () => dispatch(closeChats()));
   const chatsReducer = useSelector((state) => state.chatsReducer);
@@ -86,6 +89,10 @@ const Chat = () => {
       }
     }
   }, [messagesReducer.first_loading]);
+  const handleGoToProfile = (e) => {
+    router.push(`/user/${chatReducer.chat?.to_user?.id}`);
+    dispatch(closeChats());
+  };
   return (
     <>
       <Transition
@@ -290,8 +297,9 @@ const Chat = () => {
                               </div>
                               <div className="sm:w-0 sm:flex-1">
                                 <h1
+                                  onClick={handleGoToProfile}
                                   id="message-heading"
-                                  className="text-lg font-medium text-white"
+                                  className="text-lg font-medium text-white hover:underline cursor-pointer"
                                 >
                                   {chatReducer.chat?.to_user?.username}
                                 </h1>
