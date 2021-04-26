@@ -35,8 +35,8 @@ const useGetNotification = (notification) => {
       connection = notification.connection;
       const connectedUser =
         connection.addressee.id === authReducer.user?.id
-          ? connection.addressee
-          : connection.requester;
+          ? connection.requester
+          : connection.addressee;
       return {
         event_message: `New connection`,
         message: `${connectedUser.username} is your new connection`,
