@@ -1,5 +1,9 @@
 import axios from "axios";
-import { tokenConfig } from "./auth";
+import {
+  setPendingMessages,
+  setPendingNotifications,
+  tokenConfig,
+} from "./auth";
 import {
   CREATE_CHAT,
   CREATE_CHAT_SUCCESS,
@@ -18,6 +22,7 @@ import {
 } from "../types";
 import { createAlert } from "./alerts";
 import { fetchChat } from "./chat";
+import { addOrUpdateNotificationToFeed } from "./lastNotifications";
 
 export const openChats = () => async (dispatch, getState) => {
   dispatch({ type: OPEN_CHATS });
@@ -115,21 +120,27 @@ export const addChatToFeed = (id) => async (dispatch, getState) => {
     });
 };
 
-export const newMessageEvent = (chat__id, message__text) => async (
-  dispatch,
-  getState
-) => {
+export const newMessageEvent = (data) => async (dispatch, getState) => {
+  console.log("chat id", data.chat__pk);
+  console.log("current chat", getState().chatsReducer.current_chat);
+  if (data.chat__pk === getState().chatsReducer.current_chat) return;
   const result = getState().chatsReducer.chats.results.some(
-    (chat) => chat.id === chat__id
+    (chat) => chat.id === data.chat__pk
   );
   if (result) {
     await dispatch({
       type: NEW_MESSAGE_EVENT,
-      payload: { chat__id: chat__id, message__text: message__text },
+      payload: { chat__id: data.chat__pk, message__text: data.message__text },
     });
   } else {
-    await dispatch(addChatToFeed(chat__id));
+    await dispatch(addChatToFeed(data.chat__pk));
   }
+  await dispatch(
+    createAlert("SUCCESS", "New message from " + data.sent_by__username)
+  );
+  await dispatch(setPendingMessages());
+  await dispatch(setPendingNotifications());
+  await dispatch(addOrUpdateNotificationToFeed(data.notification__pk));
 };
 
 export const changeLastMessage = (chat__id, message__text) => async (

@@ -46,26 +46,7 @@ function WrappedApp({ Component, pageProps }) {
         console.log("data", data);
         switch (data.event) {
           case "MESSAGE_RECEIVED":
-            if (chatReducer.chat?.id !== data.chat__pk) {
-              console.log(chatReducer);
-              console.log(chatsReducer);
-              console.log(authReducer);
-              console.log(data.chat__pk);
-              await dispatch(setPendingMessages());
-              await dispatch(setPendingNotifications());
-              await dispatch(
-                addOrUpdateNotificationToFeed(data.notification__pk)
-              );
-              await dispatch(
-                createAlert(
-                  "SUCCESS",
-                  "New message from " + data.sent_by__username
-                )
-              );
-              await dispatch(
-                newMessageEvent(data.chat__pk, data.message__text)
-              );
-            }
+            await dispatch(newMessageEvent(data));
             break;
           case "NEW_INVITATION":
             await dispatch(addInvitation());
