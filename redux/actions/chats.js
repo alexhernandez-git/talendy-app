@@ -21,7 +21,7 @@ import {
   CLOSE_CHATS,
 } from "../types";
 import { createAlert } from "./alerts";
-import { fetchChat } from "./chat";
+import { fetchChat, resetChat } from "./chat";
 import { addOrUpdateNotificationToFeed } from "./lastNotifications";
 
 export const openChats = () => async (dispatch, getState) => {
@@ -29,7 +29,8 @@ export const openChats = () => async (dispatch, getState) => {
 };
 
 export const closeChats = () => async (dispatch, getState) => {
-  dispatch({ type: CLOSE_CHATS });
+  await dispatch({ type: CLOSE_CHATS });
+  await dispatch(resetChat());
 };
 
 export const fetchChats = (search = "") => async (dispatch, getState) => {

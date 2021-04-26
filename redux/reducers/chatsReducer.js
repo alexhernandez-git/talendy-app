@@ -48,6 +48,7 @@ export default function chatsReducer(state = initialState, action) {
       return {
         ...state,
         is_open: false,
+        current_chat: null,
       };
     case FETCH_CHATS:
       return {
