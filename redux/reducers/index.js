@@ -16,6 +16,7 @@ import messagesReducer from "./messagesReducer";
 
 export default combineReducers({
   authReducer: authReducer,
+  chatReducer: chatReducer,
   alertsReducer: alertsReducer,
   initialDataReducer: initialDataReducer,
   topKarmaUsersReducer: topKarmaUsersReducer,
@@ -27,6 +28,5 @@ export default combineReducers({
   lastNotificationsReducer: lastNotificationsReducer,
   lastMessagesReducer: lastMessagesReducer,
   chatsReducer: chatsReducer,
-  chatReducer: chatReducer,
   messagesReducer: messagesReducer,
 });

@@ -11,15 +11,20 @@ import { useDispatch } from "react-redux";
 import {
   addConnection,
   addInvitation,
+  setPendingMessages,
+  setPendingNotifications,
   substractConnection,
 } from "redux/actions/auth";
 import { addOrUpdateNotificationToFeed } from "redux/actions/lastNotifications";
 import { createAlert } from "redux/actions/alerts";
+import { newMessageEvent } from "redux/actions/chats";
 function WrappedApp({ Component, pageProps }) {
   // Dispatch initial data
   useDispatchInitialData();
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
+  const chatReducer = useSelector((state) => state.chatReducer);
+  const chatsReducer = useSelector((state) => state.chatsReducer);
   const ws = useRef(null);
   const connect = () => {
     ws.current = new WebSocket(
@@ -40,6 +45,28 @@ function WrappedApp({ Component, pageProps }) {
         const data = JSON.parse(e.data);
         console.log("data", data);
         switch (data.event) {
+          case "MESSAGE_RECEIVED":
+            if (chatReducer.chat?.id !== data.chat__pk) {
+              console.log(chatReducer);
+              console.log(chatsReducer);
+              console.log(authReducer);
+              console.log(data.chat__pk);
+              await dispatch(setPendingMessages());
+              await dispatch(setPendingNotifications());
+              await dispatch(
+                addOrUpdateNotificationToFeed(data.notification__pk)
+              );
+              await dispatch(
+                createAlert(
+                  "SUCCESS",
+                  "New message from " + data.sent_by__username
+                )
+              );
+              await dispatch(
+                newMessageEvent(data.chat__pk, data.message__text)
+              );
+            }
+            break;
           case "NEW_INVITATION":
             await dispatch(addInvitation());
             await dispatch(createAlert("SUCCESS", "New invitation"));

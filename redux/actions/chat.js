@@ -7,6 +7,7 @@ import {
   REMOVE_CURRENT_CHAT,
   SET_SEEN_CHAT,
   RESET_CHAT,
+  SET_CURRENT_CHAT,
 } from "../types";
 import { fetchMessages } from "./messages";
 
@@ -35,7 +36,7 @@ export const fetchChat = (id) => async (dispatch, getState) => {
         console.log(error);
       }
       try {
-        await dispatch({ type: REMOVE_CURRENT_CHAT });
+        await dispatch({ type: SET_CURRENT_CHAT, payload: res.data.id });
       } catch (error) {
         console.log(error);
       }

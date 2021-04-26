@@ -117,6 +117,7 @@ const Chat = () => {
     setMessage(e.target.value);
   };
   const handleSendMessage = (e) => {
+    console.log("entra");
     e.preventDefault();
     console.log(message.length);
     if (!message || message.trim().length === 0) {
@@ -137,11 +138,24 @@ const Chat = () => {
     socketRef.current.emit("text", payload);
     setMessage("");
   };
+  const messageInputRef = useRef();
+  const handleKeys = (e) => {
+    if (e.keyCode === 13) {
+      handleSendMessage(e);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeys);
+    return () => {
+      window.removeEventListener("keydown", handleKeys);
+    };
+  }, [chatsReducer.is_open]);
   return (
     <Transition.Root show={chatsReducer.is_open} as={Fragment}>
       <Dialog
         as="div"
         static
+        initialFocus={messageInputRef}
         className="fixed inset-0 overflow-hidden"
         open={chatsReducer.is_open}
         onClose={handleCloseChats}
@@ -273,13 +287,17 @@ const Chat = () => {
                       </ul>
                     </div>
 
-                    <div className={`w-full`}>
+                    <div
+                      className={`w-full ${
+                        chatReducer.chat ? "block" : "hidden"
+                      }`}
+                    >
                       <div className="min-h-0 flex-1 ">
                         <div className="bg-gradient-to-r from-orange-500 to-pink-500 py-5 rounded-t-lg">
                           <div className="px-4 flex sm:justify-between items-center ">
                             {chatReducer.chat?.to_user?.picture ? (
                               <img
-                                className="h-10 w-10 rounded-full  mr-4"
+                                className="hidden sm:block h-10 w-10 rounded-full  mr-4"
                                 src={
                                   new RegExp(
                                     `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
@@ -390,6 +408,7 @@ const Chat = () => {
                               value={message}
                               onChange={handleChangeMessage}
                               id="message"
+                              ref={messageInputRef}
                               name="message"
                               className="block w-full bg-white dark:bg-gray-600 border border-gray-300 rounded-3xl py-2 px-4 text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                               placeholder="Mesasage"
