@@ -11,8 +11,11 @@ import {
   FETCH_MORE_MESSAGES,
   FETCH_MORE_MESSAGES_SUCCESS,
   FETCH_MORE_MESSAGES_FAIL,
+  RESET_MESSAGES,
 } from "../types";
-
+export const resetMessages = () => async (dispatch, getState) => {
+  await dispatch({ type: RESET_MESSAGES });
+};
 export const fetchMessages = (id) => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_MESSAGES,

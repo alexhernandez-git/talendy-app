@@ -9,6 +9,7 @@ import {
   FETCH_MORE_MESSAGES,
   FETCH_MORE_MESSAGES_SUCCESS,
   FETCH_MORE_MESSAGES_FAIL,
+  RESET_MESSAGES,
 } from "../types";
 import { HYDRATE } from "next-redux-wrapper";
 
@@ -100,6 +101,21 @@ export default function messagesReducer(state = initialState, action) {
         ...state,
         is_loading: false,
         error: action.payload,
+      };
+    case RESET_MESSAGES:
+      return {
+        ...state,
+        is_loading: false,
+        messages: {
+          count: 0,
+          next: null,
+          previous: null,
+          results: [],
+        },
+        first_loading: false,
+        error: null,
+        fetching_message: false,
+        fetch_message_error: null,
       };
     default:
       return state;

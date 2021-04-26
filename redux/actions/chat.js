@@ -9,10 +9,11 @@ import {
   RESET_CHAT,
   SET_CURRENT_CHAT,
 } from "../types";
-import { fetchMessages } from "./messages";
+import { fetchMessages, resetMessages } from "./messages";
 
 export const resetChat = () => async (dispatch) => {
   dispatch({ type: RESET_CHAT });
+  dispatch(resetMessages());
 };
 
 export const fetchChat = (id) => async (dispatch, getState) => {
