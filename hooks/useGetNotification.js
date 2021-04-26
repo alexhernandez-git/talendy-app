@@ -26,7 +26,7 @@ const useGetNotification = (notification) => {
         message = notification.messages[0].text;
       }
       return {
-        event_message: `New message`,
+        event_message: many_messages ? "New messages" : "New message",
         message: message,
         user: notification.actor,
       };
