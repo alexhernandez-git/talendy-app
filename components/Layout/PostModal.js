@@ -1,7 +1,6 @@
 import React from "react";
 import { useRef, useState } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
-import { Transition } from "@tailwindui/react";
 
 import Link from "next/link";
 import { useRouter } from "next/router";

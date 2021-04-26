@@ -8,12 +8,10 @@ const useOutsideClick = (ref, callback) => {
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClick);
-    document.addEventListener("mouseup", handleClick);
+    document.addEventListener("onclick", handleClick);
 
     return () => {
-      document.removeEventListener("mouseup", handleClick);
-      document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener("onclick", handleClick);
     };
   });
 };

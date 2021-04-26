@@ -8,7 +8,6 @@ import { MdHeadset, MdMic, MdScreenShare, MdMicOff } from "react-icons/md";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Member from "components/Pages/Help/Member";
-import { Transition } from "@tailwindui/react";
 import { io } from "socket.io-client";
 import Peer from "simple-peer";
 import ContributeChat from "components/Pages/Contribute/ContributeChat";
@@ -431,51 +430,40 @@ const Contribute = () => {
                       </svg>
                     </button>
                   </div>
-                  <Transition
-                    show={moreOptionsOpen}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-out duration-100"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
+
+                  <div
+                    ref={moreOptionsRef}
+                    className={moreOptionsOpen ? "block" : "hidden"}
                   >
-                    {(ref) => (
-                      <div ref={moreOptionsRef}>
-                        <ul
-                          ref={ref}
-                          className="origin-top-right absolute right-0 mt-2 w-72 z-30 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none"
-                          tabIndex="-1"
-                          role="listbox"
-                          aria-labelledby="listbox-label"
-                          aria-activedescendant="listbox-option-0"
+                    <ul
+                      ref={ref}
+                      className="origin-top-right absolute right-0 mt-2 w-72 z-30 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                      tabIndex="-1"
+                      role="listbox"
+                      aria-labelledby="listbox-label"
+                      aria-activedescendant="listbox-option-0"
+                    >
+                      <li
+                        className="text-gray-900 dark:text-white cursor-pointer select-none relative p-4 text-sm hover:opacity-70"
+                        id="listbox-option-0"
+                        role="option"
+                      >
+                        <button
+                          onClick={handleChangeFeature.bind(this, "ASTEROIDS")}
+                          className="flex flex-col"
                         >
-                          <li
-                            className="text-gray-900 dark:text-white cursor-pointer select-none relative p-4 text-sm hover:opacity-70"
-                            id="listbox-option-0"
-                            role="option"
-                          >
-                            <button
-                              onClick={handleChangeFeature.bind(
-                                this,
-                                "ASTEROIDS"
-                              )}
-                              className="flex flex-col"
-                            >
-                              <div className="flex justify-between">
-                                <p className="font-normal">Asteroids</p>
-                              </div>
-                              <p className="text-gray-500 text-left mt-2">
-                                Psst.. waiting for someone? Let's shoot some
-                                asteroids in the meantime. This game is only
-                                loaded for you.
-                              </p>
-                            </button>
-                          </li>
-                        </ul>
-                      </div>
-                    )}
-                  </Transition>
+                          <div className="flex justify-between">
+                            <p className="font-normal">Asteroids</p>
+                          </div>
+                          <p className="text-gray-500 text-left mt-2">
+                            Psst.. waiting for someone? Let's shoot some
+                            asteroids in the meantime. This game is only loaded
+                            for you.
+                          </p>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
