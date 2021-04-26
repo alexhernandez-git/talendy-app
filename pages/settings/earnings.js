@@ -165,7 +165,7 @@ const earnings = () => {
                                 {authReducer?.user?.paypal_email ? (
                                   <>
                                     <span
-                                      onMouseDown={handleToggleWithdrawFunds}
+                                      onClick={handleToggleWithdrawFunds}
                                       className="cursor-pointer  flex items-center justify-center border-gray-300 shadow-sm bg-white dark:bg-gray-900 text-base font-medium text-gray-700 dark:text-gray-100 hover:bg-gray-50  px-5 py-3 border border-transparent rounded-3xl"
                                     >
                                       <img
@@ -178,9 +178,7 @@ const earnings = () => {
                                 ) : (
                                   <>
                                     <span
-                                      onMouseDown={
-                                        handleTogglePaypalConnectForm
-                                      }
+                                      onClick={handleTogglePaypalConnectForm}
                                       className="cursor-pointer  flex items-center justify-center border-gray-300 shadow-sm bg-white dark:bg-gray-900 text-base font-medium text-gray-700 dark:text-gray-100 hover:bg-gray-50  px-5 py-3 border border-transparent rounded-3xl"
                                     >
                                       <img

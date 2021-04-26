@@ -121,7 +121,7 @@ const Post = ({ page, image }) => {
               <div className="relative inline-block text-left">
                 <div>
                   <button
-                    onMouseDown={handleToggleOptions}
+                    onClick={handleToggleOptions}
                     onClick={(e) => e.stopPropagation()}
                     type="button"
                     className="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-100"
@@ -161,7 +161,7 @@ const Post = ({ page, image }) => {
                     >
                       <div className="py-1" role="none" ref={optionsRef}>
                         <span
-                          onMouseDown={handleOpenEdit}
+                          onClick={handleOpenEdit}
                           className="cursor-pointer flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                           role="menuitem"
                         >

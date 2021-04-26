@@ -173,7 +173,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
           <div className="flex items-center md:absolute md:right-0 md:inset-y-0 lg:hidden">
             <button
               type="button"
-              onMouseDown={handleToggleMobileMenu}
+              onClick={handleToggleMobileMenu}
               className="-mx-2 rounded-3xl p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500"
               aria-expanded="false"
             >
@@ -241,7 +241,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
               </span>
               <div className="relative inline-block text-left ">
                 <button
-                  onMouseDown={handleToggleNotifications}
+                  onClick={handleToggleNotifications}
                   className="ml-5  flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200"
                 >
                   <span className="sr-only">View notifications</span>
@@ -271,7 +271,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
               <div className="flex-shrink-0 relative ml-5">
                 <div>
                   <button
-                    onMouseDown={handleToggleMenu}
+                    onClick={handleToggleMenu}
                     type="button"
                     className="rounded-full flex"
                     id="user-menu"
@@ -386,7 +386,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
               <div className="flex-shrink-0 relative ml-5">
                 <div>
                   <span
-                    onMouseDown={handleToggleLogin}
+                    onClick={handleToggleLogin}
                     className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                   >
                     Sign in
@@ -402,7 +402,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
               <div className="flex-shrink-0 relative ml-3">
                 <div>
                   <span
-                    onMouseDown={handleToggleRegister}
+                    onClick={handleToggleRegister}
                     className="cursor-pointer inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
                   >
                     Register
@@ -536,7 +536,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
             <div className="flex-shrink-0 relative mb-3">
               <div>
                 <span
-                  onMouseDown={handleToggleLoginMobile}
+                  onClick={handleToggleLoginMobile}
                   className="cursor-pointer w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                 >
                   Sign in
@@ -552,7 +552,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
             <div className="flex-shrink-0 relative mb-3">
               <div>
                 <span
-                  onMouseDown={handleToggleRegister}
+                  onClick={handleToggleRegister}
                   className="cursor-pointer w-full inline-flex justify-center items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
                 >
                   Register
