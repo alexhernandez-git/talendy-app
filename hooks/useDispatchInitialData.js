@@ -11,7 +11,6 @@ const useDispatchInitialData = () => {
     const fetchData = async () => {
       await dispatch(loadUser());
       await dispatch(loadCurrency());
-      await dispatch(fetchLastNotifications());
       // Set initial data fetched
       await dispatch(initialDataFetched());
     };

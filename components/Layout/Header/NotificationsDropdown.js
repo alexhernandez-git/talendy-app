@@ -1,13 +1,22 @@
 import { Transition } from "@tailwindui/react";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { fetchLastNotifications } from "redux/actions/lastNotifications";
 import NotificationItem from "./NotificationItem";
 
 const NotificationsDropdown = ({ notificationsOpen, notificationsRef }) => {
+  const dispatch = useDispatch();
   const lastNotificationsReducer = useSelector(
     (state) => state.lastNotificationsReducer
   );
+  const authReducer = useSelector((state) => state.authReducer);
+  useEffect(() => {
+    if (authReducer.is_authenticated && notificationsOpen) {
+      dispatch(fetchLastNotifications());
+    }
+  }, [notificationsOpen]);
   return (
     <Transition
       show={notificationsOpen}
