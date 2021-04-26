@@ -122,7 +122,11 @@ export default function chatsReducer(state = initialState, action) {
           ...state.chats,
           results: newChangeChatsArray.map((chat) =>
             chat.id == action.payload.chat__id
-              ? { ...chat, last_message: action.payload.message__text }
+              ? {
+                  ...chat,
+                  last_message: action.payload.message__text,
+                  last_message_created: Date.now(),
+                }
               : chat
           ),
         },
@@ -169,6 +173,7 @@ export default function chatsReducer(state = initialState, action) {
                   ...chat,
                   last_message_seen: false,
                   last_message: action.payload.message__text,
+                  last_message_created: Date.now(),
                 }
               : chat
           ),

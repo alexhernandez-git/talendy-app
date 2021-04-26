@@ -20,8 +20,6 @@ export const fetchMessages = (id) => async (dispatch, getState) => {
   await axios
     .get(`${process.env.HOST}/api/chats/${id}/messages/`, tokenConfig(getState))
     .then(async (res) => {
-      const results = await res.data.results.reverse();
-      res.data.results = results;
       await dispatch({
         type: FETCH_MESSAGES_SUCCESS,
         payload: res.data,
@@ -72,10 +70,7 @@ export const fetchMessage = (chat__pk, message__pk) => async (
     });
 };
 
-export const fetchMoreMessages = (chatRef, lastHeight) => async (
-  dispatch,
-  getState
-) => {
+export const fetchMoreMessages = () => async (dispatch, getState) => {
   const url = getState().messagesReducer.messages.next;
   console.log(getState().messagesReducer.messages.next);
   if (url) {
@@ -85,15 +80,10 @@ export const fetchMoreMessages = (chatRef, lastHeight) => async (
     await axios
       .get(url, tokenConfig(getState))
       .then(async (res) => {
-        const results_mm = await res.data.results.reverse();
-        res.data.results = results_mm;
         await dispatch({
           type: FETCH_MORE_MESSAGES_SUCCESS,
           payload: res.data,
         });
-        let scrollHeight = chatRef.current.scrollHeight;
-        let newHeight = scrollHeight - lastHeight;
-        chatRef.current.scrollTo(0, newHeight);
       })
       .catch((err) => {
         dispatch({

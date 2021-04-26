@@ -11,8 +11,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { io } from "socket.io-client";
 import { Dialog, Transition } from "@headlessui/react";
-import { XIcon } from "@heroicons/react/outline";
-
+import VisibilitySensor from "react-visibility-sensor";
 const Chat = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -65,36 +64,19 @@ const Chat = () => {
   };
 
   const chatRef = useRef();
-  const handleScrollToBottom = () => {
-    if (chatRef.current) {
-      chatRef.current.scrollTop = 0;
-    }
+  const handleFetchMoreMessages = () => {
+    dispatch(fetchMoreMessages());
   };
-
-  const handleScroll = () => {
-    if (chatRef.current.scrollTop == 0 && !messagesReducer.is_loading) {
-      dispatch(fetchMoreMessages(chatRef, chatRef.current.scrollHeight));
-    }
-  };
+  function onChangeVisibility(isVisible) {
+    console.log("isVisible", isVisible);
+    if (isVisible) handleFetchMoreMessages();
+  }
 
   const handleAddMessage = async (payload) => {
-    await dispatch(addMessage(payload.text));
-    await dispatch(changeLastMessage(payload.roomID, payload.text.text));
+    await dispatch(addMessage(payload.message));
+    await dispatch(changeLastMessage(payload.roomID, payload.message.text));
   };
 
-  useEffect(() => {
-    if (messagesReducer.first_loading) {
-      setTimeout(() => {
-        handleScrollToBottom();
-      }, 1);
-      if (chatRef.current) {
-        chatRef.current.addEventListener("scroll", handleScroll);
-        return () =>
-          chatRef.current &&
-          chatRef.current.removeEventListener("scroll", handleScroll);
-      }
-    }
-  }, [messagesReducer.first_loading]);
   const handleGoToProfile = () => {
     router.push(`/user/${chatReducer.chat?.to_user?.id}`);
     dispatch(closeChats());
@@ -142,7 +124,8 @@ const Chat = () => {
     }
     const payload = {
       roomID: chatReducer.chat?.id,
-      text: {
+      token: authReducer?.access_token,
+      message: {
         text: message,
         sent_by: authReducer.user,
         files: [],
@@ -266,7 +249,6 @@ const Chat = () => {
                             <input
                               value={search}
                               onChange={handleChangeSearch}
-                              autoFocus
                               id="search_field"
                               name="search_field"
                               className="dark:bg-gray-700 block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm"
@@ -358,17 +340,6 @@ const Chat = () => {
                           style={{ height: "calc(100vh - 242px)" }}
                           ref={chatRef}
                         >
-                          {messagesReducer.messages.results.length > 0 &&
-                            messagesReducer.messages.next && (
-                              <li className="text-center mb-10">
-                                <span
-                                  className="text-gray-500 dark:text-gray-100 text-sm cursor-pointer underline"
-                                  onClick={handleScroll}
-                                >
-                                  Load more messages
-                                </span>
-                              </li>
-                            )}
                           {messagesReducer.messages.results.map((message) =>
                             message?.sent_by?.id == authReducer.user?.id ? (
                               <Message message={message} myMessage />
@@ -376,6 +347,19 @@ const Chat = () => {
                               <Message message={message} />
                             )
                           )}
+                          {messagesReducer.messages.results.length > 0 &&
+                            messagesReducer.messages.next && (
+                              <VisibilitySensor onChange={onChangeVisibility}>
+                                <div
+                                  className="p-3 flex justify-center"
+                                  onClick={handleFetchMoreMessages}
+                                >
+                                  <span className="text-gray-500 dark:text-gray-100 text-sm cursor-pointer">
+                                    Load more messages
+                                  </span>
+                                </div>
+                              </VisibilitySensor>
+                            )}
                         </ul>
                         <div className="h-18 bg-gray-200 dark:bg-gray-800">
                           <form
