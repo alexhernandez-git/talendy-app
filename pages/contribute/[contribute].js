@@ -436,7 +436,6 @@ const Contribute = () => {
                     className={moreOptionsOpen ? "block" : "hidden"}
                   >
                     <ul
-                      ref={ref}
                       className="origin-top-right absolute right-0 mt-2 w-72 z-30 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none"
                       tabIndex="-1"
                       role="listbox"

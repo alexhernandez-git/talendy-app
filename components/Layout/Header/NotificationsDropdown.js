@@ -22,7 +22,6 @@ const NotificationsDropdown = ({ notificationsOpen, notificationsRef }) => {
       className={notificationsOpen ? "block" : "hidden"}
     >
       <div
-        ref={ref}
         className={`
                    origin-top-right absolute right-0 mt-2 w-80 rounded-3xl shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 z-40 overflow-hidden`}
       >
