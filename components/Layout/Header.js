@@ -305,57 +305,59 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
                   </button>
                 </div>
 
-                <div ref={menuRef} className={menuOpen ? "block" : "hidden"}>
-                  <div
-                    className=" origin-top-right absolute z-40 right-0 mt-2 w-48 rounded-lg shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
-                    role="menu"
-                    aria-orientation="vertical"
-                    aria-labelledby="user-menu"
-                  >
-                    <span className="text-center py-2 px-4 text-sm text-orange-500 font-bold flex items-center ">
-                      <svg
-                        className="w-6 h-6 mr-1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                      {user?.karma_amount} Karma
-                    </span>
-                    <Link href="/profile/posts" role="menuitem">
-                      <span className="block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                        Profile
-                      </span>
-                    </Link>
-
-                    <Link href="/settings" role="menuitem">
-                      <span className="block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                        Settings
-                      </span>
-                    </Link>
-                    <Link href="/settings/earnings" role="menuitem">
-                      <span className="block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                        Earnings
-                      </span>
-                    </Link>
-                    <button
-                      onClick={handleSignOut}
-                      className="w-full text-left block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
-                      role="menuitem"
+                <div ref={menuRef}>
+                  {menuOpen && (
+                    <div
+                      className=" origin-top-right absolute z-40 right-0 mt-2 w-48 rounded-lg shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
+                      role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="user-menu"
                     >
-                      Sign out
-                    </button>
-                    <div className="block py-2 px-4 mt-1">
-                      <ToggleTheme />
+                      <span className="text-center py-2 px-4 text-sm text-orange-500 font-bold flex items-center ">
+                        <svg
+                          className="w-6 h-6 mr-1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        {user?.karma_amount} Karma
+                      </span>
+                      <Link href="/profile/posts" role="menuitem">
+                        <span className="block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                          Profile
+                        </span>
+                      </Link>
+
+                      <Link href="/settings" role="menuitem">
+                        <span className="block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                          Settings
+                        </span>
+                      </Link>
+                      <Link href="/settings/earnings" role="menuitem">
+                        <span className="block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                          Earnings
+                        </span>
+                      </Link>
+                      <button
+                        onClick={handleSignOut}
+                        className="w-full text-left block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
+                        role="menuitem"
+                      >
+                        Sign out
+                      </button>
+                      <div className="block py-2 px-4 mt-1">
+                        <ToggleTheme />
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
               <span

@@ -2,6 +2,7 @@ import { wrapper } from "redux/store";
 import withReduxSaga from "next-redux-saga";
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
+import "rc-slider/assets/index.css";
 import { useEffect, useRef } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import getStripe from "utils/get-stripejs";

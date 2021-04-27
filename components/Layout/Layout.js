@@ -59,7 +59,11 @@ const Layout = ({ children, page }) => {
         {children}
       </div>
       <Chat />
-      <NewPostModal modalOpen={modalOpen} modalRef={modalRef} />
+      <NewPostModal
+        modalOpen={modalOpen}
+        modalRef={modalRef}
+        handleCloseModal={handleCloseModal}
+      />
       <RegisterModal
         registerOpen={registerOpen}
         registerRef={registerRef}

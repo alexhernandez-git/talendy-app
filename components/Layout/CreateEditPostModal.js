@@ -1,14 +1,56 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { useRouter } from "next/router";
 import Editor from "components/Editor/Editor";
-
-const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
+import useOutsideClick from "hooks/useOutsideClick";
+import Slider from "rc-slider";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+const CreateEditPostModal = ({
+  modalOpen,
+  modalRef,
+  isEdit,
+  handleCloseModal,
+}) => {
   const router = useRouter();
   const handleGoToProfile = (e) => {
     e.stopPropagation();
     router.push("/user/123");
   };
+  const [publishedStatusOpen, setPublishedStatusOpen] = useState(false);
+  const handleOpenPublishedStatus = () => {
+    setPublishedStatusOpen(true);
+  };
+  const handleClosePublishedStatus = () => {
+    if (publishedStatusOpen) {
+      setPublishedStatusOpen(false);
+    }
+  };
+  const handleTogglePublishedStatus = () => {
+    setPublishedStatusOpen(!publishedStatusOpen);
+  };
+  const publishedStatusRef = useRef();
+  useOutsideClick(publishedStatusRef, () => handleClosePublishedStatus());
+
+  const formik = useFormik({
+    initialValues: {
+      karma_offered: 0,
+      title: "",
+    },
+    validationSchema: Yup.object({
+      karma_offered: Yup.number().required("Karmas offered are required"),
+      title: Yup.string().required("Title is required"),
+    }),
+    onSubmit: async (values, { resetForm }) => {
+      // console.log(valores);
+    },
+  });
+  const [sliderValue, setSliderValue] = useState(0);
+  const handleChangeKarmasOffered = (value) => {
+    console.log(value);
+    formik.setFieldValue("karma_offered", value);
+  };
+
   return (
     <div
       className={`${
@@ -58,18 +100,62 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
           className="inline-block align-bottom bg-white dark:bg-gray-700 rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-middle max-w-full sm:max-w-2xl w-full"
         >
           <div className="shadow rounded-lg">
-            <div className="px-4 py-5 sm:px-6 bg-gradient-to-r from-orange-500 to-pink-500  rounded-t-lg">
+            <div className="flex justify-between items-center px-4 py-5 sm:px-6 bg-gradient-to-r from-orange-500 to-pink-500  rounded-t-lg">
               <h2
                 id="applicant-information-title"
                 className="text-lg leading-6 font-medium text-white"
               >
                 {isEdit ? "Edit Post" : "Create Post"}
               </h2>
+              <button
+                type="button"
+                onClick={handleCloseModal}
+                className="rounded-3xl p-1 inline-flex items-center justify-center text-white outline-none ring-1 ring-inset ring-white"
+                aria-expanded="false"
+              >
+                <svg
+                  className={`block h-4 w-4`}
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
             </div>
             <div className=" px-4 py-5 sm:px-6">
               <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="">
+                  <dd className="text-sm text-gray-500 dark:text-gray-100">
+                    <div className="flex justify-between mb-1">
+                      <span className="">Karma offered</span>
+                      <span className="text-center text-sm text-orange-500 font-bold flex items-center ">
+                        {formik.values.karma_offered}
+                      </span>
+                    </div>
+                    <Slider
+                      onChange={handleChangeKarmasOffered}
+                      railStyle={{}}
+                      handleStyle={{
+                        backgroundColor: "#f97316",
+                        border: 0,
+                      }}
+                      trackStyle={{
+                        background: "none",
+                      }}
+                    />
+                  </dd>
+                </div>
+
                 <div className="sm:col-start-2">
-                  <dd className="mt-1 text-sm text-gray-900 flex justify-end">
+                  <dd className="text-sm text-gray-900 flex justify-end">
                     <div>
                       <label id="listbox-label" className="sr-only">
                         Change published status
@@ -95,6 +181,7 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
                               </p>
                             </div>
                             <button
+                              onMouseDown={handleTogglePublishedStatus}
                               type="button"
                               className="relative inline-flex items-center dark:bg-gray-800 p-2 rounded-l-none rounded-r-md text-sm font-medium text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
                               aria-haspopup="listbox"
@@ -104,6 +191,7 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
                               <span className="sr-only">
                                 Change published status
                               </span>
+
                               <svg
                                 className="h-5 w-5 "
                                 xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +220,10 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
         To: "opacity-0"
     --> */}
                         <ul
-                          className="hidden origin-top-right absolute right-0 mt-2 w-full sm:w-72 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-900 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                          ref={publishedStatusRef}
+                          className={`${
+                            publishedStatusOpen ? "block" : "hidden"
+                          } origin-top-right absolute right-0 mt-2 w-full sm:w-72 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-900 ring-1 ring-black ring-opacity-5 focus:outline-none`}
                           tabIndex="-1"
                           role="listbox"
                           aria-labelledby="listbox-label"
@@ -140,7 +231,7 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
                         >
                           {/* <!--
         Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-
+        
         Highlighted: "text-white bg-gray-800", Not Highlighted: "text-gray-900"
       --> */}
                           <li
@@ -154,7 +245,7 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
                                 <p className="font-semibold">Anyone</p>
                                 {/* <!--
               Checkmark, only display for selected option.
-
+              
               Highlighted: "text-white", Not Highlighted: "text-orange-500"
             --> */}
                                 <span className="text-gray-900 dark:text-white">
@@ -192,7 +283,7 @@ const CreateEditPostModal = ({ modalOpen, modalRef, isEdit }) => {
                                 </p>
                                 {/* <!--
               Checkmark, only display for selected option.
-
+              
               Highlighted: "text-white", Not Highlighted: "text-orange-500"
             --> */}
                                 <span className="text-orange-500 hidden">
