@@ -27,7 +27,10 @@ const Post = ({ page, image }) => {
   const handleCloseOptions = () => {
     setOptionsOpen(false);
   };
-  const handleToggleOptions = () => {
+  const handleToggleOptions = (e) => {
+    if (e) {
+      e.stopPropagation();
+    }
     setOptionsOpen(!optionsOpen);
   };
   const optionsRef = useRef();
@@ -91,7 +94,7 @@ const Post = ({ page, image }) => {
   return (
     <li>
       <article
-        onClick={handleOpenModal}
+        onMouseDown={handleOpenModal}
         aria-labelledby="question-title-81614"
         className="bg-white dark:bg-gray-700 px-4 py-6 shadow sm:p-6 sm:rounded-lg cursor-pointer"
       >
@@ -120,7 +123,7 @@ const Post = ({ page, image }) => {
               <div className="relative inline-block text-left">
                 <div>
                   <button
-                    onClick={handleToggleOptions}
+                    onMouseDown={handleToggleOptions}
                     type="button"
                     className="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-100"
                     id="options-menu-0"
