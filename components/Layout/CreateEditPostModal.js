@@ -51,7 +51,13 @@ const CreateEditPostModal = ({
     console.log(value);
     formik.setFieldValue("karma_offered", value);
   };
-
+  const [imagesOpen, setImagesOpen] = useState(false);
+  const handleOpenImages = () => {
+    setImagesOpen(true);
+  };
+  const handleCloseImages = () => {
+    setImagesOpen(false);
+  };
   return (
     <div
       className={`${
@@ -134,7 +140,7 @@ const CreateEditPostModal = ({
             <div className=" px-4 py-5 sm:px-6">
               <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="">
-                  <dd className="text-sm text-gray-900 dark:text-gray-100">
+                  <dd className="text-sm text-gray-900 dark:text-white">
                     <div className="flex justify-between mb-1">
                       <span className="">Karma offered</span>
                       <span className="text-center text-sm text-orange-500 font-bold flex items-center ">
@@ -336,43 +342,68 @@ const CreateEditPostModal = ({
                 </div>
 
                 <div className="mt-2 sm:col-span-2">
-                  <button className="inline-flex items-center py-2 text-sm font-medium rounded-md text-gray-500 dark:text-white bg-white dark:bg-gray-700">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 mr-1"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                  <button
+                    onClick={handleOpenImages}
+                    className="inline-flex items-center py-2 text-sm font-medium rounded-md text-gray-500 dark:text-white bg-white dark:bg-gray-700"
+                  >
+                    {!imagesOpen && (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 mr-1"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    )}
                     Add images
                   </button>
                 </div>
-                <div className="sm:col-span-2">
-                  <div className="border border-dashed border-gray-500 dark:border-white px-4 py-10 w-100 rounded-lg flex justify-center items-center cursor-pointer">
-                    <div className="flex items-center text-gray-500 dark:text-white">
-                      <span className="mr-2">Drag and drop images or </span>
-                      <button className="inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
-                        Upload
-                      </button>
+                {imagesOpen && (
+                  <div className="sm:col-span-2">
+                    {imagesOpen && (
+                      <div className="flex justify-end mb-2">
+                        <button onClick={handleCloseImages}>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5 text-gray-500 dark:text-gray-100"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    )}
+                    <div className="border border-dashed border-gray-500 dark:border-white px-4 py-10 w-100 rounded-lg flex justify-center items-center cursor-pointer">
+                      <div className="flex items-center text-gray-500 dark:text-white">
+                        <span className="mr-2">Drag and drop images or </span>
+                        <button className="inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
+                          Upload
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
                 {/* <div className="sm:col-span-2">
-                      <dt className="text-sm font-medium text-gray-500">
-                        Attachments
-                      </dt>
-                      <dd className="mt-1 text-sm text-gray-900">
-                        <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
-                          <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                            <div className="w-0 flex-1 flex items-center">
-                              <svg
-                                className="flex-shrink-0 h-5 w-5 text-gray-400"
-                                xmlns="http://www.w3.org/2000/svg"
+                <dt className="text-sm font-medium text-gray-500">
+                Attachments
+                </dt>
+                <dd className="mt-1 text-sm text-gray-900">
+                <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
+                <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                <div className="w-0 flex-1 flex items-center">
+                <svg
+                className="flex-shrink-0 h-5 w-5 text-gray-400"
+                xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                                 aria-hidden="true"
