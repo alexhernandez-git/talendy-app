@@ -48,11 +48,12 @@ const RegisterModal = ({ registerOpen, registerRef, handleCloseRegister }) => {
       return () => clearTimeout(timeoutId);
     }
   }, [formik.values.email]);
+  if (!registerOpen) {
+    return <></>;
+  }
   return (
     <div
-      className={`${
-        registerOpen ? "block" : "hidden"
-      } fixed z-40 inset-0 overflow-y-auto`}
+      className={` fixed z-40 inset-0 overflow-y-auto`}
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"

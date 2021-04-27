@@ -15,7 +15,6 @@ const Chat = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const messagesRef = useRef();
-  useOutsideClick(messagesRef, () => dispatch(closeChats()));
   const chatsReducer = useSelector((state) => state.chatsReducer);
   const chatReducer = useSelector((state) => state.chatReducer);
   const messagesReducer = useSelector((state) => state.messagesReducer);
@@ -39,9 +38,10 @@ const Chat = () => {
     }
     setSearch("");
   }, [chatsReducer.is_open]);
-  const handleCloseChats = () => {
-    dispatch(closeChats());
+  const handleCloseChats = async () => {
+    await dispatch(closeChats());
   };
+  useOutsideClick(messagesRef, () => handleCloseChats());
 
   const handleCloseChat = () => {
     dispatch(resetChat());
@@ -138,13 +138,9 @@ const Chat = () => {
     setMessage("");
   };
   const messageInputRef = useRef();
-
+  if (!chatsReducer.is_open) return <></>;
   return (
-    <div
-      className={`${
-        chatsReducer.is_open ? "block" : "hidden"
-      } absolute inset-0 overflow-hidden`}
-    >
+    <div className={`absolute inset-0 overflow-hidden`}>
       <div className="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
 
       <div className="fixed inset-y-0 right-0 max-w-full flex">

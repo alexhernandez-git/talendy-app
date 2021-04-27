@@ -13,6 +13,7 @@ import lastMessagesReducer from "./lastMessagesReducer";
 import chatsReducer from "./chatsReducer";
 import chatReducer from "./chatReducer";
 import messagesReducer from "./messagesReducer";
+import postReducer from "./postReducer";
 
 export default combineReducers({
   authReducer: authReducer,
@@ -29,4 +30,5 @@ export default combineReducers({
   lastMessagesReducer: lastMessagesReducer,
   chatsReducer: chatsReducer,
   messagesReducer: messagesReducer,
+  postReducer: postReducer,
 });

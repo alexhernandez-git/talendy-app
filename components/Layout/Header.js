@@ -114,8 +114,8 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
     handleCloseMobileMenu();
     dispatch(logout());
   };
-  const handleOpenChats = () => {
-    dispatch(openChats());
+  const handleOpenChats = async () => {
+    await dispatch(openChats());
   };
   return (
     <header className="bg-white dark:bg-gray-700 shadow-sm lg:static lg:overflow-y-visible">
@@ -240,7 +240,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
               </span>
               <div className="relative inline-block text-left ">
                 <button
-                  onClick={handleToggleNotifications}
+                  onMouseDown={handleToggleNotifications}
                   className="ml-5  flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200"
                 >
                   <span className="sr-only">View notifications</span>
@@ -270,7 +270,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
               <div className="flex-shrink-0 relative ml-5">
                 <div>
                   <button
-                    onClick={handleToggleMenu}
+                    onMouseDown={handleToggleMenu}
                     type="button"
                     className="rounded-full flex"
                     id="user-menu"

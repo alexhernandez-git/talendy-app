@@ -22,6 +22,7 @@ const PostModal = ({ modalOpen, modalRef, handleCloseModal }) => {
       dispatch(createAlert("ERROR", "You are not authenticated"));
     }
   };
+
   return (
     <div
       className={`${
