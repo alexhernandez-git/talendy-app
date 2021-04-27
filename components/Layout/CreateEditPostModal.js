@@ -172,7 +172,7 @@ const CreateEditPostModal = ({
                         border: 0,
                       }}
                       trackStyle={{
-                        background: "none",
+                        background: "#f97316",
                       }}
                     />
                   </dd>
