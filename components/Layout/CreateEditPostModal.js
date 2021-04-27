@@ -36,9 +36,10 @@ const CreateEditPostModal = ({
 
   const formik = useFormik({
     initialValues: {
-      karma_offered: 0,
+      karma_offered: authReducer.user?.karma_amount / 2,
       title: "",
     },
+    enableReinitialize: true,
     validationSchema: Yup.object({
       karma_offered: Yup.number().required("Karmas offered are required"),
       title: Yup.string().required("Title is required"),
@@ -162,6 +163,7 @@ const CreateEditPostModal = ({
                       </span>
                     </div>
                     <Slider
+                      value={formik.values.karma_offered}
                       onChange={handleChangeKarmasOffered}
                       max={authReducer.user?.karma_amount}
                       railStyle={{}}
