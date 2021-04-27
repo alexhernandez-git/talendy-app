@@ -140,9 +140,9 @@ const CreateEditPostModal = ({
             <div className=" px-4 py-5 sm:px-6">
               <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="">
-                  <dd className="text-sm text-gray-900 dark:text-white">
+                  <dd className="text-sm text-gray-500 dark:text-white">
                     <div className="flex justify-between mb-1">
-                      <span className="">Karma offered</span>
+                      <span className="font-medium">Karma offered</span>
                       <span className="text-center text-sm text-orange-500 font-bold flex items-center ">
                         <svg
                           className="w-4 h-4 mr-1"
