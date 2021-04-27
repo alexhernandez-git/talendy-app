@@ -341,12 +341,12 @@ const CreateEditPostModal = ({
                   </dd>
                 </div>
 
-                <div className="mt-2 sm:col-span-2">
-                  <button
-                    onClick={handleOpenImages}
-                    className="inline-flex items-center py-2 text-sm font-medium rounded-md text-gray-500 dark:text-white bg-white dark:bg-gray-700"
-                  >
-                    {!imagesOpen && (
+                {!imagesOpen && (
+                  <div className="mt-2 sm:col-span-2">
+                    <button
+                      onClick={handleOpenImages}
+                      className="inline-flex items-center py-2 text-sm font-medium rounded-md text-gray-500 dark:text-white bg-white dark:bg-gray-700"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-5 w-5 mr-1"
@@ -359,12 +359,12 @@ const CreateEditPostModal = ({
                           clipRule="evenodd"
                         />
                       </svg>
-                    )}
-                    Add images
-                  </button>
-                </div>
+                      Add images
+                    </button>
+                  </div>
+                )}
                 {imagesOpen && (
-                  <div className="sm:col-span-2">
+                  <div className="sm:col-span-2 mt-2">
                     {imagesOpen && (
                       <div className="flex justify-end mb-2">
                         <button onClick={handleCloseImages}>
