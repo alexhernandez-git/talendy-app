@@ -6,6 +6,7 @@ import useOutsideClick from "hooks/useOutsideClick";
 import Slider from "rc-slider";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useSelector } from "react-redux";
 const CreateEditPostModal = ({
   modalOpen,
   modalRef,
@@ -13,6 +14,7 @@ const CreateEditPostModal = ({
   handleCloseModal,
 }) => {
   const router = useRouter();
+  const authReducer = useSelector((state) => state.authReducer);
   const handleGoToProfile = (e) => {
     e.stopPropagation();
     router.push("/user/123");
@@ -45,7 +47,6 @@ const CreateEditPostModal = ({
       // console.log(valores);
     },
   });
-  const [sliderValue, setSliderValue] = useState(0);
   const handleChangeKarmasOffered = (value) => {
     console.log(value);
     formik.setFieldValue("karma_offered", value);
@@ -133,15 +134,30 @@ const CreateEditPostModal = ({
             <div className=" px-4 py-5 sm:px-6">
               <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="">
-                  <dd className="text-sm text-gray-500 dark:text-gray-100">
+                  <dd className="text-sm text-gray-900 dark:text-gray-100">
                     <div className="flex justify-between mb-1">
                       <span className="">Karma offered</span>
                       <span className="text-center text-sm text-orange-500 font-bold flex items-center ">
+                        <svg
+                          className="w-4 h-4 mr-1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
                         {formik.values.karma_offered}
                       </span>
                     </div>
                     <Slider
                       onChange={handleChangeKarmasOffered}
+                      max={authReducer.user?.karma_amount}
                       railStyle={{}}
                       handleStyle={{
                         backgroundColor: "#f97316",
