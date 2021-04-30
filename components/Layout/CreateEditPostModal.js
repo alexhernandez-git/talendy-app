@@ -494,7 +494,7 @@ const CreateEditPostModal = ({
                     </button>
                   </div>
                 )}
-                {imagesOpen && (
+                {images.length === 0 && imagesOpen && (
                   <div className="sm:col-span-2 mt-2">
                     {imagesOpen && (
                       <div className="flex justify-end mb-2">
@@ -535,7 +535,7 @@ const CreateEditPostModal = ({
                   </div>
                 )}
                 {images.length > 0 && (
-                  <div className="sm:col-span-2">
+                  <div className="sm:col-span-2  mt-2">
                     <dd className="mt-1 text-sm text-gray-600 dark:text-white">
                       <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
                         {images.map((image, index) => (
