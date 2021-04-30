@@ -17,6 +17,7 @@ const CreateEditPostModal = ({
 }) => {
   const router = useRouter();
   const authReducer = useSelector((state) => state.authReducer);
+  const communitiesReducer = useSelector((state) => state.communitiesReducer);
   const handleGoToProfile = (e) => {
     e.stopPropagation();
     router.push("/user/123");
@@ -130,6 +131,11 @@ const CreateEditPostModal = ({
     imagesArr.splice(index, 1);
     setImages(imagesArr);
     console.log("images", images);
+  };
+  const [community, setCommunity] = useState(null);
+  const handleChangeCommunity = (id) => {
+    setCommunity(id);
+    handleCloseCommunities();
   };
   return (
     <div
@@ -404,7 +410,14 @@ const CreateEditPostModal = ({
                           aria-expanded="true"
                           aria-labelledby="listbox-label"
                         >
-                          <span className="block truncate">Development</span>
+                          <span className="block truncate">
+                            {community
+                              ? communitiesReducer.communities.find(
+                                  (community_item) =>
+                                    community_item.id === community
+                                ).name
+                              : "Choose one (optional)"}
+                          </span>
                           <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                             <svg
                               className="h-5 w-5 text-gray-400"
@@ -430,41 +443,41 @@ const CreateEditPostModal = ({
                               aria-labelledby="listbox-label"
                               aria-activedescendant="listbox-option-3"
                             >
-                              <li
-                                className="text-gray-500 dark:text-gray-100 cursor-default select-none relative py-2 pl-3 pr-9"
-                                id="listbox-option-0"
-                                role="option"
-                              >
-                                <span className="font-normal block truncate">
-                                  Development
-                                </span>
-
-                                <span className="text-orange-600 absolute inset-y-0 right-0 flex items-center pr-4">
-                                  <svg
-                                    className="h-5 w-5"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                    aria-hidden="true"
+                              {communitiesReducer.communities.map(
+                                (community_item) => (
+                                  <li
+                                    key={community_item.id}
+                                    onClick={handleChangeCommunity.bind(
+                                      this,
+                                      community_item.id
+                                    )}
+                                    className="text-gray-500 dark:text-gray-100 cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-gray-100 dark:hover:bg-gray-900"
+                                    id="listbox-option-0"
+                                    role="option"
                                   >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                </span>
-                              </li>
-
-                              <li
-                                className="text-gray-500 dark:text-gray-100 cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-gray-100 dark:hover:bg-gray-900"
-                                id="listbox-option-0"
-                                role="option"
-                              >
-                                <span className="font-normal block truncate">
-                                  Business
-                                </span>
-                              </li>
+                                    <span className="font-normal block truncate">
+                                      {community_item.name}
+                                    </span>
+                                    {community === community_item.id && (
+                                      <span className="text-orange-600 absolute inset-y-0 right-0 flex items-center pr-4">
+                                        <svg
+                                          className="h-5 w-5"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          viewBox="0 0 20 20"
+                                          fill="currentColor"
+                                          aria-hidden="true"
+                                        >
+                                          <path
+                                            fillRule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clipRule="evenodd"
+                                          />
+                                        </svg>
+                                      </span>
+                                    )}
+                                  </li>
+                                )
+                              )}
                             </ul>
                           )}
                         </div>
