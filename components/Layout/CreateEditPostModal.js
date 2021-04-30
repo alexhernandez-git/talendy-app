@@ -23,20 +23,20 @@ const CreateEditPostModal = ({
     e.stopPropagation();
     router.push("/user/123");
   };
-  const [publishedStatusOpen, setPublishedStatusOpen] = useState(false);
-  const handleOpenPublishedStatus = () => {
-    setPublishedStatusOpen(true);
+  const [privacityOpen, setPrivacityOpen] = useState(false);
+  const handleOpenPrivacity = () => {
+    setPrivacityOpen(true);
   };
-  const handleClosePublishedStatus = () => {
-    if (publishedStatusOpen) {
-      setPublishedStatusOpen(false);
+  const handleClosePrivacity = () => {
+    if (privacityOpen) {
+      setPrivacityOpen(false);
     }
   };
-  const handleTogglePublishedStatus = () => {
-    setPublishedStatusOpen(!publishedStatusOpen);
+  const handleTogglePrivacity = () => {
+    setPrivacityOpen(!privacityOpen);
   };
-  const publishedStatusRef = useRef();
-  useOutsideClick(publishedStatusRef, () => handleClosePublishedStatus());
+  const privacityRef = useRef();
+  useOutsideClick(privacityRef, () => handleClosePrivacity());
 
   const formik = useFormik({
     initialValues: {
@@ -147,6 +147,11 @@ const CreateEditPostModal = ({
   const handleChangeText = (e) => {
     console.log(e.target.innerText);
     formik.setFieldValue("text", e.target.innerText);
+  };
+
+  const handleChangePrivacity = (value) => {
+    formik.setFieldValue("privacity", value);
+    handleClosePrivacity();
   };
 
   console.log(formik.values);
@@ -281,24 +286,48 @@ const CreateEditPostModal = ({
                         <div className="inline-flex shadow-sm rounded-md divide-x divide-gray-900">
                           <div className="relative z-0 inline-flex shadow-sm rounded-md divide-x divide-gray-200 dark:divide-gray-900">
                             <div className="relative inline-flex items-center dark:bg-gray-800 py-2 pl-3 pr-4 border border-transparent rounded-l-md shadow-sm text-gray-900 dark:text-white">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                              <p className="ml-2.5 text-sm font-medium">
-                                Anyone
-                              </p>
+                              {formik.values.privacity === "AN" && (
+                                <>
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-5 w-5"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z"
+                                      clipRule="evenodd"
+                                    />
+                                  </svg>
+                                  <p className="ml-2.5 text-sm font-medium">
+                                    Anyone
+                                  </p>
+                                </>
+                              )}
+                              {formik.values.privacity === "CO" && (
+                                <>
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-5 w-5"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z"
+                                      clipRule="evenodd"
+                                    />
+                                    <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
+                                  </svg>
+                                  <p className="ml-2.5 text-sm font-medium">
+                                    Connections only
+                                  </p>
+                                </>
+                              )}
                             </div>
                             <button
-                              onMouseDown={handleTogglePublishedStatus}
+                              onMouseDown={handleTogglePrivacity}
                               type="button"
                               className="relative inline-flex items-center dark:bg-gray-800 p-2 rounded-l-none rounded-r-md text-sm font-medium text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
                               aria-haspopup="listbox"
@@ -327,16 +356,17 @@ const CreateEditPostModal = ({
                         </div>
 
                         <ul
-                          ref={publishedStatusRef}
+                          ref={privacityRef}
                           className={`${
-                            publishedStatusOpen ? "block" : "hidden"
-                          } origin-top-right absolute right-0 mt-2 w-full sm:w-72 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-900 ring-1 ring-black ring-opacity-5 focus:outline-none`}
+                            privacityOpen ? "block" : "hidden"
+                          } origin-top-right absolute right-0 z-20 mt-2 w-full sm:w-72 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-900 ring-1 ring-black ring-opacity-5 focus:outline-none`}
                           tabIndex="-1"
                           role="listbox"
                           aria-labelledby="listbox-label"
                           aria-activedescendant="listbox-option-0"
                         >
                           <li
+                            onClick={handleChangePrivacity.bind(this, "AN")}
                             className="text-gray-900 dark:text-white  dark:hover:bg-gray-900 hover:bg-gray-100 dark:hover:text-white cursor-pointer select-none relative p-4 text-sm"
                             id="listbox-option-0"
                             role="option"
@@ -344,22 +374,23 @@ const CreateEditPostModal = ({
                             <div className="flex flex-col">
                               <div className="flex justify-between">
                                 <p className="font-semibold">Anyone</p>
-
-                                <span className="text-gray-900 dark:text-white">
-                                  <svg
-                                    className="h-5 w-5"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                    aria-hidden="true"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                </span>
+                                {formik.values.privacity === "AN" && (
+                                  <span className="text-gray-900 dark:text-white">
+                                    <svg
+                                      className="h-5 w-5"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                      aria-hidden="true"
+                                    >
+                                      <path
+                                        fillRule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clipRule="evenodd"
+                                      />
+                                    </svg>
+                                  </span>
+                                )}
                               </div>
                               <p className="text-gray-500 dark:text-gray-300 mt-2">
                                 Everyone can ask to help you.
@@ -367,6 +398,7 @@ const CreateEditPostModal = ({
                             </div>
                           </li>
                           <li
+                            onClick={handleChangePrivacity.bind(this, "CO")}
                             className="text-gray-900 dark:text-white  dark:hover:bg-gray-900 hover:bg-gray-100 dark:hover:text-white cursor-pointer select-none relative p-4 text-sm"
                             id="listbox-option-0"
                             role="option"
@@ -376,21 +408,23 @@ const CreateEditPostModal = ({
                                 <p className="font-semibold">
                                   Connections only
                                 </p>
-                                <span className="text-orange-500 hidden">
-                                  <svg
-                                    className="h-5 w-5"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                    aria-hidden="true"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                </span>
+                                {formik.values.privacity === "CO" && (
+                                  <span className="text-gray-900 dark:text-white">
+                                    <svg
+                                      className="h-5 w-5"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                      aria-hidden="true"
+                                    >
+                                      <path
+                                        fillRule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clipRule="evenodd"
+                                      />
+                                    </svg>
+                                  </span>
+                                )}
                               </div>
                               <p className="text-gray-500 dark:text-gray-300 mt-2">
                                 Only your connections can ask to help you.

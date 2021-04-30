@@ -21,8 +21,7 @@ export default function CreateEditPostEditor({
       e.preventDefault();
       return false;
     }
-    console.log(e.keyCode);
-    if (titleRef.current.innerText.length >= 300 && e.keyCode !== 8) {
+    if (titleRef.current?.innerText.length >= 300 && e.keyCode !== 8) {
       e.preventDefault();
       return false;
     }
@@ -55,7 +54,7 @@ export default function CreateEditPostEditor({
           ref={titleRef}
           onKeyDown={handleTitleKeyDown}
           onKeyUp={handleChangeTitle}
-          className="title my-4 text-gray-600 dark:text-white text-xl bg-gray-200 dark:bg-gray-900 p-3 pr-10 rounded cursor-text relative"
+          className="title my-4 text-gray-600 dark:text-white text-xl bg-gray-200 dark:bg-gray-900 p-3 pr-12 rounded cursor-text relative"
         ></div>
       </div>
       <>
