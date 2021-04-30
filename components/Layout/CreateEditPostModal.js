@@ -9,6 +9,7 @@ import * as Yup from "yup";
 import { useSelector } from "react-redux";
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
+import CreateEditPostEditor from "components/Editor/CreateEditPostEditor";
 const CreateEditPostModal = ({
   modalOpen,
   modalRef,
@@ -40,12 +41,17 @@ const CreateEditPostModal = ({
   const formik = useFormik({
     initialValues: {
       karma_offered: authReducer.user?.karma_amount / 2,
+      privacity: "AN",
       title: "",
+      text: "",
     },
+
     enableReinitialize: true,
     validationSchema: Yup.object({
       karma_offered: Yup.number().required("Karmas offered are required"),
-      title: Yup.string().required("Title is required"),
+      title: Yup.string().max(300).required("Title is required"),
+      text: Yup.string(),
+      community: null,
     }),
     onSubmit: async (values, { resetForm }) => {
       // console.log(valores);
@@ -123,20 +129,29 @@ const CreateEditPostModal = ({
     maxSize: 1073741824,
   });
   const handleRemoveFile = (file, index) => {
-    console.log(file);
-    console.log(acceptedFiles.indexOf(file));
     acceptedFiles.splice(acceptedFiles.indexOf(file), 1);
-    console.log(acceptedFiles);
     let imagesArr = [...images];
     imagesArr.splice(index, 1);
     setImages(imagesArr);
-    console.log("images", images);
   };
-  const [community, setCommunity] = useState(null);
   const handleChangeCommunity = (id) => {
-    setCommunity(id);
+    formik.setFieldValue("community", id);
+
     handleCloseCommunities();
   };
+
+  const handleChangeTitle = (e) => {
+    console.log(e.target.innerText);
+    formik.setFieldValue("title", e.target.innerText);
+  };
+  const handleChangeText = (e) => {
+    console.log(e.target.innerText);
+    formik.setFieldValue("text", e.target.innerText);
+  };
+
+  console.log(formik.values);
+  console.log(formik.errors);
+
   return (
     <div
       className={`${
@@ -389,7 +404,10 @@ const CreateEditPostModal = ({
                 </div>
                 <div className="sm:col-span-2">
                   <dd className="text-sm text-gray-900">
-                    <Editor postForm />
+                    <CreateEditPostEditor
+                      handleChangeTitle={handleChangeTitle}
+                      handleChangeText={handleChangeText}
+                    />
                   </dd>
                 </div>
                 <div className="sm:col-span-1">
@@ -411,10 +429,11 @@ const CreateEditPostModal = ({
                           aria-labelledby="listbox-label"
                         >
                           <span className="block truncate">
-                            {community
+                            {formik.values.community
                               ? communitiesReducer.communities.find(
                                   (community_item) =>
-                                    community_item.id === community
+                                    community_item.id ===
+                                    formik.values.community
                                 ).name
                               : "Choose one (optional)"}
                           </span>
@@ -458,7 +477,8 @@ const CreateEditPostModal = ({
                                     <span className="font-normal block truncate">
                                       {community_item.name}
                                     </span>
-                                    {community === community_item.id && (
+                                    {formik.values.community ===
+                                      community_item.id && (
                                       <span className="text-orange-600 absolute inset-y-0 right-0 flex items-center pr-4">
                                         <svg
                                           className="h-5 w-5"
