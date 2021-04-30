@@ -248,16 +248,6 @@ const CreateEditPostModal = ({
                           </div>
                         </div>
 
-                        {/* <!--
-      Select popover, show/hide based on select state.
-
-      Entering: ""
-        From: ""
-        To: ""
-      Leaving: "transition ease-in duration-100"
-        From: "opacity-100"
-        To: "opacity-0"
-    --> */}
                         <ul
                           ref={publishedStatusRef}
                           className={`${
@@ -268,11 +258,6 @@ const CreateEditPostModal = ({
                           aria-labelledby="listbox-label"
                           aria-activedescendant="listbox-option-0"
                         >
-                          {/* <!--
-        Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-        
-        Highlighted: "text-white bg-gray-800", Not Highlighted: "text-gray-900"
-      --> */}
                           <li
                             className="text-gray-900 dark:text-white  dark:hover:bg-gray-900 hover:bg-gray-100 dark:hover:text-white cursor-pointer select-none relative p-4 text-sm"
                             id="listbox-option-0"
@@ -280,13 +265,8 @@ const CreateEditPostModal = ({
                           >
                             <div className="flex flex-col">
                               <div className="flex justify-between">
-                                {/* <!-- Selected: "font-semibold", Not Selected: "font-normal" --> */}
                                 <p className="font-semibold">Anyone</p>
-                                {/* <!--
-              Checkmark, only display for selected option.
-              
-              Highlighted: "text-white", Not Highlighted: "text-orange-500"
-            --> */}
+
                                 <span className="text-gray-900 dark:text-white">
                                   <svg
                                     className="h-5 w-5"
@@ -303,7 +283,6 @@ const CreateEditPostModal = ({
                                   </svg>
                                 </span>
                               </div>
-                              {/* <!-- Highlighted: "text-orange-200", Not Highlighted: "text-gray-500" --> */}
                               <p className="text-gray-500 dark:text-gray-300 mt-2">
                                 Everyone can ask to help you.
                               </p>
@@ -316,15 +295,9 @@ const CreateEditPostModal = ({
                           >
                             <div className="flex flex-col">
                               <div className="flex justify-between">
-                                {/* <!-- Selected: "font-semibold", Not Selected: "font-normal" --> */}
                                 <p className="font-semibold">
                                   Connections only
                                 </p>
-                                {/* <!--
-              Checkmark, only display for selected option.
-              
-              Highlighted: "text-white", Not Highlighted: "text-orange-500"
-            --> */}
                                 <span className="text-orange-500 hidden">
                                   <svg
                                     className="h-5 w-5"
@@ -341,7 +314,6 @@ const CreateEditPostModal = ({
                                   </svg>
                                 </span>
                               </div>
-                              {/* <!-- Highlighted: "text-orange-200", Not Highlighted: "text-gray-500" --> */}
                               <p className="text-gray-500 dark:text-gray-300 mt-2">
                                 Only your connections can ask to help you.
                               </p>
@@ -495,72 +467,79 @@ const CreateEditPostModal = ({
                     </div>
                   </div>
                 )}
-                {/* <div className="sm:col-span-2">
-                <dt className="text-sm font-medium text-gray-500">
-                Attachments
-                </dt>
-                <dd className="mt-1 text-sm text-gray-900">
-                <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
-                <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                <div className="w-0 flex-1 flex items-center">
-                <svg
-                className="flex-shrink-0 h-5 w-5 text-gray-400"
-                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                aria-hidden="true"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                              <span className="ml-2 flex-1 w-0 truncate">
-                                resume_front_end_developer.pdf
-                              </span>
-                            </div>
-                            <div className="ml-4 flex-shrink-0">
-                              <a
-                                href="#"
-                                className="font-medium text-blue-600 hover:text-blue-500"
-                              >
-                                Download
-                              </a>
-                            </div>
-                          </li>
+                <div className="sm:col-span-2">
+                  <dd className="mt-1 text-sm text-gray-900 dark:text-white">
+                    <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
+                      <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                        <div className="w-0 flex-1 flex items-center">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <span className="ml-2 flex-1 w-0 truncate">
+                            resume_front_end_developer.pdf
+                          </span>
+                        </div>
+                        <div className="ml-4 flex-shrink-0">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                      </li>
 
-                          <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                            <div className="w-0 flex-1 flex items-center">
-                              <svg
-                                className="flex-shrink-0 h-5 w-5 text-gray-400"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                aria-hidden="true"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                              <span className="ml-2 flex-1 w-0 truncate">
-                                coverletter_front_end_developer.pdf
-                              </span>
-                            </div>
-                            <div className="ml-4 flex-shrink-0">
-                              <a
-                                href="#"
-                                className="font-medium text-blue-600 hover:text-blue-500"
-                              >
-                                Download
-                              </a>
-                            </div>
-                          </li>
-                        </ul>
-                      </dd>
-                    </div>*/}
+                      <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                        <div className="w-0 flex-1 flex items-center">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <span className="ml-2 flex-1 w-0 truncate">
+                            coverletter_front_end_developer.pdf
+                          </span>
+                        </div>
+                        <div className="ml-4 flex-shrink-0">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                      </li>
+                    </ul>
+                  </dd>
+                </div>
               </dl>
             </div>
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-right sm:px-6 rounded-b-xl">

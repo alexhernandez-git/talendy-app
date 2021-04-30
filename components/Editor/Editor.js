@@ -76,7 +76,7 @@ export default function Editor({ chat, postForm, solveIssueForm }) {
             id="editor"
             onKeyDown={handleKeyDown}
             contentEditable="true"
-            data-placeholder="Explanation"
+            data-placeholder="Text (optional)"
             onPaste={(e) => paste(e)}
           ></div>
         </>
