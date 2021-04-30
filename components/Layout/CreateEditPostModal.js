@@ -76,41 +76,58 @@ const CreateEditPostModal = ({
   const communitiesRef = useRef();
   useOutsideClick(communitiesRef, () => handleCloseCommunities());
 
-  const [images, setImages] = useState([]);
-  const handleAttachFiles = (e) => {
-    e.preventDefault();
-    console.log(e.target.files);
-    const files = e.target.files;
-    let totalSize = 0;
-    for (let i; i < images.length; i++) {
-      totalSize += images[i]?.size;
+  const fileValidator = (file) => {
+    console.log("file", file);
+    if (
+      file.type !== "image/jpeg" &&
+      file.type !== "image/png" &&
+      file.type !== "image/jpg"
+    ) {
+      alert("Only .png, .jpg, .jpeg files are allowed");
+      return {
+        code: "Type not allowed",
+        message: `Only .png, .jpg, .jpeg files are allowed`,
+      };
     }
-    totalSize += files?.size;
+    return null;
+  };
+  const [images, setImages] = useState([]);
+  const onDrop = useCallback((acceptedFilesNew) => {
+    // Do something with the files
+    let totalSize = 0;
+
+    for (let i; i < acceptedFilesNew.length; i++) {
+      console.log(acceptedFilesNew[i].type);
+
+      console.log(acceptedFilesNew[i].size);
+      totalSize += acceptedFilesNew[i]?.size;
+    }
     const maxAllowedSize = 1073741824;
-    console.log(totalSize);
+    console.log("total size", totalSize);
     if (totalSize > maxAllowedSize) {
       alert("Over max size");
       return;
     }
-    console.log(files);
-    setImages([...images, ...files]);
-  };
-  const handleRemoveFile = (index) => {
-    let imagesArr = [...images];
-    imagesArr.splice(index, 1);
-    setImages(imagesArr);
-  };
-  useEffect(() => {
-    console.log(images);
-  }, [images]);
-  const onDrop = useCallback((acceptedFiles) => {
-    // Do something with the files
-    console.log(acceptedFiles);
-    setImages([...images, ...acceptedFiles]);
+    setImages(acceptedFilesNew);
   }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const {
+    acceptedFiles,
+    getRootProps,
+    getInputProps,
+    isDragActive,
+  } = useDropzone({
     onDrop,
+    validator: fileValidator,
   });
+  const handleRemoveFile = (file) => {
+    console.log(acceptedFiles.indexOf(file));
+    acceptedFiles.splice(acceptedFiles.indexOf(file), 1);
+    console.log(acceptedFiles);
+    let imagesArr = [...images];
+    imagesArr.splice(imagesArr.indexOf(file), 1);
+    setImages(imagesArr);
+    console.log("images", images);
+  };
   return (
     <div
       className={`${
@@ -506,14 +523,10 @@ const CreateEditPostModal = ({
                           className="hidden"
                           multiple
                           id="attach-files-input"
-                          onChange={handleAttachFiles}
                         />
-                        <label
-                          htmlFor="attach-files-input"
-                          className="cursor-pointer inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                        >
+                        <button className="cursor-pointer inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
                           Upload
-                        </label>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -543,7 +556,7 @@ const CreateEditPostModal = ({
                             </div>
                             <div className="ml-4 flex-shrink-0">
                               <svg
-                                onClick={handleRemoveFile}
+                                onClick={handleRemoveFile.bind(this, image)}
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-5 w-5 cursor-pointer"
                                 viewBox="0 0 20 20"
