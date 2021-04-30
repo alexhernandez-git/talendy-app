@@ -7,6 +7,8 @@ import Slider from "rc-slider";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useSelector } from "react-redux";
+import { useCallback } from "react";
+import { useDropzone } from "react-dropzone";
 const CreateEditPostModal = ({
   modalOpen,
   modalRef,
@@ -101,6 +103,14 @@ const CreateEditPostModal = ({
   useEffect(() => {
     console.log(images);
   }, [images]);
+  const onDrop = useCallback((acceptedFiles) => {
+    // Do something with the files
+    console.log(acceptedFiles);
+    setImages([...images, ...acceptedFiles]);
+  }, []);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+  });
   return (
     <div
       className={`${
@@ -484,10 +494,14 @@ const CreateEditPostModal = ({
                         </button>
                       </div>
                     )}
-                    <div className="border border-dashed border-gray-500 dark:border-white px-4 py-10 w-100 rounded-lg flex justify-center items-center cursor-pointer">
+                    <div
+                      {...getRootProps()}
+                      className="border border-dashed border-gray-500 dark:border-white px-4 py-10 w-100 rounded-lg flex justify-center items-center cursor-pointer"
+                    >
                       <div className="flex items-center text-gray-500 dark:text-white">
                         <span className="mr-2">Drag and drop images or </span>
                         <input
+                          {...getInputProps()}
                           type="file"
                           className="hidden"
                           multiple
