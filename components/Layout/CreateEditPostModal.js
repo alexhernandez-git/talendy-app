@@ -118,13 +118,16 @@ const CreateEditPostModal = ({
   } = useDropzone({
     onDrop,
     validator: fileValidator,
+    accept: "image/jpeg, image/png, image/jpg",
+    maxSize: 1073741824,
   });
-  const handleRemoveFile = (file) => {
+  const handleRemoveFile = (file, index) => {
+    console.log(file);
     console.log(acceptedFiles.indexOf(file));
     acceptedFiles.splice(acceptedFiles.indexOf(file), 1);
     console.log(acceptedFiles);
     let imagesArr = [...images];
-    imagesArr.splice(imagesArr.indexOf(file), 1);
+    imagesArr.splice(index, 1);
     setImages(imagesArr);
     console.log("images", images);
   };
@@ -535,7 +538,7 @@ const CreateEditPostModal = ({
                   <div className="sm:col-span-2">
                     <dd className="mt-1 text-sm text-gray-600 dark:text-white">
                       <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
-                        {images.map((image) => (
+                        {images.map((image, index) => (
                           <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
                             <div className="w-0 flex-1 flex items-center">
                               <svg
@@ -556,7 +559,11 @@ const CreateEditPostModal = ({
                             </div>
                             <div className="ml-4 flex-shrink-0">
                               <svg
-                                onClick={handleRemoveFile.bind(this, image)}
+                                onClick={handleRemoveFile.bind(
+                                  this,
+                                  image,
+                                  index
+                                )}
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-5 w-5 cursor-pointer"
                                 viewBox="0 0 20 20"
