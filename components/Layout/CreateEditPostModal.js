@@ -74,6 +74,33 @@ const CreateEditPostModal = ({
   const communitiesRef = useRef();
   useOutsideClick(communitiesRef, () => handleCloseCommunities());
 
+  const [images, setImages] = useState([]);
+  const handleAttachFiles = (e) => {
+    e.preventDefault();
+    console.log(e.target.files);
+    const files = e.target.files;
+    let totalSize = 0;
+    for (let i; i < images.length; i++) {
+      totalSize += images[i]?.size;
+    }
+    totalSize += files?.size;
+    const maxAllowedSize = 1073741824;
+    console.log(totalSize);
+    if (totalSize > maxAllowedSize) {
+      alert("Over max size");
+      return;
+    }
+    console.log(files);
+    setImages([...images, ...files]);
+  };
+  const handleRemoveFile = (index) => {
+    let imagesArr = [...images];
+    imagesArr.splice(index, 1);
+    setImages(imagesArr);
+  };
+  useEffect(() => {
+    console.log(images);
+  }, [images]);
   return (
     <div
       className={`${
@@ -357,9 +384,9 @@ const CreateEditPostModal = ({
                               aria-hidden="true"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                                clip-rule="evenodd"
+                                clipRule="evenodd"
                               />
                             </svg>
                           </span>
@@ -460,86 +487,67 @@ const CreateEditPostModal = ({
                     <div className="border border-dashed border-gray-500 dark:border-white px-4 py-10 w-100 rounded-lg flex justify-center items-center cursor-pointer">
                       <div className="flex items-center text-gray-500 dark:text-white">
                         <span className="mr-2">Drag and drop images or </span>
-                        <button className="inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
+                        <input
+                          type="file"
+                          className="hidden"
+                          multiple
+                          id="attach-files-input"
+                          onChange={handleAttachFiles}
+                        />
+                        <label
+                          htmlFor="attach-files-input"
+                          className="cursor-pointer inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                        >
                           Upload
-                        </button>
+                        </label>
                       </div>
                     </div>
                   </div>
                 )}
-                <div className="sm:col-span-2">
-                  <dd className="mt-1 text-sm text-gray-900 dark:text-white">
-                    <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
-                      <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                        <div className="w-0 flex-1 flex items-center">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          <span className="ml-2 flex-1 w-0 truncate">
-                            resume_front_end_developer.pdf
-                          </span>
-                        </div>
-                        <div className="ml-4 flex-shrink-0">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                      </li>
-
-                      <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                        <div className="w-0 flex-1 flex items-center">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          <span className="ml-2 flex-1 w-0 truncate">
-                            coverletter_front_end_developer.pdf
-                          </span>
-                        </div>
-                        <div className="ml-4 flex-shrink-0">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                      </li>
-                    </ul>
-                  </dd>
-                </div>
+                {images.length > 0 && (
+                  <div className="sm:col-span-2">
+                    <dd className="mt-1 text-sm text-gray-600 dark:text-white">
+                      <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
+                        {images.map((image) => (
+                          <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                            <div className="w-0 flex-1 flex items-center">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                              <span className="ml-2 flex-1 w-0 truncate">
+                                {image.name}
+                              </span>
+                            </div>
+                            <div className="ml-4 flex-shrink-0">
+                              <svg
+                                onClick={handleRemoveFile}
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5 cursor-pointer"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </dd>
+                  </div>
+                )}
               </dl>
             </div>
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-right sm:px-6 rounded-b-xl">
