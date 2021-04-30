@@ -3,6 +3,7 @@ import { initialDataFetched } from "redux/actions/initialData";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchLastNotifications } from "redux/actions/lastNotifications";
+import { fetchCommunities } from "redux/actions/communities";
 
 const useDispatchInitialData = () => {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ const useDispatchInitialData = () => {
     const fetchData = async () => {
       await dispatch(loadUser());
       await dispatch(loadCurrency());
+      await dispatch(fetchCommunities());
       // Set initial data fetched
       await dispatch(initialDataFetched());
     };

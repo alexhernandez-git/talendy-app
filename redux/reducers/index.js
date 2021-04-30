@@ -14,6 +14,7 @@ import chatsReducer from "./chatsReducer";
 import chatReducer from "./chatReducer";
 import messagesReducer from "./messagesReducer";
 import postReducer from "./postReducer";
+import communitiesReducer from "./communitiesReducer";
 
 export default combineReducers({
   authReducer: authReducer,
@@ -31,4 +32,5 @@ export default combineReducers({
   chatsReducer: chatsReducer,
   messagesReducer: messagesReducer,
   postReducer: postReducer,
+  communitiesReducer: communitiesReducer,
 });
