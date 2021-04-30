@@ -54,7 +54,8 @@ const CreateEditPostModal = ({
       community: null,
     }),
     onSubmit: async (values, { resetForm }) => {
-      // console.log(valores);
+      console.log(values);
+      console.log(images);
     },
   });
   const handleChangeKarmasOffered = (value) => {
@@ -154,9 +155,6 @@ const CreateEditPostModal = ({
     handleClosePrivacity();
   };
 
-  console.log(formik.values);
-  console.log(formik.errors);
-
   return (
     <div
       className={`${
@@ -201,7 +199,8 @@ const CreateEditPostModal = ({
         To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
     --> */}
 
-        <section
+        <form
+          onSubmit={formik.handleSubmit}
           ref={modalRef}
           className="inline-block align-bottom bg-white dark:bg-gray-700 rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-middle max-w-full sm:max-w-2xl w-full"
         >
@@ -660,7 +659,7 @@ const CreateEditPostModal = ({
               </button>
             </div>
           </div>
-        </section>
+        </form>
       </div>
     </div>
   );
