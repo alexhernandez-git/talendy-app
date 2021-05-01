@@ -1,11 +1,14 @@
 import axios from "axios";
 import { tokenConfig } from "./auth";
 import { CREATE_POST, CREATE_POST_SUCCESS, CREATE_POST_FAIL } from "../types";
+import { createAlert } from "./alerts";
 
-export const createPost = (data, resetForm, closeModal) => async (
-  dispatch,
-  getState
-) => {
+export const createPost = (
+  data,
+  resetForm,
+  closeModal,
+  handleResetImages
+) => async (dispatch, getState) => {
   await dispatch({
     type: CREATE_POST,
   });
@@ -18,6 +21,8 @@ export const createPost = (data, resetForm, closeModal) => async (
       });
       await resetForm({});
       await closeModal();
+      await handleResetImages();
+      await createAlert("SUCCESS", "Post succesfully created");
     })
     .catch(async (err) => {
       await dispatch({

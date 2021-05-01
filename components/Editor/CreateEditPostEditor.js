@@ -1,10 +1,13 @@
 import React from "react";
+import { useEffect } from "react";
 import { useRef } from "react";
 import Toolbar from "./Toolbar";
 export default function CreateEditPostEditor({
   solveIssueForm,
   handleChangeTitle,
   handleChangeText,
+  titleValue = "",
+  textValue = "",
 }) {
   function paste(e) {
     e.preventDefault();
@@ -39,7 +42,15 @@ export default function CreateEditPostEditor({
     }
   };
   const titleRef = useRef();
-
+  const textRef = useRef();
+  useEffect(() => {
+    if (titleValue.length === 0) {
+      titleRef.current.innerText = "";
+    }
+    if (textValue.length === 0) {
+      textRef.current.innerText = "";
+    }
+  }, [titleValue, textValue]);
   return (
     <div>
       <div className="relative">
@@ -63,6 +74,7 @@ export default function CreateEditPostEditor({
         <div
           className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l cursor-text"
           id="editor"
+          ref={textRef}
           onKeyDown={handleKeyDown}
           onKeyUp={handleChangeText}
           contentEditable="true"

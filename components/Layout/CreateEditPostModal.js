@@ -70,7 +70,7 @@ const CreateEditPostModal = ({
       fd.append("privacity", values.privacity);
       fd.append("community", values.community);
       fd.append("karma_offered", values.karma_offered);
-      dispatch(createPost(fd, resetForm, handleCloseModal));
+      dispatch(createPost(fd, resetForm, handleCloseModal, handleResetImages));
       console.log(images);
     },
   });
@@ -169,6 +169,11 @@ const CreateEditPostModal = ({
   const handleChangePrivacity = (value) => {
     formik.setFieldValue("privacity", value);
     handleClosePrivacity();
+  };
+
+  const handleResetImages = () => {
+    setImages([]);
+    acceptedFiles.splice(0, acceptedFiles.length);
   };
 
   return (
@@ -456,6 +461,8 @@ const CreateEditPostModal = ({
                     <CreateEditPostEditor
                       handleChangeTitle={handleChangeTitle}
                       handleChangeText={handleChangeText}
+                      titleValue={formik.values.title}
+                      textValue={formik.values.text}
                     />
                   </dd>
                 </div>
