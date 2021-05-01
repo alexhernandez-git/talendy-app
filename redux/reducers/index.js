@@ -13,7 +13,7 @@ import lastMessagesReducer from "./lastMessagesReducer";
 import chatsReducer from "./chatsReducer";
 import chatReducer from "./chatReducer";
 import messagesReducer from "./messagesReducer";
-import postReducer from "./postReducer";
+import postsReducer from "./postsReducer";
 import communitiesReducer from "./communitiesReducer";
 
 export default combineReducers({
@@ -31,6 +31,6 @@ export default combineReducers({
   lastMessagesReducer: lastMessagesReducer,
   chatsReducer: chatsReducer,
   messagesReducer: messagesReducer,
-  postReducer: postReducer,
+  postsReducer: postsReducer,
   communitiesReducer: communitiesReducer,
 });

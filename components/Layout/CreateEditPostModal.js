@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import CreateEditPostEditor from "components/Editor/CreateEditPostEditor";
+import { createPost } from "redux/actions/posts";
+import { useDispatch } from "react-redux";
 const CreateEditPostModal = ({
   modalOpen,
   modalRef,
@@ -17,6 +19,7 @@ const CreateEditPostModal = ({
   handleCloseModal,
 }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
   const communitiesReducer = useSelector((state) => state.communitiesReducer);
   const handleGoToProfile = (e) => {
@@ -42,6 +45,7 @@ const CreateEditPostModal = ({
     initialValues: {
       karma_offered: authReducer.user?.karma_amount / 2,
       privacity: "AN",
+      community: "",
       title: "",
       text: "",
     },
@@ -51,10 +55,22 @@ const CreateEditPostModal = ({
       karma_offered: Yup.number().required("Karmas offered are required"),
       title: Yup.string().max(300).required("Title is required"),
       text: Yup.string(),
-      community: null,
+      privacity: Yup.string(),
+      community: Yup.string(),
     }),
     onSubmit: async (values, { resetForm }) => {
       console.log(values);
+      const fd = new FormData();
+      fd.append("title", values.title);
+      fd.append("text", values.text);
+      console.log(images);
+      for (let i = 0; i < images.length; i++) {
+        fd.append("images", images[i], images[i].name);
+      }
+      fd.append("privacity", values.privacity);
+      fd.append("community", values.community);
+      fd.append("karma_offered", values.karma_offered);
+      dispatch(createPost(fd, resetForm, handleCloseModal));
       console.log(images);
     },
   });
