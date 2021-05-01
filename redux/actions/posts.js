@@ -22,7 +22,7 @@ export const createPost = (
       await resetForm({});
       await closeModal();
       await handleResetImages();
-      await createAlert("SUCCESS", "Post succesfully created");
+      await dispatch(createAlert("SUCCESS", "Post succesfully created"));
     })
     .catch(async (err) => {
       await dispatch({
