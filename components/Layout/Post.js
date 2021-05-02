@@ -212,24 +212,11 @@ const Post = ({ page, post }) => {
             id="question-title-81614"
             className="mt-4 text-xl font-medium text-gray-900 dark:text-white"
           >
-            What would you have done differently if you ran Jurassic Park?
+            {post?.title}
           </h2>
         </div>
-        <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4">
-          <p>
-            Jurassic Park was an incredible idea and a magnificent feat of
-            engineering, but poor protocols and a disregard for human safety
-            killed what could have otherwise been one of the best businesses of
-            our generation.
-          </p>
-          <p>
-            Ultimately, I think that if you wanted to run the park successfully
-            and keep visitors safe, the most important thing to prioritize would
-            be&hellip;
-            <span className="ml-1 hover:underline cursor-pointer">
-              Read more
-            </span>
-          </p>
+        <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 whitespace-pre-line">
+          <p>{post?.text}</p>
         </div>
 
         {post?.images?.length > 0 && (
@@ -280,7 +267,9 @@ const Post = ({ page, post }) => {
                     d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span className="font-medium text-orange-500">100 Karma</span>
+                <span className="font-medium text-orange-500">
+                  {post?.karma_offered} Karma
+                </span>
                 <span className="sr-only">karmas amount</span>
               </button>
             </span>
@@ -305,61 +294,67 @@ const Post = ({ page, post }) => {
             </span>
           </div>
         </div>
-        <div className="mt-6 flex justify-between space-x-8">
-          <span className="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-white bg-white dark:bg-gray-700 ">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 mr-2"
-              viewBox="0 0 20 20"
-              fill="currentColor"
+        {post?.privacity === "CO" && (
+          <div className="mt-6 flex justify-between space-x-8">
+            <span className="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-white bg-white dark:bg-gray-700 ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 mr-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              Private
+            </span>
+          </div>
+        )}
+        {post?.status === "SO" && (
+          <div className="mt-6 flex justify-between space-x-8">
+            <span className="mt-2 flex w-full items-center justify-center px-4 py-2 border dark:border-green-300 border-green-500 shadow-sm text-sm font-medium rounded-3xl dark:text-green-300 text-green-500 bg-white dark:bg-gray-700 ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 mr-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              Solved
+            </span>
+          </div>
+        )}
+        {post?.privacity !== "CO" && post?.status !== "SO" && (
+          <div className="mt-6 sm:flex justify-between sm:space-x-8">
+            <input
+              type="text"
+              name="title"
+              onClick={(e) => e.stopPropagation()}
+              id="post-title"
+              className="block mb-2 sm:mb-0 w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+              placeholder="Message"
+              aria-describedby="title-description"
+              value=""
+            />
+            <button
+              type="button"
+              onClick={handleRequestToContribute}
+              className="w-full sm:w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
             >
-              <path
-                fillRule="evenodd"
-                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-            Private
-          </span>
-        </div>
-        <div className="mt-6 flex justify-between space-x-8">
-          <span className="mt-2 flex w-full items-center justify-center px-4 py-2 border dark:border-green-300 border-green-500 shadow-sm text-sm font-medium rounded-3xl dark:text-green-300 text-green-500 bg-white dark:bg-gray-700 ">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 mr-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-            Solved
-          </span>
-        </div>
-        <div className="mt-6 sm:flex justify-between sm:space-x-8">
-          <input
-            type="text"
-            name="title"
-            onClick={(e) => e.stopPropagation()}
-            id="post-title"
-            className="block mb-2 sm:mb-0 w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-            placeholder="Message"
-            aria-describedby="title-description"
-            value=""
-          />
-          <button
-            type="button"
-            onClick={handleRequestToContribute}
-            className="w-full sm:w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
-          >
-            Request to contribute
-          </button>
-        </div>
+              Request to contribute
+            </button>
+          </div>
+        )}
       </article>
       <PostModal
         page={page}
