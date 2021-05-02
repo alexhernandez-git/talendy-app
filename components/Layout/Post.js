@@ -1,24 +1,16 @@
 import React, { useEffect } from "react";
 import { useRef, useState } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
-import {
-  ACTIVE_CONTRIBUTED,
-  ACTIVE_POSTS_PROFILE_PAGE,
-  FOLLOWED_USERS_POSTS_PAGE,
-  HOME_PAGE,
-  MOST_KARMA_POSTS_PAGE,
-  MY_POSTS_PAGE,
-  PROFILE_PAGE,
-  SEARCH_POSTS_PAGE,
-} from "pages";
+
 import PostModal from "./PostModal";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import CreateEditPostModal from "components/Layout/CreateEditPostModal";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import moment from "moment";
 import { createAlert } from "redux/actions/alerts";
-const Post = ({ page, image }) => {
+const Post = ({ page, post }) => {
   const router = useRouter();
   const [optionsOpen, setOptionsOpen] = useState(false);
   const handleOpenOptions = () => {
@@ -91,6 +83,7 @@ const Post = ({ page, image }) => {
       dispatch(createAlert("ERROR", "You are not authenticated"));
     }
   };
+  console.log(post);
   return (
     <li>
       <article
@@ -101,21 +94,39 @@ const Post = ({ page, image }) => {
         <div>
           <div className="flex space-x-3">
             <div className="flex-shrink-0">
-              <img
-                className="h-10 w-10 rounded-full"
-                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixqx=9XbzAMvCeF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-              />
+              {post?.user && post?.user.picture ? (
+                <img
+                  className="h-10 w-10 rounded-full"
+                  src={
+                    new RegExp(
+                      `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                    ).test(post?.user.picture)
+                      ? post?.user.picture
+                      : process.env.HOST + post?.user.picture
+                  }
+                  alt=""
+                ></img>
+              ) : (
+                <span className="bg-gray-100 rounded-full overflow-hidden h-10 w-10">
+                  <svg
+                    className="text-gray-300 bg-gray-100 rounded-full h-10 w-10"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                </span>
+              )}
             </div>
             <div className="min-w-0 flex-1">
               <p className="text-sm font-medium text-gray-900 dark:text-white">
                 <span onClick={handleGoToProfile} className="hover:underline">
-                  Dries Vincent
+                  {post?.user?.username}
                 </span>
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-100">
                 <time dateTime="2020-12-09T11:43:00">
-                  December 9 at 11:43 AM
+                  {moment(post?.created).format("MMM d [at] h:mm A z")}
                 </time>
               </p>
             </div>
@@ -221,9 +232,22 @@ const Post = ({ page, image }) => {
           </p>
         </div>
 
-        {image && (
+        {post?.images?.length > 0 && (
           <div className="mt-4">
-            <img src="/static/images/freelaniumsc.png" />
+            <img
+              src={
+                new RegExp(
+                  `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                ).test(post.images[0].image)
+                  ? post.images[0].image
+                  : process.env.HOST + post.images[0].image
+              }
+            />
+          </div>
+        )}
+        {post?.images?.length > 1 && (
+          <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 flex justify-center hover:underline cursor-pointer">
+            <span>{post.images.length - 1} images more</span>
           </div>
         )}
         <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 bg-green-50 dark:bg-green-700 p-3 rounded shadow">
@@ -339,7 +363,7 @@ const Post = ({ page, image }) => {
       </article>
       <PostModal
         page={page}
-        image={image}
+        post={post}
         modalOpen={modalOpen}
         handleToggleModal={handleToggleModal}
         modalRef={modalRef}
@@ -348,7 +372,7 @@ const Post = ({ page, image }) => {
       <CreateEditPostModal
         isEdit
         page={page}
-        image={image}
+        post={post}
         modalOpen={editOpen}
         handleToggleModal={handleToggleEdit}
         modalRef={editRef}

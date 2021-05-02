@@ -7,13 +7,10 @@ import { useEffect, useRef } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import getStripe from "utils/get-stripejs";
 import useDispatchInitialData from "hooks/useDispatchInitialData";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   addConnection,
   addInvitation,
-  setPendingMessages,
-  setPendingNotifications,
   substractConnection,
 } from "redux/actions/auth";
 import { addOrUpdateNotificationToFeed } from "redux/actions/lastNotifications";
@@ -24,8 +21,6 @@ function WrappedApp({ Component, pageProps }) {
   useDispatchInitialData();
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
-  const chatReducer = useSelector((state) => state.chatReducer);
-  const chatsReducer = useSelector((state) => state.chatsReducer);
   const ws = useRef(null);
   const connect = () => {
     ws.current = new WebSocket(

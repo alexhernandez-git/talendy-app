@@ -116,7 +116,7 @@ const EarningsHistory = () => {
                 </table>
                 {!earningsReducer?.earnings.results &&
                   earningsReducer?.is_loading && (
-                    <div classNameName="flex justify-center py-3">
+                    <div className="flex justify-center py-3">
                       <Spinner />
                     </div>
                   )}

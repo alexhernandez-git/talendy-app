@@ -35,7 +35,8 @@ export default function postsReducer(state = initialState, action) {
         ...state,
         is_loading: false,
         posts: {
-          ...action.payload,
+          ...state.posts,
+          results: action.payload,
         },
         error: null,
       };

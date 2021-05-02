@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import { fetchTopKarmaUsers } from "redux/actions/topKarmaUsers";
 import { useDispatch } from "react-redux";
 import Post from "components/Layout/Post";
+import { fetchPosts } from "redux/actions/posts";
+import Spinner from "components/Layout/Spinner";
 
 export default function Home() {
   const page = HOME_PAGE;
@@ -15,11 +17,17 @@ export default function Home() {
   const dispatch = useDispatch();
   const initialDataReducer = useSelector((state) => state.initialDataReducer);
   const authReducer = useSelector((state) => state.authReducer);
+  const postsReducer = useSelector((state) => state.postsReducer);
 
   useEffect(() => {
-    if (initialDataReducer.data_fetched) {
-      dispatch(fetchTopKarmaUsers());
-    }
+    const fetchInitialData = async () => {
+      if (initialDataReducer.data_fetched) {
+        await dispatch(fetchTopKarmaUsers());
+        await dispatch(fetchPosts());
+      }
+    };
+
+    fetchInitialData();
   }, [initialDataReducer.data_fetched]);
   return (
     <Layout>
@@ -29,11 +37,15 @@ export default function Home() {
           <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
             <div>
               <h1 className="sr-only">Recent questions</h1>
+              {postsReducer.is_loading && (
+                <div className="flex justify-center space-y-4 w-full mb-4">
+                  <Spinner />
+                </div>
+              )}
               <ul className="space-y-4">
-                <Post page={page} />
-                <Post page={page} image />
-                <Post page={page} />
-                <Post page={page} image />
+                {postsReducer.posts.results.map((post) => (
+                  <Post page={page} post={post} />
+                ))}
               </ul>
             </div>
           </main>
