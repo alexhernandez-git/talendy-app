@@ -126,7 +126,7 @@ const Post = ({ page, post }) => {
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-100">
                 <time dateTime="2020-12-09T11:43:00">
-                  {moment(post?.created).format("MMM d [at] h:mm A z")}
+                  {moment(post?.created).format("MMM D [at] h:mm A z")}
                 </time>
               </p>
             </div>
