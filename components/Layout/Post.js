@@ -237,18 +237,20 @@ const Post = ({ page, post }) => {
             <span>{post.images.length - 1} images more</span>
           </div>
         )}
-        <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 bg-green-50 dark:bg-green-700 p-3 rounded shadow">
-          <span className="font-medium">Solution</span>
-          <p>
-            Jurassic Park was an incredible idea and a magnificent feat of
-            engineering, but poor protocols and a disregard for human safety
-            killed what could have otherwise been one of the best businesses of
-            our generation.&hellip;
-            <span className="ml-1 hover:underline cursor-pointer">
-              Read more
-            </span>
-          </p>
-        </div>
+        {post?.solution && (
+          <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 bg-green-50 dark:bg-green-700 p-3 rounded shadow">
+            <span className="font-medium">Solution</span>
+            <p>
+              Jurassic Park was an incredible idea and a magnificent feat of
+              engineering, but poor protocols and a disregard for human safety
+              killed what could have otherwise been one of the best businesses
+              of our generation.&hellip;
+              <span className="ml-1 hover:underline cursor-pointer">
+                Read more
+              </span>
+            </p>
+          </div>
+        )}
         <div className="mt-6 flex justify-between space-x-8">
           <div className="flex space-x-6">
             <span className="inline-flex items-center text-sm">
