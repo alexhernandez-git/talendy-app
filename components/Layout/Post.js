@@ -404,6 +404,7 @@ const Post = ({ page, post }) => {
         page={page}
         post={post}
         modalOpen={editOpen}
+        handleCloseModal={handleCloseEdit}
         handleToggleModal={handleToggleEdit}
         modalRef={editRef}
       />
