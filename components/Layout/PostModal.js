@@ -339,9 +339,9 @@ const PostModal = ({ modalOpen, modalRef, handleCloseModal, post }) => {
                   Members Contributing
                 </h3>
                 <ul className="mt-2 border-t border-gray-200 dark:border-gray-400 divide-y divide-gray-200 dark:divide-gray-400">
-                  {post.members.map((member) => (
-                    <li className="py-3 flex justify-between items-center">
-                      <div className="flex items-center">
+                  {post?.members?.map((member) => (
+                    <li className="py-3 flex justify-between items-center w-full">
+                      <div className="flex items-center w-full">
                         {post?.user && post?.user.picture ? (
                           <img
                             className="h-8 w-8 rounded-full"
@@ -365,11 +365,18 @@ const PostModal = ({ modalOpen, modalRef, handleCloseModal, post }) => {
                             </svg>
                           </span>
                         )}
-                        <p
-                          onClick={handleGoToProfile}
-                          className="cursor-pointer ml-4 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                          {member.user?.username}
+                        <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white flex justify-between w-full">
+                          <span
+                            onClick={handleGoToProfile}
+                            className="hover:underline cursor-pointer"
+                          >
+                            {member.user.username}
+                          </span>
+                          {member.role === "AD" && (
+                            <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white">
+                              Admin
+                            </span>
+                          )}
                         </p>
                       </div>
                     </li>
