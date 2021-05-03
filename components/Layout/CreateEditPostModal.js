@@ -17,6 +17,7 @@ const CreateEditPostModal = ({
   modalRef,
   isEdit,
   handleCloseModal,
+  post,
 }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -43,13 +44,14 @@ const CreateEditPostModal = ({
 
   const formik = useFormik({
     initialValues: {
-      karma_offered: authReducer.user?.karma_amount / 2,
-      privacity: "AN",
-      community: "",
-      title: "",
-      text: "",
+      karma_offered: post
+        ? post.karma_offered
+        : authReducer.user?.karma_amount / 2,
+      privacity: post ? post.privacity : "AN",
+      community: post ? post.community : "",
+      title: post ? post.title : "",
+      text: post ? post.text : "",
     },
-
     enableReinitialize: true,
     validationSchema: Yup.object({
       karma_offered: Yup.number().required("Karmas offered are required"),
@@ -75,10 +77,13 @@ const CreateEditPostModal = ({
     },
   });
   const handleChangeKarmasOffered = (value) => {
+    if (post) return;
     console.log(value);
     formik.setFieldValue("karma_offered", value);
   };
-  const [imagesOpen, setImagesOpen] = useState(false);
+  const [imagesOpen, setImagesOpen] = useState(
+    post?.images?.length > 0 ? true : false
+  );
   const handleOpenImages = () => {
     setImagesOpen(true);
   };
@@ -115,7 +120,7 @@ const CreateEditPostModal = ({
     }
     return null;
   };
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState(post ? post.images : []);
   const onDrop = useCallback((acceptedFilesNew) => {
     // Do something with the files
     let totalSize = 0;

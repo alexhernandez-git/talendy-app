@@ -49,11 +49,12 @@ const Post = ({ page, post }) => {
   }, [modalOpen]);
   const [editOpen, setEditOpen] = useState(false);
   const handleOpenEdit = (e) => {
+    console.log("entra");
+    handleCloseOptions();
+    setEditOpen(true);
     if (e) {
       e.stopPropagation();
     }
-    handleCloseOptions();
-    setEditOpen(true);
   };
   const handleCloseEdit = () => {
     setEditOpen(false);
@@ -186,7 +187,7 @@ const Post = ({ page, post }) => {
                 >
                   <div className="py-1" role="none" ref={optionsRef}>
                     <span
-                      onClick={handleOpenEdit}
+                      onMouseDown={handleOpenEdit}
                       className="cursor-pointer flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                       role="menuitem"
                     >

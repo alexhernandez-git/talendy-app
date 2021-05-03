@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
 import Toolbar from "./Toolbar";
@@ -43,6 +44,7 @@ export default function CreateEditPostEditor({
   };
   const titleRef = useRef();
   const textRef = useRef();
+  const [firstLoad, setFirstLoad] = useState(true);
   useEffect(() => {
     if (titleValue.length === 0) {
       titleRef.current.innerText = "";
@@ -50,6 +52,15 @@ export default function CreateEditPostEditor({
     if (textValue.length === 0) {
       textRef.current.innerText = "";
     }
+    if (firstLoad) {
+      if (titleValue.length !== 0) {
+        titleRef.current.innerHTML = titleValue;
+      }
+      if (textValue.length !== 0) {
+        textRef.current.innerHTML = textValue;
+      }
+    }
+    setFirstLoad(false);
   }, [titleValue, textValue]);
   return (
     <div>
