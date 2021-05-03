@@ -216,7 +216,14 @@ const Post = ({ page, post }) => {
           </h2>
         </div>
         <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 whitespace-pre-line">
-          <p>{post?.text}</p>
+          <p
+            dangerouslySetInnerHTML={{
+              __html:
+                post?.text.length > 250
+                  ? post?.text.substring(0, 250 - 3) + "..."
+                  : post?.text,
+            }}
+          ></p>
         </div>
 
         {post?.images?.length > 0 && (
@@ -342,6 +349,7 @@ const Post = ({ page, post }) => {
               type="text"
               name="title"
               onClick={(e) => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
               id="post-title"
               className="block mb-2 sm:mb-0 w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
               placeholder="Message"

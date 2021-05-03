@@ -43,6 +43,7 @@ export default function Toolbar() {
   return (
     <div className="flex justify-end rounded-t">
       <button
+        type="button"
         className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center"
         onClick={(e) => addCodeBlock()}
       >

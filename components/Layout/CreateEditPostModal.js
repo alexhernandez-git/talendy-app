@@ -163,7 +163,7 @@ const CreateEditPostModal = ({
   };
   const handleChangeText = (e) => {
     console.log(e.target.innerText);
-    formik.setFieldValue("text", e.target.innerText);
+    formik.setFieldValue("text", e.target.innerHTML);
   };
 
   const handleChangePrivacity = (value) => {
