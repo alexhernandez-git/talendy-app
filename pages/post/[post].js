@@ -10,7 +10,7 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { createAlert } from "redux/actions/alerts";
-import { fetchPost } from "redux/actions/posts";
+import { fetchPost } from "redux/actions/post";
 import { useEffect } from "react";
 import moment from "moment";
 export default function PostPage() {
@@ -47,6 +47,18 @@ export default function PostPage() {
     }
   };
   console.log(postReducer.post);
+  const copyToClipboard = () => {
+    const el = document.createElement("textarea");
+    el.value = `${location.origin}/post/${postReducer.post?.id}`;
+    el.setAttribute("readonly", "");
+    el.style.position = "absolute";
+    el.style.left = "-9999px";
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    dispatch(createAlert("SUCCESS", "Post link copied to clipboard"));
+  };
   return (
     <Layout>
       <div className="max-w-3xl mx-auto sm:p-6 lg:max-w-5xl lg:p-8 bg-white dark:bg-gray-700 rounded-b-lg">
@@ -160,7 +172,10 @@ export default function PostPage() {
 
                 <div className="flex text-sm">
                   <span className="inline-flex items-center text-sm">
-                    <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-100">
+                    <button
+                      onClick={copyToClipboard}
+                      className="inline-flex space-x-2 text-gray-400 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-100"
+                    >
                       <svg
                         className="h-5 w-5"
                         xmlns="http://www.w3.org/2000/svg"

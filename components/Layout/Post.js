@@ -87,6 +87,19 @@ const Post = ({ page, post }) => {
     }
     router.push(`/user/${post?.user?.id}`);
   };
+  const copyToClipboard = (e) => {
+    e.stopPropagation();
+    const el = document.createElement("textarea");
+    el.value = `${location.origin}/post/${post?.id}`;
+    el.setAttribute("readonly", "");
+    el.style.position = "absolute";
+    el.style.left = "-9999px";
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    dispatch(createAlert("SUCCESS", "Post link copied to clipboard"));
+  };
   console.log(post);
   return (
     <li>
@@ -294,7 +307,10 @@ const Post = ({ page, post }) => {
 
           <div className="flex text-sm">
             <span className="inline-flex items-center text-sm">
-              <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-100">
+              <button
+                onMouseDown={copyToClipboard}
+                className="inline-flex space-x-2 text-gray-400 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-100"
+              >
                 <svg
                   className="h-5 w-5"
                   xmlns="http://www.w3.org/2000/svg"
