@@ -10,7 +10,8 @@ import { useDispatch } from "react-redux";
 import Post from "components/Layout/Post";
 import { fetchPosts } from "redux/actions/posts";
 import Spinner from "components/Layout/Spinner";
-
+import VisibilitySensor from "react-visibility-sensor";
+import { fetchMorePosts } from "redux/actions/posts";
 export default function Home() {
   const page = HOME_PAGE;
 
@@ -29,6 +30,13 @@ export default function Home() {
 
     fetchInitialData();
   }, [initialDataReducer.data_fetched]);
+  const handleFetchMorePosts = () => {
+    dispatch(fetchMorePosts());
+  };
+  function onChangeVisibility(isVisible) {
+    console.log("isVisible", isVisible);
+    if (isVisible) handleFetchMorePosts();
+  }
   return (
     <Layout>
       <div className="py-10">
@@ -47,6 +55,26 @@ export default function Home() {
                   <Post page={page} post={post} />
                 ))}
               </ul>
+
+              {!postsReducer.is_fetching_more_posts &&
+                postsReducer.posts.results.length > 0 &&
+                postsReducer.posts.next && (
+                  <VisibilitySensor onChange={onChangeVisibility}>
+                    <div
+                      className="p-3 flex justify-center"
+                      onClick={handleFetchMorePosts}
+                    >
+                      <span className="text-gray-500 dark:text-gray-100 text-sm cursor-pointer">
+                        Load more posts
+                      </span>
+                    </div>
+                  </VisibilitySensor>
+                )}
+              {postsReducer.is_fetching_more_posts && (
+                <div className="flex justify-center space-y-4 w-full mb-4 p-3">
+                  <Spinner />
+                </div>
+              )}
             </div>
           </main>
           <RightSidebar />

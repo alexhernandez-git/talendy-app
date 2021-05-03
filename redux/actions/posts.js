@@ -7,6 +7,9 @@ import {
   FETCH_POSTS,
   FETCH_POSTS_SUCCESS,
   FETCH_POSTS_FAIL,
+  FETCH_MORE_POSTS,
+  FETCH_MORE_POSTS_SUCCESS,
+  FETCH_MORE_POSTS_FAIL,
 } from "../types";
 import { createAlert } from "./alerts";
 
@@ -57,4 +60,28 @@ export const fetchPosts = (search = "") => async (dispatch, getState) => {
         payload: { data: err.response?.data, status: err.response?.status },
       });
     });
+};
+
+export const fetchMorePosts = () => async (dispatch, getState) => {
+  const url = getState().postsReducer.posts.next;
+  console.log(getState().postsReducer.posts.next);
+  if (url) {
+    dispatch({
+      type: FETCH_MORE_POSTS,
+    });
+    await axios
+      .get(url, tokenConfig(getState))
+      .then(async (res) => {
+        await dispatch({
+          type: FETCH_MORE_POSTS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: FETCH_MORE_POSTS_FAIL,
+          payload: { data: err.response.data, status: err.response.status },
+        });
+      });
+  }
 };
