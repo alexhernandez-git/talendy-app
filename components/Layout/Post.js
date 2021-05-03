@@ -218,7 +218,7 @@ const Post = ({ page, post }) => {
           </div>
           <h2
             id="question-title-81614"
-            className="mt-4 text-xl font-medium text-gray-900 dark:text-white"
+            className="mt-4 text-2xl font-medium text-gray-900 dark:text-white break-words"
           >
             {post?.title}
           </h2>
