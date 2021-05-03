@@ -70,10 +70,6 @@ const Post = ({ page, post }) => {
       document.body.style.overflow = "";
     }
   }, [editOpen]);
-  const handleGoToProfile = (e) => {
-    e.stopPropagation();
-    router.push("/user/123");
-  };
   const dispatch = useDispatch();
 
   const authReducer = useSelector((state) => state.authReducer);
@@ -82,6 +78,14 @@ const Post = ({ page, post }) => {
     if (!authReducer.is_authenticated) {
       dispatch(createAlert("ERROR", "You are not authenticated"));
     }
+  };
+  const handleGoToProfile = (e) => {
+    e.stopPropagation();
+    if (post?.user?.id === authReducer.user?.id) {
+      router.push(`/profile/posts`);
+      return;
+    }
+    router.push(`/user/${post?.user?.id}`);
   };
   console.log(post);
   return (
@@ -120,7 +124,11 @@ const Post = ({ page, post }) => {
             </div>
             <div className="min-w-0 flex-1">
               <p className="text-sm font-medium text-gray-900 dark:text-white">
-                <span onClick={handleGoToProfile} className="hover:underline">
+                <span
+                  onClick={handleGoToProfile}
+                  onMouseDown={(e) => e.stopPropagation()}
+                  className="hover:underline"
+                >
                   {post?.user?.username}
                 </span>
               </p>
