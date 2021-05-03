@@ -8,10 +8,9 @@ import { useSelector } from "react-redux";
 import { fetchTopKarmaUsers } from "redux/actions/topKarmaUsers";
 import { useDispatch } from "react-redux";
 import Post from "components/Layout/Post";
-import { fetchPosts } from "redux/actions/posts";
 import Spinner from "components/Layout/Spinner";
 import VisibilitySensor from "react-visibility-sensor";
-import { fetchMorePosts } from "redux/actions/posts";
+import { fetchMorePosts, fetchPosts } from "redux/actions/posts";
 export default function Home() {
   const page = HOME_PAGE;
 

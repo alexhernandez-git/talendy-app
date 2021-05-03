@@ -32,6 +32,7 @@ export default combineReducers({
   lastMessagesReducer: lastMessagesReducer,
   chatsReducer: chatsReducer,
   postsReducer: postsReducer,
+  postReducer: postReducer,
   messagesReducer: messagesReducer,
   communitiesReducer: communitiesReducer,
 });

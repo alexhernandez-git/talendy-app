@@ -10,13 +10,17 @@ import { createAlert } from "redux/actions/alerts";
 import moment from "moment";
 const PostModal = ({ modalOpen, modalRef, handleCloseModal, post }) => {
   const router = useRouter();
-  const handleGoToProfile = (e) => {
-    e.stopPropagation();
-    router.push("/user/123");
-  };
   const dispatch = useDispatch();
 
   const authReducer = useSelector((state) => state.authReducer);
+  const handleGoToProfile = (e) => {
+    e.stopPropagation();
+    if (post?.user?.id === authReducer.user?.id) {
+      router.push(`/profile/posts`);
+      return;
+    }
+    router.push(`/user/${post?.user?.id}`);
+  };
   const handleRequestToContribute = () => {
     if (!authReducer.is_authenticated) {
       dispatch(createAlert("ERROR", "You are not authenticated"));
@@ -100,7 +104,7 @@ const PostModal = ({ modalOpen, modalRef, handleCloseModal, post }) => {
               <div className="flex justify-between items-baseline">
                 <h2
                   id="question-title-81614"
-                  className="text-xl font-medium text-gray-900 dark:text-white"
+                  className="text-xl font-medium text-gray-900 dark:text-white break-all"
                 >
                   {post?.title}
                 </h2>
@@ -113,8 +117,9 @@ const PostModal = ({ modalOpen, modalRef, handleCloseModal, post }) => {
                 />
               </div>
               {post?.images?.map((image) => (
-                <div className="mt-4 relative">
+                <div className="mt-4 relative w-auto">
                   <img
+                    className="w-full"
                     src={
                       new RegExp(
                         `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
@@ -342,15 +347,15 @@ const PostModal = ({ modalOpen, modalRef, handleCloseModal, post }) => {
                   {post?.members?.map((member) => (
                     <li className="py-3 flex justify-between items-center w-full">
                       <div className="flex items-center w-full">
-                        {post?.user && post?.user.picture ? (
+                        {member.user && member.user.picture ? (
                           <img
                             className="h-8 w-8 rounded-full"
                             src={
                               new RegExp(
                                 `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
-                              ).test(post?.user.picture)
-                                ? post?.user.picture
-                                : process.env.HOST + post?.user.picture
+                              ).test(member.user.picture)
+                                ? member.user.picture
+                                : process.env.HOST + member.user.picture
                             }
                             alt=""
                           ></img>
