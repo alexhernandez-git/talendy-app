@@ -48,7 +48,7 @@ const CreateEditPostModal = ({
         ? post.karma_offered
         : authReducer.user?.karma_amount / 2,
       privacity: post ? post.privacity : "AN",
-      community: post ? post.community : "",
+      community: post ? post.community : null,
       title: post ? post.title : "",
       text: post ? post.text : "",
     },
@@ -58,19 +58,19 @@ const CreateEditPostModal = ({
       title: Yup.string().max(300).required("Title is required"),
       text: Yup.string(),
       privacity: Yup.string(),
-      community: Yup.string(),
+      community: Yup.string().nullable(),
     }),
     onSubmit: async (values, { resetForm }) => {
-      console.log(values);
       const fd = new FormData();
       fd.append("title", values.title);
       fd.append("text", values.text);
-      console.log(images);
       for (let i = 0; i < images.length; i++) {
         fd.append("images", images[i], images[i].name);
       }
       fd.append("privacity", values.privacity);
-      fd.append("community", values.community);
+      if (values.community) {
+        fd.append("community", values.community);
+      }
       fd.append("karma_offered", values.karma_offered);
       if (post) {
         dispatch(
@@ -87,12 +87,11 @@ const CreateEditPostModal = ({
           createPost(fd, resetForm, handleCloseModal, handleResetImages)
         );
       }
-      console.log(images);
     },
   });
+  console.log(formik.errors);
   const handleChangeKarmasOffered = (value) => {
     if (post) return;
-    console.log(value);
     formik.setFieldValue("karma_offered", value);
   };
   const [imagesOpen, setImagesOpen] = useState(
@@ -120,7 +119,6 @@ const CreateEditPostModal = ({
   useOutsideClick(communitiesRef, () => handleCloseCommunities());
 
   const fileValidator = (file) => {
-    console.log("file", file);
     if (
       file.type !== "image/jpeg" &&
       file.type !== "image/png" &&
@@ -140,13 +138,9 @@ const CreateEditPostModal = ({
     let totalSize = 0;
 
     for (let i; i < acceptedFilesNew.length; i++) {
-      console.log(acceptedFilesNew[i].type);
-
-      console.log(acceptedFilesNew[i].size);
       totalSize += acceptedFilesNew[i]?.size;
     }
     const maxAllowedSize = 1073741824;
-    console.log("total size", totalSize);
     if (totalSize > maxAllowedSize) {
       alert("Over max size");
       return;
@@ -177,11 +171,9 @@ const CreateEditPostModal = ({
   };
 
   const handleChangeTitle = (e) => {
-    console.log(e.target.innerText);
     formik.setFieldValue("title", e.target.innerText);
   };
   const handleChangeText = (e) => {
-    console.log(e.target.innerText);
     formik.setFieldValue("text", e.target.innerHTML);
   };
 

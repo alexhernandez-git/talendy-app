@@ -4,6 +4,9 @@ import {
   CREATE_POST,
   CREATE_POST_SUCCESS,
   CREATE_POST_FAIL,
+  UPDATE_POST,
+  UPDATE_POST_SUCCESS,
+  UPDATE_POST_FAIL,
   FETCH_POSTS,
   FETCH_POSTS_SUCCESS,
   FETCH_POSTS_FAIL,
@@ -50,13 +53,14 @@ export const updatePost = (
   handleResetImages
 ) => async (dispatch, getState) => {
   await dispatch({
-    type: CREATE_POST,
+    type: UPDATE_POST,
   });
+  console.log("entra update post");
   await axios
-    .patch(`${process.env.HOST}/api/posts/${id}`, data, tokenConfig(getState))
+    .patch(`${process.env.HOST}/api/posts/${id}/`, data, tokenConfig(getState))
     .then(async (res) => {
       await dispatch({
-        type: CREATE_POST_SUCCESS,
+        type: UPDATE_POST_SUCCESS,
         payload: res.data,
       });
       await resetForm({});
@@ -66,7 +70,7 @@ export const updatePost = (
     })
     .catch(async (err) => {
       await dispatch({
-        type: CREATE_POST_FAIL,
+        type: UPDATE_POST_FAIL,
         payload: { data: err.response?.data, status: err.response?.status },
       });
     });

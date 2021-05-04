@@ -53,6 +53,7 @@ export default function CreateEditPostEditor({
       textRef.current.innerText = "";
     }
     if (firstLoad) {
+      console.log("entra");
       if (titleValue.length !== 0) {
         titleRef.current.innerHTML = titleValue;
       }
