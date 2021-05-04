@@ -132,7 +132,11 @@ const CreateEditPostModal = ({
     }
     return null;
   };
-  const [images, setImages] = useState(post ? post.images : []);
+  console.log(post?.images);
+  const [images, setImages] = useState([]);
+  useEffect(() => {
+    if (post?.images) setImages(post.images);
+  }, [post]);
   const onDrop = useCallback((acceptedFilesNew) => {
     // Do something with the files
     let totalSize = 0;
