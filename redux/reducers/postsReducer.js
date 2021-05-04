@@ -5,6 +5,9 @@ import {
   UPDATE_POST,
   UPDATE_POST_SUCCESS,
   UPDATE_POST_FAIL,
+  DELETE_POST,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_FAIL,
   FETCH_POSTS,
   FETCH_POSTS_SUCCESS,
   FETCH_POSTS_FAIL,
@@ -28,6 +31,8 @@ const initialState = {
   is_fetching_more_posts: false,
   is_updating_post: false,
   update_post_error: null,
+  is_deleting_post: false,
+  delete_post_error: null,
 };
 export default function postsReducer(state = initialState, action) {
   switch (action.type) {
@@ -116,6 +121,29 @@ export default function postsReducer(state = initialState, action) {
         update_post_error: null,
       };
     case UPDATE_POST_FAIL:
+      return {
+        ...state,
+        is_updating_post: false,
+        update_post_error: action.payload,
+      };
+    case DELETE_POST:
+      return {
+        ...state,
+        is_updating_post: true,
+      };
+    case DELETE_POST_SUCCESS:
+      return {
+        ...state,
+        posts: {
+          ...state.posts,
+          results: state.posts.results.filter(
+            (post) => post.id !== action.payload
+          ),
+        },
+        is_updating_post: false,
+        update_post_error: null,
+      };
+    case DELETE_POST_FAIL:
       return {
         ...state,
         is_updating_post: false,

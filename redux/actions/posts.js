@@ -7,6 +7,9 @@ import {
   UPDATE_POST,
   UPDATE_POST_SUCCESS,
   UPDATE_POST_FAIL,
+  DELETE_POST,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_FAIL,
   FETCH_POSTS,
   FETCH_POSTS_SUCCESS,
   FETCH_POSTS_FAIL,
@@ -71,6 +74,29 @@ export const updatePost = (
     .catch(async (err) => {
       await dispatch({
         type: UPDATE_POST_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
+};
+
+export const deletePost = (id, closeModal) => async (dispatch, getState) => {
+  await dispatch({
+    type: DELETE_POST,
+  });
+  console.log("entra update post");
+  await axios
+    .delete(`${process.env.HOST}/api/posts/${id}/`, tokenConfig(getState))
+    .then(async (res) => {
+      await dispatch({
+        type: DELETE_POST_SUCCESS,
+        payload: id,
+      });
+      await closeModal();
+      await dispatch(createAlert("SUCCESS", "Post succesfully deleted"));
+    })
+    .catch(async (err) => {
+      await dispatch({
+        type: DELETE_POST_FAIL,
         payload: { data: err.response?.data, status: err.response?.status },
       });
     });

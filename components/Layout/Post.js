@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import { createAlert } from "redux/actions/alerts";
+import DeletePostModal from "./DeletePostModal";
+import { deletePost } from "redux/actions/posts";
 const Post = ({ page, post }) => {
   const router = useRouter();
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -49,7 +51,6 @@ const Post = ({ page, post }) => {
   }, [modalOpen]);
   const [editOpen, setEditOpen] = useState(false);
   const handleOpenEdit = (e) => {
-    console.log("entra");
     handleCloseOptions();
     setEditOpen(true);
     if (e) {
@@ -101,7 +102,22 @@ const Post = ({ page, post }) => {
     document.body.removeChild(el);
     dispatch(createAlert("SUCCESS", "Post link copied to clipboard"));
   };
-  console.log(post);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const handleOpenDelete = () => {
+    handleCloseOptions();
+    setDeleteOpen(true);
+  };
+  const handleCloseDelete = () => {
+    setDeleteOpen(false);
+  };
+  const handleToggleDelete = () => {
+    setDeleteOpen(!deleteOpen);
+  };
+  const deleteRef = useRef();
+  useOutsideClick(deleteRef, () => handleCloseDelete());
+  const handleDeletePost = () => {
+    dispatch(deletePost(post?.id, handleCloseDelete));
+  };
   return (
     <li>
       <article
@@ -207,9 +223,9 @@ const Post = ({ page, post }) => {
                         </svg>
                         <span>Edit</span>
                       </span>
-                      <a
-                        href="#"
-                        className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                      <span
+                        onMouseDown={handleOpenDelete}
+                        className="cursor-pointer flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                         role="menuitem"
                       >
                         <svg
@@ -225,7 +241,7 @@ const Post = ({ page, post }) => {
                           />
                         </svg>
                         <span>Delete</span>
-                      </a>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -409,6 +425,12 @@ const Post = ({ page, post }) => {
         handleCloseModal={handleCloseEdit}
         handleToggleModal={handleToggleEdit}
         modalRef={editRef}
+      />
+      <DeletePostModal
+        modalOpen={deleteOpen}
+        handleCloseModal={handleCloseDelete}
+        modalRef={deleteRef}
+        handleDeletePost={handleDeletePost}
       />
     </li>
   );
