@@ -148,7 +148,11 @@ const CreateEditPostModal = ({
   const [images, setImages] = useState([]);
   useEffect(() => {
     console.log(post);
-    if (post?.images) setImages(post.images);
+    // setImages(post?.images ? post.images : []);
+    const timeoutId = setTimeout(() => {
+      setImages(post?.images ? post.images : []);
+    }, 100);
+    return () => clearTimeout(timeoutId);
   }, [post]);
   const onDrop = useCallback((acceptedFilesNew) => {
     // Do something with the files
@@ -203,6 +207,7 @@ const CreateEditPostModal = ({
     setImages([]);
     acceptedFiles.splice(0, acceptedFiles.length);
   };
+  console.log("images", images);
 
   return (
     <div
