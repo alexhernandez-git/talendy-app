@@ -52,11 +52,11 @@ const DeletePostModal = ({
                   className="text-lg leading-6 font-medium text-gray-900 dark:text-white"
                   id="modal-headline"
                 >
-                  Remove account
+                  Remove post
                 </h3>
                 <div className="mt-2">
                   <p className="text-sm text-gray-500 dark:text-gray-300">
-                    All your personal data will be removed.
+                    This post will be removed.
                   </p>
                 </div>
               </div>

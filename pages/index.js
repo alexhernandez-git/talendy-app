@@ -49,11 +49,19 @@ export default function Home() {
                   <Spinner />
                 </div>
               )}
-              <ul className="space-y-4">
-                {postsReducer.posts.results.map((post) => (
-                  <Post page={page} post={post} />
-                ))}
-              </ul>
+              {postsReducer.posts.results.length > 0 ? (
+                <ul className="space-y-4">
+                  {postsReducer.posts.results.map((post) => (
+                    <Post page={page} post={post} />
+                  ))}
+                </ul>
+              ) : (
+                <div className="flex justify-center">
+                  <span className="text-gray-500 dark:text-gray-100 text-sm">
+                    Not posts found
+                  </span>
+                </div>
+              )}
 
               {!postsReducer.is_fetching_more_posts &&
                 postsReducer.posts.results.length > 0 &&
