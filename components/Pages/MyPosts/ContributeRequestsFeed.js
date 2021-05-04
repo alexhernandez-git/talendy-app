@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import HelpRequest from "components/Pages/MyPosts/ContributeRequest";
 import Link from "next/link";
 
-const HelpRequestsFeed = () => {
+const ContributeRequestsFeed = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => {
     setIsOpen(true);
@@ -93,4 +93,4 @@ const HelpRequestsFeed = () => {
   );
 };
 
-export default HelpRequestsFeed;
+export default ContributeRequestsFeed;

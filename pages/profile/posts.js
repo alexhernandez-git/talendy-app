@@ -6,6 +6,7 @@ import useAuthRequired from "hooks/useAuthRequired";
 import Spinner from "components/Layout/Spinner";
 import Post from "components/Layout/Post";
 import ProfileMenu from "components/Pages/Profile/ProfileMenu";
+import ContributeRequestsFeed from "components/Pages/MyPosts/ContributeRequestsFeed";
 
 export default function Posts() {
   const page = MY_POSTS_PAGE;
@@ -21,6 +22,7 @@ export default function Posts() {
           <ProfileCard mobile page={page} profile user={authReducer.user} />
           <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
             <ProfileMenu page={page} />
+            <ContributeRequestsFeed />
             <div>
               <h1 className="sr-only">Recent questions</h1>
               <ul className="space-y-4">
