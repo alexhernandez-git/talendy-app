@@ -101,7 +101,7 @@ import {
 
 const initialState = {
   theme: process.browser && localStorage.getItem("theme"),
-  community: null,
+  community: "",
   access_token: process.browser && localStorage.getItem("access_token"),
   is_authenticated: null,
   is_loading: true,

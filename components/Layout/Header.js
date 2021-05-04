@@ -294,7 +294,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
                     ) : (
                       <span className="bg-gray-100 rounded-full overflow-hidden h-8 w-8">
                         <svg
-                          className="h-full w-full text-gray-300"
+                          className="h-8 w-8 text-gray-300"
                           fill="currentColor"
                           viewBox="0 0 24 24"
                         >
@@ -429,7 +429,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
                 ) : (
                   <span className="bg-gray-100 rounded-full overflow-hidden h-10 w-10">
                     <svg
-                      className="h-full w-full text-gray-300"
+                      className="h-10 w-10 text-gray-300 bg-gray-100 rounded-full overflow-hidden"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >

@@ -22,7 +22,7 @@ const NotificationItem = ({ notification }) => {
           ) : (
             <span className="inline-block h-8 w-8 rounded-full overflow-hidden bg-gray-100">
               <svg
-                className="h-full w-full text-gray-300"
+                className="h-8 w-8 text-gray-300"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >

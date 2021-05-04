@@ -20,12 +20,13 @@ export default function Followed() {
     const fetchInitialData = async () => {
       if (initialDataReducer.data_fetched) {
         await dispatch(fetchTopKarmaUsers());
-        await dispatch(fetchPosts(page));
+        await dispatch(fetchPosts(page, authReducer.community));
       }
     };
 
     fetchInitialData();
-  }, [initialDataReducer.data_fetched]);
+  }, [initialDataReducer.data_fetched, authReducer.community]);
+
   return (
     <Layout>
       <div className="py-10">

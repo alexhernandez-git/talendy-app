@@ -315,7 +315,7 @@ const settings = () => {
                           ) : (
                             <span className="inline-block bg-gray-100 rounded-full overflow-hidden h-12 w-12">
                               <svg
-                                className="h-full w-full text-gray-300"
+                                className="h-12 w-12 text-gray-300"
                                 fill="currentColor"
                                 viewBox="0 0 24 24"
                               >

@@ -270,7 +270,7 @@ const Chat = () => {
                       ) : (
                         <span className="hidden sm:block bg-gray-100 rounded-full overflow-hidden h-10 w-10 mr-4">
                           <svg
-                            className="h-full w-full text-gray-300"
+                            className="h-10 w-10 text-gray-300"
                             fill="currentColor"
                             viewBox="0 0 24 24"
                           >
