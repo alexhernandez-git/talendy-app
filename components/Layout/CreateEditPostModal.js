@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import CreateEditPostEditor from "components/Editor/CreateEditPostEditor";
-import { createPost } from "redux/actions/posts";
+import { createPost, updatePost } from "redux/actions/posts";
 import { useDispatch } from "react-redux";
 const CreateEditPostModal = ({
   modalOpen,
@@ -72,7 +72,21 @@ const CreateEditPostModal = ({
       fd.append("privacity", values.privacity);
       fd.append("community", values.community);
       fd.append("karma_offered", values.karma_offered);
-      dispatch(createPost(fd, resetForm, handleCloseModal, handleResetImages));
+      if (post) {
+        dispatch(
+          updatePost(
+            post.id,
+            fd,
+            resetForm,
+            handleCloseModal,
+            handleResetImages
+          )
+        );
+      } else {
+        dispatch(
+          createPost(fd, resetForm, handleCloseModal, handleResetImages)
+        );
+      }
       console.log(images);
     },
   });

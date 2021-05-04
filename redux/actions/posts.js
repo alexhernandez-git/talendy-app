@@ -42,6 +42,36 @@ export const createPost = (
     });
 };
 
+export const updatePost = (
+  id,
+  data,
+  resetForm,
+  closeModal,
+  handleResetImages
+) => async (dispatch, getState) => {
+  await dispatch({
+    type: CREATE_POST,
+  });
+  await axios
+    .patch(`${process.env.HOST}/api/posts/${id}`, data, tokenConfig(getState))
+    .then(async (res) => {
+      await dispatch({
+        type: CREATE_POST_SUCCESS,
+        payload: res.data,
+      });
+      await resetForm({});
+      await closeModal();
+      await handleResetImages();
+      await dispatch(createAlert("SUCCESS", "Post succesfully updated"));
+    })
+    .catch(async (err) => {
+      await dispatch({
+        type: CREATE_POST_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
+};
+
 export const fetchPosts = (search = "") => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_POSTS,
