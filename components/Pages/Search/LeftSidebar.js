@@ -38,9 +38,9 @@ const LeftSidebar = ({ page }) => {
               className={`
                   ${
                     community === 0
-                      ? "bg-gray-200 text-gray-900 dark:hover:bg-gray-300"
-                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
             >
               <span className="truncate">Development</span>
             </span>
@@ -50,9 +50,9 @@ const LeftSidebar = ({ page }) => {
               className={`
                   ${
                     community === 1
-                      ? "bg-gray-200 text-gray-900 dark:hover:bg-gray-300"
-                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
             >
               <span className="truncate">Business</span>
             </span>
@@ -62,9 +62,9 @@ const LeftSidebar = ({ page }) => {
               className={`
                   ${
                     community === 2
-                      ? "bg-gray-200 text-gray-900 dark:hover:bg-gray-300"
-                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
             >
               <span className="truncate">Finance & Accounting</span>
             </span>
@@ -74,9 +74,9 @@ const LeftSidebar = ({ page }) => {
               className={`
                   ${
                     community === 3
-                      ? "bg-gray-200 text-gray-900 dark:hover:bg-gray-300"
-                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
             >
               <span className="truncate">IT & Software</span>
             </span>
@@ -86,9 +86,9 @@ const LeftSidebar = ({ page }) => {
               className={`
                   ${
                     community === 4
-                      ? "bg-gray-200 text-gray-900 dark:hover:bg-gray-300"
-                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
             >
               <span className="truncate">Office Productivity</span>
             </span>
@@ -98,9 +98,9 @@ const LeftSidebar = ({ page }) => {
               className={`
                   ${
                     community === 5
-                      ? "bg-gray-200 text-gray-900 dark:hover:bg-gray-300"
-                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
             >
               <span className="truncate">Personal Development</span>
             </span>
@@ -110,9 +110,9 @@ const LeftSidebar = ({ page }) => {
               className={`
                   ${
                     community === 6
-                      ? "bg-gray-200 text-gray-900 dark:hover:bg-gray-300"
-                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
             >
               <span className="truncate">Design</span>
             </span>
@@ -122,9 +122,9 @@ const LeftSidebar = ({ page }) => {
               className={`
                   ${
                     community === 7
-                      ? "bg-gray-200 text-gray-900 dark:hover:bg-gray-300"
-                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
             >
               <span className="truncate">Marketing</span>
             </span>
@@ -134,9 +134,9 @@ const LeftSidebar = ({ page }) => {
               className={`
                   ${
                     community === 8
-                      ? "bg-gray-200 text-gray-900 dark:hover:bg-gray-300"
-                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
             >
               <span className="truncate">Health & Fitness</span>
             </span>
@@ -145,9 +145,9 @@ const LeftSidebar = ({ page }) => {
               className={`
                   ${
                     community === 9
-                      ? "bg-gray-200 text-gray-900 dark:hover:bg-gray-300"
-                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
             >
               <span className="truncate">Music</span>
             </span>

@@ -31,9 +31,9 @@ const LeftSidebar = ({ page }) => {
                 className={`
                   ${
                     page === PROFILE_PAGE
-                      ? "bg-gray-200 text-gray-900 dark:hover:bg-gray-300"
-                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
               >
                 <span className="truncate">All</span>
                 <span>30</span>
@@ -44,9 +44,9 @@ const LeftSidebar = ({ page }) => {
                 className={`
                   ${
                     page === ACTIVE_POSTS_PROFILE_PAGE
-                      ? "bg-gray-200 text-gray-900 dark:hover:bg-gray-300"
-                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
               >
                 <span className="truncate">Active</span>
                 <span>10</span>
@@ -57,9 +57,9 @@ const LeftSidebar = ({ page }) => {
                 className={`
                   ${
                     page === CLOSED_POSTS_PROFILE_PAGE
-                      ? "bg-gray-200 text-gray-900 dark:hover:bg-gray-300"
-                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
-                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
+                      ? "bg-gray-200 text-gray-900 "
+                      : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                  } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
               >
                 <span className="truncate">Solved</span>
                 <span>20</span>
