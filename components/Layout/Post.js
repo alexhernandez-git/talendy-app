@@ -261,7 +261,7 @@ const Post = ({ page, post }) => {
           <p
             dangerouslySetInnerHTML={{
               __html:
-                post?.text.length > 250
+                post?.text?.length > 250
                   ? post?.text.substring(0, 250 - 3) + "..."
                   : post?.text,
             }}
