@@ -64,8 +64,20 @@ const CreateEditPostModal = ({
       const fd = new FormData();
       fd.append("title", values.title);
       fd.append("text", values.text);
-      for (let i = 0; i < images.length; i++) {
-        fd.append("images", images[i], images[i].name);
+      const currentImages = images.filter((image) => image.id);
+      const currentImagesId = currentImages.map((image) => image.id);
+      console.log("current images", currentImagesId);
+      fd.append("current_images", JSON.stringify(currentImagesId));
+
+      const fileImages = images.filter((image) => !image.id);
+      console.log("file images", fileImages);
+      for (let i = 0; i < fileImages.length; i++) {
+        console.log("image", fileImages[i]);
+        try {
+          fd.append("images", fileImages[i], fileImages[i].name);
+        } catch (error) {
+          console.log(error);
+        }
       }
       fd.append("privacity", values.privacity);
       if (values.community) {
@@ -135,6 +147,7 @@ const CreateEditPostModal = ({
   console.log(post?.images);
   const [images, setImages] = useState([]);
   useEffect(() => {
+    console.log(post);
     if (post?.images) setImages(post.images);
   }, [post]);
   const onDrop = useCallback((acceptedFilesNew) => {
