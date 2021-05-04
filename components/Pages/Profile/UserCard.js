@@ -75,7 +75,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
                   ) : (
                     <span className="bg-gray-100 rounded-full overflow-hidden h-40 w-40  xl:w-56 xl:h-56">
                       <svg
-                        className="h-40 w-40 text-gray-300 bg-gray-100"
+                        className="h-full w-full text-gray-300 bg-gray-100"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >

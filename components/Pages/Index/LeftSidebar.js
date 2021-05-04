@@ -15,7 +15,7 @@ const LeftSidebar = ({ page }) => {
   const { community } = authReducer;
   const handleSetCommunity = (selectedCommunity) => {
     if (selectedCommunity === community) {
-      dispatch(changeCommunity(null));
+      dispatch(changeCommunity(""));
       return;
     }
     dispatch(changeCommunity(selectedCommunity));
