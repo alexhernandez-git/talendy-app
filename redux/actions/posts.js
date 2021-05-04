@@ -18,7 +18,7 @@ import {
   FETCH_MORE_POSTS_FAIL,
 } from "../types";
 import { createAlert } from "./alerts";
-import useGetFetchPostsRequestUrl from "hooks/useGetFetchPostsRequestUrl";
+import useGetFetchPostsRequest from "hooks/useGetFetchPostsRequest";
 
 export const createPost = (
   data,
@@ -104,14 +104,14 @@ export const deletePost = (id, closeModal) => async (dispatch, getState) => {
 };
 
 export const fetchPosts = (page, search = "") => async (dispatch, getState) => {
+  const { url, authenticationRequired } = useGetFetchPostsRequest(page);
   await dispatch({
     type: FETCH_POSTS,
   });
   await axios
     .get(
-      `${process.env.HOST}/api/${useGetFetchPostsRequestUrl(
-        page
-      )}/?search=${search}`
+      `${process.env.HOST}/api/${url}/?search=${search}`,
+      authenticationRequired ? tokenConfig(getState) : null
     )
     .then(async (res) => {
       await dispatch({
