@@ -5,7 +5,7 @@ const useGetNotification = (notification) => {
   const authReducer = useSelector((state) => state.authReducer);
   console.log(notification);
   let connection;
-  switch (notification.type) {
+  switch (notification?.type) {
     case "ME":
       const many_messages = notification.messages.length > 1;
       let message = "";

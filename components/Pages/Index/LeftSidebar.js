@@ -39,7 +39,7 @@ const LeftSidebar = ({ page }) => {
                 className={`
               ${
                 page === HOME_PAGE
-                  ? "bg-gray-200 text-gray-900 "
+                  ? "bg-gray-200 text-gray-900 dark:hover:bg-gray-300"
                   : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
               } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
               >
@@ -51,7 +51,7 @@ const LeftSidebar = ({ page }) => {
                 className={`
               ${
                 page === MOST_KARMA_POSTS_PAGE
-                  ? "bg-gray-200 text-gray-900 "
+                  ? "bg-gray-200 text-gray-900 dark:hover:bg-gray-300"
                   : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
               } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
               >
@@ -63,7 +63,7 @@ const LeftSidebar = ({ page }) => {
                 className={`
               ${
                 page === FOLLOWED_USERS_POSTS_PAGE
-                  ? "bg-gray-200 text-gray-900 "
+                  ? "bg-gray-200 text-gray-900 dark:hover:bg-gray-300"
                   : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
               } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
               >
@@ -89,7 +89,7 @@ const LeftSidebar = ({ page }) => {
                 className={`
             ${
               community === communityItem.id
-                ? "bg-gray-200 text-gray-900 "
+                ? "bg-gray-200 text-gray-900 dark:hover:bg-gray-300"
                 : "text-gray-600 hover:bg-gray-50 dark:text-gray-100"
             } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900 dark:hover:text-gray-900`}
               >
