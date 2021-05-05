@@ -315,7 +315,10 @@ export default function PostPage() {
                             alt=""
                           ></img>
                         ) : (
-                          <span className="bg-gray-100 rounded-full overflow-hidden h-8 w-8">
+                          <span
+                            className="bg-gray-100 rounded-full overflow-hidden h-8 w-8"
+                            style={{ minWidth: "2rem" }}
+                          >
                             <svg
                               className="text-gray-300 bg-gray-100 rounded-full h-8 w-8"
                               fill="currentColor"
