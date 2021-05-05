@@ -30,14 +30,14 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
   useOutsideClick(menuRef, () => handleCloseMenu());
 
   const router = useRouter();
-
+  console.log(router?.query?.search?.length > 0);
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      search: router?.query?.search ? router.query.search : "",
+      search: router?.query?.search?.length > 0 ? router.query.search[0] : "",
     },
     validationSchema: Yup.object({
-      search: Yup.string().required(),
+      search: Yup.string(),
     }),
     onSubmit: async (values) => {
       if (page == SEARCH_USERS_PAGE) {

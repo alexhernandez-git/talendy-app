@@ -27,7 +27,8 @@ const SearchPosts = () => {
         await dispatch(
           fetchPosts(page, {
             community: authReducer.community,
-            search: router.query?.search,
+            search:
+              router?.query?.search?.length > 0 ? router.query.search[0] : "",
           })
         );
       }

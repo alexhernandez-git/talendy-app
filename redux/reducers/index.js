@@ -1,4 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
+
 import authReducer from "./authReducer";
 import alertsReducer from "./alertsReducer";
 import initialDataReducer from "./initialDataReducer";
@@ -15,6 +16,7 @@ import chatReducer from "./chatReducer";
 import messagesReducer from "./messagesReducer";
 import postsReducer from "./postsReducer";
 import postReducer from "./postReducer";
+import usersReducer from "./usersReducer";
 import communitiesReducer from "./communitiesReducer";
 
 export default combineReducers({
@@ -33,6 +35,7 @@ export default combineReducers({
   chatsReducer: chatsReducer,
   postsReducer: postsReducer,
   postReducer: postReducer,
+  usersReducer: usersReducer,
   messagesReducer: messagesReducer,
   communitiesReducer: communitiesReducer,
 });
