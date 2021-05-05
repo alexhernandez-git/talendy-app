@@ -26,7 +26,7 @@ const LeftSidebar = ({ page }) => {
             className="mt-3 space-y-2"
             aria-labelledby="communities-headline"
           >
-            <Link href={`/user/posts/${userId}`}>
+            <Link href={`/user/${userId}`}>
               <span
                 className={`
                   ${
@@ -38,7 +38,7 @@ const LeftSidebar = ({ page }) => {
                 <span className="truncate">All</span>
               </span>
             </Link>
-            <Link href={`/user/posts/active/${userId}`}>
+            <Link href={`/user/active/${userId}`}>
               <span
                 className={`
                   ${
@@ -50,7 +50,7 @@ const LeftSidebar = ({ page }) => {
                 <span className="truncate">Active</span>
               </span>
             </Link>
-            <Link href={`/user/posts/closed/${userId}`}>
+            <Link href={`/user/solved/${userId}`}>
               <span
                 className={`
                   ${

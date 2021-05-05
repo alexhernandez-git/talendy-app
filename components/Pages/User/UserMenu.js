@@ -33,20 +33,23 @@ const UserMenu = ({ page }) => {
         >
           <Link href={`/user/${userId}`}>
             <a
-              aria-current="page"
               className={`${
-                page === USER_CONTRIBUTED_PAGE
+                page === USER_POSTS_PAGE ||
+                page === ACTIVE_USER_POSTS_PAGE ||
+                page === SOLVED_USER_POSTS_PAGE
                   ? "text-gray-900"
                   : "text-gray-500"
               }  dark:text-white rounded-l-lg group relative  hover:text-gray-700 dark:hover:bg-gray-800 min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10`}
             >
               <div className="flex items-center justify-center">
-                <span>Contributed</span>
+                <span>Posts</span>
                 {/* <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white">
-                  20
+                  3
                 </span> */}
               </div>
-              {page === USER_CONTRIBUTED_PAGE ? (
+              {page === USER_POSTS_PAGE ||
+              page === ACTIVE_USER_POSTS_PAGE ||
+              page === SOLVED_USER_POSTS_PAGE ? (
                 <span
                   aria-hidden="true"
                   className="bg-orange-500 absolute inset-x-0 bottom-0 h-0.5"
@@ -59,26 +62,22 @@ const UserMenu = ({ page }) => {
               )}
             </a>
           </Link>
-
-          <Link href={`/user/posts/${userId}`}>
+          <Link href={`/user/contributed/${userId}`}>
             <a
+              aria-current="page"
               className={`${
-                page === USER_POSTS_PAGE ||
-                page === ACTIVE_USER_POSTS_PAGE ||
-                page === SOLVED_USER_POSTS_PAGE
+                page === USER_CONTRIBUTED_PAGE
                   ? "text-gray-900"
                   : "text-gray-500"
               }  dark:text-white  rounded-r-lg group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10  hover:text-gray-700 dark:hover:bg-gray-800`}
             >
               <div className="flex items-center justify-center">
-                <span>Posts</span>
+                <span>Contributed</span>
                 {/* <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white">
-                  3
+                  20
                 </span> */}
               </div>
-              {page === USER_POSTS_PAGE ||
-              page === ACTIVE_USER_POSTS_PAGE ||
-              page === SOLVED_USER_POSTS_PAGE ? (
+              {page === USER_CONTRIBUTED_PAGE ? (
                 <span
                   aria-hidden="true"
                   className="bg-orange-500 absolute inset-x-0 bottom-0 h-0.5"

@@ -1,20 +1,20 @@
 import Layout from "components/Layout/Layout";
 
-import ProfileCard from "components/Pages/Profile/UserCard";
-import { USER_CONTRIBUTED_PAGE } from "pages";
+import UserCard from "components/Pages/Profile/UserCard";
+import { USER_POSTS_PAGE } from "pages";
 import LeftSidebar from "components/Pages/User/LeftSidebar";
-import { fetchUser } from "redux/actions/user";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { fetchUser } from "redux/actions/user";
 import UserMenu from "components/Pages/User/UserMenu";
 import Post from "components/Layout/Post";
-import { fetchPosts } from "redux/actions/posts";
 import PostsFeed from "components/Layout/PostsFeed";
+import { fetchPosts } from "redux/actions/posts";
 
-export default function Profile() {
-  const page = USER_CONTRIBUTED_PAGE;
+export default function UserPosts() {
+  const page = USER_POSTS_PAGE;
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -37,12 +37,13 @@ export default function Profile() {
     <Layout>
       <div className="py-10">
         <div className="max-w-3xl mx-auto sm:px-6 flex flex-col lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
-          <ProfileCard mobile page={page} user={userReducer.user} />
+          <UserCard mobile page={page} user={userReducer.user} />
+          <LeftSidebar page={page} />
           <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
             <UserMenu page={page} />
             <PostsFeed />
           </main>
-          <ProfileCard page={page} user={userReducer.user} />
+          <UserCard page={page} user={userReducer.user} />
         </div>
       </div>
     </Layout>
