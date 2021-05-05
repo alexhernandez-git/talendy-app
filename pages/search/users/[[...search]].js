@@ -45,7 +45,7 @@ const SearchPosts = () => {
         <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
           <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
             <SearchMenu page={page} />
-            <UsersFeed />
+            <UsersFeed page={page} />
           </main>
           <RightSidebar />
         </div>

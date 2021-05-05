@@ -5,6 +5,9 @@ import {
   FETCH_MORE_USERS,
   FETCH_MORE_USERS_SUCCESS,
   FETCH_MORE_USERS_FAIL,
+  FOLLOW_USER_IN_USERS,
+  FOLLOW_USER_IN_USERS_SUCCESS,
+  FOLLOW_USER_IN_USERS_FAIL,
 } from "../types";
 import { HYDRATE } from "next-redux-wrapper";
 
@@ -18,6 +21,8 @@ const initialState = {
   },
   error: null,
   is_fetching_more_users: false,
+  is_following_user: false,
+  follow_user_error: null,
 };
 export default function usersReducer(state = initialState, action) {
   switch (action.type) {
@@ -71,7 +76,29 @@ export default function usersReducer(state = initialState, action) {
         is_fetching_more_users: false,
         error: action.payload,
       };
-
+    case FOLLOW_USER_IN_USERS:
+      return {
+        ...state,
+        is_following_user: true,
+      };
+    case FOLLOW_USER_IN_USERS_SUCCESS:
+      return {
+        ...state,
+        is_following_user: false,
+        users: {
+          ...state.users,
+          results: state.users.results.map((user) =>
+            user.id === action.payload ? { ...user, is_followed: true } : user
+          ),
+        },
+        follow_user_error: null,
+      };
+    case FOLLOW_USER_IN_USERS_FAIL:
+      return {
+        ...state,
+        is_following_user: false,
+        follow_user_error: action.payload,
+      };
     default:
       return state;
   }

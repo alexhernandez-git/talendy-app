@@ -38,12 +38,12 @@ export const fetchUser = (id) => async (dispatch, getState) => {
     });
 };
 
-export const followUser = () => async (dispatch, getState) => {
+export const followUser = (id = null) => async (dispatch, getState) => {
   await dispatch({
     type: FOLLOW_USER,
   });
   const values = {
-    followed_user: getState().userReducer.user?.id,
+    followed_user: id ? id : getState().userReducer.user?.id,
   };
   await axios
     .post(`${process.env.HOST}/api/follows/`, values, tokenConfig(getState))

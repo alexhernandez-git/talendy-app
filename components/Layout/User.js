@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { removeConnection } from "redux/actions/connections";
 import { unfollow } from "redux/actions/following";
 import { getOrCreateChat } from "redux/actions/chats";
+import { followUser } from "redux/actions/user";
 
 const User = ({ page, user }) => {
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -38,6 +39,10 @@ const User = ({ page, user }) => {
   const handleGetOrCreateChat = () => {
     dispatch(getOrCreateChat(user?.id));
   };
+  const handleFollow = () => {
+    dispatch(followUser(user?.id));
+  };
+  console.log(user);
   return (
     <li>
       <div className="bg-white dark:bg-gray-700 px-4 py-6 shadow sm:p-6 sm:rounded-lg">
@@ -97,12 +102,21 @@ const User = ({ page, user }) => {
             </div>
           </div>
           {page === SEARCH_USERS_PAGE && (
-            <button
-              type="button"
-              className="inline-flex items-center px-4 py-2 shadow-sm text-sm font-medium rounded-3xl text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
-            >
-              Follow
-            </button>
+            <>
+              {user?.is_followed ? (
+                <span className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 bg-white dark:bg-gray-700">
+                  Followed
+                </span>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleFollow}
+                  className="inline-flex items-center px-4 py-2 shadow-sm text-sm font-medium rounded-3xl text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                >
+                  Follow
+                </button>
+              )}
+            </>
           )}
           {page === PEOPLE_I_FOLLOW_PAGE && (
             <button

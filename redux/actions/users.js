@@ -1,5 +1,5 @@
 import axios from "axios";
-import { tokenConfig } from "./auth";
+import { addFollow, tokenConfig } from "./auth";
 import {
   FETCH_USERS,
   FETCH_USERS_SUCCESS,
@@ -7,6 +7,9 @@ import {
   FETCH_MORE_USERS,
   FETCH_MORE_USERS_SUCCESS,
   FETCH_MORE_USERS_FAIL,
+  FOLLOW_USER_IN_USERS,
+  FOLLOW_USER_IN_USERS_SUCCESS,
+  FOLLOW_USER_IN_USERS_FAIL,
 } from "../types";
 
 export const fetchUsers = (search = "") => async (dispatch, getState) => {
@@ -14,7 +17,10 @@ export const fetchUsers = (search = "") => async (dispatch, getState) => {
     type: FETCH_USERS,
   });
   await axios
-    .get(`${process.env.HOST}/api/users/?search=${search}`)
+    .get(
+      `${process.env.HOST}/api/users/?search=${search}`,
+      getState().authReducer.is_authenticated ? tokenConfig(getState) : null
+    )
     .then(async (res) => {
       await dispatch({
         type: FETCH_USERS_SUCCESS,
@@ -50,4 +56,28 @@ export const fetchMoreUsers = () => async (dispatch, getState) => {
         });
       });
   }
+};
+
+export const followUserInUsers = (id) => async (dispatch, getState) => {
+  await dispatch({
+    type: FOLLOW_USER_IN_USERS,
+  });
+  const values = {
+    followed_user: id,
+  };
+  await axios
+    .post(`${process.env.HOST}/api/follows/`, values, tokenConfig(getState))
+    .then(async (res) => {
+      await dispatch({
+        type: FOLLOW_USER_IN_USERS_SUCCESS,
+        payload: id,
+      });
+      await dispatch(addFollow());
+    })
+    .catch(async (err) => {
+      await dispatch({
+        type: FOLLOW_USER_IN_USERS_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
 };
