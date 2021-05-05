@@ -3,6 +3,9 @@ import {
   ACTIVE_CONTRIBUTED,
   CLOSED_CONTRIBUTED,
   CONTRIBUTED_PAGE,
+  MY_ACTIVE_POSTS_PAGE,
+  MY_POSTS_PAGE,
+  MY_SOLVED_POSTS_PAGE,
 } from "pages";
 import React from "react";
 
@@ -21,11 +24,11 @@ const LeftSidebar = ({ page }) => {
             className="mt-3 space-y-2"
             aria-labelledby="communities-headline"
           >
-            <Link href="/profile/contributed">
+            <Link href="/profile/posts">
               <span
                 className={`
                   ${
-                    page === CONTRIBUTED_PAGE
+                    page === MY_POSTS_PAGE
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
@@ -34,11 +37,11 @@ const LeftSidebar = ({ page }) => {
                 <span>30</span>
               </span>
             </Link>
-            <Link href="/profile/contributed/active">
+            <Link href="/profile/posts/active">
               <span
                 className={`
                   ${
-                    page === ACTIVE_CONTRIBUTED
+                    page === MY_ACTIVE_POSTS_PAGE
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
@@ -47,11 +50,11 @@ const LeftSidebar = ({ page }) => {
                 <span>10</span>
               </span>
             </Link>
-            <Link href="/profile/contributed/closed">
+            <Link href="/profile/posts/solved">
               <span
                 className={`
                   ${
-                    page === CLOSED_CONTRIBUTED
+                    page === MY_SOLVED_POSTS_PAGE
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
