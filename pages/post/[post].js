@@ -208,7 +208,7 @@ export default function PostPage() {
                         clipRule="evenodd"
                       />
                     </svg>
-                    Private
+                    Private, connections only
                   </span>
                 </div>
               )}

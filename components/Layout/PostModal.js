@@ -254,7 +254,7 @@ const PostModal = ({ modalOpen, modalRef, handleCloseModal, post }) => {
                         clipRule="evenodd"
                       />
                     </svg>
-                    Private
+                    Private, connections only
                   </span>
                 </div>
               )}
