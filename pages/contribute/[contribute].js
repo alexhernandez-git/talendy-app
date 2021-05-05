@@ -488,7 +488,7 @@ const Contribute = () => {
                   id="timeline-title"
                   className="text-lg font-medium text-gray-900 dark:text-white"
                 >
-                  Members
+                  Members joined
                 </h2>
 
                 <div className="mt-3 flow-root">
