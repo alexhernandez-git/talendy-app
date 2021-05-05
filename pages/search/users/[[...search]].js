@@ -17,7 +17,7 @@ const SearchPosts = () => {
   const page = SEARCH_USERS_PAGE;
   const dispatch = useDispatch();
   const initialDataReducer = useSelector((state) => state.initialDataReducer);
-  const usersReducer = useSelector((state) => state.usersReducer);
+  const authReducer = useSelector((state) => state.authReducer);
   const router = useRouter();
 
   const [firstLoad, setFirstLoad] = useState(true);
@@ -37,7 +37,11 @@ const SearchPosts = () => {
     };
 
     fetchInitialData();
-  }, [initialDataReducer.data_fetched, router.query?.search]);
+  }, [
+    initialDataReducer.data_fetched,
+    router.query?.search,
+    authReducer.is_authenticated,
+  ]);
 
   return (
     <Layout page={page}>

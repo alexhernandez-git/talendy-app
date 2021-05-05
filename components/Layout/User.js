@@ -13,9 +13,12 @@ import { removeConnection } from "redux/actions/connections";
 import { unfollow } from "redux/actions/following";
 import { getOrCreateChat } from "redux/actions/chats";
 import { followUser } from "redux/actions/user";
+import { followUserInUsers } from "redux/actions/users";
+import { useSelector } from "react-redux";
 
 const User = ({ page, user }) => {
   const [optionsOpen, setOptionsOpen] = useState(false);
+  const authReducer = useSelector((state) => state.authReducer);
   const handleOpenOptions = () => {
     setOptionsOpen(true);
   };
@@ -40,7 +43,7 @@ const User = ({ page, user }) => {
     dispatch(getOrCreateChat(user?.id));
   };
   const handleFollow = () => {
-    dispatch(followUser(user?.id));
+    dispatch(followUserInUsers(user?.id));
   };
   console.log(user);
   return (
@@ -101,7 +104,7 @@ const User = ({ page, user }) => {
               </span>
             </div>
           </div>
-          {page === SEARCH_USERS_PAGE && (
+          {page === SEARCH_USERS_PAGE && authReducer.user?.id !== user?.id && (
             <>
               {user?.is_followed ? (
                 <span className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 bg-white dark:bg-gray-700">
