@@ -1,9 +1,18 @@
 import { useRouter } from "next/router";
 import {
+  ACTIVE_CONTRIBUTED_PAGE,
+  CONNECTIONS_PAGE,
+  CONTRIBUTED_PAGE,
   CONTRIBUTE_PAGE,
   FOLLOWED_USERS_POSTS_PAGE,
+  MY_ACTIVE_POSTS_PAGE,
+  MY_NETWORK_PAGE,
   MY_POSTS_PAGE,
+  MY_SOLVED_POSTS_PAGE,
   NOTIFICATIONS_PAGE,
+  PEOPLE_I_FOLLOW_PAGE,
+  SETTINGS_PAGE,
+  SOLVED_CONTRIBUTED_PAGE,
 } from "pages";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -15,7 +24,20 @@ const useAuthRequired = (page) => {
   const { is_authenticated } = authReducer;
   const router = useRouter();
   const [canRender, setCanRender] = useState(false);
-  const privatePages = [MY_POSTS_PAGE, CONTRIBUTE_PAGE, NOTIFICATIONS_PAGE];
+  const privatePages = [
+    MY_POSTS_PAGE,
+    CONTRIBUTE_PAGE,
+    NOTIFICATIONS_PAGE,
+    MY_ACTIVE_POSTS_PAGE,
+    MY_SOLVED_POSTS_PAGE,
+    CONTRIBUTED_PAGE,
+    ACTIVE_CONTRIBUTED_PAGE,
+    SOLVED_CONTRIBUTED_PAGE,
+    SETTINGS_PAGE,
+    MY_NETWORK_PAGE,
+    CONNECTIONS_PAGE,
+    PEOPLE_I_FOLLOW_PAGE,
+  ];
   const matches = privatePages.some((privPage) => privPage === page);
   useEffect(() => {
     if (initialDataReducer.data_fetched) {
