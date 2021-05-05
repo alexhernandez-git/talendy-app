@@ -103,14 +103,13 @@ export const deletePost = (id, closeModal) => async (dispatch, getState) => {
     });
 };
 
-export const fetchPosts = (page, community = "", search = "") => async (
-  dispatch,
-  getState
-) => {
+export const fetchPosts = (page, filters) => async (dispatch, getState) => {
   const { url, authenticationRequired } = useGetFetchPostsRequest(page);
   await dispatch({
     type: FETCH_POSTS,
   });
+  const search = filters?.search ? filters.search : "";
+  const community = filters?.community ? filters.community : "";
   await axios
     .get(
       `${process.env.HOST}/api/${url}/?search=${search}&community=${community}`,

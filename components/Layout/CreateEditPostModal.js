@@ -523,7 +523,7 @@ const CreateEditPostModal = ({
                                   (community_item) =>
                                     community_item.id ===
                                     formik.values.community
-                                ).name
+                                )?.name
                               : "Choose one (optional)"}
                           </span>
                           <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">

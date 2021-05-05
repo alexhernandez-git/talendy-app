@@ -1,7 +1,7 @@
 import Layout from "components/Layout/Layout";
 
 import ProfileCard from "components/Pages/Profile/UserCard";
-import { MY_POSTS_PAGE } from "pages";
+import { MY_SOLVED_POSTS_PAGE } from "pages";
 import useAuthRequired from "hooks/useAuthRequired";
 import Spinner from "components/Layout/Spinner";
 import ProfileMenu from "components/Pages/Profile/ProfileMenu";
@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import LeftSidebar from "components/Pages/MyPosts/LeftSidebar";
 
 export default function Posts() {
-  const page = MY_POSTS_PAGE;
+  const page = MY_SOLVED_POSTS_PAGE;
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
   const dispatch = useDispatch();
   useEffect(() => {

@@ -23,7 +23,7 @@ export default function Home() {
     const fetchInitialData = async () => {
       if (initialDataReducer.data_fetched) {
         await dispatch(fetchTopKarmaUsers());
-        await dispatch(fetchPosts(page, authReducer.community));
+        await dispatch(fetchPosts(page, { community: authReducer.community }));
       }
     };
 
