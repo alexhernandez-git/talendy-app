@@ -7,9 +7,38 @@ import { useState } from "react";
 import SearchMenu from "components/Pages/Search/SearchMenu";
 import PostsFeed from "components/Layout/PostsFeed";
 import Post from "components/Layout/Post";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { fetchPosts } from "redux/actions/posts";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const SearchPosts = () => {
   const page = SEARCH_POSTS_PAGE;
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const initialDataReducer = useSelector((state) => state.initialDataReducer);
+  const authReducer = useSelector((state) => state.authReducer);
+
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      if (initialDataReducer.data_fetched) {
+        await dispatch(
+          fetchPosts(page, {
+            community: authReducer.community,
+            search: router.query?.search,
+          })
+        );
+      }
+    };
+
+    fetchInitialData();
+  }, [
+    initialDataReducer.data_fetched,
+    authReducer.community,
+    router.query?.search,
+  ]);
 
   return (
     <Layout page={page}>
@@ -19,15 +48,7 @@ const SearchPosts = () => {
           <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
             <SearchMenu page={page} />
 
-            <div>
-              <h1 className="sr-only">Recent questions</h1>
-              <ul className="space-y-4">
-                <Post page={page} />
-                <Post page={page} image />
-                <Post page={page} />
-                <Post page={page} image />
-              </ul>
-            </div>
+            <PostsFeed />
           </main>
           <RightSidebar />
         </div>

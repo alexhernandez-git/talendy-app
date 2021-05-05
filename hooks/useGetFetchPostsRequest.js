@@ -8,12 +8,14 @@ import {
   MY_ACTIVE_POSTS_PAGE,
   MY_POSTS_PAGE,
   MY_SOLVED_POSTS_PAGE,
+  SEARCH_POSTS_PAGE,
 } from "pages";
 import React from "react";
 
 const useGetFetchPostsRequest = (page) => {
   switch (page) {
     case HOME_PAGE:
+    case SEARCH_POSTS_PAGE:
       return { url: "posts", authenticationRequired: false };
     case MOST_KARMA_POSTS_PAGE:
       return {

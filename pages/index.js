@@ -29,13 +29,7 @@ export default function Home() {
 
     fetchInitialData();
   }, [initialDataReducer.data_fetched, authReducer.community]);
-  const handleFetchMorePosts = () => {
-    dispatch(fetchMorePosts());
-  };
-  function onChangeVisibility(isVisible) {
-    console.log("isVisible", isVisible);
-    if (isVisible) handleFetchMorePosts();
-  }
+
   return (
     <Layout>
       <div className="py-10">

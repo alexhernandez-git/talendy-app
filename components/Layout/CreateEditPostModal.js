@@ -66,13 +66,10 @@ const CreateEditPostModal = ({
       fd.append("text", values.text);
       const currentImages = images.filter((image) => image.id);
       const currentImagesId = currentImages.map((image) => image.id);
-      console.log("current images", currentImagesId);
       fd.append("current_images", JSON.stringify(currentImagesId));
 
       const fileImages = images.filter((image) => !image.id);
-      console.log("file images", fileImages);
       for (let i = 0; i < fileImages.length; i++) {
-        console.log("image", fileImages[i]);
         try {
           fd.append("images", fileImages[i], fileImages[i].name);
         } catch (error) {
@@ -101,7 +98,6 @@ const CreateEditPostModal = ({
       }
     },
   });
-  console.log(formik.errors);
   const handleChangeKarmasOffered = (value) => {
     if (post) return;
     formik.setFieldValue("karma_offered", value);
@@ -144,10 +140,8 @@ const CreateEditPostModal = ({
     }
     return null;
   };
-  console.log(post?.images);
   const [images, setImages] = useState([]);
   useEffect(() => {
-    console.log(post);
     // setImages(post?.images ? post.images : []);
     const timeoutId = setTimeout(() => {
       setImages(post?.images ? post.images : []);
@@ -207,7 +201,6 @@ const CreateEditPostModal = ({
     setImages([]);
     acceptedFiles.splice(0, acceptedFiles.length);
   };
-  console.log("images", images);
 
   return (
     <div
