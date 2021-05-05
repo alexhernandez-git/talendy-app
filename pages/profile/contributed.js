@@ -7,11 +7,23 @@ import useAuthRequired from "hooks/useAuthRequired";
 import Spinner from "components/Layout/Spinner";
 import ProfileMenu from "components/Pages/Profile/ProfileMenu";
 import Post from "components/Layout/Post";
+import { useEffect } from "react";
+import { fetchPosts } from "redux/actions/posts";
+import { useDispatch } from "react-redux";
 
 export default function Posts() {
   const page = CONTRIBUTED_PAGE;
-
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      if (initialDataFetched) {
+        await dispatch(fetchPosts(page));
+      }
+    };
+
+    fetchInitialData();
+  }, [initialDataFetched]);
   return !canRender ? (
     <div className="flex justify-center items-center h-screen dark:bg-gray-800">
       <Spinner />
@@ -24,15 +36,7 @@ export default function Posts() {
           <ProfileCard mobile page={page} profile user={authReducer.user} />
           <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
             <ProfileMenu page={page} />
-            <div>
-              <h1 className="sr-only">Recent questions</h1>
-              <ul className="space-y-4">
-                <Post page={page} />
-                <Post page={page} image />
-                <Post page={page} />
-                <Post page={page} image />
-              </ul>
-            </div>
+            <PostsFeed />
           </main>
           <ProfileCard page={page} profile user={authReducer.user} />
         </div>

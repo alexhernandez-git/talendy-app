@@ -1,4 +1,7 @@
 import {
+  CONTRIBUTED_PAGE,
+  ACTIVE_CONTRIBUTED_PAGE,
+  SOLVED_CONTRIBUTED_PAGE,
   FOLLOWED_USERS_POSTS_PAGE,
   HOME_PAGE,
   MOST_KARMA_POSTS_PAGE,
@@ -35,6 +38,21 @@ const useGetFetchPostsRequest = (page) => {
     case MY_SOLVED_POSTS_PAGE:
       return {
         url: "posts/list_my_solved_posts",
+        authenticationRequired: true,
+      };
+    case CONTRIBUTED_PAGE:
+      return {
+        url: "posts/list_contributed_posts",
+        authenticationRequired: true,
+      };
+    case ACTIVE_CONTRIBUTED_PAGE:
+      return {
+        url: "posts/list_contributed_active_posts",
+        authenticationRequired: true,
+      };
+    case SOLVED_CONTRIBUTED_PAGE:
+      return {
+        url: "posts/list_contributed_solved_posts",
         authenticationRequired: true,
       };
     default:

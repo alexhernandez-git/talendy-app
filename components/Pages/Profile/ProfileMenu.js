@@ -6,8 +6,10 @@ import {
   MY_POSTS_PAGE,
   PEOPLE_I_FOLLOW_PAGE,
   CONNECTIONS_PAGE,
-  ACTIVE_CONTRIBUTED,
-  CLOSED_CONTRIBUTED,
+  ACTIVE_CONTRIBUTED_PAGE,
+  SOLVED_CONTRIBUTED_PAGE,
+  MY_ACTIVE_POSTS_PAGE,
+  MY_SOLVED_POSTS_PAGE,
 } from "pages";
 
 const ProfileMenu = ({ page }) => {
@@ -37,11 +39,17 @@ const ProfileMenu = ({ page }) => {
             <a
               aria-current="page"
               className={`${
-                page === MY_POSTS_PAGE ? "text-gray-900" : "text-gray-500"
+                page === MY_POSTS_PAGE ||
+                page === MY_ACTIVE_POSTS_PAGE ||
+                page === MY_SOLVED_POSTS_PAGE
+                  ? "text-gray-900"
+                  : "text-gray-500"
               }  dark:text-white rounded-l-lg group relative  hover:text-gray-700 dark:hover:bg-gray-800 min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10`}
             >
               <span>My Posts</span>
-              {page === MY_POSTS_PAGE ? (
+              {page === MY_POSTS_PAGE ||
+              page === MY_ACTIVE_POSTS_PAGE ||
+              page === MY_SOLVED_POSTS_PAGE ? (
                 <span
                   aria-hidden="true"
                   className="bg-orange-500 absolute inset-x-0 bottom-0 h-0.5"
@@ -58,16 +66,16 @@ const ProfileMenu = ({ page }) => {
             <a
               className={`${
                 page === CONTRIBUTED_PAGE ||
-                page === ACTIVE_CONTRIBUTED ||
-                page === CLOSED_CONTRIBUTED
+                page === ACTIVE_CONTRIBUTED_PAGE ||
+                page === SOLVED_CONTRIBUTED_PAGE
                   ? "text-gray-900"
                   : "text-gray-500"
               } dark:text-white group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10  hover:text-gray-700 dark:hover:bg-gray-800`}
             >
               <span>Contributed</span>
               {page === CONTRIBUTED_PAGE ||
-              page === ACTIVE_CONTRIBUTED ||
-              page === CLOSED_CONTRIBUTED ? (
+              page === ACTIVE_CONTRIBUTED_PAGE ||
+              page === SOLVED_CONTRIBUTED_PAGE ? (
                 <span
                   aria-hidden="true"
                   className="bg-orange-500 absolute inset-x-0 bottom-0 h-0.5"

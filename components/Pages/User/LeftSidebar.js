@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
-  ACTIVE_CONTRIBUTED,
+  ACTIVE_CONTRIBUTED_PAGE,
   ACTIVE_POSTS_PROFILE_PAGE,
-  CLOSED_CONTRIBUTED,
+  SOLVED_CONTRIBUTED_PAGE,
   CLOSED_POSTS_PROFILE_PAGE,
   PROFILE_PAGE,
 } from "pages";

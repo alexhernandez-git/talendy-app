@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {
-  ACTIVE_CONTRIBUTED,
-  CLOSED_CONTRIBUTED,
+  ACTIVE_CONTRIBUTED_PAGE,
+  SOLVED_CONTRIBUTED_PAGE,
   CONTRIBUTED_PAGE,
 } from "pages";
 import React from "react";
@@ -38,7 +38,7 @@ const LeftSidebar = ({ page }) => {
               <span
                 className={`
                   ${
-                    page === ACTIVE_CONTRIBUTED
+                    page === ACTIVE_CONTRIBUTED_PAGE
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
@@ -51,7 +51,7 @@ const LeftSidebar = ({ page }) => {
               <span
                 className={`
                   ${
-                    page === CLOSED_CONTRIBUTED
+                    page === SOLVED_CONTRIBUTED_PAGE
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
