@@ -15,6 +15,7 @@ import { getOrCreateChat } from "redux/actions/chats";
 import { followUser } from "redux/actions/user";
 import { followUserInUsers } from "redux/actions/users";
 import { useSelector } from "react-redux";
+import { createAlert } from "redux/actions/alerts";
 
 const User = ({ page, user }) => {
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -34,15 +35,31 @@ const User = ({ page, user }) => {
   const dispatch = useDispatch();
 
   const handleRemoveConnection = () => {
+    if (!authReducer.is_authenticated) {
+      dispatch(createAlert("ERROR", "You are not authenticated"));
+      return;
+    }
     dispatch(removeConnection(user?.id));
   };
   const handleUnfollow = () => {
+    if (!authReducer.is_authenticated) {
+      dispatch(createAlert("ERROR", "You are not authenticated"));
+      return;
+    }
     dispatch(unfollow(user?.id));
   };
   const handleGetOrCreateChat = () => {
+    if (!authReducer.is_authenticated) {
+      dispatch(createAlert("ERROR", "You are not authenticated"));
+      return;
+    }
     dispatch(getOrCreateChat(user?.id));
   };
   const handleFollow = () => {
+    if (!authReducer.is_authenticated) {
+      dispatch(createAlert("ERROR", "You are not authenticated"));
+      return;
+    }
     dispatch(followUserInUsers(user?.id));
   };
   console.log(user);
