@@ -5,7 +5,8 @@ import React from "react";
 
 const SearchMenu = ({ page }) => {
   const router = useRouter();
-  const { search } = router.query;
+  const search =
+    router?.query?.search?.length > 0 ? router.query.search[0] : "";
   return (
     <div className="px-4 mb-4 sm:px-0">
       <div className="sm:hidden">

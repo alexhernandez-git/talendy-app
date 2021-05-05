@@ -20,20 +20,25 @@ const SearchPosts = () => {
   const usersReducer = useSelector((state) => state.usersReducer);
   const router = useRouter();
 
+  const [firstLoad, setFirstLoad] = useState(true);
   useEffect(() => {
     const fetchInitialData = async () => {
       if (initialDataReducer.data_fetched) {
-        await dispatch(fetchTopKarmaUsers());
+        if (firstLoad) {
+          await dispatch(fetchTopKarmaUsers());
+        }
         await dispatch(
           fetchUsers(
             router?.query?.search?.length > 0 ? router.query.search[0] : ""
           )
         );
+        setFirstLoad(false);
       }
     };
 
     fetchInitialData();
   }, [initialDataReducer.data_fetched, router.query?.search]);
+
   return (
     <Layout page={page}>
       <div className="py-10">
