@@ -1,7 +1,7 @@
 import Layout from "components/Layout/Layout";
 
 import UserCard from "components/Pages/Profile/UserCard";
-import { ACTIVE_POSTS_PROFILE_PAGE } from "pages";
+import { ACTIVE_USER_POSTS_PAGE } from "pages";
 import LeftSidebar from "components/Pages/User/LeftSidebar";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
@@ -10,18 +10,26 @@ import { useEffect } from "react";
 import { fetchUser } from "redux/actions/user";
 import UserMenu from "components/Pages/User/UserMenu";
 import Post from "components/Layout/Post";
+import { fetchPosts } from "redux/actions/posts";
+import PostsFeed from "components/Layout/PostsFeed";
 
 export default function Profile() {
-  const page = ACTIVE_POSTS_PROFILE_PAGE;
+  const page = ACTIVE_USER_POSTS_PAGE;
   const dispatch = useDispatch();
   const router = useRouter();
   const initialDataReducer = useSelector((state) => state.initialDataReducer);
-  const authReducer = useSelector((state) => state.authReducer);
   const userReducer = useSelector((state) => state.userReducer);
   useEffect(() => {
+    const userId = router.query?.user;
+    const fetchInitialData = async () => {
+      if (initialDataReducer.data_fetched) {
+        await dispatch(fetchUser(userId));
+
+        await dispatch(fetchPosts(page, { user: userId }));
+      }
+    };
     if (initialDataReducer.data_fetched) {
-      const userId = router.query?.user;
-      dispatch(fetchUser(userId));
+      fetchInitialData();
     }
   }, [initialDataReducer.data_fetched]);
   return (
@@ -32,15 +40,7 @@ export default function Profile() {
           <LeftSidebar page={page} />
           <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
             <UserMenu page={page} />
-            <div>
-              <h1 className="sr-only">Recent questions</h1>
-              <ul className="space-y-4">
-                <Post page={page} />
-                <Post page={page} image />
-                <Post page={page} />
-                <Post page={page} image />
-              </ul>
-            </div>
+            <PostsFeed />
           </main>
           <UserCard page={page} user={userReducer.user} />
         </div>

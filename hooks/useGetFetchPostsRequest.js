@@ -9,10 +9,14 @@ import {
   MY_POSTS_PAGE,
   MY_SOLVED_POSTS_PAGE,
   SEARCH_POSTS_PAGE,
+  USER_CONTRIBUTED_PAGE,
+  USER_POSTS_PAGE,
+  ACTIVE_USER_POSTS_PAGE,
+  SOLVED_USER_POSTS_PAGE,
 } from "pages";
 import React from "react";
 
-const useGetFetchPostsRequest = (page) => {
+const useGetFetchPostsRequest = (page, user) => {
   switch (page) {
     case HOME_PAGE:
     case SEARCH_POSTS_PAGE:
@@ -56,6 +60,26 @@ const useGetFetchPostsRequest = (page) => {
       return {
         url: "posts/list_contributed_solved_posts",
         authenticationRequired: true,
+      };
+    case USER_CONTRIBUTED_PAGE:
+      return {
+        url: `posts/${user}/list_user_contributed`,
+        authenticationRequired: true,
+      };
+    case USER_POSTS_PAGE:
+      return {
+        url: `posts/${user}/list_user_posts`,
+        authenticationRequired: false,
+      };
+    case ACTIVE_USER_POSTS_PAGE:
+      return {
+        url: `posts/${user}/list_active_user_posts`,
+        authenticationRequired: false,
+      };
+    case SOLVED_USER_POSTS_PAGE:
+      return {
+        url: `posts/${user}/list_solved_user_posts`,
+        authenticationRequired: false,
       };
     default:
       return "posts";

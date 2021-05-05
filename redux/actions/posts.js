@@ -104,7 +104,10 @@ export const deletePost = (id, closeModal) => async (dispatch, getState) => {
 };
 
 export const fetchPosts = (page, filters) => async (dispatch, getState) => {
-  const { url, authenticationRequired } = useGetFetchPostsRequest(page);
+  const { url, authenticationRequired } = useGetFetchPostsRequest(
+    page,
+    filters?.user
+  );
   await dispatch({
     type: FETCH_POSTS,
   });

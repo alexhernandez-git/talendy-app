@@ -2,10 +2,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import {
   ACTIVE_CONTRIBUTED_PAGE,
-  ACTIVE_POSTS_PROFILE_PAGE,
+  ACTIVE_USER_POSTS_PAGE,
   SOLVED_CONTRIBUTED_PAGE,
-  CLOSED_POSTS_PROFILE_PAGE,
-  PROFILE_PAGE,
+  SOLVED_USER_POSTS_PAGE,
+  USER_POSTS_PAGE,
 } from "pages";
 import React from "react";
 
@@ -30,7 +30,7 @@ const LeftSidebar = ({ page }) => {
               <span
                 className={`
                   ${
-                    page === PROFILE_PAGE
+                    page === USER_POSTS_PAGE
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
@@ -42,7 +42,7 @@ const LeftSidebar = ({ page }) => {
               <span
                 className={`
                   ${
-                    page === ACTIVE_POSTS_PROFILE_PAGE
+                    page === ACTIVE_USER_POSTS_PAGE
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
@@ -54,7 +54,7 @@ const LeftSidebar = ({ page }) => {
               <span
                 className={`
                   ${
-                    page === CLOSED_POSTS_PROFILE_PAGE
+                    page === SOLVED_USER_POSTS_PAGE
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
