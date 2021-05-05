@@ -34,7 +34,6 @@ const LeftSidebar = ({ page }) => {
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
               >
                 <span className="truncate">All</span>
-                <span>30</span>
               </span>
             </Link>
             <Link href="/profile/posts/active">
@@ -47,7 +46,6 @@ const LeftSidebar = ({ page }) => {
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
               >
                 <span className="truncate">Active</span>
-                <span>10</span>
               </span>
             </Link>
             <Link href="/profile/posts/solved">
@@ -60,7 +58,6 @@ const LeftSidebar = ({ page }) => {
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
               >
                 <span className="truncate">Solved</span>
-                <span>20</span>
               </span>
             </Link>
           </div>
