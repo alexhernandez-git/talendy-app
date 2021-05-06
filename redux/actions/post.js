@@ -1,6 +1,13 @@
 import axios from "axios";
 import { tokenConfig } from "./auth";
-import { FETCH_POST, FETCH_POST_SUCCESS, FETCH_POST_FAIL } from "../types";
+import {
+  FETCH_POST,
+  FETCH_POST_SUCCESS,
+  FETCH_POST_FAIL,
+  CREATE_POST_CONTRIBUTE_REQUEST,
+  CREATE_POST_CONTRIBUTE_REQUEST_SUCCESS,
+  CREATE_POST_CONTRIBUTE_REQUEST_FAIL,
+} from "../types";
 import { createAlert } from "./alerts";
 
 export const fetchPost = (id) => async (dispatch, getState) => {

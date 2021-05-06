@@ -65,7 +65,7 @@ export default function PostPage() {
   const formik = useFormik({
     initialValues: {
       reason: "",
-      post: post?.id,
+      post: postReducer.post?.id,
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
