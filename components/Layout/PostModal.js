@@ -281,7 +281,7 @@ const PostModal = ({ modalOpen, modalRef, handleCloseModal, post, formik }) => {
               )}
               {post?.privacity !== "CO" && post?.status !== "SO" && (
                 <form
-                  onSubmit={formik.handleSubmit}
+                  onSubmit={formik?.handleSubmit}
                   className="mt-6 sm:flex justify-between sm:space-x-8"
                 >
                   <input
@@ -289,8 +289,8 @@ const PostModal = ({ modalOpen, modalRef, handleCloseModal, post, formik }) => {
                     name="reason"
                     onClick={(e) => e.stopPropagation()}
                     onMouseDown={(e) => e.stopPropagation()}
-                    value={formik.values.reason}
-                    onChange={formik.handleChange}
+                    value={formik?.values.reason}
+                    onChange={formik?.handleChange}
                     id="reason"
                     className="block mb-2 sm:mb-0 w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     placeholder="Message"
