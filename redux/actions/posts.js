@@ -16,6 +16,9 @@ import {
   FETCH_MORE_POSTS,
   FETCH_MORE_POSTS_SUCCESS,
   FETCH_MORE_POSTS_FAIL,
+  CREATE_CONTRIBUTE_REQUEST,
+  CREATE_CONTRIBUTE_REQUEST_SUCCESS,
+  CREATE_CONTRIBUTE_REQUEST_FAIL,
 } from "../types";
 import { createAlert } from "./alerts";
 import useGetFetchPostsRequest from "hooks/useGetFetchPostsRequest";
@@ -151,4 +154,33 @@ export const fetchMorePosts = () => async (dispatch, getState) => {
         });
       });
   }
+};
+
+export const createContributeRequest = (values, resetForm) => async (
+  dispatch,
+  getState
+) => {
+  await dispatch({
+    type: CREATE_CONTRIBUTE_REQUEST,
+  });
+
+  await axios
+    .post(
+      `${process.env.HOST}/api/contribute-requests/`,
+      values,
+      tokenConfig(getState)
+    )
+    .then(async (res) => {
+      await dispatch({
+        type: CREATE_CONTRIBUTE_REQUEST_SUCCESS,
+        payload: values.post,
+      });
+      await resetForm({});
+    })
+    .catch(async (err) => {
+      await dispatch({
+        type: CREATE_CONTRIBUTE_REQUEST_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
 };

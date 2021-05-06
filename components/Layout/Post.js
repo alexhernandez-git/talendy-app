@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import moment from "moment";
 import { createAlert } from "redux/actions/alerts";
 import DeletePostModal from "./DeletePostModal";
-import { deletePost } from "redux/actions/posts";
+import { createContributeRequest, deletePost } from "redux/actions/posts";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -128,12 +128,28 @@ const Post = ({ page, post }) => {
   const formik = useFormik({
     initialValues: {
       reason: "",
+      post: post.id,
     },
+    enableReinitialize: true,
     validationSchema: Yup.object({
-      reason: Yup.string(),
+      reason: Yup.string().required(),
+      post: Yup.string().required(),
     }),
-    onSubmit: async (values, { resetForm }) => {},
+    onSubmit: async (values, { resetForm }) => {
+      dispatch(createContributeRequest(values, resetForm));
+    },
   });
+
+  const handleSubmitContributeRequest = (e) => {
+    e.stopPropagation();
+    if (!authReducer.is_authenticated) {
+      dispatch(createAlert("ERROR", "You are not authenticated"));
+      return;
+    }
+    formik.handleSubmit();
+  };
+
+  console.log(formik.errors);
 
   return (
     <li>
@@ -405,7 +421,7 @@ const Post = ({ page, post }) => {
         )}
         {post?.privacity !== "CO" && post?.status !== "SO" && (
           <form
-            onSubmit={formik.handleSubmit}
+            onSubmit={handleSubmitContributeRequest}
             className="mt-6 sm:flex justify-between sm:space-x-8"
           >
             <input
@@ -422,7 +438,7 @@ const Post = ({ page, post }) => {
             />
             <button
               type="button"
-              onClick={handleRequestToContribute}
+              onMouseDown={handleSubmitContributeRequest}
               className="w-full sm:w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
             >
               Request to contribute
@@ -438,6 +454,7 @@ const Post = ({ page, post }) => {
         modalRef={modalRef}
         handleCloseModal={handleCloseModal}
         formik={formik}
+        handleSubmitContributeRequest={handleSubmitContributeRequest}
       />
       <CreateEditPostModal
         isEdit

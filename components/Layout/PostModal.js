@@ -8,7 +8,14 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { createAlert } from "redux/actions/alerts";
 import moment from "moment";
-const PostModal = ({ modalOpen, modalRef, handleCloseModal, post, formik }) => {
+const PostModal = ({
+  modalOpen,
+  modalRef,
+  handleCloseModal,
+  post,
+  formik,
+  handleSubmitContributeRequest,
+}) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -281,7 +288,7 @@ const PostModal = ({ modalOpen, modalRef, handleCloseModal, post, formik }) => {
               )}
               {post?.privacity !== "CO" && post?.status !== "SO" && (
                 <form
-                  onSubmit={formik?.handleSubmit}
+                  onSubmit={handleSubmitContributeRequest}
                   className="mt-6 sm:flex justify-between sm:space-x-8"
                 >
                   <input
@@ -298,7 +305,7 @@ const PostModal = ({ modalOpen, modalRef, handleCloseModal, post, formik }) => {
                   />
                   <button
                     type="button"
-                    onClick={handleRequestToContribute}
+                    onMouseDown={handleSubmitContributeRequest}
                     className="w-full sm:w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
                   >
                     Request to contribute

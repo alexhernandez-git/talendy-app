@@ -22,3 +22,33 @@ export const fetchPost = (id) => async (dispatch, getState) => {
       });
     });
 };
+
+export const createPostContributeRequest = (id = null) => async (
+  dispatch,
+  getState
+) => {
+  await dispatch({
+    type: CREATE_POST_CONTRIBUTE_REQUEST,
+  });
+  const values = {
+    post: id ? id : getState().userReducer.user?.id,
+  };
+  await axios
+    .post(
+      `${process.env.HOST}/api/contribute-requests/`,
+      values,
+      tokenConfig(getState)
+    )
+    .then(async (res) => {
+      await dispatch({
+        type: CREATE_POST_CONTRIBUTE_REQUEST_SUCCESS,
+        payload: id,
+      });
+    })
+    .catch(async (err) => {
+      await dispatch({
+        type: CREATE_POST_CONTRIBUTE_REQUEST_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
+};
