@@ -149,8 +149,6 @@ const Post = ({ page, post }) => {
     formik.handleSubmit();
   };
 
-  console.log(formik.errors);
-
   return (
     <li>
       <article

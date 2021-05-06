@@ -175,12 +175,20 @@ export const createContributeRequest = (values, resetForm) => async (
         type: CREATE_CONTRIBUTE_REQUEST_SUCCESS,
         payload: values.post,
       });
+
       await resetForm({});
+      await dispatch(createAlert("SUCCESS", "Request successfully created"));
     })
     .catch(async (err) => {
       await dispatch({
         type: CREATE_CONTRIBUTE_REQUEST_FAIL,
         payload: { data: err.response?.data, status: err.response?.status },
       });
+      console.log(err.response.data);
+      if (err.response?.data?.non_field_errors?.length > 0) {
+        await dispatch(
+          createAlert("ERROR", err.response?.data?.non_field_errors[0])
+        );
+      }
     });
 };
