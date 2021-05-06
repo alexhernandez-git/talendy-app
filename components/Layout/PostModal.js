@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { createAlert } from "redux/actions/alerts";
 import moment from "moment";
-const PostModal = ({ modalOpen, modalRef, handleCloseModal, post }) => {
+const PostModal = ({ modalOpen, modalRef, handleCloseModal, post, formik }) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -280,25 +280,30 @@ const PostModal = ({ modalOpen, modalRef, handleCloseModal, post }) => {
                 </div>
               )}
               {post?.privacity !== "CO" && post?.status !== "SO" && (
-                <div className="mt-6 flex justify-between space-x-8">
+                <form
+                  onSubmit={formik.handleSubmit}
+                  className="mt-6 sm:flex justify-between sm:space-x-8"
+                >
                   <input
                     type="text"
-                    name="title"
+                    name="reason"
                     onClick={(e) => e.stopPropagation()}
-                    id="post-modal-title"
-                    className="block w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                    onMouseDown={(e) => e.stopPropagation()}
+                    value={formik.values.reason}
+                    onChange={formik.handleChange}
+                    id="reason"
+                    className="block mb-2 sm:mb-0 w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                     placeholder="Message"
-                    aria-describedby="title-description"
-                    value=""
+                    aria-describedby="reason"
                   />
                   <button
                     type="button"
                     onClick={handleRequestToContribute}
-                    className="w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
+                    className="w-full sm:w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
                   >
                     Request to contribute
                   </button>
-                </div>
+                </form>
               )}
             </div>
             <div className="lg:col-start-3 lg:col-span-1">

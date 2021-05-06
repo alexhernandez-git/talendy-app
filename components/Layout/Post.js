@@ -12,6 +12,10 @@ import moment from "moment";
 import { createAlert } from "redux/actions/alerts";
 import DeletePostModal from "./DeletePostModal";
 import { deletePost } from "redux/actions/posts";
+
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 const Post = ({ page, post }) => {
   const router = useRouter();
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -120,6 +124,17 @@ const Post = ({ page, post }) => {
   const handleDeletePost = () => {
     dispatch(deletePost(post?.id, handleCloseDelete));
   };
+
+  const formik = useFormik({
+    initialValues: {
+      reason: "",
+    },
+    validationSchema: Yup.object({
+      reason: Yup.string(),
+    }),
+    onSubmit: async (values, { resetForm }) => {},
+  });
+
   return (
     <li>
       <article
@@ -389,17 +404,21 @@ const Post = ({ page, post }) => {
           </div>
         )}
         {post?.privacity !== "CO" && post?.status !== "SO" && (
-          <div className="mt-6 sm:flex justify-between sm:space-x-8">
+          <form
+            onSubmit={formik.handleSubmit}
+            className="mt-6 sm:flex justify-between sm:space-x-8"
+          >
             <input
               type="text"
-              name="title"
+              name="reason"
               onClick={(e) => e.stopPropagation()}
               onMouseDown={(e) => e.stopPropagation()}
-              id="post-title"
+              value={formik.values.reason}
+              onChange={formik.handleChange}
+              id="reason"
               className="block mb-2 sm:mb-0 w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
               placeholder="Message"
-              aria-describedby="title-description"
-              value=""
+              aria-describedby="reason"
             />
             <button
               type="button"
@@ -408,7 +427,7 @@ const Post = ({ page, post }) => {
             >
               Request to contribute
             </button>
-          </div>
+          </form>
         )}
       </article>
       <PostModal
@@ -418,6 +437,7 @@ const Post = ({ page, post }) => {
         handleToggleModal={handleToggleModal}
         modalRef={modalRef}
         handleCloseModal={handleCloseModal}
+        formik={formik}
       />
       <CreateEditPostModal
         isEdit
