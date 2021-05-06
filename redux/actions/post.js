@@ -23,16 +23,14 @@ export const fetchPost = (id) => async (dispatch, getState) => {
     });
 };
 
-export const createPostContributeRequest = (id = null) => async (
+export const createPostContributeRequest = (values, resetForm) => async (
   dispatch,
   getState
 ) => {
   await dispatch({
     type: CREATE_POST_CONTRIBUTE_REQUEST,
   });
-  const values = {
-    post: id ? id : getState().userReducer.user?.id,
-  };
+
   await axios
     .post(
       `${process.env.HOST}/api/contribute-requests/`,
@@ -42,13 +40,21 @@ export const createPostContributeRequest = (id = null) => async (
     .then(async (res) => {
       await dispatch({
         type: CREATE_POST_CONTRIBUTE_REQUEST_SUCCESS,
-        payload: id,
+        payload: values.post,
       });
+      await resetForm({});
+      await dispatch(createAlert("SUCCESS", "Request successfully created"));
     })
     .catch(async (err) => {
       await dispatch({
         type: CREATE_POST_CONTRIBUTE_REQUEST_FAIL,
         payload: { data: err.response?.data, status: err.response?.status },
       });
+      console.log(err.response.data);
+      if (err.response?.data?.non_field_errors?.length > 0) {
+        await dispatch(
+          createAlert("ERROR", err.response?.data?.non_field_errors[0])
+        );
+      }
     });
 };
