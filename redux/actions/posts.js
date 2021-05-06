@@ -104,10 +104,7 @@ export const deletePost = (id, closeModal) => async (dispatch, getState) => {
 };
 
 export const fetchPosts = (page, filters) => async (dispatch, getState) => {
-  const { url, authenticationRequired } = useGetFetchPostsRequest(
-    page,
-    filters?.user
-  );
+  const url = useGetFetchPostsRequest(page, filters?.user);
   await dispatch({
     type: FETCH_POSTS,
   });
@@ -116,7 +113,7 @@ export const fetchPosts = (page, filters) => async (dispatch, getState) => {
   await axios
     .get(
       `${process.env.HOST}/api/${url}/?search=${search}&community=${community}`,
-      authenticationRequired ? tokenConfig(getState) : null
+      getState().authReducer.is_authenticated ? tokenConfig(getState) : null
     )
     .then(async (res) => {
       await dispatch({

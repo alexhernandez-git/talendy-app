@@ -20,67 +20,31 @@ const useGetFetchPostsRequest = (page, user) => {
   switch (page) {
     case HOME_PAGE:
     case SEARCH_POSTS_PAGE:
-      return { url: "posts", authenticationRequired: false };
+      return "posts";
     case MOST_KARMA_POSTS_PAGE:
-      return {
-        url: "posts/list_most_karma_posts",
-        authenticationRequired: false,
-      };
+      return "posts/list_most_karma_posts";
     case FOLLOWED_USERS_POSTS_PAGE:
-      return {
-        url: "posts/list_followed_users_posts",
-        authenticationRequired: true,
-      };
+      return "posts/list_followed_users_posts";
     case MY_POSTS_PAGE:
-      return {
-        url: "posts/list_my_posts",
-        authenticationRequired: true,
-      };
+      return "posts/list_my_posts";
     case MY_ACTIVE_POSTS_PAGE:
-      return {
-        url: "posts/list_my_active_posts",
-        authenticationRequired: true,
-      };
+      return "posts/list_my_active_posts";
     case MY_SOLVED_POSTS_PAGE:
-      return {
-        url: "posts/list_my_solved_posts",
-        authenticationRequired: true,
-      };
+      return "posts/list_my_solved_posts";
     case CONTRIBUTED_PAGE:
-      return {
-        url: "posts/list_contributed_posts",
-        authenticationRequired: true,
-      };
+      return "posts/list_contributed_posts";
     case ACTIVE_CONTRIBUTED_PAGE:
-      return {
-        url: "posts/list_contributed_active_posts",
-        authenticationRequired: true,
-      };
+      return "posts/list_contributed_active_posts";
     case SOLVED_CONTRIBUTED_PAGE:
-      return {
-        url: "posts/list_contributed_solved_posts",
-        authenticationRequired: true,
-      };
+      return "posts/list_contributed_solved_posts";
     case USER_CONTRIBUTED_PAGE:
-      return {
-        url: `posts/${user}/list_user_contributed`,
-        authenticationRequired: true,
-      };
+      return `posts/${user}/list_user_contributed`;
     case USER_POSTS_PAGE:
-      return {
-        url: `posts/${user}/list_user_posts`,
-        authenticationRequired: false,
-      };
+      return `posts/${user}/list_user_posts`;
     case ACTIVE_USER_POSTS_PAGE:
-      return {
-        url: `posts/${user}/list_active_user_posts`,
-        authenticationRequired: false,
-      };
+      return `posts/${user}/list_active_user_posts`;
     case SOLVED_USER_POSTS_PAGE:
-      return {
-        url: `posts/${user}/list_solved_user_posts`,
-        authenticationRequired: false,
-      };
+      return `posts/${user}/list_solved_user_posts`;
     default:
       return "posts";
   }
