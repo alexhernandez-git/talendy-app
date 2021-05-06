@@ -85,6 +85,7 @@ export default function PostPage() {
     }
     formik.handleSubmit();
   };
+
   return (
     <Layout>
       <div className="max-w-3xl mx-auto sm:p-6 lg:max-w-5xl lg:p-8 bg-white dark:bg-gray-700 rounded-b-lg">
@@ -291,6 +292,7 @@ export default function PostPage() {
                     </button>
                   </form>
                 )}
+
               {postReducer.post?.is_contribute_requested && (
                 <div className="mt-6 flex justify-between space-x-8">
                   <span className="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-white bg-white dark:bg-gray-700 ">

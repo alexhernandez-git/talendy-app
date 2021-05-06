@@ -15,7 +15,10 @@ export const fetchPost = (id) => async (dispatch, getState) => {
     type: FETCH_POST,
   });
   await axios
-    .get(`${process.env.HOST}/api/posts/${id}/`)
+    .get(
+      `${process.env.HOST}/api/posts/${id}/`,
+      getState().authReducer.is_authenticated ? tokenConfig(getState) : null
+    )
     .then(async (res) => {
       await dispatch({
         type: FETCH_POST_SUCCESS,
