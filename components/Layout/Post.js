@@ -128,7 +128,7 @@ const Post = ({ page, post }) => {
   const formik = useFormik({
     initialValues: {
       reason: "",
-      post: post.id,
+      post: post?.id,
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
@@ -417,7 +417,11 @@ const Post = ({ page, post }) => {
             </span>
           </div>
         )}
-        {!post?.is_contribute_requested &&
+        {post?.members &&
+          post?.members?.some(
+            (member) => member.user.id !== authReducer.user?.id
+          ) &&
+          !post?.is_contribute_requested &&
           post?.privacity !== "CO" &&
           post?.status !== "SO" && (
             <form
