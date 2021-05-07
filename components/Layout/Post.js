@@ -417,7 +417,7 @@ const Post = ({ page, post }) => {
             </span>
           </div>
         )}
-        {post?.members?.some(
+        {!post?.members?.some(
           (member) => member.user.id !== authReducer.user?.id
         ) &&
           !post?.is_contribute_requested &&

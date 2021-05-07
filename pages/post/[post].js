@@ -340,21 +340,20 @@ export default function PostPage() {
                   </p>
                 </div>
               </div>
-              {postReducer.post?.members &&
-                postReducer.post?.members?.some(
-                  (member) => member.user.id === authReducer.user?.id
-                ) && (
-                  <div className="mt-5">
-                    <Link href="/contribute/123">
-                      <button
-                        type="button"
-                        className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
-                      >
-                        Contribute
-                      </button>
-                    </Link>
-                  </div>
-                )}
+              {!postReducer.post?.members?.some(
+                (member) => member.user.id === authReducer.user?.id
+              ) && (
+                <div className="mt-5">
+                  <Link href="/contribute/123">
+                    <button
+                      type="button"
+                      className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
+                    >
+                      Contribute
+                    </button>
+                  </Link>
+                </div>
+              )}
               <div className="mt-5">
                 <h3 className="font-medium text-gray-900 dark:text-white">
                   Members Contributing
