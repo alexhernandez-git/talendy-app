@@ -5,6 +5,7 @@ const useGetNotification = (notification) => {
   const authReducer = useSelector((state) => state.authReducer);
   console.log(notification);
   let connection;
+  let contribute_request;
   switch (notification?.type) {
     case "ME":
       const many_messages = notification.messages.length > 1;
@@ -49,6 +50,14 @@ const useGetNotification = (notification) => {
         event_message: `New invitation`,
         message: `${connection.requester.username} has invited you to connect`,
         user: connection.requester,
+      };
+    case "CR":
+      contribute_request = notification.contribute_request;
+
+      return {
+        event_message: `New contribute request`,
+        message: `${contribute_request.user.username} has requested to contribute`,
+        user: contribute_request.user,
       };
     default:
       return {
