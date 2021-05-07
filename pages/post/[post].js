@@ -261,7 +261,7 @@ export default function PostPage() {
                 </div>
               )}
               {!postReducer.post?.members?.some(
-                (member) => member.user.id !== authReducer.user?.id
+                (member) => member.user.id === authReducer.user?.id
               ) &&
                 !postReducer.post?.is_contribute_requested &&
                 postReducer.post?.privacity !== "CO" &&

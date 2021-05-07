@@ -289,7 +289,7 @@ const PostModal = ({
               {console.log(post)}
               {!post?.members &&
                 post?.members?.some(
-                  (member) => member.user.id !== authReducer.user?.id
+                  (member) => member.user.id === authReducer.user?.id
                 ) &&
                 !post?.is_contribute_requested &&
                 post?.privacity !== "CO" &&
