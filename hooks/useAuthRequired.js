@@ -11,6 +11,7 @@ import {
   MY_SOLVED_POSTS_PAGE,
   NOTIFICATIONS_PAGE,
   PEOPLE_I_FOLLOW_PAGE,
+  REQUESTS_PAGE,
   SETTINGS_PAGE,
   SOLVED_CONTRIBUTED_PAGE,
 } from "pages";
@@ -37,6 +38,7 @@ const useAuthRequired = (page) => {
     MY_NETWORK_PAGE,
     CONNECTIONS_PAGE,
     PEOPLE_I_FOLLOW_PAGE,
+    REQUESTS_PAGE,
   ];
   const matches = privatePages.some((privPage) => privPage === page);
   useEffect(() => {

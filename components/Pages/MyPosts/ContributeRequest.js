@@ -28,7 +28,7 @@ const ContributeRequest = ({ contribute_request }) => {
             ) : (
               <span className="bg-gray-100 rounded-full overflow-hidden h-8 w-8">
                 <svg
-                  className="h-full w-full text-gray-300 bg-gray-100"
+                  className="text-gray-300 bg-gray-100 rounded-full h-8 w-8"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -84,7 +84,7 @@ const ContributeRequest = ({ contribute_request }) => {
           </div>
         )}
         <div className="border sm:rounded-lg mt-4">
-          <Post post={contribute_request.post} />
+          <Post post={contribute_request?.post} />
         </div>
       </div>
     </li>

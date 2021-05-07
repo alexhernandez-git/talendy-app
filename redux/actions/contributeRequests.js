@@ -29,7 +29,7 @@ export const fetchContributeRequests = () => async (dispatch, getState) => {
     .catch((err) => {
       dispatch({
         type: FETCH_CONTRIBUTE_REQUESTS_FAIL,
-        payload: { data: err.response.data, status: err.response.status },
+        payload: { data: err.response?.data, status: err.response?.status },
       });
     });
 };
@@ -59,7 +59,7 @@ export const fetchContributeRequest = (contribute_request__pk) => async (
     .catch(async (err) => {
       await dispatch({
         type: FETCH_CONTRIBUTE_REQUEST_FAIL,
-        payload: { data: err.response.data, status: err.response.status },
+        payload: { data: err.response?.data, status: err.response?.status },
       });
     });
 };
@@ -82,7 +82,7 @@ export const fetchMoreContributeRequests = () => async (dispatch, getState) => {
       .catch((err) => {
         dispatch({
           type: FETCH_MORE_CONTRIBUTE_REQUESTS_FAIL,
-          payload: { data: err.response.data, status: err.response.status },
+          payload: { data: err.response?.data, status: err.response?.status },
         });
       });
   }

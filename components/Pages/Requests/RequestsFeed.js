@@ -1,8 +1,13 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import ContributeRequest from "../MyPosts/ContributeRequest";
 import HelpRequest from "../MyPosts/ContributeRequest";
 
 const RequestsFeed = () => {
+  const contributeRequestsReducer = useSelector(
+    (state) => state.contributeRequestsReducer
+  );
   return (
     <div className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
       <nav class="flex mb-4" aria-label="Breadcrumb">
@@ -77,12 +82,40 @@ const RequestsFeed = () => {
 
       <div className="bg-white dark:bg-gray-700 px-4 py-6 shadow sm:p-6 sm:rounded-lg">
         <div className="flow-root">
-          <ul className="sm:divide-y sm:divide-gray-200">
-            <HelpRequest />
-            <HelpRequest />
-            <HelpRequest />
-            <HelpRequest />
-          </ul>
+          {contributeRequestsReducer.contribute_requests.results.length > 0 ? (
+            <ul className="sm:divide-y sm:divide-gray-200">
+              {contributeRequestsReducer.contribute_requests.results.map(
+                (contribute_request) => (
+                  <ContributeRequest contribute_request={contribute_request} />
+                )
+              )}
+            </ul>
+          ) : (
+            <div className="flex justify-center">
+              <span className="text-gray-500 dark:text-gray-100 text-sm">
+                Not contribute requests found
+              </span>
+            </div>
+          )}
+          {!contributeRequestsReducer.is_fetching_more_contribute_requests &&
+            contributeRequestsReducer.contribute_requests.results.length > 0 &&
+            contributeRequestsReducer.contribute_requests.next && (
+              <VisibilitySensor onChange={onChangeVisibility}>
+                <div
+                  className="p-3 flex justify-center"
+                  onClick={handleFetchMoreContributeRequests}
+                >
+                  <span className="text-gray-500 dark:text-gray-100 text-sm cursor-pointer">
+                    Load more contribute requests
+                  </span>
+                </div>
+              </VisibilitySensor>
+            )}
+          {contributeRequestsReducer.is_fetching_more_contribute_requests && (
+            <div className="flex justify-center space-y-4 w-full mb-4 p-3">
+              <Spinner />
+            </div>
+          )}
         </div>
       </div>
     </div>
