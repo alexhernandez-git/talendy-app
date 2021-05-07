@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchMoreContributeRequests } from "redux/actions/contributeRequests";
 import ContributeRequest from "../MyPosts/ContributeRequest";
 import HelpRequest from "../MyPosts/ContributeRequest";
 
@@ -8,6 +9,15 @@ const RequestsFeed = () => {
   const contributeRequestsReducer = useSelector(
     (state) => state.contributeRequestsReducer
   );
+  const dispatch = useDispatch();
+  const handleFetchMoreContributeRequests = () => {
+    dispatch(fetchMoreContributeRequests());
+  };
+  const onChangeVisibility = (visible) => {
+    if (visible) {
+      handleFetchMoreContributeRequests();
+    }
+  };
   return (
     <div className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
       <nav class="flex mb-4" aria-label="Breadcrumb">

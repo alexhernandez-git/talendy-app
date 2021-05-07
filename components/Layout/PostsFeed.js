@@ -1,14 +1,22 @@
 import { HOME_PAGE } from "pages";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { fetchTopKarmaUsers } from "redux/actions/topKarmaUsers";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Post from "components/Layout/Post";
 import Spinner from "components/Layout/Spinner";
 import VisibilitySensor from "react-visibility-sensor";
 import { fetchMorePosts, fetchPosts } from "redux/actions/posts";
 const PostsFeed = ({ page }) => {
   const postsReducer = useSelector((state) => state.postsReducer);
+  const dispatch = useDispatch();
+  const handleFetchMorePosts = () => {
+    dispatch(fetchMorePosts());
+  };
+  const onChangeVisibility = (visible) => {
+    if (visible) {
+      handleFetchMorePosts();
+    }
+  };
   return (
     <div>
       <h1 className="sr-only">Posts feed</h1>
