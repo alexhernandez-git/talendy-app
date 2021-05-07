@@ -789,7 +789,7 @@ export default function authReducer(state = initialState, action) {
         ...state,
         user: {
           ...state.user,
-          invitations: ++state.user.invitations,
+          invitations_count: ++state.user.invitations_count,
         },
       };
     case SUBSTRACT_INVITATION:
@@ -797,7 +797,7 @@ export default function authReducer(state = initialState, action) {
         ...state,
         user: {
           ...state.user,
-          invitations: --state.user.invitations,
+          invitations_count: --state.user.invitations_count,
         },
       };
     case ADD_CONNECTION:
@@ -805,7 +805,7 @@ export default function authReducer(state = initialState, action) {
         ...state,
         user: {
           ...state.user,
-          connections: ++state.user.connections,
+          connections_count: ++state.user.connections_count,
         },
       };
     case SUBSTRACT_CONNECTION:
@@ -813,7 +813,7 @@ export default function authReducer(state = initialState, action) {
         ...state,
         user: {
           ...state.user,
-          connections: --state.user.connections,
+          connections_count: --state.user.connections_count,
         },
       };
     case ADD_FOLLOW:
@@ -821,7 +821,7 @@ export default function authReducer(state = initialState, action) {
         ...state,
         user: {
           ...state.user,
-          following: ++state.user.following,
+          following_count: ++state.user.following_count,
         },
       };
     case SUBSTRACT_FOLLOW:
@@ -829,7 +829,7 @@ export default function authReducer(state = initialState, action) {
         ...state,
         user: {
           ...state.user,
-          following: --state.user.following,
+          following_count: --state.user.following_count,
         },
       };
     default:
