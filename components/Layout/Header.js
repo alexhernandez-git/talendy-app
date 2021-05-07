@@ -12,6 +12,7 @@ import { logout } from "redux/actions/auth";
 import { useDispatch } from "react-redux";
 import NotificationsDropdown from "./Header/NotificationsDropdown";
 import { openChats } from "redux/actions/chats";
+import { useEffect } from "react";
 const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
   const dispatch = useDispatch();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -47,6 +48,19 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
       router.push(`/search/${values.search}`);
     },
   });
+  const [firstLoad, setFirstLoad] = useState(true);
+
+  useEffect(() => {
+    setFirstLoad(false);
+    if (!firstLoad) {
+      const timeoutId = setTimeout(() => {
+        console.log("entra");
+        formik.handleSubmit();
+      }, 500);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [formik.values.search]);
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const handleOpenMobileMenu = () => {
     setMobileMenuOpen(true);
