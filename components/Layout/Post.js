@@ -417,10 +417,9 @@ const Post = ({ page, post }) => {
             </span>
           </div>
         )}
-        {post?.members &&
-          post?.members?.some(
-            (member) => member.user.id !== authReducer.user?.id
-          ) &&
+        {post?.members?.some(
+          (member) => member.user.id !== authReducer.user?.id
+        ) &&
           !post?.is_contribute_requested &&
           post?.privacity !== "CO" &&
           post?.status !== "SO" && (
