@@ -5,7 +5,8 @@ const useGetNotification = (notification) => {
   const authReducer = useSelector((state) => state.authReducer);
   console.log(notification);
   let connection;
-  let contribute_request;
+  let user;
+  let member_joined;
   switch (notification?.type) {
     case "ME":
       const many_messages = notification.messages.length > 1;
@@ -58,6 +59,13 @@ const useGetNotification = (notification) => {
         event_message: `New contribute request`,
         message: `${contribute_request.user.username} has requested to contribute`,
         user: contribute_request.user,
+      };
+    case "JM":
+      member_joined = notification.member_joined;
+      return {
+        event_message: `New member joined`,
+        message: `${member_joined.username} has joined to your post`,
+        user: member_joined,
       };
     default:
       return {
