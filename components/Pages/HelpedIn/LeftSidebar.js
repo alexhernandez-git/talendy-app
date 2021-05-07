@@ -1,14 +1,18 @@
 import Link from "next/link";
 import {
-  ACTIVE_CONTRIBUTED_PAGE,
-  SOLVED_CONTRIBUTED_PAGE,
-  CONTRIBUTED_PAGE,
+  ACTIVE_CONTRIBUTED_POSTS_PAGE,
+  SOLVED_CONTRIBUTED_POSTS_PAGE,
+  CONTRIBUTED_POSTS_PAGE,
 } from "pages";
 import React from "react";
 
-const LeftSidebar = ({ page }) => {
+const LeftSidebar = ({ page, mobile }) => {
   return (
-    <div className="hidden xl:block  xl:col-span-2">
+    <div
+      className={`${
+        mobile ? "mx-2 xl:hidden" : "hidden xl:block  xl:col-span-2"
+      }`}
+    >
       <nav aria-label="Sidebar" className="divide-y divide-gray-300">
         <div className="">
           <p
@@ -25,7 +29,7 @@ const LeftSidebar = ({ page }) => {
               <span
                 className={`
                   ${
-                    page === CONTRIBUTED_PAGE
+                    page === CONTRIBUTED_POSTS_PAGE
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
@@ -37,7 +41,7 @@ const LeftSidebar = ({ page }) => {
               <span
                 className={`
                   ${
-                    page === ACTIVE_CONTRIBUTED_PAGE
+                    page === ACTIVE_CONTRIBUTED_POSTS_PAGE
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
@@ -49,7 +53,7 @@ const LeftSidebar = ({ page }) => {
               <span
                 className={`
                   ${
-                    page === SOLVED_CONTRIBUTED_PAGE
+                    page === SOLVED_CONTRIBUTED_POSTS_PAGE
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}

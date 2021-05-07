@@ -4,13 +4,25 @@ import {
   ACTIVE_USER_POSTS_PAGE,
   SOLVED_USER_POSTS_PAGE,
   USER_POSTS_PAGE,
-  USER_CONTRIBUTED_PAGE,
+  USER_CONTRIBUTED_POSTS_PAGE,
 } from "pages";
 import { useRouter } from "next/router";
 
 const UserMenu = ({ page }) => {
   const router = useRouter();
   const userId = router.query?.user;
+  const handleChangeMobileMenu = (e) => {
+    e.preventDefault();
+    console.log(e.target.value);
+    switch (e.target.value) {
+      case "PO":
+        router.push(`/user/${userId}`);
+        break;
+      case "CO":
+        router.push(`/user/contributed/${userId}`);
+        break;
+    }
+  };
   return (
     <div className="px-4 mb-4 sm:px-0">
       <div className="sm:hidden">
@@ -18,12 +30,12 @@ const UserMenu = ({ page }) => {
           Select a tab
         </label>
         <select
+          onChange={handleChangeMobileMenu}
           id="question-tabs"
           className="block w-full rounded-3xl border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
         >
-          <option>Contributed</option>
-
-          <option>Posts</option>
+          <option value="PO">Posts</option>
+          <option value="CO">Contributed</option>
         </select>
       </div>
       <div className="hidden sm:block">
@@ -66,7 +78,7 @@ const UserMenu = ({ page }) => {
             <a
               aria-current="page"
               className={`${
-                page === USER_CONTRIBUTED_PAGE
+                page === USER_CONTRIBUTED_POSTS_PAGE
                   ? "text-gray-900"
                   : "text-gray-500"
               }  dark:text-white  rounded-r-lg group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10  hover:text-gray-700 dark:hover:bg-gray-800`}
@@ -77,7 +89,7 @@ const UserMenu = ({ page }) => {
                   20
                 </span> */}
               </div>
-              {page === USER_CONTRIBUTED_PAGE ? (
+              {page === USER_CONTRIBUTED_POSTS_PAGE ? (
                 <span
                   aria-hidden="true"
                   className="bg-orange-500 absolute inset-x-0 bottom-0 h-0.5"

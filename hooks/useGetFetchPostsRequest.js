@@ -1,7 +1,7 @@
 import {
-  CONTRIBUTED_PAGE,
-  ACTIVE_CONTRIBUTED_PAGE,
-  SOLVED_CONTRIBUTED_PAGE,
+  CONTRIBUTED_POSTS_PAGE,
+  ACTIVE_CONTRIBUTED_POSTS_PAGE,
+  SOLVED_CONTRIBUTED_POSTS_PAGE,
   FOLLOWED_USERS_POSTS_PAGE,
   HOME_PAGE,
   MOST_KARMA_POSTS_PAGE,
@@ -9,7 +9,7 @@ import {
   MY_POSTS_PAGE,
   MY_SOLVED_POSTS_PAGE,
   SEARCH_POSTS_PAGE,
-  USER_CONTRIBUTED_PAGE,
+  USER_CONTRIBUTED_POSTS_PAGE,
   USER_POSTS_PAGE,
   ACTIVE_USER_POSTS_PAGE,
   SOLVED_USER_POSTS_PAGE,
@@ -31,13 +31,13 @@ const useGetFetchPostsRequest = (page, user) => {
       return "posts/list_my_active_posts";
     case MY_SOLVED_POSTS_PAGE:
       return "posts/list_my_solved_posts";
-    case CONTRIBUTED_PAGE:
+    case CONTRIBUTED_POSTS_PAGE:
       return "posts/list_contributed_posts";
-    case ACTIVE_CONTRIBUTED_PAGE:
+    case ACTIVE_CONTRIBUTED_POSTS_PAGE:
       return "posts/list_contributed_active_posts";
-    case SOLVED_CONTRIBUTED_PAGE:
+    case SOLVED_CONTRIBUTED_POSTS_PAGE:
       return "posts/list_contributed_solved_posts";
-    case USER_CONTRIBUTED_PAGE:
+    case USER_CONTRIBUTED_POSTS_PAGE:
       return `posts/${user}/list_user_contributed`;
     case USER_POSTS_PAGE:
       return `posts/${user}/list_user_posts`;

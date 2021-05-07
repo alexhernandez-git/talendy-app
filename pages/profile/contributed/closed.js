@@ -2,7 +2,7 @@ import Layout from "components/Layout/Layout";
 import PostsFeed from "components/Layout/PostsFeed";
 import LeftSidebar from "components/Pages/HelpedIn/LeftSidebar";
 import ProfileCard from "components/Pages/Profile/UserCard";
-import { SOLVED_CONTRIBUTED_PAGE } from "pages";
+import { SOLVED_CONTRIBUTED_POSTS_PAGE } from "pages";
 import useAuthRequired from "hooks/useAuthRequired";
 import Spinner from "components/Layout/Spinner";
 import ProfileMenu from "components/Pages/Profile/ProfileMenu";
@@ -12,7 +12,7 @@ import { fetchPosts } from "redux/actions/posts";
 import { useDispatch } from "react-redux";
 
 export default function Posts() {
-  const page = SOLVED_CONTRIBUTED_PAGE;
+  const page = SOLVED_CONTRIBUTED_POSTS_PAGE;
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -36,6 +36,8 @@ export default function Posts() {
           <ProfileCard mobile page={page} profile user={authReducer.user} />
           <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
             <ProfileMenu page={page} />
+            <LeftSidebar page={page} mobile />
+
             <PostsFeed />
           </main>
           <ProfileCard page={page} profile user={authReducer.user} />

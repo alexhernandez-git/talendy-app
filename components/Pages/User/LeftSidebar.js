@@ -1,19 +1,23 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
-  ACTIVE_CONTRIBUTED_PAGE,
+  ACTIVE_CONTRIBUTED_POSTS_PAGE,
   ACTIVE_USER_POSTS_PAGE,
-  SOLVED_CONTRIBUTED_PAGE,
+  SOLVED_CONTRIBUTED_POSTS_PAGE,
   SOLVED_USER_POSTS_PAGE,
   USER_POSTS_PAGE,
 } from "pages";
 import React from "react";
 
-const LeftSidebar = ({ page }) => {
+const LeftSidebar = ({ page, mobile }) => {
   const router = useRouter();
   const userId = router.query?.user;
   return (
-    <div className="hidden xl:block  xl:col-span-2">
+    <div
+      className={`${
+        mobile ? "mx-2 xl:hidden" : "hidden xl:block  xl:col-span-2"
+      }`}
+    >
       <nav aria-label="Sidebar" className="divide-y divide-gray-300">
         <div className="">
           <p

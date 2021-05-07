@@ -40,6 +40,8 @@ export default function Profile() {
           <LeftSidebar page={page} />
           <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
             <UserMenu page={page} />
+            <LeftSidebar page={page} mobile />
+
             <PostsFeed />
           </main>
           <UserCard page={page} user={userReducer.user} />

@@ -1,7 +1,7 @@
 import Layout from "components/Layout/Layout";
 
 import ProfileCard from "components/Pages/Profile/UserCard";
-import { USER_CONTRIBUTED_PAGE } from "pages";
+import { USER_CONTRIBUTED_POSTS_PAGE } from "pages";
 import LeftSidebar from "components/Pages/User/LeftSidebar";
 import { fetchUser } from "redux/actions/user";
 import { useRouter } from "next/router";
@@ -14,7 +14,7 @@ import { fetchPosts } from "redux/actions/posts";
 import PostsFeed from "components/Layout/PostsFeed";
 
 export default function Profile() {
-  const page = USER_CONTRIBUTED_PAGE;
+  const page = USER_CONTRIBUTED_POSTS_PAGE;
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -40,6 +40,8 @@ export default function Profile() {
           <ProfileCard mobile page={page} user={userReducer.user} />
           <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
             <UserMenu page={page} />
+            <LeftSidebar page={page} mobile />
+
             <PostsFeed />
           </main>
           <ProfileCard page={page} user={userReducer.user} />
