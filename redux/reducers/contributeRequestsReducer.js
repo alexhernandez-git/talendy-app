@@ -5,9 +5,9 @@ import {
   FETCH_MORE_CONTRIBUTE_REQUESTS,
   FETCH_MORE_CONTRIBUTE_REQUESTS_SUCCESS,
   FETCH_MORE_CONTRIBUTE_REQUESTS_FAIL,
-  ADD_CONTRIBUTE_REQUEST,
-  ADD_CONTRIBUTE_REQUEST_SUCCESS,
-  ADD_CONTRIBUTE_REQUEST_FAIL,
+  FETCH_CONTRIBUTE_REQUEST,
+  FETCH_CONTRIBUTE_REQUEST_SUCCESS,
+  FETCH_CONTRIBUTE_REQUEST_FAIL,
 } from "../types";
 import { HYDRATE } from "next-redux-wrapper";
 
@@ -68,7 +68,7 @@ export default function contributeRequestsReducer(
         ...state,
         is_fetching_more_contribute_requests: false,
         contribute_requests: {
-          next: action.payload.next,
+          ...action.payload,
           results: [
             ...state.contribute_requests.results,
             ...action.payload.results,
@@ -82,22 +82,23 @@ export default function contributeRequestsReducer(
         is_fetching_more_contribute_requests: false,
         error: action.payload,
       };
-    case ADD_CONTRIBUTE_REQUEST:
+    case FETCH_CONTRIBUTE_REQUEST:
       return {
         ...state,
         is_adding_contribute_request: true,
       };
-    case ADD_CONTRIBUTE_REQUEST_SUCCESS:
+    case FETCH_CONTRIBUTE_REQUEST_SUCCESS:
       return {
         ...state,
         is_adding_contribute_request: false,
         contribute_requests: {
           ...self.contribute_requests,
+          count: ++self.contribute_requests.count,
           results: [...state.contribute_requests.results, action.payload],
         },
         add_contribute_request_error: null,
       };
-    case ADD_CONTRIBUTE_REQUEST_FAIL:
+    case FETCH_CONTRIBUTE_REQUEST_FAIL:
       return {
         ...state,
         is_adding_contribute_request: false,

@@ -121,29 +121,6 @@ export const addChatToFeed = (id) => async (dispatch, getState) => {
     });
 };
 
-export const newMessageEvent = (data) => async (dispatch, getState) => {
-  console.log("chat id", data.chat__pk);
-  console.log("current chat", getState().chatsReducer.current_chat);
-  if (data.chat__pk === getState().chatsReducer.current_chat) return;
-  const result = getState().chatsReducer.chats.results.some(
-    (chat) => chat.id === data.chat__pk
-  );
-  if (result) {
-    await dispatch({
-      type: NEW_MESSAGE_EVENT,
-      payload: { chat__id: data.chat__pk, message__text: data.message__text },
-    });
-  } else {
-    await dispatch(addChatToFeed(data.chat__pk));
-  }
-  await dispatch(
-    createAlert("SUCCESS", "New message from " + data.sent_by__username)
-  );
-  await dispatch(setPendingMessages());
-  await dispatch(setPendingNotifications());
-  await dispatch(addOrUpdateNotificationToFeed(data.notification__pk));
-};
-
 export const changeLastMessage = (chat__id, message__text) => async (
   dispatch,
   getState

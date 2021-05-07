@@ -1,5 +1,9 @@
 import axios from "axios";
-import { tokenConfig } from "./auth";
+import {
+  setPendingMessages,
+  setPendingNotifications,
+  tokenConfig,
+} from "./auth";
 import {
   FETCH_NOTIFICATIONS,
   FETCH_NOTIFICATIONS_SUCCESS,
@@ -8,6 +12,10 @@ import {
   FETCH_MORE_NOTIFICATIONS_SUCCESS,
   FETCH_MORE_NOTIFICATIONS_FAIL,
 } from "../types";
+import { fetchContributeRequest } from "./contributeRequests";
+import { createAlert } from "./alerts";
+import { addChatToFeed } from "./chats";
+import { addOrUpdateNotificationToFeed } from "./lastNotifications";
 
 export const fetchNotifications = () => async (dispatch, getState) => {
   await dispatch({
@@ -51,4 +59,37 @@ export const fetchMoreNotifications = () => async (dispatch, getState) => {
         });
       });
   }
+};
+
+export const newMessageEvent = (data) => async (dispatch, getState) => {
+  console.log("chat id", data.chat__pk);
+  console.log("current chat", getState().chatsReducer.current_chat);
+  if (data.chat__pk === getState().chatsReducer.current_chat) return;
+  const result = getState().chatsReducer.chats.results.some(
+    (chat) => chat.id === data.chat__pk
+  );
+  if (result) {
+    await dispatch({
+      type: NEW_MESSAGE_EVENT,
+      payload: { chat__id: data.chat__pk, message__text: data.message__text },
+    });
+  } else {
+    await dispatch(addChatToFeed(data.chat__pk));
+  }
+  await dispatch(
+    createAlert("SUCCESS", "New message from " + data.sent_by__username)
+  );
+  await dispatch(setPendingMessages());
+  await dispatch(setPendingNotifications());
+  await dispatch(addOrUpdateNotificationToFeed(data.notification__pk));
+};
+
+export const newContributeRequestEvent = (data) => async (
+  dispatch,
+  getState
+) => {
+  await dispatch(createAlert("SUCCESS", "New contribute request"));
+  await dispatch(fetchContributeRequest(data.contribute_request__pk));
+  await dispatch(setPendingNotifications());
+  await dispatch(addOrUpdateNotificationToFeed(data.notification__pk));
 };

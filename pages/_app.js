@@ -15,7 +15,11 @@ import {
 } from "redux/actions/auth";
 import { addOrUpdateNotificationToFeed } from "redux/actions/lastNotifications";
 import { createAlert } from "redux/actions/alerts";
-import { newMessageEvent } from "redux/actions/chats";
+import {
+  newMessageEvent,
+  newContributeRequestEvent,
+} from "redux/actions/notifications";
+
 function WrappedApp({ Component, pageProps }) {
   // Dispatch initial data
   useDispatchInitialData();
@@ -44,16 +48,23 @@ function WrappedApp({ Component, pageProps }) {
           case "MESSAGE_RECEIVED":
             await dispatch(newMessageEvent(data));
             break;
+          case "NEW_CONTRIBUTE_REQUEST":
+            await dispatch(newContributeRequestEvent(data));
+            break;
           case "NEW_INVITATION":
             await dispatch(addInvitation());
             await dispatch(createAlert("SUCCESS", "New invitation"));
-            await dispatch(addOrUpdateNotificationToFeed());
+            await dispatch(
+              addOrUpdateNotificationToFeed(data.notification__pk)
+            );
             break;
           case "NEW_CONNECTION":
             await dispatch(addConnection());
             await dispatch(createAlert("SUCCESS", "New connection"));
 
-            await dispatch(addOrUpdateNotificationToFeed());
+            await dispatch(
+              addOrUpdateNotificationToFeed(data.notification__pk)
+            );
 
             break;
           case "CONNECTION_REMOVED":
