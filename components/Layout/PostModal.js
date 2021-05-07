@@ -287,7 +287,7 @@ const PostModal = ({
                 </div>
               )}
               {console.log(post)}
-              {post?.members &&
+              {!post?.members &&
                 post?.members?.some(
                   (member) => member.user.id !== authReducer.user?.id
                 ) &&
@@ -382,7 +382,7 @@ const PostModal = ({
                   </p>
                 </div>
               </div>
-              {!post?.members?.some(
+              {post?.members?.some(
                 (member) => member.user.id === authReducer.user?.id
               ) && (
                 <div className="mt-5">

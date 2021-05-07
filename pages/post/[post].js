@@ -260,10 +260,9 @@ export default function PostPage() {
                   </span>
                 </div>
               )}
-              {postReducer.post?.members &&
-                postReducer.post?.members?.some(
-                  (member) => member.user.id !== authReducer.user?.id
-                ) &&
+              {!postReducer.post?.members?.some(
+                (member) => member.user.id !== authReducer.user?.id
+              ) &&
                 !postReducer.post?.is_contribute_requested &&
                 postReducer.post?.privacity !== "CO" &&
                 postReducer.post?.status !== "SO" && (
@@ -340,7 +339,7 @@ export default function PostPage() {
                   </p>
                 </div>
               </div>
-              {!postReducer.post?.members?.some(
+              {postReducer.post?.members?.some(
                 (member) => member.user.id === authReducer.user?.id
               ) && (
                 <div className="mt-5">
