@@ -1,13 +1,22 @@
 import React from "react";
-import { useRouter } from "next/router";
 
 import Post from "components/Layout/Post";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import {
+  acceptContributeRequest,
+  ignoreContributeRequest,
+} from "redux/actions/contributeRequests";
 
 const ContributeRequest = ({ contribute_request }) => {
-  const router = useRouter();
+  const dispatch = useDispatch();
   console.log(contribute_request);
-
+  const handleAcceptContributeRequest = () => {
+    dispatch(acceptContributeRequest(contribute_request?.id));
+  };
+  const handleIgnoreContributeRequest = () => {
+    dispatch(ignoreContributeRequest(contribute_request?.id));
+  };
   return (
     <li>
       <div className="py-4 ">
@@ -63,6 +72,7 @@ const ContributeRequest = ({ contribute_request }) => {
           </div>
           <div className="flex-shrink-0">
             <button
+              onClick={handleIgnoreContributeRequest}
               type="button"
               className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-100  dark:hover:bg-gray-500"
             >
@@ -71,6 +81,7 @@ const ContributeRequest = ({ contribute_request }) => {
           </div>
           <div className="flex-shrink-0">
             <button
+              onClick={handleAcceptContributeRequest}
               type="button"
               className="inline-flex items-center px-3 py-0.5 rounded-full bg-orange-50 text-sm font-medium  bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 text-white"
             >

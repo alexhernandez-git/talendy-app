@@ -125,6 +125,7 @@ export default function contributeRequestsReducer(
         is_accepting_contribute_request: false,
         contribute_requests: {
           ...state.contribute_requests,
+          count: --state.contribute_requests.count,
           results: state.contribute_requests.results.filter(
             (contribute_request) => contribute_request.id !== action.payload
           ),
@@ -149,6 +150,7 @@ export default function contributeRequestsReducer(
         is_ignoring_contribute_request: false,
         contribute_requests: {
           ...state.contribute_requests,
+          count: --state.contribute_requests.count,
           results: state.contribute_requests.results.filter(
             (contribute_request) => contribute_request.id !== action.payload
           ),

@@ -102,8 +102,9 @@ export const acceptContributeRequest = (contribute_request__pk) => async (
     type: ACCEPT_CONTRIBUTE_REQUEST,
   });
   await axios
-    .get(
+    .patch(
       `${process.env.HOST}/api/contribute-requests/${contribute_request__pk}/accept/`,
+      {},
       tokenConfig(getState)
     )
     .then(async (res) => {
@@ -115,12 +116,16 @@ export const acceptContributeRequest = (contribute_request__pk) => async (
       } catch (error) {
         console.log(error);
       }
+      await dispatch(
+        createAlert("SUCCESS", "Congratulations! You have a new member")
+      );
     })
     .catch(async (err) => {
       await dispatch({
         type: ACCEPT_CONTRIBUTE_REQUEST_FAIL,
         payload: { data: err.response?.data, status: err.response?.status },
       });
+      await dispatch(createAlert("ERROR", "Error at accepting the user"));
     });
 };
 
