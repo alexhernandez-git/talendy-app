@@ -62,7 +62,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
                   /> */}
                   {user && user.picture ? (
                     <img
-                      className="h-32 w-32 overflow-hidden xl:w-56 xl:h-56 rounded-full"
+                      className="h-40 w-40 overflow-hidden xl:w-56 xl:h-56 rounded-full m-auto"
                       src={
                         new RegExp(
                           `${process.env.HOST}|https://freelanium.s3.amazonaws.com`

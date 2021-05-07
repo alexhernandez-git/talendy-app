@@ -18,6 +18,7 @@ import postsReducer from "./postsReducer";
 import postReducer from "./postReducer";
 import usersReducer from "./usersReducer";
 import communitiesReducer from "./communitiesReducer";
+import contributeRequestsReducer from "./contributeRequestsReducer";
 
 export default combineReducers({
   authReducer: authReducer,
@@ -38,4 +39,5 @@ export default combineReducers({
   usersReducer: usersReducer,
   messagesReducer: messagesReducer,
   communitiesReducer: communitiesReducer,
+  contributeRequestsReducer: contributeRequestsReducer,
 });

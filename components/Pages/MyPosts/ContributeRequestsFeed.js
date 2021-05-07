@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import HelpRequest from "components/Pages/MyPosts/ContributeRequest";
+import ContributeRequest from "components/Pages/MyPosts/ContributeRequest";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 const ContributeRequestsFeed = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +14,9 @@ const ContributeRequestsFeed = () => {
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
+  const contributeRequestsReducer = useSelector(
+    (state) => state.contributeRequestsReducer
+  );
   return (
     <div className="my-4 bg-white dark:bg-gray-700 rounded-lg shadow">
       <div
@@ -28,7 +32,7 @@ const ContributeRequestsFeed = () => {
             type="button"
             className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white"
           >
-            <span>12</span>
+            <span>{contributeRequestsReducer.contribute_requests.count}</span>
           </button>
         </h2>
         <div>
@@ -67,20 +71,21 @@ const ContributeRequestsFeed = () => {
         </div>
       </div>
       <div className={`${isOpen ? "block" : "hidden"} flow-root pb-6 px-6`}>
-        <ul className="divide-y divide-gray-200">
-          <li>
-            <HelpRequest />
-          </li>
-          <li>
-            <HelpRequest />
-          </li>
-          <li>
-            <HelpRequest />
-          </li>
-          <li>
-            <HelpRequest />
-          </li>
-        </ul>
+        {contributeRequestsReducer.contribute_requests.results.length > 0 ? (
+          <ul className="divide-y divide-gray-200">
+            {contributeRequestsReducer.contribute_requests.results.map(
+              (contribute_request) => (
+                <ContributeRequest contribute_request={contribute_request} />
+              )
+            )}
+          </ul>
+        ) : (
+          <div className="flex justify-center">
+            <span className="text-gray-500 dark:text-gray-100 text-sm">
+              Not contribute requests found
+            </span>
+          </div>
+        )}
         <div className="mt-2">
           <Link href={"/profile/requests"}>
             <span className="cursor-pointer w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl  text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
