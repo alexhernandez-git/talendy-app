@@ -346,11 +346,11 @@ export default function Home() {
         <div className="relative pt-16 pb-32 overflow-hidden">
           <div
             aria-hidden="true"
-            className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-gray-100"
+            className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-gray-100 dark:from-gray-900"
           />
           <div className="relative">
             <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:grid-flow-col-dense lg:gap-24">
-              <div className="px-4 max-w-xl mx-auto sm:px-6 lg:py-16 lg:max-w-none lg:mx-0 lg:px-0">
+              <div className="px-4 max-w-xl mx-auto sm:px-6 lg:py-32 lg:max-w-none lg:mx-0 lg:px-0">
                 <div>
                   <div>
                     <span className="h-12 w-12 rounded-md flex items-center justify-center bg-gradient-to-r from-orange-500 to-pink-500">
@@ -361,10 +361,10 @@ export default function Home() {
                     </span>
                   </div>
                   <div className="mt-6">
-                    <h2 className="text-3xl font-extrabold tracking-tight text-gray-900">
+                    <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
                       Stay on top of customer support
                     </h2>
-                    <p className="mt-4 text-lg text-gray-500">
+                    <p className="mt-4 text-lg text-gray-500 dark:text-gray-200">
                       Semper curabitur ullamcorper posuere nunc sed. Ornare
                       iaculis bibendum malesuada faucibus lacinia porttitor.
                       Pulvinar laoreet sagittis viverra duis. In venenatis sem
@@ -381,10 +381,10 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className="mt-8 border-t border-gray-200 pt-6">
+                {/* <div className="mt-8 border-t border-gray-200 pt-6">
                   <blockquote>
                     <div>
-                      <p className="text-base text-gray-500">
+                      <p className="text-base text-gray-500 dark:text-gray-200">
                         &ldquo;Cras velit quis eros eget rhoncus lacus ultrices
                         sed diam. Sit orci risus aenean curabitur donec aliquet.
                         Mi venenatis in euismod ut.&rdquo;
@@ -399,13 +399,13 @@ export default function Home() {
                             alt=""
                           />
                         </div>
-                        <div className="text-base font-medium text-gray-700">
+                        <div className="text-base font-medium text-gray-700 dark:text-gray-300">
                           Marcia Hill, Digital Marketing Manager
                         </div>
                       </div>
                     </footer>
                   </blockquote>
-                </div>
+                </div> */}
               </div>
               <div className="mt-12 sm:mt-16 lg:mt-0">
                 <div className="pl-4 -mr-48 sm:pl-6 md:-mr-16 lg:px-0 lg:m-0 lg:relative lg:h-full">
@@ -431,10 +431,10 @@ export default function Home() {
                     </span>
                   </div>
                   <div className="mt-6">
-                    <h2 className="text-3xl font-extrabold tracking-tight text-gray-900">
+                    <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
                       Better understand your customers
                     </h2>
-                    <p className="mt-4 text-lg text-gray-500">
+                    <p className="mt-4 text-lg text-gray-500 dark:text-gray-200">
                       Semper curabitur ullamcorper posuere nunc sed. Ornare
                       iaculis bibendum malesuada faucibus lacinia porttitor.
                       Pulvinar laoreet sagittis viverra duis. In venenatis sem
@@ -465,99 +465,10 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Gradient Feature Section */}
-        <div className="bg-gradient-to-r from-orange-500 to-pink-500">
-          <div className="max-w-4xl mx-auto px-4 py-16 sm:px-6 sm:pt-20 sm:pb-24 lg:max-w-7xl lg:pt-24 lg:px-8">
-            <h2 className="text-3xl font-extrabold text-white tracking-tight">
-              Inbox support built for efficiency
-            </h2>
-            <p className="mt-4 max-w-3xl text-lg text-purple-200">
-              Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et
-              magna sit morbi lobortis. Blandit aliquam sit nisl euismod mattis
-              in.
-            </p>
-            <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-16">
-              {features.map((feature) => (
-                <div key={feature.name}>
-                  <div>
-                    <span className="flex items-center justify-center h-12 w-12 rounded-md bg-white bg-opacity-10">
-                      <feature.icon
-                        className="h-6 w-6 text-white"
-                        aria-hidden="true"
-                      />
-                    </span>
-                  </div>
-                  <div className="mt-6">
-                    <h3 className="text-lg font-medium text-white">
-                      {feature.name}
-                    </h3>
-                    <p className="mt-2 text-base text-purple-200">
-                      {feature.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Stats section */}
-        <div className="relative bg-gray-900">
-          <div className="h-80 absolute inset-x-0 bottom-0 xl:top-0 xl:h-full">
-            <div className="h-full w-full xl:grid xl:grid-cols-2">
-              <div className="h-full xl:relative xl:col-start-2">
-                <img
-                  className="h-full w-full object-cover opacity-25 xl:absolute xl:inset-0"
-                  src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2830&q=80&sat=-100"
-                  alt="People working on laptops"
-                />
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-gray-900 xl:inset-y-0 xl:left-0 xl:h-full xl:w-32 xl:bg-gradient-to-r"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8 xl:grid xl:grid-cols-2 xl:grid-flow-col-dense xl:gap-x-8">
-            <div className="relative pt-12 pb-64 sm:pt-24 sm:pb-64 xl:col-start-1 xl:pb-24">
-              <h2 className="text-sm font-semibold tracking-wide uppercase">
-                <span className="bg-gradient-to-r from-purple-300 to-orange-300 bg-clip-text text-transparent">
-                  Valuable Metrics
-                </span>
-              </h2>
-              <p className="mt-3 text-3xl font-extrabold text-white">
-                Get actionable data that will help grow your business
-              </p>
-              <p className="mt-5 text-lg text-gray-300">
-                Rhoncus sagittis risus arcu erat lectus bibendum. Ut in
-                adipiscing quis in viverra tristique sem. Ornare feugiat viverra
-                eleifend fusce orci in quis amet. Sit in et vitae tortor, massa.
-                Dapibus laoreet amet lacus nibh integer quis. Eu vulputate diam
-                sit tellus quis at.
-              </p>
-              <div className="mt-12 grid grid-cols-1 gap-y-12 gap-x-6 sm:grid-cols-2">
-                {metrics.map((item) => (
-                  <p key={item.id}>
-                    <span className="block text-2xl font-bold text-white">
-                      {item.stat}
-                    </span>
-                    <span className="mt-1 block text-base text-gray-300">
-                      <span className="font-medium text-white">
-                        {item.emphasis}
-                      </span>{" "}
-                      {item.rest}
-                    </span>
-                  </p>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* CTA Section */}
-        <div className="bg-white">
+        <div className="bg-white dark:bg-gray-800">
           <div className="max-w-4xl mx-auto py-16 px-4 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 lg:flex lg:items-center lg:justify-between">
-            <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+            <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
               <span className="block">Ready to get started?</span>
               <span className="block bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">
                 Get in touch or create an account.
@@ -581,7 +492,10 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="bg-gray-50" aria-labelledby="footerHeading">
+      <footer
+        className="bg-gray-50 dark:bg-gray-700"
+        aria-labelledby="footerHeading"
+      >
         <h2 id="footerHeading" className="sr-only">
           Footer
         </h2>
@@ -660,37 +574,6 @@ export default function Home() {
                   </ul>
                 </div>
               </div>
-            </div>
-            <div className="mt-12 xl:mt-0">
-              <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-                Subscribe to our newsletter
-              </h3>
-              <p className="mt-4 text-base text-gray-500">
-                The latest news, articles, and resources, sent to your inbox
-                weekly.
-              </p>
-              <form className="mt-4 sm:flex sm:max-w-md">
-                <label htmlFor="emailAddress" className="sr-only">
-                  Email address
-                </label>
-                <input
-                  type="email"
-                  name="emailAddress"
-                  id="emailAddress"
-                  autoComplete="email"
-                  required
-                  className="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-orange-500 focus:border-orange-500 focus:placeholder-gray-400"
-                  placeholder="Enter your email"
-                />
-                <div className="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-                  <button
-                    type="submit"
-                    className="w-full flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:from-purple-700 hover:to-orange-700"
-                  >
-                    Subscribe
-                  </button>
-                </div>
-              </form>
             </div>
           </div>
           <div className="mt-12 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between lg:mt-16">
