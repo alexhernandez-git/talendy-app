@@ -496,7 +496,7 @@ const Contribute = () => {
                     id="timeline-title"
                     className="text-md text-gray-900 dark:text-white"
                   >
-                    Members Joined
+                    Joined
                   </span>
                   <ul className=" divide-y divide-gray-200 dark:divide-gray-400 ">
                     <Member admin />
