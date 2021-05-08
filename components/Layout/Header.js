@@ -145,7 +145,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
               <Link href={authReducer.is_authenticated ? "/feed" : "/"}>
                 <img
                   className="block h-8 w-auto cursor-pointer"
-                  src="https://tailwindui.com/img/logos/workflow-mark.svg?color=orange&shade=500"
+                  src="/static/images/talendy-logo.png"
                   alt="Workflow"
                 />
               </Link>
