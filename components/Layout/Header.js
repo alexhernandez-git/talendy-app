@@ -5,7 +5,7 @@ import Link from "next/link";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
-import { HOME_PAGE, SEARCH_USERS_PAGE } from "pages";
+import { HOME_PAGE, SEARCH_POSTS_PAGE, SEARCH_USERS_PAGE } from "pages";
 import Login from "./Login";
 import { useSelector } from "react-redux";
 import { logout } from "redux/actions/auth";
@@ -42,7 +42,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
     }),
     onSubmit: async (values) => {
       if (values.search === "") {
-        router.push(`/`);
+        router.back();
         return;
       }
       if (page == SEARCH_USERS_PAGE) {
@@ -175,6 +175,9 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
                     </div>
                     <input
                       id="search"
+                      autoFocus={
+                        page === SEARCH_USERS_PAGE || page === SEARCH_POSTS_PAGE
+                      }
                       value={formik.values.search}
                       onChange={formik.handleChange}
                       name="search"
