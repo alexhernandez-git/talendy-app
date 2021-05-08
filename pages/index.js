@@ -32,6 +32,7 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import { ChevronDownIcon } from "@heroicons/react/solid";
+import { useRouter } from "next/router";
 
 const footerNavigation = {
   solutions: [
@@ -126,21 +127,18 @@ const footerNavigation = {
 export default function Home() {
   const page = HOME_PAGE;
 
-  const dispatch = useDispatch();
-  const initialDataReducer = useSelector((state) => state.initialDataReducer);
   const authReducer = useSelector((state) => state.authReducer);
-
+  const router = useRouter();
   useEffect(() => {
-    const fetchInitialData = async () => {
-      if (initialDataReducer.data_fetched) {
-        await dispatch(fetchTopKarmaUsers());
-        await dispatch(fetchPosts(page, { community: authReducer.community }));
-      }
-    };
-
-    fetchInitialData();
-  }, [initialDataReducer.data_fetched, authReducer.community]);
-
+    if (authReducer.is_authenticated) {
+      router.push("/feed");
+    }
+  }, [authReducer.is_authenticated]);
+  useEffect(() => {
+    if (authReducer.is_authenticated) {
+      router.push("/feed");
+    }
+  }, []);
   return (
     <Layout>
       <main className="mt-10">

@@ -141,7 +141,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
         <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
           <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
             <div className="flex-shrink-0 flex items-center">
-              <Link href="/feed">
+              <Link href={authReducer.is_authenticated ? "/feed" : "/"}>
                 <img
                   className="block h-8 w-auto cursor-pointer"
                   src="https://tailwindui.com/img/logos/workflow-mark.svg?color=orange&shade=500"
