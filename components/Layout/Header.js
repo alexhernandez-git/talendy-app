@@ -41,6 +41,10 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
       search: Yup.string(),
     }),
     onSubmit: async (values) => {
+      if (values.search === "") {
+        router.push(`/`);
+        return;
+      }
       if (page == SEARCH_USERS_PAGE) {
         router.push(`/search/users/${values.search}`);
         return;
@@ -132,7 +136,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
     await dispatch(openChats());
   };
   return (
-    <header className="bg-white dark:bg-gray-700 shadow-sm lg:sticky lg:overflow-y-visible top-0 z-50">
+    <header className="bg-white dark:bg-gray-700 shadow-sm lg:sticky lg:overflow-y-visible top-0 z-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 static">
         <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
           <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
