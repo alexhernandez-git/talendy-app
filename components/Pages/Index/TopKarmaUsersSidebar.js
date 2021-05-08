@@ -10,7 +10,7 @@ const TopKarmaUsersSidebar = () => {
 
   return (
     <aside className="hidden xl:block xl:col-span-4">
-      <div className="sticky top-4 space-y-4">
+      <div className="sticky top-24 space-y-4">
         <section aria-labelledby="who-to-follow-heading">
           <div className="bg-white dark:bg-gray-700 rounded-lg shadow">
             <div className="p-6">

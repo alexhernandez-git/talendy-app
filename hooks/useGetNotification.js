@@ -7,6 +7,7 @@ const useGetNotification = (notification) => {
   let connection;
   let user;
   let member_joined;
+  let contribute_request;
   switch (notification?.type) {
     case "ME":
       const many_messages = notification.messages.length > 1;

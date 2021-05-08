@@ -483,7 +483,7 @@ const Contribute = () => {
               aria-labelledby="timeline-title"
               className="lg:col-start-3 lg:col-span-1 "
             >
-              <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6  dark:bg-gray-700  sticky top-4">
+              <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6  dark:bg-gray-700  sticky top-24">
                 <h2
                   id="timeline-title"
                   className="text-lg font-medium text-gray-900 dark:text-white"

@@ -163,7 +163,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
         </section>
       </div>
 
-      <div className="sticky top-4">
+      <div className="sticky top-24">
         {!profile && page !== DONATION_PAGE && (
           <>
             <section aria-labelledby="trending-heading" className="mb-4">
@@ -288,7 +288,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
             </section>
           </>
         )}
-        <div className={profile ? "sticky top-4" : ""}>
+        <div className={profile ? "sticky top-24" : ""}>
           <section aria-labelledby="trending-heading" className="mb-4">
             <div className="bg-white dark:bg-gray-700 rounded-lg shadow">
               <div className="p-6">

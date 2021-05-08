@@ -11,6 +11,7 @@ import {
   FETCH_MORE_NOTIFICATIONS,
   FETCH_MORE_NOTIFICATIONS_SUCCESS,
   FETCH_MORE_NOTIFICATIONS_FAIL,
+  NEW_MESSAGE_EVENT,
 } from "../types";
 import { fetchContributeRequest } from "./contributeRequests";
 import { createAlert } from "./alerts";
