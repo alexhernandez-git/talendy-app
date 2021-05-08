@@ -6,11 +6,7 @@ const ContributeChat = () => {
     <section aria-labelledby="notes-title" className="">
       <div className="bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg sm:overflow-hidden">
         <div className=" ">
-          <div className="px-4 py-5 sm:px-6">
-            <h2 id="notes-title" className="text-lg font-medium  text-white">
-              Chat
-            </h2>
-          </div>
+          <div className="px-4 py-5 sm:px-6"></div>
           <div className="">
             <ul className="p-4  overflow-y-auto bg-gray-100 dark:bg-gray-800 flex flex-col-reverse content-container">
               <Message />

@@ -488,13 +488,36 @@ const Contribute = () => {
                   id="timeline-title"
                   className="text-lg font-medium text-gray-900 dark:text-white"
                 >
-                  Members Joined
+                  Members
                 </h2>
 
-                <div className="mt-3 flow-root">
+                <div className="mt-3 flow-root overflow-y-auto max-h-96 p-1">
+                  <span
+                    id="timeline-title"
+                    className="text-md text-gray-900 dark:text-white"
+                  >
+                    Members Joined
+                  </span>
                   <ul className=" divide-y divide-gray-200 dark:divide-gray-400 ">
                     <Member admin />
                     <Member />
+                  </ul>
+                  <span
+                    id="timeline-title"
+                    className="text-md text-gray-900 dark:text-white"
+                  >
+                    Online
+                  </span>
+                  <ul className=" divide-y divide-gray-200 dark:divide-gray-400 ">
+                    <Member />
+                  </ul>
+                  <span
+                    id="timeline-title"
+                    className="text-md text-gray-900 dark:text-white"
+                  >
+                    Offline
+                  </span>
+                  <ul className=" divide-y divide-gray-200 dark:divide-gray-400 opacity-70">
                     <Member />
                     <Member />
                     <Member />
