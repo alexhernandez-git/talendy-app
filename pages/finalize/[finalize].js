@@ -61,30 +61,11 @@ const Finalize = () => {
               <Member />
               <Member />
               <Member />
-              <Member />
-              <Member />
-              <Member />
-              <Member />
-              <Member />
-              <Member />
-              <Member />
-              <Member />
-              <Member />
-              <Member />
-              <Member />
-              <Member />
-              <Member />
-              <Member />
-              <Member />
-              <Member />
-              <Member />
-              <Member />
-              <Member />
             </ul>
           </div>
-          <div className="col-span-12">
+          {/* <div className="col-span-12">
             <Pagination next={true} />
-          </div>
+          </div> */}
         </div>
       </div>
     </Layout>
