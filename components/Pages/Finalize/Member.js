@@ -41,14 +41,14 @@ const Member = () => {
             </div>
             <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-5 md:gap-4">
               <div className="flex items-center">
-                <Link href="/user/123">
+                <a href="/user/123" target="_blank">
                   <p
                     onMouseDown={(e) => e.stopPropagation()}
                     className="text-sm font-medium text-gray-500 dark:text-gray-100 truncate rounded-2xl px-3 py-1 hover:underline"
                   >
                     Ricardo Cooper
                   </p>
-                </Link>
+                </a>
               </div>
 
               <div className="hidden md:block col-start-3 col-span-2">
