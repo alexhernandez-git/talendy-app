@@ -1,4 +1,4 @@
-import { HOME_PAGE } from "pages";
+import { FEED_PAGE } from "pages";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { fetchTopKarmaUsers } from "redux/actions/topKarmaUsers";

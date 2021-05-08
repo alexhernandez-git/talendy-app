@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {
   FOLLOWED_USERS_POSTS_PAGE,
-  HOME_PAGE,
+  FEED_PAGE,
   MOST_KARMA_POSTS_PAGE,
 } from "pages";
 import React from "react";
@@ -33,11 +33,11 @@ const HomeMenu = ({ page }) => {
             <a
               aria-current="page"
               className={`${
-                page === HOME_PAGE ? "text-gray-900" : "text-gray-500"
+                page === FEED_PAGE ? "text-gray-900" : "text-gray-500"
               }  dark:text-white rounded-l-lg group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10  hover:text-gray-700 dark:hover:bg-gray-800`}
             >
               <span>Recent</span>
-              {page === HOME_PAGE ? (
+              {page === FEED_PAGE ? (
                 <span
                   aria-hidden="true"
                   className="bg-orange-500 absolute inset-x-0 bottom-0 h-0.5"

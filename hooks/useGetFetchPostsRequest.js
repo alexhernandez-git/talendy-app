@@ -3,7 +3,7 @@ import {
   ACTIVE_CONTRIBUTED_POSTS_PAGE,
   SOLVED_CONTRIBUTED_POSTS_PAGE,
   FOLLOWED_USERS_POSTS_PAGE,
-  HOME_PAGE,
+  FEED_PAGE,
   MOST_KARMA_POSTS_PAGE,
   MY_ACTIVE_POSTS_PAGE,
   MY_POSTS_PAGE,
@@ -18,7 +18,7 @@ import React from "react";
 
 const useGetFetchPostsRequest = (page, user) => {
   switch (page) {
-    case HOME_PAGE:
+    case FEED_PAGE:
     case SEARCH_POSTS_PAGE:
       return "posts";
     case MOST_KARMA_POSTS_PAGE:

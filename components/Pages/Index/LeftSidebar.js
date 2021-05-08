@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {
   FOLLOWED_USERS_POSTS_PAGE,
-  HOME_PAGE,
+  FEED_PAGE,
   MOST_KARMA_POSTS_PAGE,
 } from "pages";
 import React, { useState } from "react";
@@ -38,7 +38,7 @@ const LeftSidebar = ({ page }) => {
               <span
                 className={`
               ${
-                page === HOME_PAGE
+                page === FEED_PAGE
                   ? "bg-gray-200 text-gray-900"
                   : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
               } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}

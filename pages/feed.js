@@ -2,7 +2,7 @@ import Layout from "components/Layout/Layout";
 import LeftSidebar from "components/Pages/Index/LeftSidebar";
 
 import RightSidebar from "components/Pages/Index/TopKarmaUsersSidebar";
-import { HOME_PAGE } from "pages";
+import { FEED_PAGE } from "pages";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { fetchTopKarmaUsers } from "redux/actions/topKarmaUsers";
@@ -13,7 +13,7 @@ import VisibilitySensor from "react-visibility-sensor";
 import { fetchMorePosts, fetchPosts } from "redux/actions/posts";
 import PostsFeed from "components/Layout/PostsFeed";
 export default function Home() {
-  const page = HOME_PAGE;
+  const page = FEED_PAGE;
 
   const dispatch = useDispatch();
   const initialDataReducer = useSelector((state) => state.initialDataReducer);

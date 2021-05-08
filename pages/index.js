@@ -2,7 +2,7 @@ import Layout from "components/Layout/Layout";
 import LeftSidebar from "components/Pages/Index/LeftSidebar";
 
 import RightSidebar from "components/Pages/Index/TopKarmaUsersSidebar";
-import { HOME_PAGE } from "pages";
+import { FEED_PAGE, HOME_PAGE } from "pages";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { fetchTopKarmaUsers } from "redux/actions/topKarmaUsers";
@@ -33,109 +33,6 @@ import {
 } from "@heroicons/react/outline";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
-const solutions = [
-  {
-    name: "Inbox",
-    description:
-      "Get a better understanding of where your traffic is coming from.",
-    href: "#",
-    icon: InboxIcon,
-  },
-  {
-    name: "Messaging",
-    description: "Speak directly to your customers in a more meaningful way.",
-    href: "#",
-    icon: AnnotationIcon,
-  },
-  {
-    name: "Live Chat",
-    description: "Your customers' data will be safe and secure.",
-    href: "#",
-    icon: ChatAlt2Icon,
-  },
-  {
-    name: "Knowledge Base",
-    description: "Connect with third-party tools that you're already using.",
-    href: "#",
-    icon: QuestionMarkCircleIcon,
-  },
-];
-const features = [
-  {
-    name: "Unlimited Inboxes",
-    description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    icon: InboxIcon,
-  },
-  {
-    name: "Manage Team Members",
-    description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    icon: UsersIcon,
-  },
-  {
-    name: "Spam Report",
-    description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    icon: TrashIcon,
-  },
-  {
-    name: "Compose in Markdown",
-    description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    icon: PencilAltIcon,
-  },
-  {
-    name: "Team Reporting",
-    description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    icon: DocumentReportIcon,
-  },
-  {
-    name: "Saved Replies",
-    description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    icon: ReplyIcon,
-  },
-  {
-    name: "Email Commenting",
-    description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    icon: ChatAltIcon,
-  },
-  {
-    name: "Connect with Customers",
-    description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    icon: HeartIcon,
-  },
-];
-const metrics = [
-  {
-    id: 1,
-    stat: "8K+",
-    emphasis: "Companies",
-    rest: "use laoreet amet lacus nibh integer quis.",
-  },
-  {
-    id: 2,
-    stat: "25K+",
-    emphasis: "Countries around the globe",
-    rest: "lacus nibh integer quis.",
-  },
-  {
-    id: 3,
-    stat: "98%",
-    emphasis: "Customer satisfaction",
-    rest: "laoreet amet lacus nibh integer quis.",
-  },
-  {
-    id: 4,
-    stat: "12M+",
-    emphasis: "Issues resolved",
-    rest: "lacus nibh integer quis.",
-  },
-];
 const footerNavigation = {
   solutions: [
     { name: "Marketing", href: "#" },
@@ -225,10 +122,6 @@ const footerNavigation = {
     },
   ],
 };
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function Home() {
   const page = HOME_PAGE;
