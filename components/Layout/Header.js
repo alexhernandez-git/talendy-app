@@ -131,6 +131,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
     handleCloseMenu();
     handleCloseMobileMenu();
     dispatch(logout());
+    router.push("/");
   };
   const handleOpenChats = async () => {
     await dispatch(openChats());
