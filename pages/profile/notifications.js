@@ -47,7 +47,7 @@ const Notifications = () => {
               <ol class="flex items-center space-x-4">
                 <li>
                   <div>
-                    <Link href="/">
+                    <Link href="/feed">
                       <span class="cursor-pointer text-gray-400 hover:text-gray-500">
                         <svg
                           class="flex-shrink-0 h-5 w-5"

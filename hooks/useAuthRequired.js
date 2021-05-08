@@ -44,7 +44,7 @@ const useAuthRequired = (page) => {
   useEffect(() => {
     if (initialDataReducer.data_fetched) {
       if (!is_authenticated && matches) {
-        router.push("/");
+        router.push("/feed");
       } else {
         setCanRender(true);
       }

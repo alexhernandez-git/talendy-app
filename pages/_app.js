@@ -28,7 +28,7 @@ function WrappedApp({ Component, pageProps }) {
   const ws = useRef(null);
   const connect = () => {
     ws.current = new WebSocket(
-      process.env.WS + "/ws/notifications/" + authReducer.user.id + "/"
+      process.env.WS + "/ws/notifications/" + authReducer.user.id + "/feed"
     );
   };
   useEffect(() => {

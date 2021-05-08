@@ -91,11 +91,11 @@ const Contribute = () => {
 
       socketRef.current.on("not allowed", () => {
         dispatch(createAlert("ERROR", "You are already in this room"));
-        router.push("/");
+        router.push("/feed");
       });
       socketRef.current.on("no user id", () => {
         dispatch(createAlert("ERROR", "There is not user id"));
-        router.push("/");
+        router.push("/feed");
       });
       function createPeer(userToSignal, callerID, stream) {
         console.log("createPeer", stream);

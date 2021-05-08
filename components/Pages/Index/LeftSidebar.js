@@ -34,7 +34,7 @@ const LeftSidebar = ({ page }) => {
             className="mt-3 space-y-2"
             aria-labelledby="communities-headline"
           >
-            <Link href="/">
+            <Link href="/feed">
               <span
                 className={`
               ${

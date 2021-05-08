@@ -290,7 +290,7 @@ export const verifyAccount = (token, router) => async (dispatch, getState) => {
       });
       await dispatch(createAlert("SUCCESS", "Account succesfully validated"));
 
-      await router.push("/");
+      await router.push("/feed");
     })
     .catch((err) => {
       dispatch({
@@ -298,7 +298,7 @@ export const verifyAccount = (token, router) => async (dispatch, getState) => {
         payload: { data: err.response?.data, status: err.response?.status },
       });
 
-      router.push("/");
+      router.push("/feed");
     });
 };
 
@@ -317,7 +317,7 @@ export const validateChangeEmail = (token, router) => async (
         payload: res.data,
       });
 
-      router.push("/");
+      router.push("/feed");
     })
     .catch((err) => {
       dispatch({
@@ -325,7 +325,7 @@ export const validateChangeEmail = (token, router) => async (
         payload: { data: err.response?.data, status: err.response?.status },
       });
 
-      router.push("/");
+      router.push("/feed");
     });
 };
 export const forgetPassword = (values, handleClose, resetForm) => async (
@@ -361,7 +361,7 @@ export const resetPassword = (values, router) => async (dispatch, getState) => {
         payload: res.data,
       });
 
-      router.push("/");
+      router.push("/feed");
     })
     .catch((err) => {
       dispatch({
@@ -369,7 +369,7 @@ export const resetPassword = (values, router) => async (dispatch, getState) => {
         payload: { data: err.response?.data, status: err.response?.status },
       });
 
-      router.push("/");
+      router.push("/feed");
     });
 };
 
@@ -880,7 +880,7 @@ export const removeAccount = (router) => async (dispatch, getState) => {
         payload: res.data,
       });
       window.scrollTo(0, 0);
-      await router.push("/");
+      await router.push("/feed");
     })
     .catch(async (err) => {
       await dispatch({
