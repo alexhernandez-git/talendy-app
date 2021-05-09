@@ -1,7 +1,7 @@
 import Layout from "components/Layout/Layout";
-import LeftSidebar from "components/Pages/Index/LeftSidebar";
+import LeftSidebar from "components/Pages/Feed/LeftSidebar";
 
-import RightSidebar from "components/Pages/Index/TopKarmaUsersSidebar";
+import RightSidebar from "components/Pages/Feed/TopKarmaUsersSidebar";
 import UserCard from "components/Pages/Profile/UserCard";
 import { NOTIFICATIONS_PAGE } from "pages";
 import { useSelector } from "react-redux";

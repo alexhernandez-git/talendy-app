@@ -1,6 +1,6 @@
 import Layout from "components/Layout/Layout";
 
-import RightSidebar from "components/Pages/Index/TopKarmaUsersSidebar";
+import RightSidebar from "components/Pages/Feed/TopKarmaUsersSidebar";
 import { SEARCH_USERS_PAGE } from "pages";
 import { useState } from "react";
 import User from "components/Layout/User";

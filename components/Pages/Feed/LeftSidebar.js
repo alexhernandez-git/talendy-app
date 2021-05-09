@@ -72,6 +72,7 @@ const LeftSidebar = ({ page }) => {
             </Link>
           </div>
         </div>
+
         <div className="pt-3">
           <p
             className="px-3 text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider"

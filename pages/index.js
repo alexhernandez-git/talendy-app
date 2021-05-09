@@ -1,7 +1,7 @@
 import Layout from "components/Layout/Layout";
-import LeftSidebar from "components/Pages/Index/LeftSidebar";
+import LeftSidebar from "components/Pages/Feed/LeftSidebar";
 
-import RightSidebar from "components/Pages/Index/TopKarmaUsersSidebar";
+import RightSidebar from "components/Pages/Feed/TopKarmaUsersSidebar";
 import { FEED_PAGE, HOME_PAGE } from "pages";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";

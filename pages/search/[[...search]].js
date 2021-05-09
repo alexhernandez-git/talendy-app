@@ -1,7 +1,7 @@
 import Layout from "components/Layout/Layout";
 import LeftSidebar from "components/Pages/Search/LeftSidebar";
 
-import RightSidebar from "components/Pages/Index/TopKarmaUsersSidebar";
+import RightSidebar from "components/Pages/Feed/TopKarmaUsersSidebar";
 import { SEARCH_POSTS_PAGE } from "pages";
 import { useState } from "react";
 import SearchMenu from "components/Pages/Search/SearchMenu";
