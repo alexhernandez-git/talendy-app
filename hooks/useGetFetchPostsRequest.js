@@ -13,6 +13,7 @@ import {
   USER_POSTS_PAGE,
   ACTIVE_USER_POSTS_PAGE,
   SOLVED_USER_POSTS_PAGE,
+  USER_CREATED_POSTS_PAGE,
 } from "pages";
 import React from "react";
 
@@ -37,14 +38,14 @@ const useGetFetchPostsRequest = (page, user) => {
       return "posts/list_contributed_active_posts";
     case SOLVED_CONTRIBUTED_POSTS_PAGE:
       return "posts/list_contributed_solved_posts";
-    case USER_CONTRIBUTED_POSTS_PAGE:
-      return `posts/${user}/list_user_contributed`;
+
     case USER_POSTS_PAGE:
       return `posts/${user}/list_user_posts`;
-    case ACTIVE_USER_POSTS_PAGE:
-      return `posts/${user}/list_active_user_posts`;
-    case SOLVED_USER_POSTS_PAGE:
-      return `posts/${user}/list_solved_user_posts`;
+    case USER_CONTRIBUTED_POSTS_PAGE:
+      return `posts/${user}/list_user_contributed`;
+    case USER_CREATED_POSTS_PAGE:
+      return `posts/${user}/list_user_created`;
+
     default:
       return "posts";
   }

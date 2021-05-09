@@ -132,7 +132,7 @@ const Post = ({ page, post }) => {
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
-      reason: Yup.string().required(),
+      reason: Yup.string(),
       post: Yup.string().required(),
     }),
     onSubmit: async (values, { resetForm }) => {
