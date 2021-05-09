@@ -20,7 +20,7 @@ import { createAlert } from "redux/actions/alerts";
 import useAuthRequired from "hooks/useAuthRequired";
 import { fetchPost } from "redux/actions/post";
 import Spinner from "components/Layout/Spinner";
-
+import moment from "moment";
 const Audio = (props) => {
   const ref = useRef();
   useEffect(() => {
@@ -42,7 +42,6 @@ const Audio = (props) => {
 
 const Contribute = () => {
   const page = CONTRIBUTE_PAGE;
-  const image = true;
   const router = useRouter();
   const dispatch = useDispatch();
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
@@ -56,6 +55,17 @@ const Contribute = () => {
     fetchInitialData();
   }, [initialDataFetched]);
   const postReducer = useSelector((state) => state.postReducer);
+  const { post, is_loading } = postReducer;
+  useEffect(() => {
+    if (
+      !is_loading &&
+      initialDataFetched &&
+      !post?.members?.some((member) => member.user.id === authReducer.user?.id)
+    ) {
+      router.push(authReducer.is_authenticated ? "/feed" : "/");
+      dispatch(createAlert("ERROR", "You are not member of this post"));
+    }
+  }, [post]);
   // Webrtc
   const [peers, setPeers] = useState([]);
   const myStreamRef = useRef();
@@ -334,12 +344,13 @@ const Contribute = () => {
                             Welcome back,
                           </p> */}
                       <p className="text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">
-                        What would you have done differently if you ran Jurassic
-                        Park?
+                        {post?.title}
                       </p>
                       <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
                         Created at{" "}
-                        <time dateTime="2020-08-25">August 25, 2020</time>
+                        <time dateTime="2020-08-25">
+                          {moment(post?.created).format("MMM D [at] h:mm A z")}
+                        </time>
                       </p>
                     </div>
                   </div>
@@ -554,9 +565,8 @@ const Contribute = () => {
         </div>
       </Layout>
       <PostModal
-        post={postReducer.post}
+        post={post}
         page={page}
-        image={image}
         modalOpen={modalOpen}
         handleToggleModal={handleToggleModal}
         handleCloseModal={handleCloseModal}
