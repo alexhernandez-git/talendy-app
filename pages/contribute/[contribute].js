@@ -18,6 +18,8 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { createAlert } from "redux/actions/alerts";
 import useAuthRequired from "hooks/useAuthRequired";
+import { fetchPost } from "redux/actions/post";
+import Spinner from "components/Layout/Spinner";
 
 const Audio = (props) => {
   const ref = useRef();
@@ -44,6 +46,16 @@ const Contribute = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      if (initialDataFetched) {
+        await dispatch(fetchPost(router.query?.contribute));
+      }
+    };
+
+    fetchInitialData();
+  }, [initialDataFetched]);
+  const postReducer = useSelector((state) => state.postReducer);
   // Webrtc
   const [peers, setPeers] = useState([]);
   const myStreamRef = useRef();
@@ -235,7 +247,11 @@ const Contribute = () => {
   const handleShareScreen = () => {
     dispatch(createAlert("INFO", "Feature not ready"));
   };
-  return (
+  return !canRender ? (
+    <div className="flex justify-center items-center h-screen dark:bg-gray-800">
+      <Spinner />
+    </div>
+  ) : (
     <>
       {peers.map((peer, index) => {
         return <Audio key={index} peer={peer} isDeafen={isDeafen} />;
@@ -538,6 +554,7 @@ const Contribute = () => {
         </div>
       </Layout>
       <PostModal
+        post={postReducer.post}
         page={page}
         image={image}
         modalOpen={modalOpen}

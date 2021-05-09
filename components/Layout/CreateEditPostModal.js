@@ -71,11 +71,7 @@ const CreateEditPostModal = ({
       const fileImages = images.filter((image) => !image.id);
       for (let i = 0; i < fileImages.length; i++) {
         try {
-          fd.append(
-            "images",
-            fileImages[i],
-            Math.random().toString(36) + fileImages[i].name
-          );
+          fd.append("images", fileImages[i], fileImages[i].name);
         } catch (error) {
           console.log(error);
         }
