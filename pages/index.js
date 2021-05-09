@@ -33,6 +33,7 @@ import {
 } from "@heroicons/react/outline";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
+import { changeCommunity } from "redux/actions/auth";
 
 const footerNavigation = {
   solutions: [
@@ -128,6 +129,7 @@ export default function Home() {
   const page = HOME_PAGE;
 
   const authReducer = useSelector((state) => state.authReducer);
+  const communitiesReducer = useSelector((state) => state.communitiesReducer);
   const router = useRouter();
   useEffect(() => {
     if (authReducer.is_authenticated) {
@@ -139,6 +141,12 @@ export default function Home() {
       router.push("/feed");
     }
   }, []);
+  const dispatch = useDispatch();
+
+  const handleSetCommunity = (selectedCommunity) => {
+    dispatch(changeCommunity(selectedCommunity));
+    router.push("/search");
+  };
   return (
     <Layout>
       <main className="mt-10">
@@ -241,35 +249,19 @@ export default function Home() {
           />
           <div className="relative">
             <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:grid-flow-col-dense lg:gap-24">
-              <div className="px-4 max-w-xl mx-auto sm:px-6 lg:py-32 lg:max-w-none lg:mx-0 lg:px-0">
+              <div className="px-4 max-w-xl mx-auto sm:px-6 lg:py-16 lg:max-w-none lg:mx-0 lg:px-0">
                 <div>
-                  <div>
-                    <span className="h-12 w-12 rounded-md flex items-center justify-center bg-gradient-to-r from-orange-500 to-pink-500">
-                      <InboxIcon
-                        className="h-6 w-6 text-white"
-                        aria-hidden="true"
-                      />
-                    </span>
-                  </div>
                   <div className="mt-6">
-                    <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-                      Stay on top of customer support
+                    <h2 className="text-5xl font-normal tracking-tight text-gray-900 dark:text-white">
+                      Search by communities
                     </h2>
-                    <p className="mt-4 text-lg text-gray-500 dark:text-gray-200">
+                    {/* <p className="mt-4 text-lg text-gray-500 dark:text-gray-200">
                       Semper curabitur ullamcorper posuere nunc sed. Ornare
                       iaculis bibendum malesuada faucibus lacinia porttitor.
                       Pulvinar laoreet sagittis viverra duis. In venenatis sem
                       arcu pretium pharetra at. Lectus viverra dui tellus ornare
                       pharetra.
-                    </p>
-                    <div className="mt-6">
-                      <a
-                        href="#"
-                        className="inline-flex px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
-                      >
-                        Get started
-                      </a>
-                    </div>
+                    </p> */}
                   </div>
                 </div>
                 {/* <div className="mt-8 border-t border-gray-200 pt-6">
@@ -298,13 +290,21 @@ export default function Home() {
                   </blockquote>
                 </div> */}
               </div>
-              <div className="mt-12 sm:mt-16 lg:mt-0">
-                <div className="pl-4 -mr-48 sm:pl-6 md:-mr-16 lg:px-0 lg:m-0 lg:relative lg:h-full">
-                  <img
-                    className="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
-                    src="https://tailwindui.com/img/component-images/inbox-app-screenshot-1.jpg"
-                    alt="Inbox user interface"
-                  />
+              <div className="mt-12 sm:mt-16 lg:mt-0 ">
+                <span className="block text-gray-500 dark:text-gray-200 font-medium">
+                  COMMUNITIES
+                </span>
+                <div className="flex flex-wrap mt-4">
+                  {communitiesReducer.communities.map((communityItem) => (
+                    <button
+                      type="button"
+                      onClick={handleSetCommunity.bind(this, communityItem.id)}
+                      className="mr-2 mb-2 inline-flex items-center px-6 py-2 border border-transparent text-base font-medium rounded-full shadow-sm text-gray-700 bg-gray-300 hover:opacity-70 dark:text-white 
+                    dark:bg-gray-600"
+                    >
+                      {communityItem.name}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
