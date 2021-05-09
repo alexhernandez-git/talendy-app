@@ -58,14 +58,15 @@ const Contribute = () => {
   const { post, is_loading } = postReducer;
   useEffect(() => {
     if (
-      !is_loading &&
       initialDataFetched &&
+      !is_loading &&
+      post &&
       !post?.members?.some((member) => member.user.id === authReducer.user?.id)
     ) {
       router.push(authReducer.is_authenticated ? "/feed" : "/");
       dispatch(createAlert("ERROR", "You are not member of this post"));
     }
-  }, [post]);
+  }, [is_loading]);
   // Webrtc
   const [peers, setPeers] = useState([]);
   const myStreamRef = useRef();
