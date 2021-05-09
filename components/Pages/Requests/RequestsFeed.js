@@ -20,14 +20,14 @@ const RequestsFeed = () => {
   };
   return (
     <div className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
-      <nav class="flex mb-4" aria-label="Breadcrumb">
-        <ol class="flex items-center space-x-4">
+      <nav className="flex mb-4 mx-4 sm:mx-auto" aria-label="Breadcrumb">
+        <ol className="flex items-center space-x-4">
           <li>
             <div>
               <Link href="/feed">
-                <span class="cursor-pointer text-gray-400 hover:text-gray-500">
+                <span className="cursor-pointer text-gray-400 hover:text-gray-500">
                   <svg
-                    class="flex-shrink-0 h-5 w-5"
+                    className="flex-shrink-0 h-5 w-5"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
@@ -35,16 +35,16 @@ const RequestsFeed = () => {
                   >
                     <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
                   </svg>
-                  <span class="sr-only">Home</span>
+                  <span className="sr-only">Home</span>
                 </span>
               </Link>
             </div>
           </li>
 
           <li>
-            <div class="flex items-center">
+            <div className="flex items-center">
               <svg
-                class="flex-shrink-0 h-5 w-5 text-gray-400"
+                className="flex-shrink-0 h-5 w-5 text-gray-400"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
@@ -57,7 +57,7 @@ const RequestsFeed = () => {
                 />
               </svg>
               <Link href="/profile/posts">
-                <span class="cursor-pointer ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
+                <span className="cursor-pointer ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
                   Profile
                 </span>
               </Link>
@@ -65,9 +65,9 @@ const RequestsFeed = () => {
           </li>
 
           <li>
-            <div class="flex items-center">
+            <div className="flex items-center">
               <svg
-                class="flex-shrink-0 h-5 w-5 text-gray-400"
+                className="flex-shrink-0 h-5 w-5 text-gray-400"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
@@ -80,7 +80,7 @@ const RequestsFeed = () => {
                 />
               </svg>
               <span
-                class="ml-4 text-sm font-medium text-orange-500"
+                className="ml-4 text-sm font-medium text-orange-500"
                 aria-current="page"
               >
                 Requests to contribute
