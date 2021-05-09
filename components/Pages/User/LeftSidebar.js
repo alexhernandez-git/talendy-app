@@ -9,9 +9,16 @@ import {
 } from "pages";
 import React from "react";
 
-const LeftSidebar = ({ page, mobile }) => {
+const LeftSidebar = ({ page, mobile, status, setStatus }) => {
   const router = useRouter();
   const userId = router.query?.user;
+  const handleChangeStatus = (newStatus) => {
+    if (newStatus === status) {
+      setStatus("");
+      return;
+    }
+    setStatus(newStatus);
+  };
   return (
     <div
       className={`${
@@ -74,9 +81,10 @@ const LeftSidebar = ({ page, mobile }) => {
             aria-labelledby="communities-headline"
           >
             <span
+              onClick={handleChangeStatus.bind(this, "AC")}
               className={`
                   ${
-                    page === ACTIVE_USER_POSTS_PAGE
+                    status === "AC"
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
@@ -84,9 +92,10 @@ const LeftSidebar = ({ page, mobile }) => {
               <span className="truncate">Active</span>
             </span>
             <span
+              onClick={handleChangeStatus.bind(this, "SO")}
               className={`
                   ${
-                    page === SOLVED_USER_POSTS_PAGE
+                    status === "SO"
                       ? "bg-gray-200 text-gray-900 "
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}

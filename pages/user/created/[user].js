@@ -12,6 +12,7 @@ import UserMenu from "components/Pages/User/UserMenu";
 import Post from "components/Layout/Post";
 import { fetchPosts } from "redux/actions/posts";
 import PostsFeed from "components/Layout/PostsFeed";
+import { useState } from "react";
 
 export default function Profile() {
   const page = USER_CREATED_POSTS_PAGE;
@@ -20,6 +21,8 @@ export default function Profile() {
   const router = useRouter();
   const initialDataReducer = useSelector((state) => state.initialDataReducer);
   const userReducer = useSelector((state) => state.userReducer);
+  const [status, setStatus] = useState(null);
+  const [firstLoad, setFirstLoad] = useState(false);
   useEffect(() => {
     const userId = router.query?.user;
     const fetchInitialData = async () => {
@@ -33,15 +36,29 @@ export default function Profile() {
       fetchInitialData();
     }
   }, [initialDataReducer.data_fetched]);
+  useEffect(() => {
+    console.log(status);
+    if (firstLoad) {
+      const userId = router.query?.user;
+
+      dispatch(fetchPosts(page, { user: userId, status: status }));
+    }
+    setFirstLoad(true);
+  }, [status]);
   return (
     <Layout>
       <div className="py-10">
         <div className="max-w-3xl mx-auto sm:px-6 flex flex-col lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
           <ProfileCard mobile page={page} user={userReducer.user} />
-          <LeftSidebar page={page} />
+          <LeftSidebar status={status} setStatus={setStatus} page={page} />
 
           <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
-            <LeftSidebar page={page} mobile />
+            <LeftSidebar
+              status={status}
+              setStatus={setStatus}
+              page={page}
+              mobile
+            />
 
             <PostsFeed />
           </main>

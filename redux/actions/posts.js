@@ -111,11 +111,14 @@ export const fetchPosts = (page, filters) => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_POSTS,
   });
+
   const search = filters?.search ? filters.search : "";
   const community = filters?.community ? filters.community : "";
+  const status = filters?.status ? filters.status : "";
+
   await axios
     .get(
-      `${process.env.HOST}/api/${url}/?search=${search}&community=${community}`,
+      `${process.env.HOST}/api/${url}/?search=${search}&community=${community}&status=${status}`,
       getState().authReducer.is_authenticated ? tokenConfig(getState) : null
     )
     .then(async (res) => {
