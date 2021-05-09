@@ -17,12 +17,17 @@ export default function Home() {
 
   const dispatch = useDispatch();
   const initialDataReducer = useSelector((state) => state.initialDataReducer);
+  const topKarmaUsersReducer = useSelector(
+    (state) => state.topKarmaUsersReducer
+  );
   const authReducer = useSelector((state) => state.authReducer);
 
   useEffect(() => {
     const fetchInitialData = async () => {
       if (initialDataReducer.data_fetched) {
-        await dispatch(fetchTopKarmaUsers());
+        if (topKarmaUsersReducer.users.results.length === 0) {
+          await dispatch(fetchTopKarmaUsers());
+        }
         await dispatch(fetchPosts(page, { community: authReducer.community }));
       }
     };

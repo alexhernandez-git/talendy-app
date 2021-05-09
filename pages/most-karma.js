@@ -16,11 +16,15 @@ export default function MostKarma() {
   const dispatch = useDispatch();
   const initialDataReducer = useSelector((state) => state.initialDataReducer);
   const authReducer = useSelector((state) => state.authReducer);
-
+  const topKarmaUsersReducer = useSelector(
+    (state) => state.topKarmaUsersReducer
+  );
   useEffect(() => {
     const fetchInitialData = async () => {
       if (initialDataReducer.data_fetched) {
-        await dispatch(fetchTopKarmaUsers());
+        if (topKarmaUsersReducer.users.results.length === 0) {
+          await dispatch(fetchTopKarmaUsers());
+        }
         await dispatch(fetchPosts(page, { community: authReducer.community }));
       }
     };
