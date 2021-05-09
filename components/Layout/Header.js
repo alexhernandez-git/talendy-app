@@ -46,10 +46,10 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
       search: Yup.string(),
     }),
     onSubmit: async (values) => {
-      if (values.search === "") {
-        router.back();
-        return;
-      }
+      // if (values.search === "") {
+      //   router.back();
+      //   return;
+      // }
       if (page == SEARCH_USERS_PAGE) {
         router.push(`/search/users/${values.search}`);
         return;
