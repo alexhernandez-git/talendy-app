@@ -70,10 +70,14 @@ const SearchMenu = ({ page }) => {
               >
                 {router.query?.search
                   ? router.query.search
-                  : communitiesReducer.communities.find(
-                      (community_item) =>
-                        community_item.id === authReducer.community
-                    )?.name}
+                  : page === SEARCH_POSTS_PAGE
+                  ? authReducer.community
+                    ? communitiesReducer.communities.find(
+                        (community_item) =>
+                          community_item.id === authReducer.community
+                      )?.name
+                    : "Posts"
+                  : "Users"}
               </span>
             </div>
           </li>

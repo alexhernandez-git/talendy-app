@@ -5,7 +5,12 @@ import Link from "next/link";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
-import { FEED_PAGE, SEARCH_POSTS_PAGE, SEARCH_USERS_PAGE } from "pages";
+import {
+  FEED_PAGE,
+  HOME_PAGE,
+  SEARCH_POSTS_PAGE,
+  SEARCH_USERS_PAGE,
+} from "pages";
 import Login from "./Login";
 import { useSelector } from "react-redux";
 import { logout } from "redux/actions/auth";
