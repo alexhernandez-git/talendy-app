@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 const SearchMenu = ({ page }) => {
   const router = useRouter();
   const authReducer = useSelector((state) => state.authReducer);
+  const communitiesReducer = useSelector((state) => state.communitiesReducer);
   const search =
     router?.query?.search?.length > 0 ? router.query.search[0] : "";
   const [menuValue, setMenuValue] = useState(page);
@@ -27,7 +28,7 @@ const SearchMenu = ({ page }) => {
   };
   return (
     <>
-      <nav class="flex mb-4" aria-label="Breadcrumb">
+      <nav class="flex mb-4 mx-4 sm:mx-auto" aria-label="Breadcrumb">
         <ol class="flex items-center space-x-4">
           <li>
             <div>
@@ -69,9 +70,10 @@ const SearchMenu = ({ page }) => {
               >
                 {router.query?.search
                   ? router.query.search
-                  : SEARCH_POSTS_PAGE
-                  ? "Posts"
-                  : "Users"}
+                  : communitiesReducer.communities.find(
+                      (community_item) =>
+                        community_item.id === authReducer.community
+                    )?.name}
               </span>
             </div>
           </li>
