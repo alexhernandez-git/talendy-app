@@ -13,6 +13,7 @@ import { fetchPosts } from "redux/actions/posts";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Link from "next/link";
+import { fetchTopKarmaUsers } from "redux/actions/topKarmaUsers";
 
 const SearchPosts = () => {
   const page = SEARCH_POSTS_PAGE;
@@ -21,10 +22,14 @@ const SearchPosts = () => {
   const router = useRouter();
   const initialDataReducer = useSelector((state) => state.initialDataReducer);
   const authReducer = useSelector((state) => state.authReducer);
+  const [firstLoad, setFirstLoad] = useState(true);
 
   useEffect(() => {
     const fetchInitialData = async () => {
       if (initialDataReducer.data_fetched) {
+        if (firstLoad) {
+          await dispatch(fetchTopKarmaUsers());
+        }
         await dispatch(
           fetchPosts(page, {
             community: authReducer.community,
@@ -32,6 +37,7 @@ const SearchPosts = () => {
               router?.query?.search?.length > 0 ? router.query.search[0] : "",
           })
         );
+        setFirstLoad(false);
       }
     };
 
