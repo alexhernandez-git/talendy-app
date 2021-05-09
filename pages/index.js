@@ -290,7 +290,7 @@ export default function Home() {
                   </blockquote>
                 </div> */}
               </div>
-              <div className="mt-12 sm:mt-16 lg:mt-0 ">
+              <div className="mt-12 sm:mt-16 lg:mt-0 mx-5 lg:mx-auto">
                 <span className="block text-gray-500 dark:text-gray-200 font-medium">
                   COMMUNITIES
                 </span>

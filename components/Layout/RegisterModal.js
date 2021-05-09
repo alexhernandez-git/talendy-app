@@ -119,7 +119,7 @@ const RegisterModal = ({ registerOpen, registerRef, handleCloseRegister }) => {
             <div className="sm:mx-auto sm:w-full sm:max-w-md ">
               <img
                 className="mx-auto h-8 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-mark-orange-500.svg"
+                src="/static/images/talendy-logo.png"
                 alt="Workflow"
               />
               <h2 className="mt-3 text-center text-2xl font-extrabold text-gray-900 dark:text-white">
