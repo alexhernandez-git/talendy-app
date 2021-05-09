@@ -74,7 +74,7 @@ const CreateEditPostModal = ({
           fd.append(
             "images",
             fileImages[i],
-            fileImages[i].name + Math.random().toString(36).substring(7)
+            Math.random().toString(36) + fileImages[i].name
           );
         } catch (error) {
           console.log(error);
