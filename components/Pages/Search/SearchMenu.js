@@ -67,7 +67,11 @@ const SearchMenu = ({ page }) => {
                 class="ml-4 text-sm font-medium text-orange-500"
                 aria-current="page"
               >
-                {router.query?.search}
+                {router.query?.search
+                  ? router.query.search
+                  : SEARCH_POSTS_PAGE
+                  ? "Posts"
+                  : "Users"}
               </span>
             </div>
           </li>
