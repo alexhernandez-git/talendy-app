@@ -428,14 +428,16 @@ const Contribute = () => {
                       </svg>
                       Info
                     </button>
-                    <Link href="/finalize/123">
-                      <button
-                        type="button"
-                        className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm  text-white hover:text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
-                      >
-                        Finalize
-                      </button>
-                    </Link>
+                    {post?.user?.id === authReducer.user?.id && (
+                      <Link href="/finalize/123">
+                        <button
+                          type="button"
+                          className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm  text-white hover:text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                        >
+                          Finalize
+                        </button>
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
@@ -577,33 +579,53 @@ const Contribute = () => {
                   >
                     Joined
                   </span>
-                  <ul className=" divide-y divide-gray-200 dark:divide-gray-400 ">
-                    {members?.joined?.map((member) => (
-                      <Member member={member} key={member.id} />
-                    ))}
-                  </ul>
+
+                  {members?.joined?.length === 0 ? (
+                    <span className="text-sm text-gray-500 dark:text-gray-200 block">
+                      No members joined
+                    </span>
+                  ) : (
+                    <ul className=" divide-y divide-gray-200 dark:divide-gray-400 ">
+                      {members?.joined?.map((member) => (
+                        <Member member={member} key={member.id} />
+                      ))}
+                    </ul>
+                  )}
                   <span
                     id="timeline-title"
                     className="text-md text-gray-900 dark:text-white"
                   >
                     Online
                   </span>
-                  <ul className=" divide-y divide-gray-200 dark:divide-gray-400 ">
-                    {members?.online?.map((member) => (
-                      <Member member={member} key={member.id} />
-                    ))}
-                  </ul>
+
+                  {members?.online?.length === 0 ? (
+                    <span className="text-sm text-gray-500 dark:text-gray-200 block">
+                      No members online
+                    </span>
+                  ) : (
+                    <ul className=" divide-y divide-gray-200 dark:divide-gray-400 ">
+                      {members?.online?.map((member) => (
+                        <Member member={member} key={member.id} />
+                      ))}
+                    </ul>
+                  )}
                   <span
                     id="timeline-title"
                     className="text-md text-gray-900 dark:text-white"
                   >
                     Offline
                   </span>
-                  <ul className=" divide-y divide-gray-200 dark:divide-gray-400 opacity-70">
-                    {members?.offline?.map((member) => (
-                      <Member member={member} key={member.id} />
-                    ))}
-                  </ul>
+                  {members?.offline?.length === 0 ? (
+                    <span className="text-sm text-gray-500 dark:text-gray-200 block">
+                      No members offline
+                    </span>
+                  ) : (
+                    <ul className=" divide-y divide-gray-200 dark:divide-gray-400 opacity-70">
+                      {members?.offline?.map((member) => (
+                        <Member member={member} key={member.id} />
+                      ))}
+                    </ul>
+                  )}
                 </div>
                 {/* <div className="mt-6 flex flex-col justify-stretch">
              
