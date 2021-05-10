@@ -70,12 +70,8 @@ const Contribute = () => {
       dispatch(createAlert("ERROR", "You are not member of this post"));
     } else {
       if (initialDataFetched && !is_loading) {
-        if (post) {
-          setRoomID(router.query?.contribute);
-          setValidationsMade(true);
-        } else {
-          router.push(authReducer.is_authenticated ? "/feed" : "/");
-        }
+        setRoomID(router.query?.contribute);
+        setValidationsMade(true);
       }
     }
   }, [is_loading]);
