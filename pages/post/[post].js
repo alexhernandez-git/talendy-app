@@ -364,7 +364,7 @@ export default function PostPage() {
                 (member) => member.user.id === authReducer.user?.id
               ) && (
                 <div className="mt-5">
-                  <Link href={`/contribute/${postReducer.post?.id}`}>
+                  <Link href={`/contribute-room/${postReducer.post?.id}`}>
                     <button
                       type="button"
                       className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"

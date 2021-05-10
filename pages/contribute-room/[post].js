@@ -18,7 +18,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { createAlert } from "redux/actions/alerts";
 import useAuthRequired from "hooks/useAuthRequired";
-import { fetchPost } from "redux/actions/post";
+import { fetchPost } from "redux/actions/contribute_room";
 import Spinner from "components/Layout/Spinner";
 import moment from "moment";
 const Audio = (props) => {
@@ -54,8 +54,10 @@ const Contribute = () => {
 
     fetchInitialData();
   }, [initialDataFetched]);
-  const postReducer = useSelector((state) => state.postReducer);
-  const { post, is_loading } = postReducer;
+  const contribute_roomReducer = useSelector(
+    (state) => state.contribute_roomReducer
+  );
+  const { contribute_room, is_loading } = contribute_roomReducer;
   const [roomID, setRoomID] = useState(router.query?.contribute);
   const [validationsMade, setValidationsMade] = useState(false);
 
@@ -63,11 +65,15 @@ const Contribute = () => {
     if (
       initialDataFetched &&
       !is_loading &&
-      post &&
-      !post?.members?.some((member) => member.user.id === authReducer.user?.id)
+      contribute_room &&
+      !contribute_room?.members?.some(
+        (member) => member.user.id === authReducer.user?.id
+      )
     ) {
       router.push(authReducer.is_authenticated ? "/feed" : "/");
-      dispatch(createAlert("ERROR", "You are not member of this post"));
+      dispatch(
+        createAlert("ERROR", "You are not member of this contribute_room")
+      );
     } else {
       if (initialDataFetched && !is_loading) {
         setRoomID(router.query?.contribute);
@@ -285,21 +291,21 @@ const Contribute = () => {
   useEffect(() => {
     console.log("joinedMembersList changed", joinedMembersList);
 
-    if (post?.members && joinedMembersList) {
+    if (contribute_room?.members && joinedMembersList) {
       setMembers({
-        joined: post?.members?.filter((member) => {
+        joined: contribute_room?.members?.filter((member) => {
           console.log("joinedMembersList", joinedMembersList);
           return joinedMembersList?.some(
             (joinedMember) => joinedMember?.userID === member?.user?.id
           );
         }),
-        online: post?.members?.filter(
+        online: contribute_room?.members?.filter(
           (member) =>
             !joinedMembersList?.some(
               (joinedMember) => joinedMember?.userID === member?.user?.id
             ) && member?.user?.is_online
         ),
-        offline: post?.members?.filter(
+        offline: contribute_room?.members?.filter(
           (member) =>
             !joinedMembersList?.some(
               (joinedMember) => joinedMember?.userID === member?.user?.id
@@ -307,7 +313,7 @@ const Contribute = () => {
         ),
       });
     }
-  }, [post?.members, joinedMembersList]);
+  }, [contribute_room?.members, joinedMembersList]);
 
   return !canRender ? (
     <div className="flex justify-center items-center h-screen dark:bg-gray-800">
@@ -396,12 +402,14 @@ const Contribute = () => {
                             Welcome back,
                           </p> */}
                       <p className="text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">
-                        {post?.title}
+                        {contribute_room?.title}
                       </p>
                       <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
                         Created at{" "}
                         <time dateTime="2020-08-25">
-                          {moment(post?.created).format("MMM D [at] h:mm A z")}
+                          {moment(contribute_room?.created).format(
+                            "MMM D [at] h:mm A z"
+                          )}
                         </time>
                       </p>
                     </div>
@@ -428,7 +436,7 @@ const Contribute = () => {
                       </svg>
                       Info
                     </button>
-                    {post?.user?.id === authReducer.user?.id && (
+                    {contribute_room?.user?.id === authReducer.user?.id && (
                       <Link href="/finalize/123">
                         <button
                           type="button"
@@ -636,7 +644,7 @@ const Contribute = () => {
         </div>
       </Layout>
       <PostModal
-        post={post}
+        contribute_room={contribute_room}
         page={page}
         modalOpen={modalOpen}
         handleToggleModal={handleToggleModal}

@@ -19,6 +19,7 @@ import postReducer from "./postReducer";
 import usersReducer from "./usersReducer";
 import communitiesReducer from "./communitiesReducer";
 import contributeRequestsReducer from "./contributeRequestsReducer";
+import contributeRoomReducer from "./contributeRoomReducer";
 
 export default combineReducers({
   authReducer: authReducer,
@@ -40,4 +41,5 @@ export default combineReducers({
   messagesReducer: messagesReducer,
   communitiesReducer: communitiesReducer,
   contributeRequestsReducer: contributeRequestsReducer,
+  contributeRoomReducer: contributeRoomReducer,
 });

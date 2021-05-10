@@ -11,7 +11,7 @@ const Finalize = () => {
       <div className="bg-gray-50 dark:bg-gray-800 shadow-sm p-3 sticky top-0 z-30">
         <div className="max-w-3xl mx-auto  flex flex-col lg:max-w-7xl lg:grid lg:grid-cols-12 lg:gap-8  sm:px-6 lg:px-8">
           <div className=" sm:flex justify-between w-full items-center col-span-12">
-            <Link href="/contribute/123">
+            <Link href="/contribute-room/123">
               <button className="cursor-pointer w-auto mt-2 sm:mt-0 inline-flex justify-center items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm border border-gray-300 text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
