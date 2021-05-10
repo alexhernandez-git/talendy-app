@@ -56,6 +56,7 @@ const Contribute = () => {
   }, [initialDataFetched]);
   const postReducer = useSelector((state) => state.postReducer);
   const { post, is_loading } = postReducer;
+  const [roomID, setRoomID] = useState([]);
   useEffect(() => {
     if (
       initialDataFetched &&
@@ -66,7 +67,14 @@ const Contribute = () => {
       router.push(authReducer.is_authenticated ? "/feed" : "/");
       dispatch(createAlert("ERROR", "You are not member of this post"));
     } else {
-      setValidationsMade(true);
+      if (!is_loading) {
+        if (post) {
+          setRoomID(post.id);
+          setValidationsMade(true);
+        } else {
+          router.push(authReducer.is_authenticated ? "/feed" : "/");
+        }
+      }
     }
   }, [is_loading]);
   // Webrtc
@@ -75,7 +83,6 @@ const Contribute = () => {
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
-  const roomID = "room1";
   const [isMicOn, setIsMicOn] = useState(false);
   const [joinedMembersList, setJoinedMembersList] = useState([]);
   const [validationsMade, setValidationsMade] = useState(false);
@@ -84,20 +91,23 @@ const Contribute = () => {
     console.log("peers", peers);
   }, [peers]);
   const handleToggleMic = () => {
-    if (!isMicOn) {
-      setDeafen(false);
+    if (myStreamRef.current?.getAudioTracks().lenght > 0) {
+      if (!isMicOn) {
+        setDeafen(false);
+      }
+      setIsMicOn(!isMicOn);
+      myStreamRef.current.getAudioTracks()[0].enabled = !isMicOn;
     }
-    setIsMicOn(!isMicOn);
-
-    myStreamRef.current.getAudioTracks()[0].enabled = !isMicOn;
   };
   const [isDeafen, setDeafen] = useState(false);
   const handleToggleDeafen = () => {
-    setDeafen(!isDeafen);
-    if (!isDeafen) {
-      setIsMicOn(false);
-      console.log("myStreamRef.current", myStreamRef.current);
-      myStreamRef.current.getAudioTracks()[0].enabled = false;
+    if (myStreamRef.current?.getAudioTracks().lenght > 0) {
+      setDeafen(!isDeafen);
+      if (!isDeafen) {
+        setIsMicOn(false);
+        console.log("myStreamRef.current", myStreamRef.current);
+        myStreamRef.current.getAudioTracks()[0].enabled = false;
+      }
     }
   };
 
@@ -120,6 +130,8 @@ const Contribute = () => {
         setJoinedMembersList(joinedMembers);
       });
       socketRef.current.on("user left", (socketID) => {
+        console.log("joinedMembersList user left", joinedMembersList);
+        console.log("jsocketIDt", socketID);
         setJoinedMembersList(
           joinedMembersList.filter(
             (joinedMember) => joinedMember.socketID !== socketID
