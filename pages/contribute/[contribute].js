@@ -85,11 +85,9 @@ const Contribute = () => {
   const peersRef = useRef([]);
   const [isMicOn, setIsMicOn] = useState(false);
   const [joinedMembersList, setJoinedMembersList] = useState([]);
+
   const [validationsMade, setValidationsMade] = useState(false);
 
-  useEffect(() => {
-    console.log("peers", peers);
-  }, [peers]);
   const handleToggleMic = () => {
     console.log(myStreamRef.current?.getAudioTracks());
     if (myStreamRef.current?.getAudioTracks()) {
@@ -130,16 +128,15 @@ const Contribute = () => {
       });
 
       socketRef.current.on("joined members", (joinedMembers) => {
+        console.log("entra join member", joinedMembers);
         setJoinedMembersList(joinedMembers);
       });
       socketRef.current.on("user left", (socketID) => {
-        console.log("joinedMembersList user left", joinedMembersList);
-        console.log("jsocketIDt", socketID);
-        setJoinedMembersList(
-          joinedMembersList.filter(
-            (joinedMember) => joinedMember.socketID !== socketID
-          )
-        );
+        console.log("socket left", socketID);
+      });
+      socketRef.current.on("members left", (membersLeft) => {
+        console.log("entra left members", membersLeft);
+        setJoinedMembersList(membersLeft);
       });
 
       socketRef.current.on("no user id", () => {
@@ -147,7 +144,6 @@ const Contribute = () => {
         router.push("/feed");
       });
       function createPeer(userToSignal, callerID, stream) {
-        console.log("createPeer", stream);
         const peer = new Peer({
           initiator: true,
           trickle: false,
@@ -155,9 +151,6 @@ const Contribute = () => {
         });
 
         peer.on("signal", (signal) => {
-          console.log("signal", signal);
-          console.log("signal callerId", callerID);
-          console.log("signal signal", signal);
           socketRef.current.emit("sending signal", {
             userToSignal,
             callerID,
@@ -176,7 +169,6 @@ const Contribute = () => {
         });
 
         peer.on("signal", (signal) => {
-          console.log("returning signal", signal);
           socketRef.current.emit("returning signal", { signal, callerID });
         });
 
@@ -292,7 +284,9 @@ const Contribute = () => {
     offline: [],
   });
   useEffect(() => {
-    if (post?.members) {
+    console.log("joinedMembersList changed", joinedMembersList);
+
+    if (post?.members && joinedMembersList) {
       setMembers({
         joined: post?.members?.filter((member) => {
           console.log("joinedMembersList", joinedMembersList);
