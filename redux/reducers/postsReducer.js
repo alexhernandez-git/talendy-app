@@ -134,7 +134,7 @@ export default function postsReducer(state = initialState, action) {
     case DELETE_POST:
       return {
         ...state,
-        is_updating_post: true,
+        is_deleting_post: true,
       };
     case DELETE_POST_SUCCESS:
       return {
@@ -145,14 +145,14 @@ export default function postsReducer(state = initialState, action) {
             (post) => post.id !== action.payload
           ),
         },
-        is_updating_post: false,
-        update_post_error: null,
+        is_deleting_post: false,
+        delete_post_error: null,
       };
     case DELETE_POST_FAIL:
       return {
         ...state,
-        is_updating_post: false,
-        update_post_error: action.payload,
+        is_deleting_post: false,
+        delete_post_error: action.payload,
       };
     case CREATE_CONTRIBUTE_REQUEST:
       return {

@@ -103,6 +103,9 @@ export const deletePost = (id, closeModal) => async (dispatch, getState) => {
         type: DELETE_POST_FAIL,
         payload: { data: err.response?.data, status: err.response?.status },
       });
+      if (err.response?.data?.message) {
+        await dispatch(createAlert("ERROR", err.response?.data?.message));
+      }
     });
 };
 
