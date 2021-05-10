@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
-  ACTIVE_USER_POSTS_PAGE,
-  SOLVED_USER_POSTS_PAGE,
   USER_CONTRIBUTED_POSTS_PAGE,
   USER_CREATED_POSTS_PAGE,
   USER_POSTS_PAGE,

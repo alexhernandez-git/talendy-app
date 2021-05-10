@@ -229,6 +229,9 @@ const Contribute = () => {
         myStreamRef.current.getTracks().forEach(function (track) {
           track.stop();
         });
+        myStreamRef.current.getAudioTracks().forEach(function (track) {
+          track.stop();
+        });
       }
     };
   }, []);
