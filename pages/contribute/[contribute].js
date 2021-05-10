@@ -65,6 +65,8 @@ const Contribute = () => {
     ) {
       router.push(authReducer.is_authenticated ? "/feed" : "/");
       dispatch(createAlert("ERROR", "You are not member of this post"));
+    } else {
+      setValidationsMade(true);
     }
   }, [is_loading]);
   // Webrtc
@@ -76,6 +78,7 @@ const Contribute = () => {
   const roomID = "room1";
   const [isMicOn, setIsMicOn] = useState(false);
   const [joinedMembersList, setJoinedMembersList] = useState([]);
+  const [validationsMade, setValidationsMade] = useState(false);
 
   useEffect(() => {
     console.log("peers", peers);
@@ -99,7 +102,7 @@ const Contribute = () => {
   };
 
   useEffect(() => {
-    if (initialDataFetched) {
+    if (initialDataFetched && validationsMade) {
       socketRef.current = io.connect("http://localhost:5500");
       socketRef.current.on("connect", () => {
         console.log("connected layout!!!!!!!!!!");
@@ -124,10 +127,6 @@ const Contribute = () => {
         );
       });
 
-      socketRef.current.on("not allowed", () => {
-        dispatch(createAlert("ERROR", "You are already in this room"));
-        router.push("/feed");
-      });
       socketRef.current.on("no user id", () => {
         dispatch(createAlert("ERROR", "There is not user id"));
         router.push("/feed");
@@ -217,11 +216,13 @@ const Contribute = () => {
           });
         });
     }
-  }, [initialDataFetched]);
+  }, [initialDataFetched, validationsMade]);
   useEffect(() => {
     return () => {
       console.log("myStreamRef.current", myStreamRef.current);
-      socketRef.current.disconnect();
+      if (socketRef.current) {
+        socketRef.current.disconnect();
+      }
       if (myStreamRef.current) {
         myStreamRef.current.getTracks().forEach(function (track) {
           track.stop();
