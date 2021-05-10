@@ -18,7 +18,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { createAlert } from "redux/actions/alerts";
 import useAuthRequired from "hooks/useAuthRequired";
-import { fetchPost } from "redux/actions/contribute_room";
+import { fetchContributeRoom } from "redux/actions/contributeRoom";
 import Spinner from "components/Layout/Spinner";
 import moment from "moment";
 const Audio = (props) => {
@@ -48,17 +48,17 @@ const Contribute = () => {
   useEffect(() => {
     const fetchInitialData = async () => {
       if (initialDataFetched) {
-        await dispatch(fetchPost(router.query?.contribute));
+        await dispatch(fetchContributeRoom(router.query?.post));
       }
     };
 
     fetchInitialData();
   }, [initialDataFetched]);
-  const contribute_roomReducer = useSelector(
-    (state) => state.contribute_roomReducer
+  const contributeRoomReducer = useSelector(
+    (state) => state.contributeRoomReducer
   );
-  const { contribute_room, is_loading } = contribute_roomReducer;
-  const [roomID, setRoomID] = useState(router.query?.contribute);
+  const { contribute_room, is_loading } = contributeRoomReducer;
+  const [roomID, setRoomID] = useState(router.query?.post);
   const [validationsMade, setValidationsMade] = useState(false);
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const Contribute = () => {
       );
     } else {
       if (initialDataFetched && !is_loading) {
-        setRoomID(router.query?.contribute);
+        setRoomID(router.query?.post);
         setValidationsMade(true);
       }
     }
