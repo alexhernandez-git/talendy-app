@@ -56,7 +56,9 @@ const Contribute = () => {
   }, [initialDataFetched]);
   const postReducer = useSelector((state) => state.postReducer);
   const { post, is_loading } = postReducer;
-  const [roomID, setRoomID] = useState([]);
+  const [roomID, setRoomID] = useState(router.query?.contribute);
+  const [validationsMade, setValidationsMade] = useState(false);
+
   useEffect(() => {
     if (
       initialDataFetched &&
@@ -69,7 +71,7 @@ const Contribute = () => {
     } else {
       if (initialDataFetched && !is_loading) {
         if (post) {
-          setRoomID(post.id);
+          setRoomID(router.query?.contribute);
           setValidationsMade(true);
         } else {
           router.push(authReducer.is_authenticated ? "/feed" : "/");
@@ -85,8 +87,6 @@ const Contribute = () => {
   const peersRef = useRef([]);
   const [isMicOn, setIsMicOn] = useState(false);
   const [joinedMembersList, setJoinedMembersList] = useState([]);
-
-  const [validationsMade, setValidationsMade] = useState(false);
 
   const handleToggleMic = () => {
     console.log(myStreamRef.current?.getAudioTracks());
