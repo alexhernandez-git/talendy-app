@@ -75,6 +75,7 @@ const Contribute = () => {
   const peersRef = useRef([]);
   const roomID = "room1";
   const [isMicOn, setIsMicOn] = useState(false);
+  const [joinedMembersList, setJoinedMembersList] = useState([]);
 
   useEffect(() => {
     console.log("peers", peers);
@@ -110,6 +111,11 @@ const Contribute = () => {
       socketRef.current.emit("join room", {
         roomID: roomID,
         userID: authReducer.user?.id,
+      });
+
+      socketRef.current.on("joined members", (joinedMembers) => {
+        console.log("joinedMembers", joinedMembers);
+        setJoinedMembersList(joinedMembers);
       });
 
       socketRef.current.on("not allowed", () => {
@@ -258,6 +264,37 @@ const Contribute = () => {
   const handleShareScreen = () => {
     dispatch(createAlert("INFO", "Feature not ready"));
   };
+
+  const [members, setMembers] = useState({
+    joined: [],
+    online: [],
+    offline: [],
+  });
+  useEffect(() => {
+    if (post?.members) {
+      setMembers({
+        joined: post?.members?.filter((member) => {
+          console.log("joinedMembersList", joinedMembersList);
+          return joinedMembersList?.some(
+            (joinedMember) => joinedMember?.userID === member?.user?.id
+          );
+        }),
+        online: post?.members?.filter(
+          (member) =>
+            !joinedMembersList?.some(
+              (joinedMember) => joinedMember?.userID === member?.user?.id
+            ) && member?.user?.is_online
+        ),
+        offline: post?.members?.filter(
+          (member) =>
+            !joinedMembersList?.some(
+              (joinedMember) => joinedMember?.userID === member?.user?.id
+            ) && !member?.user?.is_online
+        ),
+      });
+    }
+  }, [post?.members, joinedMembersList]);
+
   return !canRender ? (
     <div className="flex justify-center items-center h-screen dark:bg-gray-800">
       <Spinner />
@@ -527,8 +564,9 @@ const Contribute = () => {
                     Joined
                   </span>
                   <ul className=" divide-y divide-gray-200 dark:divide-gray-400 ">
-                    <Member admin />
-                    <Member />
+                    {members?.joined?.map((member) => (
+                      <Member member={member} key={member.id} />
+                    ))}
                   </ul>
                   <span
                     id="timeline-title"
@@ -537,7 +575,9 @@ const Contribute = () => {
                     Online
                   </span>
                   <ul className=" divide-y divide-gray-200 dark:divide-gray-400 ">
-                    <Member />
+                    {members?.online?.map((member) => (
+                      <Member member={member} key={member.id} />
+                    ))}
                   </ul>
                   <span
                     id="timeline-title"
@@ -546,15 +586,9 @@ const Contribute = () => {
                     Offline
                   </span>
                   <ul className=" divide-y divide-gray-200 dark:divide-gray-400 opacity-70">
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
-                    <Member />
+                    {members?.offline?.map((member) => (
+                      <Member member={member} key={member.id} />
+                    ))}
                   </ul>
                 </div>
                 {/* <div className="mt-6 flex flex-col justify-stretch">

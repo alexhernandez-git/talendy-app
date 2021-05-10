@@ -28,7 +28,7 @@ const PostsFeed = ({ page }) => {
       {postsReducer.posts.results.length > 0 ? (
         <ul className="space-y-4">
           {postsReducer.posts.results.map((post) => (
-            <Post page={page} post={post} />
+            <Post page={page} post={post} key={post.id} />
           ))}
         </ul>
       ) : (
