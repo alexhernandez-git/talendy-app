@@ -114,8 +114,14 @@ const Contribute = () => {
       });
 
       socketRef.current.on("joined members", (joinedMembers) => {
-        console.log("joinedMembers", joinedMembers);
         setJoinedMembersList(joinedMembers);
+      });
+      socketRef.current.on("user left", (socketID) => {
+        setJoinedMembersList(
+          joinedMembersList.filter(
+            (joinedMember) => joinedMember.socketID !== socketID
+          )
+        );
       });
 
       socketRef.current.on("not allowed", () => {
