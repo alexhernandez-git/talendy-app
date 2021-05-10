@@ -67,7 +67,7 @@ const Contribute = () => {
       router.push(authReducer.is_authenticated ? "/feed" : "/");
       dispatch(createAlert("ERROR", "You are not member of this post"));
     } else {
-      if (!is_loading) {
+      if (initialDataFetched && !is_loading) {
         if (post) {
           setRoomID(post.id);
           setValidationsMade(true);
@@ -91,7 +91,8 @@ const Contribute = () => {
     console.log("peers", peers);
   }, [peers]);
   const handleToggleMic = () => {
-    if (myStreamRef.current?.getAudioTracks().lenght > 0) {
+    console.log(myStreamRef.current?.getAudioTracks());
+    if (myStreamRef.current?.getAudioTracks()) {
       if (!isMicOn) {
         setDeafen(false);
       }
@@ -101,7 +102,9 @@ const Contribute = () => {
   };
   const [isDeafen, setDeafen] = useState(false);
   const handleToggleDeafen = () => {
-    if (myStreamRef.current?.getAudioTracks().lenght > 0) {
+    console.log(myStreamRef.current);
+
+    if (myStreamRef.current?.getAudioTracks()) {
       setDeafen(!isDeafen);
       if (!isDeafen) {
         setIsMicOn(false);
@@ -231,7 +234,6 @@ const Contribute = () => {
   }, [initialDataFetched, validationsMade]);
   useEffect(() => {
     return () => {
-      console.log("myStreamRef.current", myStreamRef.current);
       if (socketRef.current) {
         socketRef.current.disconnect();
       }
