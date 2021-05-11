@@ -22,11 +22,29 @@ const Message = ({ message, myMessage }) => {
               className="flex-shrink-0 mr-3 cursor-pointer"
               onClick={handleGoToProfile}
             >
-              <img
-                className="h-10 w-10 rounded-full"
-                src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=8&amp;w=256&amp;h=256&amp;q=80"
-                alt=""
-              />
+              {message?.sent_by?.picture ? (
+                <img
+                  className="h-10 w-10 rounded-full"
+                  src={
+                    new RegExp(
+                      `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                    ).test(message?.sent_by?.picture)
+                      ? message?.sent_by?.picture
+                      : process.env.HOST + message?.sent_by?.picture
+                  }
+                  alt=""
+                ></img>
+              ) : (
+                <span className="bg-gray-100 rounded-full overflow-hidden h-10 w-10">
+                  <svg
+                    className="text-gray-300 bg-gray-100 rounded-full h-10 w-10"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                </span>
+              )}
               <div className="w-10"></div>
             </div>
           )}
