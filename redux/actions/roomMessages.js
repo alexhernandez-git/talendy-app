@@ -76,8 +76,8 @@ export const fetchMessage = (chat__pk, message__pk) => async (
 };
 
 export const fetchMoreRoomMessages = () => async (dispatch, getState) => {
-  const url = getState().messagesReducer.messages.next;
-  console.log(getState().messagesReducer.messages.next);
+  const url = getState().roomMessagesReducer.messages.next;
+  console.log(getState().roomMessagesReducer.messages.next);
   if (url) {
     dispatch({
       type: FETCH_MORE_ROOM_MESSAGES,
