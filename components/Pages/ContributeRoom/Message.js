@@ -7,10 +7,16 @@ const Message = ({ message, myMessage }) => {
     e.stopPropagation();
     router.push("/user/123");
   };
+  console.log(message);
+  const isAdmin = false;
   return (
     <li>
       <div className={`${myMessage ? "float-right " : "float-left "}  w-11/12`}>
-        <div className="flex items-end">
+        <div
+          className={`flex items-center ${
+            myMessage ? "justify-end " : "justify-start"
+          }`}
+        >
           {!myMessage && (
             <div
               className="flex-shrink-0 mr-3 cursor-pointer"
@@ -33,13 +39,7 @@ const Message = ({ message, myMessage }) => {
                 : " bg-white dark:bg-gray-700 dark:text-gray-100"
             } text-sm p-3 shadow rounded-lg mt-4`}
           >
-            <p>
-              Nec malesuada sed sit ut aliquet. Cras ac pharetra, sapien purus
-              vitae vestibulum auctor faucibus ullamcorper. Leo quam tincidunt
-              porttitor neque, velit sed. Tortor mauris ornare ut tellus sed
-              aliquet amet venenatis condimentum. Convallis accumsan et nunc
-              eleifend.
-            </p>
+            <p>{message?.text}</p>
           </div>
         </div>
       </div>

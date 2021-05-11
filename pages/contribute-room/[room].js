@@ -21,6 +21,7 @@ import useAuthRequired from "hooks/useAuthRequired";
 import { fetchContributeRoom } from "redux/actions/contributeRoom";
 import Spinner from "components/Layout/Spinner";
 import moment from "moment";
+import { addRoomMessage } from "redux/actions/roomMessages";
 const Audio = (props) => {
   const ref = useRef();
   useEffect(() => {
@@ -145,7 +146,7 @@ const Contribute = () => {
     };
     handleAddMessage(payload);
 
-    socketRef.current.emit("text", payload);
+    socketRef.current.emit("message", payload);
     setMessage("");
   };
 
@@ -181,7 +182,7 @@ const Contribute = () => {
         router.push("/feed");
       });
 
-      socketRef.current.on("text", (payload) => {
+      socketRef.current.on("message", (payload) => {
         console.log("payload", payload);
         handleAddMessage(payload);
       });
@@ -605,6 +606,7 @@ const Contribute = () => {
                 <ContributeChat
                   handleSendMessage={handleSendMessage}
                   handleChangeMessage={handleChangeMessage}
+                  message={message}
                 />
               )}
               {feature.toUpperCase() === "SHAREDNOTES" && (

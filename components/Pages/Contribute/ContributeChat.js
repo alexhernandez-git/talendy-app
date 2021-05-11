@@ -7,7 +7,11 @@ import { useDispatch } from "react-redux";
 import { fetchMoreRoomMessages } from "redux/actions/roomMessages";
 import ContributeRoomChatEditor from "components/Editor/ContributeRoomChatEditor";
 
-const ContributeChat = ({ handleSendMessage, handleChangeMessage }) => {
+const ContributeChat = ({
+  handleSendMessage,
+  handleChangeMessage,
+  message,
+}) => {
   const dispatch = useDispatch();
   const handleFetchMoreMessages = () => {
     dispatch(fetchMoreRoomMessages());
@@ -18,6 +22,7 @@ const ContributeChat = ({ handleSendMessage, handleChangeMessage }) => {
   }
 
   const roomMessagesReducer = useSelector((state) => state.roomMessagesReducer);
+  const authReducer = useSelector((state) => state.authReducer);
   return (
     <section aria-labelledby="notes-title" className="">
       <div className="bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg sm:overflow-hidden">
@@ -58,12 +63,13 @@ const ContributeChat = ({ handleSendMessage, handleChangeMessage }) => {
               />
             </div>
             <div className="min-w-0 flex-1 relative">
-              <form onSubmit={(e) => e.preventDefault()}>
+              <form onSubmit={handleSendMessage}>
                 <div>
                   <label htmlFor="comment" className="sr-only">
                     About
                   </label>
                   <ContributeRoomChatEditor
+                    message={message}
                     handleSendMessage={handleSendMessage}
                     handleChangeMessage={handleChangeMessage}
                   />
@@ -71,8 +77,7 @@ const ContributeChat = ({ handleSendMessage, handleChangeMessage }) => {
                 <div className="mt-3 sm:flex items-center justify-end">
                   <div className="mt-4 sm:mt-0 flex items-center justify-end">
                     <button
-                      type="button"
-                      onClick={handleSendMessage}
+                      type="submit"
                       className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                     >
                       <svg

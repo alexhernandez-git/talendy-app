@@ -1,8 +1,11 @@
 import React from "react";
+import { useRef } from "react";
+import { useEffect } from "react";
 import Toolbar from "./Toolbar";
 export default function ContributeRoomChatEditor({
   handleSendMessage,
   handleChangeMessage,
+  message,
 }) {
   function paste(e) {
     e.preventDefault();
@@ -14,12 +17,7 @@ export default function ContributeRoomChatEditor({
       .replace(close, "&gt");
     document.execCommand("insertHTML", false, text);
   }
-  const handleTitleKeyDown = (e) => {
-    if (e.keyCode === 13) {
-      e.preventDefault();
-      return false;
-    }
-  };
+
   const handleKeyDown = (e) => {
     if (e.key === "Tab" && !e.shiftKey) {
       document.execCommand("insertText", false, "\t");
@@ -32,6 +30,12 @@ export default function ContributeRoomChatEditor({
       return false;
     }
   };
+  const messageRef = useRef(null);
+  useEffect(() => {
+    if (message === "") {
+      messageRef.current.innerHTML = "";
+    }
+  }, [message]);
 
   return (
     <div>
@@ -41,6 +45,7 @@ export default function ContributeRoomChatEditor({
           className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l cursor-text"
           id="editor"
           onKeyDown={handleKeyDown}
+          ref={messageRef}
           onKeyUp={handleChangeMessage}
           contentEditable="true"
           data-placeholder="Message"
