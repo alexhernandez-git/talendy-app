@@ -54,7 +54,7 @@ const NotificationsDropdown = ({ notificationsOpen, notificationsRef }) => {
         <div className="">
           <div className="flow-root px-4 max-h-72 overflow-auto">
             {lastNotificationsReducer.notifications.results.length === 0 && (
-              <p className="text-xs font-medium text-gray-900 dark:text-white truncate">
+              <p className="text-xs font-normal text-gray-500 dark:text-gray-200 truncate mt-3">
                 You don't have notifications
               </p>
             )}
