@@ -36,7 +36,6 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
   useOutsideClick(menuRef, () => handleCloseMenu());
 
   const router = useRouter();
-  console.log(router?.query?.search?.length > 0);
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -63,7 +62,6 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
     setFirstLoad(false);
     if (!firstLoad) {
       const timeoutId = setTimeout(() => {
-        console.log("entra");
         formik.handleSubmit();
       }, 500);
       return () => clearTimeout(timeoutId);

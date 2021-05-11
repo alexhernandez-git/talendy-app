@@ -85,7 +85,6 @@ const settings = () => {
     } else if (e.target) {
       files = e.target.files;
     }
-    console.log(files);
     if (files.length > 0) {
       const reader = new FileReader();
       reader.onload = () => {

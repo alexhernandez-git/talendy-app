@@ -3,7 +3,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const Message = ({ message, myMessage }) => {
-  console.log(message);
   const roomMessagesReducer = useSelector((state) => state.roomMessagesReducer);
   const messageIndex = roomMessagesReducer.messages.results.indexOf(message);
   const previous_message =

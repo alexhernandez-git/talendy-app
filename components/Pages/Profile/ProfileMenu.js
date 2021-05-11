@@ -18,7 +18,6 @@ const ProfileMenu = ({ page }) => {
   const router = useRouter();
   const handleChangeMobileMenu = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
 
     switch (e.target.value) {
       case MY_POSTS_PAGE:

@@ -14,7 +14,6 @@ const SearchMenu = ({ page }) => {
   const [menuValue, setMenuValue] = useState(page);
   const handleChangeMobileMenu = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
 
     switch (e.target.value) {
       case SEARCH_POSTS_PAGE:

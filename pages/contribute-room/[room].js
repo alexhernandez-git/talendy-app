@@ -25,10 +25,10 @@ import {
 import Spinner from "components/Layout/Spinner";
 import moment from "moment";
 import { addRoomMessage, fetchRoomMessages } from "redux/actions/roomMessages";
+import { setEndOfContenteditable } from "helpers";
 const Audio = (props) => {
   const ref = useRef();
   useEffect(() => {
-    console.log(ref.current);
     if (props.isDeafen) {
       ref.current.muted = true;
     } else {
@@ -96,7 +96,6 @@ const Contribute = () => {
   const [joinedMembersList, setJoinedMembersList] = useState([]);
 
   const handleToggleMic = () => {
-    console.log(myStreamRef.current?.getAudioTracks());
     if (myStreamRef.current?.getAudioTracks()) {
       if (!isMicOn) {
         setDeafen(false);
@@ -107,13 +106,10 @@ const Contribute = () => {
   };
   const [isDeafen, setDeafen] = useState(false);
   const handleToggleDeafen = () => {
-    console.log(myStreamRef.current);
-
     if (myStreamRef.current?.getAudioTracks()) {
       setDeafen(!isDeafen);
       if (!isDeafen) {
         setIsMicOn(false);
-        console.log("myStreamRef.current", myStreamRef.current);
         myStreamRef.current.getAudioTracks()[0].enabled = false;
       }
     }
@@ -126,15 +122,12 @@ const Contribute = () => {
   const [message, setMessage] = useState("");
   const handleChangeMessage = (e) => {
     e.preventDefault();
-    console.log(message);
     setMessage(e.target.innerHTML);
   };
   const handleSendMessage = (e = null) => {
-    console.log("entra");
     if (e) {
       e.preventDefault();
     }
-    console.log(message.length);
     if (!message || message.trim().length === 0) {
       return;
     }
@@ -154,6 +147,26 @@ const Contribute = () => {
     setMessage("");
   };
 
+  const [editorTextLength, setEditorTextLength] = useState(0);
+  const [editorText, setEditorText] = useState(false);
+  const [onKeyUpCounter, setOnkeyUpCounter] = useState(false);
+  const sharedNotesRef = useRef();
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (editorText) {
+        const payload = {
+          token: authReducer?.access_token,
+          text: editorText,
+          roomID: roomID,
+        };
+        dispatch(updateSharedNotes(editorText));
+        console.log("editor text", editorText);
+        socketRef.current.emit("text", payload);
+      }
+    }, 1000);
+    return () => clearTimeout(timeoutId);
+  }, [onKeyUpCounter]);
   useEffect(() => {
     if (initialDataFetched && validationsMade) {
       socketRef.current = io.connect("http://localhost:5500");
@@ -170,14 +183,10 @@ const Contribute = () => {
       });
 
       socketRef.current.on("joined members", (joinedMembers) => {
-        console.log("entra join member", joinedMembers);
         setJoinedMembersList(joinedMembers);
       });
-      socketRef.current.on("user left", (socketID) => {
-        console.log("socket left", socketID);
-      });
+      socketRef.current.on("user left", (socketID) => {});
       socketRef.current.on("members left", (membersLeft) => {
-        console.log("entra left members", membersLeft);
         setJoinedMembersList(membersLeft);
       });
 
@@ -187,18 +196,24 @@ const Contribute = () => {
       });
 
       socketRef.current.on("message", (payload) => {
-        console.log("payload", payload);
         handleAddMessage(payload);
       });
-      if (feature.toUpperCase() !== "SHAREDNOTES") {
-        const handleRecievedText = (data) => {
-          console.log("data recieved", data);
-          if (data) {
-            dispatch(updateSharedNotes(data));
-          }
-        };
-        socketRef.current.on("text", handleRecievedText);
-      }
+
+      const handleRecievedText = (data) => {
+        console.log("data recieved", data);
+
+        if (data) {
+          sharedNotesRef.current.innerHTML = data;
+
+          setEndOfContenteditable(sharedNotesRef.current);
+
+          setEditorText(sharedNotesRef.current.innerHTML);
+          dispatch(updateSharedNotes(sharedNotesRef.current.innerHTML));
+          setEditorTextLength(sharedNotesRef.current.innerText.length);
+        }
+      };
+      socketRef.current.on("text", handleRecievedText);
+
       function createPeer(userToSignal, callerID, stream) {
         const peer = new Peer({
           initiator: true,
@@ -238,13 +253,11 @@ const Contribute = () => {
         .then(async (stream) => {
           myStreamRef.current = stream;
           stream.getAudioTracks()[0].enabled = isMicOn;
-          console.log(socketRef.current);
           socketRef.current.emit("media ready", roomID);
 
           socketRef.current.on("all users", (users) => {
             const peers = [];
             users.forEach((user) => {
-              console.log(user);
               const peer = createPeer(
                 user.socketID,
                 socketRef.current.id,
@@ -257,11 +270,9 @@ const Contribute = () => {
               peers.push(peer);
             });
             setPeers(peers);
-            console.log("all users user", users);
           });
 
           socketRef.current.on("user joined", (payload) => {
-            console.log("user joined", payload);
             const peer = addPeer(payload.signal, payload.callerID, stream);
             peersRef.current.push({
               peerID: payload.callerID,
@@ -272,9 +283,7 @@ const Contribute = () => {
           });
 
           socketRef.current.on("receiving returned signal", (payload) => {
-            console.log("payload", payload);
             const item = peersRef.current.find((p) => p.peerID === payload.id);
-            console.log(peersRef.current);
             item?.peer.signal(payload.signal);
           });
         });
@@ -343,12 +352,9 @@ const Contribute = () => {
     offline: [],
   });
   useEffect(() => {
-    console.log("joinedMembersList changed", joinedMembersList);
-
     if (contribute_room?.members && joinedMembersList) {
       setMembers({
         joined: contribute_room?.members?.filter((member) => {
-          console.log("joinedMembersList", joinedMembersList);
           return joinedMembersList?.some(
             (joinedMember) => joinedMember?.userID === member?.user?.id
           );
@@ -615,21 +621,30 @@ const Contribute = () => {
         <div className="py-10">
           <div className="max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
             <div className="space-y-6 lg:col-start-1 lg:col-span-2">
-              {feature.toUpperCase() === "CHAT" && (
+              {feature.toUpperCase() === "CHAT" && contribute_room && (
                 <ContributeChat
                   handleSendMessage={handleSendMessage}
                   handleChangeMessage={handleChangeMessage}
                   message={message}
                 />
               )}
-              {feature.toUpperCase() === "SHAREDNOTES" && (
+              {feature.toUpperCase() === "SHAREDNOTES" && contribute_room && (
                 <ContributeSharedNotes
                   socketRef={socketRef}
                   roomID={roomID}
                   sharedNotes={contribute_room?.shared_notes}
+                  editorTextLength={editorTextLength}
+                  editorText={editorText}
+                  onKeyUpCounter={onKeyUpCounter}
+                  setEditorTextLength={setEditorTextLength}
+                  setEditorText={setEditorText}
+                  setOnkeyUpCounter={setOnkeyUpCounter}
+                  sharedNotesRef={sharedNotesRef}
                 />
               )}
-              {feature.toUpperCase() === "ASTEROIDS" && <ContributeAsteroids />}
+              {feature.toUpperCase() === "ASTEROIDS" && contribute_room && (
+                <ContributeAsteroids />
+              )}
             </div>
 
             <section

@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 const useGetNotification = (notification) => {
   const authReducer = useSelector((state) => state.authReducer);
-  console.log(notification);
   let connection;
   let user;
   let member_joined;

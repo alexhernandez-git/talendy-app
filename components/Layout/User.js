@@ -62,7 +62,6 @@ const User = ({ page, user }) => {
     }
     dispatch(followUserInUsers(user?.id));
   };
-  console.log(user);
   return (
     <li>
       <div className="bg-white dark:bg-gray-700 px-4 py-6 shadow sm:p-6 sm:rounded-lg">

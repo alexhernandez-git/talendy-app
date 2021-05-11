@@ -10,7 +10,6 @@ const UserMenu = ({ page }) => {
   const userId = router.query?.user;
   const handleChangeMobileMenu = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
 
     switch (e.target.value) {
       case USER_POSTS_PAGE:

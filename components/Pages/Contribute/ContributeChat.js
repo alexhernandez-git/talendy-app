@@ -17,7 +17,6 @@ const ContributeChat = ({
     dispatch(fetchMoreRoomMessages());
   };
   function onChangeVisibility(isVisible) {
-    console.log("isVisible", isVisible);
     if (isVisible) handleFetchMoreMessages();
   }
 

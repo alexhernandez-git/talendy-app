@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import React from "react";
 
 const Member = ({ member }) => {
-  console.log(member);
   const admin = member?.role === "AD";
   const user = member?.user;
   return (

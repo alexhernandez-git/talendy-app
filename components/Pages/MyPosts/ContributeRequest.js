@@ -10,7 +10,6 @@ import {
 
 const ContributeRequest = ({ contribute_request }) => {
   const dispatch = useDispatch();
-  console.log(contribute_request);
   const handleAcceptContributeRequest = () => {
     dispatch(acceptContributeRequest(contribute_request?.id));
   };

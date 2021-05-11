@@ -67,7 +67,6 @@ const Chat = () => {
     dispatch(fetchMoreMessages());
   };
   function onChangeVisibility(isVisible) {
-    console.log("isVisible", isVisible);
     if (isVisible) handleFetchMoreMessages();
   }
 
@@ -97,7 +96,6 @@ const Chat = () => {
       socketRef.current.emit("join room", chatReducer.chat?.id);
 
       socketRef.current.on("text", (payload) => {
-        console.log("payload", payload);
         handleAddMessage(payload);
       });
     }
@@ -116,9 +114,7 @@ const Chat = () => {
     setMessage(e.target.value);
   };
   const handleSendMessage = (e) => {
-    console.log("entra");
     e.preventDefault();
-    console.log(message.length);
     if (!message || message.trim().length === 0) {
       return;
     }

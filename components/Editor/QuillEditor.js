@@ -17,7 +17,6 @@ const QuillEditor = () => {
     socketRef.current.on("connect_error", (err) => {
       console.log(`connect_error due to ${err.message}`);
     });
-    console.log(socketRef.current);
 
     const toolbarOptions = [
       ["bold", "italic", "underline", "strike"], // toggled buttons

@@ -120,7 +120,6 @@ export const loadUser = () => async (dispatch, getState) => {
       });
     })
     .catch(async (err) => {
-      console.log(err.response);
       await dispatch({
         type: LOAD_USER_ERROR,
       });
@@ -134,7 +133,6 @@ export const getUserByJwt = (token) => async (dispatch, getState) => {
       token: token,
     })
     .then((res) => {
-      console.log(res.data);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data,
@@ -146,7 +144,6 @@ export const login = (data, handleClose, resetForm, router) => async (
   dispatch,
   getState
 ) => {
-  console.log(data);
   await axios
     .post(`${process.env.HOST}/api/users/login/`, data)
     .then(async (res) => {

@@ -9,27 +9,17 @@ export default function ContributeSharedNotes({
   socketRef,
   roomID,
   sharedNotes,
+  editorTextLength,
+  editorText,
+  onKeyUpCounter,
+  setEditorTextLength,
+  setEditorText,
+  setOnkeyUpCounter,
+  sharedNotesRef,
 }) {
   const authReducer = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
-  function setEndOfContenteditable(contentEditableElement) {
-    var range, selection;
-    if (document.createRange) {
-      //Firefox, Chrome, Opera, Safari, IE 9+
-      range = document.createRange(); //Create a range (a range is a like the selection but invisible)
-      range.selectNodeContents(contentEditableElement); //Select the entire contents of the element with the range
-      range.collapse(false); //collapse the range to the end point. false means collapse to end rather than the start
-      selection = window.getSelection(); //get the selection object (allows you to change selection)
-      selection.removeAllRanges(); //remove any selections already made
-      selection.addRange(range); //make the range you have just created the visible selection
-    } else if (document.selection) {
-      //IE 8 and lower
-      range = document.body.createTextRange(); //Create a range (a range is a like the selection but invisible)
-      range.moveToElementText(contentEditableElement); //Select the entire contents of the element with the range
-      range.collapse(false); //collapse the range to the end point. false means collapse to end rather than the start
-      range.select(); //Select the range (make it the visible selection
-    }
-  }
+
   function paste(e) {
     e.preventDefault();
     const open = new RegExp("<", "gi");
@@ -54,32 +44,9 @@ export default function ContributeSharedNotes({
     }
   };
 
-  const [editorTextLength, setEditorTextLength] = useState(0);
-  const [editorText, setEditorText] = useState(false);
-  useEffect(() => {
-    var target = document.querySelector("#editor");
-
-    const handleRecievedText = (data) => {
-      console.log("data recieved", data);
-      if (data) {
-        target.innerHTML = data;
-        setEndOfContenteditable(target);
-
-        setEditorText(target.innerHTML);
-        dispatch(updateSharedNotes(target.innerHTML));
-      }
-      setEditorTextLength(target.innerText.length);
-    };
-    socketRef.current.on("text", handleRecievedText);
-
-    return () => {};
-  }, []);
-
-  const [onKeyUpCounter, setOnkeyUpCounter] = useState(false);
   const handleOnKeyUp = () => {
     setOnkeyUpCounter(!onKeyUpCounter);
     var target = document.querySelector("#editor");
-    console.log(editorTextLength);
     if (target.innerText.length <= 2500) {
       setEditorTextLength(target.innerText.length);
       setEditorText(target.innerHTML);
@@ -89,21 +56,7 @@ export default function ContributeSharedNotes({
       setEditorText(target.innerText);
     }
   };
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      const payload = {
-        token: authReducer?.access_token,
-        text: editorText,
-        roomID: roomID,
-      };
-      console.log(payload);
-      dispatch(updateSharedNotes(editorText));
 
-      socketRef.current.emit("text", payload);
-    }, 1000);
-    return () => clearTimeout(timeoutId);
-  }, [onKeyUpCounter]);
-  const sharedNotesRef = useRef();
   const [firstLoad, setFirstLoad] = useState(true);
 
   useEffect(() => {
@@ -123,8 +76,6 @@ export default function ContributeSharedNotes({
           onKeyUp={handleOnKeyUp}
           ref={sharedNotesRef}
           onKeyDown={handleKeyDown}
-          onFocus={(e) => console.log(e.target.selectionStart)}
-          onChange={(e) => console.log(e.target)}
           contentEditable="true"
           data-placeholder="Notes"
           onPaste={(e) => paste(e)}
