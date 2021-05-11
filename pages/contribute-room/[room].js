@@ -21,7 +21,7 @@ import useAuthRequired from "hooks/useAuthRequired";
 import { fetchContributeRoom } from "redux/actions/contributeRoom";
 import Spinner from "components/Layout/Spinner";
 import moment from "moment";
-import { addRoomMessage } from "redux/actions/roomMessages";
+import { addRoomMessage, fetchRoomMessages } from "redux/actions/roomMessages";
 const Audio = (props) => {
   const ref = useRef();
   useEffect(() => {
@@ -50,6 +50,7 @@ const Contribute = () => {
     const fetchInitialData = async () => {
       if (initialDataFetched) {
         await dispatch(fetchContributeRoom(router.query?.room));
+        await dispatch(fetchRoomMessages(router.query?.room));
       }
     };
 

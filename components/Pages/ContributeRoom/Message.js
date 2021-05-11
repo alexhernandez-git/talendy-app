@@ -10,7 +10,7 @@ const Message = ({ message, myMessage }) => {
   console.log(message);
   const isAdmin = false;
   return (
-    <li>
+    <li className="">
       <div className={`${myMessage ? "float-right " : "float-left "}  w-11/12`}>
         <div
           className={`flex items-center ${
@@ -55,9 +55,10 @@ const Message = ({ message, myMessage }) => {
                 : myMessage
                 ? "bg-gray-200 dark:bg-gray-600 dark:text-gray-100"
                 : " bg-white dark:bg-gray-700 dark:text-gray-100"
-            } text-sm p-3 shadow rounded-lg mt-4`}
+            } text-sm p-3 shadow rounded-lg mt-4 w-full`}
           >
             <p
+              className="break-all"
               dangerouslySetInnerHTML={{
                 __html: message?.text,
               }}
