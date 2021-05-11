@@ -39,7 +39,11 @@ const Message = ({ message, myMessage }) => {
                 : " bg-white dark:bg-gray-700 dark:text-gray-100"
             } text-sm p-3 shadow rounded-lg mt-4`}
           >
-            <p>{message?.text}</p>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: message?.text,
+              }}
+            ></p>
           </div>
         </div>
       </div>

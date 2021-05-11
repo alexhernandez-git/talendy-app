@@ -32,9 +32,9 @@ const ContributeChat = ({
             <ul className="p-4  overflow-y-auto bg-gray-100 dark:bg-gray-800 flex flex-col-reverse content-container">
               {roomMessagesReducer.messages.results.map((message) =>
                 message?.sent_by?.id == authReducer.user?.id ? (
-                  <Message message={message} myMessage />
+                  <Message message={message} myMessage key={message?.id} />
                 ) : (
-                  <Message message={message} />
+                  <Message message={message} key={message?.id} />
                 )
               )}
               {roomMessagesReducer.messages.results.length > 0 &&

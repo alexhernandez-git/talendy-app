@@ -123,7 +123,7 @@ const Contribute = () => {
   const handleChangeMessage = (e) => {
     e.preventDefault();
     console.log(message);
-    setMessage(e.target.innerText);
+    setMessage(e.target.innerHTML);
   };
   const handleSendMessage = (e = null) => {
     console.log("entra");

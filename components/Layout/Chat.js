@@ -319,9 +319,13 @@ const Chat = () => {
                   >
                     {messagesReducer.messages.results.map((message) =>
                       message?.sent_by?.id == authReducer.user?.id ? (
-                        <Message message={message} myMessage />
+                        <Message
+                          message={message}
+                          myMessage
+                          key={message?.id}
+                        />
                       ) : (
-                        <Message message={message} />
+                        <Message message={message} key={message?.id} />
                       )
                     )}
                     {messagesReducer.messages.results.length > 0 &&
