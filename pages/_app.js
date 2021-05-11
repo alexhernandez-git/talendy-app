@@ -57,6 +57,19 @@ function WrappedApp({ Component, pageProps }) {
             );
             break;
 
+          case "CONTRIBUTE_REQUEST_ACCEPTED":
+            await dispatch(
+              createAlert(
+                "SUCCESS",
+                "Your contribute request has been accepted"
+              )
+            );
+
+            await dispatch(
+              addOrUpdateNotificationToFeed(data.notification__pk)
+            );
+            break;
+
           case "NEW_CONTRIBUTE_REQUEST":
             await dispatch(newContributeRequestEvent(data));
             break;
