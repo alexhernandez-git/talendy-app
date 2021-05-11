@@ -367,7 +367,7 @@ const Contribute = () => {
       })}
       <Layout>
         <div className="fixed bottom-0 w-full z-40 flex items-center justify-center">
-          <div className="mr-2 flex items-center dark:bg-gray-800 bg-white rounded-t-lg border-t border-l border-r border-orange-500 dark:border-white shadow">
+          {/* <div className="mr-2 flex items-center dark:bg-gray-800 bg-white rounded-t-lg border-t border-l border-r border-orange-500 dark:border-white shadow">
             <button
               onClick={handleShareScreen}
               type="button"
@@ -378,7 +378,7 @@ const Contribute = () => {
               </IconContext.Provider>
               Screen
             </button>
-          </div>
+          </div> */}
           <div className="flex items-center dark:bg-gray-800 bg-white rounded-t-lg border-t border-l border-r border-orange-500 dark:border-white shadow">
             {/* <button
               type="button"
@@ -455,7 +455,7 @@ const Contribute = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="mt-5 flex justify-center sm:mt-0 flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
+                  <div className="mt-5 flex justify-center md:mt-0 flex-col-reverse justify-stretch space-y-4 space-y-reverse md:flex-row-reverse md:justify-end md:space-x-reverse md:space-y-0 md:space-x-3  md:space-x-3">
                     <button
                       onClick={handleOpenModal}
                       type="button"
@@ -493,26 +493,7 @@ const Contribute = () => {
             </div>
             <div className="border-t border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800  p-3">
               <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl flex justify-between items-center ">
-                <div className="  flex justify-center sm:justify-start sm:mt-0 flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
-                  <button
-                    onClick={handleChangeFeature.bind(this, "CHAT")}
-                    type="button"
-                    className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 mr-2"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    Chat
-                  </button>
+                <div className="flex justify-center md:mt-0 flex-col-reverse justify-stretch space-y-4 space-y-reverse md:flex-row-reverse md:justify-end md:space-x-reverse md:space-y-0 md:space-x-3  md:space-x-3">
                   <button
                     onClick={handleChangeFeature.bind(this, "SHAREDNOTES")}
                     type="button"
@@ -531,6 +512,25 @@ const Contribute = () => {
                       />
                     </svg>
                     Shared notes
+                  </button>
+                  <button
+                    onClick={handleChangeFeature.bind(this, "CHAT")}
+                    type="button"
+                    className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Chat
                   </button>
                 </div>
 

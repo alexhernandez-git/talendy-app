@@ -37,7 +37,6 @@ export default function Profile() {
     }
   }, [initialDataReducer.data_fetched]);
   useEffect(() => {
-    console.log(status);
     if (firstLoad) {
       const userId = router.query?.user;
 
