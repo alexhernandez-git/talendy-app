@@ -1,14 +1,10 @@
 import { useRouter } from "next/router";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Message = ({ message, myMessage }) => {
-  const router = useRouter();
-  const handleGoToProfile = (e) => {
-    e.stopPropagation();
-    router.push("/user/123");
-  };
   console.log(message);
-  const isAdmin = false;
+
   return (
     <li className="">
       <div className={`${myMessage ? "float-right " : "float-left "}  w-11/12`}>
@@ -18,9 +14,10 @@ const Message = ({ message, myMessage }) => {
           }`}
         >
           {!myMessage && (
-            <div
+            <a
               className="flex-shrink-0 mr-3 cursor-pointer"
-              onClick={handleGoToProfile}
+              href={`/user/${message?.sent_by?.id}`}
+              target="_blank"
             >
               {message?.sent_by?.picture ? (
                 <img
@@ -45,24 +42,34 @@ const Message = ({ message, myMessage }) => {
                   </svg>
                 </span>
               )}
-              <div className="w-10"></div>
-            </div>
+            </a>
           )}
-          <div
-            className={`${
-              isAdmin
-                ? "bg-gradient-to-r from-orange-500 to-pink-500 text-gray-100"
-                : myMessage
-                ? "bg-gray-200 dark:bg-gray-600 dark:text-gray-100"
-                : " bg-white dark:bg-gray-700 dark:text-gray-100"
-            } text-sm p-3 shadow rounded-lg mt-4 w-full`}
-          >
-            <p
-              className="break-all"
-              dangerouslySetInnerHTML={{
-                __html: message?.text,
-              }}
-            ></p>
+          <div className="w-full mt-4 ">
+            {!myMessage && (
+              <div className="mb-2">
+                <a
+                  href={`/user/${message?.sent_by?.id}`}
+                  target="_blank"
+                  className="text-gray-500 dark:text-gray-200 text-xs"
+                >
+                  {message?.sent_by?.username}
+                </a>
+              </div>
+            )}
+            <div
+              className={`${
+                myMessage
+                  ? "bg-gray-200 dark:bg-gray-600 dark:text-gray-100"
+                  : " bg-white dark:bg-gray-700 dark:text-gray-100"
+              } text-sm p-3 shadow rounded-lg w-full`}
+            >
+              <p
+                className="break-all"
+                dangerouslySetInnerHTML={{
+                  __html: message?.text,
+                }}
+              ></p>
+            </div>
           </div>
         </div>
       </div>
