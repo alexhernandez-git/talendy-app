@@ -154,7 +154,7 @@ const Contribute = () => {
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      if (editorText) {
+      if (editorText || editorText === "") {
         const payload = {
           token: authReducer?.access_token,
           text: editorText,

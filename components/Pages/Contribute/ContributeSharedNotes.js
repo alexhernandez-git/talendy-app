@@ -4,6 +4,7 @@ import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 import { updateSharedNotes } from "redux/actions/contributeRoom";
 import { useDispatch } from "react-redux";
+import { setEndOfContenteditable } from "helpers";
 
 export default function ContributeSharedNotes({
   socketRef,
@@ -52,7 +53,6 @@ export default function ContributeSharedNotes({
       setEditorText(target.innerHTML);
     } else {
       target.innerText = target.innerText.slice(0, 2500);
-      setEndOfContenteditable(target);
       setEditorText(target.innerText);
     }
   };
