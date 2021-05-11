@@ -113,6 +113,9 @@ const ContributeChat = ({
                         ></path>
                       </svg>
                     </button> */}
+                    <span className="mr-3 inline-flex items-center text-sm text-gray-500 dark:text-gray-200">
+                      Ctrl + Enter for send
+                    </span>
                     <button
                       type="submit"
                       className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm  text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
