@@ -70,6 +70,16 @@ function WrappedApp({ Component, pageProps }) {
             );
             break;
 
+          case "POST_MESSAGE_RECEIVED":
+            await dispatch(
+              createAlert(
+                "SUCCESS",
+                "Your have recieved a message from a contribute room"
+              )
+            );
+            addOrUpdateNotificationToFeed(data.notification__pk);
+
+            break;
           case "NEW_CONTRIBUTE_REQUEST":
             await dispatch(newContributeRequestEvent(data));
             break;

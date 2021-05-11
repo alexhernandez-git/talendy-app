@@ -8,9 +8,11 @@ const useGetNotification = (notification) => {
   let member_joined;
   let post_owner;
   let contribute_request;
+  let many_messages;
+  let message;
   switch (notification?.type) {
     case "ME":
-      const many_messages = notification.messages.length > 1;
+      many_messages = notification.messages.length > 1;
       let message = "";
       if (notification.actor) {
         message = `${
@@ -33,7 +35,30 @@ const useGetNotification = (notification) => {
         message: message,
         user: notification.actor,
       };
-      break;
+    case "PM":
+      many_messages = notification.post_messages.length > 1;
+      message = "";
+      if (notification.actor) {
+        message = `${
+          many_messages
+            ? notification.post_messages.length + " messages in contribute room"
+            : "New message in contribute room"
+        } from ${notification.actor.username}`;
+      } else {
+        message = `${
+          many_messages
+            ? notification.post_messages.length + " messages"
+            : "New message"
+        }`;
+      }
+      if (notification.post_messages.length > 0 && !many_messages) {
+        message = notification.post_messages[0].text;
+      }
+      return {
+        event_message: many_messages ? "New messages" : "New message",
+        message: message,
+        user: notification.actor,
+      };
     case "NC":
       connection = notification.connection;
       const connectedUser =
