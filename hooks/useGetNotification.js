@@ -7,6 +7,7 @@ const useGetNotification = (notification) => {
   let connection;
   let user;
   let member_joined;
+  let post_owner;
   let contribute_request;
   switch (notification?.type) {
     case "ME":
@@ -69,7 +70,7 @@ const useGetNotification = (notification) => {
         user: member_joined,
       };
     case "CA":
-      post_owner = notification.post?.user;
+      post_owner = notification?.post?.user;
       return {
         event_message: `Contribute request accepted`,
         message: `${post_owner.username} has accepted your contribute request`,
