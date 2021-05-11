@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { fetchMoreRoomMessages } from "redux/actions/roomMessages";
 import ContributeRoomChatEditor from "components/Editor/ContributeRoomChatEditor";
 
-const ContributeChat = () => {
+const ContributeChat = ({ handleSendMessage, handleChangeMessage }) => {
   const dispatch = useDispatch();
   const handleFetchMoreMessages = () => {
     dispatch(fetchMoreRoomMessages());
@@ -63,35 +63,16 @@ const ContributeChat = () => {
                   <label htmlFor="comment" className="sr-only">
                     About
                   </label>
-                  <ContributeRoomChatEditor />
+                  <ContributeRoomChatEditor
+                    handleSendMessage={handleSendMessage}
+                    handleChangeMessage={handleChangeMessage}
+                  />
                 </div>
-                <div className="mt-3 sm:flex items-center justify-between">
-                  <div className="flex items-center justify-end sm:justify-start">
-                    {/* <button
-                                type="button"
-                                className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                              >
-                                <IconContext.Provider
-                                  value={{ size: 18, className: "mr-2" }}
-                                >
-                                  <MdScreenShare />
-                                </IconContext.Provider>
-                                Screen
-                              </button>
-                              <button className="inline-flex items-center px-4 py-2 font-medium rounded-3xl text-orange-500 dark:text-gray-100 ">
-                                <IconContext.Provider value={{ size: 23 }}>
-                                  <MdMic />
-                                </IconContext.Provider>
-                              </button>
-                              <button className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 ">
-                                <IconContext.Provider value={{ size: 23 }}>
-                                  <MdHeadset />
-                                </IconContext.Provider>
-                              </button> */}
-                  </div>
+                <div className="mt-3 sm:flex items-center justify-end">
                   <div className="mt-4 sm:mt-0 flex items-center justify-end">
                     <button
                       type="button"
+                      onClick={handleSendMessage}
                       className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                     >
                       <svg

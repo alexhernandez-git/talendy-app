@@ -1,6 +1,9 @@
 import React from "react";
 import Toolbar from "./Toolbar";
-export default function ContributeRoomChatEditor() {
+export default function ContributeRoomChatEditor({
+  handleSendMessage,
+  handleChangeMessage,
+}) {
   function paste(e) {
     e.preventDefault();
     const open = new RegExp("<", "gi");
@@ -24,7 +27,7 @@ export default function ContributeRoomChatEditor() {
       return false;
     }
     if (e.ctrlKey && e.keyCode === 13) {
-      alert("Submit");
+      handleSendMessage(e);
       e.preventDefault();
       return false;
     }
@@ -38,6 +41,7 @@ export default function ContributeRoomChatEditor() {
           className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l cursor-text"
           id="editor"
           onKeyDown={handleKeyDown}
+          onKeyUp={handleChangeMessage}
           contentEditable="true"
           data-placeholder="Message"
           onPaste={(e) => paste(e)}

@@ -118,6 +118,37 @@ const Contribute = () => {
     await dispatch(addRoomMessage(payload.message));
   };
 
+  const [message, setMessage] = useState("");
+  const handleChangeMessage = (e) => {
+    e.preventDefault();
+    console.log(message);
+    setMessage(e.target.innerText);
+  };
+  const handleSendMessage = (e = null) => {
+    console.log("entra");
+    if (e) {
+      e.preventDefault();
+    }
+    console.log(message.length);
+    if (!message || message.trim().length === 0) {
+      return;
+    }
+    const payload = {
+      roomID: router.query?.room,
+      token: authReducer?.access_token,
+      message: {
+        text: message,
+        sent_by: authReducer.user,
+        files: [],
+        created: Date.now(),
+      },
+    };
+    handleAddMessage(payload);
+
+    socketRef.current.emit("text", payload);
+    setMessage("");
+  };
+
   useEffect(() => {
     if (initialDataFetched && validationsMade) {
       socketRef.current = io.connect("http://localhost:5500");
@@ -570,7 +601,12 @@ const Contribute = () => {
         <div className="py-10">
           <div className="max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
             <div className="space-y-6 lg:col-start-1 lg:col-span-2">
-              {feature.toUpperCase() === "CHAT" && <ContributeChat />}
+              {feature.toUpperCase() === "CHAT" && (
+                <ContributeChat
+                  handleSendMessage={handleSendMessage}
+                  handleChangeMessage={handleChangeMessage}
+                />
+              )}
               {feature.toUpperCase() === "SHAREDNOTES" && (
                 <ContributeSharedNotes socketRef={socketRef} roomID={roomID} />
               )}
