@@ -7,7 +7,7 @@ import { IconContext } from "react-icons";
 import { MdHeadset, MdMic, MdScreenShare, MdMicOff } from "react-icons/md";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Member from "components/Pages/Help/Member";
+import Member from "components/Pages/ContributeRoom/Member";
 import { io } from "socket.io-client";
 import Peer from "simple-peer";
 import ContributeChat from "components/Pages/Contribute/ContributeChat";
@@ -48,7 +48,7 @@ const Contribute = () => {
   useEffect(() => {
     const fetchInitialData = async () => {
       if (initialDataFetched) {
-        await dispatch(fetchContributeRoom(router.query?.post));
+        await dispatch(fetchContributeRoom(router.query?.room));
       }
     };
 
@@ -58,7 +58,7 @@ const Contribute = () => {
     (state) => state.contributeRoomReducer
   );
   const { contribute_room, is_loading } = contributeRoomReducer;
-  const [roomID, setRoomID] = useState(router.query?.post);
+  const [roomID, setRoomID] = useState(router.query?.room);
   const [validationsMade, setValidationsMade] = useState(false);
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const Contribute = () => {
       );
     } else {
       if (initialDataFetched && !is_loading) {
-        setRoomID(router.query?.post);
+        setRoomID(router.query?.room);
         setValidationsMade(true);
       }
     }
@@ -114,6 +114,10 @@ const Contribute = () => {
     }
   };
 
+  const handleAddMessage = async (payload) => {
+    await dispatch(addRoomMessage(payload.message));
+  };
+
   useEffect(() => {
     if (initialDataFetched && validationsMade) {
       socketRef.current = io.connect("http://localhost:5500");
@@ -144,6 +148,11 @@ const Contribute = () => {
       socketRef.current.on("no user id", () => {
         dispatch(createAlert("ERROR", "There is not user id"));
         router.push("/feed");
+      });
+
+      socketRef.current.on("text", (payload) => {
+        console.log("payload", payload);
+        handleAddMessage(payload);
       });
       function createPeer(userToSignal, callerID, stream) {
         const peer = new Peer({
@@ -644,7 +653,7 @@ const Contribute = () => {
         </div>
       </Layout>
       <PostModal
-        contribute_room={contribute_room}
+        post={contribute_room}
         page={page}
         modalOpen={modalOpen}
         handleToggleModal={handleToggleModal}

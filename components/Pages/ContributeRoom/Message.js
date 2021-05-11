@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 
-const Message = ({ myMessage, isAdmin }) => {
+const Message = ({ message, myMessage }) => {
   const router = useRouter();
   const handleGoToProfile = (e) => {
     e.stopPropagation();

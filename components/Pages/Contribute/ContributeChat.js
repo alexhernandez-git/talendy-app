@@ -1,7 +1,23 @@
 import React from "react";
-import Message from "components/Pages/Help/Message";
+import Message from "components/Pages/ContributeRoom/Message";
 import Editor from "components/Editor/Editor";
+import { useSelector } from "react-redux";
+import VisibilitySensor from "react-visibility-sensor";
+import { useDispatch } from "react-redux";
+import { fetchMoreRoomMessages } from "redux/actions/roomMessages";
+import ContributeRoomChatEditor from "components/Editor/ContributeRoomChatEditor";
+
 const ContributeChat = () => {
+  const dispatch = useDispatch();
+  const handleFetchMoreMessages = () => {
+    dispatch(fetchMoreRoomMessages());
+  };
+  function onChangeVisibility(isVisible) {
+    console.log("isVisible", isVisible);
+    if (isVisible) handleFetchMoreMessages();
+  }
+
+  const roomMessagesReducer = useSelector((state) => state.roomMessagesReducer);
   return (
     <section aria-labelledby="notes-title" className="">
       <div className="bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg sm:overflow-hidden">
@@ -9,14 +25,26 @@ const ContributeChat = () => {
           <div className="px-4 py-5 sm:px-6"></div>
           <div className="">
             <ul className="p-4  overflow-y-auto bg-gray-100 dark:bg-gray-800 flex flex-col-reverse content-container">
-              <Message />
-              <Message myMessage />
-              <Message myMessage />
-              <Message isAdmin />
-              <Message myMessage />
-              <Message myMessage />
-              <Message />
-              <Message myMessage />
+              {roomMessagesReducer.messages.results.map((message) =>
+                message?.sent_by?.id == authReducer.user?.id ? (
+                  <Message message={message} myMessage />
+                ) : (
+                  <Message message={message} />
+                )
+              )}
+              {roomMessagesReducer.messages.results.length > 0 &&
+                roomMessagesReducer.messages.next && (
+                  <VisibilitySensor onChange={onChangeVisibility}>
+                    <div
+                      className="p-3 flex justify-center"
+                      onClick={handleFetchMoreMessages}
+                    >
+                      <span className="text-gray-500 dark:text-gray-100 text-sm cursor-pointer">
+                        Load more messages
+                      </span>
+                    </div>
+                  </VisibilitySensor>
+                )}
             </ul>
           </div>
         </div>
@@ -35,7 +63,7 @@ const ContributeChat = () => {
                   <label htmlFor="comment" className="sr-only">
                     About
                   </label>
-                  <Editor chat />
+                  <ContributeRoomChatEditor />
                 </div>
                 <div className="mt-3 sm:flex items-center justify-between">
                   <div className="flex items-center justify-end sm:justify-start">
