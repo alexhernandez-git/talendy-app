@@ -18,7 +18,10 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { createAlert } from "redux/actions/alerts";
 import useAuthRequired from "hooks/useAuthRequired";
-import { fetchContributeRoom } from "redux/actions/contributeRoom";
+import {
+  fetchContributeRoom,
+  updateSharedNotes,
+} from "redux/actions/contributeRoom";
 import Spinner from "components/Layout/Spinner";
 import moment from "moment";
 import { addRoomMessage, fetchRoomMessages } from "redux/actions/roomMessages";
@@ -187,6 +190,15 @@ const Contribute = () => {
         console.log("payload", payload);
         handleAddMessage(payload);
       });
+      if (feature.toUpperCase() !== "SHAREDNOTES") {
+        const handleRecievedText = (data) => {
+          console.log("data recieved", data);
+          if (data) {
+            dispatch(updateSharedNotes(data));
+          }
+        };
+        socketRef.current.on("text", handleRecievedText);
+      }
       function createPeer(userToSignal, callerID, stream) {
         const peer = new Peer({
           initiator: true,
