@@ -611,7 +611,11 @@ const Contribute = () => {
                 />
               )}
               {feature.toUpperCase() === "SHAREDNOTES" && (
-                <ContributeSharedNotes socketRef={socketRef} roomID={roomID} />
+                <ContributeSharedNotes
+                  socketRef={socketRef}
+                  roomID={roomID}
+                  sharedNotes={contribute_room?.shared_notes}
+                />
               )}
               {feature.toUpperCase() === "ASTEROIDS" && <ContributeAsteroids />}
             </div>

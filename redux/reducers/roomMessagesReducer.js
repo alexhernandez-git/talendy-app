@@ -117,6 +117,7 @@ export default function roomMessagesReducer(state = initialState, action) {
         fetching_message: false,
         fetch_message_error: null,
       };
+
     default:
       return state;
   }

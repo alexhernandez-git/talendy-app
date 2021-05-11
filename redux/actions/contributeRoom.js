@@ -4,6 +4,7 @@ import {
   FETCH_CONTRIBUTE_ROOM,
   FETCH_CONTRIBUTE_ROOM_SUCCESS,
   FETCH_CONTRIBUTE_ROOM_FAIL,
+  UPDATE_SHARED_NOTES,
 } from "../types";
 import { createAlert } from "./alerts";
 
@@ -28,4 +29,8 @@ export const fetchContributeRoom = (id) => async (dispatch, getState) => {
         payload: { data: err.response?.data, status: err.response?.status },
       });
     });
+};
+
+export const updateSharedNotes = (shared_notes) => async (dispatch) => {
+  dispatch({ type: UPDATE_SHARED_NOTES, payload: shared_notes });
 };

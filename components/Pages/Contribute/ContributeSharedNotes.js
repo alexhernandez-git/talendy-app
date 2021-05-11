@@ -1,8 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import SharedToolbar from "components/Editor/SharedToolbar";
 import { io } from "socket.io-client";
+import { useSelector } from "react-redux";
+import { updateSharedNotes } from "redux/actions/contributeRoom";
+import { useDispatch } from "react-redux";
 
-export default function ContributeSharedNotes({ socketRef, roomID }) {
+export default function ContributeSharedNotes({
+  socketRef,
+  roomID,
+  sharedNotes,
+}) {
+  const authReducer = useSelector((state) => state.authReducer);
+  const dispatch = useDispatch();
   function setEndOfContenteditable(contentEditableElement) {
     var range, selection;
     if (document.createRange) {
@@ -57,6 +66,7 @@ export default function ContributeSharedNotes({ socketRef, roomID }) {
         setEndOfContenteditable(target);
 
         setEditorText(target.innerHTML);
+        dispatch(updateSharedNotes(target.innerHTML));
       }
       setEditorTextLength(target.innerText.length);
     };
@@ -81,13 +91,28 @@ export default function ContributeSharedNotes({ socketRef, roomID }) {
   };
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      const payload = { text: editorText, roomID: roomID };
+      const payload = {
+        token: authReducer?.access_token,
+        text: editorText,
+        roomID: roomID,
+      };
       console.log(payload);
+      dispatch(updateSharedNotes(editorText));
+
       socketRef.current.emit("text", payload);
     }, 1000);
     return () => clearTimeout(timeoutId);
   }, [onKeyUpCounter]);
+  const sharedNotesRef = useRef();
+  const [firstLoad, setFirstLoad] = useState(true);
 
+  useEffect(() => {
+    if (firstLoad) {
+      sharedNotesRef.current.innerHTML = sharedNotes;
+      setEditorTextLength(sharedNotesRef.current.innerText.length);
+      setFirstLoad(false);
+    }
+  }, [sharedNotes]);
   return (
     <section aria-labelledby="notes-title" className="">
       <div className="bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg p-1">
@@ -96,6 +121,7 @@ export default function ContributeSharedNotes({ socketRef, roomID }) {
           className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l cursor-text"
           id="editor"
           onKeyUp={handleOnKeyUp}
+          ref={sharedNotesRef}
           onKeyDown={handleKeyDown}
           onFocus={(e) => console.log(e.target.selectionStart)}
           onChange={(e) => console.log(e.target)}
