@@ -203,13 +203,14 @@ const Contribute = () => {
         console.log("data recieved", data);
 
         if (data) {
-          sharedNotesRef.current.innerHTML = data;
+          if (sharedNotesRef.current) {
+            sharedNotesRef.current.innerHTML = data;
+            setEndOfContenteditable(sharedNotesRef.current);
+            setEditorTextLength(sharedNotesRef.current.innerText.length);
+            setEditorText(sharedNotesRef.current.innerHTML);
+          }
 
-          setEndOfContenteditable(sharedNotesRef.current);
-
-          setEditorText(sharedNotesRef.current.innerHTML);
-          dispatch(updateSharedNotes(sharedNotesRef.current.innerHTML));
-          setEditorTextLength(sharedNotesRef.current.innerText.length);
+          dispatch(updateSharedNotes(data));
         }
       };
       socketRef.current.on("text", handleRecievedText);
