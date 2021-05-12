@@ -21,7 +21,7 @@ const initialState = {
   },
   error: null,
   is_setting_notification_read: false,
-  set_notification_read_error,
+  set_notification_read_error: null,
 };
 export default function notificationsReducer(state = initialState, action) {
   switch (action.type) {

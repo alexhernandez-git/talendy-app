@@ -12,6 +12,9 @@ import {
   FETCH_MORE_NOTIFICATIONS_SUCCESS,
   FETCH_MORE_NOTIFICATIONS_FAIL,
   NEW_MESSAGE_EVENT,
+  SET_NOTIFICATION_READ,
+  SET_NOTIFICATION_READ_SUCCESS,
+  SET_NOTIFICATION_READ_FAIL,
 } from "../types";
 import { fetchContributeRequest } from "./contributeRequests";
 import { createAlert } from "./alerts";
@@ -69,6 +72,7 @@ export const setNotificationRead = (id) => async (dispatch, getState) => {
   await axios
     .patch(
       `${process.env.HOST}/api/notifications/${id}/read/`,
+      {},
       tokenConfig(getState)
     )
     .then(async (res) => {
