@@ -59,7 +59,7 @@ const Contribute = () => {
     };
 
     fetchInitialData();
-  }, [initialDataFetched]);
+  }, [initialDataFetched, router.query?.room]);
   const contributeRoomReducer = useSelector(
     (state) => state.contributeRoomReducer
   );
