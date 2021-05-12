@@ -97,6 +97,14 @@ import {
   SUBSTRACT_CONNECTION,
   ADD_FOLLOW,
   SUBSTRACT_FOLLOW,
+  ADD_POST_COUNT,
+  SUBSTRACT_POST_COUNT,
+  ADD_CREATED_POST_COUNT,
+  SUBSTRACT_CREATED_POST_COUNT,
+  ADD_CREATED_ACTIVE_POST_COUNT,
+  SUBSTRACT_CREATED_ACTIVE_POST_COUNT,
+  ADD_CREATED_SOLVED_POST_COUNT,
+  SUBSTRACT_CREATED_SOLVED_POST_COUNT,
 } from "../types";
 
 const initialState = {
@@ -830,6 +838,70 @@ export default function authReducer(state = initialState, action) {
         user: {
           ...state.user,
           following_count: --state.user.following_count,
+        },
+      };
+    case ADD_POST_COUNT:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          posts_count: ++state.user.posts_count,
+        },
+      };
+    case SUBSTRACT_POST_COUNT:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          posts_count: --state.user.posts_count,
+        },
+      };
+    case ADD_CREATED_POST_COUNT:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          created_posts_count: ++state.user.created_posts_count,
+        },
+      };
+    case SUBSTRACT_CREATED_POST_COUNT:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          created_posts_count: --state.user.created_posts_count,
+        },
+      };
+    case ADD_CREATED_ACTIVE_POST_COUNT:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          created_active_posts_count: ++state.user.created_active_posts_count,
+        },
+      };
+    case SUBSTRACT_CREATED_ACTIVE_POST_COUNT:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          created_active_posts_count: --state.user.created_active_posts_count,
+        },
+      };
+    case ADD_CREATED_SOLVED_POST_COUNT:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          created_solved_posts_count: ++state.user.created_solved_posts_count,
+        },
+      };
+    case SUBSTRACT_CREATED_SOLVED_POST_COUNT:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          created_solved_posts_count: --state.user.created_solved_posts_count,
         },
       };
     default:

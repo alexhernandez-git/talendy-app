@@ -8,8 +8,10 @@ import {
   MY_SOLVED_POSTS_PAGE,
 } from "pages";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const LeftSidebar = ({ page, mobile }) => {
+  const authReducer = useSelector((state) => state.authReducer);
   return (
     <div
       className={`${
@@ -38,6 +40,7 @@ const LeftSidebar = ({ page, mobile }) => {
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
               >
                 <span className="truncate">All</span>
+                <span>{authReducer.user?.created_posts_count}</span>
               </span>
             </Link>
             <Link href="/profile/posts/active">
@@ -50,6 +53,7 @@ const LeftSidebar = ({ page, mobile }) => {
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
               >
                 <span className="truncate">Active</span>
+                <span>{authReducer.user?.created_active_posts_count}</span>
               </span>
             </Link>
             <Link href="/profile/posts/solved">
@@ -62,6 +66,7 @@ const LeftSidebar = ({ page, mobile }) => {
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
               >
                 <span className="truncate">Solved</span>
+                <span>{authReducer.user?.created_solved_posts_count}</span>
               </span>
             </Link>
           </div>

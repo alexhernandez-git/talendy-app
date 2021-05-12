@@ -95,6 +95,14 @@ import {
   ADD_FOLLOW,
   SUBSTRACT_FOLLOW,
   ADD_INVITATION,
+  ADD_POST_COUNT,
+  SUBSTRACT_POST_COUNT,
+  ADD_CREATED_POST_COUNT,
+  SUBSTRACT_CREATED_POST_COUNT,
+  ADD_CREATED_ACTIVE_POST_COUNT,
+  SUBSTRACT_CREATED_ACTIVE_POST_COUNT,
+  ADD_CREATED_SOLVED_POST_COUNT,
+  SUBSTRACT_CREATED_SOLVED_POST_COUNT,
 } from "../types";
 import { createAlert } from "./alerts";
 
@@ -140,27 +148,25 @@ export const getUserByJwt = (token) => async (dispatch, getState) => {
     })
     .catch(async (err) => {});
 };
-export const login = (data, handleClose, resetForm, router) => async (
-  dispatch,
-  getState
-) => {
-  await axios
-    .post(`${process.env.HOST}/api/users/login/`, data)
-    .then(async (res) => {
-      await dispatch({
-        type: LOGIN_SUCCESS,
-        payload: res.data,
+export const login =
+  (data, handleClose, resetForm, router) => async (dispatch, getState) => {
+    await axios
+      .post(`${process.env.HOST}/api/users/login/`, data)
+      .then(async (res) => {
+        await dispatch({
+          type: LOGIN_SUCCESS,
+          payload: res.data,
+        });
+        await handleClose();
+        await resetForm({});
+      })
+      .catch(async (err) => {
+        await dispatch({
+          type: AUTH_ERROR,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
       });
-      await handleClose();
-      await resetForm({});
-    })
-    .catch(async (err) => {
-      await dispatch({
-        type: AUTH_ERROR,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
-    });
-};
+  };
 
 export const isEmailAvailable = (email) => async (dispatch, getState) => {
   dispatch({ type: IS_EMAIL_AVAILABLE });
@@ -226,30 +232,28 @@ export const resetCouponAvailable = () => async (dispatch, getState) => {
   dispatch({ type: RESET_COUPON_AVAILABLE });
 };
 
-export const register = (data, handleClose, resetForm) => async (
-  dispatch,
-  getState
-) => {
-  await dispatch({
-    type: REGISTER,
-  });
-  await axios
-    .post(`${process.env.HOST}/api/users/signup/`, data)
-    .then(async (res) => {
-      await dispatch({
-        type: REGISTER_SUCCESS,
-        payload: res.data,
-      });
-      await handleClose();
-      await resetForm();
-    })
-    .catch(async (err) => {
-      await dispatch({
-        type: REGISTER_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
+export const register =
+  (data, handleClose, resetForm) => async (dispatch, getState) => {
+    await dispatch({
+      type: REGISTER,
     });
-};
+    await axios
+      .post(`${process.env.HOST}/api/users/signup/`, data)
+      .then(async (res) => {
+        await dispatch({
+          type: REGISTER_SUCCESS,
+          payload: res.data,
+        });
+        await handleClose();
+        await resetForm();
+      })
+      .catch(async (err) => {
+        await dispatch({
+          type: REGISTER_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
 
 export const logout = () => async (dispatch, getState) => {
   dispatch({ type: LOGOUT_SUCCESS });
@@ -299,54 +303,50 @@ export const verifyAccount = (token, router) => async (dispatch, getState) => {
     });
 };
 
-export const validateChangeEmail = (token, router) => async (
-  dispatch,
-  getState
-) => {
-  dispatch({ type: VALIDATE_CHANGE_EMAIL });
-  await axios
-    .post(`${process.env.HOST}/api/users/validate_change_email/`, {
-      token: token,
-    })
-    .then((res) => {
-      dispatch({
-        type: VALIDATE_CHANGE_EMAIL_SUCCESS,
-        payload: res.data,
-      });
+export const validateChangeEmail =
+  (token, router) => async (dispatch, getState) => {
+    dispatch({ type: VALIDATE_CHANGE_EMAIL });
+    await axios
+      .post(`${process.env.HOST}/api/users/validate_change_email/`, {
+        token: token,
+      })
+      .then((res) => {
+        dispatch({
+          type: VALIDATE_CHANGE_EMAIL_SUCCESS,
+          payload: res.data,
+        });
 
-      router.push("/feed");
-    })
-    .catch((err) => {
-      dispatch({
-        type: VALIDATE_CHANGE_EMAIL_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
+        router.push("/feed");
+      })
+      .catch((err) => {
+        dispatch({
+          type: VALIDATE_CHANGE_EMAIL_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
 
-      router.push("/feed");
-    });
-};
-export const forgetPassword = (values, handleClose, resetForm) => async (
-  dispatch,
-  getState
-) => {
-  dispatch({ type: FORGET_PASSWORD });
-  await axios
-    .post(`${process.env.HOST}/api/users/forget_password/`, values)
-    .then(async (res) => {
-      await dispatch({
-        type: FORGET_PASSWORD_SUCCESS,
-        payload: res.data,
+        router.push("/feed");
       });
-      await handleClose();
-      await resetForm({});
-    })
-    .catch((err) => {
-      dispatch({
-        type: FORGET_PASSWORD_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
+  };
+export const forgetPassword =
+  (values, handleClose, resetForm) => async (dispatch, getState) => {
+    dispatch({ type: FORGET_PASSWORD });
+    await axios
+      .post(`${process.env.HOST}/api/users/forget_password/`, values)
+      .then(async (res) => {
+        await dispatch({
+          type: FORGET_PASSWORD_SUCCESS,
+          payload: res.data,
+        });
+        await handleClose();
+        await resetForm({});
+      })
+      .catch((err) => {
+        dispatch({
+          type: FORGET_PASSWORD_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
       });
-    });
-};
+  };
 
 export const resetPassword = (values, router) => async (dispatch, getState) => {
   dispatch({ type: RESET_PASSWORD });
@@ -423,36 +423,34 @@ export const updateUserPicture = (picture) => async (dispatch, getState) => {
     });
 };
 
-export const changePassword = (data, resetForm) => async (
-  dispatch,
-  getState
-) => {
-  console.log(data);
-  dispatch({
-    type: CHANGE_PASSWORD,
-  });
-  await axios
-    .post(
-      `${process.env.HOST}/api/users/change_password/`,
-      data,
-      tokenConfig(getState)
-    )
-    .then(async (res) => {
-      console.log(res.data);
-
-      await dispatch({
-        type: CHANGE_PASSWORD_SUCCESS,
-      });
-      await resetForm({});
-      await dispatch(createAlert("SUCCESS", "Password successfully changed"));
-    })
-    .catch(async (err) => {
-      await dispatch({
-        type: CHANGE_PASSWORD_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
+export const changePassword =
+  (data, resetForm) => async (dispatch, getState) => {
+    console.log(data);
+    dispatch({
+      type: CHANGE_PASSWORD,
     });
-};
+    await axios
+      .post(
+        `${process.env.HOST}/api/users/change_password/`,
+        data,
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        console.log(res.data);
+
+        await dispatch({
+          type: CHANGE_PASSWORD_SUCCESS,
+        });
+        await resetForm({});
+        await dispatch(createAlert("SUCCESS", "Password successfully changed"));
+      })
+      .catch(async (err) => {
+        await dispatch({
+          type: CHANGE_PASSWORD_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
 export const resetChangePasswordErrors = () => async (dispatch) => {
   dispatch({ type: RESET_CHANGE_PASSWORD_ERRORS });
 };
@@ -509,37 +507,35 @@ export const stripeConnect = (auth_code) => async (dispatch, getState) => {
     });
 };
 
-export const paypalConnect = (
-  values,
-  handleClosePaypalConnectModal,
-  resetForm
-) => async (dispatch, getState) => {
-  await dispatch({
-    type: PAYPAL_CONNECT,
-  });
-  await axios
-    .post(
-      `${process.env.HOST}/api/users/paypal_connect/`,
-      values,
-      tokenConfig(getState)
-    )
-    .then(async (res) => {
-      console.log(res.data);
-      await dispatch({
-        type: PAYPAL_CONNECT_SUCCESS,
-        payload: res.data,
-      });
-
-      await handleClosePaypalConnectModal();
-      await resetForm({});
-    })
-    .catch(async (err) => {
-      await dispatch({
-        type: PAYPAL_CONNECT_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
+export const paypalConnect =
+  (values, handleClosePaypalConnectModal, resetForm) =>
+  async (dispatch, getState) => {
+    await dispatch({
+      type: PAYPAL_CONNECT,
     });
-};
+    await axios
+      .post(
+        `${process.env.HOST}/api/users/paypal_connect/`,
+        values,
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        console.log(res.data);
+        await dispatch({
+          type: PAYPAL_CONNECT_SUCCESS,
+          payload: res.data,
+        });
+
+        await handleClosePaypalConnectModal();
+        await resetForm({});
+      })
+      .catch(async (err) => {
+        await dispatch({
+          type: PAYPAL_CONNECT_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
 
 export const toggleView = () => async (dispatch, getState) => {
   const view = getState().authReducer.user.seller_view;
@@ -562,38 +558,36 @@ export const toggleView = () => async (dispatch, getState) => {
     });
 };
 
-export const inviteUser = (
-  values,
-  resetForm,
-  handleHideInviteContact
-) => async (dispatch, getState) => {
-  dispatch({
-    type: INVITE_USER,
-  });
-  await axios
-    .post(
-      `${process.env.HOST}/api/users/invite_user/`,
-      values,
-      tokenConfig(getState)
-    )
-    .then((res) => {
-      console.log(res.data);
-      dispatch({
-        type: INVITE_USER_SUCCESS,
-        payload: res.data,
-      });
-      resetForm({});
-      dispatch(resetInviteUser());
-
-      handleHideInviteContact();
-    })
-    .catch((err) => {
-      dispatch({
-        type: INVITE_USER_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
+export const inviteUser =
+  (values, resetForm, handleHideInviteContact) =>
+  async (dispatch, getState) => {
+    dispatch({
+      type: INVITE_USER,
     });
-};
+    await axios
+      .post(
+        `${process.env.HOST}/api/users/invite_user/`,
+        values,
+        tokenConfig(getState)
+      )
+      .then((res) => {
+        console.log(res.data);
+        dispatch({
+          type: INVITE_USER_SUCCESS,
+          payload: res.data,
+        });
+        resetForm({});
+        dispatch(resetInviteUser());
+
+        handleHideInviteContact();
+      })
+      .catch((err) => {
+        dispatch({
+          type: INVITE_USER_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
 
 export const resetInviteUser = (values) => async (dispatch, getState) => {
   dispatch({
@@ -628,36 +622,34 @@ export const unsetPendingMessages = () => async (dispatch, getState) => {
   });
 };
 
-export const addBillingInformation = (values, payment_method) => async (
-  dispatch,
-  getState
-) => {
-  dispatch({
-    type: ADD_BILLING_INFORMATION,
-  });
-  await axios
-    .patch(
-      `${process.env.HOST}/api/users/seller_add_payment_method/`,
-      {
-        ...values,
-        payment_method_id: payment_method.id,
-      },
-      tokenConfig(getState)
-    )
-    .then((res) => {
-      console.log(res.data);
-      dispatch({
-        type: ADD_BILLING_INFORMATION_SUCCESS,
-        payload: res.data,
-      });
-    })
-    .catch(async (err) => {
-      await dispatch({
-        type: ADD_BILLING_INFORMATION_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
+export const addBillingInformation =
+  (values, payment_method) => async (dispatch, getState) => {
+    dispatch({
+      type: ADD_BILLING_INFORMATION,
     });
-};
+    await axios
+      .patch(
+        `${process.env.HOST}/api/users/seller_add_payment_method/`,
+        {
+          ...values,
+          payment_method_id: payment_method.id,
+        },
+        tokenConfig(getState)
+      )
+      .then((res) => {
+        console.log(res.data);
+        dispatch({
+          type: ADD_BILLING_INFORMATION_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch(async (err) => {
+        await dispatch({
+          type: ADD_BILLING_INFORMATION_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
 
 export const loadCurrency = () => async (dispatch) => {
   // User Loading
@@ -689,66 +681,62 @@ export const changeCurrency = (currency) => async (dispatch, getState) => {
   }
 };
 
-export const changePaymentMethod = (
-  values,
-  handleCloseChangePaymentMethod,
-  resetForm
-) => async (dispatch, getState) => {
-  dispatch({
-    type: CHANGE_PAYMENT_METHOD,
-  });
-  await axios
-    .patch(
-      `${process.env.HOST}/api/users/seller_change_payment_method/`,
-      values,
-      tokenConfig(getState)
-    )
-    .then((res) => {
-      console.log(res.data);
-      dispatch({
-        type: CHANGE_PAYMENT_METHOD_SUCCESS,
-        payload: res.data,
-      });
-      resetForm({});
-      handleCloseChangePaymentMethod();
-    })
-    .catch((err) => {
-      dispatch({
-        type: CHANGE_PAYMENT_METHOD_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
+export const changePaymentMethod =
+  (values, handleCloseChangePaymentMethod, resetForm) =>
+  async (dispatch, getState) => {
+    dispatch({
+      type: CHANGE_PAYMENT_METHOD,
     });
-};
-
-export const cancelSubscription = (handleHideModal) => async (
-  dispatch,
-  getState
-) => {
-  dispatch({
-    type: CANCEL_SUBSCRIPTION,
-  });
-  await axios
-    .patch(
-      `${process.env.HOST}/api/users/seller_cancel_subscription/`,
-      {},
-      tokenConfig(getState)
-    )
-    .then((res) => {
-      dispatch();
-
-      dispatch({
-        type: CANCEL_SUBSCRIPTION_SUCCESS,
-        payload: res.data,
+    await axios
+      .patch(
+        `${process.env.HOST}/api/users/seller_change_payment_method/`,
+        values,
+        tokenConfig(getState)
+      )
+      .then((res) => {
+        console.log(res.data);
+        dispatch({
+          type: CHANGE_PAYMENT_METHOD_SUCCESS,
+          payload: res.data,
+        });
+        resetForm({});
+        handleCloseChangePaymentMethod();
+      })
+      .catch((err) => {
+        dispatch({
+          type: CHANGE_PAYMENT_METHOD_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
       });
-      handleHideModal();
-    })
-    .catch((err) => {
-      dispatch({
-        type: CANCEL_SUBSCRIPTION_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
+  };
+
+export const cancelSubscription =
+  (handleHideModal) => async (dispatch, getState) => {
+    dispatch({
+      type: CANCEL_SUBSCRIPTION,
     });
-};
+    await axios
+      .patch(
+        `${process.env.HOST}/api/users/seller_cancel_subscription/`,
+        {},
+        tokenConfig(getState)
+      )
+      .then((res) => {
+        dispatch();
+
+        dispatch({
+          type: CANCEL_SUBSCRIPTION_SUCCESS,
+          payload: res.data,
+        });
+        handleHideModal();
+      })
+      .catch((err) => {
+        dispatch({
+          type: CANCEL_SUBSCRIPTION_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
 
 export const reactivateSubscription = () => async (dispatch, getState) => {
   dispatch({
@@ -802,65 +790,61 @@ export const becomeASeller = () => async (dispatch, getState) => {
     });
 };
 
-export const attachPlanPaymentMethod = (
-  values,
-  handleCloseAddPaymentMethod,
-  resetForm
-) => async (dispatch, getState) => {
-  dispatch({
-    type: ADD_PAYMENT_METHOD,
-  });
-  await axios
-    .patch(
-      `${process.env.HOST}/api/users/attach_plan_payment_method/`,
-      values,
-      tokenConfig(getState)
-    )
-    .then((res) => {
-      dispatch({
-        type: ADD_PAYMENT_METHOD_SUCCESS,
-        payload: res.data,
-      });
-      resetForm({});
-      handleCloseAddPaymentMethod();
-    })
-    .catch((err) => {
-      dispatch({
-        type: ADD_PAYMENT_METHOD_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
+export const attachPlanPaymentMethod =
+  (values, handleCloseAddPaymentMethod, resetForm) =>
+  async (dispatch, getState) => {
+    dispatch({
+      type: ADD_PAYMENT_METHOD,
     });
-};
+    await axios
+      .patch(
+        `${process.env.HOST}/api/users/attach_plan_payment_method/`,
+        values,
+        tokenConfig(getState)
+      )
+      .then((res) => {
+        dispatch({
+          type: ADD_PAYMENT_METHOD_SUCCESS,
+          payload: res.data,
+        });
+        resetForm({});
+        handleCloseAddPaymentMethod();
+      })
+      .catch((err) => {
+        dispatch({
+          type: ADD_PAYMENT_METHOD_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
 
-export const attachPaymentMethod = (
-  values,
-  handleCloseAddPaymentMethod,
-  resetForm
-) => async (dispatch, getState) => {
-  dispatch({
-    type: ADD_PAYMENT_METHOD,
-  });
-  await axios
-    .patch(
-      `${process.env.HOST}/api/users/attach_payment_method/`,
-      values,
-      tokenConfig(getState)
-    )
-    .then((res) => {
-      dispatch({
-        type: ADD_PAYMENT_METHOD_SUCCESS,
-        payload: res.data,
-      });
-      resetForm({});
-      handleCloseAddPaymentMethod();
-    })
-    .catch((err) => {
-      dispatch({
-        type: ADD_PAYMENT_METHOD_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
+export const attachPaymentMethod =
+  (values, handleCloseAddPaymentMethod, resetForm) =>
+  async (dispatch, getState) => {
+    dispatch({
+      type: ADD_PAYMENT_METHOD,
     });
-};
+    await axios
+      .patch(
+        `${process.env.HOST}/api/users/attach_payment_method/`,
+        values,
+        tokenConfig(getState)
+      )
+      .then((res) => {
+        dispatch({
+          type: ADD_PAYMENT_METHOD_SUCCESS,
+          payload: res.data,
+        });
+        resetForm({});
+        handleCloseAddPaymentMethod();
+      })
+      .catch((err) => {
+        dispatch({
+          type: ADD_PAYMENT_METHOD_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
 
 export const removeAccount = (router) => async (dispatch, getState) => {
   dispatch({
@@ -887,37 +871,34 @@ export const removeAccount = (router) => async (dispatch, getState) => {
     });
 };
 
-export const sendFeedback = (
-  data,
-  resetForm,
-  handleCloseLeaveFeedback
-) => async (dispatch, getState) => {
-  dispatch({
-    type: LEAVE_FEEDBACK,
-  });
-  await axios
-    .post(
-      `${process.env.HOST}/api/users/leave_feedback/`,
-      data,
-      tokenConfig(getState)
-    )
-    .then(async (res) => {
-      await dispatch({
-        type: LEAVE_FEEDBACK_SUCCESS,
-        payload: res.data,
-      });
-      resetForm({});
-      handleCloseLeaveFeedback();
-    })
-    .catch(async (err) => {
-      await dispatch();
-
-      await dispatch({
-        type: LEAVE_FEEDBACK_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
+export const sendFeedback =
+  (data, resetForm, handleCloseLeaveFeedback) => async (dispatch, getState) => {
+    dispatch({
+      type: LEAVE_FEEDBACK,
     });
-};
+    await axios
+      .post(
+        `${process.env.HOST}/api/users/leave_feedback/`,
+        data,
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        await dispatch({
+          type: LEAVE_FEEDBACK_SUCCESS,
+          payload: res.data,
+        });
+        resetForm({});
+        handleCloseLeaveFeedback();
+      })
+      .catch(async (err) => {
+        await dispatch();
+
+        await dispatch({
+          type: LEAVE_FEEDBACK_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
 export const addInvitation = () => async (dispatch, getState) => {
   dispatch({
     type: ADD_INVITATION,
@@ -948,6 +929,48 @@ export const substractFollow = () => async (dispatch, getState) => {
     type: SUBSTRACT_FOLLOW,
   });
 };
+export const addPostCount = () => async (dispatch, getState) => {
+  dispatch({
+    type: ADD_POST_COUNT,
+  });
+};
+export const substractPostCount = () => async (dispatch, getState) => {
+  dispatch({
+    type: SUBSTRACT_POST_COUNT,
+  });
+};
+export const addCreatedPostCount = () => async (dispatch, getState) => {
+  dispatch({
+    type: ADD_CREATED_POST_COUNT,
+  });
+};
+export const substractCreatedPostCount = () => async (dispatch, getState) => {
+  dispatch({
+    type: SUBSTRACT_CREATED_POST_COUNT,
+  });
+};
+export const addCreatedActivePostCount = () => async (dispatch, getState) => {
+  dispatch({
+    type: ADD_CREATED_ACTIVE_POST_COUNT,
+  });
+};
+export const substractCreatedActivePostCount =
+  () => async (dispatch, getState) => {
+    dispatch({
+      type: SUBSTRACT_CREATED_ACTIVE_POST_COUNT,
+    });
+  };
+export const addCreatedSolvedPostCount = () => async (dispatch, getState) => {
+  dispatch({
+    type: ADD_CREATED_SOLVED_POST_COUNT,
+  });
+};
+export const substractCreatedSolvedPostCount =
+  () => async (dispatch, getState) => {
+    dispatch({
+      type: SUBSTRACT_CREATED_SOLVED_POST_COUNT,
+    });
+  };
 // Setup config with token - helper function
 export const tokenConfig = (getState) => {
   // Get token from state

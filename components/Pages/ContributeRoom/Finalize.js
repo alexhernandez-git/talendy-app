@@ -16,7 +16,7 @@ const Finalize = ({ handleGoToRoomPage }) => {
   return (
     <>
       <div
-        className="bg-gray-50 dark:bg-gray-800 shadow-sm p-3 lg:sticky z-20"
+        className="bg-gray-50 dark:bg-gray-800 shadow-sm p-3 lg:sticky z-10"
         style={{ top: "70px" }}
       >
         <div className="max-w-3xl mx-auto  flex flex-col lg:max-w-7xl lg:grid lg:grid-cols-12 lg:gap-8  sm:px-6 lg:px-8">

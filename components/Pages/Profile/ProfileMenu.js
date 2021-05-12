@@ -12,6 +12,7 @@ import {
   MY_SOLVED_POSTS_PAGE,
 } from "pages";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 const ProfileMenu = ({ page }) => {
   const [menuValue, setMenuValue] = useState(page);
@@ -33,6 +34,7 @@ const ProfileMenu = ({ page }) => {
     }
     setMenuValue(e.target.value);
   };
+  const authReducer = useSelector((state) => state.authReducer);
   return (
     <div className="px-4 mb-4 sm:px-0">
       <div className="sm:hidden">
@@ -68,7 +70,12 @@ const ProfileMenu = ({ page }) => {
                   : "text-gray-500"
               }  dark:text-white rounded-l-lg group relative  hover:text-gray-700 dark:hover:bg-gray-800 min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10`}
             >
-              <span>My Posts</span>
+              <span>
+                My Posts
+                <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white">
+                  <span>{authReducer.user?.created_posts_count}</span>
+                </span>
+              </span>
               {page === MY_POSTS_PAGE ||
               page === MY_ACTIVE_POSTS_PAGE ||
               page === MY_SOLVED_POSTS_PAGE ? (
@@ -94,7 +101,12 @@ const ProfileMenu = ({ page }) => {
                   : "text-gray-500"
               } dark:text-white group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10  hover:text-gray-700 dark:hover:bg-gray-800`}
             >
-              <span>Contributed</span>
+              <span>
+                Contributed
+                <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white">
+                  <span>{authReducer.user?.contributed_posts_count}</span>
+                </span>
+              </span>
               {page === CONTRIBUTED_POSTS_PAGE ||
               page === ACTIVE_CONTRIBUTED_POSTS_PAGE ||
               page === SOLVED_CONTRIBUTED_POSTS_PAGE ? (

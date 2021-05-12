@@ -28,12 +28,9 @@ const ContributeRequestsFeed = () => {
           className="text-base font-medium text-gray-900 dark:text-white"
         >
           Contribute Requests
-          <button
-            type="button"
-            className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white"
-          >
+          <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white">
             <span>{contributeRequestsReducer.contribute_requests.count}</span>
-          </button>
+          </span>
         </h2>
         <div>
           <svg
