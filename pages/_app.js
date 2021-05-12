@@ -18,6 +18,7 @@ import { createAlert } from "redux/actions/alerts";
 import {
   newMessageEvent,
   newContributeRequestEvent,
+  newContributeRoomMessageEvent,
 } from "redux/actions/notifications";
 
 function WrappedApp({ Component, pageProps }) {
@@ -71,13 +72,7 @@ function WrappedApp({ Component, pageProps }) {
             break;
 
           case "POST_MESSAGE_RECEIVED":
-            await dispatch(
-              createAlert(
-                "SUCCESS",
-                "Your have recieved a message from a contribute room"
-              )
-            );
-            addOrUpdateNotificationToFeed(data.notification__pk);
+            await dispatch(newContributeRoomMessageEvent(data));
 
             break;
           case "NEW_CONTRIBUTE_REQUEST":

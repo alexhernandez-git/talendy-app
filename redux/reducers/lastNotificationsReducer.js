@@ -109,6 +109,7 @@ export default function lastNotificationsReducer(state = initialState, action) {
         setting_all_notifications_read: false,
         set_all_notifications_read_error: action.payload,
       };
+
     default:
       return state;
   }
