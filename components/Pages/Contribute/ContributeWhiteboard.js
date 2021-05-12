@@ -138,11 +138,11 @@ const ContributeWhiteboard = ({ socketRef, roomID }) => {
             </select>
           </div>
         </div>
-        <div id="sketch">
+        <div id="sketch" className="h-full">
           <canvas
             ref={canvasRef}
             id="board"
-            className="bg-white rounded-b"
+            className="bg-white rounded-b h-full"
           ></canvas>
         </div>
       </div>
