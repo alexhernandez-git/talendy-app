@@ -289,6 +289,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
                 <NotificationsDropdown
                   notificationsOpen={notificationsOpen}
                   notificationsRef={notificationsRef}
+                  handleCloseNotifications={handleCloseNotifications}
                 />
               </div>
 

@@ -5,7 +5,11 @@ import { useSelector } from "react-redux";
 import { fetchLastNotifications } from "redux/actions/lastNotifications";
 import NotificationItem from "./NotificationItem";
 
-const NotificationsDropdown = ({ notificationsOpen, notificationsRef }) => {
+const NotificationsDropdown = ({
+  notificationsOpen,
+  notificationsRef,
+  handleCloseNotifications,
+}) => {
   const dispatch = useDispatch();
   const lastNotificationsReducer = useSelector(
     (state) => state.lastNotificationsReducer
@@ -64,6 +68,7 @@ const NotificationsDropdown = ({ notificationsOpen, notificationsRef }) => {
                   <NotificationItem
                     key={notification.id}
                     notification={notification.notification}
+                    handleCloseNotifications={handleCloseNotifications}
                   />
                 )
               )}

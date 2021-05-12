@@ -2,13 +2,14 @@ import useGetNotification from "hooks/useGetNotification";
 import React from "react";
 import moment from "moment";
 import { useRouter } from "next/router";
-const NotificationItem = ({ notification }) => {
+const NotificationItem = ({ notification, handleCloseNotifications }) => {
   const content = useGetNotification(notification);
   const router = useRouter();
   const handleOpenNotification = () => {
     if (content.link) {
       router.push(content.link);
     }
+    handleCloseNotifications();
   };
   return (
     <li
