@@ -92,6 +92,7 @@ const ContributeWhiteboard = ({ socketRef }) => {
       if (!drawing) {
         return;
       }
+      console.log(e);
       drawLine(
         current.x,
         current.y,
