@@ -50,7 +50,7 @@ const ContributeWhiteboard = ({ socketRef, roomID }) => {
         }, 200);
       });
     }
-  }, [socketRef?.current]);
+  }, []);
   const canvasRef = useCanvas(([canvas, ctx]) => {
     var sketch = document.querySelector("#sketch");
     var sketch_style = getComputedStyle(sketch);
@@ -140,7 +140,7 @@ const ContributeWhiteboard = ({ socketRef, roomID }) => {
             </select>
           </div>
         </div>
-        <div id="sketch" className="h-full">
+        <div id="sketch" className=" h-full">
           <canvas
             ref={canvasRef}
             id="board"

@@ -643,19 +643,14 @@ const Contribute = () => {
                       sharedNotes={contribute_room?.shared_notes}
                     />
                   </div>
-                  <div
-                    className={
-                      feature.toUpperCase() === "SHAREDWHITEBOARD" &&
-                      contribute_room
-                        ? "block"
-                        : "hidden"
-                    }
-                  >
-                    <ContributeWhiteboard
-                      socketRef={socketRef}
-                      roomID={roomID}
-                    />
-                  </div>
+
+                  {feature.toUpperCase() === "SHAREDWHITEBOARD" &&
+                    contribute_room && (
+                      <ContributeWhiteboard
+                        socketRef={socketRef}
+                        roomID={roomID}
+                      />
+                    )}
                   {feature.toUpperCase() === "ASTEROIDS" && contribute_room && (
                     <ContributeAsteroids />
                   )}
