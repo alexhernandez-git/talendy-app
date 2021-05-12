@@ -150,26 +150,6 @@ const Contribute = () => {
     setMessage("");
   };
 
-  const [editorTextLength, setEditorTextLength] = useState(0);
-  const [editorText, setEditorText] = useState(false);
-  const [onKeyUpCounter, setOnkeyUpCounter] = useState(false);
-  const sharedNotesRef = useRef();
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      if (editorText || editorText === "") {
-        const payload = {
-          token: authReducer?.access_token,
-          text: editorText,
-          roomID: roomID,
-        };
-        dispatch(updateSharedNotes(editorText));
-        console.log("editor text", editorText);
-        socketRef.current.emit("text", payload);
-      }
-    }, 1000);
-    return () => clearTimeout(timeoutId);
-  }, [onKeyUpCounter]);
   useEffect(() => {
     if (initialDataFetched && validationsMade) {
       socketRef.current = io.connect("http://localhost:5500");
@@ -201,22 +181,6 @@ const Contribute = () => {
       socketRef.current.on("message", (payload) => {
         handleAddMessage(payload);
       });
-
-      const handleRecievedText = (data) => {
-        console.log("data recieved", data);
-
-        if (data) {
-          if (sharedNotesRef.current) {
-            sharedNotesRef.current.innerHTML = data;
-            setEndOfContenteditable(sharedNotesRef.current);
-            setEditorTextLength(sharedNotesRef.current.innerText.length);
-            setEditorText(sharedNotesRef.current.innerHTML);
-          }
-
-          dispatch(updateSharedNotes(data));
-        }
-      };
-      socketRef.current.on("text", handleRecievedText);
 
       function createPeer(userToSignal, callerID, stream) {
         const peer = new Peer({
@@ -653,28 +617,33 @@ const Contribute = () => {
             <div className="py-10">
               <div className="max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
                 <div className="space-y-6 lg:col-start-1 lg:col-span-2">
-                  {feature.toUpperCase() === "CHAT" && contribute_room && (
+                  <div
+                    className={
+                      feature.toUpperCase() === "CHAT" && contribute_room
+                        ? "block"
+                        : "hidden"
+                    }
+                  >
                     <ContributeChat
                       handleSendMessage={handleSendMessage}
                       handleChangeMessage={handleChangeMessage}
                       message={message}
                     />
-                  )}
-                  {feature.toUpperCase() === "SHAREDNOTES" &&
-                    contribute_room && (
-                      <ContributeSharedNotes
-                        socketRef={socketRef}
-                        roomID={roomID}
-                        sharedNotes={contribute_room?.shared_notes}
-                        editorTextLength={editorTextLength}
-                        editorText={editorText}
-                        onKeyUpCounter={onKeyUpCounter}
-                        setEditorTextLength={setEditorTextLength}
-                        setEditorText={setEditorText}
-                        setOnkeyUpCounter={setOnkeyUpCounter}
-                        sharedNotesRef={sharedNotesRef}
-                      />
-                    )}
+                  </div>
+                  <div
+                    className={
+                      feature.toUpperCase() === "SHAREDNOTES" && contribute_room
+                        ? "block"
+                        : "hidden"
+                    }
+                  >
+                    <ContributeSharedNotes
+                      socketRef={socketRef}
+                      roomID={roomID}
+                      sharedNotes={contribute_room?.shared_notes}
+                    />
+                  </div>
+
                   {feature.toUpperCase() === "SHAREDWHITEBOARD" &&
                     contribute_room && (
                       <ContributeWhiteboard

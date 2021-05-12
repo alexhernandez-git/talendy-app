@@ -10,13 +10,6 @@ export default function ContributeSharedNotes({
   socketRef,
   roomID,
   sharedNotes,
-  editorTextLength,
-  editorText,
-  onKeyUpCounter,
-  setEditorTextLength,
-  setEditorText,
-  setOnkeyUpCounter,
-  sharedNotesRef,
 }) {
   const authReducer = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
@@ -45,34 +38,83 @@ export default function ContributeSharedNotes({
     }
   };
 
+  const [firstLoad, setFirstLoad] = useState(true);
+
+  const [editorTextLength, setEditorTextLength] = useState(0);
+  const [editorText, setEditorText] = useState(false);
+  const [onKeyUpCounter, setOnkeyUpCounter] = useState(false);
+  const sharedNotesRef = useRef();
+
   const handleOnKeyUp = () => {
     setOnkeyUpCounter(!onKeyUpCounter);
-    var target = document.querySelector("#editor");
-    if (target.innerText.length <= 2500) {
-      setEditorTextLength(target.innerText.length);
-      setEditorText(target.innerHTML);
+
+    console.log("entra");
+    if (sharedNotesRef.current.innerText.length <= 2500) {
+      console.log(sharedNotesRef.current.innerHTML);
+      setEditorTextLength(sharedNotesRef.current.innerText.length);
+      setEditorText(sharedNotesRef.current.innerHTML);
     } else {
-      target.innerText = target.innerText.slice(0, 2500);
-      setEditorText(target.innerText);
+      sharedNotesRef.current.innerText = sharedNotesRef.current.innerText.slice(
+        0,
+        2500
+      );
+      setEditorText(sharedNotesRef.current.innerText);
     }
   };
 
-  const [firstLoad, setFirstLoad] = useState(true);
-
   useEffect(() => {
-    if (firstLoad) {
+    const timeoutId = setTimeout(() => {
+      if (editorText || editorText === "") {
+        const payload = {
+          token: authReducer?.access_token,
+          text: editorText,
+          roomID: roomID,
+        };
+        dispatch(updateSharedNotes(editorText));
+        console.log("editor text", editorText);
+        socketRef.current.emit("text", payload);
+      }
+    }, 1000);
+    return () => clearTimeout(timeoutId);
+  }, [onKeyUpCounter]);
+  useEffect(() => {
+    if (socketRef?.current) {
+      const handleRecievedText = (data) => {
+        console.log("data recieved", data);
+
+        if (data) {
+          if (sharedNotesRef.current) {
+            sharedNotesRef.current.innerHTML = data;
+            setEndOfContenteditable(sharedNotesRef.current);
+            setEditorTextLength(sharedNotesRef.current.innerText.length);
+            setEditorText(sharedNotesRef.current.innerHTML);
+          }
+
+          dispatch(updateSharedNotes(data));
+        }
+      };
+      socketRef.current.on("text", handleRecievedText);
+    }
+  }, [socketRef?.current]);
+  useEffect(() => {
+    if (firstLoad && sharedNotes) {
       sharedNotesRef.current.innerHTML = sharedNotes;
       setEditorTextLength(sharedNotesRef.current.innerText.length);
       setFirstLoad(false);
     }
   }, [sharedNotes]);
+  useEffect(() => {
+    console.log(editorTextLength);
+  }, [editorTextLength]);
+  useEffect(() => {
+    console.log(editorText);
+  }, [editorText]);
   return (
     <section aria-labelledby="notes-title" className="">
       <div className="bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg p-1">
         <SharedToolbar editorTextLength={editorTextLength} />
         <div
           className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l cursor-text"
-          id="editor"
           onKeyUp={handleOnKeyUp}
           ref={sharedNotesRef}
           onKeyDown={handleKeyDown}
