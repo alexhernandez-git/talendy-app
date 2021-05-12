@@ -677,7 +677,10 @@ const Contribute = () => {
                     )}
                   {feature.toUpperCase() === "SHAREDWHITEBOARD" &&
                     contribute_room && (
-                      <ContributeWhiteboard socketRef={socketRef} />
+                      <ContributeWhiteboard
+                        socketRef={socketRef}
+                        roomID={roomID}
+                      />
                     )}
                   {feature.toUpperCase() === "ASTEROIDS" && contribute_room && (
                     <ContributeAsteroids />
