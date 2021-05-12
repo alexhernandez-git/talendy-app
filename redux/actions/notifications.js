@@ -92,7 +92,10 @@ export const setNotificationRead = (id) => async (dispatch, getState) => {
 export const newMessageEvent = (data) => async (dispatch, getState) => {
   console.log("chat id", data.chat__pk);
   console.log("current chat", getState().chatsReducer.current_chat);
-  if (data.chat__pk === getState().chatsReducer.current_chat) return;
+  if (data.chat__pk === getState().chatsReducer.current_chat) {
+    await dispatch(setNotificationRead(data.notification__pk));
+    return;
+  }
   const result = getState().chatsReducer.chats.results.some(
     (chat) => chat.id === data.chat__pk
   );
