@@ -44,9 +44,7 @@ const CreateEditPostModal = ({
 
   const formik = useFormik({
     initialValues: {
-      karma_offered: post
-        ? post.karma_offered
-        : authReducer.user?.karma_amount / 2,
+      karma_offered: post ? post.karma_offered : 100,
       privacity: post ? post.privacity : "AN",
       community: post ? post.community : null,
       title: post ? post.title : "",
@@ -162,17 +160,13 @@ const CreateEditPostModal = ({
     }
     setImages(acceptedFilesNew);
   }, []);
-  const {
-    acceptedFiles,
-    getRootProps,
-    getInputProps,
-    isDragActive,
-  } = useDropzone({
-    onDrop,
-    validator: fileValidator,
-    accept: "image/jpeg, image/png, image/jpg",
-    maxSize: 1073741824,
-  });
+  const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
+    useDropzone({
+      onDrop,
+      validator: fileValidator,
+      accept: "image/jpeg, image/png, image/jpg",
+      maxSize: 1073741824,
+    });
   const handleRemoveFile = (file, index) => {
     acceptedFiles.splice(acceptedFiles.indexOf(file), 1);
     let imagesArr = [...images];
@@ -310,6 +304,7 @@ const CreateEditPostModal = ({
                       value={formik.values.karma_offered}
                       onChange={handleChangeKarmasOffered}
                       max={authReducer.user?.karma_amount}
+                      min={100}
                       railStyle={{}}
                       handleStyle={{
                         backgroundColor: "#f97316",
