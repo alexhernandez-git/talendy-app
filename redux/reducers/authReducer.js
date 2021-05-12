@@ -91,6 +91,8 @@ import {
   LEAVE_FEEDBACK_SUCCESS,
   LEAVE_FEEDBACK_FAIL,
   CHANGE_COMMUNITY,
+  ADD_KARMA_AMOUNT,
+  SUBSTRACT_KARMA_AMOUNT,
   ADD_INVITATION,
   SUBSTRACT_INVITATION,
   ADD_CONNECTION,
@@ -791,6 +793,22 @@ export default function authReducer(state = initialState, action) {
         ...state,
         leaving_feedback: false,
         leave_feedback_error: action.payload,
+      };
+    case ADD_KARMA_AMOUNT:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          karma_amount: state.user?.karma_amount + action.payload,
+        },
+      };
+    case SUBSTRACT_KARMA_AMOUNT:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          karma_amount: state.user?.karma_amount - action.payload,
+        },
       };
     case ADD_INVITATION:
       return {

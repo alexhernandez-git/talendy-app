@@ -89,6 +89,8 @@ import {
   LEAVE_FEEDBACK,
   LEAVE_FEEDBACK_SUCCESS,
   LEAVE_FEEDBACK_FAIL,
+  ADD_KARMA_AMOUNT,
+  SUBSTRACT_KARMA_AMOUNT,
   SUBSTRACT_INVITATION,
   ADD_CONNECTION,
   SUBSTRACT_CONNECTION,
@@ -899,6 +901,18 @@ export const sendFeedback =
         });
       });
   };
+export const addKarmaAmount = (amount) => async (dispatch, getState) => {
+  dispatch({
+    type: ADD_KARMA_AMOUNT,
+    payload: amount,
+  });
+};
+export const substractKarmaAmount = (amount) => async (dispatch, getState) => {
+  dispatch({
+    type: SUBSTRACT_KARMA_AMOUNT,
+    payload: amount,
+  });
+};
 export const addInvitation = () => async (dispatch, getState) => {
   dispatch({
     type: ADD_INVITATION,

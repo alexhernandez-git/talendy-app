@@ -45,6 +45,7 @@ export const createPost =
           type: CREATE_POST_SUCCESS,
           payload: res.data,
         });
+
         await resetForm({});
         await closeModal();
         await handleResetImages();
