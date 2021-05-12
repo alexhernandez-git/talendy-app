@@ -156,11 +156,18 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
           <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
             <div className="flex-shrink-0 flex items-center">
               <Link href={authReducer.is_authenticated ? "/feed" : "/"}>
-                <img
-                  className="block h-8 w-auto cursor-pointer"
-                  src={logoImage}
-                  alt="Workflow"
-                />
+                <>
+                  <img
+                    className="hidden sm:block h-8 w-auto cursor-pointer"
+                    src={logoImage}
+                    alt="Workflow"
+                  />{" "}
+                  <img
+                    className="block sm:hidden h-8 w-auto cursor-pointer"
+                    src={"/static/images/talendy-logo.png"}
+                    alt="Workflow"
+                  />
+                </>
               </Link>
             </div>
           </div>
