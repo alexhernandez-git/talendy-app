@@ -1,5 +1,14 @@
 import axios from "axios";
-import { tokenConfig } from "./auth";
+import {
+  addCreatedActivePostCount,
+  addCreatedPostCount,
+  addPostCount,
+  substractCreatedActivePostCount,
+  substractCreatedPostCount,
+  substractCreatedSolvedPostCount,
+  substractPostCount,
+  tokenConfig,
+} from "./auth";
 import {
   CREATE_POST,
   CREATE_POST_SUCCESS,
@@ -23,79 +32,86 @@ import {
 import { createAlert } from "./alerts";
 import useGetFetchPostsRequest from "hooks/useGetFetchPostsRequest";
 
-export const createPost = (
-  data,
-  resetForm,
-  closeModal,
-  handleResetImages
-) => async (dispatch, getState) => {
-  await dispatch({
-    type: CREATE_POST,
-  });
-  await axios
-    .post(`${process.env.HOST}/api/posts/`, data, tokenConfig(getState))
-    .then(async (res) => {
-      await dispatch({
-        type: CREATE_POST_SUCCESS,
-        payload: res.data,
-      });
-      await resetForm({});
-      await closeModal();
-      await handleResetImages();
-      await dispatch(createAlert("SUCCESS", "Post succesfully created"));
-    })
-    .catch(async (err) => {
-      await dispatch({
-        type: CREATE_POST_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
+export const createPost =
+  (data, resetForm, closeModal, handleResetImages) =>
+  async (dispatch, getState) => {
+    await dispatch({
+      type: CREATE_POST,
     });
-};
+    await axios
+      .post(`${process.env.HOST}/api/posts/`, data, tokenConfig(getState))
+      .then(async (res) => {
+        await dispatch({
+          type: CREATE_POST_SUCCESS,
+          payload: res.data,
+        });
+        await resetForm({});
+        await closeModal();
+        await handleResetImages();
+        await dispatch(addPostCount());
+        await dispatch(addCreatedPostCount());
+        await dispatch(addCreatedActivePostCount());
+        await dispatch(createAlert("SUCCESS", "Post succesfully created"));
+      })
+      .catch(async (err) => {
+        await dispatch({
+          type: CREATE_POST_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
 
-export const updatePost = (
-  id,
-  data,
-  resetForm,
-  closeModal,
-  handleResetImages
-) => async (dispatch, getState) => {
-  await dispatch({
-    type: UPDATE_POST,
-  });
-  console.log("entra update post");
-  await axios
-    .patch(`${process.env.HOST}/api/posts/${id}/`, data, tokenConfig(getState))
-    .then(async (res) => {
-      await dispatch({
-        type: UPDATE_POST_SUCCESS,
-        payload: res.data,
-      });
-      await resetForm({});
-      await closeModal();
-      await handleResetImages();
-      await dispatch(createAlert("SUCCESS", "Post succesfully updated"));
-    })
-    .catch(async (err) => {
-      await dispatch({
-        type: UPDATE_POST_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
+export const updatePost =
+  (id, data, resetForm, closeModal, handleResetImages) =>
+  async (dispatch, getState) => {
+    await dispatch({
+      type: UPDATE_POST,
     });
-};
+    console.log("entra update post");
+    await axios
+      .patch(
+        `${process.env.HOST}/api/posts/${id}/`,
+        data,
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        await dispatch({
+          type: UPDATE_POST_SUCCESS,
+          payload: res.data,
+        });
+        await resetForm({});
+        await closeModal();
+        await handleResetImages();
+        await dispatch(createAlert("SUCCESS", "Post succesfully updated"));
+      })
+      .catch(async (err) => {
+        await dispatch({
+          type: UPDATE_POST_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
 
-export const deletePost = (id, closeModal) => async (dispatch, getState) => {
+export const deletePost = (post, closeModal) => async (dispatch, getState) => {
   await dispatch({
     type: DELETE_POST,
   });
   console.log("entra update post");
   await axios
-    .delete(`${process.env.HOST}/api/posts/${id}/`, tokenConfig(getState))
+    .delete(`${process.env.HOST}/api/posts/${post?.id}/`, tokenConfig(getState))
     .then(async (res) => {
       await dispatch({
         type: DELETE_POST_SUCCESS,
-        payload: id,
+        payload: post?.id,
       });
       await closeModal();
+      await dispatch(substractPostCount());
+      await dispatch(substractCreatedPostCount());
+      if (post?.status === "AC") {
+        await dispatch(substractCreatedActivePostCount());
+      } else if (post?.status === "SO") {
+        await dispatch(substractCreatedSolvedPostCount());
+      }
       await dispatch(createAlert("SUCCESS", "Post succesfully deleted"));
     })
     .catch(async (err) => {
@@ -162,39 +178,37 @@ export const fetchMorePosts = () => async (dispatch, getState) => {
   }
 };
 
-export const createContributeRequest = (values, resetForm) => async (
-  dispatch,
-  getState
-) => {
-  await dispatch({
-    type: CREATE_CONTRIBUTE_REQUEST,
-  });
-
-  await axios
-    .post(
-      `${process.env.HOST}/api/contribute-requests/`,
-      values,
-      tokenConfig(getState)
-    )
-    .then(async (res) => {
-      await dispatch({
-        type: CREATE_CONTRIBUTE_REQUEST_SUCCESS,
-        payload: values.post,
-      });
-
-      await resetForm({});
-      await dispatch(createAlert("SUCCESS", "Request successfully created"));
-    })
-    .catch(async (err) => {
-      await dispatch({
-        type: CREATE_CONTRIBUTE_REQUEST_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
-      console.log(err.response.data);
-      if (err.response?.data?.non_field_errors?.length > 0) {
-        await dispatch(
-          createAlert("ERROR", err.response?.data?.non_field_errors[0])
-        );
-      }
+export const createContributeRequest =
+  (values, resetForm) => async (dispatch, getState) => {
+    await dispatch({
+      type: CREATE_CONTRIBUTE_REQUEST,
     });
-};
+
+    await axios
+      .post(
+        `${process.env.HOST}/api/contribute-requests/`,
+        values,
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        await dispatch({
+          type: CREATE_CONTRIBUTE_REQUEST_SUCCESS,
+          payload: values.post,
+        });
+
+        await resetForm({});
+        await dispatch(createAlert("SUCCESS", "Request successfully created"));
+      })
+      .catch(async (err) => {
+        await dispatch({
+          type: CREATE_CONTRIBUTE_REQUEST_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+        console.log(err.response.data);
+        if (err.response?.data?.non_field_errors?.length > 0) {
+          await dispatch(
+            createAlert("ERROR", err.response?.data?.non_field_errors[0])
+          );
+        }
+      });
+  };

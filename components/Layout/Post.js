@@ -122,7 +122,7 @@ const Post = ({ page, post }) => {
   const deleteRef = useRef();
   useOutsideClick(deleteRef, () => handleCloseDelete());
   const handleDeletePost = () => {
-    dispatch(deletePost(post?.id, handleCloseDelete));
+    dispatch(deletePost(post, handleCloseDelete));
   };
 
   const formik = useFormik({
