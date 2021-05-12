@@ -124,7 +124,9 @@ export const newContributeRoomMessageEvent =
   (data) => async (dispatch, getState) => {
     console.log("post id", data.post__pk);
 
-    if (getState().contributeRoomReducer.contribute_room.id !== data.post__pk) {
+    if (
+      getState().contributeRoomReducer.contribute_room?.id !== data.post__pk
+    ) {
       await dispatch(
         createAlert(
           "SUCCESS",

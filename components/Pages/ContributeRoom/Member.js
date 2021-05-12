@@ -1,9 +1,11 @@
 import { useRouter } from "next/router";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Member = ({ member }) => {
   const admin = member?.role === "AD";
   const user = member?.user;
+  const authReducer = useSelector((state) => state.authReducer);
   return (
     <li className="py-3 flex justify-between items-center">
       <div className="flex items-center w-full">
@@ -34,7 +36,12 @@ const Member = ({ member }) => {
           </span>
         )}
         <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white flex justify-between w-full">
-          <a href="/user/123" target="_blank">
+          <a
+            href={`/${
+              authReducer.user?.id === user.id ? "profile" : "user"
+            }/user/${user?.id}`}
+            target="_blank"
+          >
             <span className="hover:underline cursor-pointer">
               {user?.username}
             </span>

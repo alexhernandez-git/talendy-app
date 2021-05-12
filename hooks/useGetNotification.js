@@ -47,15 +47,18 @@ const useGetNotification = (notification) => {
       } else {
         message = `${
           many_messages
-            ? notification.post_messages.length + " messages"
-            : "New message"
+            ? notification.post_messages.length +
+              " messages from contribute room"
+            : "New message from contribute Room"
         }`;
       }
       if (notification.post_messages.length > 0 && !many_messages) {
         message = notification.post_messages[0].text;
       }
       return {
-        event_message: many_messages ? "New messages" : "New message",
+        event_message: many_messages
+          ? "New messages from contribute room"
+          : "New message from contribute room",
         message: message,
         user: notification.actor,
       };

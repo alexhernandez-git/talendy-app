@@ -5,6 +5,7 @@ import {
   FETCH_CONTRIBUTE_ROOM_SUCCESS,
   FETCH_CONTRIBUTE_ROOM_FAIL,
   UPDATE_SHARED_NOTES,
+  RESET_CONTRIBUTE_ROOM,
 } from "../types";
 import { createAlert } from "./alerts";
 
@@ -33,4 +34,7 @@ export const fetchContributeRoom = (id) => async (dispatch, getState) => {
 
 export const updateSharedNotes = (shared_notes) => async (dispatch) => {
   dispatch({ type: UPDATE_SHARED_NOTES, payload: shared_notes });
+};
+export const resetContributeRoom = () => async (dispatch) => {
+  dispatch({ type: RESET_CONTRIBUTE_ROOM });
 };

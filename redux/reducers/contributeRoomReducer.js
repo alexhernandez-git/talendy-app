@@ -3,6 +3,7 @@ import {
   FETCH_CONTRIBUTE_ROOM_SUCCESS,
   FETCH_CONTRIBUTE_ROOM_FAIL,
   UPDATE_SHARED_NOTES,
+  RESET_CONTRIBUTE_ROOM,
 } from "../types";
 import { HYDRATE } from "next-redux-wrapper";
 
@@ -42,6 +43,11 @@ export default function contributeRoomReducer(state = initialState, action) {
           ...state.contribute_room,
           shared_notes: action.payload,
         },
+      };
+    case RESET_CONTRIBUTE_ROOM:
+      return {
+        ...state,
+        contribute_room: null,
       };
     default:
       return state;

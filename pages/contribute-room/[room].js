@@ -20,6 +20,7 @@ import { createAlert } from "redux/actions/alerts";
 import useAuthRequired from "hooks/useAuthRequired";
 import {
   fetchContributeRoom,
+  resetContributeRoom,
   updateSharedNotes,
 } from "redux/actions/contributeRoom";
 import Spinner from "components/Layout/Spinner";
@@ -292,6 +293,7 @@ const Contribute = () => {
   }, [initialDataFetched, validationsMade]);
   useEffect(() => {
     return () => {
+      dispatch(resetContributeRoom());
       if (socketRef.current) {
         socketRef.current.disconnect();
       }
