@@ -571,7 +571,7 @@ const Contribute = () => {
                       <div>
                         <button
                           type="button"
-                          onClick={handleOpenMoreOptions}
+                          onMouseDown={handleOpenMoreOptions}
                           className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                           id="menu-button"
                           aria-expanded="true"
