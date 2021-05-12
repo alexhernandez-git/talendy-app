@@ -4,12 +4,19 @@ import Pagination from "components/Layout/Pagination";
 import Member from "components/Pages/Finalize/Member";
 import Link from "next/link";
 import React from "react";
-
+import { useSelector } from "react-redux";
+import moment from "moment";
+import SolveIssueEditor from "components/Editor/SolveIssueEditor";
 const Finalize = ({ handleGoToRoomPage }) => {
+  const contributeRoomReducer = useSelector(
+    (state) => state.contributeRoomReducer
+  );
+  const { contribute_room } = contributeRoomReducer;
+
   return (
     <>
       <div
-        className="bg-gray-50 dark:bg-gray-800 shadow-sm p-3 lg:sticky z-30"
+        className="bg-gray-50 dark:bg-gray-800 shadow-sm p-3 lg:sticky z-20"
         style={{ top: "70px" }}
       >
         <div className="max-w-3xl mx-auto  flex flex-col lg:max-w-7xl lg:grid lg:grid-cols-12 lg:gap-8  sm:px-6 lg:px-8">
@@ -42,15 +49,20 @@ const Finalize = ({ handleGoToRoomPage }) => {
           <div className="flex items-center space-x-5 col-span-12 mb-6">
             <div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                What would you have done differently if you ran Jurassic Park?
+                {contribute_room?.title}
               </h3>
               <p className="text-sm font-medium text-gray-500">
-                Created at <time dateTime="2020-08-25">August 25, 2020</time>
+                Created at{" "}
+                <time dateTime="2020-08-25">
+                  {moment(contribute_room?.created).format(
+                    "MMM D [at] h:mm A z"
+                  )}
+                </time>
               </p>
             </div>
           </div>
           <div className="shadow overflow-hidden sm:rounded-md col-span-12 mb-4 p-4 bg-white dark:bg-gray-700">
-            <Editor solveIssueForm />
+            <SolveIssueEditor />
             <div className="mt-3">
               <span className="text-gray-500 dark:text-gray-300 text-sm">
                 Help the community by sharing the solution you have found
