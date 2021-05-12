@@ -375,9 +375,14 @@ export default function PostPage() {
                 </div>
               )}
               <div className="mt-5">
-                <h3 className="font-medium text-gray-900 dark:text-white">
-                  Members Contributing
-                </h3>
+                <div className="sm:flex justify-between items-end">
+                  <h3 className="font-medium text-gray-900 dark:text-white">
+                    Members Contributing
+                  </h3>
+                  <span className="font-normal text-xs text-gray-900 dark:text-white">
+                    {postReducer.post?.members_count}/10
+                  </span>
+                </div>
                 <ul className="mt-2 border-t border-gray-200 dark:border-gray-400 divide-y divide-gray-200 dark:divide-gray-400">
                   {postReducer.post?.members?.map((member) => (
                     <li className="py-3 flex justify-between items-center w-full">
