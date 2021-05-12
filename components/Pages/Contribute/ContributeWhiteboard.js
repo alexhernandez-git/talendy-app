@@ -115,9 +115,8 @@ const ContributeWhiteboard = ({ socketRef, roomID }) => {
     <section aria-labelledby="notes-title" className="">
       <div
         className="w-full content-container
-      bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg p-1
-      sketch"
-        id="sketch"
+      bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg pt-1
+      "
       >
         <div className="flex justify-end">
           <input
@@ -139,11 +138,13 @@ const ContributeWhiteboard = ({ socketRef, roomID }) => {
             </select>
           </div>
         </div>
-        <canvas
-          ref={canvasRef}
-          id="board"
-          className="bg-white content-container rounded "
-        ></canvas>
+        <div id="sketch">
+          <canvas
+            ref={canvasRef}
+            id="board"
+            className="bg-white rounded-b"
+          ></canvas>
+        </div>
       </div>
     </section>
   );
