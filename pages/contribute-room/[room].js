@@ -28,7 +28,7 @@ import moment from "moment";
 import { addRoomMessage, fetchRoomMessages } from "redux/actions/roomMessages";
 import { setEndOfContenteditable } from "helpers";
 import Finalize from "components/pages/ContributeRoom/Finalize";
-import ContributeExcalidraw from "components/Pages/Contribute/ContributeExcalidraw";
+import ContributeWhiteboard from "components/Pages/Contribute/ContributeWhiteboard";
 const Audio = (props) => {
   const ref = useRef();
   useEffect(() => {
@@ -398,7 +398,7 @@ const Contribute = () => {
       })}
       <Layout>
         <div className="fixed bottom-0 w-full z-40 flex items-center justify-center">
-          {/* <div className="mr-2 flex items-center dark:bg-gray-800 bg-white rounded-t-lg border-t border-l border-r border-orange-500 dark:border-white shadow">
+          <div className="mr-2 flex items-center dark:bg-gray-800 bg-white rounded-t-lg border-t border-l border-r border-orange-500 dark:border-white shadow">
             <button
               onClick={handleShareScreen}
               type="button"
@@ -409,17 +409,8 @@ const Contribute = () => {
               </IconContext.Provider>
               Screen
             </button>
-          </div> */}
+          </div>
           <div className="flex items-center dark:bg-gray-800 bg-white rounded-t-lg border-t border-l border-r border-orange-500 dark:border-white shadow">
-            {/* <button
-              type="button"
-              className="mr-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-gray-100 bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-            >
-              <IconContext.Provider value={{ size: 18, className: "mr-2" }}>
-                <MdScreenShare />
-              </IconContext.Provider>
-              Screen
-            </button> */}
             {isMicOn ? (
               <button
                 onClick={handleToggleMic}
@@ -529,7 +520,10 @@ const Contribute = () => {
                   <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl flex justify-between items-center ">
                     <div className="flex justify-center md:mt-0 flex-col-reverse justify-stretch space-y-4 space-y-reverse md:flex-row-reverse md:justify-end md:space-x-reverse md:space-y-0 md:space-x-3  md:space-x-3">
                       <button
-                        onClick={handleChangeFeature.bind(this, "EXCALIDRAW")}
+                        onClick={handleChangeFeature.bind(
+                          this,
+                          "SHAREDWHITEBOARD"
+                        )}
                         type="button"
                         className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                       >
@@ -546,7 +540,7 @@ const Contribute = () => {
                             clipRule="evenodd"
                           />
                         </svg>
-                        Shared screen
+                        Shared whiteboard
                       </button>
                       <button
                         onClick={handleChangeFeature.bind(this, "SHAREDNOTES")}
@@ -681,8 +675,10 @@ const Contribute = () => {
                         sharedNotesRef={sharedNotesRef}
                       />
                     )}
-                  {feature.toUpperCase() === "EXCALIDRAW" &&
-                    contribute_room && <ContributeExcalidraw />}
+                  {feature.toUpperCase() === "SHAREDWHITEBOARD" &&
+                    contribute_room && (
+                      <ContributeWhiteboard socketRef={socketRef} />
+                    )}
                   {feature.toUpperCase() === "ASTEROIDS" && contribute_room && (
                     <ContributeAsteroids />
                   )}

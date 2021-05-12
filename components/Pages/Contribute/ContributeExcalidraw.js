@@ -59,7 +59,7 @@ const InitialData = {
       isDeleted: false,
     },
   ],
-  appState: { viewBackgroundColor: "#AFEEEE", currentItemFontFamily: 1 },
+  appState: { viewBackgroundColor: "#FFF", currentItemFontFamily: 1 },
   scrollToContent: true,
   libraryItems: [
     [
@@ -1294,14 +1294,20 @@ const ContributeExcalidraw = ({}) => {
   const excalidrawRef = useRef(null);
 
   const [viewModeEnabled, setViewModeEnabled] = useState(false);
-  const [zenModeEnabled, setZenModeEnabled] = useState(false);
+  const [zenModeEnabled, setZenModeEnabled] = useState(true);
   const [gridModeEnabled, setGridModeEnabled] = useState(false);
   const [blobUrl, setBlobUrl] = useState(null);
   const [canvasUrl, setCanvasUrl] = useState(null);
   const [exportWithDarkMode, setExportWithDarkMode] = useState(false);
   const [shouldAddWatermark, setShouldAddWatermark] = useState(false);
   const [theme, setTheme] = useState("light");
-
+  useEffect(() => {
+    if (authReducer.theme === "dark") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  }, [authReducer?.theme]);
   useEffect(() => {
     const onHashChange = () => {
       const hash = new URLSearchParams(window.location.hash.slice(1));
@@ -1346,16 +1352,17 @@ const ContributeExcalidraw = ({}) => {
     };
     excalidrawRef.current.updateScene(sceneData);
   };
+
   return (
     <section aria-labelledby="notes-title" className="">
-      <div className="excalidraw-wrapper w-full content-container">
+      <div className="w-full content-container">
         <Excalidraw
           ref={excalidrawRef}
           initialData={InitialData}
           onChange={(elements, state) =>
             console.log("Elements :", elements, "State : ", state)
           }
-          onPointerUpdate={(payload) => console.log(payload)}
+          // onPointerUpdate={(payload) => console.log(payload)}
           onCollabButtonClick={() =>
             window.alert("You clicked on collab button")
           }

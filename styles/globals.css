@@ -111,3 +111,7 @@ canvas {
   text-align: center;
   color: #fff;
 }
+
+.excalidraw-modal-container {
+  z-index: 1000 !important;
+}
