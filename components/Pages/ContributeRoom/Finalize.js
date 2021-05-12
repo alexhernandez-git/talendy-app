@@ -8,7 +8,10 @@ import React from "react";
 const Finalize = ({ handleGoToRoomPage }) => {
   return (
     <>
-      <div className="bg-gray-50 dark:bg-gray-800 shadow-sm p-3 sticky top-0 z-30">
+      <div
+        className="bg-gray-50 dark:bg-gray-800 shadow-sm p-3 lg:sticky z-30"
+        style={{ top: "70px" }}
+      >
         <div className="max-w-3xl mx-auto  flex flex-col lg:max-w-7xl lg:grid lg:grid-cols-12 lg:gap-8  sm:px-6 lg:px-8">
           <div className=" sm:flex justify-between w-full items-center col-span-12">
             <button
