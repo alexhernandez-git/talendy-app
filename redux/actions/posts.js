@@ -2,10 +2,12 @@ import axios from "axios";
 import {
   addCreatedActivePostCount,
   addCreatedPostCount,
+  addKarmaAmount,
   addPostCount,
   substractCreatedActivePostCount,
   substractCreatedPostCount,
   substractCreatedSolvedPostCount,
+  substractKarmaAmount,
   substractPostCount,
   tokenConfig,
 } from "./auth";
@@ -45,7 +47,7 @@ export const createPost =
           type: CREATE_POST_SUCCESS,
           payload: res.data,
         });
-
+        await dispatch(substractKarmaAmount(res.data?.karma_offered));
         await resetForm({});
         await closeModal();
         await handleResetImages();
@@ -105,6 +107,8 @@ export const deletePost = (post, closeModal) => async (dispatch, getState) => {
         type: DELETE_POST_SUCCESS,
         payload: post?.id,
       });
+      await dispatch(addKarmaAmount(post?.karma_offered));
+
       await closeModal();
       await dispatch(substractPostCount());
       await dispatch(substractCreatedPostCount());
