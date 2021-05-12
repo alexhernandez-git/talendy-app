@@ -10,13 +10,27 @@ import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
 import useCanvas from "hooks/useCanvas";
+const sizeOptions = [5, 10, 15, 20, 25];
 const ContributeWhiteboard = ({ socketRef, roomID }) => {
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
 
   const [isDrawing, setIsDrawing] = useState(false);
   const [timeout, setTimeoutId] = useState(undefined);
-
+  const [color, setColor] = useState("#000");
+  const [size, setSize] = useState(5);
+  const handleChangeColor = (e) => {
+    setColor(e.target.value);
+    var canvas = document.querySelector("#board");
+    var ctx = canvas.getContext("2d");
+    ctx.strokeStyle = e.target.value;
+  };
+  const handleChangeSize = (e) => {
+    setSize(e.target.value);
+    var canvas = document.querySelector("#board");
+    var ctx = canvas.getContext("2d");
+    ctx.lineWidth = e.target.value;
+  };
   useEffect(() => {
     socketRef.current.on("drawing", function (data) {
       var interval = setInterval(function () {
@@ -58,10 +72,10 @@ const ContributeWhiteboard = ({ socketRef, roomID }) => {
     );
 
     /* Drawing on Paint App */
-    ctx.lineWidth = 2;
+    ctx.lineWidth = size;
     ctx.lineJoin = "round";
     ctx.lineCap = "round";
-    ctx.strokeStyle = "black";
+    ctx.strokeStyle = color;
 
     canvas.addEventListener(
       "mousedown",
@@ -99,7 +113,32 @@ const ContributeWhiteboard = ({ socketRef, roomID }) => {
 
   return (
     <section aria-labelledby="notes-title" className="">
-      <div className="w-full content-container  sketch" id="sketch">
+      <div
+        className="w-full content-container
+      bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg p-1
+      sketch"
+        id="sketch"
+      >
+        <div className="flex justify-end">
+          <input
+            type="color"
+            className="bg-gray-800 h-auto rounded-t cursor-pointer flex items-center text-white mr-1 text-xs"
+            value={color}
+            onChange={handleChangeColor}
+          />
+
+          <div>
+            <select
+              className="bg-gray-800 py-2  rounded-t cursor-pointer flex items-center text-white mr-1 text-xs"
+              value={size}
+              onChange={handleChangeSize}
+            >
+              {sizeOptions.map((sizeValue) => (
+                <option value={sizeValue}>{sizeValue}</option>
+              ))}
+            </select>
+          </div>
+        </div>
         <canvas
           ref={canvasRef}
           id="board"
