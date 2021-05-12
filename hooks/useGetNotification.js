@@ -13,7 +13,7 @@ const useGetNotification = (notification) => {
   switch (notification?.type) {
     case "ME":
       many_messages = notification.messages.length > 1;
-      let message = "";
+      message = "";
       if (notification.actor) {
         message = `${
           many_messages
@@ -34,6 +34,7 @@ const useGetNotification = (notification) => {
         event_message: many_messages ? "New messages" : "New message",
         message: message,
         user: notification.actor,
+        link: null,
       };
     case "PM":
       many_messages = notification.post_messages.length > 1;
@@ -61,6 +62,7 @@ const useGetNotification = (notification) => {
           : "New message from contribute room",
         message: message,
         user: notification.actor,
+        link: `/contribute-room/${notification?.post?.id}`,
       };
     case "NC":
       connection = notification.connection;
@@ -72,6 +74,7 @@ const useGetNotification = (notification) => {
         event_message: `New connection`,
         message: `${connectedUser.username} is your new connection`,
         user: connectedUser,
+        link: `/user/${connectedUser?.id}`,
       };
     case "NI":
       connection = notification.connection;
@@ -80,6 +83,7 @@ const useGetNotification = (notification) => {
         event_message: `New invitation`,
         message: `${connection.requester.username} has invited you to connect`,
         user: connection.requester,
+        link: `/profile/mynetwork`,
       };
     case "CR":
       contribute_request = notification.contribute_request;
@@ -88,6 +92,7 @@ const useGetNotification = (notification) => {
         event_message: `New contribute request`,
         message: `${contribute_request.user.username} has requested to contribute`,
         user: contribute_request.user,
+        link: `/profile/posts`,
       };
     case "JM":
       member_joined = notification.member_joined;
@@ -95,6 +100,7 @@ const useGetNotification = (notification) => {
         event_message: `New member joined`,
         message: `${member_joined.username} has joined to your post`,
         user: member_joined,
+        link: `/contribute-room/${notification?.post?.id}`,
       };
     case "CA":
       post_owner = notification?.post?.user;
@@ -102,12 +108,14 @@ const useGetNotification = (notification) => {
         event_message: `Contribute request accepted`,
         message: `${post_owner.username} has accepted your contribute request`,
         user: post_owner,
+        link: `/contribute-room/${notification?.post?.id}`,
       };
     default:
       return {
         event_message: `New notification`,
         message: null,
         user: null,
+        link: null,
       };
   }
 };
