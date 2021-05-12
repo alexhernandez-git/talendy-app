@@ -464,31 +464,33 @@ const DonationForm = () => {
           >
             DONATE NOW
           </button>
-          <div className="flex justify-center mt-5 text-gray-500 dark:text-gray-200">
-            <span className="text-xs flex items-center">
-              You will earn{" "}
-              <span className="text-orange-500 flex items-center mx-1">
-                <svg
-                  className="w-4 h-4 inline"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                6000 Karma
-              </span>{" "}
-              for this good action
-            </span>
-          </div>
-          {!authReducer.is_authenticated && (
-            <div className="mt-4 flex justify-center">
+
+          {authReducer.is_authenticated ? (
+            <div className="flex justify-center mt-5 text-gray-500 dark:text-gray-100">
+              <span className="text-xs flex items-center">
+                You will earn{" "}
+                <span className="text-orange-500 flex items-center mx-1">
+                  <svg
+                    className="w-4 h-4 inline"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  5000 Karma
+                </span>{" "}
+                for this good action
+              </span>
+            </div>
+          ) : (
+            <div className="mt-5 flex justify-center">
               <span className="text-sm text-gray-400 dark:text-gray-300">
                 Anonymous donation enabled, no sign in required
               </span>
