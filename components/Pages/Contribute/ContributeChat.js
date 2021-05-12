@@ -113,7 +113,7 @@ const ContributeChat = ({
                       </svg>
                     </button> */}
                     <span className="mr-3 inline-flex items-center text-sm text-gray-500 dark:text-gray-200">
-                      Ctrl + Enter for send
+                      Ctrl + Enter to send
                     </span>
                     <button
                       type="submit"
