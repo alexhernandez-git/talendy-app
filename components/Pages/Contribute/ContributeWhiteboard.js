@@ -10,7 +10,7 @@ import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
 import useCanvas from "hooks/useCanvas";
-const sizeOptions = [5, 10, 15, 20, 25];
+const sizeOptions = [1, 2, 5, 10, 15, 20, 25, 30, 40, 50];
 const ContributeWhiteboard = ({ socketRef, roomID }) => {
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
