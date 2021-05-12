@@ -139,6 +139,16 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
   const handleOpenChats = async () => {
     await dispatch(openChats());
   };
+  const [logoImage, setLogoImage] = useState(
+    "/static/images/talendy-logo-light.png"
+  );
+  useEffect(() => {
+    if (authReducer.theme === "dark") {
+      setLogoImage("/static/images/talendy-logo-dark.png");
+    } else {
+      setLogoImage("/static/images/talendy-logo-light.png");
+    }
+  }, [authReducer.theme]);
   return (
     <header className="bg-white dark:bg-gray-700 shadow-sm lg:sticky lg:overflow-y-visible top-0 z-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 static">
@@ -148,7 +158,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
               <Link href={authReducer.is_authenticated ? "/feed" : "/"}>
                 <img
                   className="block h-8 w-auto cursor-pointer"
-                  src="/static/images/talendy-logo.png"
+                  src={logoImage}
                   alt="Workflow"
                 />
               </Link>
