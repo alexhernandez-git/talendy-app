@@ -32,23 +32,25 @@ const ContributeWhiteboard = ({ socketRef, roomID }) => {
     ctx.lineWidth = e.target.value;
   };
   useEffect(() => {
-    socketRef.current.on("drawing", function (data) {
-      var interval = setInterval(function () {
-        if (isDrawing) return;
-        setIsDrawing(true);
-        clearInterval(interval);
-        var image = new Image();
-        var canvas = document.querySelector("#board");
-        var ctx = canvas.getContext("2d");
-        image.onload = function () {
-          ctx.drawImage(image, 0, 0);
+    if (socketRef?.current) {
+      socketRef.current.on("drawing", function (data) {
+        var interval = setInterval(function () {
+          if (isDrawing) return;
+          setIsDrawing(true);
+          clearInterval(interval);
+          var image = new Image();
+          var canvas = document.querySelector("#board");
+          var ctx = canvas.getContext("2d");
+          image.onload = function () {
+            ctx.drawImage(image, 0, 0);
 
-          setIsDrawing(false);
-        };
-        image.src = data;
-      }, 200);
-    });
-  }, []);
+            setIsDrawing(false);
+          };
+          image.src = data;
+        }, 200);
+      });
+    }
+  }, [socketRef?.current]);
   const canvasRef = useCanvas(([canvas, ctx]) => {
     var sketch = document.querySelector("#sketch");
     var sketch_style = getComputedStyle(sketch);
@@ -142,7 +144,7 @@ const ContributeWhiteboard = ({ socketRef, roomID }) => {
           <canvas
             ref={canvasRef}
             id="board"
-            className="bg-white rounded-b h-full"
+            className="bg-white rounded-b"
           ></canvas>
         </div>
       </div>
