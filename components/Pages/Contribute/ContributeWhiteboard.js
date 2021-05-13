@@ -97,6 +97,18 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
       false
     );
 
+    canvas.addEventListener(
+      "touchmove",
+      function (e) {
+        last_mouse.x = mouse.x;
+        last_mouse.y = mouse.y;
+
+        mouse.x = e.pageX - this.offsetLeft;
+        mouse.y = e.pageY - this.offsetTop;
+      },
+      false
+    );
+
     /* Drawing on Paint App */
     ctx.lineWidth = size;
     ctx.lineJoin = "round";
@@ -110,11 +122,25 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
       },
       false
     );
+    canvas.addEventListener(
+      "touchdown",
+      function (e) {
+        canvas.addEventListener("touchmove", onPaint, false);
+      },
+      false
+    );
 
     canvas.addEventListener(
       "mouseup",
       function () {
         canvas.removeEventListener("mousemove", onPaint, false);
+      },
+      false
+    );
+    canvas.addEventListener(
+      "touchup",
+      function () {
+        canvas.removeEventListener("touchmove", onPaint, false);
       },
       false
     );
@@ -133,7 +159,7 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
           data: base64ImageData,
           roomID: roomID,
         });
-      }, 1000);
+      }, 200);
     };
   });
 
