@@ -38,10 +38,12 @@ export default function SolveIssueEditor({ formik }) {
     formik.setFieldValue("solution", e.target.innerHTML);
   };
   useEffect(() => {
-    if (firstLoad && solutionRef?.current) {
-      solutionRef.current.innerHTML = formik.values?.solution;
+    if (formik.values?.solution) {
+      if (firstLoad && solutionRef?.current) {
+        solutionRef.current.innerHTML = formik.values?.solution;
+      }
+      setFirstLoad(false);
     }
-    setFirstLoad(false);
   }, [formik.values?.solution]);
 
   return (

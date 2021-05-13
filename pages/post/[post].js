@@ -155,21 +155,12 @@ export default function PostPage() {
               {postReducer.post?.solution && (
                 <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 bg-green-50 dark:bg-green-800 p-3 rounded shadow">
                   <span className="font-medium">Solution</span>
-                  <p>
-                    Jurassic Park was an incredible idea and a magnificent feat
-                    of engineering, but poor protocols and a disregard for human
-                    safety killed what could have otherwise been one of the best
-                    businesses of our generation.
-                  </p>
-                  <p>
-                    Ultimately, I think that if you wanted to run the park
-                    successfully and keep visitors safe, the most important
-                    thing to prioritize would be Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Cumque dolor eligendi, culpa,
-                    quaerat earum possimus porro nam perspiciatis tempora
-                    temporibus tenetur optio ipsa distinctio cum! Sunt soluta
-                    veritatis nisi id?
-                  </p>
+                  <p
+                    className="whitespace-pre-line"
+                    dangerouslySetInnerHTML={{
+                      __html: postReducer.post?.solution,
+                    }}
+                  />
                 </div>
               )}
               <div className="mt-6 flex justify-between space-x-8">
