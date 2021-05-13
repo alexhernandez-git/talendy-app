@@ -25,7 +25,7 @@ const Finalize = ({ handleGoToRoomPage }) => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      solution: contribute_room?.solution,
+      solution: contribute_room?.draft_solution,
     },
     validationSchema: Yup.object({
       solution: Yup.string().max(2500),
