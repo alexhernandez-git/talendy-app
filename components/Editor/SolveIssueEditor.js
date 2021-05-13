@@ -35,7 +35,11 @@ export default function SolveIssueEditor({ formik }) {
   const [firstLoad, setFirstLoad] = useState(true);
   const handleChangeSolution = (e) => {
     e.preventDefault();
-    formik.setFieldValue("solution", e.target.innerHTML);
+    if (solutionRef.current?.innerText?.length > 2500) {
+      solutionRef.current.innerHTML = formik.values?.solution;
+    } else {
+      formik.setFieldValue("solution", e.target.innerHTML);
+    }
   };
   useEffect(() => {
     if (formik.values?.solution) {
@@ -51,7 +55,7 @@ export default function SolveIssueEditor({ formik }) {
       <Toolbar />
       <div className="relative">
         <span className="absolute right-1 bottom-1 text-xs text-gray-400 z-10 ">
-          {formik.values?.solution?.length}/2500
+          {solutionRef.current?.innerText?.length}/2500
         </span>
 
         <div
