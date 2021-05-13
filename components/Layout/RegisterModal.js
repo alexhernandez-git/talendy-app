@@ -40,8 +40,8 @@ const RegisterModal = ({ registerOpen, registerRef, handleCloseRegister }) => {
     },
   });
   useEffect(() => {
-    dispatch(resetEmailAvailable());
     if (formik.values.email != "") {
+      dispatch(resetEmailAvailable());
       const timeoutId = setTimeout(() => {
         dispatch(isEmailAvailable({ email: formik.values.email }));
       }, 500);

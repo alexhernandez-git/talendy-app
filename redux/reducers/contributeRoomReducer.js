@@ -4,13 +4,17 @@ import {
   FETCH_CONTRIBUTE_ROOM_FAIL,
   UPDATE_SHARED_NOTES,
   RESET_CONTRIBUTE_ROOM,
+  UPDATE_MEMBER_REVIEW,
+  UPDATE_MEMBER_REVIEW_SUCCESS,
+  UPDATE_MEMBER_REVIEW_FAIL,
 } from "../types";
-import { HYDRATE } from "next-redux-wrapper";
 
 const initialState = {
   is_loading: false,
   contribute_room: null,
   error: null,
+  is_updating_member_review: null,
+  update_member_review_error: false,
 };
 export default function contributeRoomReducer(state = initialState, action) {
   switch (action.type) {
@@ -48,6 +52,23 @@ export default function contributeRoomReducer(state = initialState, action) {
       return {
         ...state,
         contribute_room: null,
+      };
+    case UPDATE_MEMBER_REVIEW:
+      return {
+        ...state,
+        is_updating_member_review: true,
+      };
+    case UPDATE_MEMBER_REVIEW_SUCCESS:
+      return {
+        ...state,
+        is_updating_member_review: false,
+        update_member_review_error: null,
+      };
+    case UPDATE_MEMBER_REVIEW_FAIL:
+      return {
+        ...state,
+        is_updating_member_review: false,
+        update_member_review_error: action.payload,
       };
     default:
       return state;

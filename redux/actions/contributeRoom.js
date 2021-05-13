@@ -6,8 +6,10 @@ import {
   FETCH_CONTRIBUTE_ROOM_FAIL,
   UPDATE_SHARED_NOTES,
   RESET_CONTRIBUTE_ROOM,
+  UPDATE_MEMBER_REVIEW,
+  UPDATE_MEMBER_REVIEW_SUCCESS,
+  UPDATE_MEMBER_REVIEW_FAIL,
 } from "../types";
-import { createAlert } from "./alerts";
 
 export const fetchContributeRoom = (id) => async (dispatch, getState) => {
   await dispatch({
@@ -38,3 +40,29 @@ export const updateSharedNotes = (shared_notes) => async (dispatch) => {
 export const resetContributeRoom = () => async (dispatch) => {
   dispatch({ type: RESET_CONTRIBUTE_ROOM });
 };
+
+export const updateMemberReview =
+  async (values, id) => async (dispatch, getState) => {
+    await dispatch({
+      type: UPDATE_MEMBER_REVIEW,
+    });
+    await axios
+      .patch(
+        `${process.env.HOST}/api/posts/${
+          getState().contributeRoomReducer.contribute_room?.id
+        }/members/${id}/`,
+        values,
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        await dispatch({
+          type: UPDATE_MEMBER_REVIEW_SUCCESS,
+        });
+      })
+      .catch(async (err) => {
+        await dispatch({
+          type: UPDATE_MEMBER_REVIEW_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };

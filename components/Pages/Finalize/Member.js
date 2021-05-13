@@ -6,12 +6,12 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { updateMemberReview } from "redux/actions/contributeRoom";
+import { useDispatch } from "react-redux";
 const Member = ({ member }) => {
-  const [rating, setRating] = useState(0);
+  const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
-  const handleChangeRating = (rating) => {
-    setRating(rating);
-  };
+
   const [isFormOpen, setIsFormOpen] = useState(false);
   const handleToggleForm = () => {
     setIsFormOpen(!isFormOpen);
@@ -28,17 +28,19 @@ const Member = ({ member }) => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      rate: member?.rate,
+      rate: null,
       comment: member?.comment,
     },
     validationSchema: Yup.object({
-      rate: Yup.float().nullable(),
-      comment: Yup.string(),
+      rate: Yup.number().nullable(),
+      comment: Yup.string().nullable(),
     }),
     onSubmit: async (values) => {
       console.log(values);
+      dispatch(updateMemberReview(values, member?.id));
     },
   });
+  console.log(formik.errors);
   const [firstLoad, setFirstLoad] = useState(true);
 
   useEffect(() => {
@@ -50,6 +52,11 @@ const Member = ({ member }) => {
     }
     setFirstLoad(false);
   }, [formik?.values?.rate, formik?.values?.comment]);
+  const handleChangeRating = (rating) => {
+    if (rating > 0) {
+      formik.setFieldValue("rate", rating);
+    }
+  };
   const formRef = useRef();
   useOutsideClick(formRef, () => handleCloseForm());
   return (
@@ -121,7 +128,7 @@ const Member = ({ member }) => {
             <div className="sm:flex items-end">
               <div className=" mr-2">
                 <StarRatings
-                  rating={rating}
+                  rating={formik?.values?.rate ? formik.values.rate : 0}
                   starRatedColor="#e5c07b"
                   numberOfStars={5}
                   starHoverColor="#e5c07b"
@@ -215,7 +222,7 @@ const Member = ({ member }) => {
                     </label>
                     <div className="mt-1 flex">
                       <StarRatings
-                        rating={rating}
+                        rating={formik?.values?.rate ? formik.values.rate : 0}
                         changeRating={(rating) => handleChangeRating(rating)}
                         starRatedColor="#e5c07b"
                         numberOfStars={5}
@@ -230,19 +237,22 @@ const Member = ({ member }) => {
 
                 <div>
                   <label
-                    htmlFor="about"
+                    htmlFor="comment"
                     className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                   >
                     Comment
                   </label>
                   <div className="mt-1">
                     <textarea
-                      id="about"
-                      name="about"
+                      id="comment"
+                      name="comment"
                       rows="3"
+                      onChange={formik.handleChange}
                       className="focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-300"
                       placeholder="Message"
-                    ></textarea>
+                    >
+                      {formik?.values?.comment}
+                    </textarea>
                   </div>
                   <p className="mt-2 text-sm text-gray-500 dark:text-gray-100">
                     Leave a respectful and constructive comment
