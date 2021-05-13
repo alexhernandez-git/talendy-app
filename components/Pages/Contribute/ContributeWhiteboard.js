@@ -136,15 +136,7 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
   const handleClearCanvas = () => {
     var canvas = document.querySelector("#board");
     var ctx = canvas.getContext("2d");
-    var sketch = document.querySelector("#sketch");
-    var sketch_style = getComputedStyle(sketch);
-    canvas.width = parseInt(sketch_style.getPropertyValue("width"));
-    canvas.height = parseInt(sketch_style.getPropertyValue("height"));
-    /* Drawing on Paint App */
-    ctx.lineWidth = size;
-    ctx.lineJoin = "round";
-    ctx.lineCap = "round";
-    ctx.strokeStyle = color;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     var base64ImageData = canvas.toDataURL("image/png");
     console.log(base64ImageData);
     socketRef.current.emit("drawing", {
