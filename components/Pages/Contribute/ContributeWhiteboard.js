@@ -136,7 +136,9 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
   const handleClearCanvas = () => {
     var canvas = document.querySelector("#board");
     var ctx = canvas.getContext("2d");
+    ctx.save();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
     var base64ImageData = canvas.toDataURL("image/png");
     console.log(base64ImageData);
     socketRef.current.emit("drawing", {
