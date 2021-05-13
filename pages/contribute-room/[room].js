@@ -320,19 +320,16 @@ const Contribute = () => {
     handleCloseMoreOptions();
   };
   const [isSharingScreen, setIsSharingScreen] = useState(false);
+  const shareScreenVideoRef = useRef();
   const handleShareScreen = () => {
     navigator.mediaDevices.getDisplayMedia({ cursor: true }).then((stream) => {
       dispatch(createAlert("INFO", "Feature not ready"));
       myScreenSharingStreamRef.current = stream;
+      shareScreenVideoRef.current.srcObject = stream;
+      shareScreenVideoRef.current.play();
       const screenTrack = stream.getTracks()[0];
       setIsSharingScreen(true);
-      myScreenSharingStreamRef.current
-        .getTracks()
-        .forEach(async function (track) {
-          await setIsSharingScreen(false);
-          await handleChangeFeature("CHAT");
-          await track.stop();
-        });
+
       handleChangeFeature("SCREENSHARING");
       screenTrack.onended = function () {
         setIsSharingScreen(false);
@@ -672,6 +669,7 @@ const Contribute = () => {
                     <ContributeScreenSharing
                       socketRef={socketRef}
                       roomID={roomID}
+                      shareScreenVideoRef={shareScreenVideoRef}
                     />
                   </div>
                   <div

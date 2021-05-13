@@ -6,9 +6,23 @@ import { updateSharedNotes } from "redux/actions/contributeRoom";
 import { useDispatch } from "react-redux";
 import { setEndOfContenteditable } from "helpers";
 
-export default function ContributeScreenSharing({ socketRef, roomID }) {
+export default function ContributeScreenSharing({
+  socketRef,
+  roomID,
+  shareScreenVideoRef,
+}) {
   const authReducer = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
 
-  return <section aria-labelledby="notes-title" className=""></section>;
+  return (
+    <section aria-labelledby="notes-title" className="">
+      <video ref={shareScreenVideoRef} className="w-full h-full" />
+      <div className="mt-4 flex justify-center">
+        <span className="text-sm text-red-500 dark:text-red-500 p-3 border border-red-500 rounded-xl">
+          This feature is not ready at the moment, you are not sharing the
+          content
+        </span>
+      </div>
+    </section>
+  );
 }
