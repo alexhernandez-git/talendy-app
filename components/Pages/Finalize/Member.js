@@ -2,10 +2,11 @@ import useOutsideClick from "hooks/useOutsideClick";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import StarRatings from "react-star-ratings";
-
+import moment from "moment";
+import { useSelector } from "react-redux";
 const Member = ({ member }) => {
   const [rating, setRating] = useState(0);
-
+  const authReducer = useSelector((state) => state.authReducer);
   const handleChangeRating = (rating) => {
     setRating(rating);
   };
@@ -59,7 +60,14 @@ const Member = ({ member }) => {
             </div>
             <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-5 md:gap-4">
               <div className="flex items-center">
-                <a href="/user/123" target="_blank">
+                <a
+                  href={`/${
+                    authReducer.user?.id === member?.user?.id
+                      ? "profile/posts"
+                      : "user/" + member?.user?.id
+                  }`}
+                  target="_blank"
+                >
                   <p
                     onMouseDown={(e) => e.stopPropagation()}
                     className="text-sm font-medium text-gray-500 dark:text-gray-100 truncate rounded-2xl px-3 py-1 hover:underline"
@@ -69,14 +77,14 @@ const Member = ({ member }) => {
                 </a>
               </div>
 
-              <div className="hidden md:block col-start-3 col-span-2">
+              <div className="hidden  col-start-3 col-span-2 md:flex items-center">
                 <div>
                   <p className="text-sm text-gray-900 dark:text-white">
                     Applied on{" "}
-                    <time dateTime="2020-01-07">January 7, 2020</time>
-                  </p>
-                  <p className="mt-2 flex items-center text-sm text-gray-500 dark:text-gray-100">
-                    Completed phone screening
+                    <time dateTime="2020-01-07">
+                      {" "}
+                      {moment(member?.created).format("MMM D [at] h:mm A z")}
+                    </time>
                   </p>
                 </div>
               </div>

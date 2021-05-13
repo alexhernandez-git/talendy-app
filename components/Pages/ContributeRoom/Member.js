@@ -38,8 +38,10 @@ const Member = ({ member }) => {
         <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white flex justify-between w-full">
           <a
             href={`/${
-              authReducer.user?.id === user.id ? "profile" : "user"
-            }/user/${user?.id}`}
+              authReducer.user?.id === user.id
+                ? "profile/posts"
+                : "user/" + user?.id
+            }`}
             target="_blank"
           >
             <span className="hover:underline cursor-pointer">
