@@ -39,17 +39,17 @@ const Member = ({ member }) => {
       console.log(values);
     },
   });
+  const [firstLoad, setFirstLoad] = useState(true);
+
   useEffect(() => {
-    if (
-      (formik?.values?.rate && formik.values?.rate !== member?.rate) ||
-      (formik?.values?.comment && formik.values?.comment !== member?.comment)
-    ) {
+    if (!firstLoad && (formik?.values?.rate || formik?.values?.comment)) {
       const timeoutId = setTimeout(() => {
         formik.handleSubmit();
       }, 500);
       return () => clearTimeout(timeoutId);
     }
-  }, [formik?.values]);
+    setFirstLoad(false);
+  }, [formik?.values?.rate, formik?.values?.comment]);
   const formRef = useRef();
   useOutsideClick(formRef, () => handleCloseForm());
   return (
