@@ -152,7 +152,10 @@ const Member = ({ member }) => {
                     And if you invite him to a coffee?
                   </label>
                   <div className="mt-1">
-                    <Link href="/donation/123">
+                    <a
+                      href={`/user/donation/${member?.user?.id}`}
+                      target="_blank"
+                    >
                       <button
                         type="button"
                         className="bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
@@ -171,7 +174,7 @@ const Member = ({ member }) => {
                         </svg>
                         Donate
                       </button>
-                    </Link>
+                    </a>
                   </div>
                 </div>
 
