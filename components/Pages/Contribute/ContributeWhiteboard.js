@@ -11,7 +11,7 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import useCanvas from "hooks/useCanvas";
 const sizeOptions = [1, 2, 5, 10, 15, 20, 25, 30, 40, 50, 100];
-const ContributeWhiteboard = ({ socketRef, roomID }) => {
+const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
 
@@ -19,6 +19,7 @@ const ContributeWhiteboard = ({ socketRef, roomID }) => {
   const [timeout, setTimeoutId] = useState(undefined);
   const [color, setColor] = useState("#000");
   const [size, setSize] = useState(5);
+  const [firstLoad, setFirstLoad] = useState(true);
   const handleChangeColor = (e) => {
     setColor(e.target.value);
     var canvas = document.querySelector("#board");
@@ -51,6 +52,23 @@ const ContributeWhiteboard = ({ socketRef, roomID }) => {
       });
     }
   }, []);
+
+  useEffect(() => {
+    if (feature.toUpperCase() === "SHAREDWHITEBOARD" && firstLoad) {
+      var canvas = document.querySelector("#board");
+      var ctx = canvas.getContext("2d");
+      var sketch = document.querySelector("#sketch");
+      var sketch_style = getComputedStyle(sketch);
+      canvas.width = parseInt(sketch_style.getPropertyValue("width"));
+      canvas.height = parseInt(sketch_style.getPropertyValue("height"));
+      /* Drawing on Paint App */
+      ctx.lineWidth = size;
+      ctx.lineJoin = "round";
+      ctx.lineCap = "round";
+      ctx.strokeStyle = color;
+      setFirstLoad(false);
+    }
+  }, [feature]);
   const canvasRef = useCanvas(([canvas, ctx]) => {
     var sketch = document.querySelector("#sketch");
     var sketch_style = getComputedStyle(sketch);
@@ -117,7 +135,7 @@ const ContributeWhiteboard = ({ socketRef, roomID }) => {
     <section aria-labelledby="notes-title" className="">
       <div
         className="w-full content-container
-      bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg pt-1
+      bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg pt-1 mb-10 lg:mb-0
       "
       >
         <div className="flex justify-end">
