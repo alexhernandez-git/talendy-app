@@ -34,6 +34,7 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
   useEffect(() => {
     if (socketRef?.current) {
       socketRef.current.on("drawing", function (data) {
+        console.log(data);
         var interval = setInterval(function () {
           // if (isDrawing) return;
           setIsDrawing(true);
@@ -50,6 +51,9 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
 
           image.src = data;
         }, 200);
+      });
+      socketRef.current.on("clear canvas", () => {
+        handleClearCanvas();
       });
     }
   }, []);
@@ -136,11 +140,15 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
   const handleClearCanvas = () => {
     var canvas = document.querySelector("#board");
     var ctx = canvas.getContext("2d");
-    ctx.save();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.restore();
+  };
+
+  const handleEmitAndClear = () => {
+    var canvas = document.querySelector("#board");
     var base64ImageData = canvas.toDataURL("image/png");
-    socketRef.current.emit("drawing", {
+
+    handleClearCanvas();
+    socketRef.current.emit("clear canvas", {
       data: base64ImageData,
       roomID: roomID,
     });
@@ -155,7 +163,7 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
       >
         <div className="flex justify-between">
           <button
-            onClick={handleClearCanvas}
+            onClick={handleEmitAndClear}
             className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center text-white ml-1 text-xs"
           >
             Clear
