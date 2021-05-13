@@ -11,6 +11,7 @@ const Finalize = ({ handleGoToRoomPage }) => {
   const contributeRoomReducer = useSelector(
     (state) => state.contributeRoomReducer
   );
+  const authReducer = useSelector((state) => state.authReducer);
   const { contribute_room } = contributeRoomReducer;
 
   return (
@@ -72,11 +73,10 @@ const Finalize = ({ handleGoToRoomPage }) => {
 
           <div className="shadow overflow-hidden sm:rounded-md col-span-12">
             <ul className="divide-y divide-gray-200">
-              <Member />
-              <Member />
-              <Member />
-              <Member />
-              <Member />
+              {contribute_room.members.map(
+                (member) =>
+                  member.user.id !== authReducer.user?.id && <Member />
+              )}
             </ul>
           </div>
           {/* <div className="col-span-12">
