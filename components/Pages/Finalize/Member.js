@@ -37,7 +37,7 @@ const Member = ({ member }) => {
     }),
     onSubmit: async (values) => {
       console.log(values);
-      dispatch(updateMemberReview(values, member?.id));
+      await dispatch(updateMemberReview(values, member?.id));
     },
   });
   console.log(formik.errors);
@@ -255,7 +255,7 @@ const Member = ({ member }) => {
                     </textarea>
                   </div>
                   <p className="mt-2 text-sm text-gray-500 dark:text-gray-100">
-                    Leave a respectful and constructive comment
+                    This review will be reflected when you finalize the post
                   </p>
                 </div>
               </div>

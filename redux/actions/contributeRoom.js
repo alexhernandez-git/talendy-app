@@ -42,7 +42,7 @@ export const resetContributeRoom = () => async (dispatch) => {
 };
 
 export const updateMemberReview =
-  async (values, id) => async (dispatch, getState) => {
+  (values, id) => async (dispatch, getState) => {
     await dispatch({
       type: UPDATE_MEMBER_REVIEW,
     });
