@@ -16,11 +16,9 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
   const authReducer = useSelector((state) => state.authReducer);
 
   const [isDrawing, setIsDrawing] = useState(false);
-  const [timeout, setTimeoutId] = useState(undefined);
   const [color, setColor] = useState("#000000");
   const [size, setSize] = useState(5);
   const [firstLoad, setFirstLoad] = useState(true);
-  const [base64ImageData, setBase64ImageData] = useState();
   const handleChangeColor = (e) => {
     setColor(e.target.value);
     var canvas = document.querySelector("#board");
@@ -37,7 +35,7 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
     if (socketRef?.current) {
       socketRef.current.on("drawing", function (data) {
         var interval = setInterval(function () {
-          if (isDrawing) return;
+          // if (isDrawing) return;
           setIsDrawing(true);
           clearInterval(interval);
           var image = new Image();
@@ -48,6 +46,8 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
 
             setIsDrawing(false);
           };
+          console.log(data);
+
           image.src = data;
         }, 200);
       });
@@ -70,12 +70,13 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
       setFirstLoad(false);
     }
   }, [feature]);
+
   const canvasRef = useCanvas(([canvas, ctx]) => {
     var sketch = document.querySelector("#sketch");
     var sketch_style = getComputedStyle(sketch);
     canvas.width = parseInt(sketch_style.getPropertyValue("width"));
     canvas.height = parseInt(sketch_style.getPropertyValue("height"));
-
+    let timeout;
     var mouse = { x: 0, y: 0 };
     var last_mouse = { x: 0, y: 0 };
 
@@ -120,19 +121,18 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
       ctx.lineTo(mouse.x, mouse.y);
       ctx.closePath();
       ctx.stroke();
-
       if (timeout != undefined) clearTimeout(timeout);
-      const timeoutId = setTimeout(function () {
+      timeout = setTimeout(function () {
+        console.log("entra");
         var base64ImageData = canvas.toDataURL("image/png");
-        console.log(base64ImageData);
         socketRef.current.emit("drawing", {
           data: base64ImageData,
           roomID: roomID,
         });
       }, 1000);
-      setTimeoutId(timeoutId);
     };
   });
+
   const handleClearCanvas = () => {
     var canvas = document.querySelector("#board");
     var ctx = canvas.getContext("2d");
@@ -140,7 +140,6 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.restore();
     var base64ImageData = canvas.toDataURL("image/png");
-    console.log(base64ImageData);
     socketRef.current.emit("drawing", {
       data: base64ImageData,
       roomID: roomID,
