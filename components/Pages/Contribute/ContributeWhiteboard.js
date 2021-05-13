@@ -133,6 +133,25 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
       setTimeoutId(timeoutId);
     };
   });
+  const handleClearCanvas = () => {
+    var canvas = document.querySelector("#board");
+    var ctx = canvas.getContext("2d");
+    var sketch = document.querySelector("#sketch");
+    var sketch_style = getComputedStyle(sketch);
+    canvas.width = parseInt(sketch_style.getPropertyValue("width"));
+    canvas.height = parseInt(sketch_style.getPropertyValue("height"));
+    /* Drawing on Paint App */
+    ctx.lineWidth = size;
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.strokeStyle = color;
+    var base64ImageData = canvas.toDataURL("image/png");
+    console.log(base64ImageData);
+    socketRef.current.emit("drawing", {
+      data: base64ImageData,
+      roomID: roomID,
+    });
+  };
 
   return (
     <section aria-labelledby="notes-title" className="">
@@ -141,24 +160,32 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
       bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg pt-1 mb-10 lg:mb-0
       "
       >
-        <div className="flex justify-end">
-          <input
-            type="color"
-            className="bg-gray-800 h-auto rounded-t cursor-pointer flex items-center text-white mr-1 text-xs"
-            value={color}
-            onChange={handleChangeColor}
-          />
+        <div className="flex justify-between">
+          <button
+            onClick={handleClearCanvas}
+            className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center text-white ml-1 text-xs"
+          >
+            Clear
+          </button>
+          <div className="flex justify-end">
+            <input
+              type="color"
+              className="bg-gray-800 h-auto rounded-t cursor-pointer flex items-center text-white mr-1 text-xs"
+              value={color}
+              onChange={handleChangeColor}
+            />
 
-          <div>
-            <select
-              className="bg-gray-800 py-2  rounded-t cursor-pointer flex items-center text-white mr-1 text-xs"
-              value={size}
-              onChange={handleChangeSize}
-            >
-              {sizeOptions.map((sizeValue) => (
-                <option value={sizeValue}>{sizeValue}</option>
-              ))}
-            </select>
+            <div>
+              <select
+                className="bg-gray-800 py-2  rounded-t cursor-pointer flex items-center text-white mr-1 text-xs"
+                value={size}
+                onChange={handleChangeSize}
+              >
+                {sizeOptions.map((sizeValue) => (
+                  <option value={sizeValue}>{sizeValue}</option>
+                ))}
+              </select>
+            </div>
           </div>
         </div>
         <div id="sketch" className=" h-full">
