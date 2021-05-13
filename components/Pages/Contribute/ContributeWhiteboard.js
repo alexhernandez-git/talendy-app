@@ -20,6 +20,7 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
   const [color, setColor] = useState("#000000");
   const [size, setSize] = useState(5);
   const [firstLoad, setFirstLoad] = useState(true);
+  const [base64ImageData, setBase64ImageData] = useState();
   const handleChangeColor = (e) => {
     setColor(e.target.value);
     var canvas = document.querySelector("#board");
@@ -112,6 +113,7 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
       },
       false
     );
+
     var onPaint = function () {
       ctx.beginPath();
       ctx.moveTo(last_mouse.x, last_mouse.y);
@@ -122,6 +124,7 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
       if (timeout != undefined) clearTimeout(timeout);
       const timeoutId = setTimeout(function () {
         var base64ImageData = canvas.toDataURL("image/png");
+        console.log(base64ImageData);
         socketRef.current.emit("drawing", {
           data: base64ImageData,
           roomID: roomID,
