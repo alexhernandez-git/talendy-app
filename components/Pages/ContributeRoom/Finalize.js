@@ -35,7 +35,6 @@ const Finalize = ({ handleGoToRoomPage }) => {
       await dispatch(updateSolution(values));
     },
   });
-  console.log(formik.errors);
   const [firstLoad, setFirstLoad] = useState(true);
 
   useEffect(() => {
