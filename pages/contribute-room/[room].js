@@ -4,7 +4,13 @@ import PostModal from "components/Layout/PostModal";
 import Layout from "components/Layout/Layout";
 import { CONTRIBUTE_PAGE } from "pages";
 import { IconContext } from "react-icons";
-import { MdHeadset, MdMic, MdScreenShare, MdMicOff } from "react-icons/md";
+import {
+  MdHeadset,
+  MdMic,
+  MdScreenShare,
+  MdMicOff,
+  MdFiberManualRecord,
+} from "react-icons/md";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Member from "components/Pages/ContributeRoom/Member";
@@ -29,6 +35,7 @@ import { addRoomMessage, fetchRoomMessages } from "redux/actions/roomMessages";
 import { setEndOfContenteditable } from "helpers";
 import Finalize from "components/pages/ContributeRoom/Finalize";
 import ContributeWhiteboard from "components/Pages/Contribute/ContributeWhiteboard";
+import ContributeScreenSharing from "components/Pages/Contribute/ContributeScreenSharing";
 const Audio = (props) => {
   const ref = useRef();
   useEffect(() => {
@@ -481,7 +488,7 @@ const Contribute = () => {
                   </div>
                 </div>
                 <div className="border-t border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800  p-3">
-                  <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl flex justify-between items-center ">
+                  <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl sm:flex justify-between items-center ">
                     <div className="flex justify-center md:mt-0 flex-col-reverse justify-stretch space-y-4 space-y-reverse md:flex-row-reverse md:justify-end md:space-x-reverse md:space-y-0 md:space-x-3  md:space-x-3">
                       <button
                         onClick={handleChangeFeature.bind(
@@ -544,9 +551,24 @@ const Contribute = () => {
                         </svg>
                         Chat
                       </button>
+                      <button
+                        onClick={handleChangeFeature.bind(
+                          this,
+                          "SCREENSHARING"
+                        )}
+                        type="button"
+                        className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                      >
+                        <IconContext.Provider
+                          value={{ size: 25, className: "mr-2 text-red-600" }}
+                        >
+                          <MdFiberManualRecord />
+                        </IconContext.Provider>
+                        Screen sharing
+                      </button>
                     </div>
 
-                    <div className="relative inline-block text-left">
+                    <div className="relative sm:inline-block text-left mt-5 sm:mt-0 flex justify-end">
                       <div>
                         <button
                           type="button"
@@ -578,7 +600,7 @@ const Contribute = () => {
                         className={moreOptionsOpen ? "block" : "hidden"}
                       >
                         <ul
-                          className="origin-top-right absolute right-0 mt-2 w-72 z-30 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                          className="origin-top-right absolute right-0 mt-10 sm:mt-2 w-72 z-30 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none"
                           tabIndex="-1"
                           role="listbox"
                           aria-labelledby="listbox-label"
@@ -616,7 +638,20 @@ const Contribute = () => {
 
             <div className="py-10">
               <div className="max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
-                <div className="space-y-6 lg:col-start-1 lg:col-span-2">
+                <div className="lg:col-start-1 lg:col-span-2">
+                  <div
+                    className={
+                      feature.toUpperCase() === "SCREENSHARING" &&
+                      contribute_room
+                        ? "block"
+                        : "hidden"
+                    }
+                  >
+                    <ContributeScreenSharing
+                      socketRef={socketRef}
+                      roomID={roomID}
+                    />
+                  </div>
                   <div
                     className={
                       feature.toUpperCase() === "CHAT" && contribute_room
