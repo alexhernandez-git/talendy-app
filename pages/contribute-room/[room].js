@@ -99,6 +99,7 @@ const Contribute = () => {
   // Webrtc
   const [peers, setPeers] = useState([]);
   const myStreamRef = useRef();
+  const myScreenSharingStreamRef = useRef();
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
@@ -157,6 +158,24 @@ const Contribute = () => {
     setMessage("");
   };
 
+  function createPeer(userToSignal, callerID, stream) {
+    const peer = new Peer({
+      initiator: true,
+      trickle: false,
+      stream,
+    });
+
+    peer.on("signal", (signal) => {
+      socketRef.current.emit("sending signal", {
+        userToSignal,
+        callerID,
+        signal,
+      });
+    });
+
+    return peer;
+  }
+
   useEffect(() => {
     if (initialDataFetched && validationsMade) {
       socketRef.current = io.connect("http://localhost:5500");
@@ -188,24 +207,6 @@ const Contribute = () => {
       socketRef.current.on("message", (payload) => {
         handleAddMessage(payload);
       });
-
-      function createPeer(userToSignal, callerID, stream) {
-        const peer = new Peer({
-          initiator: true,
-          trickle: false,
-          stream,
-        });
-
-        peer.on("signal", (signal) => {
-          socketRef.current.emit("sending signal", {
-            userToSignal,
-            callerID,
-            signal,
-          });
-        });
-
-        return peer;
-      }
 
       function addPeer(incomingSignal, callerID, stream) {
         const peer = new Peer({
@@ -318,8 +319,27 @@ const Contribute = () => {
     setFeature(newFeature);
     handleCloseMoreOptions();
   };
+  const [isSharingScreen, setIsSharingScreen] = useState(false);
   const handleShareScreen = () => {
-    dispatch(createAlert("INFO", "Feature not ready"));
+    navigator.mediaDevices.getDisplayMedia({ cursor: true }).then((stream) => {
+      dispatch(createAlert("INFO", "Feature not ready"));
+      myScreenSharingStreamRef.current = stream;
+      const screenTrack = stream.getTracks()[0];
+      setIsSharingScreen(true);
+      myScreenSharingStreamRef.current
+        .getTracks()
+        .forEach(async function (track) {
+          await setIsSharingScreen(false);
+          await handleChangeFeature("CHAT");
+          await track.stop();
+        });
+      handleChangeFeature("SCREENSHARING");
+      screenTrack.onended = function () {
+        setIsSharingScreen(false);
+        handleChangeFeature("CHAT");
+        console.log("screen sharing ended");
+      };
+    });
   };
 
   const [members, setMembers] = useState({
@@ -551,21 +571,23 @@ const Contribute = () => {
                         </svg>
                         Chat
                       </button>
-                      <button
-                        onClick={handleChangeFeature.bind(
-                          this,
-                          "SCREENSHARING"
-                        )}
-                        type="button"
-                        className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                      >
-                        <IconContext.Provider
-                          value={{ size: 25, className: "mr-2 text-red-600" }}
+                      {isSharingScreen && (
+                        <button
+                          onClick={handleChangeFeature.bind(
+                            this,
+                            "SCREENSHARING"
+                          )}
+                          type="button"
+                          className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                         >
-                          <MdFiberManualRecord />
-                        </IconContext.Provider>
-                        Screen sharing
-                      </button>
+                          <IconContext.Provider
+                            value={{ size: 20, className: "mr-2 text-red-600" }}
+                          >
+                            <MdFiberManualRecord />
+                          </IconContext.Provider>
+                          Screen sharing
+                        </button>
+                      )}
                     </div>
 
                     <div className="relative sm:inline-block text-left mt-5 sm:mt-0 flex justify-end">
