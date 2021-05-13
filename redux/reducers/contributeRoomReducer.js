@@ -7,14 +7,19 @@ import {
   UPDATE_MEMBER_REVIEW,
   UPDATE_MEMBER_REVIEW_SUCCESS,
   UPDATE_MEMBER_REVIEW_FAIL,
+  UPDATE_SOLUTION,
+  UPDATE_SOLUTION_SUCCESS,
+  UPDATE_SOLUTION_FAIL,
 } from "../types";
 
 const initialState = {
   is_loading: false,
   contribute_room: null,
   error: null,
-  is_updating_member_review: null,
-  update_member_review_error: false,
+  is_updating_member_review: false,
+  update_member_review_error: null,
+  is_updating_solution: false,
+  update_solution_error: null,
 };
 export default function contributeRoomReducer(state = initialState, action) {
   switch (action.type) {
@@ -69,6 +74,23 @@ export default function contributeRoomReducer(state = initialState, action) {
         ...state,
         is_updating_member_review: false,
         update_member_review_error: action.payload,
+      };
+    case UPDATE_SOLUTION:
+      return {
+        ...state,
+        is_updating_solution: true,
+      };
+    case UPDATE_SOLUTION_SUCCESS:
+      return {
+        ...state,
+        is_updating_solution: false,
+        update_solution_error: null,
+      };
+    case UPDATE_SOLUTION_FAIL:
+      return {
+        ...state,
+        is_updating_solution: false,
+        update_solution_error: action.payload,
       };
     default:
       return state;
