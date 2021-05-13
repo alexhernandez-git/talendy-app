@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { useRef } from "react";
 import Toolbar from "./Toolbar";
-export default function SolveIssueEditor() {
+export default function SolveIssueEditor({ formik }) {
   function paste(e) {
     e.preventDefault();
     const open = new RegExp("<", "gi");
@@ -29,19 +31,33 @@ export default function SolveIssueEditor() {
       return false;
     }
   };
+  const solutionRef = useRef();
+  const [firstLoad, setFirstLoad] = useState(true);
+  const handleChangeSolution = (e) => {
+    e.preventDefault();
+    formik.setFieldValue("solution", e.target.innerHTML);
+  };
+  useEffect(() => {
+    if (firstLoad && solutionRef?.current) {
+      solutionRef.current.innerHTML = formik.values?.solution;
+    }
+    setFirstLoad(false);
+  }, [formik.values?.solution]);
 
   return (
     <div>
       <Toolbar />
       <div className="relative">
         <span className="absolute right-1 bottom-1 text-xs text-gray-400 z-10 ">
-          10/2500
+          {formik.values?.solution?.length}/2500
         </span>
 
         <div
           className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l pr-12 cursor-text"
           id="editor"
           onKeyDown={handleKeyDown}
+          ref={solutionRef}
+          onKeyUp={handleChangeSolution}
           contentEditable="true"
           data-placeholder="Solution"
           onPaste={(e) => paste(e)}

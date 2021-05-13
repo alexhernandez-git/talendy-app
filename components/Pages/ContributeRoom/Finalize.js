@@ -7,12 +7,46 @@ import React from "react";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import SolveIssueEditor from "components/Editor/SolveIssueEditor";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { updateSolution } from "redux/actions/contributeRoom";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+
 const Finalize = ({ handleGoToRoomPage }) => {
+  const dispatch = useDispatch();
+
   const contributeRoomReducer = useSelector(
     (state) => state.contributeRoomReducer
   );
   const authReducer = useSelector((state) => state.authReducer);
   const { contribute_room } = contributeRoomReducer;
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      solution: contribute_room?.solution,
+    },
+    validationSchema: Yup.object({
+      solution: Yup.string().max(2500),
+    }),
+    onSubmit: async (values) => {
+      console.log(values);
+      await dispatch(updateSolution(values));
+    },
+  });
+  console.log(formik.errors);
+  const [firstLoad, setFirstLoad] = useState(true);
+
+  useEffect(() => {
+    if (!firstLoad && (formik?.values?.solution || formik?.values?.comment)) {
+      const timeoutId = setTimeout(() => {
+        formik.handleSubmit();
+      }, 500);
+      return () => clearTimeout(timeoutId);
+    }
+    setFirstLoad(false);
+  }, [formik?.values?.solution]);
 
   return (
     <>
@@ -63,7 +97,7 @@ const Finalize = ({ handleGoToRoomPage }) => {
             </div>
           </div>
           <div className="shadow overflow-hidden sm:rounded-md col-span-12 mb-4 p-4 bg-white dark:bg-gray-700">
-            <SolveIssueEditor />
+            <SolveIssueEditor formik={formik} />
             <div className="mt-3">
               <span className="text-gray-500 dark:text-gray-300 text-sm">
                 Help the community by sharing the solution you have found
