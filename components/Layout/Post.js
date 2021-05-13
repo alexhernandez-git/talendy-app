@@ -288,7 +288,7 @@ const Post = ({ page, post }) => {
         </div>
         <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 whitespace-pre-line">
           <p
-            className="whitespace-pre-line"
+            className="whitespace-pre-line break-all"
             dangerouslySetInnerHTML={{
               __html:
                 post?.text?.length > 250
@@ -319,15 +319,17 @@ const Post = ({ page, post }) => {
         {post?.solution && (
           <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 bg-green-50 dark:bg-green-700 p-3 rounded shadow">
             <span className="font-medium">Solution</span>
-            <p
-              className="whitespace-pre-line"
-              dangerouslySetInnerHTML={{
-                __html:
-                  post?.solution?.length > 250
-                    ? post?.solution.substring(0, 250 - 3) + "..."
-                    : post?.solution,
-              }}
-            ></p>
+            <div className="whitespace-pre-line">
+              <p
+                className="whitespace-pre-line break-all"
+                dangerouslySetInnerHTML={{
+                  __html:
+                    post?.solution?.length > 250
+                      ? post?.solution.substring(0, 250 - 3) + "..."
+                      : post?.solution,
+                }}
+              ></p>
+            </div>
           </div>
         )}
         <div className="mt-6 flex justify-between space-x-8">

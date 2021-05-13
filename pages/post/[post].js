@@ -105,7 +105,7 @@ export default function PostPage() {
               </div>
               <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4">
                 <p
-                  className="whitespace-pre-line"
+                  className="whitespace-pre-line break-all"
                   dangerouslySetInnerHTML={{
                     __html: postReducer.post?.text,
                   }}
@@ -156,7 +156,7 @@ export default function PostPage() {
                 <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4 bg-green-50 dark:bg-green-800 p-3 rounded shadow">
                   <span className="font-medium">Solution</span>
                   <p
-                    className="whitespace-pre-line"
+                    className="whitespace-pre-line break-all"
                     dangerouslySetInnerHTML={{
                       __html: postReducer.post?.solution,
                     }}
