@@ -17,7 +17,7 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
 
   const [isDrawing, setIsDrawing] = useState(false);
   const [timeout, setTimeoutId] = useState(undefined);
-  const [color, setColor] = useState("#000");
+  const [color, setColor] = useState("#000000");
   const [size, setSize] = useState(5);
   const [firstLoad, setFirstLoad] = useState(true);
   const handleChangeColor = (e) => {
