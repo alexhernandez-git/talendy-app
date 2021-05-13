@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import StarRatings from "react-star-ratings";
 
-const Member = () => {
+const Member = ({ member }) => {
   const [rating, setRating] = useState(0);
 
   const handleChangeRating = (rating) => {
@@ -33,11 +33,29 @@ const Member = () => {
         >
           <div className="min-w-0 flex-1 flex items-center">
             <div className="flex-shrink-0">
-              <img
-                className="h-12 w-12 rounded-full"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=9XbzAMvCeF&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-              />
+              {member?.user?.picture ? (
+                <img
+                  className="h-12 w-12 rounded-full"
+                  src={
+                    new RegExp(
+                      `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                    ).test(member?.user?.picture)
+                      ? member?.user?.picture
+                      : process.env.HOST + member?.user?.picture
+                  }
+                  alt=""
+                ></img>
+              ) : (
+                <span className="bg-gray-100 rounded-full overflow-hidden h-12 w-12">
+                  <svg
+                    className="text-gray-300 bg-gray-100 rounded-full h-12 w-12"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                </span>
+              )}
             </div>
             <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-5 md:gap-4">
               <div className="flex items-center">
@@ -46,7 +64,7 @@ const Member = () => {
                     onMouseDown={(e) => e.stopPropagation()}
                     className="text-sm font-medium text-gray-500 dark:text-gray-100 truncate rounded-2xl px-3 py-1 hover:underline"
                   >
-                    Ricardo Cooper
+                    {member?.user?.username}
                   </p>
                 </a>
               </div>

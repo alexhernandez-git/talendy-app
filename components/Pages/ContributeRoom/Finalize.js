@@ -75,7 +75,9 @@ const Finalize = ({ handleGoToRoomPage }) => {
             <ul className="divide-y divide-gray-200">
               {contribute_room.members.map(
                 (member) =>
-                  member.user.id !== authReducer.user?.id && <Member />
+                  member.user.id !== authReducer.user?.id && (
+                    <Member member={member} key={member.id} />
+                  )
               )}
             </ul>
           </div>
