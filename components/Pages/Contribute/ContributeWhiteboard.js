@@ -56,7 +56,7 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
         handleClearCanvas();
       });
     }
-  }, []);
+  }, [socketRef?.current]);
 
   useEffect(() => {
     if (feature.toUpperCase() === "SHAREDWHITEBOARD" && firstLoad) {
