@@ -28,7 +28,7 @@ const Member = ({ member }) => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      rate: null,
+      rate: member?.rate,
       comment: member?.comment,
     },
     validationSchema: Yup.object({
@@ -127,15 +127,27 @@ const Member = ({ member }) => {
           <div>
             <div className="sm:flex items-end">
               <div className=" mr-2">
-                <StarRatings
-                  rating={formik?.values?.rate ? formik.values.rate : 0}
-                  starRatedColor="#e5c07b"
-                  numberOfStars={5}
-                  starHoverColor="#e5c07b"
-                  starDimension="15px"
-                  starSpacing="0px"
-                  name="rating"
-                />
+                {formik?.values?.rate ? (
+                  <StarRatings
+                    rating={formik.values.rate}
+                    starRatedColor="#e5c07b"
+                    numberOfStars={5}
+                    starHoverColor="#e5c07b"
+                    starDimension="15px"
+                    starSpacing="0px"
+                    name="rating"
+                  />
+                ) : (
+                  <StarRatings
+                    rating={0}
+                    starRatedColor="#e5c07b"
+                    numberOfStars={5}
+                    starHoverColor="#e5c07b"
+                    starDimension="15px"
+                    starSpacing="0px"
+                    name="rating"
+                  />
+                )}
               </div>
               <div className="flex items-center justify-center">
                 <span className="text-sm text-gray-500 dark:text-gray-100">
@@ -221,16 +233,29 @@ const Member = ({ member }) => {
                       Rate
                     </label>
                     <div className="mt-1 flex">
-                      <StarRatings
-                        rating={formik?.values?.rate ? formik.values.rate : 0}
-                        changeRating={(rating) => handleChangeRating(rating)}
-                        starRatedColor="#e5c07b"
-                        numberOfStars={5}
-                        starHoverColor="#e5c07b"
-                        starDimension="25px"
-                        starSpacing="0px"
-                        name="rating"
-                      />
+                      {formik?.values?.rate ? (
+                        <StarRatings
+                          rating={formik.values.rate}
+                          changeRating={(rating) => handleChangeRating(rating)}
+                          starRatedColor="#e5c07b"
+                          numberOfStars={5}
+                          starHoverColor="#e5c07b"
+                          starDimension="25px"
+                          starSpacing="0px"
+                          name="rating"
+                        />
+                      ) : (
+                        <StarRatings
+                          rating={0}
+                          changeRating={(rating) => handleChangeRating(rating)}
+                          starRatedColor="#e5c07b"
+                          numberOfStars={5}
+                          starHoverColor="#e5c07b"
+                          starDimension="25px"
+                          starSpacing="0px"
+                          name="rating"
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
