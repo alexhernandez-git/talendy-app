@@ -1,8 +1,13 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
+import { useSelector } from "react-redux";
 import Toolbar from "./Toolbar";
 export default function SolveIssueEditor({ formik }) {
+  const contributeRoomReducer = useSelector(
+    (state) => state.contributeRoomReducer
+  );
+  const { contribute_room } = contributeRoomReducer;
   function paste(e) {
     e.preventDefault();
     const open = new RegExp("<", "gi");
@@ -42,13 +47,13 @@ export default function SolveIssueEditor({ formik }) {
     }
   };
   useEffect(() => {
-    if (formik.values?.solution) {
+    if (contribute_room?.draft_solution) {
       if (firstLoad && solutionRef?.current) {
-        solutionRef.current.innerHTML = formik.values?.solution;
+        solutionRef.current.innerHTML = contribute_room?.draft_solution;
       }
       setFirstLoad(false);
     }
-  }, [formik.values?.solution]);
+  }, [contribute_room?.draft_solution]);
 
   return (
     <div>
