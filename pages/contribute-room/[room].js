@@ -439,360 +439,351 @@ const Contribute = () => {
             )}
           </div>
         </div>
-        {isFinalizePage ? (
+        <div className={isFinalizePage ? "block" : "hidden"}>
           <Finalize handleGoToRoomPage={handleGoToRoomPage} />
-        ) : (
-          <>
-            <section aria-labelledby="profile-overview-title">
-              <div className="bg-white dark:bg-gray-700 shadow border-t border-gray-200 dark:border-gray-600">
-                <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl">
-                  <h2 className="sr-only" id="profile-overview-title">
-                    Profile Overview
-                  </h2>
-                  <div className="bg-white dark:bg-gray-700  p-3 sm:px-0">
-                    <div className="sm:flex sm:items-center sm:justify-between">
-                      <div className="sm:flex sm:space-x-5">
-                        <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
-                          {/* <p className="text-sm font-medium text-gray-600">
+        </div>
+
+        <section
+          aria-labelledby="profile-overview-title"
+          className={!isFinalizePage ? "block" : "hidden"}
+        >
+          <div className="bg-white dark:bg-gray-700 shadow border-t border-gray-200 dark:border-gray-600">
+            <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl">
+              <h2 className="sr-only" id="profile-overview-title">
+                Profile Overview
+              </h2>
+              <div className="bg-white dark:bg-gray-700  p-3 sm:px-0">
+                <div className="sm:flex sm:items-center sm:justify-between">
+                  <div className="sm:flex sm:space-x-5">
+                    <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
+                      {/* <p className="text-sm font-medium text-gray-600">
                             Welcome back,
                           </p> */}
-                          <p className="text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">
-                            {contribute_room?.title}
-                          </p>
-                          <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                            Created at{" "}
-                            <time dateTime="2020-08-25">
-                              {moment(contribute_room?.created).format(
-                                "MMM D [at] h:mm A z"
-                              )}
-                            </time>
-                          </p>
-                        </div>
-                      </div>
-                      <div className="mt-5 flex justify-center md:mt-0 flex-col-reverse justify-stretch space-y-4 space-y-reverse md:flex-row-reverse md:justify-end md:space-x-reverse md:space-y-0 md:space-x-3  md:space-x-3">
-                        <button
-                          onClick={handleOpenModal}
-                          type="button"
-                          className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 hover:text-gray-500 dark:hover:text-white dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5 mr-2"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                          </svg>
-                          Info
-                        </button>
-                        {contribute_room?.user?.id === authReducer.user?.id && (
-                          <button
-                            onClick={handleGoToFinalize}
-                            type="button"
-                            className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm  text-white hover:text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
-                          >
-                            Finalize
-                          </button>
-                        )}
-                      </div>
+                      <p className="text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">
+                        {contribute_room?.title}
+                      </p>
+                      <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                        Created at{" "}
+                        <time dateTime="2020-08-25">
+                          {moment(contribute_room?.created).format(
+                            "MMM D [at] h:mm A z"
+                          )}
+                        </time>
+                      </p>
                     </div>
                   </div>
-                </div>
-                <div className="border-t border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800  p-3">
-                  <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl sm:flex justify-between items-center ">
-                    <div className="flex justify-center md:mt-0 flex-col-reverse justify-stretch space-y-4 space-y-reverse md:flex-row-reverse md:justify-end md:space-x-reverse md:space-y-0 md:space-x-3  md:space-x-3">
+                  <div className="mt-5 flex justify-center md:mt-0 flex-col-reverse justify-stretch space-y-4 space-y-reverse md:flex-row-reverse md:justify-end md:space-x-reverse md:space-y-0 md:space-x-3  md:space-x-3">
+                    <button
+                      onClick={handleOpenModal}
+                      type="button"
+                      className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 hover:text-gray-500 dark:hover:text-white dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 mr-2"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      Info
+                    </button>
+                    {contribute_room?.user?.id === authReducer.user?.id && (
                       <button
-                        onClick={handleChangeFeature.bind(
-                          this,
-                          "SHAREDWHITEBOARD"
-                        )}
+                        onClick={handleGoToFinalize}
                         type="button"
-                        className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                        className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm  text-white hover:text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5 mr-2"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                          <path
-                            fillRule="evenodd"
-                            d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        Shared whiteboard
+                        Finalize
                       </button>
-                      <button
-                        onClick={handleChangeFeature.bind(this, "SHAREDNOTES")}
-                        type="button"
-                        className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5 mr-2"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        Shared notes
-                      </button>
-                      <button
-                        onClick={handleChangeFeature.bind(this, "CHAT")}
-                        type="button"
-                        className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5 mr-2"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        Chat
-                      </button>
-                      {isSharingScreen && (
-                        <button
-                          onClick={handleChangeFeature.bind(
-                            this,
-                            "SCREENSHARING"
-                          )}
-                          type="button"
-                          className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                        >
-                          <IconContext.Provider
-                            value={{ size: 20, className: "mr-2 text-red-600" }}
-                          >
-                            <MdFiberManualRecord />
-                          </IconContext.Provider>
-                          Screen sharing
-                        </button>
-                      )}
-                    </div>
-
-                    <div className="relative sm:inline-block text-left mt-5 sm:mt-0 flex justify-end">
-                      <div>
-                        <button
-                          type="button"
-                          onMouseDown={handleOpenMoreOptions}
-                          className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                          id="menu-button"
-                          aria-expanded="true"
-                          aria-haspopup="true"
-                        >
-                          More
-                          <svg
-                            className="-mr-1 ml-2 h-5 w-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </button>
-                      </div>
-
-                      <div
-                        ref={moreOptionsRef}
-                        className={moreOptionsOpen ? "block" : "hidden"}
-                      >
-                        <ul
-                          className="origin-top-right absolute right-0 mt-10 sm:mt-2 w-72 z-30 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none"
-                          tabIndex="-1"
-                          role="listbox"
-                          aria-labelledby="listbox-label"
-                          aria-activedescendant="listbox-option-0"
-                        >
-                          <li
-                            className="text-gray-900 dark:text-white cursor-pointer select-none relative p-4 text-sm hover:opacity-70"
-                            id="listbox-option-0"
-                            role="option"
-                          >
-                            <button
-                              onClick={handleChangeFeature.bind(
-                                this,
-                                "ASTEROIDS"
-                              )}
-                              className="flex flex-col"
-                            >
-                              <div className="flex justify-between">
-                                <p className="font-normal">Asteroids</p>
-                              </div>
-                              <p className="text-gray-500 text-left mt-2">
-                                Psst.. waiting for someone? Let's shoot some
-                                asteroids in the meantime. This game is only
-                                loaded for you.
-                              </p>
-                            </button>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
+                    )}
                   </div>
                 </div>
               </div>
-            </section>
-
-            <div className="py-10">
-              <div className="max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
-                <div className="lg:col-start-1 lg:col-span-2">
-                  <div
-                    className={
-                      feature.toUpperCase() === "SCREENSHARING" &&
-                      contribute_room
-                        ? "block"
-                        : "hidden"
-                    }
+            </div>
+            <div className="border-t border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800  p-3">
+              <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl sm:flex justify-between items-center ">
+                <div className="flex justify-center md:mt-0 flex-col-reverse justify-stretch space-y-4 space-y-reverse md:flex-row-reverse md:justify-end md:space-x-reverse md:space-y-0 md:space-x-3  md:space-x-3">
+                  <button
+                    onClick={handleChangeFeature.bind(this, "SHAREDWHITEBOARD")}
+                    type="button"
+                    className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                   >
-                    <ContributeScreenSharing
-                      socketRef={socketRef}
-                      roomID={roomID}
-                      shareScreenVideoRef={shareScreenVideoRef}
-                    />
-                  </div>
-                  <div
-                    className={
-                      feature.toUpperCase() === "CHAT" && contribute_room
-                        ? "block"
-                        : "hidden"
-                    }
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                      <path
+                        fillRule="evenodd"
+                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Shared whiteboard
+                  </button>
+                  <button
+                    onClick={handleChangeFeature.bind(this, "SHAREDNOTES")}
+                    type="button"
+                    className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                   >
-                    <ContributeChat
-                      handleSendMessage={handleSendMessage}
-                      handleChangeMessage={handleChangeMessage}
-                      message={message}
-                    />
-                  </div>
-                  <div
-                    className={
-                      feature.toUpperCase() === "SHAREDNOTES" && contribute_room
-                        ? "block"
-                        : "hidden"
-                    }
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Shared notes
+                  </button>
+                  <button
+                    onClick={handleChangeFeature.bind(this, "CHAT")}
+                    type="button"
+                    className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                   >
-                    <ContributeSharedNotes
-                      socketRef={socketRef}
-                      roomID={roomID}
-                      sharedNotes={contribute_room?.shared_notes}
-                    />
-                  </div>
-                  <div
-                    className={
-                      feature.toUpperCase() === "SHAREDWHITEBOARD" &&
-                      contribute_room
-                        ? "block"
-                        : "hidden"
-                    }
-                  >
-                    <ContributeWhiteboard
-                      socketRef={socketRef}
-                      roomID={roomID}
-                      feature={feature}
-                    />
-                  </div>
-                  {feature.toUpperCase() === "ASTEROIDS" && contribute_room && (
-                    <ContributeAsteroids />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Chat
+                  </button>
+                  {isSharingScreen && (
+                    <button
+                      onClick={handleChangeFeature.bind(this, "SCREENSHARING")}
+                      type="button"
+                      className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                    >
+                      <IconContext.Provider
+                        value={{ size: 20, className: "mr-2 text-red-600" }}
+                      >
+                        <MdFiberManualRecord />
+                      </IconContext.Provider>
+                      Screen sharing
+                    </button>
                   )}
                 </div>
 
-                <section
-                  aria-labelledby="timeline-title"
-                  className="lg:col-start-3 lg:col-span-1 "
-                >
-                  <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6  dark:bg-gray-700  sticky top-24">
-                    <h2
-                      id="timeline-title"
-                      className="text-lg font-medium text-gray-900 dark:text-white"
+                <div className="relative sm:inline-block text-left mt-5 sm:mt-0 flex justify-end">
+                  <div>
+                    <button
+                      type="button"
+                      onMouseDown={handleOpenMoreOptions}
+                      className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                      id="menu-button"
+                      aria-expanded="true"
+                      aria-haspopup="true"
                     >
-                      Members
-                    </h2>
-
-                    <div className="mt-3 flow-root overflow-y-auto max-h-96 p-1">
-                      <span
-                        id="timeline-title"
-                        className="text-md text-gray-900 dark:text-white"
+                      More
+                      <svg
+                        className="-mr-1 ml-2 h-5 w-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
                       >
-                        Joined
-                      </span>
-
-                      {members?.joined?.length === 0 ? (
-                        <span className="text-sm text-gray-500 dark:text-gray-200 block">
-                          No members joined
-                        </span>
-                      ) : (
-                        <ul className=" divide-y divide-gray-200 dark:divide-gray-400 ">
-                          {members?.joined?.map((member) => (
-                            <Member member={member} key={member.id} />
-                          ))}
-                        </ul>
-                      )}
-                      <span
-                        id="timeline-title"
-                        className="text-md text-gray-900 dark:text-white"
-                      >
-                        Online
-                      </span>
-
-                      {members?.online?.length === 0 ? (
-                        <span className="text-sm text-gray-500 dark:text-gray-200 block">
-                          No members online
-                        </span>
-                      ) : (
-                        <ul className=" divide-y divide-gray-200 dark:divide-gray-400 ">
-                          {members?.online?.map((member) => (
-                            <Member member={member} key={member.id} />
-                          ))}
-                        </ul>
-                      )}
-                      <span
-                        id="timeline-title"
-                        className="text-md text-gray-900 dark:text-white"
-                      >
-                        Offline
-                      </span>
-                      {members?.offline?.length === 0 ? (
-                        <span className="text-sm text-gray-500 dark:text-gray-200 block">
-                          No members offline
-                        </span>
-                      ) : (
-                        <ul className=" divide-y divide-gray-200 dark:divide-gray-400 opacity-70">
-                          {members?.offline?.map((member) => (
-                            <Member member={member} key={member.id} />
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                    {/* <div className="mt-6 flex flex-col justify-stretch">
-             
-            </div> */}
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </button>
                   </div>
-                </section>
+
+                  <div
+                    ref={moreOptionsRef}
+                    className={moreOptionsOpen ? "block" : "hidden"}
+                  >
+                    <ul
+                      className="origin-top-right absolute right-0 mt-10 sm:mt-2 w-72 z-30 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                      tabIndex="-1"
+                      role="listbox"
+                      aria-labelledby="listbox-label"
+                      aria-activedescendant="listbox-option-0"
+                    >
+                      <li
+                        className="text-gray-900 dark:text-white cursor-pointer select-none relative p-4 text-sm hover:opacity-70"
+                        id="listbox-option-0"
+                        role="option"
+                      >
+                        <button
+                          onClick={handleChangeFeature.bind(this, "ASTEROIDS")}
+                          className="flex flex-col"
+                        >
+                          <div className="flex justify-between">
+                            <p className="font-normal">Asteroids</p>
+                          </div>
+                          <p className="text-gray-500 text-left mt-2">
+                            Psst.. waiting for someone? Let's shoot some
+                            asteroids in the meantime. This game is only loaded
+                            for you.
+                          </p>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
-          </>
-        )}
+          </div>
+        </section>
+
+        <div className={`${!isFinalizePage ? "block" : "hidden"} py-10`}>
+          <div className="max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
+            <div className="lg:col-start-1 lg:col-span-2">
+              <div
+                className={
+                  feature.toUpperCase() === "SCREENSHARING" && contribute_room
+                    ? "block"
+                    : "hidden"
+                }
+              >
+                <ContributeScreenSharing
+                  socketRef={socketRef}
+                  roomID={roomID}
+                  shareScreenVideoRef={shareScreenVideoRef}
+                />
+              </div>
+              <div
+                className={
+                  feature.toUpperCase() === "CHAT" && contribute_room
+                    ? "block"
+                    : "hidden"
+                }
+              >
+                <ContributeChat
+                  handleSendMessage={handleSendMessage}
+                  handleChangeMessage={handleChangeMessage}
+                  message={message}
+                />
+              </div>
+              <div
+                className={
+                  feature.toUpperCase() === "SHAREDNOTES" && contribute_room
+                    ? "block"
+                    : "hidden"
+                }
+              >
+                <ContributeSharedNotes
+                  socketRef={socketRef}
+                  roomID={roomID}
+                  sharedNotes={contribute_room?.shared_notes}
+                />
+              </div>
+              <div
+                className={
+                  feature.toUpperCase() === "SHAREDWHITEBOARD" &&
+                  contribute_room
+                    ? "block"
+                    : "hidden"
+                }
+              >
+                <ContributeWhiteboard
+                  socketRef={socketRef}
+                  roomID={roomID}
+                  feature={feature}
+                />
+              </div>
+              {feature.toUpperCase() === "ASTEROIDS" && contribute_room && (
+                <ContributeAsteroids />
+              )}
+            </div>
+
+            <section
+              aria-labelledby="timeline-title"
+              className="lg:col-start-3 lg:col-span-1 "
+            >
+              <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6  dark:bg-gray-700  sticky top-24">
+                <h2
+                  id="timeline-title"
+                  className="text-lg font-medium text-gray-900 dark:text-white"
+                >
+                  Members
+                </h2>
+
+                <div className="mt-3 flow-root overflow-y-auto max-h-96 p-1">
+                  <span
+                    id="timeline-title"
+                    className="text-md text-gray-900 dark:text-white"
+                  >
+                    Joined
+                  </span>
+
+                  {members?.joined?.length === 0 ? (
+                    <span className="text-sm text-gray-500 dark:text-gray-200 block">
+                      No members joined
+                    </span>
+                  ) : (
+                    <ul className=" divide-y divide-gray-200 dark:divide-gray-400 ">
+                      {members?.joined?.map((member) => (
+                        <Member member={member} key={member.id} />
+                      ))}
+                    </ul>
+                  )}
+                  <span
+                    id="timeline-title"
+                    className="text-md text-gray-900 dark:text-white"
+                  >
+                    Online
+                  </span>
+
+                  {members?.online?.length === 0 ? (
+                    <span className="text-sm text-gray-500 dark:text-gray-200 block">
+                      No members online
+                    </span>
+                  ) : (
+                    <ul className=" divide-y divide-gray-200 dark:divide-gray-400 ">
+                      {members?.online?.map((member) => (
+                        <Member member={member} key={member.id} />
+                      ))}
+                    </ul>
+                  )}
+                  <span
+                    id="timeline-title"
+                    className="text-md text-gray-900 dark:text-white"
+                  >
+                    Offline
+                  </span>
+                  {members?.offline?.length === 0 ? (
+                    <span className="text-sm text-gray-500 dark:text-gray-200 block">
+                      No members offline
+                    </span>
+                  ) : (
+                    <ul className=" divide-y divide-gray-200 dark:divide-gray-400 opacity-70">
+                      {members?.offline?.map((member) => (
+                        <Member member={member} key={member.id} />
+                      ))}
+                    </ul>
+                  )}
+                </div>
+                {/* <div className="mt-6 flex flex-col justify-stretch">
+             
+            </div> */}
+              </div>
+            </section>
+          </div>
+        </div>
       </Layout>
       <PostModal
         post={contribute_room}
