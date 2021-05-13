@@ -4,6 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 import StarRatings from "react-star-ratings";
 import moment from "moment";
 import { useSelector } from "react-redux";
+import * as Yup from "yup";
+import { useFormik } from "formik";
 const Member = ({ member }) => {
   const [rating, setRating] = useState(0);
   const authReducer = useSelector((state) => state.authReducer);
@@ -23,6 +25,31 @@ const Member = ({ member }) => {
     }
   };
 
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      rate: member?.rate,
+      comment: member?.comment,
+    },
+    validationSchema: Yup.object({
+      rate: Yup.float().nullable(),
+      comment: Yup.string(),
+    }),
+    onSubmit: async (values) => {
+      console.log(values);
+    },
+  });
+  useEffect(() => {
+    if (
+      (formik?.values?.rate && formik.values?.rate !== member?.rate) ||
+      (formik?.values?.comment && formik.values?.comment !== member?.comment)
+    ) {
+      const timeoutId = setTimeout(() => {
+        formik.handleSubmit();
+      }, 500);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [formik?.values]);
   const formRef = useRef();
   useOutsideClick(formRef, () => handleCloseForm());
   return (
