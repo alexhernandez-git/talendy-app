@@ -55,7 +55,6 @@ export default function ContributeSharedNotes({
       return str.length + (m ? m.length : 0);
     }
     const textBytes = lengthInUtf8Bytes(sharedNotesRef.current.innerHTML);
-    console.log(textBytes);
     if (textBytes < 20000) {
       console.log(sharedNotesRef.current.innerHTML);
       setEditorTextLength(sharedNotesRef.current.innerText.length);
