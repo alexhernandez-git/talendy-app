@@ -49,16 +49,19 @@ export default function ContributeSharedNotes({
     setOnkeyUpCounter(!onKeyUpCounter);
 
     console.log("entra");
-    if (sharedNotesRef.current.innerText.length <= 2500) {
+    function lengthInUtf8Bytes(str) {
+      // Matches only the 10.. bytes that are non-initial characters in a multi-byte sequence.
+      var m = encodeURIComponent(str).match(/%[89ABab]/g);
+      return str.length + (m ? m.length : 0);
+    }
+    const textBytes = lengthInUtf8Bytes(sharedNotesRef.current.innerHTML);
+    console.log(textBytes);
+    if (textBytes < 20000) {
       console.log(sharedNotesRef.current.innerHTML);
       setEditorTextLength(sharedNotesRef.current.innerText.length);
       setEditorText(sharedNotesRef.current.innerHTML);
     } else {
-      sharedNotesRef.current.innerText = sharedNotesRef.current.innerText.slice(
-        0,
-        2500
-      );
-      setEditorText(sharedNotesRef.current.innerText);
+      sharedNotesRef.current.innerHTML = editorText;
     }
   };
 
