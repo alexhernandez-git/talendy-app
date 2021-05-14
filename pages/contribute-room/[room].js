@@ -75,6 +75,7 @@ const Contribute = () => {
   const { contribute_room, is_loading } = contributeRoomReducer;
   const [roomID, setRoomID] = useState(router.query?.room);
   const [validationsMade, setValidationsMade] = useState(false);
+  const [screenSharePeer, setScreenSharePeer] = useState();
 
   useEffect(() => {
     if (
@@ -101,6 +102,7 @@ const Contribute = () => {
   const myStreamRef = useRef();
   const myScreenSharingStreamRef = useRef();
   const socketRef = useRef();
+  const ssSocketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
   const [isMicOn, setIsMicOn] = useState(false);
@@ -158,30 +160,70 @@ const Contribute = () => {
     setMessage("");
   };
 
-  function createPeer(userToSignal, callerID, stream) {
+  function createPeer(userToSignal, callerID, stream, isSharingScreen = false) {
     const peer = new Peer({
       initiator: true,
       trickle: false,
       stream,
     });
-
-    peer.on("signal", (signal) => {
-      socketRef.current.emit("sending signal", {
-        userToSignal,
-        callerID,
-        signal,
+    if (isSharingScreen) {
+      peer.on("signal", (signal) => {
+        ssSocketRef.current.emit("sending signal", {
+          userToSignal,
+          callerID,
+          signal,
+        });
       });
-    });
+    } else {
+      peer.on("signal", (signal) => {
+        socketRef.current.emit("sending signal", {
+          userToSignal,
+          callerID,
+          signal,
+        });
+      });
+    }
 
     return peer;
   }
+  function addPeer(incomingSignal, callerID, stream, isSharingScreen) {
+    const peer = new Peer({
+      initiator: false,
+      trickle: false,
+      stream,
+    });
+    if (isSharingScreen) {
+      peer.on("signal", (signal) => {
+        ssSocketRef.current.emit("returning signal", {
+          signal,
+          callerID,
+        });
+      });
+    } else {
+      peer.on("signal", (signal) => {
+        socketRef.current.emit("returning signal", {
+          signal,
+          callerID,
+        });
+      });
+    }
 
+    peer.signal(incomingSignal);
+
+    return peer;
+  }
+  socketRef.current.on("receiving returned signal", (payload) => {
+    const item = peersRef.current.find((p) => p.peerID === payload.id);
+    item?.peer.signal(payload.signal);
+  });
   useEffect(() => {
     if (initialDataFetched && validationsMade) {
       socketRef.current = io.connect("http://localhost:5500");
+
       socketRef.current.on("connect", () => {
         console.log("connected layout!!!!!!!!!!");
       });
+
       socketRef.current.on("connect_error", (err) => {
         console.log(`connect_error due to ${err.message}`);
       });
@@ -192,9 +234,9 @@ const Contribute = () => {
       });
 
       socketRef.current.on("joined members", (joinedMembers) => {
+        console.log("joined members", joinedMembers);
         setJoinedMembersList(joinedMembers);
       });
-      socketRef.current.on("user left", (socketID) => {});
       socketRef.current.on("members left", (membersLeft) => {
         setJoinedMembersList(membersLeft);
       });
@@ -207,22 +249,6 @@ const Contribute = () => {
       socketRef.current.on("message", (payload) => {
         handleAddMessage(payload);
       });
-
-      function addPeer(incomingSignal, callerID, stream) {
-        const peer = new Peer({
-          initiator: false,
-          trickle: false,
-          stream,
-        });
-
-        peer.on("signal", (signal) => {
-          socketRef.current.emit("returning signal", { signal, callerID });
-        });
-
-        peer.signal(incomingSignal);
-
-        return peer;
-      }
 
       navigator.mediaDevices
         .getUserMedia({ video: false, audio: true })
@@ -237,7 +263,8 @@ const Contribute = () => {
               const peer = createPeer(
                 user.socketID,
                 socketRef.current.id,
-                stream
+                stream,
+                false
               );
               peersRef.current.push({
                 peerID: user.socketID,
@@ -249,18 +276,20 @@ const Contribute = () => {
           });
 
           socketRef.current.on("user joined", (payload) => {
-            const peer = addPeer(payload.signal, payload.callerID, stream);
+            console.log("user joined", payload);
+
+            const peer = addPeer(
+              payload.signal,
+              payload.callerID,
+              stream,
+              false
+            );
             peersRef.current.push({
               peerID: payload.callerID,
               peer,
             });
 
             setPeers((users) => [...users, peer]);
-          });
-
-          socketRef.current.on("receiving returned signal", (payload) => {
-            const item = peersRef.current.find((p) => p.peerID === payload.id);
-            item?.peer.signal(payload.signal);
           });
         });
     }
@@ -324,21 +353,71 @@ const Contribute = () => {
   const handleShareScreen = () => {
     navigator.mediaDevices.getDisplayMedia({ cursor: true }).then((stream) => {
       dispatch(createAlert("INFO", "Feature not ready"));
+      ssSocketRef.current = io.connect("http://localhost:5500");
+      ssSocketRef.current.on("connect", () => {
+        console.log("connected ss socket ref!!!!!!!!!!");
+      });
       myScreenSharingStreamRef.current = stream;
       shareScreenVideoRef.current.srcObject = stream;
       shareScreenVideoRef.current.play();
       const screenTrack = stream.getTracks()[0];
       setIsSharingScreen(true);
+      ssSocketRef.current.emit("join room", {
+        roomID: roomID,
+        userID: authReducer.user?.id,
+      });
+
+      ssSocketRef.current.emit("media ready", roomID);
+
+      ssSocketRef.current.on("all users", (users) => {
+        const peers = [];
+        users.forEach((user) => {
+          const peer = createPeer(
+            user.socketID,
+            ssSocketRef.current.id,
+            stream,
+            true
+          );
+          peersRef.current.push({
+            peerID: user.socketID,
+            peer,
+          });
+          peers.push(peer);
+        });
+        setPeers(peers);
+      });
+
+      ssSocketRef.current.on("user joined", (payload) => {
+        console.log("user joined", payload);
+        const peer = addPeer(payload.signal, payload.callerID, stream, true);
+        peersRef.current.push({
+          peerID: payload.callerID,
+          peer,
+        });
+
+        setPeers((users) => [...users, peer]);
+      });
+
+      // ssSocketRef.current.on("receiving returned signal", (payload) => {
+      //   const item = peersRef.current.find((p) => p.peerID === payload.id);
+      //   item?.peer.signal(payload.signal);
+      // });
 
       handleChangeFeature("SCREENSHARING");
       screenTrack.onended = function () {
+        ssSocketRef.current.disconnect();
         setIsSharingScreen(false);
         handleChangeFeature("CHAT");
         console.log("screen sharing ended");
       };
     });
   };
-
+  useEffect(() => {
+    console.log("peers", peers);
+  }, [peers]);
+  useEffect(() => {
+    console.log("peers ref", peersRef?.current);
+  }, [peersRef?.current]);
   const [members, setMembers] = useState({
     joined: [],
     online: [],
@@ -660,7 +739,7 @@ const Contribute = () => {
                 }
               >
                 <ContributeScreenSharing
-                  socketRef={socketRef}
+                  ssSocketRef={ssSocketRef}
                   roomID={roomID}
                   shareScreenVideoRef={shareScreenVideoRef}
                 />
