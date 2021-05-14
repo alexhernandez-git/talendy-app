@@ -44,13 +44,15 @@ const Member = ({ member }) => {
   const [firstLoad, setFirstLoad] = useState(true);
 
   useEffect(() => {
-    if (!firstLoad && formik?.values?.comment) {
-      const timeoutId = setTimeout(() => {
-        formik.handleSubmit();
-      }, 500);
-      return () => clearTimeout(timeoutId);
+    if (formik?.values?.comment) {
+      if (!firstLoad) {
+        const timeoutId = setTimeout(() => {
+          formik.handleSubmit();
+        }, 500);
+        return () => clearTimeout(timeoutId);
+      }
+      setFirstLoad(false);
     }
-    setFirstLoad(false);
   }, [formik?.values?.comment]);
   const handleChangeRating = (rating) => {
     if (rating > 0) {

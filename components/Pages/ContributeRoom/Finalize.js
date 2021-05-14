@@ -31,20 +31,22 @@ const Finalize = ({ handleGoToRoomPage }) => {
       solution: Yup.string().max(2500),
     }),
     onSubmit: async (values) => {
-      console.log(values);
+      console.log("submit", values);
       await dispatch(updateSolution(values));
     },
   });
   const [firstLoad, setFirstLoad] = useState(true);
 
   useEffect(() => {
-    if (!firstLoad && (formik?.values?.solution || formik?.values?.comment)) {
-      const timeoutId = setTimeout(() => {
-        formik.handleSubmit();
-      }, 500);
-      return () => clearTimeout(timeoutId);
+    if (formik?.values?.solution) {
+      if (!firstLoad) {
+        const timeoutId = setTimeout(() => {
+          formik.handleSubmit();
+        }, 500);
+        return () => clearTimeout(timeoutId);
+      }
+      setFirstLoad(false);
     }
-    setFirstLoad(false);
   }, [formik?.values?.solution]);
 
   return (
