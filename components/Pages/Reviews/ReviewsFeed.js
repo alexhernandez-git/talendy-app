@@ -56,7 +56,7 @@ const ReviewsFeed = ({ profile }) => {
                 />
               </svg>
               {profile ? (
-                <Link href="/profile/reviews">
+                <Link href="/profile/posts">
                   <span className="cursor-pointer ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
                     Profile
                   </span>
