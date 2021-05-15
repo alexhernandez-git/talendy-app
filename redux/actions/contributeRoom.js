@@ -12,7 +12,11 @@ import {
   UPDATE_SOLUTION,
   UPDATE_SOLUTION_SUCCESS,
   UPDATE_SOLUTION_FAIL,
+  FINALIZE_POST,
+  FINALIZE_POST_SUCCESS,
+  FINALIZE_POST_FAIL,
 } from "../types";
+import { createAlert } from "./alerts";
 
 export const fetchContributeRoom = (id) => async (dispatch, getState) => {
   await dispatch({
@@ -92,5 +96,34 @@ export const updateSolution = (values) => async (dispatch, getState) => {
         type: UPDATE_SOLUTION_FAIL,
         payload: { data: err.response?.data, status: err.response?.status },
       });
+    });
+};
+
+export const finalizePost = (values) => async (dispatch, getState) => {
+  await dispatch({
+    type: FINALIZE_POST,
+  });
+  await axios
+    .patch(
+      `${process.env.HOST}/api/posts/${
+        getState().contributeRoomReducer.contribute_room?.id
+      }/finalize/`,
+      values,
+      tokenConfig(getState)
+    )
+    .then(async (res) => {
+      await dispatch({
+        type: FINALIZE_POST_SUCCESS,
+      });
+      dispatch(createAlert("SUCCESS", "Posts successfully solved"));
+    })
+    .catch(async (err) => {
+      await dispatch({
+        type: FINALIZE_POST_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+      dispatch(
+        createAlert("ERROR", "Something went wrong at finalizing the post")
+      );
     });
 };

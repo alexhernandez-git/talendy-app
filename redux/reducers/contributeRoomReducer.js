@@ -10,6 +10,9 @@ import {
   UPDATE_SOLUTION,
   UPDATE_SOLUTION_SUCCESS,
   UPDATE_SOLUTION_FAIL,
+  FINALIZE_POST,
+  FINALIZE_POST_SUCCESS,
+  FINALIZE_POST_FAIL,
 } from "../types";
 
 const initialState = {
@@ -20,6 +23,8 @@ const initialState = {
   update_member_review_error: null,
   is_updating_solution: false,
   update_solution_error: null,
+  is_finalizing_post: false,
+  finalize_post_error: null,
 };
 export default function contributeRoomReducer(state = initialState, action) {
   switch (action.type) {
@@ -91,6 +96,27 @@ export default function contributeRoomReducer(state = initialState, action) {
         ...state,
         is_updating_solution: false,
         update_solution_error: action.payload,
+      };
+    case FINALIZE_POST:
+      return {
+        ...state,
+        is_finalizing_post: true,
+      };
+    case FINALIZE_POST_SUCCESS:
+      return {
+        ...state,
+        is_finalizing_post: false,
+        contribute_room: {
+          ...status.contribute_room,
+          status: "SO",
+        },
+        finalize_post_error: null,
+      };
+    case FINALIZE_POST_FAIL:
+      return {
+        ...state,
+        is_finalizing_post: false,
+        finalize_post_error: action.payload,
       };
     default:
       return state;

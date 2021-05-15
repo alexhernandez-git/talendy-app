@@ -9,7 +9,7 @@ import moment from "moment";
 import SolveIssueEditor from "components/Editor/SolveIssueEditor";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { updateSolution } from "redux/actions/contributeRoom";
+import { finalizePost, updateSolution } from "redux/actions/contributeRoom";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -49,6 +49,9 @@ const Finalize = ({ handleGoToRoomPage }) => {
     }
   }, [formik?.values?.solution]);
 
+  const handleFinalize = () => {
+    dispatch(finalizePost());
+  };
   return (
     <>
       <div
@@ -74,7 +77,10 @@ const Finalize = ({ handleGoToRoomPage }) => {
                 />
               </svg>
             </button>
-            <button className="cursor-pointer w-full sm:w-auto mt-2 sm:mt-0 inline-flex justify-center items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
+            <button
+              onClick={handleFinalize}
+              className="cursor-pointer w-full sm:w-auto mt-2 sm:mt-0 inline-flex justify-center items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+            >
               Confirm finalize
             </button>
           </div>
