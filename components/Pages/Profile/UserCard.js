@@ -118,7 +118,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
               </div>
               <div className="space-y-2">
                 <div className="text-lg leading-6 font-medium text-center">
-                  <Link href={profile ? "/profile/posts" : "/user/123"}>
+                  <Link href={profile ? "/profile/posts" : `/user/${user?.id}`}>
                     <h3 className="mb-3 cursor-pointer">{user?.username}</h3>
                   </Link>
                   <div className=" flex justify-center items-center">

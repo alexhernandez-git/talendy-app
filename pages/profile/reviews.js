@@ -30,7 +30,7 @@ export default function Reviews() {
         <div className="max-w-3xl mx-auto sm:px-6 flex flex-col lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
           <UserCard mobile page={page} profile user={authReducer.user} />
           {/* <Feed page={page} /> */}
-          <ReviewsFeed />
+          <ReviewsFeed profile />
           <UserCard page={page} profile user={authReducer.user} />
         </div>
       </div>

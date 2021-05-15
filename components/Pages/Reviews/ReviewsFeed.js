@@ -5,8 +5,9 @@ import { useSelector } from "react-redux";
 import { fetchMoreReviews } from "redux/actions/reviews";
 import Review from "./Review";
 
-const ReviewsFeed = () => {
+const ReviewsFeed = ({ profile }) => {
   const reviewsReducer = useSelector((state) => state.reviewsReducer);
+  const userReducer = useSelector((state) => state.userReducer);
 
   const handleLoadMoreNotifications = () => {
     dispatch(fetchMoreReviews());
@@ -16,6 +17,7 @@ const ReviewsFeed = () => {
       handleLoadMoreNotifications();
     }
   };
+
   return (
     <div className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
       <nav className="flex mb-4 mx-4 sm:mx-auto" aria-label="Breadcrumb">
@@ -53,11 +55,19 @@ const ReviewsFeed = () => {
                   clipRule="evenodd"
                 />
               </svg>
-              <Link href="/profile/reviews">
-                <span className="cursor-pointer ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
-                  Profile
-                </span>
-              </Link>
+              {profile ? (
+                <Link href="/profile/reviews">
+                  <span className="cursor-pointer ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
+                    Profile
+                  </span>
+                </Link>
+              ) : (
+                <Link href={`/user/${userReducer?.user?.id}`}>
+                  <span className="cursor-pointer ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
+                    {userReducer?.user?.username}
+                  </span>
+                </Link>
+              )}
             </div>
           </li>
 
