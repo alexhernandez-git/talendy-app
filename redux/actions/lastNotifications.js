@@ -53,7 +53,6 @@ export const addOrUpdateNotificationToFeed =
             type: UPDATE_NOTIFICATION_TO_FEED_SUCCESS,
             payload: res.data,
           });
-          await dispatch(setPendingNotifications());
         } else {
           await dispatch({
             type: ADD_NOTIFICATION_TO_FEED_SUCCESS,

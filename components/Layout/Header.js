@@ -261,7 +261,11 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
             <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
               <span
                 onClick={handleOpenChats}
-                className="ml-5 cursor-pointer flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200"
+                className={`ml-5 cursor-pointer flex-shrink-0 bg-white  rounded-full p-1  dark:text-white  dark:hover:text-gray-200 ${
+                  authReducer.user?.pending_messages
+                    ? "  hover:text-orange-400 text-orange-500 dark:bg-orange-600"
+                    : " hover:text-gray-500 text-gray-400 dark:bg-gray-600"
+                }`}
               >
                 <span className="sr-only">View Messages</span>
 
@@ -283,7 +287,11 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
               <div className="relative inline-block text-left ">
                 <button
                   onMouseDown={handleToggleNotifications}
-                  className="ml-5  flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200"
+                  className={`ml-5 cursor-pointer flex-shrink-0 bg-white  rounded-full p-1  dark:text-white  dark:hover:text-gray-200 ${
+                    authReducer.user?.pending_notifications
+                      ? "  hover:text-orange-400 text-orange-500 dark:bg-orange-600"
+                      : " hover:text-gray-500 text-gray-400 dark:bg-gray-600"
+                  }`}
                 >
                   <span className="sr-only">View notifications</span>
 

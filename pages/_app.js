@@ -52,6 +52,7 @@ function WrappedApp({ Component, pageProps }) {
 
           case "JOINED_MEMBERSHIP":
             await dispatch(createAlert("SUCCESS", "New member joined"));
+            await dispatch(setPendingNotifications());
 
             await dispatch(
               addOrUpdateNotificationToFeed(data.notification__pk)
@@ -65,6 +66,7 @@ function WrappedApp({ Component, pageProps }) {
                 "Your contribute request has been accepted"
               )
             );
+            await dispatch(setPendingNotifications());
 
             await dispatch(
               addOrUpdateNotificationToFeed(data.notification__pk)
@@ -72,13 +74,18 @@ function WrappedApp({ Component, pageProps }) {
             break;
 
           case "POST_MESSAGE_RECEIVED":
+            await dispatch(setPendingNotifications());
             await dispatch(newContributeRoomMessageEvent(data));
 
             break;
           case "NEW_CONTRIBUTE_REQUEST":
+            await dispatch(setPendingNotifications());
+
             await dispatch(newContributeRequestEvent(data));
             break;
           case "NEW_INVITATION":
+            await dispatch(setPendingNotifications());
+
             await dispatch(addInvitation());
             await dispatch(createAlert("SUCCESS", "New invitation"));
             await dispatch(
@@ -86,6 +93,8 @@ function WrappedApp({ Component, pageProps }) {
             );
             break;
           case "NEW_CONNECTION":
+            await dispatch(setPendingNotifications());
+
             await dispatch(addConnection());
             await dispatch(createAlert("SUCCESS", "New connection"));
 
@@ -98,6 +107,8 @@ function WrappedApp({ Component, pageProps }) {
             await dispatch(substractConnection());
             break;
           case "POST_FINALIZED":
+            await dispatch(setPendingNotifications());
+
             await dispatch(createAlert("SUCCESS", "Post finalized"));
 
             await addOrUpdateNotificationToFeed(data.notification__pk);
