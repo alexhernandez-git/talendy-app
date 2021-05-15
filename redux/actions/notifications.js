@@ -111,7 +111,6 @@ export const newMessageEvent = (data) => async (dispatch, getState) => {
     createAlert("SUCCESS", "New message from " + data.sent_by__username)
   );
   await dispatch(setPendingMessages());
-  await dispatch(setPendingNotifications());
   await dispatch(addOrUpdateNotificationToFeed(data.notification__pk));
 };
 
