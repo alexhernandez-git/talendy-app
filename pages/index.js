@@ -33,7 +33,7 @@ import {
 } from "@heroicons/react/outline";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
-import { changeCommunity } from "redux/actions/auth";
+import { changeCommunityFilter } from "redux/actions/auth";
 
 const footerNavigation = {
   solutions: [
@@ -144,7 +144,7 @@ export default function Home() {
   const dispatch = useDispatch();
 
   const handleSetCommunity = (selectedCommunity) => {
-    dispatch(changeCommunity(selectedCommunity));
+    dispatch(changeCommunityFilter(selectedCommunity));
     router.push("/search");
   };
   return (

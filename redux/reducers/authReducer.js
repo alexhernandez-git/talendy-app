@@ -90,7 +90,8 @@ import {
   LEAVE_FEEDBACK,
   LEAVE_FEEDBACK_SUCCESS,
   LEAVE_FEEDBACK_FAIL,
-  CHANGE_COMMUNITY,
+  CHANGE_COMMUNITY_FILTER,
+  CHANGE_STATUS_FILTER,
   ADD_KARMA_AMOUNT,
   SUBSTRACT_KARMA_AMOUNT,
   ADD_INVITATION,
@@ -111,7 +112,8 @@ import {
 
 const initialState = {
   theme: process.browser && localStorage.getItem("theme"),
-  community: "",
+  community_filter: "",
+  status_filter: "",
   access_token: process.browser && localStorage.getItem("access_token"),
   is_authenticated: null,
   is_loading: true,
@@ -179,10 +181,15 @@ export default function authReducer(state = initialState, action) {
         ...state,
         theme: action.payload,
       };
-    case CHANGE_COMMUNITY:
+    case CHANGE_COMMUNITY_FILTER:
       return {
         ...state,
-        community: action.payload,
+        community_filter: action.payload,
+      };
+    case CHANGE_STATUS_FILTER:
+      return {
+        ...state,
+        status_filter: action.payload,
       };
     case CHANGE_CURRENCY:
       localStorage.setItem("currency", action.payload);

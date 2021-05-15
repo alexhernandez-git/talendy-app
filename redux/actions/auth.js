@@ -2,7 +2,8 @@ import axios from "axios";
 
 import {
   CHANGE_THEME,
-  CHANGE_COMMUNITY,
+  CHANGE_COMMUNITY_FILTER,
+  CHANGE_STATUS_FILTER,
   USER_LOADED,
   USER_LOADING,
   AUTH_ERROR,
@@ -112,8 +113,12 @@ export const changeTheme = (theme) => async (dispatch, getState) => {
   await dispatch({ type: CHANGE_THEME, payload: theme });
 };
 
-export const changeCommunity = (community) => async (dispatch, getState) => {
-  await dispatch({ type: CHANGE_COMMUNITY, payload: community });
+export const changeCommunityFilter =
+  (community) => async (dispatch, getState) => {
+    await dispatch({ type: CHANGE_COMMUNITY_FILTER, payload: community });
+  };
+export const changeStatusFilter = (status) => async (dispatch, getState) => {
+  await dispatch({ type: CHANGE_STATUS_FILTER, payload: status });
 };
 
 // SET TOKEN

@@ -28,12 +28,14 @@ export default function Home() {
         if (topKarmaUsersReducer.users.results.length === 0) {
           await dispatch(fetchTopKarmaUsers());
         }
-        await dispatch(fetchPosts(page, { community: authReducer.community }));
+        await dispatch(
+          fetchPosts(page, { community: authReducer.community_filter })
+        );
       }
     };
 
     fetchInitialData();
-  }, [initialDataReducer.data_fetched, authReducer.community]);
+  }, [initialDataReducer.data_fetched, authReducer.community_filter]);
 
   return (
     <Layout>

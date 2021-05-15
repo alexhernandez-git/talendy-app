@@ -32,7 +32,8 @@ const SearchPosts = () => {
         }
         await dispatch(
           fetchPosts(page, {
-            community: authReducer.community,
+            community: authReducer.community_filter,
+            status: authReducer.status_filter,
             search:
               router?.query?.search?.length > 0 ? router.query.search[0] : "",
           })
@@ -44,7 +45,8 @@ const SearchPosts = () => {
     fetchInitialData();
   }, [
     initialDataReducer.data_fetched,
-    authReducer.community,
+    authReducer.community_filter,
+    authReducer.status_filter,
     router.query?.search,
   ]);
 
