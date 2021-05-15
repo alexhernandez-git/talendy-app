@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeCommunityFilter } from "redux/actions/auth";
+import { changeCommunityFilter, changeStatusFilter } from "redux/actions/auth";
 
 const LeftSidebar = ({ page }) => {
   const dispatch = useDispatch();
