@@ -32,6 +32,8 @@ export const openChats = () => async (dispatch, getState) => {
 };
 
 export const closeChats = () => async (dispatch, getState) => {
+  await dispatch(unsetPendingMessages());
+
   await dispatch({ type: CLOSE_CHATS });
   await dispatch(resetChat());
 };
