@@ -3,6 +3,7 @@ import {
   setPendingMessages,
   setPendingNotifications,
   tokenConfig,
+  unsetPendingMessages,
 } from "./auth";
 import {
   CREATE_CHAT,
@@ -25,7 +26,9 @@ import { fetchChat, resetChat } from "./chat";
 import { addOrUpdateNotificationToFeed } from "./lastNotifications";
 
 export const openChats = () => async (dispatch, getState) => {
-  dispatch({ type: OPEN_CHATS });
+  await dispatch(unsetPendingMessages());
+
+  await dispatch({ type: OPEN_CHATS });
 };
 
 export const closeChats = () => async (dispatch, getState) => {
@@ -33,37 +36,39 @@ export const closeChats = () => async (dispatch, getState) => {
   await dispatch(resetChat());
 };
 
-export const fetchChats = (search = "") => async (dispatch, getState) => {
-  await dispatch({
-    type: FETCH_CHATS,
-  });
-  console.log(`${process.env.HOST}/api/chats/?search=${search}`);
-  await axios
-    .get(
-      `${process.env.HOST}/api/chats/?search=${search}`,
-      tokenConfig(getState)
-    )
-    .then(async (res) => {
-      console.log("chats", res.data);
-      await dispatch({
-        type: FETCH_CHATS_SUCCESS,
-        payload: res.data,
-      });
-      const current_chat = getState().chatsReducer.current_chat;
-      console.log("current_chat", current_chat);
-      if (current_chat) {
-        await dispatch(fetchChat(current_chat));
-      }
-    })
-    .catch((err) => {
-      console.log(err.response);
-
-      dispatch({
-        type: FETCH_CHATS_FAIL,
-        payload: { data: err.response.data, status: err.response?.status },
-      });
+export const fetchChats =
+  (search = "") =>
+  async (dispatch, getState) => {
+    await dispatch({
+      type: FETCH_CHATS,
     });
-};
+    console.log(`${process.env.HOST}/api/chats/?search=${search}`);
+    await axios
+      .get(
+        `${process.env.HOST}/api/chats/?search=${search}`,
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        console.log("chats", res.data);
+        await dispatch({
+          type: FETCH_CHATS_SUCCESS,
+          payload: res.data,
+        });
+        const current_chat = getState().chatsReducer.current_chat;
+        console.log("current_chat", current_chat);
+        if (current_chat) {
+          await dispatch(fetchChat(current_chat));
+        }
+      })
+      .catch((err) => {
+        console.log(err.response);
+
+        dispatch({
+          type: FETCH_CHATS_FAIL,
+          payload: { data: err.response.data, status: err.response?.status },
+        });
+      });
+  };
 
 export const getOrCreateChat = (user_id) => async (dispatch, getState) => {
   dispatch({
@@ -121,20 +126,18 @@ export const addChatToFeed = (id) => async (dispatch, getState) => {
     });
 };
 
-export const changeLastMessage = (chat__id, message__text) => async (
-  dispatch,
-  getState
-) => {
-  const result = getState().chatsReducer.chats.results.some(
-    (chat) => chat.id === chat__id
-  );
-  console.log("is result", result);
-  if (result) {
-    await dispatch({
-      type: CHANGE_LAST_MESSAGE,
-      payload: { chat__id: chat__id, message__text: message__text },
-    });
-  } else {
-    await dispatch(addChatToFeed(chat__id));
-  }
-};
+export const changeLastMessage =
+  (chat__id, message__text) => async (dispatch, getState) => {
+    const result = getState().chatsReducer.chats.results.some(
+      (chat) => chat.id === chat__id
+    );
+    console.log("is result", result);
+    if (result) {
+      await dispatch({
+        type: CHANGE_LAST_MESSAGE,
+        payload: { chat__id: chat__id, message__text: message__text },
+      });
+    } else {
+      await dispatch(addChatToFeed(chat__id));
+    }
+  };
