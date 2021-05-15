@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   addConnection,
   addInvitation,
+  setPendingNotifications,
   substractConnection,
 } from "redux/actions/auth";
 import { addOrUpdateNotificationToFeed } from "redux/actions/lastNotifications";

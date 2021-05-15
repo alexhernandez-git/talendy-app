@@ -11,7 +11,7 @@ const useGetNotification = (notification) => {
   let many_messages;
   let message;
   let post;
-  let rating_user;
+  let review_user;
   switch (notification?.type) {
     case "ME":
       many_messages = notification.messages.length > 1;
@@ -121,11 +121,11 @@ const useGetNotification = (notification) => {
         link: `/contributing-room/${notification?.post?.id}`,
       };
     case "NR":
-      rating_user = notification?.rating_user;
+      review_user = notification?.review?.review_user;
       return {
         event_message: `New Review`,
-        message: `You got a new review from ${rating_user?.username}`,
-        user: rating_user,
+        message: `You got a new review from ${review_user?.username}`,
+        user: review_user,
         link: `/profile/reviews`,
       };
     default:

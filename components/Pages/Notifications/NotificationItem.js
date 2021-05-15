@@ -45,7 +45,7 @@ const NotificationItem = ({ notification }) => {
               {content.event_message}
             </h3>
             <p className="text-sm text-gray-500 dark:text-gray-300">
-              {moment(notification.modified).subtract(1, "seconds").fromNow()}
+              {moment(notification?.modified).subtract(1, "seconds").fromNow()}
             </p>
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-300">

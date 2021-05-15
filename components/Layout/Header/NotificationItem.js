@@ -51,7 +51,7 @@ const NotificationItem = ({ notification, handleCloseNotifications }) => {
             {content.message}
           </p>
           <p className="float-right text-xs text-gray-400 dark:text-gray-200 truncate">
-            {moment(notification.modified).subtract(1, "seconds").fromNow()}
+            {moment(notification?.modified).subtract(1, "seconds").fromNow()}
           </p>
         </div>
       </div>
