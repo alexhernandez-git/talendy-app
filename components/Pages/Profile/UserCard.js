@@ -141,17 +141,29 @@ const UserCard = ({ mobile, page, profile, user }) => {
                       }
                     >
                       <button className="cursor-pointer">
-                        <StarRatings
-                          rating={user?.reputation}
-                          starRatedColor="#e5c07b"
-                          numberOfStars={5}
-                          starHoverColor="#e5c07b"
-                          starDimension="15px"
-                          starSpacing="0px"
-                          name="rating"
-                        />
+                        {user?.reputation ? (
+                          <StarRatings
+                            rating={user?.reputation}
+                            starRatedColor="#e5c07b"
+                            numberOfStars={5}
+                            starHoverColor="#e5c07b"
+                            starDimension="15px"
+                            starSpacing="0px"
+                            name="rating"
+                          />
+                        ) : (
+                          <StarRatings
+                            rating={0}
+                            starRatedColor="#e5c07b"
+                            numberOfStars={5}
+                            starHoverColor="#e5c07b"
+                            starDimension="15px"
+                            starSpacing="0px"
+                            name="rating"
+                          />
+                        )}
                         <span className="text-xs text-gray-500 ml-1">
-                          {user?.ratings_count} Reviews
+                          {user?.reviews_count} Reviews
                         </span>
                       </button>
                     </Link>
