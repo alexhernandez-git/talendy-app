@@ -53,7 +53,6 @@ function WrappedApp({ Component, pageProps }) {
 
           case "JOINED_MEMBERSHIP":
             await dispatch(createAlert("SUCCESS", "New member joined"));
-            await dispatch(setPendingNotifications());
 
             await dispatch(
               addOrUpdateNotificationToFeed(data.notification__pk)
