@@ -28,12 +28,12 @@ const Member = ({ member }) => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      rate: member?.rate,
-      comment: member?.comment,
+      draft_rating: member?.draft_rating,
+      draft_comment: member?.draft_comment,
     },
     validationSchema: Yup.object({
-      rate: Yup.number().nullable(),
-      comment: Yup.string().nullable(),
+      draft_rating: Yup.number().nullable(),
+      draft_comment: Yup.string().nullable(),
     }),
     onSubmit: async (values) => {
       console.log(values);
@@ -44,7 +44,7 @@ const Member = ({ member }) => {
   const [firstLoad, setFirstLoad] = useState(true);
 
   useEffect(() => {
-    if (formik?.values?.comment) {
+    if (formik?.values?.draft_comment) {
       if (!firstLoad) {
         const timeoutId = setTimeout(() => {
           formik.handleSubmit();
@@ -53,10 +53,10 @@ const Member = ({ member }) => {
       }
       setFirstLoad(false);
     }
-  }, [formik?.values?.comment]);
+  }, [formik?.values?.draft_comment]);
   const handleChangeRating = (rating) => {
     if (rating > 0) {
-      formik.setFieldValue("rate", rating);
+      formik.setFieldValue("draft_rating", rating);
       formik.handleSubmit();
     }
   };
@@ -130,9 +130,9 @@ const Member = ({ member }) => {
           <div>
             <div className="sm:flex items-end">
               <div className=" mr-2">
-                {formik?.values?.rate ? (
+                {formik?.values?.draft_rating ? (
                   <StarRatings
-                    rating={formik.values.rate}
+                    rating={formik.values.draft_rating}
                     starRatedColor="#e5c07b"
                     numberOfStars={5}
                     starHoverColor="#e5c07b"
@@ -236,9 +236,9 @@ const Member = ({ member }) => {
                       Rate
                     </label>
                     <div className="mt-1 flex">
-                      {formik?.values?.rate ? (
+                      {formik?.values?.draft_rating ? (
                         <StarRatings
-                          rating={formik.values.rate}
+                          rating={formik.values.draft_rating}
                           changeRating={(rating) => handleChangeRating(rating)}
                           starRatedColor="#e5c07b"
                           numberOfStars={5}
@@ -265,21 +265,21 @@ const Member = ({ member }) => {
 
                 <div>
                   <label
-                    htmlFor="comment"
+                    htmlFor="draft_comment"
                     className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                   >
                     Comment
                   </label>
                   <div className="mt-1">
                     <textarea
-                      id="comment"
-                      name="comment"
+                      id="draft_comment"
+                      name="draft_comment"
                       rows="3"
                       onChange={formik.handleChange}
                       className="focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-300"
                       placeholder="Message"
                     >
-                      {formik?.values?.comment}
+                      {formik?.values?.draft_comment}
                     </textarea>
                   </div>
                   <p className="mt-2 text-sm text-gray-500 dark:text-gray-100">
