@@ -1,8 +1,9 @@
 import Link from "next/link";
 import React from "react";
 import StarRatings from "react-star-ratings";
-
-const Review = () => {
+import moment from "moment";
+const Review = ({ review }) => {
+  console.log(review);
   return (
     <li>
       <div className="relative py-4">
@@ -19,31 +20,31 @@ const Review = () => {
               <div className="text-sm">
                 <Link href="/user/123">
                   <span className="font-medium text-gray-900 dark:text-white cursor-pointer">
-                    Eduardo Benz
+                    {review?.review_user?.username}
                   </span>
                 </Link>
               </div>
               <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-100 flex items-end">
-                <div className="mr-2" style={{ marginBottom: "1.5px" }}>
-                  <StarRatings
-                    rating={4}
-                    starRatedColor="#e5c07b"
-                    numberOfStars={5}
-                    starHoverColor="#e5c07b"
-                    starDimension="15px"
-                    starSpacing="0px"
-                    name="rating"
-                  />
-                </div>
-                <span>6 days ago</span>
+                {review?.rating && (
+                  <div className="mr-2" style={{ marginBottom: "1.5px" }}>
+                    <StarRatings
+                      rating={review.rating}
+                      starRatedColor="#e5c07b"
+                      numberOfStars={5}
+                      starHoverColor="#e5c07b"
+                      starDimension="15px"
+                      starSpacing="0px"
+                      name="rating"
+                    />
+                  </div>
+                )}
+                <span>
+                  {moment(review?.created).subtract(1, "seconds").fromNow()}
+                </span>
               </p>
             </div>
             <div className="mt-2 text-sm text-gray-700 dark:text-gray-50">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum
-                nec varius. Et diam cursus quis sed purus nam.
-              </p>
+              <p>{review?.comment}</p>
             </div>
           </div>
         </div>

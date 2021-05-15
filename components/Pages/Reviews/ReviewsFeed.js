@@ -1,16 +1,21 @@
-import React, { useEffect } from "react";
-import { CardElement } from "@stripe/react-stripe-js";
-import { IconContext } from "react-icons/lib";
-import { FaCoffee, FaPizzaSlice } from "react-icons/fa";
-import { GiCroissant } from "react-icons/gi";
-import { SiNetflix } from "react-icons/si";
-import { useSelector } from "react-redux";
-import Review from "./Review";
+import Spinner from "components/Layout/Spinner";
 import Link from "next/link";
+import React from "react";
+import { useSelector } from "react-redux";
+import { fetchMoreReviews } from "redux/actions/reviews";
+import Review from "./Review";
 
-const ReviewsFeed = ({ profile }) => {
-  const userReducer = useSelector((state) => state.userReducer);
+const ReviewsFeed = () => {
+  const reviewsReducer = useSelector((state) => state.reviewsReducer);
 
+  const handleLoadMoreNotifications = () => {
+    dispatch(fetchMoreReviews());
+  };
+  const onChangeVisibility = (visible) => {
+    if (visible) {
+      handleLoadMoreNotifications();
+    }
+  };
   return (
     <div className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
       <nav className="flex mb-4 mx-4 sm:mx-auto" aria-label="Breadcrumb">
@@ -48,19 +53,11 @@ const ReviewsFeed = ({ profile }) => {
                   clipRule="evenodd"
                 />
               </svg>
-              {profile ? (
-                <Link href="/profile/posts">
-                  <span className="cursor-pointer ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
-                    Profile
-                  </span>
-                </Link>
-              ) : (
-                <Link href={`/user/${userReducer.user?.id}`}>
-                  <span className="cursor-pointer ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
-                    {userReducer.user?.username}
-                  </span>
-                </Link>
-              )}
+              <Link href="/profile/reviews">
+                <span className="cursor-pointer ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
+                  Profile
+                </span>
+              </Link>
             </div>
           </li>
 
@@ -92,12 +89,44 @@ const ReviewsFeed = ({ profile }) => {
 
       <div className="bg-white dark:bg-gray-700 px-4 py-6 shadow sm:p-6 sm:rounded-lg">
         <div className="flow-root">
-          <ul className="sm:divide-y sm:divide-gray-200">
-            <Review />
-            <Review />
-            <Review />
-            <Review />
-          </ul>
+          {reviewsReducer.is_loading && (
+            <div className="flex justify-center space-y-4 w-full mb-4">
+              <Spinner />
+            </div>
+          )}
+          {reviewsReducer.reviews.results.length > 0 ? (
+            <ul className="sm:divide-y sm:divide-gray-200">
+              {reviewsReducer.reviews.results.map((review) => (
+                <Review review={review} key={review?.id} />
+              ))}
+            </ul>
+          ) : (
+            <div className="flex justify-center">
+              <span className="text-gray-500 dark:text-gray-100 text-sm">
+                No reviews found
+              </span>
+            </div>
+          )}
+
+          {!reviewsReducer.is_fetching_more_reviews &&
+            reviewsReducer.reviews.results.length > 0 &&
+            reviewsReducer.reviews.next && (
+              <VisibilitySensor onChange={onChangeVisibility}>
+                <div
+                  className="p-3 flex justify-center"
+                  onClick={handleFetchMorePosts}
+                >
+                  <span className="text-gray-500 dark:text-gray-100 text-sm cursor-pointer">
+                    Load more reviews
+                  </span>
+                </div>
+              </VisibilitySensor>
+            )}
+          {reviewsReducer.is_fetching_more_reviews && (
+            <div className="flex justify-center space-y-4 w-full mb-4 p-3">
+              <Spinner />
+            </div>
+          )}
         </div>
       </div>
     </div>

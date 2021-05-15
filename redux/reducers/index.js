@@ -21,6 +21,7 @@ import communitiesReducer from "./communitiesReducer";
 import contributeRequestsReducer from "./contributeRequestsReducer";
 import contributeRoomReducer from "./contributeRoomReducer";
 import roomMessagesReducer from "./roomMessagesReducer";
+import reviewsReducer from "./reviewsReducer";
 
 export default combineReducers({
   authReducer: authReducer,
@@ -44,4 +45,5 @@ export default combineReducers({
   contributeRequestsReducer: contributeRequestsReducer,
   contributeRoomReducer: contributeRoomReducer,
   roomMessagesReducer: roomMessagesReducer,
+  reviewsReducer: reviewsReducer,
 });
