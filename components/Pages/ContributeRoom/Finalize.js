@@ -50,7 +50,7 @@ const Finalize = ({ handleGoToRoomPage }) => {
   }, [formik?.values?.solution]);
 
   const handleFinalize = () => {
-    dispatch(finalizePost());
+    dispatch(finalizePost(handleGoToRoomPage));
   };
   return (
     <>
