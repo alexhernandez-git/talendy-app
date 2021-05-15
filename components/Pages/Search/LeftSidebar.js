@@ -75,7 +75,7 @@ const LeftSidebar = ({ page }) => {
                 onClick={handleSetCommunity.bind(this, communityItem.id)}
                 className={`
             ${
-              community === communityItem.id
+              community_filter === communityItem.id
                 ? "bg-gray-200 text-gray-900 "
                 : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
             } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
