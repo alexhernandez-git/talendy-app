@@ -241,7 +241,7 @@ const PostModal = ({
                   </span>
                 </div>
               </div>
-              {post?.privacity === "CO" && (
+              {post?.status !== "SO" && post?.privacity === "CO" && (
                 <div className="mt-6 flex justify-between space-x-8">
                   <span className="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-white bg-white dark:bg-gray-700 ">
                     <svg
