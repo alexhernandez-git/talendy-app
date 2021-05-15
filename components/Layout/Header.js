@@ -13,7 +13,7 @@ import {
 } from "pages";
 import Login from "./Login";
 import { useSelector } from "react-redux";
-import { logout } from "redux/actions/auth";
+import { logout, unsetPendingNotifications } from "redux/actions/auth";
 import { useDispatch } from "react-redux";
 import NotificationsDropdown from "./Header/NotificationsDropdown";
 import { openChats } from "redux/actions/chats";
@@ -93,6 +93,8 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
     }
   };
   const handleToggleNotifications = () => {
+    dispatch(unsetPendingNotifications());
+
     setNotificationsOpen(!notificationsOpen);
   };
   const notificationsRef = useRef();
