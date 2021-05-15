@@ -99,9 +99,11 @@ export default function ContributeSharedNotes({
     }
   }, [socketRef?.current]);
   useEffect(() => {
-    if (firstLoad && sharedNotes) {
-      sharedNotesRef.current.innerHTML = sharedNotes;
-      setEditorTextLength(sharedNotesRef.current.innerText.length);
+    if (firstLoad) {
+      if (sharedNotes) {
+        sharedNotesRef.current.innerHTML = sharedNotes;
+        setEditorTextLength(sharedNotesRef.current.innerText.length);
+      }
       setFirstLoad(false);
     }
   }, [sharedNotes]);
