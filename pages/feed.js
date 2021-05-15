@@ -29,13 +29,20 @@ export default function Home() {
           await dispatch(fetchTopKarmaUsers());
         }
         await dispatch(
-          fetchPosts(page, { community: authReducer.community_filter })
+          fetchPosts(page, {
+            community: authReducer.community_filter,
+            status: authReducer.status_filter,
+          })
         );
       }
     };
 
     fetchInitialData();
-  }, [initialDataReducer.data_fetched, authReducer.community_filter]);
+  }, [
+    initialDataReducer.data_fetched,
+    authReducer.community_filter,
+    authReducer.status_filter,
+  ]);
 
   return (
     <Layout>
