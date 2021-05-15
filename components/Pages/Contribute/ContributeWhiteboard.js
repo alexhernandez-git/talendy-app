@@ -14,7 +14,9 @@ const sizeOptions = [1, 2, 5, 10, 15, 20, 25, 30, 40, 50, 100];
 const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
-
+  const contributeRoomReducer = useSelector(
+    (state) => state.contributeRoomReducer
+  );
   const [isDrawing, setIsDrawing] = useState(false);
   const [color, setColor] = useState("#000000");
   const [size, setSize] = useState(5);
@@ -146,6 +148,7 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
     );
 
     var onPaint = function () {
+      if (contributeRoomReducer.contribute_room?.status === "SO") return;
       ctx.beginPath();
       ctx.moveTo(last_mouse.x, last_mouse.y);
       ctx.lineTo(mouse.x, mouse.y);

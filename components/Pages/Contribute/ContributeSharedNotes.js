@@ -118,8 +118,9 @@ export default function ContributeSharedNotes({
             dangerouslySetInnerHTML={{
               __html: sharedNotes,
             }}
-            className="text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l cursor-text"
+            className="text-gray-500 dark:text-200 text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l cursor-text"
             style={{ minHeight: "40rem" }}
+            ref={sharedNotesRef}
           ></div>
         ) : (
           <div
