@@ -107,7 +107,7 @@ export default function contributeRoomReducer(state = initialState, action) {
         ...state,
         is_finalizing_post: false,
         contribute_room: {
-          ...status.contribute_room,
+          ...state.contribute_room,
           status: "SO",
         },
         finalize_post_error: null,
