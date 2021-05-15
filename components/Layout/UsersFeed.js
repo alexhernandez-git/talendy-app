@@ -25,7 +25,7 @@ const UsersFeed = ({ page }) => {
       ) : (
         <div className="flex justify-center">
           <span className="text-gray-500 dark:text-gray-100 text-sm">
-            Not users found
+            No users found
           </span>
         </div>
       )}

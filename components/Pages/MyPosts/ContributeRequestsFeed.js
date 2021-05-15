@@ -79,7 +79,7 @@ const ContributeRequestsFeed = () => {
         ) : (
           <div className="flex justify-center">
             <span className="text-gray-500 dark:text-gray-100 text-sm">
-              Not contribute requests found
+              No contribute requests found
             </span>
           </div>
         )}

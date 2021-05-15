@@ -34,7 +34,7 @@ const PostsFeed = ({ page }) => {
       ) : (
         <div className="flex justify-center">
           <span className="text-gray-500 dark:text-gray-100 text-sm">
-            Not active posts found
+            No posts found
           </span>
         </div>
       )}

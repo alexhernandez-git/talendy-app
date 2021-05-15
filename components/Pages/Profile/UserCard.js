@@ -315,7 +315,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
                       About
                     </dt>
                     <dd className="mt-1 text-sm text-gray-900 dark:text-white">
-                      {user?.about ? user.about : "Not about info"}
+                      {user?.about ? user.about : "No about info"}
                     </dd>
                   </div>
                 </dl>
