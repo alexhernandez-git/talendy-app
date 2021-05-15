@@ -201,30 +201,31 @@ const Post = ({ page, post }) => {
             </div>
             <div className="flex-shrink-0 self-center flex">
               <div className="relative inline-block text-left">
-                {authReducer.user?.id === post?.user?.id && (
-                  <div>
-                    <button
-                      onMouseDown={handleToggleOptions}
-                      type="button"
-                      className="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-100"
-                      id="options-menu-0"
-                      aria-expanded="false"
-                      aria-haspopup="true"
-                    >
-                      <span className="sr-only">Open options</span>
-
-                      <svg
-                        className="h-5 w-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
+                {post?.status !== "SO" &&
+                  authReducer.user?.id === post?.user?.id && (
+                    <div>
+                      <button
+                        onMouseDown={handleToggleOptions}
+                        type="button"
+                        className="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-100"
+                        id="options-menu-0"
+                        aria-expanded="false"
+                        aria-haspopup="true"
                       >
-                        <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-                      </svg>
-                    </button>
-                  </div>
-                )}
+                        <span className="sr-only">Open options</span>
+
+                        <svg
+                          className="h-5 w-5"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                        </svg>
+                      </button>
+                    </div>
+                  )}
 
                 <div
                   className={`${

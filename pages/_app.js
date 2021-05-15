@@ -97,6 +97,12 @@ function WrappedApp({ Component, pageProps }) {
           case "CONNECTION_REMOVED":
             await dispatch(substractConnection());
             break;
+          case "POST_FINALIZED":
+            await dispatch(createAlert("SUCCESS", "Post finalized"));
+
+            await addOrUpdateNotificationToFeed(data.notification__pk);
+
+            break;
         }
       };
       if (!authReducer.is_authenticated) {
