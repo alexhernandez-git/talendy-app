@@ -142,7 +142,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
                     >
                       <button className="cursor-pointer">
                         <StarRatings
-                          rating={3.5}
+                          rating={user?.reputation}
                           starRatedColor="#e5c07b"
                           numberOfStars={5}
                           starHoverColor="#e5c07b"
@@ -151,7 +151,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
                           name="rating"
                         />
                         <span className="text-xs text-gray-500 ml-1">
-                          9 Reviews
+                          {user?.ratings_count} Reviews
                         </span>
                       </button>
                     </Link>
@@ -306,7 +306,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
                       Posts Contributed
                     </dt>
                     <dd className="mt-1 text-sm text-gray-900 dark:text-white">
-                      300
+                      {user?.contributed_posts_count}
                     </dd>
                   </div>
 
