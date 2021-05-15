@@ -18,7 +18,7 @@ const Review = ({ review }) => {
           <div className="min-w-0 flex-1">
             <div>
               <div className="text-sm">
-                <Link href="/user/123">
+                <Link href={`/user/${review?.review_user?.id}`}>
                   <span className="font-medium text-gray-900 dark:text-white cursor-pointer">
                     {review?.review_user?.username}
                   </span>
