@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchUser } from "redux/actions/user";
+import { fetchReviews } from "redux/actions/reviews";
 
 export default function Reviews() {
   const page = REVIEWS_PAGE;
@@ -15,14 +16,22 @@ export default function Reviews() {
   const dispatch = useDispatch();
   const router = useRouter();
   const initialDataReducer = useSelector((state) => state.initialDataReducer);
-  const authReducer = useSelector((state) => state.authReducer);
   const userReducer = useSelector((state) => state.userReducer);
+
   useEffect(() => {
+    const userId = router.query?.user;
+    const fetchInitialData = async () => {
+      if (initialDataReducer.data_fetched) {
+        await dispatch(fetchUser(userId));
+
+        await dispatch(fetchReviews(userId));
+      }
+    };
     if (initialDataReducer.data_fetched) {
-      const userId = router.query?.user;
-      dispatch(fetchUser(userId));
+      fetchInitialData();
     }
   }, [initialDataReducer.data_fetched]);
+
   return (
     <Layout>
       <div className="py-10">
