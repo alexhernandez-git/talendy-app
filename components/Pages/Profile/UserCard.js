@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { DONATION_PAGE } from "pages";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import StarRatings from "react-star-ratings";
@@ -42,6 +44,12 @@ const UserCard = ({ mobile, page, profile, user }) => {
   const handleGetOrCreateChat = () => {
     dispatch(getOrCreateChat(user?.id));
   };
+  const [showReputation, setShowReputation] = useState(false);
+  useEffect(() => {
+    if (user?.reputation) {
+      setShowReputation(true);
+    }
+  }, [user?.reputation]);
   return (
     <aside
       className={`lg:col-span-4  mb-4 lg:mb-0 ${
@@ -141,19 +149,9 @@ const UserCard = ({ mobile, page, profile, user }) => {
                       }
                     >
                       <button className="cursor-pointer">
-                        {user?.reputation ? (
+                        {showReputation && (
                           <StarRatings
-                            rating={user?.reputation}
-                            starRatedColor="#e5c07b"
-                            numberOfStars={5}
-                            starHoverColor="#e5c07b"
-                            starDimension="15px"
-                            starSpacing="0px"
-                            name="rating"
-                          />
-                        ) : (
-                          <StarRatings
-                            rating={0}
+                            rating={user?.reputation ? user.reputation : 0}
                             starRatedColor="#e5c07b"
                             numberOfStars={5}
                             starHoverColor="#e5c07b"
