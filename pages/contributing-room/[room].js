@@ -266,9 +266,7 @@ const Contribute = () => {
         });
     }
   }, [initialDataFetched, validationsMade]);
-  useEffect(() => {
-    console.log("peers", peers);
-  }, [peers]);
+
   useEffect(() => {
     return () => {
       dispatch(resetContributeRoom());
@@ -498,14 +496,22 @@ const Contribute = () => {
                       </svg>
                       Info
                     </button>
-                    {contribute_room?.user?.id === authReducer.user?.id && (
-                      <button
-                        onClick={handleGoToFinalize}
-                        type="button"
-                        className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm  text-white hover:text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
-                      >
-                        Finalize
-                      </button>
+                    {contribute_room?.status === "SO" ? (
+                      <span className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500">
+                        Finalized
+                      </span>
+                    ) : (
+                      <>
+                        {contribute_room?.user?.id === authReducer.user?.id && (
+                          <button
+                            onClick={handleGoToFinalize}
+                            type="button"
+                            className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-3xl shadow-sm  text-white hover:text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                          >
+                            Finalize
+                          </button>
+                        )}
+                      </>
                     )}
                   </div>
                 </div>
