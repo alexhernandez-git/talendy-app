@@ -148,21 +148,22 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
     );
 
     var onPaint = function () {
-      if (contributeRoomReducer.contribute_room?.status === "SO") return;
       ctx.beginPath();
       ctx.moveTo(last_mouse.x, last_mouse.y);
       ctx.lineTo(mouse.x, mouse.y);
       ctx.closePath();
       ctx.stroke();
-      if (timeout != undefined) clearTimeout(timeout);
-      timeout = setTimeout(function () {
-        console.log("entra");
-        var base64ImageData = canvas.toDataURL("image/png");
-        socketRef.current.emit("drawing", {
-          data: base64ImageData,
-          roomID: roomID,
-        });
-      }, 200);
+      if (contributeRoomReducer.contribute_room?.status !== "SO") {
+        if (timeout != undefined) clearTimeout(timeout);
+        timeout = setTimeout(function () {
+          console.log("entra");
+          var base64ImageData = canvas.toDataURL("image/png");
+          socketRef.current.emit("drawing", {
+            data: base64ImageData,
+            roomID: roomID,
+          });
+        }, 200);
+      }
     };
   });
 
@@ -176,6 +177,7 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
     var canvas = document.querySelector("#board");
     var base64ImageData = canvas.toDataURL("image/png");
 
+    if (contributeRoomReducer.contribute_room?.status === "SO") return;
     handleClearCanvas();
     socketRef.current.emit("clear canvas", {
       data: base64ImageData,
