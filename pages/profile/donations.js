@@ -1,7 +1,7 @@
 import Layout from "components/Layout/Layout";
 
 import UserCard from "components/Pages/Profile/UserCard";
-import { PROFILE_REVIEWS_PAGE } from "pages";
+import { PROFILE_DONATIONS_PAGE, PROFILE_REVIEWS_PAGE } from "pages";
 import LeftSidebar from "components/Pages/User/LeftSidebar";
 import ReviewsFeed from "components/Pages/Reviews/ReviewsFeed";
 import { useRouter } from "next/router";
@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 import Donation from "pages/user/donation/[user]";
 import Spinner from "components/Layout/Spinner";
 
-export default function Reviews() {
+export default function Donaitons() {
   const page = PROFILE_DONATIONS_PAGE;
   const router = useRouter();
   const dispatch = useDispatch();
