@@ -6,13 +6,36 @@ import { GiCroissant } from "react-icons/gi";
 import { SiNetflix } from "react-icons/si";
 import { useSelector } from "react-redux";
 import Link from "next/link";
-
+import { useFormik } from "formik";
+import * as Yup from "yup";
 const DonationForm = () => {
   const authReducer = useSelector((state) => state.authReducer);
   const userReducer = useSelector((state) => state.userReducer);
   const donationOptionsReducer = useSelector(
     (state) => state.donationOptionsReducer
   );
+  const formik = useFormik({
+    initialValues: {
+      payment_method_id: "",
+
+      donation_option_id: donationOptionsReducer.options.filter(
+        (option) => option.currency === authReducer.currency
+      )[0]?.id,
+      other_amount: "",
+      to_user_id: "",
+    },
+    enableReinitialize: true,
+    validationSchema: Yup.object({
+      payment_method_id: Yup.string(),
+      donation_option_id: Yup.string(),
+      other_amount: Yup.string(),
+      to_user_id: Yup.string(),
+    }),
+    onSubmit: async (values, { resetForm }) => {
+      console.log(values);
+    },
+  });
+  console.log(formik.values);
 
   return (
     <div className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
@@ -298,7 +321,6 @@ const DonationForm = () => {
                 <fieldset>
                   <legend className="sr-only">Amount options</legend>
                   <div className="space-y-4">
-                    {console.log(donationOptionsReducer)}
                     {donationOptionsReducer?.options
                       .filter(
                         (option) => option.currency === authReducer.currency
@@ -331,6 +353,7 @@ const DonationForm = () => {
                               </p>
                             </div>
                           </div>
+
                           <div
                             id="server-size-0-description-1"
                             className="mt-2 flex text-sm sm:mt-0 sm:block sm:ml-4 sm:text-right"
@@ -340,10 +363,12 @@ const DonationForm = () => {
                             </div>
                           </div>
                           {/* Border selected */}
-                          {/* <div
-                            className="border-orange-500 absolute -inset-px rounded-3xl border-2 pointer-events-none"
-                            aria-hidden="true"
-                          ></div> */}
+                          {option.id === formik.values.donation_option_id && (
+                            <div
+                              className="border-orange-500 absolute -inset-px rounded-3xl border-2 pointer-events-none"
+                              aria-hidden="true"
+                            ></div>
+                          )}
                         </label>
                       ))}
                   </div>
