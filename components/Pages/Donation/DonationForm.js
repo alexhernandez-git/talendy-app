@@ -36,7 +36,20 @@ const DonationForm = () => {
     },
   });
   console.log(formik.values);
-
+  const inviteTo = {
+    L1: {
+      label: "A coffe",
+    },
+    L2: {
+      label: "A meal",
+    },
+    L3: {
+      label: "A dinner",
+    },
+    L4: {
+      label: "A luxury dinner",
+    },
+  };
   return (
     <div className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
       <nav className="flex mb-4 mx-4 sm:mx-auto" aria-label="Breadcrumb">
@@ -349,7 +362,7 @@ const DonationForm = () => {
                                 >
                                   <FaCoffee />
                                 </IconContext.Provider>
-                                A Coffe
+                                {inviteTo[option.type]?.label}
                               </p>
                             </div>
                           </div>

@@ -50,6 +50,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
       setShowReputation(true);
     }
   }, [user?.reputation]);
+
   return (
     <aside
       className={`lg:col-span-4  mb-4 lg:mb-0 ${
