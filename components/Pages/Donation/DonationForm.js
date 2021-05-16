@@ -241,7 +241,31 @@ const DonationForm = () => {
                   )}
                 </>
               ) : (
-                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:flex justify-between items-center col-span-2">
+                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 col-span-2">
+                  {/* <div className="flex justify-center mb-2">
+                    <input
+                      type="text"
+                      name="title"
+                      id="donation-title"
+                      className="text-left w-full block border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-400 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-1.5 px-4 focus:ring-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                      placeholder="Full Name"
+                      aria-describedby="title-description"
+                      value=""
+                    ></input>
+                  </div> */}
+                  {/* {!authReducer.is_authenticated && (
+                    <div className="flex justify-center mb-2">
+                      <input
+                        type="text"
+                        name="email"
+                        id="donation-email"
+                        className="text-left w-full block border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-400 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-1.5 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                        placeholder="Email"
+                        aria-describedby="email"
+                        value=""
+                      ></input>
+                    </div>
+                  )} */}
                   <CardElement
                     options={{
                       hidePostalCode: true,
