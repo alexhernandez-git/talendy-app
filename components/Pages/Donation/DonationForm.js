@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import { CardElement } from "@stripe/react-stripe-js";
 import { IconContext } from "react-icons/lib";
 import { FaCoffee, FaPizzaSlice } from "react-icons/fa";
-import { GiCroissant } from "react-icons/gi";
-import { SiNetflix } from "react-icons/si";
+import { GiMeal, GiHotMeal, GiSandwich } from "react-icons/gi";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { MdRestaurantMenu } from "react-icons/md";
 const DonationForm = () => {
   const authReducer = useSelector((state) => state.authReducer);
   const userReducer = useSelector((state) => state.userReducer);
@@ -39,15 +39,35 @@ const DonationForm = () => {
   const inviteTo = {
     L1: {
       label: "A coffe",
+      icon: (
+        <IconContext.Provider value={{ size: 18, className: "mr-2" }}>
+          <FaCoffee />
+        </IconContext.Provider>
+      ),
     },
     L2: {
       label: "A meal",
+      icon: (
+        <IconContext.Provider value={{ size: 18, className: "mr-2" }}>
+          <GiSandwich />
+        </IconContext.Provider>
+      ),
     },
     L3: {
       label: "A dinner",
+      icon: (
+        <IconContext.Provider value={{ size: 18, className: "mr-2" }}>
+          <GiMeal />
+        </IconContext.Provider>
+      ),
     },
     L4: {
       label: "A luxury dinner",
+      icon: (
+        <IconContext.Provider value={{ size: 18, className: "mr-2" }}>
+          <GiHotMeal />
+        </IconContext.Provider>
+      ),
     },
   };
   return (
@@ -357,11 +377,8 @@ const DonationForm = () => {
                                 id="server-size-0-label"
                                 className="font-medium  flex items-center"
                               >
-                                <IconContext.Provider
-                                  value={{ size: 18, className: "mr-2" }}
-                                >
-                                  <FaCoffee />
-                                </IconContext.Provider>
+                                {inviteTo[option.type]?.icon}
+
                                 {inviteTo[option.type]?.label}
                               </p>
                             </div>
