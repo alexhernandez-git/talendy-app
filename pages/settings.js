@@ -468,7 +468,7 @@ const settings = () => {
                           onChange={personalInfoForm.handleChange}
                           onBlur={personalInfoForm.handleBlur}
                           value={personalInfoForm.values.currency}
-                          disabled
+                          disabled={authReducer.user?.is_currency_permanent}
                         >
                           <option defaultValue disabled value="">
                             Select one
