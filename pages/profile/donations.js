@@ -16,13 +16,16 @@ import Donation from "pages/user/donation/[user]";
 import Spinner from "components/Layout/Spinner";
 
 export default function Reviews() {
-  const page = PROFILE_REVIEWS_PAGE;
+  const page = PROFILE_DONATIONS_PAGE;
   const router = useRouter();
   const dispatch = useDispatch();
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
   useEffect(() => {
+    const handleFetchData = async () => {
+      await dispatch(fetchReviews());
+    };
     if (initialDataFetched) {
-      dispatch(fetchReviews());
+      handleFetchData();
     }
   }, [initialDataFetched]);
   const reviewsReducer = useSelector((state) => state.reviewsReducer);

@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchUser } from "redux/actions/user";
+import { fetchDonationOptions } from "redux/actions/donationOptions";
 
 export default function Donation() {
   const page = DONATION_PAGE;
@@ -18,9 +19,13 @@ export default function Donation() {
   const authReducer = useSelector((state) => state.authReducer);
   const userReducer = useSelector((state) => state.userReducer);
   useEffect(() => {
-    if (initialDataReducer.data_fetched) {
+    const handleFetchData = async () => {
       const userId = router.query?.user;
-      dispatch(fetchUser(userId));
+      await dispatch(fetchUser(userId));
+      await dispatch(fetchDonationOptions());
+    };
+    if (initialDataReducer.data_fetched) {
+      handleFetchData();
     }
   }, [initialDataReducer.data_fetched]);
   return (

@@ -10,6 +10,9 @@ import Link from "next/link";
 const DonationForm = () => {
   const authReducer = useSelector((state) => state.authReducer);
   const userReducer = useSelector((state) => state.userReducer);
+  const donationOptionsReducer = useSelector(
+    (state) => state.donationOptionsReducer
+  );
 
   return (
     <div className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
@@ -295,150 +298,54 @@ const DonationForm = () => {
                 <fieldset>
                   <legend className="sr-only">Amount options</legend>
                   <div className="space-y-4">
-                    <label className="relative block rounded-3xl border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between">
-                      <input
-                        type="radio"
-                        name="server_size"
-                        value="Hobby"
-                        className="sr-only"
-                        aria-labelledby="server-size-0-label"
-                        aria-describedby="server-size-0-description-0 server-size-0-description-1"
-                      />
-                      <div className="flex items-center">
-                        <div className="text-sm">
-                          <p
-                            id="server-size-0-label"
-                            className="font-medium  flex items-center"
+                    {console.log(donationOptionsReducer)}
+                    {donationOptionsReducer?.options
+                      .filter(
+                        (option) => option.currency === authReducer.currency
+                      )
+                      .map((option) => (
+                        <label
+                          key={option.id}
+                          className="relative block rounded-3xl border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between"
+                        >
+                          <input
+                            type="radio"
+                            name="server_size"
+                            value="Hobby"
+                            className="sr-only"
+                            aria-labelledby="server-size-0-label"
+                            aria-describedby="server-size-0-description-0 server-size-0-description-1"
+                          />
+                          <div className="flex items-center">
+                            <div className="text-sm">
+                              <p
+                                id="server-size-0-label"
+                                className="font-medium  flex items-center"
+                              >
+                                <IconContext.Provider
+                                  value={{ size: 18, className: "mr-2" }}
+                                >
+                                  <FaCoffee />
+                                </IconContext.Provider>
+                                A Coffe
+                              </p>
+                            </div>
+                          </div>
+                          <div
+                            id="server-size-0-description-1"
+                            className="mt-2 flex text-sm sm:mt-0 sm:block sm:ml-4 sm:text-right"
                           >
-                            <IconContext.Provider
-                              value={{ size: 18, className: "mr-2" }}
-                            >
-                              <FaCoffee />
-                            </IconContext.Provider>
-                            A Coffe
-                          </p>
-                        </div>
-                      </div>
-                      <div
-                        id="server-size-0-description-1"
-                        className="mt-2 flex text-sm sm:mt-0 sm:block sm:ml-4 sm:text-right"
-                      >
-                        <div className="font-medium">$4</div>
-                      </div>
-                      {/* Border selected */}
-                      <div
-                        className="border-orange-500 absolute -inset-px rounded-3xl border-2 pointer-events-none"
-                        aria-hidden="true"
-                      ></div>
-                    </label>
-
-                    <label className="relative block rounded-3xl border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between">
-                      <input
-                        type="radio"
-                        name="server_size"
-                        value="Startup"
-                        className="sr-only"
-                        aria-labelledby="server-size-1-label"
-                        aria-describedby="server-size-1-description-0 server-size-1-description-1"
-                      />
-                      <div className="flex items-center">
-                        <div className="text-sm">
-                          <p
-                            id="server-size-2-label"
-                            className="font-medium flex items-center"
-                          >
-                            <IconContext.Provider
-                              value={{ size: 18, className: "mr-2" }}
-                            >
-                              <GiCroissant />
-                            </IconContext.Provider>
-                            A Breakfast
-                          </p>
-                        </div>
-                      </div>
-                      <div
-                        id="server-size-1-description-1"
-                        className="mt-2 flex text-sm sm:mt-0 sm:block sm:ml-4 sm:text-right"
-                      >
-                        <div className="font-medium">$8</div>
-                      </div>
-                      <div
-                        className="border-transparent absolute -inset-px rounded-3xl border-2 pointer-events-none"
-                        aria-hidden="true"
-                      ></div>
-                    </label>
-
-                    <label className="relative block rounded-3xl border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between">
-                      <input
-                        type="radio"
-                        name="server_size"
-                        value="Business"
-                        className="sr-only"
-                        aria-labelledby="server-size-2-label"
-                        aria-describedby="server-size-2-description-0 server-size-2-description-1"
-                      />
-                      <div className="flex items-center">
-                        <div className="text-sm">
-                          <p
-                            id="server-size-2-label"
-                            className="font-medium  flex items-center"
-                          >
-                            <IconContext.Provider
-                              value={{ size: 18, className: "mr-2" }}
-                            >
-                              <FaPizzaSlice />
-                            </IconContext.Provider>
-                            A Pizza
-                          </p>
-                        </div>
-                      </div>
-                      <div
-                        id="server-size-2-description-1"
-                        className="mt-2 flex text-sm sm:mt-0 sm:block sm:ml-4 sm:text-right"
-                      >
-                        <div className="font-medium ">$12</div>
-                      </div>
-                      <div
-                        className="border-transparent absolute -inset-px rounded-3xl border-2 pointer-events-none"
-                        aria-hidden="true"
-                      ></div>
-                    </label>
-
-                    <label className="relative block rounded-3xl border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between">
-                      <input
-                        type="radio"
-                        name="server_size"
-                        value="Enterprise"
-                        className="sr-only"
-                        aria-labelledby="server-size-3-label"
-                        aria-describedby="server-size-3-description-0 server-size-3-description-1"
-                      />
-                      <div className="flex items-center">
-                        <div className="text-sm">
-                          <p
-                            id="server-size-2-label"
-                            className="font-medium  flex items-center"
-                          >
-                            <IconContext.Provider
-                              value={{ size: 18, className: "mr-2" }}
-                            >
-                              <SiNetflix />
-                            </IconContext.Provider>
-                            A Netflix subscription
-                          </p>
-                        </div>
-                      </div>
-                      <div
-                        id="server-size-3-description-1"
-                        className="mt-2 flex text-sm sm:mt-0 sm:block sm:ml-4 sm:text-right"
-                      >
-                        <div className="font-medium ">$16</div>
-                      </div>
-                      <div
-                        className="border-transparent absolute -inset-px rounded-3xl border-2 pointer-events-none"
-                        aria-hidden="true"
-                      ></div>
-                    </label>
+                            <div className="font-medium">
+                              {option.price_label}
+                            </div>
+                          </div>
+                          {/* Border selected */}
+                          {/* <div
+                            className="border-orange-500 absolute -inset-px rounded-3xl border-2 pointer-events-none"
+                            aria-hidden="true"
+                          ></div> */}
+                        </label>
+                      ))}
                   </div>
                 </fieldset>
 

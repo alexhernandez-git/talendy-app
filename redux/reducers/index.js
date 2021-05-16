@@ -21,6 +21,7 @@ import communitiesReducer from "./communitiesReducer";
 import contributeRequestsReducer from "./contributeRequestsReducer";
 import contributeRoomReducer from "./contributeRoomReducer";
 import roomMessagesReducer from "./roomMessagesReducer";
+import donationOptionsReducer from "./donationOptionsReducer";
 import reviewsReducer from "./reviewsReducer";
 
 export default combineReducers({
@@ -42,6 +43,7 @@ export default combineReducers({
   usersReducer: usersReducer,
   messagesReducer: messagesReducer,
   communitiesReducer: communitiesReducer,
+  donationOptionsReducer: donationOptionsReducer,
   contributeRequestsReducer: contributeRequestsReducer,
   contributeRoomReducer: contributeRoomReducer,
   roomMessagesReducer: roomMessagesReducer,
