@@ -321,7 +321,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
                             clipRule="evenodd"
                           />
                         </svg>
-                        Your Donations
+                        Donations
                       </button>
                     </Link>
                   </div>
