@@ -112,6 +112,7 @@ import {
 
 const initialState = {
   theme: process.browser && localStorage.getItem("theme"),
+  currency: process.browser && localStorage.getItem("currency"),
   community_filter: "",
   status_filter: "",
   access_token: process.browser && localStorage.getItem("access_token"),
