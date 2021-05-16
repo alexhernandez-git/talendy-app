@@ -61,7 +61,7 @@ const Review = ({ review }) => {
                 </span>
               </p>
             </div>
-            <div className="mt-2 text-sm text-gray-700 dark:text-gray-50">
+            <div className="mt-2 text-sm text-gray-700 dark:text-gray-50 break-all whitespace-pre-line">
               <p>{review?.comment}</p>
             </div>
           </div>
