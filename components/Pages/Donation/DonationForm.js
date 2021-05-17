@@ -76,6 +76,7 @@ const DonationForm = () => {
       other_amount: "",
       message: "",
       to_user_id: userReducer.user?.id,
+      currency: authReducer.currency,
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
@@ -93,6 +94,7 @@ const DonationForm = () => {
         "Message must be less than or equal to 300 characters"
       ),
       to_user_id: Yup.string().required(),
+      currency: Yup.string().required(),
     }),
     onSubmit: async (values, { resetForm }) => {
       console.log(values);
@@ -142,6 +144,7 @@ const DonationForm = () => {
     formik.setFieldValue("donation_option_id", "");
   };
   const handleChangeCurrency = (e) => {
+    formik.handleChange(e);
     dispatch(changeCurrency(e.target.value));
   };
   return (
@@ -506,6 +509,7 @@ const DonationForm = () => {
                 </div>
                 <div>
                   <div className="relative flex justify-center">
+                    {console.log("authReducer", authReducer)}
                     <input
                       type="text"
                       name="other_amount"
@@ -516,9 +520,11 @@ const DonationForm = () => {
                           ? "pr-10 border-red-300 text-red-600   placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
                           : " text-sm placeholder-gray-500  dark:placeholder-gray-300 dark:text-white  focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
                       }`}
-                      placeholder={`${getSymbolFromCurrency(
-                        authReducer.currency
-                      )} Other`}
+                      placeholder={`${
+                        !authReducer.is_loading && authReducer.currency
+                          ? getSymbolFromCurrency(authReducer.currency)
+                          : ""
+                      } Other`}
                       aria-describedby="other_amount"
                       value={formik.values.other_amount}
                       onKeyUp={handleRemoveDonationOption}
@@ -559,6 +565,8 @@ const DonationForm = () => {
                       name="currency"
                       value={authReducer.currency}
                       autoComplete="currency"
+                      onBlur={formik.handleBlur}
+                      value={formik.values.currency}
                       onChange={handleChangeCurrency}
                       className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                     >
