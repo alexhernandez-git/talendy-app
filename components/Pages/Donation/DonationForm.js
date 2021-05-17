@@ -19,7 +19,7 @@ import { useDispatch } from "react-redux";
 import Spinner from "components/Layout/Spinner";
 
 import Container from "react-modal-promise";
-import useUserConfirmationModal from "../../../hooks/useUserConfirmation";
+import useUserConfirmationModal from "hooks/useUserConfirmation";
 
 const DonationForm = () => {
   const authReducer = useSelector((state) => state.authReducer);
@@ -28,18 +28,6 @@ const DonationForm = () => {
     (state) => state.donationOptionsReducer
   );
   const dispatch = useDispatch();
-  const [userConfirmationOpen, setUserConfirmationOpen] = useState(false);
-  const handleOpenUserConfirmation = () => {
-    setUserConfirmationOpen(true);
-  };
-  const handleCloseRegister = () => {
-    if (userConfirmationOpen) {
-      setUserConfirmationOpen(false);
-    }
-  };
-  const handleToggleUserConfirmation = () => {
-    setUserConfirmationOpen(!userConfirmationOpen);
-  };
 
   const stripe = useStripe();
   const elements = useElements();

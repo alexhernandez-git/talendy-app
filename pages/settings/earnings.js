@@ -10,7 +10,8 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-
+import Container from "react-modal-promise";
+import useUserConfirmationModal from "hooks/useUserConfirmation";
 const earnings = () => {
   const router = useRouter();
   const code = router.query.code ? router.query.code : null;
@@ -19,7 +20,18 @@ const earnings = () => {
   const withdrawFundsRef = useRef();
   const [openWithdrawFunds, setOpenWithdrawFunds] = useState(false);
   const handleToggleWithdrawFunds = () => {
-    setOpenWithdrawFunds(!openWithdrawFunds);
+    if (!openWithdrawFunds) {
+      useUserConfirmationModal()
+        .then(() => {
+          console.log("success");
+          setOpenWithdrawFunds(true);
+        })
+        .catch(() => {
+          console.log("error");
+        });
+    } else {
+      setOpenWithdrawFunds(false);
+    }
   };
   const handleCloseWithdrawFunds = () => {
     if (openWithdrawFunds) {
@@ -32,7 +44,18 @@ const earnings = () => {
   const paypalConnectModalRef = useRef();
   const [openPaypalConnectModal, setOpenPaypalConnectModal] = useState(false);
   const handleTogglePaypalConnectForm = () => {
-    setOpenPaypalConnectModal(!openPaypalConnectModal);
+    if (!openPaypalConnectModal) {
+      useUserConfirmationModal()
+        .then(() => {
+          console.log("success");
+          setOpenPaypalConnectModal(true);
+        })
+        .catch(() => {
+          console.log("error");
+        });
+    } else {
+      setOpenPaypalConnectModal(false);
+    }
   };
   const handleClosePaypalConnectModal = () => {
     if (openPaypalConnectModal) {
@@ -54,6 +77,7 @@ const earnings = () => {
         <>
           {/* Asside */}
           <SettingsLayout>
+            <Container />
             <div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
               <div className="bg-gray-50 dark:bg-gray-800 pt-12 sm:pt-16 shadow sm:rounded-3xl sm:overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
