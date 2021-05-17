@@ -144,7 +144,14 @@ export const acceptUserInvitation = () => async (dispatch, getState) => {
     });
 };
 export const donateUser =
-  (id, values, resetForm, clearCardElement = null) =>
+  (
+    id,
+    values,
+    resetForm,
+    handleCloseNewPaymentMethod,
+    handleCloseChangePaymentMethod,
+    clearCardElement
+  ) =>
   async (dispatch, getState) => {
     dispatch({
       type: DONATE_USER,
@@ -185,6 +192,8 @@ export const donateUser =
           createAlert("SUCCESS", "Congratulations! you have made a donation")
         );
         await resetForm({});
+        await handleCloseNewPaymentMethod();
+        await handleCloseChangePaymentMethod();
         if (clearCardElement) {
           await clearCardElement();
         }

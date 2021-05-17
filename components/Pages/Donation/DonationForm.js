@@ -45,7 +45,23 @@ const DonationForm = () => {
     // each type of element.
     const cardElement = elements.getElement(CardElement);
 
+    console.log("card element", cardElement);
+
+    if (!cardElement) {
+      dispatch(
+        donateUser(
+          userReducer.user?.id,
+          values,
+          resetForm,
+          handleCloseNewPaymentMethod,
+          handleCloseChangePaymentMethod
+        )
+      );
+      return;
+    }
+
     // Use your card Element with other Stripe.js APIs
+
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: cardElement,
@@ -66,6 +82,8 @@ const DonationForm = () => {
             payment_method_id: paymentMethod.id,
           },
           resetForm,
+          handleCloseNewPaymentMethod,
+          handleCloseChangePaymentMethod,
           cardElement.clear
         )
       );
@@ -117,11 +135,7 @@ const DonationForm = () => {
     }),
     onSubmit: async (values, { resetForm }) => {
       console.log(values);
-      if (values.payment_method_id) {
-        dispatch(donateUser(userReducer.user?.id, values, resetForm));
-      } else {
-        stripeSubmit(values, resetForm);
-      }
+      stripeSubmit(values, resetForm);
     },
   });
   console.log(formik.errors);
