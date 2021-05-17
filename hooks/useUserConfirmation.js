@@ -43,14 +43,17 @@ const useUserConfirmation = ({ isOpen, onResolve, onReject }) => {
       if (token) {
         config.headers["Authorization"] = `Token ${token}`;
       }
+      setIsConfirming(true);
       await axios
         .post(`${process.env.HOST}/api/users/confirm_user/`, values, config)
         .then((res) => {
-          console.log("res", res.data);
           resetForm({});
+          setIsConfirming(false);
+          onResolve({});
         })
         .catch((err) => {
           console.log("err", err.response);
+          setIsConfirming(false);
         });
     },
   });
