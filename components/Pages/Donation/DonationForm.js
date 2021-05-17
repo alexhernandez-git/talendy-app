@@ -118,9 +118,7 @@ const DonationForm = () => {
     onSubmit: async (values, { resetForm }) => {
       console.log(values);
       if (values.payment_method_id) {
-        dispatch(
-          donateUser(userReducer.user?.id, values, resetForm, cardElement.clear)
-        );
+        dispatch(donateUser(userReducer.user?.id, values, resetForm));
       } else {
         stripeSubmit(values, resetForm);
       }
