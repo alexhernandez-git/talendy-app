@@ -180,6 +180,21 @@ const DonationForm = () => {
     formik.setFieldValue("other_amount_karma", karmaAmount);
   };
   console.log(formik.values);
+
+  const [changePaymentMethod, setChangePaymentMethod] = useState(false);
+  const [newPaymentMethod, setNewPaymentMethod] = useState(false);
+  const handleOpenChangePaymentMethod = () => {
+    setChangePaymentMethod(true);
+  };
+  const handleCloseChangePaymentMethod = () => {
+    setChangePaymentMethod(false);
+  };
+  const handleOpenNewPaymentMethod = () => {
+    setNewPaymentMethod(true);
+  };
+  const handleCloseNewPaymentMethod = () => {
+    setNewPaymentMethod(false);
+  };
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -284,9 +299,9 @@ const DonationForm = () => {
               <dt className="text-sm font-medium text-gray-500 dark:text-gray-300">
                 Payment
               </dt>
-              {false ? (
+              {!newPaymentMethod && authReducer.user?.payment_methods ? (
                 <>
-                  {false ? (
+                  {!changePaymentMethod ? (
                     <dd className="text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2 flex justify-between items-center">
                       <div className="flex justify-between w-full mr-3">
                         <span className="text-gray-500 dark:text-gray-100 font-bold">
@@ -296,7 +311,10 @@ const DonationForm = () => {
                           **** **** **** 4344
                         </span>
                       </div>
-                      <button className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
+                      <button
+                        onClick={handleOpenChangePaymentMethod}
+                        className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-5 w-5 mr-2"
@@ -311,7 +329,7 @@ const DonationForm = () => {
                             d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
                           />
                         </svg>
-                        Edit
+                        Change
                       </button>
                     </dd>
                   ) : (
@@ -320,7 +338,7 @@ const DonationForm = () => {
                         <li>
                           <div
                             className={`relative border ${
-                              true && "rounded-tl-md rounded-tr-md"
+                              true && "rounded-tl-3xl rounded-tr-3xl"
                             } flex justify-between`}
                           >
                             <label className="flex items-center justify-between text-sm cursor-pointer w-full  p-4">
@@ -389,9 +407,7 @@ const DonationForm = () => {
                         </li>
                         <li>
                           <div
-                            className={`relative border ${
-                              true && "rounded-bl-md rounded-br-md"
-                            } flex justify-between`}
+                            className={`relative border  flex justify-between`}
                           >
                             <label className="flex items-center justify-between text-sm cursor-pointer w-full  p-4">
                               <input
@@ -422,9 +438,20 @@ const DonationForm = () => {
                             </label>
                           </div>
                         </li>
+                        <li>
+                          <button
+                            onClick={handleOpenNewPaymentMethod}
+                            className={`relative border rounded-bl-3xl rounded-br-3xl flex w-full justify-center`}
+                          >
+                            <span className="p-2">Add new</span>
+                          </button>
+                        </li>
                       </ul>
                       <div className="flex justify-end mt-2">
-                        <button className="mr-2 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
+                        <button
+                          onClick={handleCloseChangePaymentMethod}
+                          className="mr-2 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                        >
                           Cancel
                         </button>
                         <button className="justify-center inline-flex items-center px-4 py-2 shadow-sm text-sm font-medium rounded-3xl text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
@@ -436,48 +463,34 @@ const DonationForm = () => {
                 </>
               ) : (
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 col-span-2">
-                  {/* <div className="flex justify-center mb-2">
-                    <input
-                      type="text"
-                      name="title"
-                      id="donation-title"
-                      className="text-left w-full block border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-400 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-1.5 px-4 focus:ring-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                      placeholder="Full Name"
-                      aria-describedby="title-description"
-                      value=""
-                    ></input>
-                  </div> */}
-                  {/* {!authReducer.is_authenticated && (
-                    <div className="flex justify-center mb-2">
-                      <input
-                        type="text"
-                        name="email"
-                        id="donation-email"
-                        className="text-left w-full block border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-400 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-1.5 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                        placeholder="Email"
-                        aria-describedby="email"
-                        value=""
-                      ></input>
-                    </div>
-                  )} */}
-                  <CardElement
-                    onChange={handleCardElement}
-                    options={{
-                      hidePostalCode: true,
-                      style: {
-                        base: {
-                          color: authReducer.theme ? "#fff" : "#424770",
-                          "::placeholder": {
-                            color: "#aab7c4",
+                  <div className="flex justify-between items-center">
+                    <CardElement
+                      onChange={handleCardElement}
+                      options={{
+                        hidePostalCode: true,
+                        style: {
+                          base: {
+                            color: authReducer.theme ? "#fff" : "#424770",
+                            "::placeholder": {
+                              color: "#aab7c4",
+                            },
+                          },
+                          invalid: {
+                            color: "#9e2146",
                           },
                         },
-                        invalid: {
-                          color: "#9e2146",
-                        },
-                      },
-                    }}
-                    className="block w-full border bg-white dark:bg-gray-600 border-gray-300  rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                  />
+                      }}
+                      className="block w-full border bg-white dark:bg-gray-600 border-gray-300  rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                    />
+                    {authReducer.user?.payment_methods && (
+                      <button
+                        onClick={handleCloseNewPaymentMethod}
+                        className="ml-2 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                      >
+                        Cancel
+                      </button>
+                    )}
+                  </div>
                   {stripeError && (
                     <p className="mt-2 text-sm text-red-600">
                       {stripeError.message}
