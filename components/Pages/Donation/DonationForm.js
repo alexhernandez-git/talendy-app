@@ -25,6 +25,7 @@ const DonationForm = () => {
       )[0]?.id,
       other_amount: "",
       to_user_id: "",
+      message: "",
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
@@ -39,6 +40,10 @@ const DonationForm = () => {
           .moreThan(2, "Amount must be greater than 2.00"),
       }),
       to_user_id: Yup.string(),
+      message: Yup.string().max(
+        300,
+        "Message must be less than or equal to 300 characters"
+      ),
     }),
     onSubmit: async (values, { resetForm }) => {
       console.log(values);
@@ -490,14 +495,45 @@ const DonationForm = () => {
               </dd>
             </div>
             <div className="mb-4 sm:mb-5 pt-5">
-              <div className="">
-                <textarea
-                  id="about"
-                  name="about"
-                  rows="3"
-                  className="focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-300"
-                  placeholder="Message (optional)"
-                ></textarea>
+              <div>
+                <div className="relative">
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="3"
+                    value={formik.values.message}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={`appearance-none block w-full border rounded-md shadow-sm py-2 px-4 focus:outline-none  sm:text-sm dark:focus:text-white bg-white border-gray-300  text-sm  focus:placeholder-gray-400 focus:text-gray-900 dark:bg-gray-600 ${
+                      formik.touched.message && formik.errors.message
+                        ? "pr-10 border-red-300 text-red-600   placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
+                        : " text-sm placeholder-gray-500  dark:placeholder-gray-300 dark:text-white  focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
+                    }`}
+                    placeholder="Message (optional)"
+                  ></textarea>
+                  {formik.touched.message && formik.errors.message && (
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      <svg
+                        className="h-5 w-5 text-red-500"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                {formik.touched.message && formik.errors.message && (
+                  <p className="mt-2 text-sm text-red-600 " id="message-error">
+                    {formik.errors.message}
+                  </p>
+                )}
               </div>
             </div>
           </dl>
