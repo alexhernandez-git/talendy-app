@@ -60,6 +60,10 @@ const useUserConfirmation = ({ isOpen, onResolve, onReject }) => {
     },
   });
 
+  useEffect(() => {
+    setErrors(null);
+  }, [formik.values?.password]);
+
   if (!isOpen) {
     return <></>;
   }
