@@ -140,14 +140,18 @@ const DonationForm = () => {
     }),
     onSubmit: async (values, { resetForm }) => {
       console.log(values);
-      useUserConfirmationModal()
-        .then(() => {
-          console.log("success");
-          stripeSubmit(values, resetForm);
-        })
-        .catch(() => {
-          console.log("error");
-        });
+      if (authReducer.is_authenticated) {
+        useUserConfirmationModal()
+          .then(() => {
+            console.log("success");
+            stripeSubmit(values, resetForm);
+          })
+          .catch(() => {
+            console.log("error");
+          });
+      } else {
+        stripeSubmit(values, resetForm);
+      }
     },
   });
   console.log(formik.errors);
