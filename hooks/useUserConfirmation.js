@@ -10,6 +10,7 @@ import useOutsideClick from "./useOutsideClick";
 import { useState } from "react";
 import { createModal } from "react-modal-promise";
 import Spinner from "../components/Layout/Spinner";
+import axios from "axios";
 const useUserConfirmation = ({ isOpen, onResolve, onReject }) => {
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
@@ -28,6 +29,29 @@ const useUserConfirmation = ({ isOpen, onResolve, onReject }) => {
     }),
     onSubmit: async (values, { resetForm }) => {
       console.log(values);
+      // User Loading
+      let token = authReducer.access_token;
+
+      // Headers
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      // If token, add to headers config
+      if (token) {
+        config.headers["Authorization"] = `Token ${token}`;
+      }
+      await axios
+        .post(`${process.env.HOST}/api/users/confirm_user/`, values, config)
+        .then((res) => {
+          console.log("res", res.data);
+          resetForm({});
+        })
+        .catch((err) => {
+          console.log("err", err.response);
+        });
     },
   });
 
@@ -148,6 +172,21 @@ const useUserConfirmation = ({ isOpen, onResolve, onReject }) => {
                   {formik.errors.password}
                 </p>
               )}
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="w-full flex items-center justify-center py-2 px-4 border border-transparent rounded-3xl shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+              >
+                {isConfirming && <Spinner className="mr-2" />}
+                Confirm
+              </button>
+              <div className="pt-5">
+                <p className="text-sm text-center leading-5 text-gray-500 dark:text-gray-200">
+                  Enter your password to confirm that it is you
+                </p>
+              </div>
             </div>
           </form>
         </section>
