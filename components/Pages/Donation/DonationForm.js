@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 
 import { IconContext } from "react-icons/lib";
@@ -17,6 +17,10 @@ import currencies from "data/currencies";
 import { changeCurrency } from "redux/actions/auth";
 import { useDispatch } from "react-redux";
 import Spinner from "components/Layout/Spinner";
+
+import Container from "react-modal-promise";
+import useUserConfirmationModal from "../../../hooks/useUserConfirmation";
+
 const DonationForm = () => {
   const authReducer = useSelector((state) => state.authReducer);
   const userReducer = useSelector((state) => state.userReducer);
@@ -24,6 +28,19 @@ const DonationForm = () => {
     (state) => state.donationOptionsReducer
   );
   const dispatch = useDispatch();
+  const [userConfirmationOpen, setUserConfirmationOpen] = useState(false);
+  const handleOpenUserConfirmation = () => {
+    setUserConfirmationOpen(true);
+  };
+  const handleCloseRegister = () => {
+    if (userConfirmationOpen) {
+      setUserConfirmationOpen(false);
+    }
+  };
+  const handleToggleUserConfirmation = () => {
+    setUserConfirmationOpen(!userConfirmationOpen);
+  };
+
   const stripe = useStripe();
   const elements = useElements();
 
@@ -135,7 +152,14 @@ const DonationForm = () => {
     }),
     onSubmit: async (values, { resetForm }) => {
       console.log(values);
-      stripeSubmit(values, resetForm);
+      useUserConfirmationModal()
+        .then(() => {
+          console.log("success");
+          stripeSubmit(values, resetForm);
+        })
+        .catch(() => {
+          console.log("error");
+        });
     },
   });
   console.log(formik.errors);
@@ -222,10 +246,9 @@ const DonationForm = () => {
     setChangePaymentMethod(false);
   };
   return (
-    <form
-      onSubmit={formik.handleSubmit}
-      className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}
-    >
+    <div className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
+      <form id="donation-form" onSubmit={formik.handleSubmit} />
+      <Container />
       <nav className="flex mb-4 mx-4 sm:mx-auto" aria-label="Breadcrumb">
         <ol className="flex items-center space-x-4">
           <li>
@@ -700,6 +723,7 @@ const DonationForm = () => {
         <div className="pb-6">
           <button
             type="submit"
+            form="donation-form"
             className="w-full uppercase bg-gradient-to-r items-center from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
           >
             {userReducer.is_donating_user && <Spinner className="mr-2" />}
@@ -777,7 +801,7 @@ const DonationForm = () => {
           )}
         </div>
       </div>
-    </form>
+    </div>
   );
 };
 
