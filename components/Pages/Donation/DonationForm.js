@@ -16,6 +16,7 @@ import { donateUser } from "redux/actions/user";
 import currencies from "data/currencies";
 import { changeCurrency } from "redux/actions/auth";
 import { useDispatch } from "react-redux";
+import Spinner from "components/Layout/Spinner";
 const DonationForm = () => {
   const authReducer = useSelector((state) => state.authReducer);
   const userReducer = useSelector((state) => state.userReducer);
@@ -706,6 +707,7 @@ const DonationForm = () => {
             type="submit"
             className="w-full uppercase bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
           >
+            {userReducer.is_donating_user && <Spinner className="mr-2" />}
             DONATE NOW
           </button>
 
