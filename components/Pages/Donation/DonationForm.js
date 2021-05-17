@@ -700,7 +700,7 @@ const DonationForm = () => {
         <div className="pb-6">
           <button
             type="submit"
-            className="w-full uppercase bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
+            className="w-full uppercase bg-gradient-to-r items-center from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
           >
             {userReducer.is_donating_user && <Spinner className="mr-2" />}
             DONATE NOW
