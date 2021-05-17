@@ -539,7 +539,7 @@ const CreateEditPostModal = ({
                               aria-labelledby="listbox-label"
                               aria-activedescendant="listbox-option-3"
                             >
-                              {communitiesReducer.communities.map(
+                              {communitiesReducer.communities?.map(
                                 (community_item) => (
                                   <li
                                     key={community_item.id}

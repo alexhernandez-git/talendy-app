@@ -295,7 +295,7 @@ export default function Home() {
                   COMMUNITIES
                 </span>
                 <div className="flex flex-wrap mt-4">
-                  {communitiesReducer.communities.map((communityItem) => (
+                  {communitiesReducer.communities?.map((communityItem) => (
                     <button
                       type="button"
                       onClick={handleSetCommunity.bind(this, communityItem.id)}

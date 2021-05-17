@@ -125,7 +125,7 @@ const LeftSidebar = ({ page }) => {
             className="mt-3 space-y-2"
             aria-labelledby="communities-headline"
           >
-            {communitiesReducer.communities.map((communityItem) => (
+            {communitiesReducer.communities?.map((communityItem) => (
               <span
                 onClick={handleSetCommunity.bind(this, communityItem.id)}
                 className={`

@@ -201,8 +201,10 @@ export const donateUser =
           await clearCardElement();
         }
       })
-      .catch((err) => {
-        dispatch({
+      .catch(async (err) => {
+        await createAlert("ERROR", "Error when making the donation");
+
+        await dispatch({
           type: DONATE_USER_FAIL,
           payload: { data: err.response?.data, status: err.response?.status },
         });
