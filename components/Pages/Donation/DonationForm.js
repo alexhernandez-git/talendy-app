@@ -78,6 +78,7 @@ const DonationForm = () => {
       message: "",
       currency: authReducer.currency,
       email: "",
+      is_authenticated: authReducer.is_authenticated,
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
@@ -95,8 +96,8 @@ const DonationForm = () => {
         "Message must be less than or equal to 300 characters"
       ),
       currency: Yup.string().required(),
-      email: Yup.string().when({
-        is: authReducer.is_authenticated === true,
+      email: Yup.string().when("is_authenticated", {
+        is: false,
         then: Yup.string().required("Email is required"),
       }),
     }),
@@ -105,7 +106,7 @@ const DonationForm = () => {
       stripeSubmit(values, resetForm);
     },
   });
-  console.log(authReducer);
+  console.log(formik.errors);
   const inviteTo = {
     L1: {
       label: "A coffe",
@@ -230,6 +231,28 @@ const DonationForm = () => {
       <div className="bg-white dark:bg-gray-700 px-4 shadow sm:px-6 sm:rounded-lg">
         <div className="px-4 py-5 sm:p-0">
           <dl className="sm:divide-y divide-gray-200 dark:sm:divide-gray-400">
+            {!authReducer.is_authenticated && (
+              <div className="py-4 sm:pt-5 pb-6 sm:col-span-2 flex justify-end">
+                <select
+                  id="currency"
+                  name="currency"
+                  value={authReducer.currency}
+                  autoComplete="currency"
+                  onBlur={formik.handleBlur}
+                  value={formik.values.currency}
+                  onChange={handleChangeCurrency}
+                  className="mt-1 focus:ring-orange-500 focus:border-orange-500 block min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                >
+                  <option defaultValue disabled value="">
+                    Select one
+                  </option>
+
+                  {currencies.map((currency) => (
+                    <option value={currency.code}>{currency.code}</option>
+                  ))}
+                </select>
+              </div>
+            )}
             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 items-center">
               <dt className="text-sm font-medium text-gray-500 dark:text-gray-300">
                 Payment
@@ -562,28 +585,6 @@ const DonationForm = () => {
                     </p>
                   )}
                 </div>
-                {!authReducer.is_authenticated && (
-                  <div className="mt-4">
-                    <select
-                      id="currency"
-                      name="currency"
-                      value={authReducer.currency}
-                      autoComplete="currency"
-                      onBlur={formik.handleBlur}
-                      value={formik.values.currency}
-                      onChange={handleChangeCurrency}
-                      className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
-                    >
-                      <option defaultValue disabled value="">
-                        Select one
-                      </option>
-
-                      {currencies.map((currency) => (
-                        <option value={currency.code}>{currency.code}</option>
-                      ))}
-                    </select>
-                  </div>
-                )}
               </dd>
             </div>
 
@@ -625,10 +626,7 @@ const DonationForm = () => {
                     )}
                   </div>
                   {formik.touched.email && formik.errors.email && (
-                    <p
-                      className="mt-2 text-sm text-red-600 text-center"
-                      id="email-error"
-                    >
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
                       {formik.errors.email}
                     </p>
                   )}

@@ -159,6 +159,9 @@ export const donateUser =
 
     fd.append("currency", values.currency);
     fd.append("payment_method_id", values.payment_method_id);
+    if (values.email) {
+      fd.append("email", values.email);
+    }
     await axios
       .patch(
         `${process.env.HOST}/api/users/${id}/make_donation/`,
