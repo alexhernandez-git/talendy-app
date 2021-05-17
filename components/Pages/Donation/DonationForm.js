@@ -4,6 +4,8 @@ import { IconContext } from "react-icons/lib";
 import { FaCoffee, FaPizzaSlice } from "react-icons/fa";
 import { GiMeal, GiHotMeal, GiSandwich } from "react-icons/gi";
 import { useSelector } from "react-redux";
+import getSymbolFromCurrency from "currency-symbol-map";
+
 import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -449,7 +451,9 @@ const DonationForm = () => {
                           ? "pr-10 border-red-300 text-red-600   placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
                           : " text-sm placeholder-gray-500  dark:placeholder-gray-300 dark:text-white  focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
                       }`}
-                      placeholder="$ Other"
+                      placeholder={`${getSymbolFromCurrency(
+                        authReducer.currency
+                      )} Other`}
                       aria-describedby="other_amount"
                       value={formik.values.other_amount}
                       onKeyUp={handleRemoveDonationOption}
