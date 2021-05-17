@@ -15,6 +15,9 @@ import {
   ACCEPT_USER_INVITATION,
   ACCEPT_USER_INVITATION_SUCCESS,
   ACCEPT_USER_INVITATION_FAIL,
+  DONATE_USER,
+  DONATE_USER_SUCCESS,
+  DONATE_USER_FAIL,
 } from "../types";
 import { tokenConfig, addConnection, substractFollow, addFollow } from "./auth";
 
@@ -38,28 +41,30 @@ export const fetchUser = (id) => async (dispatch, getState) => {
     });
 };
 
-export const followUser = (id = null) => async (dispatch, getState) => {
-  await dispatch({
-    type: FOLLOW_USER,
-  });
-  const values = {
-    followed_user: id ? id : getState().userReducer.user?.id,
-  };
-  await axios
-    .post(`${process.env.HOST}/api/follows/`, values, tokenConfig(getState))
-    .then(async (res) => {
-      await dispatch({
-        type: FOLLOW_USER_SUCCESS,
-      });
-      await dispatch(addFollow());
-    })
-    .catch(async (err) => {
-      await dispatch({
-        type: FOLLOW_USER_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
+export const followUser =
+  (id = null) =>
+  async (dispatch, getState) => {
+    await dispatch({
+      type: FOLLOW_USER,
     });
-};
+    const values = {
+      followed_user: id ? id : getState().userReducer.user?.id,
+    };
+    await axios
+      .post(`${process.env.HOST}/api/follows/`, values, tokenConfig(getState))
+      .then(async (res) => {
+        await dispatch({
+          type: FOLLOW_USER_SUCCESS,
+        });
+        await dispatch(addFollow());
+      })
+      .catch(async (err) => {
+        await dispatch({
+          type: FOLLOW_USER_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
 
 export const unfollowUser = () => async (dispatch, getState) => {
   await dispatch({
@@ -132,6 +137,26 @@ export const acceptUserInvitation = () => async (dispatch, getState) => {
     .catch(async (err) => {
       await dispatch({
         type: ACCEPT_USER_INVITATION_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
+};
+export const donateUser = (values, resetForm) => async (dispatch, getState) => {
+  dispatch({
+    type: DONATE_USER,
+  });
+  await axios
+    .post(`${process.env.HOST}/api/donations/`, values, tokenConfig(getState))
+    .then((res) => {
+      dispatch({
+        type: DONATE_USER_SUCCESS,
+        payload: res.data,
+      });
+      resetForm({});
+    })
+    .catch((err) => {
+      dispatch({
+        type: DONATE_USER_FAIL,
         payload: { data: err.response?.data, status: err.response?.status },
       });
     });

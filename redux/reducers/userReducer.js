@@ -14,6 +14,9 @@ import {
   ACCEPT_USER_INVITATION,
   ACCEPT_USER_INVITATION_SUCCESS,
   ACCEPT_USER_INVITATION_FAIL,
+  DONATE_USER,
+  DONATE_USER_SUCCESS,
+  DONATE_USER_FAIL,
 } from "../types";
 
 const initialState = {
@@ -28,6 +31,8 @@ const initialState = {
   connect_user_error: null,
   is_accepting_invitation: false,
   accept_invitation_error: null,
+  is_donating_user: false,
+  donate_user_error: null,
 };
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
@@ -133,6 +138,24 @@ export default function userReducer(state = initialState, action) {
         ...state,
         is_accepting_invitation: false,
         accept_invitation_error: action.payload,
+      };
+    case DONATE_USER:
+      return {
+        ...state,
+        is_donating_user: true,
+      };
+    case DONATE_USER_SUCCESS:
+      return {
+        ...state,
+        is_donating_user: false,
+
+        donate_user_error: null,
+      };
+    case DONATE_USER_FAIL:
+      return {
+        ...state,
+        is_donating_user: false,
+        donate_user_error: action.payload,
       };
     default:
       return state;

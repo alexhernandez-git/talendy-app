@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { CardElement } from "@stripe/react-stripe-js";
+import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+
 import { IconContext } from "react-icons/lib";
 import { FaCoffee, FaPizzaSlice } from "react-icons/fa";
 import { GiMeal, GiHotMeal, GiSandwich } from "react-icons/gi";
@@ -10,26 +11,74 @@ import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { MdRestaurantMenu } from "react-icons/md";
+import { useState } from "react";
+import { donateUser } from "redux/actions/user";
+import currencies from "data/currencies";
+import { changeCurrency } from "redux/actions/auth";
+import { useDispatch } from "react-redux";
 const DonationForm = () => {
   const authReducer = useSelector((state) => state.authReducer);
   const userReducer = useSelector((state) => state.userReducer);
   const donationOptionsReducer = useSelector(
     (state) => state.donationOptionsReducer
   );
+  const dispatch = useDispatch();
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const [stripeError, setStripeError] = useState(null);
+  const handleCardElement = (e) => {
+    console.log(e);
+    setStripeError(e.error);
+  };
+
+  const stripeSubmit = async (values, resetForm) => {
+    if (!stripe || !elements) {
+      // Stripe.js has not loaded yet. Make sure to disable
+      // form submission until Stripe.js has loaded.
+      return;
+    }
+
+    // Get a reference to a mounted CardElement. Elements knows how
+    // to find your CardElement because there can only ever be one of
+    // each type of element.
+    const cardElement = elements.getElement(CardElement);
+
+    // Use your card Element with other Stripe.js APIs
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card: cardElement,
+    });
+
+    if (error) {
+      console.log("[error]", error);
+      setStripeError(error);
+    } else {
+      console.log("[PaymentMethod]", paymentMethod);
+      setStripeError(null);
+      dispatch(
+        donateUser(
+          {
+            ...values,
+
+            payment_method_id: paymentMethod.id,
+          },
+          resetForm
+        )
+      );
+    }
+  };
   const formik = useFormik({
     initialValues: {
-      payment_method_id: "",
-
       donation_option_id: donationOptionsReducer.options.filter(
         (option) => option.currency === authReducer.currency
       )[0]?.id,
       other_amount: "",
-      to_user_id: "",
       message: "",
+      to_user_id: userReducer.user?.id,
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
-      payment_method_id: Yup.string(),
       donation_option_id: Yup.string(),
       other_amount: Yup.number().when("donation_option_id", {
         is: (donation_option_id) => !donation_option_id,
@@ -39,17 +88,17 @@ const DonationForm = () => {
           .positive("Amount must be greater than zero")
           .moreThan(2, "Amount must be greater than 2.00"),
       }),
-      to_user_id: Yup.string(),
       message: Yup.string().max(
         300,
         "Message must be less than or equal to 300 characters"
       ),
+      to_user_id: Yup.string().required(),
     }),
     onSubmit: async (values, { resetForm }) => {
       console.log(values);
+      stripeSubmit(values, resetForm);
     },
   });
-  console.log(formik.values);
   console.log(formik.errors);
   const inviteTo = {
     L1: {
@@ -92,9 +141,14 @@ const DonationForm = () => {
   const handleRemoveDonationOption = () => {
     formik.setFieldValue("donation_option_id", "");
   };
-
+  const handleChangeCurrency = (e) => {
+    dispatch(changeCurrency(e.target.value));
+  };
   return (
-    <div className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
+    <form
+      onSubmit={formik.handleSubmit}
+      className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}
+    >
       <nav className="flex mb-4 mx-4 sm:mx-auto" aria-label="Breadcrumb">
         <ol className="flex items-center space-x-4">
           <li>
@@ -349,6 +403,7 @@ const DonationForm = () => {
                     </div>
                   )} */}
                   <CardElement
+                    onChange={handleCardElement}
                     options={{
                       hidePostalCode: true,
                       style: {
@@ -365,6 +420,11 @@ const DonationForm = () => {
                     }}
                     className="block w-full border bg-white dark:bg-gray-600 border-gray-300  rounded-3xl shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                   />
+                  {stripeError && (
+                    <p className="mt-2 text-sm text-red-600">
+                      {stripeError.message}
+                    </p>
+                  )}
                 </dd>
               )}
             </div>
@@ -492,8 +552,29 @@ const DonationForm = () => {
                     </p>
                   )}
                 </div>
+                {!authReducer.is_authenticated && (
+                  <div className="mt-4">
+                    <select
+                      id="currency"
+                      name="currency"
+                      value={authReducer.currency}
+                      autoComplete="currency"
+                      onChange={handleChangeCurrency}
+                      className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                    >
+                      <option defaultValue disabled value="">
+                        Select one
+                      </option>
+
+                      {currencies.map((currency) => (
+                        <option value={currency.code}>{currency.code}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
               </dd>
             </div>
+
             <div className="mb-4 sm:mb-5 pt-5">
               <div>
                 <div className="relative">
@@ -540,7 +621,7 @@ const DonationForm = () => {
         </div>
         <div className="pb-6">
           <button
-            type="button"
+            type="submit"
             className="w-full uppercase bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
           >
             DONATE NOW
@@ -589,7 +670,7 @@ const DonationForm = () => {
           )}
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 
