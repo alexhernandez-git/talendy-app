@@ -28,7 +28,14 @@ const DonationForm = () => {
     validationSchema: Yup.object({
       payment_method_id: Yup.string(),
       donation_option_id: Yup.string(),
-      other_amount: Yup.string(),
+      other_amount: Yup.number().when("donation_option_id", {
+        is: (donation_option_id) => !donation_option_id,
+        then: Yup.number()
+          .required("Amount is required")
+          .typeError("Amount must be a number")
+          .positive("Amount must be greater than zero")
+          .moreThan(2, "Amount must be greater than 2.00"),
+      }),
       to_user_id: Yup.string(),
     }),
     onSubmit: async (values, { resetForm }) => {
@@ -36,6 +43,7 @@ const DonationForm = () => {
     },
   });
   console.log(formik.values);
+  console.log(formik.errors);
   const inviteTo = {
     L1: {
       label: "A coffe",
@@ -70,6 +78,14 @@ const DonationForm = () => {
       ),
     },
   };
+  const handleChangeDonationOption = (id) => {
+    formik.setFieldValue("other_amount", "");
+    formik.setFieldValue("donation_option_id", id);
+  };
+  const handleRemoveDonationOption = () => {
+    formik.setFieldValue("donation_option_id", "");
+  };
+
   return (
     <div className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
       <nav className="flex mb-4 mx-4 sm:mx-auto" aria-label="Breadcrumb">
@@ -361,6 +377,10 @@ const DonationForm = () => {
                       .map((option) => (
                         <label
                           key={option.id}
+                          onClick={handleChangeDonationOption.bind(
+                            this,
+                            option.id
+                          )}
                           className="relative block rounded-3xl border border-gray-300 bg-white dark:bg-gray-700 shadow-sm px-6 py-4 cursor-pointer hover:border-gray-400 sm:flex sm:justify-between"
                         >
                           <input
@@ -417,16 +437,51 @@ const DonationForm = () => {
                     </span>
                   </div>
                 </div>
-                <div className="flex justify-center">
-                  <input
-                    type="text"
-                    name="title"
-                    id="donation-title"
-                    className="text-center w-full block border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                    placeholder="$ Other"
-                    aria-describedby="title-description"
-                    value=""
-                  ></input>
+                <div>
+                  <div className="relative flex justify-center">
+                    <input
+                      type="text"
+                      name="other_amount"
+                      id="other_amount"
+                      className={`appearance-none text-center block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm dark:focus:text-white bg-white border-gray-300  text-sm  focus:placeholder-gray-400 focus:text-gray-900 dark:bg-gray-600 ${
+                        formik.touched.other_amount &&
+                        formik.errors.other_amount
+                          ? "pr-10 border-red-300 text-red-600   placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
+                          : " text-sm placeholder-gray-500  dark:placeholder-gray-300 dark:text-white  focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
+                      }`}
+                      placeholder="$ Other"
+                      aria-describedby="other_amount"
+                      value={formik.values.other_amount}
+                      onKeyUp={handleRemoveDonationOption}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    ></input>
+                    {formik.touched.other_amount && formik.errors.other_amount && (
+                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <svg
+                          className="h-5 w-5 text-red-500"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  {formik.touched.other_amount && formik.errors.other_amount && (
+                    <p
+                      className="mt-2 text-sm text-red-600 text-center"
+                      id="other_amount-error"
+                    >
+                      {formik.errors.other_amount}
+                    </p>
+                  )}
                 </div>
               </dd>
             </div>
@@ -452,29 +507,39 @@ const DonationForm = () => {
           </button>
 
           {authReducer.is_authenticated ? (
-            <div className="flex justify-center mt-5 text-gray-500 dark:text-gray-100">
-              <span className="text-xs flex items-center">
-                You will earn{" "}
-                <span className="text-orange-500 flex items-center mx-1">
-                  <svg
-                    className="w-4 h-4 inline"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  5000 Karma
-                </span>{" "}
-                for this good action
-              </span>
-            </div>
+            <>
+              {formik.values.donation_option_id && (
+                <div className="flex justify-center mt-5 text-gray-500 dark:text-gray-100">
+                  <span className="text-xs flex items-center">
+                    You will earn{" "}
+                    <span className="text-orange-500 flex items-center mx-1">
+                      <svg
+                        className="w-4 h-4 inline"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      {
+                        donationOptionsReducer.options.find(
+                          (option) =>
+                            option.id === formik.values.donation_option_id
+                        ).paid_karma
+                      }{" "}
+                      Karma
+                    </span>{" "}
+                    for this good action
+                  </span>
+                </div>
+              )}
+            </>
           ) : (
             <div className="mt-5 flex justify-center">
               <span className="text-sm text-gray-400 dark:text-gray-300">
