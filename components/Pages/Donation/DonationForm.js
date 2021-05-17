@@ -64,7 +64,8 @@ const DonationForm = () => {
 
             payment_method_id: paymentMethod.id,
           },
-          resetForm
+          resetForm,
+          cardElement.clear
         )
       );
     }
@@ -177,7 +178,7 @@ const DonationForm = () => {
     }
     formik.setFieldValue("other_amount_karma", karmaAmount);
   };
-  console.log(userReducer);
+  console.log(formik.values);
   return (
     <form
       onSubmit={formik.handleSubmit}

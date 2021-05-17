@@ -144,7 +144,7 @@ export const acceptUserInvitation = () => async (dispatch, getState) => {
     });
 };
 export const donateUser =
-  (id, values, resetForm) => async (dispatch, getState) => {
+  (id, values, resetForm, clearCardElement) => async (dispatch, getState) => {
     dispatch({
       type: DONATE_USER,
     });
@@ -152,8 +152,8 @@ export const donateUser =
     if (values.donation_option_id) {
       fd.append("donation_option_id", values.donation_option_id);
     }
-    if (values.donation_option_id) {
-      fd.append("donation_option_id", values.donation_option_id);
+    if (values.other_amount) {
+      fd.append("other_amount", values.other_amount);
     }
     fd.append("message", values.message);
 
@@ -184,6 +184,7 @@ export const donateUser =
           createAlert("SUCCESS", "Congratulations! you have made a donation")
         );
         await resetForm({});
+        await clearCardElement();
       })
       .catch((err) => {
         dispatch({
