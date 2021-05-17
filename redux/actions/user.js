@@ -163,6 +163,9 @@ export const donateUser =
     if (values.other_amount) {
       fd.append("other_amount", values.other_amount);
     }
+    if (other_amount_karma) {
+      fd.append("other_amount_karma", values.other_amount_karma);
+    }
     fd.append("message", values.message);
 
     fd.append("currency", values.currency);
