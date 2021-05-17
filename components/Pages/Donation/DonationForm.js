@@ -82,6 +82,9 @@ const DonationForm = () => {
       email: "",
       is_authenticated: authReducer.is_authenticated,
       other_amount_karma: "",
+      payment_method_id: authReducer.user?.default_payment_method
+        ? authReducer.user?.default_payment_method
+        : "",
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
@@ -110,6 +113,7 @@ const DonationForm = () => {
         is: false,
         then: Yup.string().required("Email is required"),
       }),
+      payment_method_id: Yup.string(),
     }),
     onSubmit: async (values, { resetForm }) => {
       console.log(values);
@@ -194,6 +198,10 @@ const DonationForm = () => {
   };
   const handleCloseNewPaymentMethod = () => {
     setNewPaymentMethod(false);
+  };
+  const handleChangeCard = (id) => {
+    formik.setFieldValue("payment_method_id", id);
+    setChangePaymentMethod(false);
   };
   return (
     <form
@@ -308,7 +316,13 @@ const DonationForm = () => {
                           Visa
                         </span>
                         <span className="text-gray-500 dark:text-gray-100">
-                          **** **** **** 4344
+                          **** **** ****{" "}
+                          {
+                            authReducer.user?.payment_methods.find(
+                              (card) =>
+                                card.id === formik.values.payment_method_id
+                            )?.card?.last4
+                          }
                         </span>
                       </div>
                       <button
@@ -334,130 +348,64 @@ const DonationForm = () => {
                     </dd>
                   ) : (
                     <dd className="text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
-                      <ul className="relative bg-white dark:bg-gray-700 rounded-3xl -space-y-px w-full">
-                        <li>
-                          <div
-                            className={`relative border ${
-                              true && "rounded-tl-3xl rounded-tr-3xl"
-                            } flex justify-between`}
-                          >
-                            <label className="flex items-center justify-between text-sm cursor-pointer w-full  p-4">
-                              <input
-                                name="payment_method_id"
-                                type="radio"
-                                className="focus:ring-orange-500 h-4 w-4 text-orange-600 cursor-pointer border-gray-300"
-                                aria-describedby="plan-option-pricing-0 plan-option-limit-0"
-                              />
-                              <p
-                                id="plan-option-pricing-1"
-                                className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center"
-                              >
-                                <span className="font-medium">
-                                  **** **** **** 4325
-                                </span>
-                              </p>
+                      <div className="flex justify-start mb-2">
+                        <button
+                          onClick={handleCloseChangePaymentMethod}
+                          className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                      <ul className="relative bg-white dark:bg-gray-700 rounded-md -space-y-px w-full">
+                        {authReducer.user?.payment_methods.map(
+                          (card_object, i) => (
+                            <li
+                              key={card_object.id}
+                              onClick={handleChangeCard.bind(
+                                this,
+                                card_object.id
+                              )}
+                            >
                               <div
-                                id="plan-option-limit-1"
-                                className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:flex justify-end items-center"
+                                className={`relative border ${
+                                  i === 0 && "rounded-tl-md rounded-tr-md"
+                                } flex justify-between`}
                               >
-                                <p
-                                  id="plan-option-limit-2"
-                                  className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right "
-                                >
-                                  Visa
-                                </p>
+                                <label className="flex items-center justify-between text-sm cursor-pointer w-full  p-4 hover:opacity-80">
+                                  <p
+                                    id="plan-option-pricing-1"
+                                    className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center"
+                                  >
+                                    <span className="font-medium">
+                                      **** **** **** {card_object?.card?.last4}
+                                    </span>
+                                  </p>
+                                  <div
+                                    id="plan-option-limit-1"
+                                    className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:flex justify-end items-center"
+                                  >
+                                    <p
+                                      id="plan-option-limit-2"
+                                      className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right "
+                                    >
+                                      {card_object?.card?.brand}
+                                    </p>
+                                  </div>
+                                </label>
                               </div>
-                            </label>
-                          </div>
-                        </li>
-                        <li>
-                          <div
-                            className={`relative border ${
-                              false && "rounded-tl-md rounded-tr-md"
-                            } flex justify-between`}
-                          >
-                            <label className="flex items-center justify-between text-sm cursor-pointer w-full  p-4">
-                              <input
-                                name="payment_method_id"
-                                type="radio"
-                                className="focus:ring-orange-500 h-4 w-4 text-orange-600 cursor-pointer border-gray-300"
-                                aria-describedby="plan-option-pricing-0 plan-option-limit-0"
-                              />
-                              <p
-                                id="plan-option-pricing-1"
-                                className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center"
-                              >
-                                <span className="font-medium">
-                                  **** **** **** 4325
-                                </span>
-                              </p>
-                              <div
-                                id="plan-option-limit-1"
-                                className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:flex justify-end items-center"
-                              >
-                                <p
-                                  id="plan-option-limit-2"
-                                  className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right "
-                                >
-                                  Visa
-                                </p>
-                              </div>
-                            </label>
-                          </div>
-                        </li>
-                        <li>
-                          <div
-                            className={`relative border  flex justify-between`}
-                          >
-                            <label className="flex items-center justify-between text-sm cursor-pointer w-full  p-4">
-                              <input
-                                name="payment_method_id"
-                                type="radio"
-                                className="focus:ring-orange-500 h-4 w-4 text-orange-600 cursor-pointer border-gray-300"
-                                aria-describedby="plan-option-pricing-0 plan-option-limit-0"
-                              />
-                              <p
-                                id="plan-option-pricing-1"
-                                className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center"
-                              >
-                                <span className="font-medium">
-                                  **** **** **** 4325
-                                </span>
-                              </p>
-                              <div
-                                id="plan-option-limit-1"
-                                className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:flex justify-end items-center"
-                              >
-                                <p
-                                  id="plan-option-limit-2"
-                                  className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right "
-                                >
-                                  Visa
-                                </p>
-                              </div>
-                            </label>
-                          </div>
-                        </li>
+                            </li>
+                          )
+                        )}
+
                         <li>
                           <button
                             onClick={handleOpenNewPaymentMethod}
-                            className={`relative border rounded-bl-3xl rounded-br-3xl flex w-full justify-center`}
+                            className={`relative border rounded-bl-md rounded-br-md flex w-full justify-center`}
                           >
                             <span className="p-2">Add new</span>
                           </button>
                         </li>
                       </ul>
-                      <div className="flex justify-end mt-2">
-                        <button
-                          onClick={handleCloseChangePaymentMethod}
-                          className="mr-2 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                        >
-                          Cancel
-                        </button>
-                        <button className="justify-center inline-flex items-center px-4 py-2 shadow-sm text-sm font-medium rounded-3xl text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
-                          Select
-                        </button>
-                      </div>
                     </dd>
                   )}
                 </>
