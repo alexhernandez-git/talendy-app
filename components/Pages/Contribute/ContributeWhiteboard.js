@@ -177,7 +177,6 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
     var canvas = document.querySelector("#board");
     var base64ImageData = canvas.toDataURL("image/png");
 
-    if (contributeRoomReducer.contribute_room?.status === "SO") return;
     handleClearCanvas();
     socketRef.current.emit("clear canvas", {
       data: base64ImageData,

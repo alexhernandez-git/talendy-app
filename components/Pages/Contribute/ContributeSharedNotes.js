@@ -108,34 +108,21 @@ export default function ContributeSharedNotes({
     }
   }, [sharedNotes]);
 
-  const contributeRoomReducer = useSelector(
-    (state) => state.contributeRoomReducer
-  );
   return (
     <section aria-labelledby="notes-title" className="">
       <div className="bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg p-1">
         <SharedToolbar editorTextLength={editorTextLength} />
-        {contributeRoomReducer.contribute_room?.status === "SO" ? (
-          <div
-            dangerouslySetInnerHTML={{
-              __html: sharedNotes,
-            }}
-            className="text-gray-500 dark:text-200 text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l cursor-text"
-            style={{ minHeight: "40rem" }}
-            ref={sharedNotesRef}
-          ></div>
-        ) : (
-          <div
-            className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l cursor-text"
-            onKeyUp={handleOnKeyUp}
-            ref={sharedNotesRef}
-            onKeyDown={handleKeyDown}
-            contentEditable="true"
-            data-placeholder="Notes"
-            onPaste={(e) => paste(e)}
-            style={{ minHeight: "40rem" }}
-          ></div>
-        )}
+
+        <div
+          className="editor text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l cursor-text"
+          onKeyUp={handleOnKeyUp}
+          ref={sharedNotesRef}
+          onKeyDown={handleKeyDown}
+          contentEditable="true"
+          data-placeholder="Notes"
+          onPaste={(e) => paste(e)}
+          style={{ minHeight: "40rem" }}
+        ></div>
       </div>
     </section>
   );
