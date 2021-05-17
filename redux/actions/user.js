@@ -18,7 +18,9 @@ import {
   DONATE_USER,
   DONATE_USER_SUCCESS,
   DONATE_USER_FAIL,
+  USER_LOADED,
 } from "../types";
+import { createAlert } from "./alerts";
 import { tokenConfig, addConnection, substractFollow, addFollow } from "./auth";
 
 export const fetchUser = (id) => async (dispatch, getState) => {
@@ -145,14 +147,32 @@ export const donateUser = (values, resetForm) => async (dispatch, getState) => {
   dispatch({
     type: DONATE_USER,
   });
+  const fd = new FormData();
+  if (values.donation_option_id) {
+    fd.append("donation_option_id", values.donation_option_id);
+  }
+  if (values.donation_option_id) {
+    fd.append("donation_option_id", values.donation_option_id);
+  }
+  fd.append("message", values.message);
+  fd.append("to_user_id", values.to_user_id);
+  fd.append("currency", values.currency);
+  fd.append("payment_method_id", values.payment_method_id);
   await axios
-    .post(`${process.env.HOST}/api/donations/`, values, tokenConfig(getState))
-    .then((res) => {
-      dispatch({
+    .post(`${process.env.HOST}/api/donations/`, fd, tokenConfig(getState))
+    .then(async (res) => {
+      console.log("res", res.data);
+      // res.data === my user
+      if (res.data) {
+        await dispatch({ type: USER_LOADED, payload: { user: res.data } });
+      }
+      await dispatch({
         type: DONATE_USER_SUCCESS,
-        payload: res.data,
       });
-      resetForm({});
+      await dispatch(
+        createAlert("SUCCESS", "Congratulations! you have made a donation")
+      );
+      await resetForm({});
     })
     .catch((err) => {
       dispatch({

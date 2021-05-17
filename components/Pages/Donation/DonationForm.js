@@ -101,7 +101,7 @@ const DonationForm = () => {
       stripeSubmit(values, resetForm);
     },
   });
-  console.log(formik.errors);
+  console.log(authReducer);
   const inviteTo = {
     L1: {
       label: "A coffe",
@@ -147,6 +147,7 @@ const DonationForm = () => {
     formik.handleChange(e);
     dispatch(changeCurrency(e.target.value));
   };
+  console.log(userReducer);
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -509,7 +510,6 @@ const DonationForm = () => {
                 </div>
                 <div>
                   <div className="relative flex justify-center">
-                    {console.log("authReducer", authReducer)}
                     <input
                       type="text"
                       name="other_amount"
