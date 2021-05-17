@@ -117,7 +117,13 @@ const DonationForm = () => {
     }),
     onSubmit: async (values, { resetForm }) => {
       console.log(values);
-      stripeSubmit(values, resetForm);
+      if (values.payment_method_id) {
+        dispatch(
+          donateUser(userReducer.user?.id, values, resetForm, cardElement.clear)
+        );
+      } else {
+        stripeSubmit(values, resetForm);
+      }
     },
   });
   console.log(formik.errors);
