@@ -143,41 +143,49 @@ export const acceptUserInvitation = () => async (dispatch, getState) => {
       });
     });
 };
-export const donateUser = (values, resetForm) => async (dispatch, getState) => {
-  dispatch({
-    type: DONATE_USER,
-  });
-  const fd = new FormData();
-  if (values.donation_option_id) {
-    fd.append("donation_option_id", values.donation_option_id);
-  }
-  if (values.donation_option_id) {
-    fd.append("donation_option_id", values.donation_option_id);
-  }
-  fd.append("message", values.message);
-  fd.append("to_user_id", values.to_user_id);
-  fd.append("currency", values.currency);
-  fd.append("payment_method_id", values.payment_method_id);
-  await axios
-    .post(`${process.env.HOST}/api/donations/`, fd, tokenConfig(getState))
-    .then(async (res) => {
-      console.log("res", res.data);
-      // res.data === my user
-      if (res.data) {
-        await dispatch({ type: USER_LOADED, payload: { user: res.data } });
-      }
-      await dispatch({
-        type: DONATE_USER_SUCCESS,
-      });
-      await dispatch(
-        createAlert("SUCCESS", "Congratulations! you have made a donation")
-      );
-      await resetForm({});
-    })
-    .catch((err) => {
-      dispatch({
-        type: DONATE_USER_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
+export const donateUser =
+  (id, values, resetForm) => async (dispatch, getState) => {
+    dispatch({
+      type: DONATE_USER,
     });
-};
+    const fd = new FormData();
+    if (values.donation_option_id) {
+      fd.append("donation_option_id", values.donation_option_id);
+    }
+    if (values.donation_option_id) {
+      fd.append("donation_option_id", values.donation_option_id);
+    }
+    fd.append("message", values.message);
+
+    fd.append("currency", values.currency);
+    fd.append("payment_method_id", values.payment_method_id);
+    await axios
+      .patch(
+        `${process.env.HOST}/api/users/${id}/make_donation/`,
+        fd,
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        console.log("res", res.data);
+        // res.data.user === my user
+        if (res.data?.user) {
+          await dispatch({
+            type: USER_LOADED,
+            payload: { user: res.data.user },
+          });
+        }
+        await dispatch({
+          type: DONATE_USER_SUCCESS,
+        });
+        await dispatch(
+          createAlert("SUCCESS", "Congratulations! you have made a donation")
+        );
+        await resetForm({});
+      })
+      .catch((err) => {
+        dispatch({
+          type: DONATE_USER_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };

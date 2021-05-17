@@ -58,6 +58,7 @@ const DonationForm = () => {
       setStripeError(null);
       dispatch(
         donateUser(
+          userReducer.user?.id,
           {
             ...values,
 
@@ -75,8 +76,8 @@ const DonationForm = () => {
       )[0]?.id,
       other_amount: "",
       message: "",
-      to_user_id: userReducer.user?.id,
       currency: authReducer.currency,
+      email: "",
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
@@ -93,8 +94,11 @@ const DonationForm = () => {
         300,
         "Message must be less than or equal to 300 characters"
       ),
-      to_user_id: Yup.string().required(),
       currency: Yup.string().required(),
+      email: Yup.string().when({
+        is: authReducer.is_authenticated === true,
+        then: Yup.string().required("Email is required"),
+      }),
     }),
     onSubmit: async (values, { resetForm }) => {
       console.log(values);
@@ -584,6 +588,52 @@ const DonationForm = () => {
             </div>
 
             <div className="mb-4 sm:mb-5 pt-5">
+              {!authReducer.is_authenticated && (
+                <div className="mb-4">
+                  <div className="relative flex justify-center">
+                    <input
+                      type="text"
+                      name="email"
+                      id="email"
+                      className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm dark:focus:text-white bg-white border-gray-300  text-sm  focus:placeholder-gray-400 focus:text-gray-900 dark:bg-gray-600 ${
+                        formik.touched.email && formik.errors.email
+                          ? "pr-10 border-red-300 text-red-600   placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
+                          : " text-sm placeholder-gray-500  dark:placeholder-gray-300 dark:text-white  focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
+                      }`}
+                      placeholder={`Email`}
+                      aria-describedby="email"
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    ></input>
+                    {formik.touched.email && formik.errors.email && (
+                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <svg
+                          className="h-5 w-5 text-red-500"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  {formik.touched.email && formik.errors.email && (
+                    <p
+                      className="mt-2 text-sm text-red-600 text-center"
+                      id="email-error"
+                    >
+                      {formik.errors.email}
+                    </p>
+                  )}
+                </div>
+              )}
               <div>
                 <div className="relative">
                   <textarea
