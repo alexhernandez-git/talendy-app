@@ -4,16 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import Spinner from "components/Layout/Spinner";
 import Pagination from "components/Layout/Pagination";
+import { fetchEarningsPagination } from "redux/actions/earnings";
 const EarningsHistory = () => {
   const dispatch = useDispatch();
 
   const earningsReducer = useSelector((state) => state.earningsReducer);
-  const handleChangePage = (url) => {};
+  const handleChangePage = (url) => {
+    dispatch(fetchEarningsPagination(url));
+  };
   const getEarningType = (earning) => {
     switch (earning.type) {
-      case "OR":
+      case "DR":
         if (moment().isAfter(moment(earning.available_for_withdrawn_date))) {
-          return "Order revenue";
+          return "Donation revenue";
         }
         const days_left = moment(earning.available_for_withdrawn_date).diff(
           moment(),
@@ -21,21 +24,10 @@ const EarningsHistory = () => {
         );
         const percentage = (100 - (100 * days_left) / 13).toFixed(0);
 
-        return <div>Order revenue: Pending clearance {percentage}%</div>;
+        return <div>Donation revenue: Pending clearance {percentage}%</div>;
       case "WI":
         return "Withdrawn funds";
-      case "RE":
-        if (moment().isAfter(moment(earning.available_for_withdrawn_date))) {
-          return "Refund funds";
-        }
-        const days_left_refund = moment(
-          earning.available_for_withdrawn_date
-        ).diff(moment(), "days");
-        const percentage_refund = (100 - (100 * days_left_refund) / 13).toFixed(
-          0
-        );
 
-        return <div>Refund funds: Pending clearance {percentage_refund}%</div>;
       case "SP":
         return "Credits spent";
     }

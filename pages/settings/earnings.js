@@ -12,13 +12,22 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import Container from "react-modal-promise";
 import useUserConfirmationModal from "hooks/useUserConfirmation";
+import { fetchEarnings } from "redux/actions/earnings";
+import useAuthRequired from "hooks/useAuthRequired";
 const earnings = () => {
   const router = useRouter();
-  const code = router.query.code ? router.query.code : null;
   const dispatch = useDispatch();
-  const authReducer = useSelector((state) => state.authReducer);
+  const [cantRender, authReducer, initial_data_fetched] = useAuthRequired();
   const withdrawFundsRef = useRef();
   const [openWithdrawFunds, setOpenWithdrawFunds] = useState(false);
+  const handleFetchEarnigsData = async () => {
+    if (initial_data_fetched && authReducer.user) {
+      await dispatch(fetchEarnings());
+    }
+  };
+  useEffect(() => {
+    handleFetchEarnigsData();
+  }, [initial_data_fetched]);
   const handleToggleWithdrawFunds = () => {
     if (!openWithdrawFunds) {
       useUserConfirmationModal()
@@ -63,7 +72,6 @@ const earnings = () => {
     }
   };
   useOutsideClick(paypalConnectModalRef, () => handleClosePaypalConnectModal());
-  const cantRender = true;
   return (
     <>
       <Head>
