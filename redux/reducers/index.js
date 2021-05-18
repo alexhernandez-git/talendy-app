@@ -23,6 +23,7 @@ import contributeRoomReducer from "./contributeRoomReducer";
 import roomMessagesReducer from "./roomMessagesReducer";
 import donationOptionsReducer from "./donationOptionsReducer";
 import reviewsReducer from "./reviewsReducer";
+import donationsReducer from "./donationsReducer";
 
 export default combineReducers({
   authReducer: authReducer,
@@ -48,4 +49,5 @@ export default combineReducers({
   contributeRoomReducer: contributeRoomReducer,
   roomMessagesReducer: roomMessagesReducer,
   reviewsReducer: reviewsReducer,
+  donationsReducer: donationsReducer,
 });

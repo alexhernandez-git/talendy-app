@@ -6,14 +6,16 @@ import LeftSidebar from "components/Pages/User/LeftSidebar";
 import ReviewsFeed from "components/Pages/Reviews/ReviewsFeed";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { fetchMoreReviews, fetchReviews } from "redux/actions/reviews";
+import { fetchMoreReviews, fetchReviews } from "redux/actions/donations";
 import Link from "next/link";
 import Review from "components/Pages/Reviews/Review";
 import useAuthRequired from "hooks/useAuthRequired";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import Donation from "pages/user/donation/[user]";
+import Donation from "components/pages/Donations/Donation";
 import Spinner from "components/Layout/Spinner";
+import { fetchDonations, fetchMoreDonations } from "redux/actions/donations";
+import VisibilitySensor from "react-visibility-sensor";
 
 export default function Donaitons() {
   const page = PROFILE_DONATIONS_PAGE;
@@ -22,21 +24,20 @@ export default function Donaitons() {
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
   useEffect(() => {
     const handleFetchData = async () => {
-      await dispatch(fetchReviews());
+      await dispatch(fetchDonations());
     };
     if (initialDataFetched) {
       handleFetchData();
     }
   }, [initialDataFetched]);
-  const reviewsReducer = useSelector((state) => state.reviewsReducer);
-  const userReducer = useSelector((state) => state.userReducer);
+  const donationsReducer = useSelector((state) => state.donationsReducer);
 
-  const handleLoadMoreNotifications = () => {
-    dispatch(fetchMoreReviews());
+  const handleFetchMoreDonations = () => {
+    dispatch(fetchMoreDonations());
   };
   const onChangeVisibility = (visible) => {
     if (visible) {
-      handleLoadMoreNotifications();
+      handleFetchMoreDonations();
     }
   };
   return (
@@ -117,15 +118,15 @@ export default function Donaitons() {
 
             <div className="bg-white dark:bg-gray-700 px-4 py-6 shadow sm:p-6 sm:rounded-lg">
               <div className="flow-root">
-                {reviewsReducer.is_loading && (
+                {donationsReducer.is_loading && (
                   <div className="flex justify-center space-y-4 w-full mb-4">
                     <Spinner />
                   </div>
                 )}
-                {reviewsReducer.reviews.results.length > 0 ? (
+                {donationsReducer.donations.results.length > 0 ? (
                   <ul className="sm:divide-y sm:divide-gray-200">
-                    {reviewsReducer.reviews.results.map((review) => (
-                      <Donation review={review} key={review?.id} />
+                    {donationsReducer.donations.results.map((donation) => (
+                      <Donation donation={donation} key={donation?.id} />
                     ))}
                   </ul>
                 ) : (
@@ -136,21 +137,21 @@ export default function Donaitons() {
                   </div>
                 )}
 
-                {!reviewsReducer.is_fetching_more_reviews &&
-                  reviewsReducer.reviews.results.length > 0 &&
-                  reviewsReducer.reviews.next && (
+                {!donationsReducer.is_fetching_more_donations &&
+                  donationsReducer.donations.results.length > 0 &&
+                  donationsReducer.donations.next && (
                     <VisibilitySensor onChange={onChangeVisibility}>
                       <div
                         className="p-3 flex justify-center"
-                        onClick={handleFetchMorePosts}
+                        onClick={handleFetchMoreDonations}
                       >
                         <span className="text-gray-500 dark:text-gray-100 text-sm cursor-pointer">
-                          Load more reviews
+                          Load more donations
                         </span>
                       </div>
                     </VisibilitySensor>
                   )}
-                {reviewsReducer.is_fetching_more_reviews && (
+                {donationsReducer.is_fetching_more_donations && (
                   <div className="flex justify-center space-y-4 w-full mb-4 p-3">
                     <Spinner />
                   </div>

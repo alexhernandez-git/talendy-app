@@ -4,6 +4,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { fetchMoreReviews } from "redux/actions/reviews";
 import Review from "./Review";
+import VisibilitySensor from "react-visibility-sensor";
 
 const ReviewsFeed = ({ profile }) => {
   const reviewsReducer = useSelector((state) => state.reviewsReducer);
