@@ -51,6 +51,13 @@ function WrappedApp({ Component, pageProps }) {
             await dispatch(newMessageEvent(data));
             break;
 
+          case "NEW_DONATION":
+            await dispatch(createAlert("SUCCESS", "New donation"));
+
+            await dispatch(
+              addOrUpdateNotificationToFeed(data.notification__pk)
+            );
+            break;
           case "JOINED_MEMBERSHIP":
             await dispatch(createAlert("SUCCESS", "New member joined"));
 

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 const useGetNotification = (notification) => {
   const authReducer = useSelector((state) => state.authReducer);
+  console.log(notification);
   let connection;
   let user;
   let member_joined;
@@ -123,10 +124,21 @@ const useGetNotification = (notification) => {
     case "NR":
       review_user = notification?.review?.review_user;
       return {
-        event_message: `New Review`,
+        event_message: `New review`,
         message: `You got a new review from ${review_user?.username}`,
         user: review_user,
         link: `/profile/reviews`,
+      };
+    case "ND":
+      const donation = notification?.donation;
+      user = donation?.from_user
+        ? donation.from_user
+        : { username: "Anonymous user" };
+      return {
+        event_message: `New donation`,
+        message: `You got a new donation of $${donation.net_amount} from ${user?.username}`,
+        user: user,
+        link: `/profile/donations`,
       };
     default:
       return {
