@@ -212,7 +212,8 @@ export default function PostPage() {
                 </div>
               </div>
               {postReducer.post?.status !== "SO" &&
-                postReducer.post?.privacity === "CO" && (
+                postReducer.post?.privacity === "CO" &&
+                !postReducer.post?.user?.is_connection && (
                   <div className="mt-6 flex justify-between space-x-8">
                     <span className="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-white bg-white dark:bg-gray-700 ">
                       <svg
@@ -256,7 +257,8 @@ export default function PostPage() {
                 (member) => member.user.id === authReducer.user?.id
               ) &&
                 !postReducer.post?.is_contribute_requested &&
-                postReducer.post?.privacity !== "CO" &&
+                (postReducer.post?.privacity !== "CO" ||
+                  postReducer.post?.user?.is_connection) &&
                 postReducer.post?.status !== "SO" && (
                   <form
                     onSubmit={handleSubmitContributeRequest}

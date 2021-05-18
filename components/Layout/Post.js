@@ -148,7 +148,7 @@ const Post = ({ page, post }) => {
     }
     formik.handleSubmit();
   };
-
+  console.log("post", post);
   return (
     <li>
       <article
@@ -381,7 +381,7 @@ const Post = ({ page, post }) => {
             </span>
           </div>
         </div>
-        {post?.status !== "SO" && post?.privacity === "CO" && (
+        {post?.status !== "SO" && post?.privacity === "CO" && !post?.user?.is_connection && (
           <div className="mt-6 flex justify-between space-x-8">
             <span className="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-white bg-white dark:bg-gray-700 ">
               <svg
@@ -425,7 +425,8 @@ const Post = ({ page, post }) => {
           (member) => member.user.id === authReducer.user?.id
         ) &&
           !post?.is_contribute_requested &&
-          post?.privacity !== "CO" &&
+          (post?.privacity !== "CO" || post?.user?.is_connection) &&
+          post?.user &&
           post?.status !== "SO" && (
             <form
               onSubmit={handleSubmitContributeRequest}
