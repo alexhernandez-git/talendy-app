@@ -114,6 +114,24 @@ const settings = () => {
       dispatch(updateUser(values));
     },
   });
+  const notificationsForm = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      email_notifications_allowed: user && user.email_notifications_allowed,
+    },
+    validationSchema: Yup.object({
+      email_notifications_allowed: Yup.boolean().nullable(),
+    }),
+    onSubmit: async (values) => {
+      dispatch(updateUser(values));
+    },
+  });
+  const handleToggleEmailNotificaitonsAllowed = () => {
+    notificationsForm.setFieldValue(
+      "email_notifications_allowed",
+      !notificationsForm.values.email_notifications_allowed
+    );
+  };
   const emailForm = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -127,6 +145,7 @@ const settings = () => {
       dispatch(changeEmail(values));
     },
   });
+
   React.useEffect(() => {
     if (user) {
       dispatch(resetEmailAvailable());
@@ -493,6 +512,65 @@ const settings = () => {
                   </div>
                 </div>
               </form>
+              <form onSubmit={notificationsForm.handleSubmit}>
+                <div className="shadow sm:rounded-3xl sm:overflow-hidden">
+                  <div className="bg-white dark:bg-gray-700 py-6 px-4 space-y-6 sm:p-6">
+                    <div>
+                      <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
+                        Notifications
+                      </h3>
+                      {/* <p className="mt-1 text-sm text-gray-500">
+                    Use a permanent address where you can recieve mail.
+                  </p> */}
+                    </div>
+
+                    <div className="grid grid-cols-6 gap-6">
+                      <div className="flex flex-col col-span-6 sm:col-span-4">
+                        <p
+                          className="text-sm font-medium text-gray-900 dark:text-white"
+                          id="privacy-option-1-label"
+                        >
+                          Email notifications
+                        </p>
+                        <p
+                          className="text-sm text-gray-500 dark:text-gray-200"
+                          id="privacy-option-1-description"
+                        >
+                          Recive the notifications in your inbox.
+                        </p>
+                      </div>
+                      <button
+                        onClick={handleToggleEmailNotificaitonsAllowed}
+                        type="button"
+                        className={`bg-gray-200  dark:bg-gray-500 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 `}
+                        role="switch"
+                        aria-checked="true"
+                        aria-labelledby="privacy-option-1-label"
+                        aria-describedby="privacy-option-1-description"
+                      >
+                        <span className="sr-only">Use setting</span>
+                        <span
+                          aria-hidden="true"
+                          className={`${
+                            notificationsForm.values.email_notifications_allowed
+                              ? "translate-x-5 bg-orange-500"
+                              : "translate-x-0 bg-white"
+                          } pointer-events-none inline-block h-5 w-5 rounded-full  shadow transform ring-0  transition ease-in-out duration-200`}
+                        ></span>
+                      </button>{" "}
+                    </div>
+                  </div>
+                  <div className="px-4 py-3 bg-gray-50  dark:bg-gray-800 text-right sm:px-6">
+                    <button
+                      type="submit"
+                      className="text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </form>
+
               <form onSubmit={emailForm.handleSubmit}>
                 <div className="shadow sm:rounded-3xl sm:overflow-hidden">
                   <div className="bg-white dark:bg-gray-700 py-6 px-4 space-y-6 sm:p-6">
