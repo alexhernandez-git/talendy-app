@@ -9,15 +9,15 @@ const Donation = ({ donation }) => {
       <div className="relative py-4">
         <div className="relative flex items-start space-x-3">
           <div className="relative">
-            {donation?.donation_user?.picture ? (
+            {donation?.from_user?.picture ? (
               <img
                 className="h-10 w-10 rounded-full flex items-center justify-center"
                 src={
                   new RegExp(
                     `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
-                  ).test(donation?.donation_user?.picture)
-                    ? donation?.donation_user?.picture
-                    : process.env.HOST + donation?.donation_user?.picture
+                  ).test(donation?.from_user?.picture)
+                    ? donation?.from_user?.picture
+                    : process.env.HOST + donation?.from_user?.picture
                 }
                 alt=""
               ></img>
@@ -36,20 +36,23 @@ const Donation = ({ donation }) => {
           <div className="min-w-0 flex-1">
             <div>
               <div className="text-sm">
-                <Link href={`/user/${donation?.donation_user?.id}`}>
+                <Link href={`/user/${donation?.from_user?.id}`}>
                   <span className="font-medium text-gray-900 dark:text-white cursor-pointer">
-                    {donation?.donation_user?.username}
+                    {donation?.from_user?.username}
                   </span>
                 </Link>
               </div>
               <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-100 flex items-end">
+                <span className="mr-2 text-orange-500">
+                  ${donation?.net_amount}
+                </span>
                 <span>
                   {moment(donation?.created).subtract(1, "seconds").fromNow()}
                 </span>
               </p>
             </div>
             <div className="mt-2 text-sm text-gray-700 dark:text-gray-50 break-all whitespace-pre-line">
-              <p>{donation?.comment}</p>
+              <p>{donation?.message}</p>
             </div>
           </div>
         </div>
