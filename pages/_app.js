@@ -53,6 +53,7 @@ function WrappedApp({ Component, pageProps }) {
 
           case "NEW_DONATION":
             await dispatch(createAlert("SUCCESS", "New donation"));
+            await dispatch(setPendingNotifications());
 
             await dispatch(
               addOrUpdateNotificationToFeed(data.notification__pk)
@@ -60,6 +61,7 @@ function WrappedApp({ Component, pageProps }) {
             break;
           case "JOINED_MEMBERSHIP":
             await dispatch(createAlert("SUCCESS", "New member joined"));
+            await dispatch(setPendingNotifications());
 
             await dispatch(
               addOrUpdateNotificationToFeed(data.notification__pk)
