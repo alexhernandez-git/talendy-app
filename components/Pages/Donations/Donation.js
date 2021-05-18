@@ -36,11 +36,17 @@ const Donation = ({ donation }) => {
           <div className="min-w-0 flex-1">
             <div>
               <div className="text-sm">
-                <Link href={`/user/${donation?.from_user?.id}`}>
+                {donation?.is_anonymous ? (
                   <span className="font-medium text-gray-900 dark:text-white cursor-pointer">
-                    {donation?.from_user?.username}
+                    Anonymous user
                   </span>
-                </Link>
+                ) : (
+                  <Link href={`/user/${donation?.from_user?.id}`}>
+                    <span className="font-medium text-gray-900 dark:text-white cursor-pointer">
+                      {donation?.from_user?.username}
+                    </span>
+                  </Link>
+                )}
               </div>
               <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-100 flex items-end">
                 <span className="mr-2 text-orange-500">

@@ -133,7 +133,7 @@ const useGetNotification = (notification) => {
       const donation = notification?.donation;
       user = donation?.from_user
         ? donation.from_user
-        : { username: "Anonymous user" };
+        : { username: "anonymous user" };
       return {
         event_message: `New donation`,
         message: `You got a new donation of $${donation.net_amount} from ${user?.username}`,
