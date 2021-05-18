@@ -37,7 +37,7 @@ const Donation = ({ donation }) => {
             <div>
               <div className="text-sm">
                 {donation?.is_anonymous ? (
-                  <span className="font-medium text-gray-900 dark:text-white cursor-pointer">
+                  <span className="font-medium text-gray-900 dark:text-white">
                     Anonymous user
                   </span>
                 ) : (
