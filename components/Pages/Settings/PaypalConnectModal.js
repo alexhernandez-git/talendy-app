@@ -2,6 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
+import { paypalConnect } from "redux/actions/auth";
 
 const PaypalConnectModal = ({
   paypalConnectModalRef,
@@ -21,7 +22,9 @@ const PaypalConnectModal = ({
         .oneOf([Yup.ref("email"), null], "Emails must match")
         .required("PayPal email confirmation is required"),
     }),
-    onSubmit: async (values, { resetForm }) => {},
+    onSubmit: async (values, { resetForm }) => {
+      dispatch(paypalConnect(values, handleClosePaypalConnectModal, resetForm));
+    },
   });
   return (
     <div

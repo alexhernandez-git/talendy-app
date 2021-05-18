@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "components/Layout/Spinner";
+import { withdrawFounds } from "redux/actions/earnings";
 
 const WithdrawFundsModal = ({
   withdrawFundsRef,
@@ -29,6 +30,9 @@ const WithdrawFundsModal = ({
     }),
     onSubmit: async (values, { resetForm }) => {
       console.log(values);
+      await dispatch(
+        withdrawFounds(values, resetForm, handleCloseWithdrawFunds)
+      );
     },
   });
 
@@ -51,7 +55,7 @@ const WithdrawFundsModal = ({
           </span>
           <div
             ref={withdrawFundsRef}
-            className="inline-block align-bottom bg-white dark:text-gray-700 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full sm:p-6"
+            className="inline-block align-bottom bg-white dark:bg-gray-700 rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full sm:p-6"
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-headline"
@@ -88,7 +92,7 @@ const WithdrawFundsModal = ({
                               alt=""
                             />
                           </div>
-                          <div className="relative text-gray-500 dark:text-gray-300 ml-2">
+                          <div className="relative text-gray-500 dark:text-gray-200 ml-2">
                             PayPal Account
                           </div>
                         </div>
@@ -104,7 +108,7 @@ const WithdrawFundsModal = ({
 
                       <div className="mt-1   sm:mt-0 sm:col-span-2">
                         <div className="flex items-center">
-                          <div className="relative text-gray-500">
+                          <div className="relative text-gray-500 dark:text-gray-200">
                             {authReducer.user?.paypal_email}
                           </div>
                         </div>
@@ -189,7 +193,7 @@ const WithdrawFundsModal = ({
                 Cancel
               </button>
             </div>
-            <div className="mt-4 text-sm text-gray-500 dark:text-gray-300">
+            <div className="mt-4 text-sm text-gray-500 dark:text-gray-200">
               <span>
                 Currency conversion fees are included. Please note{" "}
                 <span className="text-bold">
