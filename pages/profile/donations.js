@@ -12,7 +12,7 @@ import Review from "components/Pages/Reviews/Review";
 import useAuthRequired from "hooks/useAuthRequired";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import Donation from "components/pages/Donations/Donation";
+import Donation from "components/Pages/Donations/Donation";
 import Spinner from "components/Layout/Spinner";
 import { fetchDonations, fetchMoreDonations } from "redux/actions/donations";
 import VisibilitySensor from "react-visibility-sensor";
