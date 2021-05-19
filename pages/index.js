@@ -342,14 +342,12 @@ export default function Home() {
                   </div>
                   <div className="mt-6">
                     <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-                      Better understand your customers
+                      A collaboration room will be at your disposal
                     </h2>
                     <p className="mt-4 text-lg text-gray-500 dark:text-gray-200">
-                      Semper curabitur ullamcorper posuere nunc sed. Ornare
-                      iaculis bibendum malesuada faucibus lacinia porttitor.
-                      Pulvinar laoreet sagittis viverra duis. In venenatis sem
-                      arcu pretium pharetra at. Lectus viverra dui tellus ornare
-                      pharetra.
+                      Where you can communicate by collaborating on the post, by
+                      voice and by chat, you can also share notes, write on the
+                      shared whiteboard and some more surprises.
                     </p>
                     <div className="mt-6">
                       <span
@@ -381,7 +379,7 @@ export default function Home() {
             <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
               <span className="block">Ready to get started?</span>
               <span className="block bg-gradient-to-r from-orange-500 to-pink-500 bg-clip-text text-transparent">
-                Get in touch or create an account.
+                Create an account.
               </span>
             </h2>
             <div className="mt-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-5">
