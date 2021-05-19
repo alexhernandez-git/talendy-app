@@ -65,7 +65,7 @@ const useGetNotification = (notification) => {
           : "New message from contribute room",
         message: message,
         user: notification.actor,
-        link: `/contributing-room/${notification?.post?.id}`,
+        link: `/collaborate-room/${notification?.post?.id}`,
       };
     case "NC":
       connection = notification.connection;
@@ -103,7 +103,7 @@ const useGetNotification = (notification) => {
         event_message: `New member joined`,
         message: `${member_joined.username} has joined to your post`,
         user: member_joined,
-        link: `/contributing-room/${notification?.post?.id}`,
+        link: `/collaborate-room/${notification?.post?.id}`,
       };
     case "CA":
       post_owner = notification?.post?.user;
@@ -111,7 +111,7 @@ const useGetNotification = (notification) => {
         event_message: `Contribute request accepted`,
         message: `${post_owner.username} has accepted your contribute request`,
         user: post_owner,
-        link: `/contributing-room/${notification?.post?.id}`,
+        link: `/collaborate-room/${notification?.post?.id}`,
       };
     case "PF":
       post = notification?.post;
@@ -119,7 +119,7 @@ const useGetNotification = (notification) => {
         event_message: `Post finalized`,
         message: `${post.user?.username} has finalized the post`,
         user: post.user,
-        link: `/contributing-room/${notification?.post?.id}`,
+        link: `/collaborate-room/${notification?.post?.id}`,
       };
     case "NR":
       review_user = notification?.review?.review_user;
