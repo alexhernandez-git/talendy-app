@@ -159,7 +159,7 @@ const User = ({ page, user }) => {
                 <div className="relative inline-block text-left">
                   <div>
                     <button
-                      onClick={handleToggleOptions}
+                      onMouseDown={handleToggleOptions}
                       type="button"
                       className="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-100"
                       id="options-menu-0"
