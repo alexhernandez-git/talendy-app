@@ -33,9 +33,9 @@ import Spinner from "components/Layout/Spinner";
 import moment from "moment";
 import { addRoomMessage, fetchRoomMessages } from "redux/actions/roomMessages";
 import { setEndOfContenteditable } from "helpers";
-import Finalize from "components/pages/ContributeRoom/Finalize";
 import ContributeWhiteboard from "components/Pages/Contribute/ContributeWhiteboard";
 import ContributeScreenSharing from "components/Pages/Contribute/ContributeScreenSharing";
+import Finalize from "components/Pages/ContributeRoom/Finalize";
 const Audio = (props) => {
   const ref = useRef();
   useEffect(() => {
