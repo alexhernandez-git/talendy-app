@@ -7,7 +7,12 @@ import NewPostModal from "./CreateEditPostModal";
 import RegisterModal from "./RegisterModal";
 import { useAlert } from "hooks/useAlert";
 
-const Layout = ({ children, page }) => {
+const Layout = ({
+  children,
+  page,
+  openRegisterByLayout = null,
+  setOpenRegisterByLayout = null,
+}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -43,9 +48,17 @@ const Layout = ({ children, page }) => {
     if (registerOpen) {
       document.body.style.overflow = "hidden";
     } else {
+      if (setOpenRegisterByLayout) {
+        setOpenRegisterByLayout(false);
+      }
       document.body.style.overflow = "";
     }
   }, [registerOpen]);
+  useEffect(() => {
+    if (openRegisterByLayout) {
+      setRegisterOpen(true);
+    }
+  }, [openRegisterByLayout]);
   const alert = useAlert();
   return (
     <>

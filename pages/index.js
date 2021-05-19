@@ -34,6 +34,7 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
 import { changeCommunityFilter } from "redux/actions/auth";
+import Link from "next/link";
 
 const footerNavigation = {
   solutions: [
@@ -159,8 +160,15 @@ export default function Home() {
       );
     }
   }, [authReducer.theme]);
+  const [openRegisterByLayout, setOpenRegisterByLayout] = useState(false);
+  const handleOpenRegisterByLayout = () => {
+    setOpenRegisterByLayout(true);
+  };
   return (
-    <Layout>
+    <Layout
+      openRegisterByLayout={openRegisterByLayout}
+      setOpenRegisterByLayout={setOpenRegisterByLayout}
+    >
       <main className="mt-10">
         {/* Hero section */}
         <div className="relative">
@@ -188,18 +196,17 @@ export default function Home() {
                 </p>
                 <div className="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
                   <div className="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
-                    <a
-                      href="#"
-                      className="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-orange-700 bg-white hover:opacity-90 hover:bg-orange-50 sm:px-8"
+                    <span
+                      onClick={handleOpenRegisterByLayout}
+                      className="cursor-pointer flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-orange-700 bg-white hover:opacity-90 hover:bg-orange-50 sm:px-8"
                     >
                       Join now
-                    </a>
-                    <a
-                      href="#"
-                      className="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r hover:opacity-90 from-orange-500 to-pink-500 hover:to-pink-600 sm:px-8"
-                    >
-                      Sign in
-                    </a>
+                    </span>
+                    <Link href={"/feed"}>
+                      <span className="cursor-pointer flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r hover:opacity-90 from-orange-500 to-pink-500 hover:to-pink-600 sm:px-8">
+                        See posts
+                      </span>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -345,12 +352,12 @@ export default function Home() {
                       pharetra.
                     </p>
                     <div className="mt-6">
-                      <a
-                        href="#"
-                        className="inline-flex px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                      <span
+                        onClick={handleOpenRegisterByLayout}
+                        className="cursor-pointer inline-flex px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
                       >
                         Get started
-                      </a>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -378,18 +385,12 @@ export default function Home() {
               </span>
             </h2>
             <div className="mt-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-5">
-              <a
-                href="#"
-                className="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
-              >
-                Learn more
-              </a>
-              <a
-                href="#"
-                className="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-orange-800 bg-orange-50 hover:bg-orange-100"
+              <span
+                onClick={handleOpenRegisterByLayout}
+                className="cursor-pointer flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
               >
                 Get started
-              </a>
+              </span>
             </div>
           </div>
         </div>
