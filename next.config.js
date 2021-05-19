@@ -2,7 +2,6 @@ module.exports = {
   future: {
     webpack5: true,
   },
-  assetPrefix: "http://",
   env: {
     HOST: process.env.HOST,
     WS: process.env.WS,
