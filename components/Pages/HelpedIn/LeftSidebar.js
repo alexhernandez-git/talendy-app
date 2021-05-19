@@ -38,7 +38,7 @@ const LeftSidebar = ({ page, mobile }) => {
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
               >
                 <span className="truncate">All</span>
-                <span>{authReducer.user?.contributed_posts_count}</span>
+                <span>{authReducer.user?.collaborated_posts_count}</span>
               </span>
             </Link>
             <Link href="/profile/contributed/active">
@@ -51,7 +51,7 @@ const LeftSidebar = ({ page, mobile }) => {
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
               >
                 <span className="truncate">Active</span>
-                <span>{authReducer.user?.contributed_active_posts_count}</span>
+                <span>{authReducer.user?.collaborated_active_posts_count}</span>
               </span>
             </Link>
             <Link href="/profile/contributed/closed">
@@ -64,7 +64,7 @@ const LeftSidebar = ({ page, mobile }) => {
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
               >
                 <span className="truncate">Solved</span>
-                <span>{authReducer.user?.contributed_solved_posts_count}</span>
+                <span>{authReducer.user?.collaborated_solved_posts_count}</span>
               </span>
             </Link>
           </div>

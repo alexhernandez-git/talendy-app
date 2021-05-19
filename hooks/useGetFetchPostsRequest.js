@@ -31,7 +31,7 @@ const useGetFetchPostsRequest = (page, user) => {
     case MY_SOLVED_POSTS_PAGE:
       return "posts/list_my_solved_posts";
     case CONTRIBUTED_POSTS_PAGE:
-      return "posts/list_contributed_posts";
+      return "posts/list_collaborated_posts";
     case ACTIVE_CONTRIBUTED_POSTS_PAGE:
       return "posts/list_contributed_active_posts";
     case SOLVED_CONTRIBUTED_POSTS_PAGE:

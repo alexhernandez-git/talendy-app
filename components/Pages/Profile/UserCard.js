@@ -347,7 +347,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
                       Posts Contributed
                     </dt>
                     <dd className="mt-1 text-sm text-gray-900 dark:text-white">
-                      {user?.contributed_posts_count}
+                      {user?.collaborated_posts_count}
                     </dd>
                   </div>
 
