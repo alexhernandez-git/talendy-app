@@ -24,7 +24,7 @@ export const fetchContributeRoom = (id) => async (dispatch, getState) => {
   });
   await axios
     .get(
-      `${process.env.HOST}/api/posts/${id}/retrieve_contribute_room/`,
+      `${process.env.HOST}/api/posts/${id}/retrieve_collaborate_room/`,
       tokenConfig(getState)
     )
     .then(async (res) => {
