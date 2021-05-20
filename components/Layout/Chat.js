@@ -86,7 +86,7 @@ const Chat = () => {
       if (socketRef.current) {
         socketRef.current.disconnect();
       }
-      socketRef.current = io.connect("http://localhost:5400");
+      socketRef.current = io.connect(process.env.CHAT_WS);
       socketRef.current.on("connect", () => {
         console.log("connected chat!!!!!!!!!!");
       });

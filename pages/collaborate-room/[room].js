@@ -178,7 +178,7 @@ const Contribute = () => {
 
   useEffect(() => {
     if (initialDataFetched && validationsMade) {
-      socketRef.current = io.connect("http://localhost:5500");
+      socketRef.current = io.connect(process.env.COLLABORATE_ROOM_WS);
       socketRef.current.on("connect", () => {
         console.log("connected layout!!!!!!!!!!");
       });
