@@ -102,6 +102,7 @@ export default function ContributeSharedNotes({
     if (firstLoad) {
       if (sharedNotes) {
         sharedNotesRef.current.innerHTML = sharedNotes;
+        setEditorText(sharedNotes);
         setEditorTextLength(sharedNotesRef.current.innerText.length);
       }
       setFirstLoad(false);
