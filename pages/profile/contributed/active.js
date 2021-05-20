@@ -37,7 +37,6 @@ export default function Posts() {
           <main className={`lg:col-span-8 xl:col-span-6 xl:col-start-3`}>
             <ProfileMenu page={page} />
             <LeftSidebar page={page} mobile />
-
             <PostsFeed />
           </main>
           <ProfileCard page={page} profile user={authReducer.user} />
