@@ -137,7 +137,7 @@ const Chat = () => {
   if (!chatsReducer.is_open) return <></>;
   return (
     <div className={`absolute inset-0 overflow-hidden z-40`}>
-      <div className="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+      <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
 
       <div className="fixed inset-y-0 right-0 max-w-full flex">
         <div
