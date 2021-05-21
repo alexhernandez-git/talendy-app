@@ -13,6 +13,9 @@ import {
   FINALIZE_POST,
   FINALIZE_POST_SUCCESS,
   FINALIZE_POST_FAIL,
+  STOP_COLLABORATING,
+  STOP_COLLABORATING_SUCCESS,
+  STOP_COLLABORATING_FAIL,
 } from "../types";
 
 const initialState = {
@@ -25,6 +28,8 @@ const initialState = {
   update_solution_error: null,
   is_finalizing_post: false,
   finalize_post_error: null,
+  is_stopping_colaborating: false,
+  stop_collaborating_error: null,
 };
 export default function collaborateRoomReducer(state = initialState, action) {
   switch (action.type) {
@@ -96,6 +101,24 @@ export default function collaborateRoomReducer(state = initialState, action) {
         ...state,
         is_updating_solution: false,
         update_solution_error: action.payload,
+      };
+    case STOP_COLLABORATING:
+      return {
+        ...state,
+        is_stopping_colaborating: true,
+      };
+    case STOP_COLLABORATING_SUCCESS:
+      return {
+        ...state,
+        is_stopping_colaborating: false,
+        collaborate_room: action.payload,
+        stop_collaborating_error: null,
+      };
+    case STOP_COLLABORATING_FAIL:
+      return {
+        ...state,
+        is_stopping_colaborating: false,
+        stop_collaborating_error: action.payload,
       };
     case FINALIZE_POST:
       return {

@@ -15,6 +15,9 @@ import {
   FINALIZE_POST,
   FINALIZE_POST_SUCCESS,
   FINALIZE_POST_FAIL,
+  STOP_COLLABORATING,
+  STOP_COLLABORATING_SUCCESS,
+  STOP_COLLABORATING_FAIL,
 } from "../types";
 import { createAlert } from "./alerts";
 
@@ -96,6 +99,37 @@ export const updateSolution = (values) => async (dispatch, getState) => {
         type: UPDATE_SOLUTION_FAIL,
         payload: { data: err.response?.data, status: err.response?.status },
       });
+    });
+};
+
+export const stopCollaborating = (router) => async (dispatch, getState) => {
+  await dispatch({
+    type: STOP_COLLABORATING,
+  });
+  await axios
+    .patch(
+      `${process.env.HOST}/api/posts/${
+        getState().collaborateRoomReducer.collaborate_room?.id
+      }/stop_collaborating/`,
+      { stop_collaborating_user: getState().authReducer.user?.id },
+      tokenConfig(getState)
+    )
+    .then(async (res) => {
+      await dispatch({
+        type: STOP_COLLABORATING_SUCCESS,
+        payload: res.data,
+      });
+      await router.push("/feed");
+      await dispatch(
+        createAlert("SUCCESS", "You have stopped collaborating on this post")
+      );
+    })
+    .catch(async (err) => {
+      await dispatch({
+        type: STOP_COLLABORATING_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+      dispatch(createAlert("ERROR", "Something went wrong"));
     });
 };
 
