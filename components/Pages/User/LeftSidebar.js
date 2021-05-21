@@ -68,7 +68,7 @@ const LeftSidebar = ({ page, mobile, status, setStatus }) => {
                       : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
                   } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
               >
-                <span className="truncate">Contributed</span>
+                <span className="truncate">Collaborated</span>
               </span>
             </Link>
           </div>

@@ -49,7 +49,7 @@ const ProfileMenu = ({ page }) => {
         >
           <option value={MY_POSTS_PAGE}>My Posts</option>
 
-          <option value={CONTRIBUTED_POSTS_PAGE}>Contributed</option>
+          <option value={CONTRIBUTED_POSTS_PAGE}>Collaborated</option>
 
           <option value={MY_NETWORK_PAGE}>My Network</option>
         </select>
@@ -102,7 +102,7 @@ const ProfileMenu = ({ page }) => {
               } dark:text-white group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-700  py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10  hover:text-gray-700 dark:hover:bg-gray-800`}
             >
               <span>
-                Contributed
+                Collaborated
                 <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white">
                   <span>{authReducer.user?.collaborated_posts_count}</span>
                 </span>
