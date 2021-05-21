@@ -793,7 +793,7 @@ const DonationForm = () => {
             </div>
           )}
           <div className="mt-2 flex justify-center">
-            <span className="text-sm text-gray-400 dark:text-gray-300">
+            <span className="text-xs text-gray-400 dark:text-gray-300">
               20% of what you donate will go to the maintenance of this platform
             </span>
           </div>
