@@ -10,10 +10,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta
-            http-equiv="Content-Security-Policy"
-            content="upgrade-insecure-requests"
-          ></meta>
+          <link rel="shortcut icon" href="/static/images/talendy-logo.ico" />
         </Head>
         <body>
           <Main />
