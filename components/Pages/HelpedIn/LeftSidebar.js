@@ -28,7 +28,7 @@ const LeftSidebar = ({ page, mobile }) => {
             className="mt-3 space-y-2"
             aria-labelledby="communities-headline"
           >
-            <Link href="/profile/contributed">
+            <Link href="/profile/collaborated">
               <span
                 className={`
                   ${
@@ -41,7 +41,7 @@ const LeftSidebar = ({ page, mobile }) => {
                 <span>{authReducer.user?.collaborated_posts_count}</span>
               </span>
             </Link>
-            <Link href="/profile/contributed/active">
+            <Link href="/profile/collaborated/active">
               <span
                 className={`
                   ${
@@ -54,7 +54,7 @@ const LeftSidebar = ({ page, mobile }) => {
                 <span>{authReducer.user?.collaborated_active_posts_count}</span>
               </span>
             </Link>
-            <Link href="/profile/contributed/closed">
+            <Link href="/profile/collaborated/closed">
               <span
                 className={`
                   ${

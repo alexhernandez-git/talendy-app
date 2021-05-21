@@ -72,7 +72,7 @@ function WrappedApp({ Component, pageProps }) {
             await dispatch(
               createAlert(
                 "SUCCESS",
-                "Your contribute request has been accepted"
+                "Your collaborate request has been accepted"
               )
             );
             await dispatch(setPendingNotifications());

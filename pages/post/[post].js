@@ -256,7 +256,7 @@ export default function PostPage() {
               {!postReducer.post?.members?.some(
                 (member) => member.user.id === authReducer.user?.id
               ) &&
-                !postReducer.post?.is_contribute_requested &&
+                !postReducer.post?.is_collaborate_requested &&
                 (postReducer.post?.privacity !== "CO" ||
                   postReducer.post?.user?.is_connection) &&
                 postReducer.post?.status !== "SO" && (
@@ -281,12 +281,12 @@ export default function PostPage() {
                       onMouseDown={handleSubmitContributeRequest}
                       className="w-full sm:w-72 bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
                     >
-                      Request to contribute
+                      Request to collaborate
                     </button>
                   </form>
                 )}
 
-              {postReducer.post?.is_contribute_requested && (
+              {postReducer.post?.is_collaborate_requested && (
                 <div className="mt-6 flex justify-between space-x-8">
                   <span className="mt-2 flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-orange-500 dark:text-white bg-white dark:bg-gray-700 ">
                     {/* <svg

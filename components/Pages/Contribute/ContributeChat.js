@@ -21,8 +21,8 @@ const ContributeChat = ({
   }
 
   const roomMessagesReducer = useSelector((state) => state.roomMessagesReducer);
-  const contributeRoomReducer = useSelector(
-    (state) => state.contributeRoomReducer
+  const collaborateRoomReducer = useSelector(
+    (state) => state.collaborateRoomReducer
   );
   const authReducer = useSelector((state) => state.authReducer);
   return (

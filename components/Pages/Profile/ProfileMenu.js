@@ -25,7 +25,7 @@ const ProfileMenu = ({ page }) => {
         router.push(`/profile/posts`);
         break;
       case CONTRIBUTED_POSTS_PAGE:
-        router.push(`/profile/contributed`);
+        router.push(`/profile/collaborated`);
         break;
       case MY_NETWORK_PAGE:
         router.push(`/profile/mynetwork`);
@@ -91,7 +91,7 @@ const ProfileMenu = ({ page }) => {
               )}
             </a>
           </Link>
-          <Link href="/profile/contributed">
+          <Link href="/profile/collaborated">
             <a
               className={`${
                 page === CONTRIBUTED_POSTS_PAGE ||

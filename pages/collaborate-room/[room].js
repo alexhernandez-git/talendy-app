@@ -28,7 +28,7 @@ import {
   fetchContributeRoom,
   resetContributeRoom,
   updateSharedNotes,
-} from "redux/actions/contributeRoom";
+} from "redux/actions/collaborateRoom";
 import Spinner from "components/Layout/Spinner";
 import moment from "moment";
 import { addRoomMessage, fetchRoomMessages } from "redux/actions/roomMessages";
@@ -69,10 +69,10 @@ const Contribute = () => {
 
     fetchInitialData();
   }, [initialDataFetched, router.query?.room]);
-  const contributeRoomReducer = useSelector(
-    (state) => state.contributeRoomReducer
+  const collaborateRoomReducer = useSelector(
+    (state) => state.collaborateRoomReducer
   );
-  const { contribute_room, is_loading } = contributeRoomReducer;
+  const { collaborate_room, is_loading } = collaborateRoomReducer;
   const [roomID, setRoomID] = useState(router.query?.room);
   const [validationsMade, setValidationsMade] = useState(false);
 
@@ -80,14 +80,14 @@ const Contribute = () => {
     if (
       initialDataFetched &&
       !is_loading &&
-      contribute_room &&
-      !contribute_room?.members?.some(
+      collaborate_room &&
+      !collaborate_room?.members?.some(
         (member) => member.user.id === authReducer.user?.id
       )
     ) {
       router.push(authReducer.is_authenticated ? "/feed" : "/");
       dispatch(
-        createAlert("ERROR", "You are not member of this contribute_room")
+        createAlert("ERROR", "You are not member of this collaborate_room")
       );
     } else {
       if (initialDataFetched && !is_loading) {
@@ -347,20 +347,20 @@ const Contribute = () => {
     offline: [],
   });
   useEffect(() => {
-    if (contribute_room?.members && joinedMembersList) {
+    if (collaborate_room?.members && joinedMembersList) {
       setMembers({
-        joined: contribute_room?.members?.filter((member) => {
+        joined: collaborate_room?.members?.filter((member) => {
           return joinedMembersList?.some(
             (joinedMember) => joinedMember?.userID === member?.user?.id
           );
         }),
-        online: contribute_room?.members?.filter(
+        online: collaborate_room?.members?.filter(
           (member) =>
             !joinedMembersList?.some(
               (joinedMember) => joinedMember?.userID === member?.user?.id
             ) && member?.user?.is_online
         ),
-        offline: contribute_room?.members?.filter(
+        offline: collaborate_room?.members?.filter(
           (member) =>
             !joinedMembersList?.some(
               (joinedMember) => joinedMember?.userID === member?.user?.id
@@ -368,7 +368,7 @@ const Contribute = () => {
         ),
       });
     }
-  }, [contribute_room?.members, joinedMembersList]);
+  }, [collaborate_room?.members, joinedMembersList]);
 
   const [isFinalizePage, setIsFinalizePage] = useState(false);
   const handleGoToFinalize = () => {
@@ -462,12 +462,12 @@ const Contribute = () => {
                             Welcome back,
                           </p> */}
                       <p className="text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">
-                        {contribute_room?.title}
+                        {collaborate_room?.title}
                       </p>
                       <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
                         Created at{" "}
                         <time dateTime="2020-08-25">
-                          {moment(contribute_room?.created).format(
+                          {moment(collaborate_room?.created).format(
                             "MMM D [at] h:mm A z"
                           )}
                         </time>
@@ -496,13 +496,14 @@ const Contribute = () => {
                       </svg>
                       Info
                     </button>
-                    {contribute_room?.status === "SO" ? (
+                    {collaborate_room?.status === "SO" ? (
                       <span className="inline-flex items-center justify-center  px-4 py-2 border dark:border-green-300 border-green-500 shadow-sm text-sm font-medium rounded-3xl dark:text-green-300 text-green-500 bg-white dark:bg-gray-700 ">
                         Finalized
                       </span>
                     ) : (
                       <>
-                        {contribute_room?.user?.id === authReducer.user?.id && (
+                        {collaborate_room?.user?.id ===
+                          authReducer.user?.id && (
                           <button
                             onClick={handleGoToFinalize}
                             type="button"
@@ -664,7 +665,7 @@ const Contribute = () => {
             <div className="lg:col-start-1 lg:col-span-2">
               <div
                 className={
-                  feature.toUpperCase() === "SCREENSHARING" && contribute_room
+                  feature.toUpperCase() === "SCREENSHARING" && collaborate_room
                     ? "block"
                     : "hidden"
                 }
@@ -677,7 +678,7 @@ const Contribute = () => {
               </div>
               <div
                 className={
-                  feature.toUpperCase() === "CHAT" && contribute_room
+                  feature.toUpperCase() === "CHAT" && collaborate_room
                     ? "block"
                     : "hidden"
                 }
@@ -690,7 +691,7 @@ const Contribute = () => {
               </div>
               <div
                 className={
-                  feature.toUpperCase() === "SHAREDNOTES" && contribute_room
+                  feature.toUpperCase() === "SHAREDNOTES" && collaborate_room
                     ? "block"
                     : "hidden"
                 }
@@ -698,13 +699,13 @@ const Contribute = () => {
                 <ContributeSharedNotes
                   socketRef={socketRef}
                   roomID={roomID}
-                  sharedNotes={contribute_room?.shared_notes}
+                  sharedNotes={collaborate_room?.shared_notes}
                 />
               </div>
               <div
                 className={
                   feature.toUpperCase() === "SHAREDWHITEBOARD" &&
-                  contribute_room
+                  collaborate_room
                     ? "block"
                     : "hidden"
                 }
@@ -715,7 +716,7 @@ const Contribute = () => {
                   feature={feature}
                 />
               </div>
-              {feature.toUpperCase() === "ASTEROIDS" && contribute_room && (
+              {feature.toUpperCase() === "ASTEROIDS" && collaborate_room && (
                 <ContributeAsteroids />
               )}
             </div>
@@ -796,7 +797,7 @@ const Contribute = () => {
         </div>
       </Layout>
       <PostModal
-        post={contribute_room}
+        post={collaborate_room}
         page={page}
         modalOpen={modalOpen}
         handleToggleModal={handleToggleModal}

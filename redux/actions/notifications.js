@@ -16,7 +16,7 @@ import {
   SET_NOTIFICATION_READ_SUCCESS,
   SET_NOTIFICATION_READ_FAIL,
 } from "../types";
-import { fetchContributeRequest } from "./contributeRequests";
+import { fetchContributeRequest } from "./collaborateRequests";
 import { createAlert } from "./alerts";
 import { addChatToFeed } from "./chats";
 import { addOrUpdateNotificationToFeed } from "./lastNotifications";
@@ -116,8 +116,8 @@ export const newMessageEvent = (data) => async (dispatch, getState) => {
 
 export const newContributeRequestEvent =
   (data) => async (dispatch, getState) => {
-    await dispatch(createAlert("SUCCESS", "New contribute request"));
-    await dispatch(fetchContributeRequest(data.contribute_request__pk));
+    await dispatch(createAlert("SUCCESS", "New collaborate request"));
+    await dispatch(fetchContributeRequest(data.collaborate_request__pk));
     await dispatch(setPendingNotifications());
     await dispatch(addOrUpdateNotificationToFeed(data.notification__pk));
   };
@@ -127,12 +127,12 @@ export const newContributeRoomMessageEvent =
     console.log("post id", data.post__pk);
 
     if (
-      getState().contributeRoomReducer.contribute_room?.id !== data.post__pk
+      getState().collaborateRoomReducer.collaborate_room?.id !== data.post__pk
     ) {
       await dispatch(
         createAlert(
           "SUCCESS",
-          "Your have recieved a message from a contribute room"
+          "Your have recieved a message from a collaborate room"
         )
       );
       await dispatch(addOrUpdateNotificationToFeed(data.notification__pk));

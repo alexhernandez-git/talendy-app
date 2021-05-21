@@ -59,7 +59,7 @@ const LeftSidebar = ({ page, mobile, status, setStatus }) => {
                 <span className="truncate">Created</span>
               </span>
             </Link>
-            <Link href={`/user/contributed/${userId}`}>
+            <Link href={`/user/collaborated/${userId}`}>
               <span
                 className={`
                   ${

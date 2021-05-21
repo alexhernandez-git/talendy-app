@@ -13,7 +13,7 @@ const UserMenu = ({ page }) => {
 
     switch (e.target.value) {
       case USER_POSTS_PAGE:
-        router.push(`/user/contributed/${userId}`);
+        router.push(`/user/collaborated/${userId}`);
         break;
       case USER_CONTRIBUTED_POSTS_PAGE:
         router.push(`/user/${userId}`);
@@ -67,7 +67,7 @@ const UserMenu = ({ page }) => {
               )}
             </a>
           </Link>
-          <Link href={`/user/contributed/${userId}`}>
+          <Link href={`/user/collaborated/${userId}`}>
             <a
               aria-current="page"
               className={`${

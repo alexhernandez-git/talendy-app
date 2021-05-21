@@ -14,8 +14,8 @@ const sizeOptions = [1, 2, 5, 10, 15, 20, 25, 30, 40, 50, 100];
 const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
-  const contributeRoomReducer = useSelector(
-    (state) => state.contributeRoomReducer
+  const collaborateRoomReducer = useSelector(
+    (state) => state.collaborateRoomReducer
   );
   const [isDrawing, setIsDrawing] = useState(false);
   const [color, setColor] = useState("#000000");
@@ -153,7 +153,7 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
       ctx.lineTo(mouse.x, mouse.y);
       ctx.closePath();
       ctx.stroke();
-      if (contributeRoomReducer.contribute_room?.status !== "SO") {
+      if (collaborateRoomReducer.collaborate_room?.status !== "SO") {
         if (timeout != undefined) clearTimeout(timeout);
         timeout = setTimeout(function () {
           console.log("entra");

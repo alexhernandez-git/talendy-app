@@ -19,22 +19,22 @@ import { HYDRATE } from "next-redux-wrapper";
 
 const initialState = {
   is_loading: false,
-  contribute_requests: {
+  collaborate_requests: {
     count: 0,
     next: null,
     previous: null,
     results: [],
   },
   error: null,
-  is_fetching_more_contribute_requests: false,
-  is_adding_contribute_request: false,
-  add_contribute_request_error: null,
-  is_accepting_contribute_request: false,
-  accept_contribute_request_error: null,
-  is_ignoring_contribute_request: false,
-  ignore_contribute_request_error: null,
+  is_fetching_more_collaborate_requests: false,
+  is_adding_collaborate_request: false,
+  add_collaborate_request_error: null,
+  is_accepting_collaborate_request: false,
+  accept_collaborate_request_error: null,
+  is_ignoring_collaborate_request: false,
+  ignore_collaborate_request_error: null,
 };
-export default function contributeRequestsReducer(
+export default function collaborateRequestsReducer(
   state = initialState,
   action
 ) {
@@ -51,7 +51,7 @@ export default function contributeRequestsReducer(
       return {
         ...state,
         is_loading: false,
-        contribute_requests: {
+        collaborate_requests: {
           ...action.payload,
         },
         error: null,
@@ -60,7 +60,7 @@ export default function contributeRequestsReducer(
       return {
         ...state,
         is_loading: false,
-        contribute_requests: {
+        collaborate_requests: {
           count: 0,
           next: null,
           previous: null,
@@ -71,16 +71,16 @@ export default function contributeRequestsReducer(
     case FETCH_MORE_CONTRIBUTE_REQUESTS:
       return {
         ...state,
-        is_fetching_more_contribute_requests: true,
+        is_fetching_more_collaborate_requests: true,
       };
     case FETCH_MORE_CONTRIBUTE_REQUESTS_SUCCESS:
       return {
         ...state,
-        is_fetching_more_contribute_requests: false,
-        contribute_requests: {
+        is_fetching_more_collaborate_requests: false,
+        collaborate_requests: {
           ...action.payload,
           results: [
-            ...state.contribute_requests.results,
+            ...state.collaborate_requests.results,
             ...action.payload.results,
           ],
         },
@@ -89,80 +89,80 @@ export default function contributeRequestsReducer(
     case FETCH_MORE_CONTRIBUTE_REQUESTS_FAIL:
       return {
         ...state,
-        is_fetching_more_contribute_requests: false,
+        is_fetching_more_collaborate_requests: false,
         error: action.payload,
       };
     case FETCH_CONTRIBUTE_REQUEST:
       return {
         ...state,
-        is_adding_contribute_request: true,
+        is_adding_collaborate_request: true,
       };
     case FETCH_CONTRIBUTE_REQUEST_SUCCESS:
       return {
         ...state,
-        is_adding_contribute_request: false,
-        contribute_requests: {
-          ...self.contribute_requests,
-          count: ++self.contribute_requests.count,
-          results: [...state.contribute_requests.results, action.payload],
+        is_adding_collaborate_request: false,
+        collaborate_requests: {
+          ...self.collaborate_requests,
+          count: ++self.collaborate_requests.count,
+          results: [...state.collaborate_requests.results, action.payload],
         },
-        add_contribute_request_error: null,
+        add_collaborate_request_error: null,
       };
     case FETCH_CONTRIBUTE_REQUEST_FAIL:
       return {
         ...state,
-        is_adding_contribute_request: false,
-        add_contribute_request_error: action.payload,
+        is_adding_collaborate_request: false,
+        add_collaborate_request_error: action.payload,
       };
     case ACCEPT_CONTRIBUTE_REQUEST:
       return {
         ...state,
-        is_accepting_contribute_request: true,
+        is_accepting_collaborate_request: true,
       };
     case ACCEPT_CONTRIBUTE_REQUEST_SUCCESS:
       return {
         ...state,
-        is_accepting_contribute_request: false,
-        contribute_requests: {
-          ...state.contribute_requests,
-          count: --state.contribute_requests.count,
-          results: state.contribute_requests.results.filter(
-            (contribute_request) => contribute_request.id !== action.payload
+        is_accepting_collaborate_request: false,
+        collaborate_requests: {
+          ...state.collaborate_requests,
+          count: --state.collaborate_requests.count,
+          results: state.collaborate_requests.results.filter(
+            (collaborate_request) => collaborate_request.id !== action.payload
           ),
         },
-        accept_contribute_request_error: null,
+        accept_collaborate_request_error: null,
       };
     case ACCEPT_CONTRIBUTE_REQUEST_FAIL:
       return {
         ...state,
-        is_accepting_contribute_request: false,
+        is_accepting_collaborate_request: false,
 
-        accept_contribute_request_error: action.payload,
+        accept_collaborate_request_error: action.payload,
       };
     case IGNORE_CONTRIBUTE_REQUEST:
       return {
         ...state,
-        is_ignoring_contribute_request: true,
+        is_ignoring_collaborate_request: true,
       };
     case IGNORE_CONTRIBUTE_REQUEST_SUCCESS:
       return {
         ...state,
-        is_ignoring_contribute_request: false,
-        contribute_requests: {
-          ...state.contribute_requests,
-          count: --state.contribute_requests.count,
-          results: state.contribute_requests.results.filter(
-            (contribute_request) => contribute_request.id !== action.payload
+        is_ignoring_collaborate_request: false,
+        collaborate_requests: {
+          ...state.collaborate_requests,
+          count: --state.collaborate_requests.count,
+          results: state.collaborate_requests.results.filter(
+            (collaborate_request) => collaborate_request.id !== action.payload
           ),
         },
-        ignore_contribute_request_error: null,
+        ignore_collaborate_request_error: null,
       };
     case IGNORE_CONTRIBUTE_REQUEST_FAIL:
       return {
         ...state,
-        is_ignoring_contribute_request: false,
+        is_ignoring_collaborate_request: false,
 
-        ignore_contribute_request_error: action.payload,
+        ignore_collaborate_request_error: action.payload,
       };
     default:
       return state;

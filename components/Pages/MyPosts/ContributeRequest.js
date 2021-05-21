@@ -6,30 +6,30 @@ import { useDispatch } from "react-redux";
 import {
   acceptContributeRequest,
   ignoreContributeRequest,
-} from "redux/actions/contributeRequests";
+} from "redux/actions/collaborateRequests";
 
-const ContributeRequest = ({ contribute_request }) => {
+const ContributeRequest = ({ collaborate_request }) => {
   const dispatch = useDispatch();
   const handleAcceptContributeRequest = () => {
-    dispatch(acceptContributeRequest(contribute_request?.id));
+    dispatch(acceptContributeRequest(collaborate_request?.id));
   };
   const handleIgnoreContributeRequest = () => {
-    dispatch(ignoreContributeRequest(contribute_request?.id));
+    dispatch(ignoreContributeRequest(collaborate_request?.id));
   };
   return (
     <li>
       <div className="py-4 ">
         <div className="flex items-center  space-x-3">
           <div className="flex-shrink-0">
-            {contribute_request?.user?.picture ? (
+            {collaborate_request?.user?.picture ? (
               <img
                 className="h-8 w-8 overflow-hidden rounded-full m-auto"
                 src={
                   new RegExp(
                     `${process.env.HOST}|https://talendy.s3.amazonaws.com`
-                  ).test(contribute_request?.user?.picture)
-                    ? contribute_request?.user?.picture
-                    : process.env.HOST + contribute_request?.user?.picture
+                  ).test(collaborate_request?.user?.picture)
+                    ? collaborate_request?.user?.picture
+                    : process.env.HOST + collaborate_request?.user?.picture
                 }
                 alt=""
               ></img>
@@ -47,8 +47,8 @@ const ContributeRequest = ({ contribute_request }) => {
           </div>
           <div className="min-w-0 flex-1">
             <p className="text-sm font-medium text-gray-900 dark:text-white">
-              <Link href={`/user/${contribute_request?.user?.id}`}>
-                <span>{contribute_request?.user?.username}</span>
+              <Link href={`/user/${collaborate_request?.user?.id}`}>
+                <span>{collaborate_request?.user?.username}</span>
               </Link>
             </p>
             <p className="text-sm text-orange-500 flex items-center font-medium">
@@ -66,7 +66,7 @@ const ContributeRequest = ({ contribute_request }) => {
                   d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              {contribute_request?.user?.karma_amount} Karma
+              {collaborate_request?.user?.karma_amount} Karma
             </p>
           </div>
           <div className="flex-shrink-0">
@@ -88,13 +88,13 @@ const ContributeRequest = ({ contribute_request }) => {
             </button>
           </div>
         </div>
-        {contribute_request?.reason && (
+        {collaborate_request?.reason && (
           <div className="mt-2 text-sm text-gray-700  dark:text-gray-100 space-y-4">
-            {contribute_request.reason}
+            {collaborate_request.reason}
           </div>
         )}
         <div className="border sm:rounded-lg mt-4">
-          <Post post={contribute_request?.post} />
+          <Post post={collaborate_request?.post} />
         </div>
       </div>
     </li>

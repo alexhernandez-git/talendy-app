@@ -191,7 +191,7 @@ export const createContributeRequest =
 
     await axios
       .post(
-        `${process.env.HOST}/api/contribute-requests/`,
+        `${process.env.HOST}/api/collaborate-requests/`,
         values,
         tokenConfig(getState)
       )

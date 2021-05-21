@@ -11,7 +11,7 @@ import { fetchPosts } from "redux/actions/posts";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import LeftSidebar from "components/Pages/MyPosts/LeftSidebar";
-import { fetchContributeRequests } from "redux/actions/contributeRequests";
+import { fetchContributeRequests } from "redux/actions/collaborateRequests";
 
 export default function Posts() {
   const page = MY_POSTS_PAGE;

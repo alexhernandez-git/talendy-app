@@ -36,8 +36,8 @@ const initialState = {
   update_post_error: null,
   is_deleting_post: false,
   delete_post_error: null,
-  is_creating_contribute_request: false,
-  create_contribute_request_error: null,
+  is_creating_collaborate_request: false,
+  create_collaborate_request_error: null,
 };
 export default function postsReducer(state = initialState, action) {
   switch (action.type) {
@@ -157,17 +157,17 @@ export default function postsReducer(state = initialState, action) {
     case CREATE_CONTRIBUTE_REQUEST:
       return {
         ...state,
-        is_creating_contribute_request: true,
+        is_creating_collaborate_request: true,
       };
     case CREATE_CONTRIBUTE_REQUEST_SUCCESS:
       return {
         ...state,
-        is_creating_contribute_request: false,
+        is_creating_collaborate_request: false,
         posts: {
           ...state.posts,
           results: state.posts.results.map((post) =>
             post.id === action.payload
-              ? { ...post, is_contribute_requested: true }
+              ? { ...post, is_collaborate_requested: true }
               : post
           ),
         },
@@ -175,8 +175,8 @@ export default function postsReducer(state = initialState, action) {
     case CREATE_CONTRIBUTE_REQUEST_FAIL:
       return {
         ...state,
-        is_creating_contribute_request: false,
-        create_contribute_request_error: action.payload,
+        is_creating_collaborate_request: false,
+        create_collaborate_request_error: action.payload,
       };
     default:
       return state;

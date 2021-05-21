@@ -56,7 +56,7 @@ export const updateMemberReview =
     await axios
       .patch(
         `${process.env.HOST}/api/posts/${
-          getState().contributeRoomReducer.contribute_room?.id
+          getState().collaborateRoomReducer.collaborate_room?.id
         }/members/${id}/`,
         values,
         tokenConfig(getState)
@@ -81,7 +81,7 @@ export const updateSolution = (values) => async (dispatch, getState) => {
   await axios
     .patch(
       `${process.env.HOST}/api/posts/${
-        getState().contributeRoomReducer.contribute_room?.id
+        getState().collaborateRoomReducer.collaborate_room?.id
       }/update_solution/`,
       values,
       tokenConfig(getState)
@@ -107,7 +107,7 @@ export const finalizePost =
     await axios
       .patch(
         `${process.env.HOST}/api/posts/${
-          getState().contributeRoomReducer.contribute_room?.id
+          getState().collaborateRoomReducer.collaborate_room?.id
         }/finalize/`,
         {},
         tokenConfig(getState)

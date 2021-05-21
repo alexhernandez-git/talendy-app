@@ -18,8 +18,8 @@ import postsReducer from "./postsReducer";
 import postReducer from "./postReducer";
 import usersReducer from "./usersReducer";
 import communitiesReducer from "./communitiesReducer";
-import contributeRequestsReducer from "./contributeRequestsReducer";
-import contributeRoomReducer from "./contributeRoomReducer";
+import collaborateRequestsReducer from "./collaborateRequestsReducer";
+import collaborateRoomReducer from "./collaborateRoomReducer";
 import roomMessagesReducer from "./roomMessagesReducer";
 import donationOptionsReducer from "./donationOptionsReducer";
 import reviewsReducer from "./reviewsReducer";
@@ -46,8 +46,8 @@ export default combineReducers({
   messagesReducer: messagesReducer,
   communitiesReducer: communitiesReducer,
   donationOptionsReducer: donationOptionsReducer,
-  contributeRequestsReducer: contributeRequestsReducer,
-  contributeRoomReducer: contributeRoomReducer,
+  collaborateRequestsReducer: collaborateRequestsReducer,
+  collaborateRoomReducer: collaborateRoomReducer,
   roomMessagesReducer: roomMessagesReducer,
   reviewsReducer: reviewsReducer,
   donationsReducer: donationsReducer,

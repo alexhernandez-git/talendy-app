@@ -9,7 +9,7 @@ import moment from "moment";
 import SolveIssueEditor from "components/Editor/SolveIssueEditor";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { finalizePost, updateSolution } from "redux/actions/contributeRoom";
+import { finalizePost, updateSolution } from "redux/actions/collaborateRoom";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -17,15 +17,15 @@ import { useDispatch } from "react-redux";
 const Finalize = ({ handleGoToRoomPage }) => {
   const dispatch = useDispatch();
 
-  const contributeRoomReducer = useSelector(
-    (state) => state.contributeRoomReducer
+  const collaborateRoomReducer = useSelector(
+    (state) => state.collaborateRoomReducer
   );
   const authReducer = useSelector((state) => state.authReducer);
-  const { contribute_room } = contributeRoomReducer;
+  const { collaborate_room } = collaborateRoomReducer;
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      solution: contribute_room?.draft_solution,
+      solution: collaborate_room?.draft_solution,
     },
     validationSchema: Yup.object({
       solution: Yup.string().max(2500),
@@ -91,12 +91,12 @@ const Finalize = ({ handleGoToRoomPage }) => {
           <div className="flex items-center space-x-5 col-span-12 mb-6">
             <div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                {contribute_room?.title}
+                {collaborate_room?.title}
               </h3>
               <p className="text-sm font-medium text-gray-500">
                 Created at{" "}
                 <time dateTime="2020-08-25">
-                  {moment(contribute_room?.created).format(
+                  {moment(collaborate_room?.created).format(
                     "MMM D [at] h:mm A z"
                   )}
                 </time>
@@ -114,7 +114,7 @@ const Finalize = ({ handleGoToRoomPage }) => {
 
           <div className="shadow overflow-hidden sm:rounded-md col-span-12">
             <ul className="divide-y divide-gray-200">
-              {contribute_room?.members.map(
+              {collaborate_room?.members.map(
                 (member) =>
                   member.user.id !== authReducer.user?.id && (
                     <Member member={member} key={member.id} />

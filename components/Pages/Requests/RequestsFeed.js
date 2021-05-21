@@ -1,13 +1,13 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchMoreContributeRequests } from "redux/actions/contributeRequests";
+import { fetchMoreContributeRequests } from "redux/actions/collaborateRequests";
 import ContributeRequest from "../MyPosts/ContributeRequest";
 import HelpRequest from "../MyPosts/ContributeRequest";
 
 const RequestsFeed = () => {
-  const contributeRequestsReducer = useSelector(
-    (state) => state.contributeRequestsReducer
+  const collaborateRequestsReducer = useSelector(
+    (state) => state.collaborateRequestsReducer
   );
   const dispatch = useDispatch();
   const handleFetchMoreContributeRequests = () => {
@@ -83,7 +83,7 @@ const RequestsFeed = () => {
                 className="ml-4 text-sm font-medium text-orange-500"
                 aria-current="page"
               >
-                Requests to contribute
+                Requests to collaborate
               </span>
             </div>
           </li>
@@ -92,36 +92,40 @@ const RequestsFeed = () => {
 
       <div className="bg-white dark:bg-gray-700 px-4 py-6 shadow sm:p-6 sm:rounded-lg">
         <div className="flow-root">
-          {contributeRequestsReducer.contribute_requests.results.length > 0 ? (
+          {collaborateRequestsReducer.collaborate_requests.results.length >
+          0 ? (
             <ul className="sm:divide-y sm:divide-gray-200">
-              {contributeRequestsReducer.contribute_requests.results.map(
-                (contribute_request) => (
-                  <ContributeRequest contribute_request={contribute_request} />
+              {collaborateRequestsReducer.collaborate_requests.results.map(
+                (collaborate_request) => (
+                  <ContributeRequest
+                    collaborate_request={collaborate_request}
+                  />
                 )
               )}
             </ul>
           ) : (
             <div className="flex justify-center">
               <span className="text-gray-500 dark:text-gray-100 text-sm">
-                No contribute requests found
+                No collaborate requests found
               </span>
             </div>
           )}
-          {!contributeRequestsReducer.is_fetching_more_contribute_requests &&
-            contributeRequestsReducer.contribute_requests.results.length > 0 &&
-            contributeRequestsReducer.contribute_requests.next && (
+          {!collaborateRequestsReducer.is_fetching_more_collaborate_requests &&
+            collaborateRequestsReducer.collaborate_requests.results.length >
+              0 &&
+            collaborateRequestsReducer.collaborate_requests.next && (
               <VisibilitySensor onChange={onChangeVisibility}>
                 <div
                   className="p-3 flex justify-center"
                   onClick={handleFetchMoreContributeRequests}
                 >
                   <span className="text-gray-500 dark:text-gray-100 text-sm cursor-pointer">
-                    Load more contribute requests
+                    Load more collaborate requests
                   </span>
                 </div>
               </VisibilitySensor>
             )}
-          {contributeRequestsReducer.is_fetching_more_contribute_requests && (
+          {collaborateRequestsReducer.is_fetching_more_collaborate_requests && (
             <div className="flex justify-center space-y-4 w-full mb-4 p-3">
               <Spinner />
             </div>

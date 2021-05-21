@@ -17,7 +17,7 @@ import {
 
 const initialState = {
   is_loading: false,
-  contribute_room: null,
+  collaborate_room: null,
   error: null,
   is_updating_member_review: false,
   update_member_review_error: null,
@@ -26,7 +26,7 @@ const initialState = {
   is_finalizing_post: false,
   finalize_post_error: null,
 };
-export default function contributeRoomReducer(state = initialState, action) {
+export default function collaborateRoomReducer(state = initialState, action) {
   switch (action.type) {
     // case HYDRATE:
     //   // Attention! This will overwrite client state! Real apps should use proper reconciliation.
@@ -40,7 +40,7 @@ export default function contributeRoomReducer(state = initialState, action) {
       return {
         ...state,
         is_loading: false,
-        contribute_room: action.payload,
+        collaborate_room: action.payload,
         error: null,
       };
     case FETCH_CONTRIBUTE_ROOM_FAIL:
@@ -53,15 +53,15 @@ export default function contributeRoomReducer(state = initialState, action) {
     case UPDATE_SHARED_NOTES:
       return {
         ...state,
-        contribute_room: {
-          ...state.contribute_room,
+        collaborate_room: {
+          ...state.collaborate_room,
           shared_notes: action.payload,
         },
       };
     case RESET_CONTRIBUTE_ROOM:
       return {
         ...state,
-        contribute_room: null,
+        collaborate_room: null,
       };
     case UPDATE_MEMBER_REVIEW:
       return {
@@ -106,8 +106,8 @@ export default function contributeRoomReducer(state = initialState, action) {
       return {
         ...state,
         is_finalizing_post: false,
-        contribute_room: {
-          ...state.contribute_room,
+        collaborate_room: {
+          ...state.collaborate_room,
           status: "SO",
         },
         finalize_post_error: null,

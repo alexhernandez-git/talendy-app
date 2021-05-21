@@ -6,7 +6,7 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { updateMemberReview } from "redux/actions/contributeRoom";
+import { updateMemberReview } from "redux/actions/collaborateRoom";
 import { useDispatch } from "react-redux";
 const Member = ({ member }) => {
   const dispatch = useDispatch();

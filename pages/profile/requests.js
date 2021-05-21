@@ -6,7 +6,7 @@ import RequestsFeed from "components/Pages/Requests/RequestsFeed";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import useAuthRequired from "hooks/useAuthRequired";
-import { fetchContributeRequests } from "redux/actions/contributeRequests";
+import { fetchContributeRequests } from "redux/actions/collaborateRequests";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Spinner from "components/Layout/Spinner";

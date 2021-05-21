@@ -33,38 +33,36 @@ export const fetchPost = (id) => async (dispatch, getState) => {
     });
 };
 
-export const createPostContributeRequest = (values, resetForm) => async (
-  dispatch,
-  getState
-) => {
-  await dispatch({
-    type: CREATE_POST_CONTRIBUTE_REQUEST,
-  });
-
-  await axios
-    .post(
-      `${process.env.HOST}/api/contribute-requests/`,
-      values,
-      tokenConfig(getState)
-    )
-    .then(async (res) => {
-      await dispatch({
-        type: CREATE_POST_CONTRIBUTE_REQUEST_SUCCESS,
-        payload: values.post,
-      });
-      await resetForm({});
-      await dispatch(createAlert("SUCCESS", "Request successfully created"));
-    })
-    .catch(async (err) => {
-      await dispatch({
-        type: CREATE_POST_CONTRIBUTE_REQUEST_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
-      console.log(err.response.data);
-      if (err.response?.data?.non_field_errors?.length > 0) {
-        await dispatch(
-          createAlert("ERROR", err.response?.data?.non_field_errors[0])
-        );
-      }
+export const createPostContributeRequest =
+  (values, resetForm) => async (dispatch, getState) => {
+    await dispatch({
+      type: CREATE_POST_CONTRIBUTE_REQUEST,
     });
-};
+
+    await axios
+      .post(
+        `${process.env.HOST}/api/collaborate-requests/`,
+        values,
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        await dispatch({
+          type: CREATE_POST_CONTRIBUTE_REQUEST_SUCCESS,
+          payload: values.post,
+        });
+        await resetForm({});
+        await dispatch(createAlert("SUCCESS", "Request successfully created"));
+      })
+      .catch(async (err) => {
+        await dispatch({
+          type: CREATE_POST_CONTRIBUTE_REQUEST_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+        console.log(err.response.data);
+        if (err.response?.data?.non_field_errors?.length > 0) {
+          await dispatch(
+            createAlert("ERROR", err.response?.data?.non_field_errors[0])
+          );
+        }
+      });
+  };

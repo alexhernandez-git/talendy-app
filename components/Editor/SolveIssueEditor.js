@@ -4,10 +4,10 @@ import { useRef } from "react";
 import { useSelector } from "react-redux";
 import Toolbar from "./Toolbar";
 export default function SolveIssueEditor({ formik }) {
-  const contributeRoomReducer = useSelector(
-    (state) => state.contributeRoomReducer
+  const collaborateRoomReducer = useSelector(
+    (state) => state.collaborateRoomReducer
   );
-  const { contribute_room } = contributeRoomReducer;
+  const { collaborate_room } = collaborateRoomReducer;
   function paste(e) {
     e.preventDefault();
     const open = new RegExp("<", "gi");
@@ -47,13 +47,13 @@ export default function SolveIssueEditor({ formik }) {
     }
   };
   useEffect(() => {
-    if (contribute_room?.draft_solution) {
+    if (collaborate_room?.draft_solution) {
       if (firstLoad && solutionRef?.current) {
-        solutionRef.current.innerHTML = contribute_room?.draft_solution;
+        solutionRef.current.innerHTML = collaborate_room?.draft_solution;
       }
       setFirstLoad(false);
     }
-  }, [contribute_room?.draft_solution]);
+  }, [collaborate_room?.draft_solution]);
 
   return (
     <div>

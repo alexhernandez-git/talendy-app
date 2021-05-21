@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import SharedToolbar from "components/Editor/SharedToolbar";
 import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
-import { updateSharedNotes } from "redux/actions/contributeRoom";
+import { updateSharedNotes } from "redux/actions/collaborateRoom";
 import { useDispatch } from "react-redux";
 import { setEndOfContenteditable } from "helpers";
 

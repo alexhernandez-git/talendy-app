@@ -8,7 +8,7 @@ const useGetNotification = (notification) => {
   let user;
   let member_joined;
   let post_owner;
-  let contribute_request;
+  let collaborate_request;
   let many_messages;
   let message;
   let post;
@@ -45,15 +45,16 @@ const useGetNotification = (notification) => {
       if (notification.actor) {
         message = `${
           many_messages
-            ? notification.post_messages.length + " messages in contribute room"
-            : "New message in contribute room"
+            ? notification.post_messages.length +
+              " messages in collaborate room"
+            : "New message in collaborate room"
         } from ${notification.actor.username}`;
       } else {
         message = `${
           many_messages
             ? notification.post_messages.length +
-              " messages from contribute room"
-            : "New message from contribute Room"
+              " messages from collaborate room"
+            : "New message from collaborate Room"
         }`;
       }
       if (notification.post_messages.length > 0 && !many_messages) {
@@ -61,8 +62,8 @@ const useGetNotification = (notification) => {
       }
       return {
         event_message: many_messages
-          ? "New messages from contribute room"
-          : "New message from contribute room",
+          ? "New messages from collaborate room"
+          : "New message from collaborate room",
         message: message,
         user: notification.actor,
         link: `/collaborate-room/${notification?.post?.id}`,
@@ -89,12 +90,12 @@ const useGetNotification = (notification) => {
         link: `/profile/mynetwork`,
       };
     case "CR":
-      contribute_request = notification.contribute_request;
+      collaborate_request = notification.collaborate_request;
 
       return {
-        event_message: `New contribute request`,
-        message: `${contribute_request.user.username} has requested to contribute`,
-        user: contribute_request.user,
+        event_message: `New collaborate request`,
+        message: `${collaborate_request.user.username} has requested to collaborate`,
+        user: collaborate_request.user,
         link: `/profile/posts`,
       };
     case "JM":
@@ -109,7 +110,7 @@ const useGetNotification = (notification) => {
       post_owner = notification?.post?.user;
       return {
         event_message: `Contribute request accepted`,
-        message: `${post_owner.username} has accepted your contribute request`,
+        message: `${post_owner.username} has accepted your collaborate request`,
         user: post_owner,
         link: `/collaborate-room/${notification?.post?.id}`,
       };
