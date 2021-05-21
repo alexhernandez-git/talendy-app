@@ -14,7 +14,7 @@ const Donation = ({ donation }) => {
                 className="h-10 w-10 rounded-full flex items-center justify-center"
                 src={
                   new RegExp(
-                    `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                    `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                   ).test(donation?.from_user?.picture)
                     ? donation?.from_user?.picture
                     : process.env.HOST + donation?.from_user?.picture

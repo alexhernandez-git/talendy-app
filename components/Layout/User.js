@@ -73,7 +73,7 @@ const User = ({ page, user }) => {
                   className="h-10 w-10 rounded-full"
                   src={
                     new RegExp(
-                      `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                      `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                     ).test(user.picture)
                       ? user.picture
                       : process.env.HOST + user.picture

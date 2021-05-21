@@ -41,7 +41,7 @@ const ChatItem = ({ chat }) => {
                   className="h-10 w-10 rounded-full "
                   src={
                     new RegExp(
-                      `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                      `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                     ).test(chat?.picture)
                       ? chat?.picture
                       : process.env.HOST + chat?.picture

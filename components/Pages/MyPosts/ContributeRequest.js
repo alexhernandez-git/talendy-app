@@ -26,7 +26,7 @@ const ContributeRequest = ({ contribute_request }) => {
                 className="h-8 w-8 overflow-hidden rounded-full m-auto"
                 src={
                   new RegExp(
-                    `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                    `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                   ).test(contribute_request?.user?.picture)
                     ? contribute_request?.user?.picture
                     : process.env.HOST + contribute_request?.user?.picture

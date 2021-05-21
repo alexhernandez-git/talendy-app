@@ -38,7 +38,7 @@ const Message = ({ message, myMessage }) => {
                       className="h-10 w-10 rounded-full"
                       src={
                         new RegExp(
-                          `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                          `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                         ).test(message?.sent_by?.picture)
                           ? message?.sent_by?.picture
                           : process.env.HOST + message?.sent_by?.picture

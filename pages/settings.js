@@ -323,7 +323,7 @@ const settings = () => {
                               className="inline-block h-12 w-12 rounded-full"
                               src={
                                 new RegExp(
-                                  `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                                  `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                                 ).test(user.picture)
                                   ? user.picture
                                   : process.env.HOST + user.picture

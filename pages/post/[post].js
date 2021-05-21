@@ -117,7 +117,7 @@ export default function PostPage() {
                     className="w-full"
                     src={
                       new RegExp(
-                        `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                        `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                       ).test(image.image)
                         ? image.image
                         : process.env.HOST + image.image
@@ -128,7 +128,7 @@ export default function PostPage() {
                       target="_blank"
                       href={
                         new RegExp(
-                          `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                          `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                         ).test(image.image)
                           ? image.image
                           : process.env.HOST + image.image
@@ -314,7 +314,7 @@ export default function PostPage() {
                       className="h-10 w-10 rounded-full"
                       src={
                         new RegExp(
-                          `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                          `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                         ).test(postReducer.post?.user?.picture)
                           ? postReducer.post?.user?.picture
                           : process.env.HOST + postReducer.post?.user?.picture
@@ -386,7 +386,7 @@ export default function PostPage() {
                             className="h-8 w-8 rounded-full"
                             src={
                               new RegExp(
-                                `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                                `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                               ).test(member.user.picture)
                                 ? member.user.picture
                                 : process.env.HOST + member.user.picture

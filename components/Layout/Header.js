@@ -337,7 +337,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
                         className="h-8 w-8 rounded-full"
                         src={
                           new RegExp(
-                            `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                            `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                           ).test(user.picture)
                             ? user.picture
                             : process.env.HOST + user.picture
@@ -472,7 +472,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
                     className="h-10 w-10 rounded-full"
                     src={
                       new RegExp(
-                        `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                        `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                       ).test(user.picture)
                         ? user.picture
                         : process.env.HOST + user.picture

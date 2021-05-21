@@ -144,7 +144,7 @@ const PostModal = ({
                     className="w-full"
                     src={
                       new RegExp(
-                        `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                        `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                       ).test(image.image)
                         ? image.image
                         : process.env.HOST + image.image
@@ -155,7 +155,7 @@ const PostModal = ({
                       target="_blank"
                       href={
                         new RegExp(
-                          `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                          `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                         ).test(image.image)
                           ? image.image
                           : process.env.HOST + image.image
@@ -342,7 +342,7 @@ const PostModal = ({
                       className="h-10 w-10 rounded-full"
                       src={
                         new RegExp(
-                          `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                          `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                         ).test(post?.user.picture)
                           ? post?.user.picture
                           : process.env.HOST + post?.user.picture
@@ -410,7 +410,7 @@ const PostModal = ({
                             className="h-8 w-8 rounded-full"
                             src={
                               new RegExp(
-                                `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                                `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                               ).test(member.user.picture)
                                 ? member.user.picture
                                 : process.env.HOST + member.user.picture

@@ -255,7 +255,7 @@ const Chat = () => {
                           className="hidden sm:block h-10 w-10 rounded-full  mr-4"
                           src={
                             new RegExp(
-                              `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                              `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                             ).test(chatReducer.chat?.to_user?.picture)
                               ? chatReducer.chat?.to_user?.picture
                               : process.env.HOST +

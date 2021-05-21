@@ -14,7 +14,7 @@ const Review = ({ review }) => {
                 className="h-10 w-10 rounded-full flex items-center justify-center"
                 src={
                   new RegExp(
-                    `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                    `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                   ).test(review?.review_user?.picture)
                     ? review?.review_user?.picture
                     : process.env.HOST + review?.review_user?.picture

@@ -74,7 +74,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
                       className="h-40 w-40 overflow-hidden xl:w-56 xl:h-56 rounded-full m-auto"
                       src={
                         new RegExp(
-                          `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                          `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                         ).test(user.picture)
                           ? user.picture
                           : process.env.HOST + user.picture

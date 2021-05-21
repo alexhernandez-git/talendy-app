@@ -76,7 +76,7 @@ const Member = ({ member }) => {
                   className="h-12 w-12 rounded-full"
                   src={
                     new RegExp(
-                      `${process.env.HOST}|https://freelanium.s3.amazonaws.com`
+                      `${process.env.HOST}|https://talendy.s3.amazonaws.com`
                     ).test(member?.user?.picture)
                       ? member?.user?.picture
                       : process.env.HOST + member?.user?.picture
