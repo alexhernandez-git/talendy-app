@@ -723,7 +723,6 @@ const DonationForm = () => {
               ? "Donating, please wait..."
               : "DONATE NOW"}
           </button>
-
           {authReducer.is_authenticated ? (
             <>
               {formik.values.donation_option_id ? (
@@ -793,6 +792,11 @@ const DonationForm = () => {
               </span>
             </div>
           )}
+          <div className="mt-2 flex justify-center">
+            <span className="text-sm text-gray-400 dark:text-gray-300">
+              20% of what you donate will go to the maintenance of this platform
+            </span>
+          </div>
         </div>
       </div>
     </div>
