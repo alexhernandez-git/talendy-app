@@ -24,7 +24,9 @@ const User = ({ page, user }) => {
     setOptionsOpen(true);
   };
   const handleCloseOptions = () => {
-    setOptionsOpen(false);
+    if (optionsOpen) {
+      setOptionsOpen(false);
+    }
   };
   const handleToggleOptions = () => {
     setOptionsOpen(!optionsOpen);
