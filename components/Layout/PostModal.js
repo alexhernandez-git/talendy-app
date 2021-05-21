@@ -329,7 +329,7 @@ const PostModal = ({
                   clipRule="evenodd"
                 />
               </svg> */}
-                    Contribute requested
+                    Collaborate requested
                   </span>
                 </div>
               )}

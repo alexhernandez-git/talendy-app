@@ -301,7 +301,7 @@ export default function PostPage() {
                   clipRule="evenodd"
                 />
               </svg> */}
-                    Contribute requested
+                    Collaborate requested
                   </span>
                 </div>
               )}
