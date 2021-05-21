@@ -727,7 +727,7 @@ const DonationForm = () => {
             <>
               {formik.values.donation_option_id ? (
                 <div className="flex justify-center mt-5 text-gray-500 dark:text-gray-100">
-                  <span className="text-sm flex items-center">
+                  <span className="text-xs flex items-center">
                     You will earn{" "}
                     <span className="text-orange-500 flex items-center mx-1">
                       <svg
@@ -759,7 +759,7 @@ const DonationForm = () => {
                 <>
                   {formik.values.other_amount_karma && (
                     <div className="flex justify-center mt-5 text-gray-500 dark:text-gray-100">
-                      <span className="text-sm flex items-center">
+                      <span className="text-xs flex items-center">
                         You will earn{" "}
                         <span className="text-orange-500 flex items-center mx-1">
                           <svg
