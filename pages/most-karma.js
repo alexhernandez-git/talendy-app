@@ -22,9 +22,7 @@ export default function MostKarma() {
   useEffect(() => {
     const fetchInitialData = async () => {
       if (initialDataReducer.data_fetched) {
-        if (topKarmaUsersReducer.users.results.length === 0) {
-          await dispatch(fetchTopKarmaUsers());
-        }
+        await dispatch(fetchTopKarmaUsers());
         await dispatch(
           fetchPosts(page, {
             community: authReducer.community_filter,
