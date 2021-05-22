@@ -493,10 +493,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
               </div>
               <div className="ml-3">
                 <div className="text-base font-medium text-gray-800 dark:text-gray-100">
-                  Chelsea Hagon
-                </div>
-                <div className="text-sm font-medium text-gray-500 dark:text-gray-200">
-                  chelseahagon@example.com
+                  {user?.username}
                 </div>
               </div>
 
