@@ -15,10 +15,12 @@ export const fetchReviews =
     await dispatch({
       type: FETCH_REVIEWS,
     });
-    console.log(`${process.env.HOST}/api/reviews/${user && user + "/user/"}`);
+    console.log(
+      `${process.env.HOST}/api/reviews/${user ? user + "/user/" : ""}`
+    );
     await axios
       .get(
-        `${process.env.HOST}/api/reviews/${user && user + "/user/"}`,
+        `${process.env.HOST}/api/reviews/${user ? user + "/user/" : ""}`,
         tokenConfig(getState)
       )
       .then(async (res) => {
