@@ -1,8 +1,7 @@
 import { FEED_PAGE } from "pages";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { fetchTopKarmaUsers } from "redux/actions/topKarmaUsers";
-import { useDispatch } from "react-redux";
 import Spinner from "components/Layout/Spinner";
 import VisibilitySensor from "react-visibility-sensor";
 import User from "./User";
