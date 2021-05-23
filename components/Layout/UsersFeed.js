@@ -6,8 +6,18 @@ import { useDispatch } from "react-redux";
 import Spinner from "components/Layout/Spinner";
 import VisibilitySensor from "react-visibility-sensor";
 import User from "./User";
+import { fetchMoreUsers } from "redux/actions/users";
 const UsersFeed = ({ page }) => {
   const usersReducer = useSelector((state) => state.usersReducer);
+  const dispatch = useDispatch();
+  const handleFetchMoreUsers = () => {
+    dispatch(fetchMoreUsers());
+  };
+  const onChangeVisibility = (visible) => {
+    if (visible) {
+      handleFetchMoreUsers();
+    }
+  };
   return (
     <div>
       <h1 className="sr-only">Users feed</h1>
