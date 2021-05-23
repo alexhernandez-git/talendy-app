@@ -21,6 +21,7 @@ import {
   newContributeRequestEvent,
   newContributeRoomMessageEvent,
 } from "redux/actions/notifications";
+import Head from "next/head";
 
 function WrappedApp({ Component, pageProps }) {
   // Dispatch initial data
@@ -142,6 +143,9 @@ function WrappedApp({ Component, pageProps }) {
   }, []);
   return (
     <Elements stripe={getStripe()}>
+      <Head>
+        <title>Talendy - Collaboration community</title>
+      </Head>
       <Component {...pageProps} />
     </Elements>
   );

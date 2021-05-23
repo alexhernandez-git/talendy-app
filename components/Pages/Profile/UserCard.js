@@ -50,7 +50,19 @@ const UserCard = ({ mobile, page, profile, user }) => {
       setShowReputation(true);
     }
   }, [user?.reputation]);
-
+  const copyToClipboard = (e) => {
+    e.stopPropagation();
+    const el = document.createElement("textarea");
+    el.value = `${location.origin}/user/${user?.id}`;
+    el.setAttribute("readonly", "");
+    el.style.position = "absolute";
+    el.style.left = "-9999px";
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    dispatch(createAlert("SUCCESS", "Profile link copied to clipboard"));
+  };
   return (
     <aside
       className={`lg:col-span-4  mb-4 lg:mb-0 ${
@@ -167,6 +179,27 @@ const UserCard = ({ mobile, page, profile, user }) => {
                       </button>
                     </Link>
                   </div>
+                  {profile && (
+                    <span className="inline-flex items-center text-sm">
+                      <button
+                        onMouseDown={copyToClipboard}
+                        className="mt-4 text-sm top-0 right-0 inline-flex space-x-2 text-gray-400 hover:text-gray-500"
+                      >
+                        <svg
+                          className="h-5 w-5"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
+                        </svg>
+                        <span className="font-medium text-gray-700 ">
+                          Share your profile
+                        </span>
+                      </button>
+                    </span>
+                  )}
                 </div>
               </div>
             </div>

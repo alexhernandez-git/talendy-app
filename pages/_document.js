@@ -10,8 +10,6 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <title>Talendy - Collaboration community</title>
-
           <link rel="shortcut icon" href="/static/images/talendy-logo.ico" />
         </Head>
         <body>
