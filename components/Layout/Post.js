@@ -443,7 +443,7 @@ const Post = ({ page, post }) => {
                 onChange={formik.handleChange}
                 id="reason"
                 className="block mb-2 sm:mb-0 w-full border bg-white dark:bg-gray-600 border-gray-300  text-sm placeholder-gray-500 dark:placeholder-gray-300  dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 rounded-3xl shadow-sm py-2 px-4 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                placeholder="Message"
+                placeholder="Message (required)"
                 aria-describedby="reason"
               />
               <button
