@@ -5,8 +5,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { sendFeedback } from "redux/actions/auth";
+import { useSelector } from "react-redux";
+import Spinner from "components/Layout/Spinner";
 export default function Conatct() {
   const page = CONTACT_PAGE;
+  const authReducer = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -291,6 +294,9 @@ export default function Conatct() {
                     type="submit"
                     className="w-full flex items-center justify-center py-2 px-4 border border-transparent rounded-3xl shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
                   >
+                    {authReducer.leaving_feedback && (
+                      <Spinner className="mr-2" />
+                    )}
                     Send message
                   </button>
                 </div>
