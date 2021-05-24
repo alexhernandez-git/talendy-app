@@ -2,12 +2,16 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { fetchChat } from "redux/actions/chat";
 import moment from "moment";
+import { useSelector } from "react-redux";
 
 const ChatItem = ({ chat }) => {
   const dispatch = useDispatch();
   const handleGetChat = () => {
     dispatch(fetchChat(chat.id));
   };
+  const chatReducer = useSelector((state) => state.chatReducer);
+  const authReducer = useSelector((state) => state.authReducer);
+
   moment.locale("en", {
     relativeTime: {
       future: "in %s",
@@ -73,7 +77,14 @@ const ChatItem = ({ chat }) => {
                       .fromNow()}
                   </p>
                 </div>
-                <p className="text-xs text-gray-500 dark:text-gray-200 truncate">
+                <p
+                  className={`text-xs text-gray-500 dark:text-gray-200 truncate ${
+                    !chat.last_message_seen &&
+                    chat.last_message_sent_by !== authReducer.user?.id &&
+                    chatReducer.chat?.id !== chat.id &&
+                    "font-black"
+                  }`}
+                >
                   {chat?.last_message}
                 </p>
               </div>
