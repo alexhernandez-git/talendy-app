@@ -67,7 +67,7 @@ export const fetchChats =
 
         dispatch({
           type: FETCH_CHATS_FAIL,
-          payload: { data: err.response.data, status: err.response?.status },
+          payload: { data: err.response?.data, status: err.response?.status },
         });
       });
   };
@@ -98,7 +98,7 @@ export const getOrCreateChat = (user_id) => async (dispatch, getState) => {
 
       dispatch({
         type: CREATE_CHAT_FAIL,
-        payload: { data: err.response.data, status: err.response?.status },
+        payload: { data: err.response?.data, status: err.response?.status },
       });
       dispatch(createAlert("ERROR", "Something went wrong"));
     });

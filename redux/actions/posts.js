@@ -177,7 +177,7 @@ export const fetchMorePosts = () => async (dispatch, getState) => {
       .catch((err) => {
         dispatch({
           type: FETCH_MORE_POSTS_FAIL,
-          payload: { data: err.response.data, status: err.response.status },
+          payload: { data: err.response?.data, status: err.response.status },
         });
       });
   }
@@ -209,7 +209,6 @@ export const createContributeRequest =
           type: CREATE_CONTRIBUTE_REQUEST_FAIL,
           payload: { data: err.response?.data, status: err.response?.status },
         });
-        console.log(err.response.data);
         if (err.response?.data?.non_field_errors?.length > 0) {
           await dispatch(
             createAlert("ERROR", err.response?.data?.non_field_errors[0])

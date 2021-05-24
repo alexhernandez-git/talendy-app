@@ -33,7 +33,7 @@ export const fetchRoomMessages = (id) => async (dispatch, getState) => {
     .catch((err) => {
       dispatch({
         type: FETCH_ROOM_MESSAGES_FAIL,
-        payload: { data: err.response.data, status: err.response.status },
+        payload: { data: err.response?.data, status: err.response.status },
       });
     });
 };
@@ -45,35 +45,33 @@ export const addRoomMessage = (data) => async (dispatch, getState) => {
   });
 };
 
-export const fetchMessage = (chat__pk, message__pk) => async (
-  dispatch,
-  getState
-) => {
-  await dispatch({
-    type: FETCH_ROOM_MESSAGE,
-  });
-  await axios
-    .get(
-      `${process.env.HOST}/api/posts/${chat__pk}/messages/${message__pk}/`,
-      tokenConfig(getState)
-    )
-    .then(async (res) => {
-      try {
-        await dispatch({
-          type: FETCH_ROOM_MESSAGE_SUCCESS,
-          payload: res.data,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    })
-    .catch(async (err) => {
-      await dispatch({
-        type: FETCH_ROOM_MESSAGE_FAIL,
-        payload: { data: err.response.data, status: err.response.status },
-      });
+export const fetchMessage =
+  (chat__pk, message__pk) => async (dispatch, getState) => {
+    await dispatch({
+      type: FETCH_ROOM_MESSAGE,
     });
-};
+    await axios
+      .get(
+        `${process.env.HOST}/api/posts/${chat__pk}/messages/${message__pk}/`,
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        try {
+          await dispatch({
+            type: FETCH_ROOM_MESSAGE_SUCCESS,
+            payload: res.data,
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      })
+      .catch(async (err) => {
+        await dispatch({
+          type: FETCH_ROOM_MESSAGE_FAIL,
+          payload: { data: err.response?.data, status: err.response.status },
+        });
+      });
+  };
 
 export const fetchMoreRoomMessages = () => async (dispatch, getState) => {
   const url = getState().roomMessagesReducer.messages.next;
@@ -93,7 +91,7 @@ export const fetchMoreRoomMessages = () => async (dispatch, getState) => {
       .catch((err) => {
         dispatch({
           type: FETCH_MORE_ROOM_MESSAGES_FAIL,
-          payload: { data: err.response.data, status: err.response.status },
+          payload: { data: err.response?.data, status: err.response.status },
         });
       });
   }

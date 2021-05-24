@@ -166,16 +166,18 @@ const Login = ({ loginOpen, loginRef, mobile, handleClose }) => {
                 method="POST"
               >
                 {authReducer.error &&
-                  authReducer.error.data.non_field_errors &&
-                  authReducer.error.data.non_field_errors.map((message, i) => (
-                    <div
-                      key={i}
-                      className="mb-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4"
-                    >
-                      <p>{message}</p>
-                    </div>
-                  ))}
-                {authReducer.error && authReducer.error.data.detail && (
+                  authReducer.error?.data?.non_field_errors &&
+                  authReducer.error?.data?.non_field_errors.map(
+                    (message, i) => (
+                      <div
+                        key={i}
+                        className="mb-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4"
+                      >
+                        <p>{message}</p>
+                      </div>
+                    )
+                  )}
+                {authReducer.error && authReducer.error?.data?.detail && (
                   <div className="mb-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
                     <p>Invalid credentials</p>
                   </div>
