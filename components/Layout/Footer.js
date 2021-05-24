@@ -9,8 +9,8 @@ const Footer = () => {
       <h2 id="footerHeading" className="sr-only">
         Footer
       </h2>
-      <div className="max-w-7xl mx-auto pt-16 pb-8 px-4 sm:px-6 lg:px-8">
-        <div className="mt-12 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between lg:mt-16">
+      <div className="max-w-7xl mx-auto pt-4 pb-8 px-4 sm:px-6 lg:px-8">
+        <div className="mt-4 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between ">
           <div className="flex items-center">
             <a href="/privacy" target="_blank">
               <p className="mt-8 text-base text-gray-400 md:mt-0 md:order-1 mr-5 md:mx-5">
