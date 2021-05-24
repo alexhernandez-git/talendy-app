@@ -398,7 +398,7 @@ const PostModal = ({
                     Members Contributing
                   </h3>
                   <span className="font-normal text-xs text-gray-900 dark:text-white">
-                    {post?.members_count}/10
+                    {post?.members_count}/5
                   </span>
                 </div>
                 <ul className="mt-2 border-t border-gray-200 dark:border-gray-400 divide-y divide-gray-200 dark:divide-gray-400">
