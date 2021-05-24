@@ -878,34 +878,34 @@ export const removeAccount = (router) => async (dispatch, getState) => {
     });
 };
 
-export const sendFeedback =
-  (data, resetForm, handleCloseLeaveFeedback) => async (dispatch, getState) => {
-    dispatch({
-      type: LEAVE_FEEDBACK,
-    });
-    await axios
-      .post(
-        `${process.env.HOST}/api/users/leave_feedback/`,
-        data,
-        tokenConfig(getState)
-      )
-      .then(async (res) => {
-        await dispatch({
-          type: LEAVE_FEEDBACK_SUCCESS,
-          payload: res.data,
-        });
-        resetForm({});
-        handleCloseLeaveFeedback();
-      })
-      .catch(async (err) => {
-        await dispatch();
-
-        await dispatch({
-          type: LEAVE_FEEDBACK_FAIL,
-          payload: { data: err.response?.data, status: err.response?.status },
-        });
+export const sendFeedback = (data, resetForm) => async (dispatch, getState) => {
+  dispatch({
+    type: LEAVE_FEEDBACK,
+  });
+  await axios
+    .post(
+      `${process.env.HOST}/api/users/leave_feedback/`,
+      data,
+      tokenConfig(getState)
+    )
+    .then(async (res) => {
+      await dispatch({
+        type: LEAVE_FEEDBACK_SUCCESS,
+        payload: res.data,
       });
-  };
+      await resetForm({});
+      await dispatch(
+        createAlert("SUCCESS", "The message has been successfully sent")
+      );
+    })
+    .catch(async (err) => {
+      await dispatch(createAlert("ERROR", "Error sending message"));
+      await dispatch({
+        type: LEAVE_FEEDBACK_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
+};
 export const addKarmaAmount = (amount) => async (dispatch, getState) => {
   dispatch({
     type: ADD_KARMA_AMOUNT,

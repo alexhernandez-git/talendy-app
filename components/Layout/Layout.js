@@ -6,6 +6,7 @@ import Chat from "./Chat";
 import NewPostModal from "./CreateEditPostModal";
 import RegisterModal from "./RegisterModal";
 import { useAlert } from "hooks/useAlert";
+import Footer from "./Footer";
 
 const Layout = ({
   children,
@@ -71,6 +72,8 @@ const Layout = ({
         />
         {children}
       </div>
+      <Footer />
+
       <Chat />
       <NewPostModal
         modalOpen={modalOpen}
