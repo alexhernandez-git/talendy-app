@@ -47,9 +47,12 @@ const NotificationItem = ({ notification, handleCloseNotifications }) => {
             {content.event_message}
           </p>
 
-          <p className="text-xs text-gray-500 dark:text-gray-100 truncate">
-            {content.message}
-          </p>
+          <p
+            className="text-xs text-gray-500 dark:text-gray-100 truncate"
+            dangerouslySetInnerHTML={{
+              __html: content.message,
+            }}
+          />
           <p className="float-right text-xs text-gray-400 dark:text-gray-200 truncate">
             {moment(notification?.modified).subtract(1, "seconds").fromNow()}
           </p>
