@@ -741,9 +741,9 @@ const Contribute = () => {
                   feature={feature}
                 />
               </div>
-              {feature.toUpperCase() === "ASTEROIDS" && collaborate_room && (
-                <ContributeAsteroids />
-              )}
+              {!isFinalizePage &&
+                feature.toUpperCase() === "ASTEROIDS" &&
+                collaborate_room && <ContributeAsteroids />}
             </div>
 
             <section
