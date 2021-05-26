@@ -106,6 +106,9 @@ import {
   SUBSTRACT_CREATED_ACTIVE_POST_COUNT,
   ADD_CREATED_SOLVED_POST_COUNT,
   SUBSTRACT_CREATED_SOLVED_POST_COUNT,
+  UPDATE_GEOLOCATION,
+  UPDATE_GEOLOCATION_SUCCESS,
+  UPDATE_GEOLOCATION_FAIL,
 } from "../types";
 import { createAlert } from "./alerts";
 
@@ -403,6 +406,30 @@ export const updateUser = (user) => async (dispatch, getState) => {
     });
 };
 
+export const updateGeolocation = (data) => async (dispatch, getState) => {
+  dispatch({ type: UPDATE_GEOLOCATION });
+  await axios
+    .patch(
+      `${process.env.HOST}/api/users/${
+        getState().authReducer.user.id
+      }/update_geolocation/`,
+      data,
+      tokenConfig(getState)
+    )
+    .then(async (res) => {
+      console.log(res);
+      await dispatch({
+        type: UPDATE_GEOLOCATION_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: UPDATE_GEOLOCATION_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
+};
 export const updateUserPicture = (picture) => async (dispatch, getState) => {
   const fd = new FormData();
   fd.append("picture", picture, picture.name);

@@ -13,6 +13,7 @@ import {
   addInvitation,
   setPendingNotifications,
   substractConnection,
+  updateGeolocation,
 } from "redux/actions/auth";
 import { addOrUpdateNotificationToFeed } from "redux/actions/lastNotifications";
 import { createAlert } from "redux/actions/alerts";
@@ -28,6 +29,7 @@ function WrappedApp({ Component, pageProps }) {
   useDispatchInitialData();
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
+  const initialDataReducer = useSelector((state) => state.initialDataReducer);
   const ws = useRef(null);
   const connect = () => {
     ws.current = new WebSocket(
@@ -141,6 +143,39 @@ function WrappedApp({ Component, pageProps }) {
       document.documentElement.classList.remove("dark");
     }
   }, []);
+  useEffect(() => {
+    if (
+      !authReducer.is_loading &&
+      authReducer.is_authenticated &&
+      initialDataReducer.data_fetched &&
+      !authReducer.user?.geolocation
+    ) {
+      function success(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        console.log(latitude, longitude);
+        dispatch(
+          updateGeolocation({ latitude: latitude, longitude: longitude })
+        );
+      }
+
+      function error() {
+        console.log("error at getting geolocation");
+      }
+
+      if (!navigator.geolocation) {
+        console.log("Geolocation is not supported by your browser");
+      } else {
+        console.log("Locating…");
+        navigator.geolocation.getCurrentPosition(success, error);
+      }
+    }
+  }, [
+    authReducer.is_loading,
+    authReducer.is_authenticated,
+    initialDataReducer.data_fetched,
+  ]);
   return (
     <Elements stripe={getStripe()}>
       <Head>

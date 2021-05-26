@@ -108,6 +108,9 @@ import {
   SUBSTRACT_CREATED_ACTIVE_POST_COUNT,
   ADD_CREATED_SOLVED_POST_COUNT,
   SUBSTRACT_CREATED_SOLVED_POST_COUNT,
+  UPDATE_GEOLOCATION,
+  UPDATE_GEOLOCATION_SUCCESS,
+  UPDATE_GEOLOCATION_FAIL,
 } from "../types";
 
 const initialState = {
@@ -173,6 +176,8 @@ const initialState = {
   remove_account_error: null,
   leaving_feedback: false,
   leave_feedback_error: null,
+  is_updating_geolocation: false,
+  update_geolocation_error: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -501,6 +506,24 @@ export default function authReducer(state = initialState, action) {
         ...state,
         is_updating_user: false,
         update_user_error: action.payload,
+      };
+    case UPDATE_GEOLOCATION:
+      return {
+        ...state,
+        is_updating_geolocation: true,
+      };
+    case UPDATE_GEOLOCATION_SUCCESS:
+      return {
+        ...state,
+        is_updating_geolocation: false,
+        user: action.payload,
+        update_geolocation_error: null,
+      };
+    case UPDATE_GEOLOCATION_FAIL:
+      return {
+        ...state,
+        is_updating_geolocation: false,
+        update_geolocation_error: action.payload,
       };
     case CHANGE_EMAIL:
       return {

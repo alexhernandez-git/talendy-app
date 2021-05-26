@@ -57,13 +57,13 @@ const NotificationsDropdown = ({
         </div>
         <div className="">
           <div className="flow-root px-4 max-h-72 overflow-auto">
-            {lastNotificationsReducer.notifications.results.length === 0 && (
+            {lastNotificationsReducer.notifications?.results?.length === 0 && (
               <p className="text-xs font-normal text-gray-500 dark:text-gray-200 truncate mt-3">
                 You don't have notifications
               </p>
             )}
             <ul className="divide-y divide-gray-200">
-              {lastNotificationsReducer.notifications.results.map(
+              {lastNotificationsReducer.notifications?.results.map(
                 (notification) => (
                   <NotificationItem
                     key={notification.id}
