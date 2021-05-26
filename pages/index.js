@@ -191,7 +191,7 @@ export default function Home() {
                   </span>
                 </h1>
                 <p className="mt-6 max-w-lg mx-auto text-center text-xl text-orange-200 sm:max-w-3xl">
-                  Make contacts, improve your skills and get relevant experience
+                  Make contacts, improve your skills, get relevant experience
                   helping people with the same professional interests and{" "}
                   <span className="text-white">build your portfolio</span>.
                 </p>
