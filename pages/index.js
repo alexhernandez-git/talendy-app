@@ -193,7 +193,7 @@ export default function Home() {
                 <p className="mt-6 max-w-lg mx-auto text-center text-xl text-orange-200 sm:max-w-3xl">
                   Make contacts, improve your skills and get relevant experience
                   helping people with the same professional interests and{" "}
-                  <span className="font-bold">build your portfolio</span>.
+                  <span className="font-normal">build your portfolio</span>.
                 </p>
                 <div className="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
                   <div className="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
