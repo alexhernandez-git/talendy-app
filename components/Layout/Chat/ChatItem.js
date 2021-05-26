@@ -71,11 +71,13 @@ const ChatItem = ({ chat }) => {
                   <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
                     {chat?.room_name}
                   </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-200">
-                    {moment(chat?.last_message_created)
-                      .subtract(1, "seconds")
-                      .fromNow()}
-                  </p>
+                  {chat?.last_message_created && (
+                    <p className="text-xs text-gray-500 dark:text-gray-200">
+                      {moment(chat.last_message_created)
+                        .subtract(1, "seconds")
+                        .fromNow()}
+                    </p>
+                  )}
                 </div>
                 <p
                   className={`text-xs text-gray-500 dark:text-gray-200 truncate ${
