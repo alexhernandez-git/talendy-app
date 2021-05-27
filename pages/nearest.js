@@ -92,7 +92,7 @@ export default function Nearest() {
                           clipRule="evenodd"
                         />
                       </svg>
-                      Active geolocation
+                      Get geolocation
                     </button>
                   </div>
                 )}
