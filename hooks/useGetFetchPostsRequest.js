@@ -12,6 +12,7 @@ import {
   USER_CONTRIBUTED_POSTS_PAGE,
   USER_POSTS_PAGE,
   USER_CREATED_POSTS_PAGE,
+  NEAREST_POSTS_PAGE,
 } from "pages";
 import React from "react";
 
@@ -24,6 +25,8 @@ const useGetFetchPostsRequest = (page, user) => {
       return "posts/list_most_karma_posts";
     case FOLLOWED_USERS_POSTS_PAGE:
       return "posts/list_followed_users_posts";
+    case NEAREST_POSTS_PAGE:
+      return "posts/list_nearest_posts";
     case MY_POSTS_PAGE:
       return "posts/list_my_posts";
     case MY_ACTIVE_POSTS_PAGE:

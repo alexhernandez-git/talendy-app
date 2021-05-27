@@ -3,6 +3,7 @@ import {
   FOLLOWED_USERS_POSTS_PAGE,
   FEED_PAGE,
   MOST_KARMA_POSTS_PAGE,
+  NEAREST_POSTS_PAGE,
 } from "pages";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -75,6 +76,18 @@ const LeftSidebar = ({ page }) => {
               } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
               >
                 <span className="truncate">Followed</span>
+              </span>
+            </Link>
+            <Link href="/nearest">
+              <span
+                className={`
+              ${
+                page === NEAREST_POSTS_PAGE
+                  ? "bg-gray-200 text-gray-900 "
+                  : "text-gray-600 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+              } cursor-pointer group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-3xl hover:text-gray-900`}
+              >
+                <span className="truncate">Nearest</span>
               </span>
             </Link>
           </div>
