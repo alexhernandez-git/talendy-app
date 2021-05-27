@@ -395,7 +395,7 @@ const PostModal = ({
               <div className="mt-5">
                 <div className="sm:flex justify-between items-end">
                   <h3 className="font-medium text-gray-900 dark:text-white">
-                    Members Contributing
+                    Members Collaborating
                   </h3>
                   <span className="font-normal text-xs text-gray-900 dark:text-white">
                     {post?.members_count}/5
