@@ -519,7 +519,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
                   />
                 </svg>
               </button>
-              <Link href="/notifications">
+              <Link href="/profile/notifications">
                 <button
                   type="button"
                   className="ml-5 flex-shrink-0 bg-white dark:bg-gray-600 rounded-full p-1 text-gray-400 dark:text-white hover:text-gray-500 dark:hover:text-gray-200"
