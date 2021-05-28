@@ -36,7 +36,6 @@ const Finalize = ({ handleGoToRoomPage }) => {
       solution: Yup.string().max(2500),
     }),
     onSubmit: async (values) => {
-      console.log("submit", values);
       await dispatch(updateSolution(values));
     },
   });
@@ -49,7 +48,6 @@ const Finalize = ({ handleGoToRoomPage }) => {
       karma_winner: Yup.string().required(),
     }),
     onSubmit: async (values) => {
-      console.log("submit", values);
       await dispatch(updateKarmaWinner(values));
     },
   });
@@ -60,7 +58,6 @@ const Finalize = ({ handleGoToRoomPage }) => {
       formikKarmaWinner.handleSubmit();
     }
   };
-  console.log(formikKarmaWinner.values);
   const [firstLoad, setFirstLoad] = useState(true);
 
   useEffect(() => {

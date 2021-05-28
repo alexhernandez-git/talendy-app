@@ -102,7 +102,7 @@ const Contribute = () => {
   const myStreamRef = useRef();
   const myScreenSharingStreamRef = useRef();
   const socketRef = useRef();
-  const userVideo = useRef();
+  const videoSocketRef = useRef();
   const peersRef = useRef([]);
   const [isMicOn, setIsMicOn] = useState(false);
   const [joinedMembersList, setJoinedMembersList] = useState([]);
@@ -257,6 +257,7 @@ const Contribute = () => {
 
           socketRef.current.on("user joined", (payload) => {
             const peer = addPeer(payload.signal, payload.callerID, stream);
+
             peersRef.current.push({
               peerID: payload.callerID,
               peer,
@@ -326,15 +327,63 @@ const Contribute = () => {
   const shareScreenVideoRef = useRef();
   const handleShareScreen = () => {
     navigator.mediaDevices.getDisplayMedia({ cursor: true }).then((stream) => {
-      dispatch(createAlert("INFO", "Feature not ready"));
       myScreenSharingStreamRef.current = stream;
       shareScreenVideoRef.current.srcObject = stream;
       shareScreenVideoRef.current.play();
       const screenTrack = stream.getTracks()[0];
       setIsSharingScreen(true);
+      videoSocketRef.current = io.connect(process.env.COLLABORATE_ROOM_WS);
+      videoSocketRef.current.on("connect", () => {
+        console.log("connected screen sharing!!!!!!!!!!");
+      });
+      videoSocketRef.current.on("connect_error", (err) => {
+        console.log(`connect_error due to ${err.message}`);
+      });
+      videoSocketRef.current.emit("join room", {
+        roomID: roomID,
+        userID: authReducer.user?.id + "|screensharing",
+      });
+      videoSocketRef.current.emit("ss media ready", roomID);
 
+      videoSocketRef.current.on("ss all users", (users) => {
+        const peers = [];
+        users.forEach((user) => {
+          const peer = createPeer(
+            user.socketID,
+            videoSocketRef.current.id,
+            stream
+          );
+          peersRef.current.push({
+            peerID: user.socketID,
+            peer,
+          });
+          peers.push(peer);
+        });
+        setPeers(peers);
+      });
       handleChangeFeature("SCREENSHARING");
+
       screenTrack.onended = function () {
+        if (videoSocketRef.current) {
+          videoSocketRef.current.disconnect();
+        }
+        if (myScreenSharingStreamRef.current) {
+          myScreenSharingStreamRef.current
+            .getTracks()
+            .forEach(function (track) {
+              track.stop();
+            });
+          myScreenSharingStreamRef.current
+            .getAudioTracks()
+            .forEach(function (track) {
+              track.stop();
+            });
+          myScreenSharingStreamRef.current
+            .getVideoTracks()
+            .forEach(function (track) {
+              track.stop();
+            });
+        }
         setIsSharingScreen(false);
         handleChangeFeature("CHAT");
         console.log("screen sharing ended");
@@ -393,6 +442,7 @@ const Contribute = () => {
   const handleStopCollaborating = () => {
     dispatch(stopCollaborating(router));
   };
+
   return !canRender ? (
     <div className="flex justify-center items-center h-screen dark:bg-gray-800">
       <Spinner />
@@ -404,7 +454,7 @@ const Contribute = () => {
       })}
       <Layout>
         <div className="fixed bottom-0 w-full z-40 flex items-center justify-center">
-          {/* <div className="mr-2 flex items-center dark:bg-gray-800 bg-white rounded-t-lg border-t border-l border-r border-orange-500 dark:border-white shadow">
+          <div className="mr-2 flex items-center dark:bg-gray-800 bg-white rounded-t-lg border-t border-l border-r border-orange-500 dark:border-white shadow">
             <button
               onClick={handleShareScreen}
               type="button"
@@ -415,7 +465,7 @@ const Contribute = () => {
               </IconContext.Provider>
               Screen
             </button>
-          </div> */}
+          </div>
           <div className="flex items-center dark:bg-gray-800 bg-white rounded-t-lg border-t border-l border-r border-orange-500 dark:border-white shadow">
             {isMicOn ? (
               <button
@@ -700,6 +750,8 @@ const Contribute = () => {
                   socketRef={socketRef}
                   roomID={roomID}
                   shareScreenVideoRef={shareScreenVideoRef}
+                  peers={peers}
+                  setIsSharingScreen={setIsSharingScreen}
                 />
               </div>
               <div

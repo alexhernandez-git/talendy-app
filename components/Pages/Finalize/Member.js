@@ -39,11 +39,9 @@ const Member = ({ member, handleChangeKarmaWinner, karma_winner }) => {
       draft_comment: Yup.string().nullable(),
     }),
     onSubmit: async (values) => {
-      console.log(values);
       await dispatch(updateMemberReview(values, member?.id));
     },
   });
-  console.log(formik.errors);
   const [firstLoad, setFirstLoad] = useState(true);
 
   useEffect(() => {
