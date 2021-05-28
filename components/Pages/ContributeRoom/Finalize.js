@@ -17,6 +17,7 @@ import {
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { createAlert } from "redux/actions/alerts";
 
 const Finalize = ({ handleGoToRoomPage }) => {
   const dispatch = useDispatch();
@@ -73,6 +74,13 @@ const Finalize = ({ handleGoToRoomPage }) => {
   }, [formik?.values?.solution]);
 
   const handleFinalize = () => {
+    if (
+      collaborateRoomReducer.collaborate_room?.members?.length > 1 &&
+      !collaborateRoomReducer.collaborate_room?.karma_winner
+    ) {
+      dispatch(createAlert("ERROR", "You need to establish a karma winner"));
+      return;
+    }
     dispatch(finalizePost(handleGoToRoomPage));
   };
   return (
