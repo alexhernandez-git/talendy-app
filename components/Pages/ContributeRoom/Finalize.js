@@ -55,8 +55,10 @@ const Finalize = ({ handleGoToRoomPage }) => {
   });
 
   const handleChangeKarmaWinner = (id) => {
-    formikKarmaWinner.setFieldValue("karma_winner", id);
-    formikKarmaWinner.handleSubmit();
+    if (formikKarmaWinner.values.karma_winner !== id) {
+      formikKarmaWinner.setFieldValue("karma_winner", id);
+      formikKarmaWinner.handleSubmit();
+    }
   };
   console.log(formikKarmaWinner.values);
   const [firstLoad, setFirstLoad] = useState(true);
