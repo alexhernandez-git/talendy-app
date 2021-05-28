@@ -62,7 +62,7 @@ const Finalize = ({ handleGoToRoomPage }) => {
   const [firstLoad, setFirstLoad] = useState(true);
 
   useEffect(() => {
-    if (formik?.values?.solution) {
+    if (formik?.values?.solution || !firstLoad) {
       if (!firstLoad) {
         const timeoutId = setTimeout(() => {
           formik.handleSubmit();
