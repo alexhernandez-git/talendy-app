@@ -10,21 +10,7 @@ export default function ContributeScreenSharing({
   socketRef,
   roomID,
   shareScreenVideoRef,
-  peers,
-  setIsSharingScreen,
 }) {
-  useEffect(() => {
-    peers.forEach((peer) => {
-      console.log("peer", peer);
-      peer.on("stream", (stream) => {
-        if (stream.getVideoTracks().length) {
-          console.log("streeam video", stream);
-          setIsSharingScreen(true);
-          shareScreenVideoRef.current.srcObject = stream;
-        }
-      });
-    });
-  }, [peers]);
   const authReducer = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
   console.log(shareScreenVideoRef);

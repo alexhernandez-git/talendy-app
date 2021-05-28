@@ -390,7 +390,18 @@ const Contribute = () => {
       };
     });
   };
-
+  useEffect(() => {
+    peers.forEach((peer) => {
+      console.log("peer", peer);
+      peer.on("stream", (stream) => {
+        if (stream.getVideoTracks().length) {
+          console.log("streeam video", stream);
+          setIsSharingScreen(true);
+          shareScreenVideoRef.current.srcObject = stream;
+        }
+      });
+    });
+  }, [peers]);
   const [members, setMembers] = useState({
     joined: [],
     online: [],
@@ -454,7 +465,7 @@ const Contribute = () => {
       })}
       <Layout>
         <div className="fixed bottom-0 w-full z-40 flex items-center justify-center">
-          <div className="mr-2 flex items-center dark:bg-gray-800 bg-white rounded-t-lg border-t border-l border-r border-orange-500 dark:border-white shadow">
+          {/* <div className="mr-2 flex items-center dark:bg-gray-800 bg-white rounded-t-lg border-t border-l border-r border-orange-500 dark:border-white shadow">
             <button
               onClick={handleShareScreen}
               type="button"
@@ -465,7 +476,7 @@ const Contribute = () => {
               </IconContext.Provider>
               Screen
             </button>
-          </div>
+          </div> */}
           <div className="flex items-center dark:bg-gray-800 bg-white rounded-t-lg border-t border-l border-r border-orange-500 dark:border-white shadow">
             {isMicOn ? (
               <button
@@ -750,8 +761,6 @@ const Contribute = () => {
                   socketRef={socketRef}
                   roomID={roomID}
                   shareScreenVideoRef={shareScreenVideoRef}
-                  peers={peers}
-                  setIsSharingScreen={setIsSharingScreen}
                 />
               </div>
               <div
