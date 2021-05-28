@@ -12,6 +12,9 @@ import {
   UPDATE_SOLUTION,
   UPDATE_SOLUTION_SUCCESS,
   UPDATE_SOLUTION_FAIL,
+  UPDATE_KARMA_WINNER,
+  UPDATE_KARMA_WINNER_SUCCESS,
+  UPDATE_KARMA_WINNER_FAIL,
   FINALIZE_POST,
   FINALIZE_POST_SUCCESS,
   FINALIZE_POST_FAIL,
@@ -102,6 +105,30 @@ export const updateSolution = (values) => async (dispatch, getState) => {
     });
 };
 
+export const updateKarmaWinner = (values) => async (dispatch, getState) => {
+  await dispatch({
+    type: UPDATE_KARMA_WINNER,
+  });
+  await axios
+    .patch(
+      `${process.env.HOST}/api/posts/${
+        getState().collaborateRoomReducer.collaborate_room?.id
+      }/update_karma_winner/`,
+      values,
+      tokenConfig(getState)
+    )
+    .then(async (res) => {
+      await dispatch({
+        type: UPDATE_KARMA_WINNER_SUCCESS,
+      });
+    })
+    .catch(async (err) => {
+      await dispatch({
+        type: UPDATE_KARMA_WINNER_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
+};
 export const stopCollaborating = (router) => async (dispatch, getState) => {
   await dispatch({
     type: STOP_COLLABORATING,

@@ -9,7 +9,11 @@ import moment from "moment";
 import SolveIssueEditor from "components/Editor/SolveIssueEditor";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { finalizePost, updateSolution } from "redux/actions/collaborateRoom";
+import {
+  finalizePost,
+  updateKarmaWinner,
+  updateSolution,
+} from "redux/actions/collaborateRoom";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -35,6 +39,25 @@ const Finalize = ({ handleGoToRoomPage }) => {
       await dispatch(updateSolution(values));
     },
   });
+  const formikKarmaWinner = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      karma_winner: collaborate_room?.karma_winner,
+    },
+    validationSchema: Yup.object({
+      karma_winner: Yup.string().required(),
+    }),
+    onSubmit: async (values) => {
+      console.log("submit", values);
+      await dispatch(updateKarmaWinner(values));
+    },
+  });
+
+  const handleChangeKarmaWinner = (id) => {
+    formikKarmaWinner.setFieldValue("karma_winner", id);
+    formikKarmaWinner.handleSubmit();
+  };
+  console.log(formikKarmaWinner.values);
   const [firstLoad, setFirstLoad] = useState(true);
 
   useEffect(() => {
@@ -117,7 +140,12 @@ const Finalize = ({ handleGoToRoomPage }) => {
               {collaborate_room?.members.map(
                 (member) =>
                   member.user.id !== authReducer.user?.id && (
-                    <Member member={member} key={member.id} />
+                    <Member
+                      handleChangeKarmaWinner={handleChangeKarmaWinner}
+                      karma_winner={formikKarmaWinner.values.karma_winner}
+                      member={member}
+                      key={member.id}
+                    />
                   )
               )}
             </ul>

@@ -16,6 +16,9 @@ import {
   STOP_COLLABORATING,
   STOP_COLLABORATING_SUCCESS,
   STOP_COLLABORATING_FAIL,
+  UPDATE_KARMA_WINNER,
+  UPDATE_KARMA_WINNER_SUCCESS,
+  UPDATE_KARMA_WINNER_FAIL,
 } from "../types";
 
 const initialState = {
@@ -30,6 +33,8 @@ const initialState = {
   finalize_post_error: null,
   is_stopping_colaborating: false,
   stop_collaborating_error: null,
+  is_updating_karma_winner: false,
+  update_kamra_winner_error: null,
 };
 export default function collaborateRoomReducer(state = initialState, action) {
   switch (action.type) {
@@ -101,6 +106,23 @@ export default function collaborateRoomReducer(state = initialState, action) {
         ...state,
         is_updating_solution: false,
         update_solution_error: action.payload,
+      };
+    case UPDATE_KARMA_WINNER:
+      return {
+        ...state,
+        is_updating_karma_winner: true,
+      };
+    case UPDATE_KARMA_WINNER_SUCCESS:
+      return {
+        ...state,
+        is_updating_karma_winner: false,
+        update_karma_winner_error: null,
+      };
+    case UPDATE_KARMA_WINNER_FAIL:
+      return {
+        ...state,
+        is_updating_karma_winner: false,
+        update_karma_winner_error: action.payload,
       };
     case STOP_COLLABORATING:
       return {

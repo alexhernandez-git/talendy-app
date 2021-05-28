@@ -8,9 +8,12 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { updateMemberReview } from "redux/actions/collaborateRoom";
 import { useDispatch } from "react-redux";
-const Member = ({ member }) => {
+const Member = ({ member, handleChangeKarmaWinner, karma_winner }) => {
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
+  const collaborateRoomReducer = useSelector(
+    (state) => state.collaborateRoomReducer
+  );
 
   const [isFormOpen, setIsFormOpen] = useState(false);
   const handleToggleForm = () => {
@@ -95,7 +98,7 @@ const Member = ({ member }) => {
                 </span>
               )}
             </div>
-            <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-5 md:gap-4">
+            <div className="min-w-0 flex-1 px-4 sm:flex items-center justify-between">
               <div className="flex items-center">
                 <a
                   href={`/${
@@ -107,29 +110,81 @@ const Member = ({ member }) => {
                 >
                   <p
                     onMouseDown={(e) => e.stopPropagation()}
-                    className="text-sm font-medium text-gray-500 dark:text-gray-100 truncate rounded-2xl px-3 py-1 hover:underline"
+                    className="text-sm font-medium text-gray-500 dark:text-gray-100 truncate rounded-2xl py-1 hover:underline"
                   >
                     {member?.user?.username}
                   </p>
                 </a>
               </div>
 
-              <div className="hidden  col-start-3 col-span-2 md:flex items-center">
+              <div className=" col-start-2 col-span-4 flex items-center">
                 <div>
-                  <p className="text-sm text-gray-900 dark:text-white">
-                    Applied on{" "}
-                    <time dateTime="2020-01-07">
-                      {" "}
-                      {moment(member?.created).format("MMM D [at] h:mm A z")}
-                    </time>
-                  </p>
+                  {karma_winner === member?.id ? (
+                    <button
+                      onMouseDown={(e) => e.stopPropagation()}
+                      onClick={handleChangeKarmaWinner.bind(this, member?.id)}
+                      className={
+                        "cursor-pointer w-full sm:w-auto mt-2 sm:mt-0 inline-flex justify-center items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                      }
+                    >
+                      <span
+                        className={`text-center text-orange-100 font-bold inline-flex items-center mr-1`}
+                      >
+                        <svg
+                          className="w-5 h-5 mr-0.5"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        Karma
+                      </span>{" "}
+                      winner
+                    </button>
+                  ) : (
+                    <button
+                      onMouseDown={(e) => e.stopPropagation()}
+                      onClick={handleChangeKarmaWinner.bind(this, member?.id)}
+                      className={
+                        "inline-flex items-center text-xs justify-center px-4 py-2 border border-gray-300 shadow-sm font-medium rounded-3xl text-gray-500 hover:text-gray-500 dark:hover:text-white dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                      }
+                    >
+                      Give <span className="hidden sm:inline ml-1">the</span>{" "}
+                      <span
+                        className={`text-center ml-1 text-orange-500 font-bold inline-flex items-center`}
+                      >
+                        <svg
+                          className="w-5 h-5 mr-0.5"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        Karma
+                      </span>
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
           </div>
           <div>
             <div className="sm:flex items-end">
-              <div className=" mr-2">
+              <div className="hidden sm:inline mr-2">
                 {formik?.values?.draft_rating ? (
                   <StarRatings
                     rating={formik.values.draft_rating}
