@@ -25,6 +25,7 @@ import donationOptionsReducer from "./donationOptionsReducer";
 import reviewsReducer from "./reviewsReducer";
 import donationsReducer from "./donationsReducer";
 import earningsReducer from "./earningsReducer";
+import kanbanReducer from "./kanbanReducer";
 
 export default combineReducers({
   authReducer: authReducer,
@@ -52,4 +53,5 @@ export default combineReducers({
   reviewsReducer: reviewsReducer,
   donationsReducer: donationsReducer,
   earningsReducer: earningsReducer,
+  kanbanReducer: kanbanReducer,
 });
