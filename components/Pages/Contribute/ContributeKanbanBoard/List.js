@@ -17,7 +17,7 @@ const List = ({ title, cards, listID, index }) => {
           <Droppable droppableId={String(listID)}>
             {(provided) => (
               <>
-                <h4 className="p-4">{title}</h4>
+                <h4 className="p-4 truncate">{title}</h4>
                 <div {...provided.droppableProps} ref={provided.innerRef}>
                   {cards.map((card, index) => (
                     <Card

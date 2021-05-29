@@ -46,10 +46,8 @@ const ActionButton = (props) => {
         <div
           style={{
             overflow: "visible",
-            minHeight: 80,
-            minWidth: 272,
-            padding: "6px  8px 2px",
           }}
+          className=""
         >
           <TextareaAutosize
             placeholder={placeholder}
