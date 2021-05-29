@@ -62,11 +62,14 @@ const ActionButton = (props) => {
             }}
           />
         </div>
-        <div style={styles.formButtonGroup}>
+        <div
+          style={styles.formButtonGroup}
+          className="text-gray-900 dark:text-white"
+        >
           <button
             onMouseDown={list ? handleAddList : handleAddCard}
             variant="contained"
-            className="bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 text-white px-2 rounded-md"
+            className="bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 text-white px-2 rounded-md "
           >
             {buttonTitle}
           </button>
@@ -89,13 +92,15 @@ const ActionButton = (props) => {
           color: buttonTextColor,
           minWidth: 300,
         }}
-        className={`${list ? " bg-gray-400" : "inherit"}`}
+        className={`${
+          list ? " bg-gray-400 text-gray-900 dark:text-white" : "inherit"
+        }`}
         onClick={openForm}
       >
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
+            className="h-5 w-5  text-gray-900 dark:text-white"
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -106,7 +111,7 @@ const ActionButton = (props) => {
             />
           </svg>
         </span>
-        <p>{buttonText}</p>
+        <p className=" text-gray-900 dark:text-white">{buttonText}</p>
       </div>
     );
   };
