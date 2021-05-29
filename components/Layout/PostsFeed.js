@@ -8,6 +8,7 @@ import VisibilitySensor from "react-visibility-sensor";
 import { fetchMorePosts, fetchPosts } from "redux/actions/posts";
 const PostsFeed = ({ page }) => {
   const postsReducer = useSelector((state) => state.postsReducer);
+  const authReducer = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
   const handleFetchMorePosts = () => {
     dispatch(fetchMorePosts());

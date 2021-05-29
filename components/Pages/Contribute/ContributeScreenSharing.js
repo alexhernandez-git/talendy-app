@@ -13,10 +13,10 @@ export default function ContributeScreenSharing({
 }) {
   const authReducer = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
-  console.log(shareScreenVideoRef);
+
   return (
     <section aria-labelledby="notes-title" className="">
-      <video ref={shareScreenVideoRef} className="w-full h-full" controls />
+      <video ref={shareScreenVideoRef} className="w-full h-full" />
       <div className="mt-4 flex justify-center">
         <span className="text-sm text-red-500 dark:text-red-500 p-3 border border-red-500 rounded-xl">
           This feature is not ready at the moment, you are not sharing the

@@ -140,6 +140,14 @@ const useGetNotification = (notification) => {
         user: user,
         link: `/profile/donations`,
       };
+    case "CF":
+      post = notification?.post;
+      return {
+        event_message: `A user followed has created a new post`,
+        message: `${post.user?.username} has created a new post`,
+        user: post.user,
+        link: `/post/${notification?.post?.id}`,
+      };
     default:
       return {
         event_message: `New notification`,
