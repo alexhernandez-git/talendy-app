@@ -13,7 +13,9 @@ const Card = ({ text, id, index }) => {
         >
           <div>
             <div>
-              <span gutterBottom>{text}</span>
+              <span gutterBottom className="whitespace-pre-line">
+                {text}
+              </span>
             </div>
           </div>
         </div>
