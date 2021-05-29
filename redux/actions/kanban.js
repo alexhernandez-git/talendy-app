@@ -1,10 +1,10 @@
 import { ADD_CARD, ADD_LIST, DRAG_HAPPENED } from "redux/types";
-
+import { v4 as uuidv4 } from "uuid";
 export const addList = (title) => {
   const newList = {
     title: title,
     cards: [],
-    id: Math.random().toString(36).substring(7),
+    id: uuidv4(),
   };
   return {
     type: ADD_LIST,
@@ -64,20 +64,11 @@ export const sort =
 export const addCard = (listID, text) => (dispatch, getState) => {
   const newCard = {
     text: text,
-    id: Math.random().toString(36).substring(7),
+    id: uuidv4(),
   };
-  const newState = getState().kanbanReducer.map((list) => {
-    if (list.id === listID) {
-      return {
-        ...list,
-        cards: [...list.cards, newCard],
-      };
-    } else {
-      return list;
-    }
-  });
+
   dispatch({
     type: ADD_CARD,
-    payload: newState,
+    payload: { listID: listID, newCard: newCard },
   });
 };

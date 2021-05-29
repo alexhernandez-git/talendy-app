@@ -37,7 +37,11 @@ const ContributeKanbanBoard = ({ socketRef, roomID }) => {
   }, [JSON.stringify(lists)]);
 
   return (
-    <section aria-labelledby="notes-title" className="overflow-auto">
+    <section
+      aria-labelledby="notes-title"
+      className="overflow-auto"
+      style={{ minHeight: "40rem" }}
+    >
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="all-lists" direction="horizontal" type="list">
           {(provided) => (

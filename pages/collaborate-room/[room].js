@@ -218,6 +218,7 @@ const Contribute = () => {
         });
 
         peer.on("signal", (signal) => {
+          console.log("enter on returning signal");
           socketRef.current.emit("returning signal", { signal, callerID });
         });
 
@@ -226,6 +227,7 @@ const Contribute = () => {
         return peer;
       }
       socketRef.current.on("receiving returned signal", (payload) => {
+        console.log("enter on receiving returen");
         const item = peersRef.current.find((p) => p.peerID === payload.id);
         item?.peer.signal(payload.signal);
       });
@@ -240,6 +242,7 @@ const Contribute = () => {
           socketRef.current.emit("media ready", roomID);
 
           socketRef.current.on("all users", (users) => {
+            console.log("enter on all users");
             const peers = [];
             users.forEach((user) => {
               const peer = createPeer(
@@ -257,6 +260,7 @@ const Contribute = () => {
           });
 
           socketRef.current.on("user joined", (payload) => {
+            console.log("enter on user joined");
             const peer = addPeer(payload.signal, payload.callerID, stream);
             peersRef.current.push({
               peerID: payload.callerID,

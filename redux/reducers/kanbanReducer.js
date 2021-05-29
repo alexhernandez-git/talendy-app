@@ -7,7 +7,11 @@ const listsReducer = (state = initialState, action) => {
     case ADD_LIST:
       return [...state, action.payload];
     case ADD_CARD:
-      return action.payload;
+      return state.map((list) =>
+        list.id === action.payload.listID
+          ? { ...list, cards: [...list.cards, action.payload.newCard] }
+          : list
+      );
     case DRAG_HAPPENED:
       return action.payload;
     default:

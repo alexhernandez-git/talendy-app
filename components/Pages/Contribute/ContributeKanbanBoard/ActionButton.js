@@ -46,6 +46,7 @@ const ActionButton = (props) => {
         <div
           style={{
             overflow: "visible",
+            minWidth: "18rem",
           }}
           className=""
         >
