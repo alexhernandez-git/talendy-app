@@ -18,7 +18,7 @@ export const sort =
     console.log("droppableIndexStart", droppableIndexStart);
     console.log("droppableIndexEnd", droppableIndexEnd);
     console.log("type", type);
-    let state = getState().kanbanReducer;
+    let state = getState().collaborateRoomReducer.collaborate_room?.kanban;
     const newStateSort = state;
 
     // dragging lists around

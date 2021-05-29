@@ -6,7 +6,9 @@ import { sort } from "redux/actions/kanban";
 import { useEffect, useState } from "react";
 
 const ContributeKanbanBoard = ({ socketRef, roomID }) => {
-  const lists = useSelector((state) => state.kanbanReducer);
+  const { collaborate_room } = useSelector(
+    (state) => state.collaborateRoomReducer
+  );
   const dispatch = useDispatch();
   const onDragEnd = (result) => {
     // TODO: reordering logic
@@ -30,11 +32,11 @@ const ContributeKanbanBoard = ({ socketRef, roomID }) => {
   const [firstRender, setFirstRender] = useState(0);
   useEffect(() => {
     if (firstRender > 0) {
-      console.log(lists);
+      console.log(collaborate_room?.kanban);
     } else {
       setFirstRender((firstRender) => firstRender + 1);
     }
-  }, [JSON.stringify(lists)]);
+  }, [JSON.stringify(collaborate_room?.kanban)]);
 
   return (
     <section
@@ -50,7 +52,7 @@ const ContributeKanbanBoard = ({ socketRef, roomID }) => {
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              {lists.map((list, index) => (
+              {collaborate_room?.kanban.map((list, index) => (
                 <List
                   listID={list.id}
                   title={list.title}
