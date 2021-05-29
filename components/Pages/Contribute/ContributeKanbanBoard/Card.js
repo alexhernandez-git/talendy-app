@@ -13,7 +13,7 @@ const Card = ({ text, id, index }) => {
         >
           <div>
             <div>
-              <span gutterBottom className="whitespace-pre-line">
+              <span gutterBottom className="whitespace-pre-line text-sm">
                 {text}
               </span>
             </div>
