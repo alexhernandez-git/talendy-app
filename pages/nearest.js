@@ -57,6 +57,7 @@ export default function Nearest() {
     }
     if (!authReducer.is_authenticated) {
       dispatch(createAlert("INFO", "You need to be authenticated"));
+      return;
     }
     if (!navigator.geolocation) {
       console.log("Geolocation is not supported by your browser");
