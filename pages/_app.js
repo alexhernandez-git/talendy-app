@@ -126,6 +126,16 @@ function WrappedApp({ Component, pageProps }) {
             await addOrUpdateNotificationToFeed(data.notification__pk);
 
             break;
+          case "POST_CREATED_BY_A_USER_FOLLOWED":
+            await dispatch(setPendingNotifications());
+
+            await dispatch(
+              createAlert("SUCCESS", "Post created by a user followed")
+            );
+
+            await addOrUpdateNotificationToFeed(data.notification__pk);
+
+            break;
         }
       };
       if (!authReducer.is_authenticated) {
