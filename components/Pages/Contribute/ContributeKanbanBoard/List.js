@@ -21,7 +21,7 @@ const List = ({ title, cards, listID, index }) => {
                 <div {...provided.droppableProps} ref={provided.innerRef}>
                   {cards.map((card, index) => (
                     <Card
-                      text={card.text}
+                      title={card.title}
                       key={card.id}
                       id={card.id}
                       index={index}

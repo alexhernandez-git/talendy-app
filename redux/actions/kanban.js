@@ -1,16 +1,7 @@
-import { ADD_CARD, ADD_LIST, DRAG_HAPPENED } from "redux/types";
+import { ADD_CARD, ADD_LIST, CREATE_LIST, DRAG_HAPPENED } from "redux/types";
 import { v4 as uuidv4 } from "uuid";
-export const addList = (title) => {
-  const newList = {
-    title: title,
-    cards: [],
-    id: uuidv4(),
-  };
-  return {
-    type: ADD_LIST,
-    payload: newList,
-  };
-};
+import axios from "axios";
+import { tokenConfig } from "./auth";
 
 export const sort =
   (
@@ -22,6 +13,11 @@ export const sort =
     type
   ) =>
   (dispatch, getState) => {
+    console.log("droppableIdStart", droppableIdStart);
+    console.log("droppableIdEnd", droppableIdEnd);
+    console.log("droppableIndexStart", droppableIndexStart);
+    console.log("droppableIndexEnd", droppableIndexEnd);
+    console.log("type", type);
     let state = getState().kanbanReducer;
     const newStateSort = state;
 
@@ -61,11 +57,57 @@ export const sort =
     });
   };
 
-export const addCard = (listID, text) => (dispatch, getState) => {
-  const newCard = {
-    text: text,
+export const addList = (title) => async (dispatch, getState) => {
+  const newList = {
+    title: title,
+    cards: [],
     id: uuidv4(),
   };
+  await axios
+    .post(
+      `${process.env.HOST}/api/posts/${
+        getState().collaborateRoomReducer.collaborate_room?.id
+      }/kanbans/`,
+      newList,
+      tokenConfig(getState)
+    )
+    .then(async (res) => {
+      await dispatch({
+        type: CREATE_LIST,
+        payload: res.data,
+      });
+    })
+    .catch(async (err) => {
+      console.log("Create list error", err.response);
+    });
+  dispatch({
+    type: ADD_LIST,
+    payload: newList,
+  });
+};
+export const addCard = (listID, title) => async (dispatch, getState) => {
+  const newCard = {
+    title: title,
+    id: uuidv4(),
+  };
+
+  await axios
+    .post(
+      `${process.env.HOST}/api/posts/${
+        getState().collaborateRoomReducer.collaborate_room?.id
+      }/kanbans/${listID}/cards/`,
+      newCard,
+      tokenConfig(getState)
+    )
+    .then(async (res) => {
+      await dispatch({
+        type: CREATE_CARD,
+        payload: res.data,
+      });
+    })
+    .catch(async (err) => {
+      console.log("Create card error", err.response);
+    });
 
   dispatch({
     type: ADD_CARD,

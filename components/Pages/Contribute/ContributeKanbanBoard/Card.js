@@ -1,7 +1,7 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 
-const Card = ({ text, id, index }) => {
+const Card = ({ title, id, index }) => {
   return (
     <Draggable draggableId={String(id)} index={index}>
       {(provided) => (
@@ -14,7 +14,7 @@ const Card = ({ text, id, index }) => {
           <div>
             <div>
               <span gutterBottom className="whitespace-pre-line text-sm">
-                {text}
+                {title}
               </span>
             </div>
           </div>

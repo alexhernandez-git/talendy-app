@@ -19,6 +19,9 @@ import {
   UPDATE_KARMA_WINNER,
   UPDATE_KARMA_WINNER_SUCCESS,
   UPDATE_KARMA_WINNER_FAIL,
+  ADD_CARD,
+  ADD_LIST,
+  DRAG_HAPPENED,
 } from "../types";
 
 const initialState = {
@@ -162,6 +165,34 @@ export default function collaborateRoomReducer(state = initialState, action) {
         ...state,
         is_finalizing_post: false,
         finalize_post_error: action.payload,
+      };
+    case ADD_LIST:
+      return {
+        ...state,
+        collaborate_room: {
+          ...state.collaborate_room,
+          kanban: [...state.collaborate_room.kanban, action.payload],
+        },
+      };
+    case ADD_CARD:
+      return {
+        ...state,
+        collaborate_room: {
+          ...state.collaborate_room,
+          kanban: state.collaborate_room.kanban.map((list) =>
+            list.id === action.payload.listID
+              ? { ...list, cards: [...list.cards, action.payload.newCard] }
+              : list
+          ),
+        },
+      };
+    case DRAG_HAPPENED:
+      return {
+        ...state,
+        collaborate_room: {
+          ...state.collaborate_room,
+          kanban: action.payload,
+        },
       };
     default:
       return state;

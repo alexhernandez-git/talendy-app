@@ -478,8 +478,8 @@ export const UPDATE_SHARED_NOTES = "UPDATE_SHARED_NOTES";
 export const ADD_CARD = "ADD_CARD";
 export const ADD_LIST = "ADD_LIST";
 export const DRAG_HAPPENED = "DRAG_HAPPENED";
-export const CREATE_LIST = "CREATE_LIST";
 export const CREATE_CARD = "CREATE_CARD";
+export const CREATE_LIST = "CREATE_LIST";
 
 // Communitites
 export const FETCH_COMMUNITIES = "FETCH_COMMUNITIES";
