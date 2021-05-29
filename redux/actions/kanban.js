@@ -54,6 +54,7 @@ export const sort =
       // put the card in the new list
       listEnd.cards.splice(droppableIndexEnd, 0, ...card);
     }
+    console.log(newStateSort);
     dispatch({
       type: DRAG_HAPPENED,
       payload: newStateSort,
