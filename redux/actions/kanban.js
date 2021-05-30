@@ -73,6 +73,25 @@ export const sort =
 
     // other list
     if (droppableIdStart !== droppableIdEnd) {
+      axios
+        .patch(
+          `${process.env.HOST}/api/posts/${
+            getState().collaborateRoomReducer.collaborate_room?.id
+          }/update_kanban_card_between_lists_order/`,
+          {
+            list_start_id: droppableIdStart,
+            list_end_id: droppableIdEnd,
+            droppable_index_start: droppableIndexStart,
+            droppable_index_end: droppableIndexEnd,
+          },
+          tokenConfig(getState)
+        )
+        .then((res) => {
+          console.log("Sort card between lists success", res.data);
+        })
+        .catch((err) => {
+          console.log("Sort card between lists error", err.response);
+        });
       // find the list where drag happened
       const listStart = state.find((list) => droppableIdStart === list.id);
 
