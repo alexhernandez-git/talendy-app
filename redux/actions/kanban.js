@@ -1,4 +1,4 @@
-import { ADD_CARD, ADD_LIST, CREATE_LIST, DRAG_HAPPENED } from "redux/types";
+import { ADD_CARD, ADD_LIST, DRAG_HAPPENED } from "redux/types";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { tokenConfig } from "./auth";
@@ -12,7 +12,7 @@ export const sort =
     draggableId,
     type
   ) =>
-  (dispatch, getState) => {
+  async (dispatch, getState) => {
     console.log("droppableIdStart", droppableIdStart);
     console.log("droppableIdEnd", droppableIdEnd);
     console.log("droppableIndexStart", droppableIndexStart);
@@ -24,6 +24,23 @@ export const sort =
     // dragging lists around
     console.log(type);
     if (type === "list") {
+      axios
+        .patch(
+          `${process.env.HOST}/api/posts/${
+            getState().collaborateRoomReducer.collaborate_room?.id
+          }/update_kanban_list_order/`,
+          {
+            droppable_index_start: droppableIndexStart,
+            droppable_index_end: droppableIndexEnd,
+          },
+          tokenConfig(getState)
+        )
+        .then((res) => {
+          console.log("Sort list success", res.data);
+        })
+        .catch((err) => {
+          console.log("Sort list error", err.response);
+        });
       const list = newStateSort.splice(droppableIndexStart, 1);
       newStateSort.splice(droppableIndexEnd, 0, ...list);
       return newStateSort;
@@ -31,6 +48,24 @@ export const sort =
 
     // in the same list
     if (droppableIdStart === droppableIdEnd) {
+      axios
+        .patch(
+          `${process.env.HOST}/api/posts/${
+            getState().collaborateRoomReducer.collaborate_room?.id
+          }/update_kanban_card_order/`,
+          {
+            list_id: droppableIdStart,
+            droppable_index_start: droppableIndexStart,
+            droppable_index_end: droppableIndexEnd,
+          },
+          tokenConfig(getState)
+        )
+        .then((res) => {
+          console.log("Sort card success", res.data);
+        })
+        .catch((err) => {
+          console.log("Sort card error", err.response);
+        });
       const list = state.find((list) => droppableIdStart === list.id);
       const card = list.cards.splice(droppableIndexStart, 1);
       list.cards.splice(droppableIndexEnd, 0, ...card);
@@ -72,10 +107,7 @@ export const addList = (title) => async (dispatch, getState) => {
       tokenConfig(getState)
     )
     .then(async (res) => {
-      await dispatch({
-        type: CREATE_LIST,
-        payload: res.data,
-      });
+      console.log("Create list success", res.data);
     })
     .catch(async (err) => {
       console.log("Create list error", err.response);
@@ -100,10 +132,7 @@ export const addCard = (listID, title) => async (dispatch, getState) => {
       tokenConfig(getState)
     )
     .then(async (res) => {
-      await dispatch({
-        type: CREATE_CARD,
-        payload: res.data,
-      });
+      console.log("Create card success", res.data);
     })
     .catch(async (err) => {
       console.log("Create card error", err.response);
