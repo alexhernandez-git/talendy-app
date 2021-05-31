@@ -43,13 +43,13 @@ const Card = ({ title, id, index }) => {
           {...provided.dragHandleProps}
         >
           {!isEditTitle && (
-            <div className="absolute right-3">
+            <div className="absolute right-3 top-3">
               <div className=" flex items-center opacity-0 group-hover:opacity-100 text-gray-600 dark:text-gray-200 transition bg-gray-100 dark:bg-gray-700 p-1 rounded">
                 <>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     onClick={handleOpenEditTitle}
-                    className="cursor-pointer h-5 w-5 mr-2 transition"
+                    className="cursor-pointer h-5 w-5 mr-2 "
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -62,7 +62,7 @@ const Card = ({ title, id, index }) => {
                   </svg>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="cursor-pointer h-5 w-5 transition"
+                    className="cursor-pointer h-5 w-5 "
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -99,7 +99,6 @@ const Card = ({ title, id, index }) => {
                         />
                       </svg>
                     </div>
-
                     <TextareaAutosize
                       autoFocus
                       value={formik.values.title}
@@ -112,6 +111,14 @@ const Card = ({ title, id, index }) => {
                         resize: "none",
                       }}
                     />
+                    <div className="mt-2 flex justify-end">
+                      <button
+                        type="submit"
+                        className="bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 text-white px-2 rounded-md cursor-pointer "
+                      >
+                        Save
+                      </button>
+                    </div>
                   </div>
                 </form>
               ) : (
