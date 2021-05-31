@@ -39,16 +39,12 @@ const ContributeKanbanBoard = ({ socketRef, roomID }) => {
   }, [JSON.stringify(collaborate_room?.kanban)]);
 
   return (
-    <section
-      aria-labelledby="notes-title"
-      className="overflow-auto"
-      style={{ minHeight: "40rem" }}
-    >
+    <section className="overflow-auto block" style={{ minHeight: "40rem" }}>
       <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="all-lists" direction="horizontal" type="list">
+        <Droppable droppableId="all-lists" direction="horizontal">
           {(provided) => (
             <div
-              className="flex"
+              className="inline-flex"
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
@@ -61,7 +57,9 @@ const ContributeKanbanBoard = ({ socketRef, roomID }) => {
                   index={index}
                 />
               ))}
-              {provided.placeholder}
+              <div style={{ visibility: "hidden", height: 0 }}>
+                {provided.placeholder}
+              </div>
 
               <ActionButton list />
             </div>
