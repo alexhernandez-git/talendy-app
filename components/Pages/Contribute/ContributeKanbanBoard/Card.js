@@ -41,23 +41,9 @@ const Card = ({ title, id, index }) => {
           ref={provided.innerRef}
           {...provided.dragHandleProps}
         >
-          <div className="absolute right-3">
-            <div className=" flex items-center opacity-0 group-hover:opacity-100 text-gray-600 dark:text-gray-200 transition bg-gray-100 dark:bg-gray-700 p-1 rounded">
-              {isEditTitle ? (
-                <svg
-                  onClick={handleCloseEditTitle}
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="cursor-pointer h-5 w-5 transition"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              ) : (
+          {!isEditTitle && (
+            <div className="absolute right-3">
+              <div className=" flex items-center opacity-0 group-hover:opacity-100 text-gray-600 dark:text-gray-200 transition bg-gray-100 dark:bg-gray-700 p-1 rounded">
                 <>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -86,17 +72,51 @@ const Card = ({ title, id, index }) => {
                     />
                   </svg>
                 </>
-              )}
+              </div>
             </div>
-          </div>
+          )}
           <div>
             <div>
-              <span
-                gutterBottom
-                className="text-gray-600 dark:text-gray-200 whitespace-pre-line block break-all text-sm"
-              >
-                {title}fewafeawewfewffewaweaffeawfawewaeffewfweaewafewawef
-              </span>
+              {isEditTitle ? (
+                <form onSubmit={formik.handleSubmit} className="py-4 w-full ">
+                  <div className="relative w-full text-gray-400 focus-within:text-gray-600 dark:text-gray-100 dark:focus-within:text-gray-200 ">
+                    <div
+                      className="absolute inset-y-0 flex items-center pointer-events-none right-2"
+                      aria-hidden="true"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        onClick={handleCloseEditTitle}
+                        className="h-5 w-5 cursor-pointer"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <input
+                      type="text"
+                      className="focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-lg sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                      value={formik.values.title}
+                      onChange={formik.handleChange}
+                      autoFocus
+                      onBlur={handleBlur}
+                      name="title"
+                    />
+                  </div>
+                </form>
+              ) : (
+                <span
+                  gutterBottom
+                  className="text-gray-600 dark:text-gray-200 whitespace-pre-line block break-all text-sm"
+                >
+                  {title}fewafeawewfewffewaweaffeawfawewaeffewfweaewafewawef
+                </span>
+              )}
             </div>
           </div>
         </div>
