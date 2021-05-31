@@ -89,11 +89,12 @@ const ActionButton = (props) => {
         style={{
           ...styles.openForButtonGroup,
           opacity: buttonTextOpacity,
-          color: buttonTextColor,
           minWidth: 300,
         }}
         className={`${
-          list ? " bg-gray-400 text-gray-900 dark:text-white" : "inherit"
+          list
+            ? " bg-gray-400 text-gray-900 dark:text-white"
+            : "inherit text-gray-900 dark:text-white"
         }`}
         onClick={openForm}
       >
