@@ -14,6 +14,7 @@ const List = ({ title, cards, listID, index }) => {
     setIsEditTitle(false);
   };
   const handleBlur = (e) => {
+    formik.handleSubmit();
     handleCloseEditTitle();
     formik.handleBlur(e);
   };
@@ -29,6 +30,7 @@ const List = ({ title, cards, listID, index }) => {
       ),
     }),
     onSubmit: async (values) => {
+      handleCloseEditTitle();
       console.log(values);
     },
   });
@@ -51,7 +53,10 @@ const List = ({ title, cards, listID, index }) => {
               <div style={{ minWidth: "18rem", maxWidth: "18rem" }}>
                 <div className="flex justify-between">
                   {isEditTitle ? (
-                    <form className="py-4 w-full mr-2">
+                    <form
+                      onSubmit={formik.handleSubmit}
+                      className="py-4 w-full mr-2"
+                    >
                       <input
                         type="text"
                         className="focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-lg sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
@@ -72,7 +77,7 @@ const List = ({ title, cards, listID, index }) => {
                       <svg
                         onClick={handleCloseEditTitle}
                         xmlns="http://www.w3.org/2000/svg"
-                        className="cursor-pointer h-5 w-5 text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-200 transition"
+                        className="cursor-pointer h-5 w-5 text-gray-400 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -87,7 +92,7 @@ const List = ({ title, cards, listID, index }) => {
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           onClick={handleOpenEditTitle}
-                          className="cursor-pointer h-5 w-5 text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-200 transition"
+                          className="cursor-pointer h-5 w-5 mr-2 text-gray-400 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition"
                           viewBox="0 0 20 20"
                           fill="currentColor"
                         >
@@ -100,7 +105,7 @@ const List = ({ title, cards, listID, index }) => {
                         </svg>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="cursor-pointer h-5 w-5 text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-200 transition"
+                          className="cursor-pointer h-5 w-5 text-gray-400 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition"
                           viewBox="0 0 20 20"
                           fill="currentColor"
                         >
