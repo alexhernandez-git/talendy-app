@@ -13,7 +13,7 @@ const List = ({ title, cards, listID, index }) => {
             minWidth: "18rem",
             maxWidth: "18rem",
           }}
-          className="rounded-md p-3 mr-3 h-full bg-gray-200 dark:bg-gray-700 shadow group "
+          className="rounded-md p-3 mr-3 h-full bg-gray-200 dark:bg-gray-700 shadow"
           {...provided.draggableProps}
           ref={provided.innerRef}
           {...provided.dragHandleProps}
@@ -23,13 +23,13 @@ const List = ({ title, cards, listID, index }) => {
               <div style={{ minWidth: "18rem", maxWidth: "18rem" }}>
                 <div className="flex justify-between">
                   <h4 className="p-4 text-gray-900 dark:text-white truncate">
-                    {title}fewafewaaweffaweawefeawawfefeawaefwfaew
+                    {title}
                   </h4>
-                  <div className="text-gray-400 dark:text-gray-600 group-hover:text-gray-600 dark:group-hover:text-gray-200 transition flex items-center">
+                  <div className=" flex items-center">
                     <span className="cursor-pointer">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
+                        className="h-5 w-5 text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-200 transition"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -44,7 +44,7 @@ const List = ({ title, cards, listID, index }) => {
                     <span className="cursor-pointer">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
+                        className="h-5 w-5 text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-200 transition"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >

@@ -100,7 +100,7 @@ const ActionButton = (props) => {
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5  text-gray-900 dark:text-white"
+            className="h-5 w-5 "
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -111,7 +111,7 @@ const ActionButton = (props) => {
             />
           </svg>
         </span>
-        <p className=" text-gray-900 dark:text-white">{buttonText}</p>
+        <p className="">{buttonText}</p>
       </div>
     );
   };
