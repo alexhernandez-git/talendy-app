@@ -47,12 +47,13 @@ const List = ({ title, cards, listID, index }) => {
               <div style={{ minWidth: "18rem", maxWidth: "18rem" }}>
                 <div className="flex justify-between">
                   {isEditTitle ? (
-                    <form className="py-4">
+                    <form className="py-4 w-full mr-2">
                       <input
                         type="text"
                         className="focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-lg sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                         value={formik.values.title}
                         onChange={formik.handleChange}
+                        autoFocus
                         onBlur={formik.handleBlur}
                         name="title"
                       />
