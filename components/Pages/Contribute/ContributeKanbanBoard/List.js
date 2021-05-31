@@ -13,6 +13,10 @@ const List = ({ title, cards, listID, index }) => {
   const handleCloseEditTitle = () => {
     setIsEditTitle(false);
   };
+  const handleBlur = (e) => {
+    handleCloseEditTitle();
+    formik.handleBlur(e);
+  };
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -54,7 +58,7 @@ const List = ({ title, cards, listID, index }) => {
                         value={formik.values.title}
                         onChange={formik.handleChange}
                         autoFocus
-                        onBlur={formik.handleBlur}
+                        onBlur={handleBlur}
                         name="title"
                       />
                     </form>
