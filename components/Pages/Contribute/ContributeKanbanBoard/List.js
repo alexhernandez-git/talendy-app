@@ -8,6 +8,7 @@ import { useState } from "react";
 const List = ({ title, cards, listID, index }) => {
   const [isEditTitle, setIsEditTitle] = useState(false);
   const handleOpenEditTitle = () => {
+    console.log("entra");
     setIsEditTitle(true);
   };
   const handleCloseEditTitle = () => {
