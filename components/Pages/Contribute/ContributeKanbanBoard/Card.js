@@ -104,7 +104,6 @@ const Card = ({ title, id, index }) => {
                       value={formik.values.title}
                       name="title"
                       onChange={formik.handleChange}
-                      autoFocus
                       onBlur={handleBlur}
                       className="focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-lg sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
                       style={{
