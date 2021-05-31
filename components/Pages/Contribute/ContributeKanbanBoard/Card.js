@@ -3,6 +3,7 @@ import { Draggable } from "react-beautiful-dnd";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useState } from "react";
+import TextareaAutosize from "react-textarea-autosize";
 const Card = ({ title, id, index }) => {
   const [isEditTitle, setIsEditTitle] = useState(false);
   const handleOpenEditTitle = () => {
@@ -81,7 +82,7 @@ const Card = ({ title, id, index }) => {
                 <form onSubmit={formik.handleSubmit} className="py-4 w-full ">
                   <div className="relative w-full text-gray-400 focus-within:text-gray-600 dark:text-gray-100 dark:focus-within:text-gray-200 ">
                     <div
-                      className="absolute inset-y-0 flex items-center pointer-events-none right-2"
+                      className="absolute inset-y-0 flex items-start right-2 top-2"
                       aria-hidden="true"
                     >
                       <svg
@@ -98,14 +99,18 @@ const Card = ({ title, id, index }) => {
                         />
                       </svg>
                     </div>
-                    <input
-                      type="text"
-                      className="focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-lg sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+
+                    <TextareaAutosize
+                      autoFocus
                       value={formik.values.title}
+                      name="title"
                       onChange={formik.handleChange}
                       autoFocus
                       onBlur={handleBlur}
-                      name="title"
+                      className="focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-lg sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                      style={{
+                        resize: "none",
+                      }}
                     />
                   </div>
                 </form>
@@ -114,7 +119,7 @@ const Card = ({ title, id, index }) => {
                   gutterBottom
                   className="text-gray-600 dark:text-gray-200 whitespace-pre-line block break-all text-sm"
                 >
-                  {title}fewafeawewfewffewaweaffeawfawewaeffewfweaewafewawef
+                  {title}
                 </span>
               )}
             </div>
