@@ -44,6 +44,7 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
           var image = new Image();
           var canvas = document.querySelector("#board");
           var ctx = canvas.getContext("2d");
+          image.crossOrigin = "anonymous";
           image.onload = function () {
             ctx.drawImage(image, 0, 0);
 
@@ -73,6 +74,13 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
       ctx.lineJoin = "round";
       ctx.lineCap = "round";
       ctx.strokeStyle = color;
+      var image = new Image();
+      image.crossOrigin = "anonymous";
+      image.onload = function () {
+        ctx.drawImage(image, 0, 0);
+      };
+
+      image.src = collaborateRoomReducer.collaborate_room?.drawing;
       setFirstLoad(false);
     }
   }, [feature]);
@@ -161,6 +169,7 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
           socketRef.current.emit("drawing", {
             data: base64ImageData,
             roomID: roomID,
+            token: authReducer?.access_token,
           });
         }, 200);
       }
@@ -175,12 +184,14 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
 
   const handleEmitAndClear = () => {
     var canvas = document.querySelector("#board");
+
     var base64ImageData = canvas.toDataURL("image/png");
 
     handleClearCanvas();
     socketRef.current.emit("clear canvas", {
       data: base64ImageData,
       roomID: roomID,
+      token: authReducer?.access_token,
     });
   };
 
