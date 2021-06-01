@@ -585,7 +585,7 @@ const Contribute = () => {
                         clipRule="evenodd"
                       />
                     </svg>
-                    Shared whiteboard
+                    Whiteboard
                   </button>
                   <button
                     onClick={handleChangeFeature.bind(this, "SHAREDNOTES")}
@@ -679,6 +679,28 @@ const Contribute = () => {
                       aria-labelledby="listbox-label"
                       aria-activedescendant="listbox-option-0"
                     >
+                      <li
+                        className="text-gray-900 dark:text-white cursor-pointer select-none relative p-4 text-sm hover:opacity-70"
+                        id="listbox-option-0"
+                        role="option"
+                      >
+                        <button
+                          onClick={handleChangeFeature.bind(
+                            this,
+                            "SHAREDFILES"
+                          )}
+                          className="flex flex-col"
+                        >
+                          <div className="flex justify-between">
+                            <p className="font-normal">Shared files</p>
+                          </div>
+                          <p className="text-gray-500 text-left mt-2">
+                            Share your files in this room.
+                            <br />
+                            When the post is finished the files will be deleted
+                          </p>
+                        </button>
+                      </li>
                       <li
                         className="text-gray-900 dark:text-white cursor-pointer select-none relative p-4 text-sm hover:opacity-70"
                         id="listbox-option-0"
