@@ -24,6 +24,8 @@ import {
   DRAG_HAPPENED,
   UPDATE_CARD,
   UPDATE_LIST,
+  DELETE_CARD,
+  DELETE_LIST,
 } from "../types";
 
 const initialState = {
@@ -225,6 +227,33 @@ export default function collaborateRoomReducer(state = initialState, action) {
             list.id === action.payload.listUpdated.id
               ? { ...list, ...action.payload.listUpdated }
               : list
+          ),
+        },
+      };
+    case DELETE_CARD:
+      return {
+        ...state,
+        collaborate_room: {
+          ...state.collaborate_room,
+          kanban: state.collaborate_room.kanban.map((list) =>
+            list.id === action.payload.listID
+              ? {
+                  ...list,
+                  cards: list.cards.filter(
+                    (card) => card.id !== action.payload.cardID
+                  ),
+                }
+              : list
+          ),
+        },
+      };
+    case DELETE_LIST:
+      return {
+        ...state,
+        collaborate_room: {
+          ...state.collaborate_room,
+          kanban: state.collaborate_room.kanban.filter(
+            (list) => list.id !== action.payload.listID
           ),
         },
       };

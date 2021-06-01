@@ -7,7 +7,7 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
 import { useRef } from "react";
-import { updateList } from "redux/actions/kanban";
+import { updateList, deleteList } from "redux/actions/kanban";
 import { useDispatch } from "react-redux";
 const List = ({ title, cards, listID, index }) => {
   const dispatch = useDispatch();
@@ -53,7 +53,10 @@ const List = ({ title, cards, listID, index }) => {
   };
   const modalRef = useRef();
   useOutsideClick(modalRef, () => handleModalClose());
-  const handleDeleteList = () => {};
+  const handleDeleteList = () => {
+    dispatch(deleteList(listID));
+    handleModalClose();
+  };
   return (
     <>
       <Draggable draggableId={String(listID)} index={index}>

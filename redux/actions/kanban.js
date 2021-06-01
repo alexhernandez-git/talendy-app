@@ -4,6 +4,8 @@ import {
   DRAG_HAPPENED,
   UPDATE_CARD,
   UPDATE_LIST,
+  DELETE_CARD,
+  DELETE_LIST,
 } from "redux/types";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
@@ -212,5 +214,45 @@ export const updateList = (listID, values) => async (dispatch, getState) => {
   dispatch({
     type: UPDATE_LIST,
     payload: { listUpdated: values },
+  });
+};
+
+export const deleteCard = (listID, cardID) => async (dispatch, getState) => {
+  await axios
+    .delete(
+      `${process.env.HOST}/api/posts/${
+        getState().collaborateRoomReducer.collaborate_room?.id
+      }/kanbans/${listID}/cards/${cardID}/`,
+      tokenConfig(getState)
+    )
+    .then(async (res) => {
+      console.log("Delete card success", res.data);
+    })
+    .catch(async (err) => {
+      console.log("Delete card error", err.response);
+    });
+  dispatch({
+    type: DELETE_CARD,
+    payload: { listID: listID, cardID: cardID },
+  });
+};
+
+export const deleteList = (listID) => async (dispatch, getState) => {
+  await axios
+    .delete(
+      `${process.env.HOST}/api/posts/${
+        getState().collaborateRoomReducer.collaborate_room?.id
+      }/kanbans/${listID}/`,
+      tokenConfig(getState)
+    )
+    .then(async (res) => {
+      console.log("Delete list success", res.data);
+    })
+    .catch(async (err) => {
+      console.log("Delete list error", err.response);
+    });
+  dispatch({
+    type: DELETE_LIST,
+    payload: { listID: listID },
   });
 };

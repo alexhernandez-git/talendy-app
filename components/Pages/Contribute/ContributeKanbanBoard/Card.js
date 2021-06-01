@@ -9,7 +9,7 @@ import { setEndOfContenteditable } from "helpers";
 import { useEffect } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
 import { useDispatch } from "react-redux";
-import { updateCard } from "redux/actions/kanban";
+import { deleteCard, updateCard } from "redux/actions/kanban";
 const Card = ({ listID, title, id, index }) => {
   const textareaRef = useRef();
   const dispatch = useDispatch();
@@ -54,7 +54,10 @@ const Card = ({ listID, title, id, index }) => {
   };
   const modalRef = useRef();
   useOutsideClick(modalRef, () => handleModalClose());
-  const handleDeleteCard = () => {};
+  const handleDeleteCard = () => {
+    dispatch(deleteCard(listID, id));
+    handleModalClose();
+  };
   return (
     <>
       <Draggable draggableId={String(id)} index={index}>
