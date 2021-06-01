@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
 const ActionButton = (props) => {
-  const { list, listID, roomID } = props;
+  const { list, listID, roomID, socketRef } = props;
   const { collaborate_room } = useSelector(
     (state) => state.collaborateRoomReducer
   );
@@ -33,7 +33,7 @@ const ActionButton = (props) => {
         cards: [],
         id: uuidv4(),
       };
-      dispatch(addList(newList));
+      dispatch(addList({ newList: newList }));
       socketRef.current.emit("add list", {
         newList: newList,
         roomID: roomID,
@@ -49,9 +49,10 @@ const ActionButton = (props) => {
         title: text,
         id: uuidv4(),
       };
-      dispatch(addCard(listID, newCard));
+      dispatch(addCard({ listID: listID, newCard: newCard }));
       socketRef.current.emit("add card", {
         newCard: newCard,
+        listID: listID,
         roomID: roomID,
         collaborateRoomID: collaborate_room?.id,
         token: access_token,

@@ -3,10 +3,16 @@ import ActionButton from "./ContributeKanbanBoard/ActionButton";
 import List from "./ContributeKanbanBoard/List";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import {
+  addCard,
+  addList,
+  deleteCard,
+  deleteList,
   sort,
   sortCard,
   sortCardInDiferentLists,
   sortList,
+  updateCard,
+  updateList,
 } from "redux/actions/kanban";
 import { useEffect, useState } from "react";
 
@@ -25,7 +31,12 @@ const ContributeKanbanBoard = ({ socketRef, roomID }) => {
       return;
     }
     if (type === "list") {
-      dispatch(sortList(source.index, destination.index));
+      dispatch(
+        sortList({
+          droppableIndexStart: source.index,
+          droppableIndexEnd: destination.index,
+        })
+      );
       socketRef.current.emit("update list order", {
         droppableIndexStart: source.index,
         droppableIndexEnd: destination.index,
@@ -37,7 +48,13 @@ const ContributeKanbanBoard = ({ socketRef, roomID }) => {
       return;
     }
     if (source.droppableId === destination.droppableId) {
-      dispatch(sortCard(source.droppableId, source.index, destination.index));
+      dispatch(
+        sortCard({
+          droppableIdStart: source.droppableId,
+          droppableIndexStart: source.index,
+          droppableIndexEnd: destination.index,
+        })
+      );
       socketRef.current.emit("update card order", {
         droppableIdStart: source.droppableId,
         droppableIndexStart: source.index,
@@ -50,16 +67,16 @@ const ContributeKanbanBoard = ({ socketRef, roomID }) => {
     }
     if (source.droppableId !== destination.droppableId) {
       dispatch(
-        sortCardInDiferentLists(
-          source.droppableId,
-          destination.droppableId,
-          source.index,
-          destination.index
-        )
+        sortCardInDiferentLists({
+          droppableIdStart: source.droppableId,
+          droppableIdEnd: destination.droppableId,
+          droppableIndexStart: source.index,
+          droppableIndexEnd: destination.index,
+        })
       );
       socketRef.current.emit("update card between lists order", {
         droppableIdStart: source.droppableId,
-        droppableIdEnd: source.droppableId,
+        droppableIdEnd: destination.droppableId,
         droppableIndexStart: source.index,
         droppableIndexEnd: destination.index,
         roomID: roomID,
@@ -80,30 +97,39 @@ const ContributeKanbanBoard = ({ socketRef, roomID }) => {
     if (socketRef?.current) {
       socketRef.current.on("list order updated", (payload) => {
         console.log(payload);
+        dispatch(sortList(payload));
       });
       socketRef.current.on("card order updated", (payload) => {
         console.log(payload);
+        dispatch(sortCard(payload));
       });
       socketRef.current.on("card between lists order updated", (payload) => {
         console.log(payload);
+        dispatch(sortCardInDiferentLists(payload));
       });
       socketRef.current.on("list added", (payload) => {
         console.log(payload);
+        dispatch(addList(payload));
       });
       socketRef.current.on("card added", (payload) => {
         console.log(payload);
+        dispatch(addCard(payload));
       });
       socketRef.current.on("list updated", (payload) => {
         console.log(payload);
+        dispatch(updateList(payload));
       });
       socketRef.current.on("card updated", (payload) => {
         console.log(payload);
+        dispatch(updateCard(payload));
       });
       socketRef.current.on("list deleted", (payload) => {
         console.log(payload);
+        dispatch(deleteList(payload));
       });
       socketRef.current.on("card deleted", (payload) => {
         console.log(payload);
+        dispatch(deleteCard(payload));
       });
     }
   }, [socketRef?.current]);
@@ -132,7 +158,7 @@ const ContributeKanbanBoard = ({ socketRef, roomID }) => {
                 {provided.placeholder}
               </div>
 
-              <ActionButton list roomID={roomID} />
+              <ActionButton list roomID={roomID} socketRef={socketRef} />
             </div>
           )}
         </Droppable>

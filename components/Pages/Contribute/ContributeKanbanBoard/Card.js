@@ -45,7 +45,7 @@ const Card = ({ listID, title, id, index, socketRef, roomID }) => {
     onSubmit: async (values) => {
       handleCloseEditTitle();
       console.log(values);
-      dispatch(updateCard(listID, values, id));
+      dispatch(updateCard({ listID: listID, values: values, cardID: id }));
       socketRef.current.emit("update card", {
         listID: listID,
         values: values,
@@ -69,7 +69,7 @@ const Card = ({ listID, title, id, index, socketRef, roomID }) => {
   const modalRef = useRef();
   useOutsideClick(modalRef, () => handleModalClose());
   const handleDeleteCard = () => {
-    dispatch(deleteCard(listID, id));
+    dispatch(deleteCard({ listID: listID, cardID: id }));
     socketRef.current.emit("delete card", {
       listID: listID,
       cardID: id,
