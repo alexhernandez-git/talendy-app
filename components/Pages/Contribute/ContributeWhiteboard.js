@@ -182,14 +182,9 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   };
 
-  const handleEmitAndClear = () => {
-    var canvas = document.querySelector("#board");
-
-    var base64ImageData = canvas.toDataURL("image/png");
-
-    handleClearCanvas();
+  const handleEmitAndClear = async () => {
+    await handleClearCanvas();
     socketRef.current.emit("clear canvas", {
-      data: base64ImageData,
       roomID: roomID,
       token: authReducer?.access_token,
     });
