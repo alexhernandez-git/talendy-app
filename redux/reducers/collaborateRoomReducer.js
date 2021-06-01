@@ -22,6 +22,8 @@ import {
   ADD_CARD,
   ADD_LIST,
   DRAG_HAPPENED,
+  UPDATE_CARD,
+  UPDATE_LIST,
 } from "../types";
 
 const initialState = {
@@ -192,6 +194,38 @@ export default function collaborateRoomReducer(state = initialState, action) {
         collaborate_room: {
           ...state.collaborate_room,
           kanban: action.payload,
+        },
+      };
+    case UPDATE_CARD:
+      return {
+        ...state,
+        collaborate_room: {
+          ...state.collaborate_room,
+          kanban: state.collaborate_room.kanban.map((list) =>
+            list.id === action.payload.listID
+              ? {
+                  ...list,
+                  cards: list.cards.map((card) =>
+                    card.id === action.payload.cardUpdated.id
+                      ? action.payload.cardUpdated
+                      : card
+                  ),
+                }
+              : list
+          ),
+        },
+      };
+    case UPDATE_LIST:
+      console.log(state.collaborate_room.kanban);
+      return {
+        ...state,
+        collaborate_room: {
+          ...state.collaborate_room,
+          kanban: state.collaborate_room.kanban.map((list) =>
+            list.id === action.payload.listUpdated.id
+              ? { ...list, ...action.payload.listUpdated }
+              : list
+          ),
         },
       };
     default:

@@ -1,4 +1,10 @@
-import { ADD_CARD, ADD_LIST, DRAG_HAPPENED } from "redux/types";
+import {
+  ADD_CARD,
+  ADD_LIST,
+  DRAG_HAPPENED,
+  UPDATE_CARD,
+  UPDATE_LIST,
+} from "redux/types";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { tokenConfig } from "./auth";
@@ -160,5 +166,51 @@ export const addCard = (listID, title) => async (dispatch, getState) => {
   dispatch({
     type: ADD_CARD,
     payload: { listID: listID, newCard: newCard },
+  });
+};
+
+export const updateCard =
+  (listID, values, cardID) => async (dispatch, getState) => {
+    await axios
+      .patch(
+        `${process.env.HOST}/api/posts/${
+          getState().collaborateRoomReducer.collaborate_room?.id
+        }/kanbans/${listID}/cards/${cardID}/`,
+        values,
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        console.log("Update card success", res.data);
+      })
+      .catch(async (err) => {
+        console.log("Update card error", err.response);
+      });
+    values.id = cardID;
+    dispatch({
+      type: UPDATE_CARD,
+      payload: { listID: listID, cardUpdated: values },
+    });
+  };
+
+export const updateList = (listID, values) => async (dispatch, getState) => {
+  await axios
+    .patch(
+      `${process.env.HOST}/api/posts/${
+        getState().collaborateRoomReducer.collaborate_room?.id
+      }/kanbans/${listID}/`,
+      values,
+      tokenConfig(getState)
+    )
+    .then(async (res) => {
+      console.log("Update list success", res.data);
+    })
+    .catch(async (err) => {
+      console.log("Update list error", err.response);
+    });
+  values.id = listID;
+  console.log(values);
+  dispatch({
+    type: UPDATE_LIST,
+    payload: { listUpdated: values },
   });
 };
