@@ -170,6 +170,7 @@ const List = ({ title, cards, listID, index, socketRef, roomID }) => {
                         key={card.id}
                         id={card.id}
                         index={index}
+                        roomID={roomID}
                         listID={listID}
                         socketRef={socketRef}
                       />
