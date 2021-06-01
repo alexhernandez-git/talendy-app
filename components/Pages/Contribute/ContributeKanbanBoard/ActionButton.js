@@ -2,9 +2,16 @@ import React, { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { useDispatch } from "react-redux";
 import { addList, addCard } from "redux/actions/kanban";
+import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
 const ActionButton = (props) => {
-  const { list, listID } = props;
+  const { list, listID, roomID } = props;
+  const { collaborate_room } = useSelector(
+    (state) => state.collaborateRoomReducer
+  );
+  const { access_token } = useSelector((state) => state.authReducer);
+
   const [formOpen, setFormOpen] = useState(false);
   const openForm = () => {
     setFormOpen(true);
@@ -21,13 +28,34 @@ const ActionButton = (props) => {
   const dispatch = useDispatch();
   const handleAddList = () => {
     if (text) {
-      dispatch(addList(text));
+      const newList = {
+        title: text,
+        cards: [],
+        id: uuidv4(),
+      };
+      dispatch(addList(newList));
+      socketRef.current.emit("add list", {
+        newList: newList,
+        roomID: roomID,
+        collaborateRoomID: collaborate_room?.id,
+        token: access_token,
+      });
       setText("");
     }
   };
   const handleAddCard = () => {
     if (text) {
-      dispatch(addCard(listID, text));
+      const newCard = {
+        title: text,
+        id: uuidv4(),
+      };
+      dispatch(addCard(listID, newCard));
+      socketRef.current.emit("add card", {
+        newCard: newCard,
+        roomID: roomID,
+        collaborateRoomID: collaborate_room?.id,
+        token: access_token,
+      });
       setText("");
     }
   };

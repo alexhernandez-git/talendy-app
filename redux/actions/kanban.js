@@ -11,6 +11,46 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { tokenConfig } from "./auth";
 
+export const sortList =
+  (droppableIndexStart, droppableIndexEnd) => async (dispatch, getState) => {
+    let state = getState().collaborateRoomReducer.collaborate_room?.kanban;
+    const newStateSort = state;
+
+    const list = newStateSort.splice(droppableIndexStart, 1);
+    newStateSort.splice(droppableIndexEnd, 0, ...list);
+
+    dispatch({
+      type: DRAG_HAPPENED,
+      payload: newStateSort,
+    });
+  };
+
+export const sortCard =
+  (droppableIdStart, droppableIndexStart, droppableIndexEnd) =>
+  async (dispatch, getState) => {
+    let state = getState().collaborateRoomReducer.collaborate_room?.kanban;
+    const list = state.find((list) => droppableIdStart === list.id);
+    const card = list.cards.splice(droppableIndexStart, 1);
+    list.cards.splice(droppableIndexEnd, 0, ...card);
+  };
+export const sortCardInDiferentLists =
+  (droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd) =>
+  async (dispatch, getState) => {
+    let state = getState().collaborateRoomReducer.collaborate_room?.kanban;
+
+    // find the list where drag happened
+    const listStart = state.find((list) => droppableIdStart === list.id);
+
+    // pull out the card from this list
+    const card = listStart.cards.splice(droppableIndexStart, 1);
+
+    // find the list where drag ended
+    const listEnd = state.find((list) => droppableIdEnd === list.id);
+    console.log("list end ", listEnd);
+    // put the card in the new list
+    listEnd.cards.splice(droppableIndexEnd, 0, ...card);
+  };
+
 export const sort =
   (
     droppableIdStart,
@@ -51,7 +91,6 @@ export const sort =
         });
       const list = newStateSort.splice(droppableIndexStart, 1);
       newStateSort.splice(droppableIndexEnd, 0, ...list);
-      return newStateSort;
     }
 
     // in the same list
@@ -119,52 +158,13 @@ export const sort =
     });
   };
 
-export const addList = (title) => async (dispatch, getState) => {
-  const newList = {
-    title: title,
-    cards: [],
-    id: uuidv4(),
-  };
-  await axios
-    .post(
-      `${process.env.HOST}/api/posts/${
-        getState().collaborateRoomReducer.collaborate_room?.id
-      }/kanbans/`,
-      newList,
-      tokenConfig(getState)
-    )
-    .then(async (res) => {
-      console.log("Create list success", res.data);
-    })
-    .catch(async (err) => {
-      console.log("Create list error", err.response);
-    });
+export const addList = (newList) => async (dispatch, getState) => {
   dispatch({
     type: ADD_LIST,
     payload: newList,
   });
 };
-export const addCard = (listID, title) => async (dispatch, getState) => {
-  const newCard = {
-    title: title,
-    id: uuidv4(),
-  };
-
-  await axios
-    .post(
-      `${process.env.HOST}/api/posts/${
-        getState().collaborateRoomReducer.collaborate_room?.id
-      }/kanbans/${listID}/cards/`,
-      newCard,
-      tokenConfig(getState)
-    )
-    .then(async (res) => {
-      console.log("Create card success", res.data);
-    })
-    .catch(async (err) => {
-      console.log("Create card error", err.response);
-    });
-
+export const addCard = (listID, newCard) => async (dispatch, getState) => {
   dispatch({
     type: ADD_CARD,
     payload: { listID: listID, newCard: newCard },
@@ -173,20 +173,6 @@ export const addCard = (listID, title) => async (dispatch, getState) => {
 
 export const updateCard =
   (listID, values, cardID) => async (dispatch, getState) => {
-    await axios
-      .patch(
-        `${process.env.HOST}/api/posts/${
-          getState().collaborateRoomReducer.collaborate_room?.id
-        }/kanbans/${listID}/cards/${cardID}/`,
-        values,
-        tokenConfig(getState)
-      )
-      .then(async (res) => {
-        console.log("Update card success", res.data);
-      })
-      .catch(async (err) => {
-        console.log("Update card error", err.response);
-      });
     values.id = cardID;
     dispatch({
       type: UPDATE_CARD,
@@ -195,20 +181,6 @@ export const updateCard =
   };
 
 export const updateList = (listID, values) => async (dispatch, getState) => {
-  await axios
-    .patch(
-      `${process.env.HOST}/api/posts/${
-        getState().collaborateRoomReducer.collaborate_room?.id
-      }/kanbans/${listID}/`,
-      values,
-      tokenConfig(getState)
-    )
-    .then(async (res) => {
-      console.log("Update list success", res.data);
-    })
-    .catch(async (err) => {
-      console.log("Update list error", err.response);
-    });
   values.id = listID;
   console.log(values);
   dispatch({
@@ -218,19 +190,6 @@ export const updateList = (listID, values) => async (dispatch, getState) => {
 };
 
 export const deleteCard = (listID, cardID) => async (dispatch, getState) => {
-  await axios
-    .delete(
-      `${process.env.HOST}/api/posts/${
-        getState().collaborateRoomReducer.collaborate_room?.id
-      }/kanbans/${listID}/cards/${cardID}/`,
-      tokenConfig(getState)
-    )
-    .then(async (res) => {
-      console.log("Delete card success", res.data);
-    })
-    .catch(async (err) => {
-      console.log("Delete card error", err.response);
-    });
   dispatch({
     type: DELETE_CARD,
     payload: { listID: listID, cardID: cardID },
@@ -238,19 +197,6 @@ export const deleteCard = (listID, cardID) => async (dispatch, getState) => {
 };
 
 export const deleteList = (listID) => async (dispatch, getState) => {
-  await axios
-    .delete(
-      `${process.env.HOST}/api/posts/${
-        getState().collaborateRoomReducer.collaborate_room?.id
-      }/kanbans/${listID}/`,
-      tokenConfig(getState)
-    )
-    .then(async (res) => {
-      console.log("Delete list success", res.data);
-    })
-    .catch(async (err) => {
-      console.log("Delete list error", err.response);
-    });
   dispatch({
     type: DELETE_LIST,
     payload: { listID: listID },

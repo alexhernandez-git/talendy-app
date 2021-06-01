@@ -10,9 +10,15 @@ import { useEffect } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
 import { useDispatch } from "react-redux";
 import { deleteCard, updateCard } from "redux/actions/kanban";
-const Card = ({ listID, title, id, index }) => {
+import { useSelector } from "react-redux";
+const Card = ({ listID, title, id, index, socketRef, roomID }) => {
   const textareaRef = useRef();
   const dispatch = useDispatch();
+  const { collaborate_room } = useSelector(
+    (state) => state.collaborateRoomReducer
+  );
+  const { access_token } = useSelector((state) => state.authReducer);
+
   const [isEditTitle, setIsEditTitle] = useState(false);
   const handleOpenEditTitle = () => {
     setIsEditTitle(true);
@@ -40,6 +46,14 @@ const Card = ({ listID, title, id, index }) => {
       handleCloseEditTitle();
       console.log(values);
       dispatch(updateCard(listID, values, id));
+      socketRef.current.emit("update card", {
+        listID: listID,
+        values: values,
+        cardID: id,
+        roomID: roomID,
+        collaborateRoomID: collaborate_room?.id,
+        token: access_token,
+      });
     },
   });
   const handleFocus = (event) => event.target.select();
@@ -56,6 +70,13 @@ const Card = ({ listID, title, id, index }) => {
   useOutsideClick(modalRef, () => handleModalClose());
   const handleDeleteCard = () => {
     dispatch(deleteCard(listID, id));
+    socketRef.current.emit("delete card", {
+      listID: listID,
+      cardID: id,
+      roomID: roomID,
+      collaborateRoomID: collaborate_room?.id,
+      token: access_token,
+    });
     handleModalClose();
   };
   return (

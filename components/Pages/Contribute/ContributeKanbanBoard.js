@@ -2,13 +2,19 @@ import { useDispatch, useSelector } from "react-redux";
 import ActionButton from "./ContributeKanbanBoard/ActionButton";
 import List from "./ContributeKanbanBoard/List";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { sort } from "redux/actions/kanban";
+import {
+  sort,
+  sortCard,
+  sortCardInDiferentLists,
+  sortList,
+} from "redux/actions/kanban";
 import { useEffect, useState } from "react";
 
 const ContributeKanbanBoard = ({ socketRef, roomID }) => {
   const { collaborate_room } = useSelector(
     (state) => state.collaborateRoomReducer
   );
+  const { access_token } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
   const onDragEnd = (result) => {
     // TODO: reordering logic
@@ -18,16 +24,49 @@ const ContributeKanbanBoard = ({ socketRef, roomID }) => {
     if (!destination) {
       return;
     }
-    dispatch(
-      sort(
-        source.droppableId,
-        destination.droppableId,
-        source.index,
-        destination.index,
-        draggableId,
-        type
-      )
-    );
+    if (type === "list") {
+      dispatch(sortList(source.index, destination.index));
+      socketRef.current.emit("update list order", {
+        droppableIndexStart: source.index,
+        droppableIndexEnd: destination.index,
+        roomID: roomID,
+        collaborateRoomID: collaborate_room?.id,
+        token: access_token,
+      });
+
+      return;
+    }
+    if (source.droppableId === destination.droppableId) {
+      dispatch(sortCard(source.droppableId, source.index, destination.index));
+      socketRef.current.emit("update card order", {
+        droppableIdStart: source.droppableId,
+        droppableIndexStart: source.index,
+        droppableIndexEnd: destination.index,
+        roomID: roomID,
+        collaborateRoomID: collaborate_room?.id,
+        token: access_token,
+      });
+      return;
+    }
+    if (source.droppableId !== destination.droppableId) {
+      dispatch(
+        sortCardInDiferentLists(
+          source.droppableId,
+          destination.droppableId,
+          source.index,
+          destination.index
+        )
+      );
+      socketRef.current.emit("update card between lists order", {
+        droppableIdStart: source.droppableId,
+        droppableIdEnd: source.droppableId,
+        droppableIndexStart: source.index,
+        droppableIndexEnd: destination.index,
+        roomID: roomID,
+        collaborateRoomID: collaborate_room?.id,
+        token: access_token,
+      });
+    }
   };
   const [firstRender, setFirstRender] = useState(0);
   useEffect(() => {
@@ -37,7 +76,37 @@ const ContributeKanbanBoard = ({ socketRef, roomID }) => {
       setFirstRender((firstRender) => firstRender + 1);
     }
   }, [JSON.stringify(collaborate_room?.kanban)]);
-
+  useEffect(() => {
+    if (socketRef?.current) {
+      socketRef.current.on("list order updated", (payload) => {
+        console.log(payload);
+      });
+      socketRef.current.on("card order updated", (payload) => {
+        console.log(payload);
+      });
+      socketRef.current.on("card between lists order updated", (payload) => {
+        console.log(payload);
+      });
+      socketRef.current.on("list added", (payload) => {
+        console.log(payload);
+      });
+      socketRef.current.on("card added", (payload) => {
+        console.log(payload);
+      });
+      socketRef.current.on("list updated", (payload) => {
+        console.log(payload);
+      });
+      socketRef.current.on("card updated", (payload) => {
+        console.log(payload);
+      });
+      socketRef.current.on("list deleted", (payload) => {
+        console.log(payload);
+      });
+      socketRef.current.on("card deleted", (payload) => {
+        console.log(payload);
+      });
+    }
+  }, [socketRef?.current]);
   return (
     <section className="overflow-auto block" style={{ minHeight: "40rem" }}>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -55,13 +124,15 @@ const ContributeKanbanBoard = ({ socketRef, roomID }) => {
                   cards={list.cards}
                   key={list.id}
                   index={index}
+                  socketRef={socketRef}
+                  roomID={roomID}
                 />
               ))}
               <div style={{ visibility: "hidden", height: 0 }}>
                 {provided.placeholder}
               </div>
 
-              <ActionButton list />
+              <ActionButton list roomID={roomID} />
             </div>
           )}
         </Droppable>

@@ -9,8 +9,13 @@ import useOutsideClick from "hooks/useOutsideClick";
 import { useRef } from "react";
 import { updateList, deleteList } from "redux/actions/kanban";
 import { useDispatch } from "react-redux";
-const List = ({ title, cards, listID, index }) => {
+import { useSelector } from "react-redux";
+const List = ({ title, cards, listID, index, socketRef, roomID }) => {
   const dispatch = useDispatch();
+  const { collaborate_room } = useSelector(
+    (state) => state.collaborateRoomReducer
+  );
+  const { access_token } = useSelector((state) => state.authReducer);
 
   const [isEditTitle, setIsEditTitle] = useState(false);
   const handleOpenEditTitle = () => {
@@ -40,6 +45,13 @@ const List = ({ title, cards, listID, index }) => {
       handleCloseEditTitle();
       console.log(values);
       dispatch(updateList(listID, values));
+      socketRef.current.emit("update list", {
+        listID: listID,
+        values: values,
+        roomID: roomID,
+        collaborateRoomID: collaborate_room?.id,
+        token: access_token,
+      });
     },
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -55,6 +67,13 @@ const List = ({ title, cards, listID, index }) => {
   useOutsideClick(modalRef, () => handleModalClose());
   const handleDeleteList = () => {
     dispatch(deleteList(listID));
+    socketRef.current.emit("delete list", {
+      listID: listID,
+      roomID: roomID,
+      collaborateRoomID: collaborate_room?.id,
+      token: access_token,
+    });
+
     handleModalClose();
   };
   return (
@@ -155,7 +174,7 @@ const List = ({ title, cards, listID, index }) => {
                       />
                     ))}
                     {provided.placeholder}
-                    <ActionButton listID={listID} />
+                    <ActionButton listID={listID} roomID={roomID} />
                   </div>
                 </div>
               )}
