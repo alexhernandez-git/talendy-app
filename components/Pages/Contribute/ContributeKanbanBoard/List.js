@@ -49,7 +49,6 @@ const List = ({ title, cards, listID, index, socketRef, roomID }) => {
         listID: listID,
         values: values,
         roomID: roomID,
-        collaborateRoomID: collaborate_room?.id,
         token: access_token,
       });
     },
@@ -70,7 +69,6 @@ const List = ({ title, cards, listID, index, socketRef, roomID }) => {
     socketRef.current.emit("delete list", {
       listID: listID,
       roomID: roomID,
-      collaborateRoomID: collaborate_room?.id,
       token: access_token,
     });
 

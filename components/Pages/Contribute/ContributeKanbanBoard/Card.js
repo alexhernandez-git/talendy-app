@@ -51,7 +51,6 @@ const Card = ({ listID, title, id, index, socketRef, roomID }) => {
         values: values,
         cardID: id,
         roomID: roomID,
-        collaborateRoomID: collaborate_room?.id,
         token: access_token,
       });
     },
@@ -74,7 +73,6 @@ const Card = ({ listID, title, id, index, socketRef, roomID }) => {
       listID: listID,
       cardID: id,
       roomID: roomID,
-      collaborateRoomID: collaborate_room?.id,
       token: access_token,
     });
     handleModalClose();

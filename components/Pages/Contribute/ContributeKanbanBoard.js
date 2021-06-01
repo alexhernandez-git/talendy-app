@@ -41,7 +41,6 @@ const ContributeKanbanBoard = ({ socketRef, roomID }) => {
         droppableIndexStart: source.index,
         droppableIndexEnd: destination.index,
         roomID: roomID,
-        collaborateRoomID: collaborate_room?.id,
         token: access_token,
       });
 
@@ -60,7 +59,6 @@ const ContributeKanbanBoard = ({ socketRef, roomID }) => {
         droppableIndexStart: source.index,
         droppableIndexEnd: destination.index,
         roomID: roomID,
-        collaborateRoomID: collaborate_room?.id,
         token: access_token,
       });
       return;
@@ -80,7 +78,6 @@ const ContributeKanbanBoard = ({ socketRef, roomID }) => {
         droppableIndexStart: source.index,
         droppableIndexEnd: destination.index,
         roomID: roomID,
-        collaborateRoomID: collaborate_room?.id,
         token: access_token,
       });
     }

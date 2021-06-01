@@ -7,9 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const ActionButton = (props) => {
   const { list, listID, roomID, socketRef } = props;
-  const { collaborate_room } = useSelector(
-    (state) => state.collaborateRoomReducer
-  );
+
   const { access_token } = useSelector((state) => state.authReducer);
 
   const [formOpen, setFormOpen] = useState(false);
@@ -37,7 +35,6 @@ const ActionButton = (props) => {
       socketRef.current.emit("add list", {
         newList: newList,
         roomID: roomID,
-        collaborateRoomID: collaborate_room?.id,
         token: access_token,
       });
       setText("");
@@ -54,7 +51,6 @@ const ActionButton = (props) => {
         newCard: newCard,
         listID: listID,
         roomID: roomID,
-        collaborateRoomID: collaborate_room?.id,
         token: access_token,
       });
       setText("");
