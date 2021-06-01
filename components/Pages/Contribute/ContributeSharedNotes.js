@@ -99,7 +99,7 @@ export default function ContributeSharedNotes({
     }
   }, [socketRef?.current]);
   useEffect(() => {
-    if (sharedNotes && firstLoad) {
+    if ((sharedNotes || sharedNotes === "") && firstLoad) {
       sharedNotesRef.current.innerHTML = sharedNotes;
       console.log(sharedNotes);
       setEditorText(sharedNotes);
