@@ -22,14 +22,7 @@ const PostModal = ({
   const dispatch = useDispatch();
 
   const authReducer = useSelector((state) => state.authReducer);
-  const handleGoToProfile = (e) => {
-    e.stopPropagation();
-    if (post?.user?.id === authReducer.user?.id) {
-      router.push(`/profile/posts`);
-      return;
-    }
-    router.push(`/user/${post?.user?.id}`);
-  };
+
   const handleRequestToContribute = () => {
     if (!authReducer.is_authenticated) {
       dispatch(createAlert("ERROR", "You are not authenticated"));
@@ -363,12 +356,11 @@ const PostModal = ({
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-medium text-gray-900 dark:text-white">
-                    <span
-                      onClick={handleGoToProfile}
-                      className="hover:underline cursor-pointer"
-                    >
-                      {post?.user?.username}
-                    </span>
+                    <Link href={"/profile/posts"}>
+                      <span className="hover:underline cursor-pointer">
+                        {post?.user?.username}
+                      </span>
+                    </Link>
                   </p>
                   <p className="text-sm text-gray-500 dark:text-gray-100">
                     <time dateTime="2020-12-09T11:43:00">
@@ -432,12 +424,17 @@ const PostModal = ({
                           </span>
                         )}
                         <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white flex justify-between w-full">
-                          <span
-                            onClick={handleGoToProfile}
-                            className="hover:underline cursor-pointer"
+                          <Link
+                            href={
+                              post?.user?.id === authReducer.user?.id
+                                ? "/profile/posts"
+                                : `/user/${post?.user?.id}`
+                            }
                           >
-                            {member.user.username}
-                          </span>
+                            <span className="hover:underline cursor-pointer">
+                              {member.user.username}
+                            </span>
+                          </Link>
                           {member.role === "AD" && (
                             <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white">
                               Admin

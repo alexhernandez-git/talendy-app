@@ -27,7 +27,7 @@ export default function Donation() {
     if (initialDataReducer.data_fetched) {
       handleFetchData();
     }
-  }, [initialDataReducer.data_fetched]);
+  }, [initialDataReducer.data_fetched, router.query?.user]);
   return (
     <Layout>
       <div className="py-10">

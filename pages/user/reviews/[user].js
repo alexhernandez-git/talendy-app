@@ -30,7 +30,7 @@ export default function Reviews() {
     if (initialDataReducer.data_fetched) {
       fetchInitialData();
     }
-  }, [initialDataReducer.data_fetched]);
+  }, [initialDataReducer.data_fetched, router.query?.user]);
 
   return (
     <Layout>
