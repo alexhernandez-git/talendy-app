@@ -426,7 +426,7 @@ const PostModal = ({
                         <p className="ml-4 text-sm font-medium text-gray-900 dark:text-white flex justify-between w-full">
                           <Link
                             href={
-                              post?.user?.id === authReducer.user?.id
+                              member?.user?.id === authReducer.user?.id
                                 ? "/profile/posts"
                                 : `/user/${post?.user?.id}`
                             }
