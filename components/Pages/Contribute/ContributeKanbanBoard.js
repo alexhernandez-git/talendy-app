@@ -131,7 +131,7 @@ const ContributeKanbanBoard = ({ socketRef, roomID }) => {
     }
   }, [socketRef?.current]);
   return (
-    <section className="overflow-auto block" style={{ minHeight: "40rem" }}>
+    <section className="overflow-auto block content-container">
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="all-lists" direction="horizontal" type="list">
           {(provided) => (

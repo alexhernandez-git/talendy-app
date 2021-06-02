@@ -38,6 +38,7 @@ import ContributeWhiteboard from "components/Pages/Contribute/ContributeWhiteboa
 import ContributeScreenSharing from "components/Pages/Contribute/ContributeScreenSharing";
 import Finalize from "components/Pages/ContributeRoom/Finalize";
 import ContributeKanbanBoard from "components/Pages/Contribute/ContributeKanbanBoard";
+import ContributeSharedResources from "components/Pages/Contribute/ContributeSharedResources";
 const Audio = (props) => {
   const ref = useRef();
   useEffect(() => {
@@ -687,17 +688,18 @@ const Contribute = () => {
                         <button
                           onClick={handleChangeFeature.bind(
                             this,
-                            "SHAREDFILES"
+                            "SHAREDRESOURCES"
                           )}
                           className="flex flex-col"
                         >
                           <div className="flex justify-between">
-                            <p className="font-normal">Shared files</p>
+                            <p className="font-normal">Shared resources</p>
                           </div>
                           <p className="text-gray-500 text-left mt-2">
-                            Share your files in this room.
+                            Share your resources in this room.
                             <br />
-                            When the post is finished the files will be deleted
+                            When the post is finished the resources will be
+                            deleted
                           </p>
                         </button>
                       </li>
@@ -792,6 +794,19 @@ const Contribute = () => {
                 }
               >
                 <ContributeKanbanBoard socketRef={socketRef} roomID={roomID} />
+              </div>
+              <div
+                className={
+                  feature.toUpperCase() === "SHAREDRESOURCES" &&
+                  collaborate_room
+                    ? "block"
+                    : "hidden"
+                }
+              >
+                <ContributeSharedResources
+                  socketRef={socketRef}
+                  roomID={roomID}
+                />
               </div>
               {!isFinalizePage &&
                 feature.toUpperCase() === "ASTEROIDS" &&
