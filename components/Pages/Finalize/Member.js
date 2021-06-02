@@ -8,12 +8,19 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { updateMemberReview } from "redux/actions/collaborateRoom";
 import { useDispatch } from "react-redux";
-const Member = ({ member, handleChangeKarmaWinner, karma_winner }) => {
+const Member = ({
+  member,
+  handleChangeKarmaWinner,
+  karma_winner,
+  isFinalizePage,
+  first,
+}) => {
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
   const collaborateRoomReducer = useSelector(
     (state) => state.collaborateRoomReducer
   );
+  console.log(first);
 
   const [isFormOpen, setIsFormOpen] = useState(false);
   const handleToggleForm = () => {
@@ -27,6 +34,14 @@ const Member = ({ member, handleChangeKarmaWinner, karma_winner }) => {
       setIsFormOpen(false);
     }
   };
+
+  useEffect(() => {
+    if (first) {
+      handleOpenForm();
+    } else {
+      handleCloseForm();
+    }
+  }, [isFinalizePage]);
 
   const formik = useFormik({
     enableReinitialize: true,

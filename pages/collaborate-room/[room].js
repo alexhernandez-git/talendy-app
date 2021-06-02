@@ -464,7 +464,10 @@ const Contribute = () => {
           </div>
         </div>
         <div className={isFinalizePage ? "block" : "hidden"}>
-          <Finalize handleGoToRoomPage={handleGoToRoomPage} />
+          <Finalize
+            handleGoToRoomPage={handleGoToRoomPage}
+            isFinalizePage={isFinalizePage}
+          />
         </div>
 
         <section

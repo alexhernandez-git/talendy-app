@@ -19,7 +19,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createAlert } from "redux/actions/alerts";
 
-const Finalize = ({ handleGoToRoomPage }) => {
+const Finalize = ({ handleGoToRoomPage, isFinalizePage }) => {
   const dispatch = useDispatch();
 
   const collaborateRoomReducer = useSelector(
@@ -144,17 +144,18 @@ const Finalize = ({ handleGoToRoomPage }) => {
 
           <div className="shadow overflow-hidden sm:rounded-md col-span-12">
             <ul className="divide-y divide-gray-200">
-              {collaborate_room?.members.map(
-                (member) =>
-                  member.user.id !== authReducer.user?.id && (
-                    <Member
-                      handleChangeKarmaWinner={handleChangeKarmaWinner}
-                      karma_winner={formikKarmaWinner.values.karma_winner}
-                      member={member}
-                      key={member.id}
-                    />
-                  )
-              )}
+              {collaborate_room?.members
+                .filter((member) => member.user.id !== authReducer.user?.id)
+                .map((member, index) => (
+                  <Member
+                    handleChangeKarmaWinner={handleChangeKarmaWinner}
+                    karma_winner={formikKarmaWinner.values.karma_winner}
+                    member={member}
+                    first={index === 0 ? true : false}
+                    key={member.id}
+                    isFinalizePage={isFinalizePage}
+                  />
+                ))}
             </ul>
           </div>
           {/* <div className="col-span-12">
