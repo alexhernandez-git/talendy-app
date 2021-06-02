@@ -57,9 +57,11 @@ const ContributeSharedResources = ({ socketRef, roomID }) => {
               Folder
             </button>
 
-            <button className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center text-white  text-xs">
+            <button
+              onClick={handleFeatureNotReady}
+              className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center text-white  text-xs"
+            >
               <svg
-                onClick={handleFeatureNotReady}
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 mr-1"
                 fill="none"
