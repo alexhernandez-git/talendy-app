@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { createAlert } from "redux/actions/alerts";
 import moment from "moment";
-import { CONTRIBUTE_PAGE } from "pages";
+import { COLLABORATION_ROOM_PAGE } from "pages";
 const PostModal = ({
   modalOpen,
   modalRef,
@@ -377,7 +377,7 @@ const PostModal = ({
                   </p>
                 </div>
               </div>
-              {page !== CONTRIBUTE_PAGE &&
+              {page !== COLLABORATION_ROOM_PAGE &&
                 post?.members?.some(
                   (member) => member.user.id === authReducer.user?.id
                 ) && (

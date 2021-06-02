@@ -7,7 +7,7 @@ import NewPostModal from "./CreateEditPostModal";
 import RegisterModal from "./RegisterModal";
 import { useAlert } from "hooks/useAlert";
 import Footer from "./Footer";
-
+import { COLLABORATION_ROOM_PAGE } from "pages";
 const Layout = ({
   children,
   page,
@@ -72,7 +72,7 @@ const Layout = ({
         />
         {children}
       </div>
-      <Footer />
+      {page !== COLLABORATION_ROOM_PAGE && <Footer />}
 
       <Chat />
       <NewPostModal

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
 import PostModal from "components/Layout/PostModal";
 import Layout from "components/Layout/Layout";
-import { CONTRIBUTE_PAGE } from "pages";
+import { COLLABORATION_ROOM_PAGE } from "pages";
 import { IconContext } from "react-icons";
 import {
   MdHeadset,
@@ -58,7 +58,7 @@ const Audio = (props) => {
 };
 
 const Contribute = () => {
-  const page = CONTRIBUTE_PAGE;
+  const page = COLLABORATION_ROOM_PAGE;
   const router = useRouter();
   const dispatch = useDispatch();
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
@@ -408,7 +408,7 @@ const Contribute = () => {
       {peers.map((peer, index) => {
         return <Audio key={index} peer={peer} isDeafen={isDeafen} />;
       })}
-      <Layout>
+      <Layout page={page}>
         <div className="fixed bottom-0 w-full z-40 flex items-center justify-center">
           {/* <div className="mr-2 flex items-center dark:bg-gray-800 bg-white rounded-t-lg border-t border-l border-r border-orange-500 dark:border-white shadow">
             <button
