@@ -15,6 +15,7 @@ import {
   updateList,
 } from "redux/actions/kanban";
 import { useEffect, useState } from "react";
+import { createAlert } from "redux/actions/alerts";
 
 const ContributeSharedResources = ({ socketRef, roomID }) => {
   const { collaborate_room } = useSelector(
@@ -27,12 +28,18 @@ const ContributeSharedResources = ({ socketRef, roomID }) => {
     if (socketRef?.current) {
     }
   }, [socketRef?.current]);
+  const handleFeatureNotReady = () => {
+    dispatch(createAlert("INFO", "Feature not ready"));
+  };
   return (
     <section className="overflow-auto block">
       <div className="bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg p-1">
         <div className="flex justify-end items-center rounded-t">
           <div className="flex ">
-            <button className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center text-white mr-1 text-xs">
+            <button
+              onClick={handleFeatureNotReady}
+              className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center text-white mr-1 text-xs"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 mr-1"
@@ -52,6 +59,7 @@ const ContributeSharedResources = ({ socketRef, roomID }) => {
 
             <button className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center text-white  text-xs">
               <svg
+                onClick={handleFeatureNotReady}
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 mr-1"
                 fill="none"
