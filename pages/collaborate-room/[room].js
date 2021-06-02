@@ -554,6 +554,21 @@ const Contribute = () => {
               <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl sm:flex justify-between items-center ">
                 <div className="flex justify-center md:mt-0 flex-col-reverse justify-stretch space-y-4 space-y-reverse md:flex-row-reverse md:justify-end md:space-x-reverse md:space-y-0 md:space-x-3  md:space-x-3">
                   <button
+                    onClick={handleChangeFeature.bind(this, "SHAREDRESOURCES")}
+                    type="button"
+                    className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
+                    </svg>
+                    Resources
+                  </button>
+                  <button
                     onClick={handleChangeFeature.bind(this, "KANBANBOARD")}
                     type="button"
                     className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
@@ -568,26 +583,7 @@ const Contribute = () => {
                     </svg>
                     Kanban board
                   </button>
-                  <button
-                    onClick={handleChangeFeature.bind(this, "SHAREDWHITEBOARD")}
-                    type="button"
-                    className="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 mr-2"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                      <path
-                        fillRule="evenodd"
-                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    Whiteboard
-                  </button>
+
                   <button
                     onClick={handleChangeFeature.bind(this, "SHAREDNOTES")}
                     type="button"
@@ -605,7 +601,7 @@ const Contribute = () => {
                         clipRule="evenodd"
                       />
                     </svg>
-                    Shared notes
+                    Notes
                   </button>
                   <button
                     onClick={handleChangeFeature.bind(this, "CHAT")}
@@ -688,18 +684,15 @@ const Contribute = () => {
                         <button
                           onClick={handleChangeFeature.bind(
                             this,
-                            "SHAREDRESOURCES"
+                            "SHAREDWHITEBOARD"
                           )}
                           className="flex flex-col"
                         >
                           <div className="flex justify-between">
-                            <p className="font-normal">Shared resources</p>
+                            <p className="font-normal">Whiteboard</p>
                           </div>
                           <p className="text-gray-500 text-left mt-2">
-                            Share your resources in this room.
-                            <br />
-                            When the post is finished the resources will be
-                            deleted
+                            Draw on a shared whiteboard.
                           </p>
                         </button>
                       </li>
