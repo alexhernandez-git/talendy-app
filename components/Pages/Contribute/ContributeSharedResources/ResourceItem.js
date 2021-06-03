@@ -200,7 +200,7 @@ const ResourceItem = ({ is_file = false, item }) => {
             <div
               className={`${
                 itemOptions ? "block" : "hidden"
-              } origin-top-right absolute right-0 mt-2 w-36 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none`}
+              } origin-top-right absolute left-0 mt-2 w-36 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none`}
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="menu-button"
@@ -264,7 +264,7 @@ const ResourceItem = ({ is_file = false, item }) => {
             <div
               className={`${
                 moveItem ? "block" : "hidden"
-              } origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none`}
+              } origin-top-right absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none`}
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="menu-button"
