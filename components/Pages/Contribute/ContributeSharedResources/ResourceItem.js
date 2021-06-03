@@ -109,16 +109,14 @@ const ResourceItem = ({ is_file = false, item }) => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      title: item?.title,
+      name: item?.name,
     },
     validationSchema: Yup.object({
-      title: Yup.string().max(
-        100,
-        "Title must not be more than 100 characters"
-      ),
+      name: Yup.string().max(100, "Title must not be more than 100 characters"),
     }),
     onSubmit: async (values) => {
       console.log(values);
+      handleCloseEditTitle();
     },
   });
   const MoveFolder = () => {
@@ -304,15 +302,16 @@ const ResourceItem = ({ is_file = false, item }) => {
           >
             <input
               type="text"
+              name="name"
               autoFocus
               className="block w-20 h-5 bg-white dark:bg-gray-600 border border-gray-300 rounded-3xl py-2  text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-              value={formik.values.title}
+              value={formik.values.name}
               onChange={formik.handleChange}
               onBlur={handleBlur}
             />
           </form>
         ) : (
-          <span className="text-xs mt-1">
+          <span onDoubleClick={handleOpenEditTitle} className="text-xs mt-1">
             {is_file ? "filename" : "foldername"}
           </span>
         )}
