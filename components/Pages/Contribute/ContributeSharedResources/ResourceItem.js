@@ -97,11 +97,11 @@ const ResourceItem = ({ is_file = false }) => {
         <div className="relative inline-block text-left">
           <span
             onMouseDown={handleToggleItemOptions}
-            className="h-4 w-4 cursor-pointer opacity-0 group-hover:opacity-100 transition"
+            className="h-4 w-4 cursor-pointer "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
+              className="h-4 w-4 opacity-0 group-hover:opacity-100 transition"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
