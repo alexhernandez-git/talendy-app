@@ -680,17 +680,15 @@ const Contribute = () => {
                       aria-activedescendant="listbox-option-0"
                     >
                       <li
+                        onClick={handleChangeFeature.bind(
+                          this,
+                          "SHAREDWHITEBOARD"
+                        )}
                         className="text-gray-900 dark:text-white cursor-pointer select-none relative p-4 text-sm hover:opacity-70"
                         id="listbox-option-0"
                         role="option"
                       >
-                        <button
-                          onClick={handleChangeFeature.bind(
-                            this,
-                            "SHAREDWHITEBOARD"
-                          )}
-                          className="flex flex-col"
-                        >
+                        <button className="flex flex-col">
                           <div className="flex justify-between">
                             <p className="font-normal">Whiteboard</p>
                           </div>
@@ -700,14 +698,12 @@ const Contribute = () => {
                         </button>
                       </li>
                       <li
+                        onClick={handleChangeFeature.bind(this, "ASTEROIDS")}
                         className="text-gray-900 dark:text-white cursor-pointer select-none relative p-4 text-sm hover:opacity-70"
                         id="listbox-option-0"
                         role="option"
                       >
-                        <button
-                          onClick={handleChangeFeature.bind(this, "ASTEROIDS")}
-                          className="flex flex-col"
-                        >
+                        <button className="flex flex-col">
                           <div className="flex justify-between">
                             <p className="font-normal">Asteroids</p>
                           </div>
