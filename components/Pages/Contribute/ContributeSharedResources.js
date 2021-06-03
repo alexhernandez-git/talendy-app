@@ -107,10 +107,10 @@ const ContributeSharedResources = ({ socketRef, roomID }) => {
             <ResourceItem is_file />
             <ResourceItem is_file />
 
-            <ResourceItem is_file />
-            <ResourceItem is_file />
-            <ResourceItem is_file />
-            <ResourceItem is_file />
+            <ResourceItem />
+            <ResourceItem />
+            <ResourceItem />
+            <ResourceItem />
             <ResourceItem is_file />
           </div>
         </div>

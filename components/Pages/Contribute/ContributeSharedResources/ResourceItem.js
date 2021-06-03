@@ -15,8 +15,9 @@ import {
 } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import { MdDelete, MdEdit } from "react-icons/md";
-
-const ResourceItem = ({ is_file = false }) => {
+import * as Yup from "yup";
+import { useFormik } from "formik";
+const ResourceItem = ({ is_file = false, item }) => {
   const setFileIcon = () => {
     switch ("file.txt") {
       case "docx":
@@ -91,7 +92,35 @@ const ResourceItem = ({ is_file = false }) => {
   };
   const moveItemRef = useRef();
   useOutsideClick(moveItemRef, () => handleCloseMoveItem());
-
+  const [isEditTitle, setIsEditTitle] = useState(false);
+  const handleOpenEditTitle = () => {
+    handleCloseItemOptions();
+    console.log("entra");
+    setIsEditTitle(true);
+  };
+  const handleCloseEditTitle = () => {
+    setIsEditTitle(false);
+  };
+  const handleBlur = (e) => {
+    formik.handleSubmit();
+    handleCloseEditTitle();
+    formik.handleBlur(e);
+  };
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      title: item?.title,
+    },
+    validationSchema: Yup.object({
+      title: Yup.string().max(
+        100,
+        "Title must not be more than 100 characters"
+      ),
+    }),
+    onSubmit: async (values) => {
+      console.log(values);
+    },
+  });
   const MoveFolder = () => {
     return (
       <span
@@ -201,6 +230,7 @@ const ResourceItem = ({ is_file = false }) => {
                   className="cursor-pointer flex items-center p-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                   role="menuitem"
                   tabindex="-1"
+                  onClick={handleOpenEditTitle}
                   id="menu-item-0"
                 >
                   <IconContext.Provider
@@ -267,9 +297,25 @@ const ResourceItem = ({ is_file = false }) => {
         >
           {is_file ? setFileIcon() : <FaFolder />}
         </IconContext.Provider>
-        <span className="text-xs mt-1">
-          {is_file ? "filename" : "foldername"}
-        </span>
+        {isEditTitle ? (
+          <form
+            onSubmit={formik.handleSubmit}
+            className="text-xs mt-1 flex items-center justify-center"
+          >
+            <input
+              type="text"
+              autoFocus
+              className="block w-20 h-5 bg-white dark:bg-gray-600 border border-gray-300 rounded-3xl py-2  text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+              value={formik.values.title}
+              onChange={formik.handleChange}
+              onBlur={handleBlur}
+            />
+          </form>
+        ) : (
+          <span className="text-xs mt-1">
+            {is_file ? "filename" : "foldername"}
+          </span>
+        )}
       </div>
       <div
         className={`${
