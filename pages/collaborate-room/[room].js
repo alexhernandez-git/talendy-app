@@ -722,7 +722,7 @@ const Contribute = () => {
           </div>
         </section>
 
-        <div className={`${!isFinalizePage ? "block" : "hidden"} py-10`}>
+        <div className={`${!isFinalizePage ? "block" : "hidden"} py-10 z-10`}>
           <div className="max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
             <div className="lg:col-start-1 lg:col-span-2">
               <div
