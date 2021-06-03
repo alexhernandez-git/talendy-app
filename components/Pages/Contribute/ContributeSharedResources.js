@@ -46,7 +46,11 @@ const ContributeSharedResources = ({ socketRef, roomID }) => {
 
   return (
     <section className="block">
-      <div className="bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg p-1">
+      <div
+        className="w-full
+      bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg pt-1 mb-10 lg:mb-0
+      "
+      >
         <div className="flex justify-end items-center rounded-t">
           <div className="flex ">
             <button
@@ -72,7 +76,7 @@ const ContributeSharedResources = ({ socketRef, roomID }) => {
 
             <button
               onClick={handleFeatureNotReady}
-              className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center text-white  text-xs"
+              className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center text-white  text-xs mr-1"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -92,24 +96,22 @@ const ContributeSharedResources = ({ socketRef, roomID }) => {
             </button>
           </div>
         </div>
-        <div className="overflow-auto text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l content-container">
-          <div className="flex flex-wrap">
-            <ResourceItem />
+        <div
+          className=" text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b h-full"
+          style={{ minHeight: "40rem" }}
+        >
+          <div className="flex flex-wrap ">
             <ResourceItem is_file />
             <ResourceItem is_file />
             <ResourceItem is_file />
             <ResourceItem is_file />
-            <ResourceItem />
-            <ResourceItem />
-            <ResourceItem />
-            <ResourceItem />
+            <ResourceItem is_file />
+
             <ResourceItem is_file />
             <ResourceItem is_file />
             <ResourceItem is_file />
             <ResourceItem is_file />
-            <ResourceItem />
-            <ResourceItem />
-            <ResourceItem />
+            <ResourceItem is_file />
           </div>
         </div>
       </div>

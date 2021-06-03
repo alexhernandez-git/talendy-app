@@ -74,6 +74,20 @@ const ResourceItem = ({ is_file = false }) => {
   };
   const modalRef = useRef();
   useOutsideClick(modalRef, () => handleModalClose());
+  const [moveItem, setMoveItem] = useState(false);
+  const handleOpenMoveItem = () => {
+    setMoveItem(true);
+  };
+  const handleCloseMoveItem = () => {
+    if (moveItem) {
+      setMoveItem(false);
+    }
+  };
+  const handleToggleMoveItem = () => {
+    setMoveItem(!moveItem);
+  };
+  const moveItemRef = useRef();
+  useOutsideClick(moveItemRef, () => handleCloseMoveItem());
   return (
     <>
       <div className="flex flex-col items-center m-3 group">
@@ -132,6 +146,7 @@ const ResourceItem = ({ is_file = false }) => {
                   role="menuitem"
                   tabindex="-1"
                   id="menu-item-0"
+                  onClick={handleOpenMoveItem}
                 >
                   <IconContext.Provider
                     value={{
@@ -176,6 +191,20 @@ const ResourceItem = ({ is_file = false }) => {
                   </IconContext.Provider>
                   Delete
                 </span>
+              </div>
+            </div>
+            {/* Move item */}
+            <div
+              className={`${
+                moveItem ? "block" : "hidden"
+              } origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none`}
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="menu-button"
+              tabindex="-1"
+            >
+              <div className="py-1" ref={moveItemRef} role="none">
+                fwafefwae
               </div>
             </div>
           </div>
