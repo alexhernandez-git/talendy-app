@@ -787,19 +787,15 @@ const Contribute = () => {
               >
                 <ContributeKanbanBoard socketRef={socketRef} roomID={roomID} />
               </div>
-              <div
-                className={
-                  feature.toUpperCase() === "SHAREDRESOURCES" &&
-                  collaborate_room
-                    ? "block"
-                    : "hidden"
-                }
-              >
-                <ContributeSharedResources
-                  socketRef={socketRef}
-                  roomID={roomID}
-                />
-              </div>
+
+              {feature.toUpperCase() === "SHAREDRESOURCES" &&
+                collaborate_room && (
+                  <ContributeSharedResources
+                    socketRef={socketRef}
+                    roomID={roomID}
+                  />
+                )}
+
               {!isFinalizePage &&
                 feature.toUpperCase() === "ASTEROIDS" &&
                 collaborate_room && <ContributeAsteroids />}
