@@ -76,11 +76,11 @@ const ContributeWhiteboard = ({ socketRef, roomID, feature }) => {
       ctx.strokeStyle = color;
       var image = new Image();
       image.crossOrigin = "anonymous";
+      image.src = collaborateRoomReducer.collaborate_room?.drawing;
       image.onload = function () {
         ctx.drawImage(image, 0, 0);
       };
 
-      image.src = collaborateRoomReducer.collaborate_room?.drawing;
       setFirstLoad(false);
     }
   }, [feature]);
