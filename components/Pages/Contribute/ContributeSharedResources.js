@@ -45,7 +45,7 @@ const ContributeSharedResources = ({ socketRef, roomID }) => {
   };
 
   return (
-    <section className="overflow-auto block">
+    <section className="block">
       <div className="bg-gradient-to-r from-orange-500 to-pink-500 dark:bg-gray-700 shadow sm:rounded-lg p-1">
         <div className="flex justify-end items-center rounded-t">
           <div className="flex ">
@@ -92,9 +92,20 @@ const ContributeSharedResources = ({ socketRef, roomID }) => {
             </button>
           </div>
         </div>
-        <div className="text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l content-container">
+        <div className="overflow-auto text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b rounded-l content-container">
           <div className="flex flex-wrap">
             <ResourceItem />
+            <ResourceItem is_file />
+            <ResourceItem is_file />
+            <ResourceItem is_file />
+            <ResourceItem is_file />
+            <ResourceItem />
+            <ResourceItem />
+            <ResourceItem />
+            <ResourceItem />
+            <ResourceItem is_file />
+            <ResourceItem is_file />
+            <ResourceItem is_file />
             <ResourceItem is_file />
             <ResourceItem />
             <ResourceItem />

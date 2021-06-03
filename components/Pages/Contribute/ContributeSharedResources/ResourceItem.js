@@ -1,4 +1,7 @@
+import useOutsideClick from "hooks/useOutsideClick";
 import React from "react";
+import { useRef } from "react";
+import { useState } from "react";
 import {
   FaFileAlt,
   FaFileCsv,
@@ -45,6 +48,20 @@ const ResourceItem = ({ is_file = false }) => {
         return <FaFileAlt />;
     }
   };
+  const [itemOptions, setItemOptions] = useState(false);
+  const handleOpenItemOptions = () => {
+    setItemOptions(true);
+  };
+  const handleCloseItemOptions = () => {
+    if (itemOptions) {
+      setItemOptions(false);
+    }
+  };
+  const handleToggleItemOptions = () => {
+    setItemOptions(!itemOptions);
+  };
+  const itemOptionsRef = useRef();
+  useOutsideClick(itemOptionsRef, () => handleCloseItemOptions());
   console.log(is_file);
   return (
     <div className="flex flex-col items-center m-3 group">
@@ -77,16 +94,82 @@ const ResourceItem = ({ is_file = false }) => {
       </div> */}
 
       <div className="flex w-full justify-end items-center">
-        <span className="h-4 w-4 cursor-pointer opacity-0 group-hover:opacity-100 transition">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4"
-            viewBox="0 0 20 20"
-            fill="currentColor"
+        <div className="relative inline-block text-left">
+          <span
+            onMouseDown={handleToggleItemOptions}
+            className="h-4 w-4 cursor-pointer opacity-0 group-hover:opacity-100 transition"
           >
-            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-          </svg>
-        </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+            </svg>
+          </span>
+
+          <div
+            className={`${
+              itemOptions ? "block" : "hidden"
+            } origin-top-right absolute right-0 mt-2 w-25 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none`}
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="menu-button"
+            tabindex="-1"
+          >
+            <div className="py-1" ref={itemOptionsRef} role="none">
+              <span
+                className="cursor-pointer flex items-center p-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                role="menuitem"
+                tabindex="-1"
+                id="menu-item-0"
+              >
+                <IconContext.Provider
+                  value={{
+                    size: 15,
+                    className: "cursor-pointer mr-1",
+                  }}
+                >
+                  <FaFolderOpen />
+                </IconContext.Provider>
+                Move
+              </span>
+              <span
+                className="cursor-pointer flex items-center p-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                role="menuitem"
+                tabindex="-1"
+                id="menu-item-0"
+              >
+                <IconContext.Provider
+                  value={{
+                    size: 15,
+                    className: "cursor-pointer text-dark mr-1 action-icon",
+                  }}
+                >
+                  <MdEdit />
+                </IconContext.Provider>
+                Edit
+              </span>
+              <span
+                className="cursor-pointer flex items-center p-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                role="menuitem"
+                tabindex="-1"
+                id="menu-item-0"
+              >
+                <IconContext.Provider
+                  value={{
+                    size: 15,
+                    className: "cursor-pointer mr-1",
+                  }}
+                >
+                  <MdDelete />
+                </IconContext.Provider>
+                Delete
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
       <IconContext.Provider
         value={{
