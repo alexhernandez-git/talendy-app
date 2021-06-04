@@ -173,11 +173,11 @@ const ContributeSharedResources = ({ socketRef, roomID }) => {
                 <ResourceItem is_file key={file.id} item={file} />
               ))}
           </div>
-          {(foldersReducer.isLoading || filesReducer.isLoading) && (
+          {/* {(foldersReducer.isLoading || filesReducer.isLoading) && (
             <div className="flex justify-center items-center">
               <Spinner />
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </section>
