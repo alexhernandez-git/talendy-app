@@ -17,7 +17,16 @@ import { IconContext } from "react-icons/lib";
 import { MdDelete, MdEdit } from "react-icons/md";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-const ResourceItem = ({ is_file = false, item }) => {
+import { deleteFiles, editFile } from "redux/actions/files";
+import { deleteFolders, editFolder } from "redux/actions/folders";
+import { useDispatch } from "react-redux";
+const ResourceItem = ({
+  is_file = false,
+  item,
+  is_editing,
+  hanldeEnterFolder,
+}) => {
+  const dispatch = useDispatch();
   const setFileIcon = () => {
     switch ("file.txt") {
       case "docx":
@@ -92,7 +101,7 @@ const ResourceItem = ({ is_file = false, item }) => {
   };
   const moveItemRef = useRef();
   useOutsideClick(moveItemRef, () => handleCloseMoveItem());
-  const [isEditTitle, setIsEditTitle] = useState(false);
+  const [isEditTitle, setIsEditTitle] = useState(is_editing);
   const handleOpenEditTitle = () => {
     handleCloseItemOptions();
     console.log("entra");
@@ -116,9 +125,35 @@ const ResourceItem = ({ is_file = false, item }) => {
     }),
     onSubmit: async (values) => {
       console.log(values);
+      if (is_file) {
+        if (item.name != values.name) {
+          dispatch(
+            editFile({
+              id: item.id,
+              name: values.name,
+            })
+          );
+        }
+      } else {
+        if (item.name != values.name) {
+          dispatch(
+            editFolder({
+              id: item.id,
+              name: values.name,
+            })
+          );
+        }
+      }
       handleCloseEditTitle();
     },
   });
+  const handleDeleteItem = () => {
+    if (is_file) {
+      dispatch(deleteFiles(item.id));
+    } else {
+      dispatch(deleteFolders(item.id));
+    }
+  };
   const MoveFolder = () => {
     return (
       <span
@@ -293,7 +328,11 @@ const ResourceItem = ({ is_file = false, item }) => {
             className: "cursor-pointer",
           }}
         >
-          {is_file ? setFileIcon() : <FaFolder />}
+          {is_file ? (
+            setFileIcon()
+          ) : (
+            <FaFolder onClick={() => hanldeEnterFolder(item)} />
+          )}
         </IconContext.Provider>
         {isEditTitle ? (
           <form
@@ -311,8 +350,12 @@ const ResourceItem = ({ is_file = false, item }) => {
             />
           </form>
         ) : (
-          <span onDoubleClick={handleOpenEditTitle} className="text-xs mt-1">
-            {is_file ? "filename" : "foldername"}
+          <span
+            onDoubleClick={handleOpenEditTitle}
+            className="text-xs mt-1  truncate"
+            style={{ maxWidth: "4.5rem" }}
+          >
+            {item.name}
           </span>
         )}
       </div>
@@ -376,7 +419,7 @@ const ResourceItem = ({ is_file = false, item }) => {
             </div>
             <div className="bg-gray-50 dark:bg-gray-800 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
               <button
-                onClick={() => {}}
+                onClick={handleDeleteItem}
                 type="button"
                 className="w-full inline-flex justify-center rounded-3xl border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 sm:ml-3 sm:w-auto sm:text-sm"
               >

@@ -54,7 +54,7 @@ export const fetchMoreUsers = () => async (dispatch, getState) => {
       .catch((err) => {
         dispatch({
           type: FETCH_MORE_USERS_FAIL,
-          payload: { data: err.response?.data, status: err.response.status },
+          payload: { data: err.response?.data, status: err.response?.status },
         });
       });
   }

@@ -31,7 +31,7 @@ export const fetchMessages = (id) => async (dispatch, getState) => {
     .catch((err) => {
       dispatch({
         type: FETCH_MESSAGES_FAIL,
-        payload: { data: err.response?.data, status: err.response.status },
+        payload: { data: err.response?.data, status: err.response?.status },
       });
     });
 };
@@ -66,7 +66,7 @@ export const fetchMessage =
       .catch(async (err) => {
         await dispatch({
           type: FETCH_MESSAGE_FAIL,
-          payload: { data: err.response?.data, status: err.response.status },
+          payload: { data: err.response?.data, status: err.response?.status },
         });
       });
   };
@@ -89,7 +89,7 @@ export const fetchMoreMessages = () => async (dispatch, getState) => {
       .catch((err) => {
         dispatch({
           type: FETCH_MORE_MESSAGES_FAIL,
-          payload: { data: err.response?.data, status: err.response.status },
+          payload: { data: err.response?.data, status: err.response?.status },
         });
       });
   }

@@ -47,7 +47,7 @@ export const fetchMoreDonations = () => async (dispatch, getState) => {
       .catch((err) => {
         dispatch({
           type: FETCH_MORE_DONATIONS_FAIL,
-          payload: { data: err.response?.data, status: err.response.status },
+          payload: { data: err.response?.data, status: err.response?.status },
         });
       });
   }

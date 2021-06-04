@@ -55,7 +55,7 @@ export const fetchMoreReviews = () => async (dispatch, getState) => {
       .catch((err) => {
         dispatch({
           type: FETCH_MORE_REVIEWS_FAIL,
-          payload: { data: err.response?.data, status: err.response.status },
+          payload: { data: err.response?.data, status: err.response?.status },
         });
       });
   }
