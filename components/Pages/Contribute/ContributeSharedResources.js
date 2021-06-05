@@ -77,11 +77,11 @@ const ContributeSharedResources = ({ socketRef, roomID }) => {
   };
   const hanldeEnterFolder = async (folder) => {
     await dispatch(setCurrentFolder(folder.id));
-    refetchDocs();
+    await refetchDocs();
   };
   const hanldeEnterTopFolder = async () => {
     await dispatch(removeCurrentFolder());
-    refetchDocs();
+    await refetchDocs();
   };
   const fileRef = useRef();
   const handleCreateFile = (e) => {

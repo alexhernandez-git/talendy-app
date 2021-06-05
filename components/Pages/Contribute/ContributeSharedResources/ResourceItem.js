@@ -29,7 +29,7 @@ const ResourceItem = ({
 }) => {
   const dispatch = useDispatch();
   const setFileIcon = () => {
-    switch ("file.txt") {
+    switch (item.name.split(".").pop()) {
       case "docx":
       case "DOCX":
         return <FaFileWord style={{ color: "#4285f4" }} />;
