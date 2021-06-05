@@ -34,8 +34,9 @@ import {
   removeCurrentFolder,
   setCurrentFolder,
 } from "redux/actions/folders";
-import { fetchFiles } from "redux/actions/files";
+import { createFile, fetchFiles } from "redux/actions/files";
 import Spinner from "components/Layout/Spinner";
+import { useRef } from "react";
 
 const ContributeSharedResources = ({ socketRef, roomID }) => {
   const collaborateRoomReducer = useSelector(
@@ -81,6 +82,16 @@ const ContributeSharedResources = ({ socketRef, roomID }) => {
   const hanldeEnterTopFolder = async () => {
     await dispatch(removeCurrentFolder());
     refetchDocs();
+  };
+  const fileRef = useRef();
+  const handleCreateFile = (e) => {
+    if (e.target.files?.length > 0) {
+      console.log(e.target.files);
+
+      const dispatchCreateFile = (values) => dispatch(createFile(values));
+      dispatchCreateFile(e.target.files[0]);
+    }
+    fileRef.current.value = "";
   };
 
   return (
@@ -131,9 +142,15 @@ const ContributeSharedResources = ({ socketRef, roomID }) => {
               </svg>
               Folder
             </button>
-
-            <button
-              onClick={handleFeatureNotReady}
+            <input
+              type="file"
+              ref={fileRef}
+              id="create-file-input"
+              className="hidden"
+              onChange={handleCreateFile}
+            />
+            <label
+              for="create-file-input"
               className="bg-gray-800 py-2 px-3 rounded-t cursor-pointer flex items-center text-white  text-xs mr-1"
             >
               <svg
@@ -151,7 +168,7 @@ const ContributeSharedResources = ({ socketRef, roomID }) => {
                 />
               </svg>
               File
-            </button>
+            </label>
           </div>
         </div>
         <div

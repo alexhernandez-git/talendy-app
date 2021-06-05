@@ -95,7 +95,6 @@ export const moveFolder = (folder) => async (dispatch, getState) => {
 export const moveFile = (file) => async (dispatch, getState) => {
   // User Loading
   await dispatch({ type: MOVE_FILE });
-
   await axios
     .patch(
       `${process.env.HOST}/api/posts/${

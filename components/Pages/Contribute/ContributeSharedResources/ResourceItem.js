@@ -14,12 +14,13 @@ import {
   FaFolderOpen,
 } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
-import { MdDelete, MdEdit } from "react-icons/md";
+import { MdDelete, MdEdit, MdFileDownload } from "react-icons/md";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { deleteFiles, editFile } from "redux/actions/files";
 import { deleteFolders, editFolder } from "redux/actions/folders";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import MoveFolderDropdown from "./MoveFolderDropdown";
 const ResourceItem = ({
   is_file = false,
   item,
@@ -154,41 +155,7 @@ const ResourceItem = ({
       dispatch(deleteFolders(item.id));
     }
   };
-  const MoveFolder = () => {
-    return (
-      <span
-        className="cursor-pointer flex items-center justify-between p-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-        role="menuitem"
-        tabindex="-1"
-        id="menu-item-0"
-        onClick={handleOpenMoveItem}
-      >
-        <div className="flex items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 mr-2"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
-          </svg>
-          foldername
-        </div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path
-            fillRule="evenodd"
-            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </span>
-    );
-  };
+
   return (
     <>
       <div className="flex flex-col items-center m-3 group">
@@ -242,6 +209,32 @@ const ResourceItem = ({
               tabindex="-1"
             >
               <div className="py-1" ref={itemOptionsRef} role="none">
+                {is_file && (
+                  <a
+                    target="_blank"
+                    href={
+                      new RegExp(
+                        `${process.env.HOST}|https://talendy.s3.amazonaws.com`
+                      ).test(item.file)
+                        ? item.file
+                        : process.env.HOST + item.file
+                    }
+                    className="cursor-pointer flex items-center p-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-0"
+                  >
+                    <IconContext.Provider
+                      value={{
+                        size: 15,
+                        className: "cursor-pointer mr-1",
+                      }}
+                    >
+                      <MdFileDownload />
+                    </IconContext.Provider>
+                    Download
+                  </a>
+                )}
                 <span
                   className="cursor-pointer flex items-center p-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                   role="menuitem"
@@ -306,18 +299,11 @@ const ResourceItem = ({
               tabindex="-1"
             >
               <div className="p-1" ref={moveItemRef} role="none">
-                <div className="">
-                  <MoveFolder />
-                </div>
-
-                <div className="flex justify-end mt-1">
-                  <button
-                    type="button"
-                    class="inline-flex w-full items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 hover:text-gray-500 dark:hover:text-white dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                  >
-                    Move here
-                  </button>
-                </div>
+                <MoveFolderDropdown
+                  item={item}
+                  is_file={is_file}
+                  handleCloseItemOptions={handleCloseItemOptions}
+                />
               </div>
             </div>
           </div>
