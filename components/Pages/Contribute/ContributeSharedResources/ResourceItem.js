@@ -310,7 +310,7 @@ const ResourceItem = ({
         </div>
         <IconContext.Provider
           value={{
-            size: 75,
+            size: 100,
             className: "cursor-pointer",
           }}
         >
@@ -329,7 +329,7 @@ const ResourceItem = ({
               type="text"
               name="name"
               autoFocus
-              className="block w-20 h-5 bg-white dark:bg-gray-600 border border-gray-300 rounded-3xl py-2  text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+              className="block w-24 h-5 bg-white dark:bg-gray-600 border border-gray-300 rounded-3xl py-2  text-sm placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none dark:text-white focus:text-gray-900 dark:focus:text-white focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
               value={formik.values.name}
               onChange={formik.handleChange}
               onBlur={handleBlur}
@@ -339,7 +339,7 @@ const ResourceItem = ({
           <span
             onDoubleClick={handleOpenEditTitle}
             className="text-xs mt-1  truncate"
-            style={{ maxWidth: "4.5rem" }}
+            style={{ maxWidth: "6rem" }}
           >
             {item.name}
           </span>
