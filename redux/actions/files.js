@@ -110,8 +110,14 @@ export const createFile = (file) => async (dispatch, getState) => {
         payload: res.data,
       });
     })
-    .catch((err) => {
-      dispatch({
+    .catch(async (err) => {
+      console.log(err.response.data);
+      if (err.response?.data?.non_field_errors?.length > 0) {
+        await dispatch(
+          createAlert("ERROR", err.response?.data?.non_field_errors[0])
+        );
+      }
+      await dispatch({
         type: CREATE_FILE_FAIL,
         payload: { data: err.response?.data, status: err.response?.status },
       });
