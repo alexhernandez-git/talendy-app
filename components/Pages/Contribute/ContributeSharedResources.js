@@ -177,7 +177,7 @@ const ContributeSharedResources = ({ socketRef, roomID }) => {
           </div>
         </div>
         <div
-          className=" text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-900 p-3 rounded-b h-full"
+          className=" text-gray-600 dark:text-white text-sm bg-gray-200 dark:bg-gray-800 p-3 rounded-b h-full"
           style={{ minHeight: "40rem" }}
         >
           <div className="flex flex-wrap ">
