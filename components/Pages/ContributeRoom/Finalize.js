@@ -18,10 +18,11 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createAlert } from "redux/actions/alerts";
+import { useRouter } from "next/router";
 
 const Finalize = ({ handleGoToRoomPage, isFinalizePage }) => {
   const dispatch = useDispatch();
-
+  const router = useRouter();
   const collaborateRoomReducer = useSelector(
     (state) => state.collaborateRoomReducer
   );
@@ -71,7 +72,9 @@ const Finalize = ({ handleGoToRoomPage, isFinalizePage }) => {
       setFirstLoad(false);
     }
   }, [formik?.values?.solution]);
-
+  const handleGoToHome = () => {
+    router.push("/feed");
+  };
   const handleFinalize = () => {
     if (
       collaborateRoomReducer.collaborate_room?.members?.length > 1 &&
@@ -80,7 +83,7 @@ const Finalize = ({ handleGoToRoomPage, isFinalizePage }) => {
       dispatch(createAlert("ERROR", "You need to establish a karma winner"));
       return;
     }
-    dispatch(finalizePost(handleGoToRoomPage));
+    dispatch(finalizePost(handleGoToHome));
   };
   return (
     <>

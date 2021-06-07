@@ -463,7 +463,13 @@ const Contribute = () => {
             )}
           </div>
         </div>
-        <div className={isFinalizePage ? "block" : "hidden"}>
+        <div
+          className={
+            collaborate_room?.status !== "SO" && isFinalizePage
+              ? "block"
+              : "hidden"
+          }
+        >
           <Finalize
             handleGoToRoomPage={handleGoToRoomPage}
             isFinalizePage={isFinalizePage}
@@ -553,7 +559,11 @@ const Contribute = () => {
                 </div>
               </div>
             </div>
-            <div className="border-t border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800  p-3">
+            <div
+              className={`${
+                collaborate_room?.status !== "SO" ? "block" : "hidden"
+              } border-t border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800  p-3`}
+            >
               <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl sm:flex justify-between items-center ">
                 <div className="flex justify-center md:mt-0 flex-col-reverse justify-stretch space-y-4 space-y-reverse md:flex-row-reverse md:justify-end md:space-x-reverse md:space-y-0 md:space-x-3  md:space-x-3">
                   <button
@@ -721,8 +731,22 @@ const Contribute = () => {
             </div>
           </div>
         </section>
-
-        <div className={`${!isFinalizePage ? "block" : "hidden"} py-10`}>
+        <div
+          className={`${
+            collaborate_room?.status === "SO" ? "block" : "hidden"
+          } flex justify-center items-center content-container`}
+        >
+          <span className="text-gray-500 dark:text-gray-100">
+            This room has been finalized
+          </span>
+        </div>
+        <div
+          className={`${
+            collaborate_room?.status !== "SO" && !isFinalizePage
+              ? "block"
+              : "hidden"
+          } py-10`}
+        >
           <div className="max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
             <div className="lg:col-start-1 lg:col-span-2  z-10">
               <div

@@ -369,7 +369,8 @@ const PostModal = ({
                   </p>
                 </div>
               </div>
-              {page !== COLLABORATION_ROOM_PAGE &&
+              {post?.status !== "SO" &&
+                page !== COLLABORATION_ROOM_PAGE &&
                 post?.members?.some(
                   (member) => member.user.id === authReducer.user?.id
                 ) && (

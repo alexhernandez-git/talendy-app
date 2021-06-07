@@ -35,7 +35,7 @@ import { createAlert } from "./alerts";
 import useGetFetchPostsRequest from "hooks/useGetFetchPostsRequest";
 
 export const createPost =
-  (data, resetForm, closeModal, handleResetImages) =>
+  (data, resetForm, closeModal, handleResetImages, handleGoToProfile) =>
   async (dispatch, getState) => {
     await dispatch({
       type: CREATE_POST,
@@ -54,6 +54,7 @@ export const createPost =
         await dispatch(addPostCount());
         await dispatch(addCreatedPostCount());
         await dispatch(addCreatedActivePostCount());
+        await handleGoToProfile();
         await dispatch(createAlert("SUCCESS", "Post succesfully created"));
       })
       .catch(async (err) => {

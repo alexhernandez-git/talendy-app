@@ -100,6 +100,10 @@ export default function postsReducer(state = initialState, action) {
       return {
         ...state,
         is_creating_post: false,
+        posts: {
+          ...state.posts,
+          results: [action.payload, ...state.posts.results],
+        },
         create_post_error: null,
       };
     case CREATE_POST_FAIL:

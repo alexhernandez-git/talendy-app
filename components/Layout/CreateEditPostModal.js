@@ -23,9 +23,8 @@ const CreateEditPostModal = ({
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
   const communitiesReducer = useSelector((state) => state.communitiesReducer);
-  const handleGoToProfile = (e) => {
-    e.stopPropagation();
-    router.push("/user/123");
+  const handleGoToProfile = () => {
+    router.push("/profile/posts");
   };
   const [privacityOpen, setPrivacityOpen] = useState(false);
   const handleOpenPrivacity = () => {
@@ -91,7 +90,13 @@ const CreateEditPostModal = ({
         );
       } else {
         dispatch(
-          createPost(fd, resetForm, handleCloseModal, handleResetImages)
+          createPost(
+            fd,
+            resetForm,
+            handleCloseModal,
+            handleResetImages,
+            handleGoToProfile
+          )
         );
       }
     },
