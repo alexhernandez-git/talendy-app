@@ -59,7 +59,7 @@ const dashboard = () => {
 
             <a
               href="#"
-              className="bg-orange-700 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+              className="bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
               aria-current="page"
             >
               <svg
@@ -193,7 +193,7 @@ const dashboard = () => {
           <div className="flex-shrink-0 px-4 flex items-center">
             <img
               className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-mark.svg?color=white"
+              src="/static/images/talendy-logo.png"
               alt="Workflow"
             />
           </div>
@@ -246,7 +246,7 @@ const dashboard = () => {
 
                 <a
                   href="#"
-                  className="bg-orange-700 text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                  className="bg-orange-500 text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
                   aria-current="page"
                 >
                   <svg
