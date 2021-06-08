@@ -14,7 +14,7 @@ const dashboard = () => {
             <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               <div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
                 <dt>
-                  <div class="absolute bg-indigo-500 rounded-md p-3">
+                  <div class="absolute bg-orange-500 rounded-md p-3">
                     <svg
                       class="h-6 w-6 text-white"
                       xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,7 @@ const dashboard = () => {
                     <div class="text-sm">
                       <a
                         href="#"
-                        class="font-medium text-indigo-600 hover:text-indigo-500"
+                        class="font-medium text-orange-600 hover:text-orange-500"
                       >
                         {" "}
                         View all
@@ -71,7 +71,7 @@ const dashboard = () => {
 
               <div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
                 <dt>
-                  <div class="absolute bg-indigo-500 rounded-md p-3">
+                  <div class="absolute bg-orange-500 rounded-md p-3">
                     <svg
                       class="h-6 w-6 text-white"
                       xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +115,7 @@ const dashboard = () => {
                     <div class="text-sm">
                       <a
                         href="#"
-                        class="font-medium text-indigo-600 hover:text-indigo-500"
+                        class="font-medium text-orange-600 hover:text-orange-500"
                       >
                         {" "}
                         View all
@@ -128,7 +128,7 @@ const dashboard = () => {
 
               <div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
                 <dt>
-                  <div class="absolute bg-indigo-500 rounded-md p-3">
+                  <div class="absolute bg-orange-500 rounded-md p-3">
                     <svg
                       class="h-6 w-6 text-white"
                       xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +172,7 @@ const dashboard = () => {
                     <div class="text-sm">
                       <a
                         href="#"
-                        class="font-medium text-indigo-600 hover:text-indigo-500"
+                        class="font-medium text-orange-600 hover:text-orange-500"
                       >
                         {" "}
                         View all
@@ -189,7 +189,7 @@ const dashboard = () => {
             </h2>
 
             <div class="shadow sm:hidden">
-              <ul class="mt-2 divide-y divide-gray-200 overflow-hidden shadow sm:hidden">
+              <ul class="mt-5 divide-y divide-gray-200 overflow-hidden shadow sm:hidden">
                 <li>
                   <a href="#" class="block px-4 py-4 bg-white hover:bg-gray-50">
                     <span class="flex items-center space-x-4">
@@ -258,8 +258,8 @@ const dashboard = () => {
             </div>
 
             <div class="hidden sm:block">
-              <div class="max-w-6xl mx-auto">
-                <div class="flex flex-col mt-2">
+              <div class="mx-auto">
+                <div class="flex flex-col mt-5">
                   <div class="align-middle min-w-full overflow-x-auto shadow overflow-hidden sm:rounded-lg">
                     <table class="min-w-full divide-y divide-gray-200">
                       <thead>
