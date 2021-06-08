@@ -399,6 +399,11 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
                           Earnings
                         </span>
                       </Link>
+                      <Link href="/dashboard" role="menuitem">
+                        <span className="block py-2 px-4 text-sm text-orange-500  hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                          Admin
+                        </span>
+                      </Link>
                       <button
                         onClick={handleSignOut}
                         className="w-full text-left block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
@@ -562,6 +567,13 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
                   Earnings
                 </span>
               </Link>
+
+              <Link href="/dashboard" role="menuitem">
+                <span className="cursor-pointer block rounded-3xl py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover-text-gray-300">
+                  Admin
+                </span>
+              </Link>
+
               <button
                 onClick={handleSignOut}
                 className="w-full text-left cursor-pointer block rounded-3xl py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover-text-gray-300"
