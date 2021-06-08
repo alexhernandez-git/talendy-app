@@ -4,7 +4,7 @@ import React from "react";
 const dashboard = () => {
   return (
     <Layout>
-      <main class="flex-1 relative pb-8 z-0 overflow-y-auto">
+      <main class="flex-1 relative pb-8 z-0 overflow-y-auto px-4">
         <div class="mt-8">
           <div class="max-w-6xl mx-auto">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
