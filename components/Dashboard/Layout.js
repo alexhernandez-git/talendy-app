@@ -1,25 +1,45 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import {
+  COMMUNITIES_DASHBOARD_PAGE,
+  DASHBOARD_PAGE,
+  POSTS_DASHBOARD_PAGE,
+  SETTINGS_DASHBOARD_PAGE,
+  STATISTICS_DASHBOARD_PAGE,
+  USERS_DASHBOARD_PAGE,
+} from "pages";
 import React from "react";
 import { useEffect } from "react";
 
-const Layout = ({ children }) => {
+const Layout = ({ page, children }) => {
   return (
     <div className="h-screen bg-gray-50 flex overflow-hidden">
       <div className="hidden w-28 bg-orange-200 overflow-y-auto md:block">
         <div className="w-full py-6 flex flex-col items-center">
           <div className="flex-shrink-0 flex items-center">
-            <img
-              className="h-8 w-auto"
-              src="/static/images/talendy-logo.png"
-              alt="Workflow"
-            />
+            <Link href="/feed">
+              <img
+                className="h-8 w-auto cursor-pointer"
+                src="/static/images/talendy-logo.png"
+                alt="Workflow"
+              />
+            </Link>
           </div>
           <div className="flex-1 mt-6 w-full px-2 space-y-1">
             <Link href="/dashboard">
-              <span className="cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium">
+              <span
+                className={
+                  page === DASHBOARD_PAGE
+                    ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                }
+              >
                 <svg
-                  className="text-orange-600 group-hover:text-white h-6 w-6"
+                  className={
+                    page === DASHBOARD_PAGE
+                      ? "text-white h-6 w-6"
+                      : "text-orange-600 group-hover:text-white h-6 w-6"
+                  }
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -38,12 +58,20 @@ const Layout = ({ children }) => {
             </Link>
             <Link href="/dashboard/users">
               <span
-                className="cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                className={
+                  page === USERS_DASHBOARD_PAGE
+                    ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                }
                 aria-current="page"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="text-white h-6 w-6"
+                  className={
+                    page === USERS_DASHBOARD_PAGE
+                      ? "text-white h-6 w-6"
+                      : "text-orange-600 group-hover:text-white h-6 w-6"
+                  }
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -59,10 +87,20 @@ const Layout = ({ children }) => {
               </span>
             </Link>
             <Link href="/dashboard/posts">
-              <span className="cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium">
+              <span
+                className={
+                  page === POSTS_DASHBOARD_PAGE
+                    ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                }
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="text-orange-600 group-hover:text-white h-6 w-6"
+                  className={
+                    page === POSTS_DASHBOARD_PAGE
+                      ? "text-white h-6 w-6"
+                      : "text-orange-600 group-hover:text-white h-6 w-6"
+                  }
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -78,10 +116,20 @@ const Layout = ({ children }) => {
               </span>
             </Link>
             <Link href="/dashboard/communities">
-              <span className="cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium">
+              <span
+                className={
+                  page === COMMUNITIES_DASHBOARD_PAGE
+                    ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                }
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="text-orange-600 group-hover:text-white h-6 w-6"
+                  className={
+                    page === COMMUNITIES_DASHBOARD_PAGE
+                      ? "text-white h-6 w-6"
+                      : "text-orange-600 group-hover:text-white h-6 w-6"
+                  }
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -97,10 +145,20 @@ const Layout = ({ children }) => {
               </span>
             </Link>
             <Link href="/dashboard/statistics">
-              <span className="cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium">
+              <span
+                className={
+                  page === STATISTICS_DASHBOARD_PAGE
+                    ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                }
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="text-orange-600 group-hover:text-white h-6 w-6"
+                  className={
+                    page === STATISTICS_DASHBOARD_PAGE
+                      ? "text-white h-6 w-6"
+                      : "text-orange-600 group-hover:text-white h-6 w-6"
+                  }
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -116,9 +174,19 @@ const Layout = ({ children }) => {
               </span>
             </Link>
             <Link href="/dashboard/settings">
-              <span className="cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium">
+              <span
+                className={
+                  page === SETTINGS_DASHBOARD_PAGE
+                    ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                }
+              >
                 <svg
-                  className="text-orange-600 group-hover:text-white h-6 w-6"
+                  className={
+                    page === SETTINGS_DASHBOARD_PAGE
+                      ? "text-white h-6 w-6"
+                      : "text-orange-600 group-hover:text-white h-6 w-6"
+                  }
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -191,9 +259,19 @@ const Layout = ({ children }) => {
             <nav className="h-full flex flex-col">
               <div className="space-y-1">
                 <Link href="/dashboard">
-                  <span className="cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium">
+                  <span
+                    className={
+                      page === DASHBOARD_PAGE
+                        ? "cursor-pointer bg-orange-500 text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                        : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                    }
+                  >
                     <svg
-                      className="text-orange-600 group-hover:text-white mr-3 h-6 w-6"
+                      className={
+                        page === DASHBOARD_PAGE
+                          ? "text-white mr-3 h-6 w-6"
+                          : "text-orange-600 group-hover:text-white mr-3 h-6 w-6"
+                      }
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -212,12 +290,20 @@ const Layout = ({ children }) => {
                 </Link>
                 <Link href="/dashboard/users">
                   <span
-                    className="cursor-pointer bg-orange-500 text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                    className={
+                      page === USERS_DASHBOARD_PAGE
+                        ? "cursor-pointer bg-orange-500 text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                        : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                    }
                     aria-current="page"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="text-white mr-3 h-6 w-6"
+                      className={
+                        page === USERS_DASHBOARD_PAGE
+                          ? "text-white mr-3 h-6 w-6"
+                          : "text-orange-600 group-hover:text-white mr-3 h-6 w-6"
+                      }
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -233,10 +319,20 @@ const Layout = ({ children }) => {
                   </span>
                 </Link>
                 <Link href="/dashboard/posts">
-                  <span className="cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium">
+                  <span
+                    className={
+                      page === POSTS_DASHBOARD_PAGE
+                        ? "cursor-pointer bg-orange-500 text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                        : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                    }
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="text-orange-600 group-hover:text-white mr-3 h-6 w-6"
+                      className={
+                        page === POSTS_DASHBOARD_PAGE
+                          ? "text-white mr-3 h-6 w-6"
+                          : "text-orange-600 group-hover:text-white mr-3 h-6 w-6"
+                      }
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -253,10 +349,20 @@ const Layout = ({ children }) => {
                 </Link>
 
                 <Link href="/dashboard/communities">
-                  <span className="cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium">
+                  <span
+                    className={
+                      page === COMMUNITIES_DASHBOARD_PAGE
+                        ? "cursor-pointer bg-orange-500 text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                        : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                    }
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="text-orange-600 group-hover:text-white mr-3 h-6 w-6"
+                      className={
+                        page === COMMUNITIES_DASHBOARD_PAGE
+                          ? "text-white mr-3 h-6 w-6"
+                          : "text-orange-600 group-hover:text-white mr-3 h-6 w-6"
+                      }
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -272,10 +378,20 @@ const Layout = ({ children }) => {
                   </span>
                 </Link>
                 <Link href="/dashboard/statistics">
-                  <span className="cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium">
+                  <span
+                    className={
+                      page === STATISTICS_DASHBOARD_PAGE
+                        ? "cursor-pointer bg-orange-500 text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                        : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                    }
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="text-orange-600 group-hover:text-white mr-3 h-6 w-6"
+                      className={
+                        page === STATISTICS_DASHBOARD_PAGE
+                          ? "text-white mr-3 h-6 w-6"
+                          : "text-orange-600 group-hover:text-white mr-3 h-6 w-6"
+                      }
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -291,9 +407,19 @@ const Layout = ({ children }) => {
                   </span>
                 </Link>
                 <Link href="/dashboard/settings">
-                  <span className="cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium">
+                  <span
+                    className={
+                      page === SETTINGS_DASHBOARD_PAGE
+                        ? "cursor-pointer bg-orange-500 text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                        : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                    }
+                  >
                     <svg
-                      className="text-orange-600 group-hover:text-white mr-3 h-6 w-6"
+                      className={
+                        page === SETTINGS_DASHBOARD_PAGE
+                          ? "text-white mr-3 h-6 w-6"
+                          : "text-orange-600 group-hover:text-white mr-3 h-6 w-6"
+                      }
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"

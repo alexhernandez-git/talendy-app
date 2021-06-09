@@ -1,9 +1,11 @@
 import Layout from "components/Dashboard/Layout";
+import { DASHBOARD_PAGE } from "pages";
 import React from "react";
 
 const dashboard = () => {
+  const page = DASHBOARD_PAGE;
   return (
-    <Layout>
+    <Layout page={page}>
       <main class="flex-1 relative pb-8 z-0 overflow-y-auto px-4">
         <div class="mt-8">
           <div class="max-w-6xl mx-auto">
