@@ -65,8 +65,29 @@ const users = () => {
               </div>
             </div>
             {/* End desktop tabs */}
+            {/* Create user button */}
+            <div className="flex justify-end items-center mt-3 mb-2">
+              <button className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 mr-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
+                  />
+                </svg>
+                New user
+              </button>
+            </div>
+            {/* End create user button */}
             {/* Start users table */}
-            <div class="flex flex-col mt-4">
+            <div class="flex flex-col ">
               <div class="overflow-x-auto">
                 <div class="py-2 align-middle inline-block min-w-full">
                   <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -152,6 +173,38 @@ const users = () => {
                         {/* End user item */}
                       </tbody>
                     </table>
+                    {/* Pagination */}
+                    <nav
+                      class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
+                      aria-label="Pagination"
+                    >
+                      <div class="hidden sm:block">
+                        <p class="text-sm text-gray-700">
+                          Showing
+                          <span class="font-medium">1</span>
+                          to
+                          <span class="font-medium">10</span>
+                          of
+                          <span class="font-medium">20</span>
+                          results
+                        </p>
+                      </div>
+                      <div class="flex-1 flex justify-between sm:justify-end">
+                        <a
+                          href="#"
+                          class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 hover:text-gray-500 dark:hover:text-white dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                        >
+                          Previous
+                        </a>
+                        <a
+                          href="#"
+                          class="ml-3 inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 hover:text-gray-500 dark:hover:text-white dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                        >
+                          Next
+                        </a>
+                      </div>
+                    </nav>
+                    {/* End pagination */}
                   </div>
                 </div>
               </div>

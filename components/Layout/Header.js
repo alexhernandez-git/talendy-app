@@ -400,7 +400,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
                         </span>
                       </Link>
                       <Link href="/dashboard" role="menuitem">
-                        <span className="block py-2 px-4 text-sm text-orange-500  hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                        <span className="block font-medium py-2 px-4 text-sm text-orange-500  hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                           Admin
                         </span>
                       </Link>
