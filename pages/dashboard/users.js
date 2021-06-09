@@ -19,7 +19,7 @@ const users = () => {
                 name="tabs"
                 class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm rounded-md"
               >
-                <option>Standard users</option>
+                <option>Users</option>
 
                 <option>Managers</option>
 
@@ -35,7 +35,7 @@ const users = () => {
                     href="#"
                     class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-200 whitespace-nowrap flex py-4 px-1 border-b-2 font-medium text-sm"
                   >
-                    Standard users
+                    Users
                     <span class="bg-gray-100 text-gray-900 hidden ml-3 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block">
                       52
                     </span>
@@ -92,7 +92,7 @@ const users = () => {
                 <div class="py-2 align-middle inline-block min-w-full">
                   <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                     <table class="min-w-full divide-y divide-gray-200">
-                      <thead class="bg-gray-50">
+                      <thead class="bg-gray-100">
                         <tr>
                           <th
                             scope="col"
@@ -164,9 +164,12 @@ const users = () => {
                           <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a
                               href="#"
-                              class="text-orange-600 hover:text-orange-900"
+                              class="text-orange-600 hover:text-orange-900 mr-3"
                             >
                               Edit
+                            </a>
+                            <a href="#" class="text-red-600 hover:text-red-900">
+                              Disable
                             </a>
                           </td>
                         </tr>
@@ -180,13 +183,9 @@ const users = () => {
                     >
                       <div class="hidden sm:block">
                         <p class="text-sm text-gray-700">
-                          Showing
-                          <span class="font-medium">1</span>
-                          to
-                          <span class="font-medium">10</span>
-                          of
-                          <span class="font-medium">20</span>
-                          results
+                          Showing <span class="font-medium">1</span> to{" "}
+                          <span class="font-medium">10</span> of{" "}
+                          <span class="font-medium">20</span> results
                         </p>
                       </div>
                       <div class="flex-1 flex justify-between sm:justify-end">

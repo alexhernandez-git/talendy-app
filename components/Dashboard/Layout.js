@@ -86,35 +86,6 @@ const Layout = ({ page, children }) => {
                 <span className="mt-2">Users</span>
               </span>
             </Link>
-            <Link href="/dashboard/posts">
-              <span
-                className={
-                  page === POSTS_DASHBOARD_PAGE
-                    ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
-                    : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
-                }
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={
-                    page === POSTS_DASHBOARD_PAGE
-                      ? "text-white h-6 w-6"
-                      : "text-orange-600 group-hover:text-white h-6 w-6"
-                  }
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                  />
-                </svg>
-                <span className="mt-2">Posts</span>
-              </span>
-            </Link>
             <Link href="/dashboard/communities">
               <span
                 className={
@@ -144,6 +115,36 @@ const Layout = ({ page, children }) => {
                 <span className="mt-2">Communities</span>
               </span>
             </Link>
+            <Link href="/dashboard/posts">
+              <span
+                className={
+                  page === POSTS_DASHBOARD_PAGE
+                    ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                }
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={
+                    page === POSTS_DASHBOARD_PAGE
+                      ? "text-white h-6 w-6"
+                      : "text-orange-600 group-hover:text-white h-6 w-6"
+                  }
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                  />
+                </svg>
+                <span className="mt-2">Posts</span>
+              </span>
+            </Link>
+
             <Link href="/dashboard/statistics">
               <span
                 className={
@@ -318,35 +319,6 @@ const Layout = ({ page, children }) => {
                     <span>Users</span>
                   </span>
                 </Link>
-                <Link href="/dashboard/posts">
-                  <span
-                    className={
-                      page === POSTS_DASHBOARD_PAGE
-                        ? "cursor-pointer bg-orange-500 text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
-                        : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
-                    }
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className={
-                        page === POSTS_DASHBOARD_PAGE
-                          ? "text-white mr-3 h-6 w-6"
-                          : "text-orange-600 group-hover:text-white mr-3 h-6 w-6"
-                      }
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                      />
-                    </svg>
-                    <span>Posts</span>
-                  </span>
-                </Link>
 
                 <Link href="/dashboard/communities">
                   <span
@@ -377,6 +349,36 @@ const Layout = ({ page, children }) => {
                     <span>Communities</span>
                   </span>
                 </Link>
+                <Link href="/dashboard/posts">
+                  <span
+                    className={
+                      page === POSTS_DASHBOARD_PAGE
+                        ? "cursor-pointer bg-orange-500 text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                        : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                    }
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={
+                        page === POSTS_DASHBOARD_PAGE
+                          ? "text-white mr-3 h-6 w-6"
+                          : "text-orange-600 group-hover:text-white mr-3 h-6 w-6"
+                      }
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                      />
+                    </svg>
+                    <span>Posts</span>
+                  </span>
+                </Link>
+
                 <Link href="/dashboard/statistics">
                   <span
                     className={
