@@ -10,6 +10,7 @@ const useDispatchInitialData = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      // Here load client
       await dispatch(loadUser());
       await dispatch(loadCurrency());
       await dispatch(fetchCommunities());
