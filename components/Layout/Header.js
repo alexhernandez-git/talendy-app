@@ -261,6 +261,11 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
           </div>
           {authReducer.is_authenticated ? (
             <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
+              <Link href="/dashboard">
+                <span className="cursor-pointer ml-6 inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
+                  Dashbaord
+                </span>
+              </Link>
               <span
                 onClick={handleOpenChats}
                 className={`ml-5 cursor-pointer flex-shrink-0 bg-white  rounded-full p-1  dark:text-white  dark:hover:text-gray-200 ${
@@ -319,7 +324,6 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
                   handleCloseNotifications={handleCloseNotifications}
                 />
               </div>
-
               <div className="flex-shrink-0 relative ml-5">
                 <div>
                   <button
@@ -399,11 +403,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
                           Earnings
                         </span>
                       </Link>
-                      <Link href="/dashboard" role="menuitem">
-                        <span className="block font-medium py-2 px-4 text-sm text-orange-500  hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                          Admin
-                        </span>
-                      </Link>
+
                       <button
                         onClick={handleSignOut}
                         className="w-full text-left block py-2 px-4 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
@@ -551,6 +551,11 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
             </div>
 
             <div className="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
+              <Link href="/dashboard" role="menuitem">
+                <span className="cursor-pointer block rounded-3xl py-2 px-3 text-base font-medium text-orange-500 hover:bg-gray-50 hover:text-orange-900 dark:text-orange-300 dark:hover:bg-gray-700 dark:hover-text-orange-300">
+                  Dashboard
+                </span>
+              </Link>
               <Link href="/profile/posts" role="menuitem">
                 <span className="cursor-pointer block rounded-3xl py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover-text-gray-300">
                   Your Profile
