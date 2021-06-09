@@ -315,7 +315,7 @@ const dashboard = () => {
                           </td>
                           <td class="hidden px-6 py-4 whitespace-nowrap text-sm text-gray-500 md:block">
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize">
-                              success
+                              Active
                             </span>
                           </td>
                           <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
