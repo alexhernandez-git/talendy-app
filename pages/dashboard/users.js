@@ -22,8 +22,6 @@ const users = () => {
               >
                 <option>Users</option>
 
-                <option>Managers</option>
-
                 <option selected>Admins</option>
               </select>
               {/* Create user button */}
@@ -61,16 +59,6 @@ const users = () => {
                       Users
                       <span className="bg-gray-100 text-gray-900 hidden ml-3 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block">
                         52
-                      </span>
-                    </a>
-
-                    <a
-                      href="#"
-                      className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-200 whitespace-nowrap flex py-4 px-1 border-b-2 font-medium text-sm"
-                    >
-                      Managers
-                      <span className="bg-gray-100 text-gray-900 hidden ml-3 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block">
-                        6
                       </span>
                     </a>
 

@@ -45,12 +45,13 @@ const communities = () => {
                             Name
                           </th>
 
-                          {/* <th
+                          <th
                             scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                            class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
                           >
-                            Status
+                            Posts
                           </th>
+                          {/* 
                           <th
                             scope="col"
                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -69,9 +70,15 @@ const communities = () => {
                             <div class="text-sm text-gray-900">
                               Regional Paradigm Technician
                             </div>
+
                             {/* <div class="text-sm text-gray-500">
                               Optimization
                             </div> */}
+                          </td>
+                          <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-center text-gray-900 font-medium">
+                              43
+                            </div>
                           </td>
                           {/* <td class="px-6 py-4 whitespace-nowrap">
                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">

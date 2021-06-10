@@ -7,6 +7,7 @@ import {
   SETTINGS_DASHBOARD_PAGE,
   STATISTICS_DASHBOARD_PAGE,
   USERS_DASHBOARD_PAGE,
+  USER_DETAIL_DASHBOARD_PAGE,
 } from "pages";
 import React from "react";
 import { useEffect } from "react";
@@ -59,7 +60,8 @@ const Layout = ({ page, children }) => {
             <Link href="/dashboard/users">
               <span
                 className={
-                  page === USERS_DASHBOARD_PAGE
+                  page === USERS_DASHBOARD_PAGE ||
+                  page === USER_DETAIL_DASHBOARD_PAGE
                     ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                     : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                 }
@@ -68,7 +70,8 @@ const Layout = ({ page, children }) => {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className={
-                    page === USERS_DASHBOARD_PAGE
+                    page === USERS_DASHBOARD_PAGE ||
+                    page === USER_DETAIL_DASHBOARD_PAGE
                       ? "text-white h-6 w-6"
                       : "text-orange-600 group-hover:text-white h-6 w-6"
                   }
