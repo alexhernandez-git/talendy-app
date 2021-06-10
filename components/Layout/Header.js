@@ -415,7 +415,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
               </div>
               <Link href="/dashboard">
                 <span className="ml-5 cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 hover:text-gray-500 dark:hover:text-white dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
-                  Dashbaord
+                  Dashboard
                 </span>
               </Link>
               <span
