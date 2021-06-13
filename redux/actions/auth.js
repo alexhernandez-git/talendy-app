@@ -347,6 +347,7 @@ export const forgetPassword =
           type: FORGET_PASSWORD_SUCCESS,
           payload: res.data,
         });
+        await dispatch(createAlert("SUCCESS", "Email successfully sent"));
         await handleClose();
         await resetForm({});
       })
