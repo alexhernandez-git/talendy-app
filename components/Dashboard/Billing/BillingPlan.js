@@ -4,7 +4,7 @@ import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cancelSubscription, reactivateSubscription } from "redux/actions/auth";
 
-const BillingPlan = () => {
+const BillingPlan = ({ handleOpenAddBilling }) => {
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
   const [showModal, setShowModal] = useState(false);
@@ -30,10 +30,6 @@ const BillingPlan = () => {
         } fixed z-10 inset-0 overflow-y-auto`}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-          <div className="fixed inset-0 transition-opacity" aria-hidden="true">
-            <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-          </div>
-
           <span
             className="hidden sm:inline-block sm:align-middle sm:h-screen"
             aria-hidden="true"
@@ -139,7 +135,10 @@ const BillingPlan = () => {
                   <div className="ml-3">
                     <p className="text-sm text-yellow-700">
                       4 days free trial left.{" "}
-                      <span className="cursor-pointer font-medium underline text-yellow-700 hover:text-yellow-600">
+                      <span
+                        onClick={handleOpenAddBilling}
+                        className="cursor-pointer font-medium underline text-yellow-700 hover:text-yellow-600"
+                      >
                         Add Billing Information.
                       </span>
                     </p>
