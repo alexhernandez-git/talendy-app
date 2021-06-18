@@ -118,11 +118,108 @@ const BillingPlan = () => {
       <form action="#" method="POST">
         <div className="shadow sm:rounded-md sm:overflow-hidden">
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
+            {true && (
+              <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 ">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <svg
+                      className="h-5 w-5 text-yellow-400"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm text-yellow-700">
+                      4 days free trial left.{" "}
+                      <span className="cursor-pointer font-medium underline text-yellow-700 hover:text-yellow-600">
+                        Add Billing Information.
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
             <fieldset>
               <legend className="sr-only">Pricing plans</legend>
               <ul className="relative bg-white rounded-md -space-y-px">
                 <li>
-                  <div className="relative border rounded-md border-gray-200 p-4 flex flex-col md:pl-4 md:pr-6 md:grid md:grid-cols-3">
+                  <div className="relative border rounded-t-md border-gray-200 p-4 flex flex-col md:pl-4 md:pr-6 md:grid md:grid-cols-3">
+                    <label className="flex items-center text-sm cursor-pointer">
+                      <input
+                        name="pricing_plan"
+                        type="radio"
+                        className="h-4 w-4 text-orange-500 cursor-pointer border-gray-300 focus:ring-cyan-500 "
+                        aria-describedby="plan-option-pricing-1 plan-option-limit-1"
+                        checked
+                      />
+                      <span className="ml-3 font-medium text-gray-900">
+                        Silver
+                      </span>
+                    </label>
+                    <p
+                      id="plan-option-pricing-1"
+                      className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center"
+                    >
+                      <span className="font-medium">
+                        {
+                          authReducer.user?.current_plan_subscription
+                            ?.plan_price_label
+                        }{" "}
+                        / mo
+                      </span>
+                    </p>
+                    <p
+                      id="plan-option-limit-1"
+                      className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right"
+                    >
+                      50 users
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div className="relative border border-gray-200 p-4 flex flex-col md:pl-4 md:pr-6 md:grid md:grid-cols-3">
+                    <label className="flex items-center text-sm cursor-pointer">
+                      <input
+                        name="pricing_plan"
+                        type="radio"
+                        className="h-4 w-4 text-orange-500 cursor-pointer border-gray-300 focus:ring-cyan-500 "
+                        aria-describedby="plan-option-pricing-1 plan-option-limit-1"
+                        checked
+                      />
+                      <span className="ml-3 font-medium text-gray-900">
+                        Gold
+                      </span>
+                    </label>
+                    <p
+                      id="plan-option-pricing-1"
+                      className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center"
+                    >
+                      <span className="font-medium">
+                        {
+                          authReducer.user?.current_plan_subscription
+                            ?.plan_price_label
+                        }{" "}
+                        / mo
+                      </span>
+                    </p>
+                    <p
+                      id="plan-option-limit-1"
+                      className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right"
+                    >
+                      100 users
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div className="relative border rounded-b-md border-gray-200 p-4 flex flex-col md:pl-4 md:pr-6 md:grid md:grid-cols-3">
                     <label className="flex items-center text-sm cursor-pointer">
                       <input
                         name="pricing_plan"
@@ -151,7 +248,7 @@ const BillingPlan = () => {
                       id="plan-option-limit-1"
                       className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right"
                     >
-                      Ilimited orders
+                      200 users
                     </p>
                   </div>
                 </li>

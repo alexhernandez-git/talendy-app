@@ -111,7 +111,7 @@ export const createFile = (file) => async (dispatch, getState) => {
       });
     })
     .catch(async (err) => {
-      console.log(err.response.data);
+      console.log(err?.response?.data);
       if (err.response?.data?.non_field_errors?.length > 0) {
         await dispatch(
           createAlert("ERROR", err.response?.data?.non_field_errors[0])

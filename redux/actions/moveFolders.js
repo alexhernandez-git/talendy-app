@@ -47,7 +47,7 @@ export const fetchFolders =
       .catch((err) => {
         dispatch({
           type: MOVE_FOLDERS_FAIL,
-          payload: { data: err.response.data, status: err.response.status },
+          payload: { data: err?.response?.data, status: err?.response?.status },
         });
       });
   };
@@ -87,7 +87,7 @@ export const moveFolder = (folder) => async (dispatch, getState) => {
     .catch((err) => {
       dispatch({
         type: MOVE_FOLDER_FAIL,
-        payload: { data: err.response.data, status: err.response.status },
+        payload: { data: err?.response?.data, status: err?.response?.status },
       });
     });
 };
@@ -114,7 +114,7 @@ export const moveFile = (file) => async (dispatch, getState) => {
     .catch((err) => {
       dispatch({
         type: MOVE_FILE_FAIL,
-        payload: { data: err.response.data, status: err.response.status },
+        payload: { data: err?.response?.data, status: err?.response?.status },
       });
     });
 };
