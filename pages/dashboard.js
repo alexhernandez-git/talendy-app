@@ -187,7 +187,7 @@ const dashboard = () => {
             </dl>
 
             <h2 class="mx-auto mt-8 text-lg leading-6 font-medium text-gray-900">
-              Recent posts
+              Login history
             </h2>
 
             <div class="shadow sm:hidden">

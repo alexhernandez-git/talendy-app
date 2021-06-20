@@ -181,16 +181,14 @@ const Layout = ({ page, children }) => {
             <Link href="/dashboard/settings">
               <span
                 className={
-                  page === SETTINGS_DASHBOARD_PAGE ||
-                  page === BILLING_DASHBOARD_PAGE
+                  page === SETTINGS_DASHBOARD_PAGE
                     ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                     : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                 }
               >
                 <svg
                   className={
-                    page === SETTINGS_DASHBOARD_PAGE ||
-                    page === BILLING_DASHBOARD_PAGE
+                    page === SETTINGS_DASHBOARD_PAGE
                       ? "text-white h-6 w-6"
                       : "text-orange-600 group-hover:text-white h-6 w-6"
                   }
@@ -214,6 +212,35 @@ const Layout = ({ page, children }) => {
                   />
                 </svg>
                 <span className="mt-2">Settings</span>
+              </span>
+            </Link>
+            <Link href="/dashboard/billing">
+              <span
+                className={
+                  page === BILLING_DASHBOARD_PAGE
+                    ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                }
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={
+                    page === BILLING_DASHBOARD_PAGE
+                      ? "text-white h-6 w-6"
+                      : "text-orange-600 group-hover:text-white h-6 w-6"
+                  }
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                  />
+                </svg>
+                <span className="mt-2">Billing</span>
               </span>
             </Link>
           </div>

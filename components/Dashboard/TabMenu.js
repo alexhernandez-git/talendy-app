@@ -24,8 +24,7 @@ const TabMenu = ({ page }) => {
           name="tabs"
           className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm rounded-md"
         >
-          <option>Portal</option>
-          <option>Billing</option>
+          <option>Info</option>
         </select>
       </div>
       {/* End mobile tabs */}
@@ -41,21 +40,10 @@ const TabMenu = ({ page }) => {
                     : "cursor-pointer border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 hover:border-gray-200 whitespace-nowrap flex py-4 px-1 border-b-2 font-medium text-sm"
                 }
               >
-                Portal
+                Info
               </span>
             </Link>
 
-            <Link href="/dashboard/billing">
-              <span
-                className={
-                  page === BILLING_DASHBOARD_PAGE
-                    ? "cursor-pointer border-orange-500 text-orange-600 dark:text-orange-500 whitespace-nowrap flex py-4 px-1 border-b-2 font-medium text-sm"
-                    : "cursor-pointer border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 hover:border-gray-200 whitespace-nowrap flex py-4 px-1 border-b-2 font-medium text-sm"
-                }
-              >
-                Billing
-              </span>
-            </Link>
             {/* 
             <Link href="/billing">
               <span
