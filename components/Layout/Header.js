@@ -413,7 +413,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
                   )}
                 </div>
               </div>
-              <Link href="/dashboard">
+              <Link href="/dashboard/users">
                 <span className="ml-5 cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 hover:text-gray-500 dark:hover:text-white dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
                   Dashboard
                 </span>
@@ -551,7 +551,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
             </div>
 
             <div className="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
-              <Link href="/dashboard" role="menuitem">
+              <Link href="/dashboard/users" role="menuitem">
                 <span className="cursor-pointer block rounded-3xl py-2 px-3 text-base font-medium text-orange-500 hover:bg-gray-50 hover:text-orange-900 dark:text-orange-300 dark:hover:bg-gray-700 dark:hover-text-orange-300">
                   Dashboard
                 </span>

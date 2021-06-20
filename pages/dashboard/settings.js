@@ -183,7 +183,6 @@ const settings = () => {
       <main class="flex-1 relative pb-8 z-0 overflow-y-auto px-4">
         <div class="mt-8">
           <div class="max-w-6xl mx-auto">
-            <TabMenu page={page} />
             <div className="mt-6">
               <div className="lg:grid lg:grid-cols-3 lg:gap-6">
                 <div className="lg:col-span-1">
