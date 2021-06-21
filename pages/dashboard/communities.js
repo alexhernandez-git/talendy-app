@@ -10,7 +10,35 @@ const communities = () => {
         <div className="mt-8">
           <div className="max-w-6xl mx-auto">
             {/* Create user button */}
-            <div className="flex justify-end items-center mb-2">
+
+            <div className="flex justify-between items-center mb-2">
+              <div className="flex items-center">
+                <span class="relative z-0 inline-flex shadow-sm rounded-3xl">
+                  <button
+                    type="button"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 rounded-3xl border border-gray-300  text-sm font-medium text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Remove
+                  </button>
+                </span>
+                <div className="ml-2">
+                  <span className="text-gray-500 text-xs">
+                    23 of 100 selected
+                  </span>
+                </div>
+              </div>
               <button className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -42,6 +70,23 @@ const communities = () => {
                             scope="col"
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                           >
+                            <span className="sr-only">Select all</span>
+                            <span class="relative inline-flex items-center bg-white">
+                              <label for="select-all" class="sr-only">
+                                Select all
+                              </label>
+                              <input
+                                id="select-all"
+                                type="checkbox"
+                                name="select-all"
+                                class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
+                              />
+                            </span>
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
                             Name
                           </th>
 
@@ -53,7 +98,7 @@ const communities = () => {
                             Role
                           </th> */}
                           <th scope="col" className="relative px-6 py-3">
-                            <span className="sr-only">Edit - Remove</span>
+                            <span className="sr-only">Edit</span>
                           </th>
                         </tr>
                       </thead>
@@ -61,31 +106,22 @@ const communities = () => {
                         {/* User item */}
                         <tr>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900 flex items-center">
-                              <span className="mr-2">
-                                Regional Paradigm Technician
-                              </span>
-                              <a
-                                href="#"
-                                className="text-orange-600 hover:text-orange-900 mr-3"
-                              >
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="h-6 w-6 inline"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                                  />
-                                </svg>
-                              </a>
-                            </div>
-
+                            <span class="relative inline-flex items-center bg-white">
+                              <label for="select-all" class="sr-only">
+                                Select
+                              </label>
+                              <input
+                                id="select-all"
+                                type="checkbox"
+                                name="select-all"
+                                class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
+                              />
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <span className="text-sm text-gray-500">
+                              Regional Paradigm Technician
+                            </span>
                             {/* <div className="text-sm text-gray-500">
                               Optimization
                             </div> */}
@@ -102,7 +138,7 @@ const communities = () => {
                           <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a
                               href="#"
-                              className="text-red-600 hover:text-red-900"
+                              className="text-orange-600 hover:text-orange-900 mr-3"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +151,7 @@ const communities = () => {
                                   strokeLinecap="round"
                                   strokeLinejoin="round"
                                   strokeWidth={2}
-                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                                 />
                               </svg>
                             </a>

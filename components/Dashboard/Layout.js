@@ -1,3 +1,5 @@
+import { useAlert } from "hooks/useAlert";
+import useOutsideClick from "hooks/useOutsideClick";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
@@ -7,15 +9,45 @@ import {
   POSTS_DASHBOARD_PAGE,
   SETTINGS_DASHBOARD_PAGE,
   STATISTICS_DASHBOARD_PAGE,
-  USERS_DASHBOARD_PAGE,
+  MEMBERS_DASHBOARD_PAGE,
   USER_DETAIL_DASHBOARD_PAGE,
 } from "pages";
 import React from "react";
+import { useState } from "react";
+import { useRef } from "react";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logout } from "redux/actions/auth";
 
-const Layout = ({ page, children }) => {
+const Layout = ({ page, search, setSearch, children }) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleSignOut = () => {
+    dispatch(logout());
+    router.push("/");
+  };
+  const alert = useAlert();
+  const authReducer = useSelector((state) => state.authReducer);
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const handleOpenMenu = () => {
+    setMenuOpen(true);
+  };
+  const handleCloseMenu = () => {
+    if (menuOpen) {
+      setMenuOpen(false);
+    }
+  };
+  const handleToggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+  const menuRef = useRef();
+  useOutsideClick(menuRef, () => handleCloseMenu());
   return (
     <div className="h-screen bg-gray-50 flex overflow-hidden">
+      {alert}
       <div className="hidden w-28 bg-orange-200 overflow-y-auto md:block">
         <div className="w-full py-6 flex flex-col items-center">
           <div className="flex-shrink-0 flex items-center">
@@ -61,7 +93,7 @@ const Layout = ({ page, children }) => {
             <Link href="/dashboard/users">
               <span
                 className={
-                  page === USERS_DASHBOARD_PAGE ||
+                  page === MEMBERS_DASHBOARD_PAGE ||
                   page === USER_DETAIL_DASHBOARD_PAGE
                     ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                     : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
@@ -71,7 +103,7 @@ const Layout = ({ page, children }) => {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className={
-                    page === USERS_DASHBOARD_PAGE ||
+                    page === MEMBERS_DASHBOARD_PAGE ||
                     page === USER_DETAIL_DASHBOARD_PAGE
                       ? "text-white h-6 w-6"
                       : "text-orange-600 group-hover:text-white h-6 w-6"
@@ -87,7 +119,7 @@ const Layout = ({ page, children }) => {
                     d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
                   />
                 </svg>
-                <span className="mt-2">Users</span>
+                <span className="mt-2">Members</span>
               </span>
             </Link>
             <Link href="/dashboard/communities">
@@ -297,7 +329,7 @@ const Layout = ({ page, children }) => {
                 <Link href="/dashboard/users">
                   <span
                     className={
-                      page === USERS_DASHBOARD_PAGE
+                      page === MEMBERS_DASHBOARD_PAGE
                         ? "cursor-pointer bg-orange-500 text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
                         : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
                     }
@@ -306,7 +338,7 @@ const Layout = ({ page, children }) => {
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className={
-                        page === USERS_DASHBOARD_PAGE
+                        page === MEMBERS_DASHBOARD_PAGE
                           ? "text-white mr-3 h-6 w-6"
                           : "text-orange-600 group-hover:text-white mr-3 h-6 w-6"
                       }
@@ -321,7 +353,7 @@ const Layout = ({ page, children }) => {
                         d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
                       />
                     </svg>
-                    <span>Users</span>
+                    <span>Members</span>
                   </span>
                 </Link>
 
@@ -489,94 +521,121 @@ const Layout = ({ page, children }) => {
                 />
               </svg>
             </button>
-            <div className="flex-1 flex justify-end px-4 sm:px-6">
-              {(page === USERS_DASHBOARD_PAGE ||
-                page === COMMUNITIES_DASHBOARD_PAGE ||
-                page === POSTS_DASHBOARD_PAGE) && (
-                <div class="flex-1 flex">
-                  <form class="w-full flex md:ml-0" action="#" method="GET">
-                    <label for="search_field" class="sr-only">
-                      Search all files
-                    </label>
-                    <div class="relative w-full text-gray-400 focus-within:text-gray-600">
-                      <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center">
-                        <svg
-                          class="flex-shrink-0 h-5 w-5"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          aria-hidden="true"
+
+            <div className="flex items-center justify-between w-full  px-4 sm:px-6">
+              <div className="flex-1 flex justify-start">
+                <div className="hidden md:flex items-center space-x-4 sm:space-x-6">
+                  <div className="relative flex-shrink-0">
+                    <div>
+                      <Link href="/">
+                        <button
+                          type="button"
+                          className=" rounded-full flex text-md items-center text-gray-500 dark:text-gray-100"
+                          id="user-menu-button"
+                          aria-expanded="false"
+                          aria-haspopup="true"
                         >
-                          <path
-                            fill-rule="evenodd"
-                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                            clip-rule="evenodd"
-                          />
-                        </svg>
-                      </div>
-                      <input
-                        name="search_field"
-                        id="search_field"
-                        class="h-full w-full border-transparent py-2 pl-8 pr-3 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent focus:placeholder-gray-400 sm:hidden"
-                        placeholder="Search"
-                        type="search"
-                      />
-                      <input
-                        name="search_field"
-                        id="search_field"
-                        class="hidden h-full w-full border-transparent py-2 pl-8 pr-3 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent focus:placeholder-gray-400 sm:block"
-                        placeholder="Search"
-                        type="search"
-                      />
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M15 19l-7-7 7-7"
+                            />
+                          </svg>
+
+                          <span>Feed</span>
+                        </button>
+                      </Link>
                     </div>
-                  </form>
+                  </div>
                 </div>
-              )}
-              <div className="ml-2 flex items-center space-x-4 sm:ml-6 sm:space-x-6">
+
+                {(page === POSTS_DASHBOARD_PAGE ||
+                  page === MEMBERS_DASHBOARD_PAGE ||
+                  page === COMMUNITIES_DASHBOARD_PAGE) && (
+                  <div className="flex-1 flex md:border-l dark:border-gray-600 sm:ml-4 sm:pl-4">
+                    <form
+                      className="w-full flex md:ml-0"
+                      action="#"
+                      method="GET"
+                    >
+                      <label for="search_field" className="sr-only">
+                        Search all portals
+                      </label>
+                      <div className="relative w-full text-gray-400 focus-within:text-gray-600">
+                        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center">
+                          <svg
+                            className="flex-shrink-0 h-5 w-5"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <input
+                          name="search_field"
+                          id="search_field"
+                          onChange={(e) => setSearch(e.target.value)}
+                          value={search}
+                          className="h-full w-full border-transparent py-2 pl-8 pr-3 text-base dark:bg-gray-700  dark:text-white text-gray-900 placeholder-gray-500 dark:placeholder-gray-400  focus:outline-none focus:ring-0 focus:border-transparent focus:placeholder-gray-400 dark:focus:placeholder-gray-600  sm:hidden"
+                          placeholder="Search"
+                          type="search"
+                        />
+                        <input
+                          name="search_field"
+                          onChange={(e) => setSearch(e.target.value)}
+                          value={search}
+                          id="search_field"
+                          className="hidden h-full w-full border-transparent py-2 pl-8 pr-3 text-base  dark:bg-gray-700  dark:text-white text-gray-900 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-0 focus:border-transparent focus:placeholder-gray-400 dark:focus:placeholder-gray-600 sm:block"
+                          placeholder="Search"
+                          type="search"
+                        />
+                      </div>
+                    </form>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex items-center space-x-4 sm:space-x-6">
                 <div className="relative flex-shrink-0">
                   <div>
                     <button
                       type="button"
-                      className="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                      onClick={handleSignOut}
+                      className="rounded-full flex text-md items-center text-gray-500 dark:text-gray-100"
                       id="user-menu-button"
                       aria-expanded="false"
                       aria-haspopup="true"
                     >
-                      <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
-                        alt=""
-                      />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 mr-1"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                        />
+                      </svg>
+                      <span>Sign out</span>
                     </button>
-                  </div>
-
-                  <div
-                    className="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                    role="menu"
-                    aria-orientation="vertical"
-                    aria-labelledby="user-menu-button"
-                    tabindex="-1"
-                  >
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700"
-                      role="menuitem"
-                      tabindex="-1"
-                      id="user-menu-item-0"
-                    >
-                      Your profile
-                    </a>
-
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700"
-                      role="menuitem"
-                      tabindex="-1"
-                      id="user-menu-item-1"
-                    >
-                      Sign out
-                    </a>
                   </div>
                 </div>
               </div>

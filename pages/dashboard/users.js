@@ -1,10 +1,10 @@
 import Layout from "components/Dashboard/Layout";
 import Link from "next/link";
-import { USERS_DASHBOARD_PAGE } from "pages";
+import { MEMBERS_DASHBOARD_PAGE } from "pages";
 import React from "react";
 
 const users = () => {
-  const page = USERS_DASHBOARD_PAGE;
+  const page = MEMBERS_DASHBOARD_PAGE;
   return (
     <Layout page={page}>
       <main className="flex-1 relative pb-8 z-0 overflow-y-auto overflow-x-hidden px-4">
@@ -16,26 +16,7 @@ const users = () => {
                 <span class="relative z-0 inline-flex shadow-sm rounded-3xl">
                   <button
                     type="button"
-                    class="relative inline-flex items-center px-4 py-2 rounded-l-3xl border border-gray-300  text-sm font-medium text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 mr-2"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                      <path
-                        fillRule="evenodd"
-                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    Edit membership
-                  </button>
-                  <button
-                    type="button"
-                    class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-3xl border border-gray-300  text-sm font-medium text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 rounded-3xl border border-gray-300  text-sm font-medium text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +26,7 @@ const users = () => {
                     >
                       <path d="M11 6a3 3 0 11-6 0 3 3 0 016 0zM14 17a6 6 0 00-12 0h12zM13 8a1 1 0 100 2h4a1 1 0 100-2h-4z" />
                     </svg>
-                    Kick user
+                    Kick member
                   </button>
                 </span>
                 <div className="ml-2">
@@ -69,7 +50,7 @@ const users = () => {
                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                   />
                 </svg>
-                New user
+                New member
               </button>
             </div>
 
@@ -126,15 +107,16 @@ const users = () => {
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider "
+                            className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider "
                           >
-                            Is Manager
+                            Type
                           </th>
+
                           <th
                             scope="col"
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider "
                           >
-                            Is Admin
+                            <span className="sr-only">Edit</span>
                           </th>
                           <th
                             scope="col"
@@ -187,30 +169,23 @@ const users = () => {
                           <td className="px-6 py-4 whitespace-nowrap">
                             <span className="text-sm">alex@gmail.com</span>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="h-5 w-5 text-green-500"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
+                          <td className="px-6 py-4 whitespace-nowrap text-center">
+                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full uppercase bg-gray-100 text-gray-800">
+                              BASIC
+                            </span>
                           </td>
+
                           <td className="px-6 py-4 whitespace-nowrap">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
-                              className="h-5 w-5 text-red-500"
+                              className="h-5 w-5 text-orange-500 cursor-pointer"
                               viewBox="0 0 20 20"
                               fill="currentColor"
                             >
+                              <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                               <path
                                 fillRule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
                                 clipRule="evenodd"
                               />
                             </svg>

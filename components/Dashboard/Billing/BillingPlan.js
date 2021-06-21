@@ -183,7 +183,7 @@ const BillingPlan = ({ handleOpenAddBilling }) => {
                       id="plan-option-limit-1"
                       className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right"
                     >
-                      50 users
+                      50 members
                     </p>
                   </div>
                 </li>
@@ -217,7 +217,7 @@ const BillingPlan = ({ handleOpenAddBilling }) => {
                       id="plan-option-limit-1"
                       className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right"
                     >
-                      100 users
+                      100 members
                     </p>
                   </div>
                 </li>
@@ -251,7 +251,7 @@ const BillingPlan = ({ handleOpenAddBilling }) => {
                       id="plan-option-limit-1"
                       className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right"
                     >
-                      200 users
+                      200 members
                     </p>
                   </div>
                 </li>
