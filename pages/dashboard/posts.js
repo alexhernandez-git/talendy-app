@@ -43,38 +43,33 @@ const posts = () => {
                   >
                     <div className="flex items-center px-4 py-4 sm:px-6">
                       <div className="min-w-0 flex-1 flex items-center">
-                        <div className="flex-shrink-0">
-                          <img
-                            className="h-12 w-12 rounded-full"
-                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                            alt=""
-                          />
-                        </div>
-                        <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                        <div className="min-w-0 flex-1 pr-4 md:grid md:grid-cols-2 md:gap-4">
                           <div>
                             <p className="text-sm font-medium text-orange-600 truncate">
-                              Ricardo Cooper
+                              Post ttitleaiffeaw Lorem ipsum dolor sit amet
+                              conecessitatibus alias dolores eligendi odit
+                              nostrum?
                             </p>
                             <p className="mt-2 flex items-center text-sm text-gray-500">
                               <svg
-                                className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                                 xmlns="http://www.w3.org/2000/svg"
+                                className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
-                                aria-hidden="true"
                               >
-                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                <path
+                                  fillRule="evenodd"
+                                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                  clipRule="evenodd"
+                                />
                               </svg>
-                              <span className="truncate">
-                                ricardo.cooper@example.com
-                              </span>
+                              <span className="truncate">Ricardo cooper</span>
                             </p>
                           </div>
                           <div className="hidden md:block">
                             <div>
                               <p className="text-sm text-gray-900">
-                                Applied on
+                                Created on{" "}
                                 <time datetime="2020-01-07">
                                   January 7, 2020
                                 </time>
@@ -93,7 +88,7 @@ const posts = () => {
                                     clip-rule="evenodd"
                                   />
                                 </svg>
-                                Admin
+                                Active
                               </p>
                             </div>
                           </div>
