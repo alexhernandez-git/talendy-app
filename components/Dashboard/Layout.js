@@ -251,7 +251,7 @@ const Layout = ({ page, search, setSearch, children }) => {
       </div>
 
       <div
-        className="fixed inset-0 z-40 flex md:hidden"
+        className={`fixed inset-0 z-40 flex ${menuOpen ? "block" : "hidden"}`}
         role="dialog"
         aria-modal="true"
       >
@@ -260,8 +260,14 @@ const Layout = ({ page, search, setSearch, children }) => {
           aria-hidden="true"
         ></div>
 
-        <div className="relative max-w-xs w-full bg-orange-200 pt-5 pb-4 flex-1 flex flex-col">
-          <div className="absolute top-1 right-0 -mr-14 p-1">
+        <div
+          className="relative max-w-xs w-full bg-orange-200 pt-5 pb-4 flex-1 flex flex-col"
+          ref={menuRef}
+        >
+          <div
+            className="absolute top-1 right-0 -mr-14 p-1"
+            onClick={handleCloseMenu}
+          >
             <button
               type="button"
               className="h-12 w-12 rounded-full flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-white"
@@ -501,6 +507,7 @@ const Layout = ({ page, search, setSearch, children }) => {
           <div className="relative flex-shrink-0 h-16 bg-white border-b border-gray-200 shadow-sm flex">
             <button
               type="button"
+              onMouseDown={handleToggleMenu}
               className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500 md:hidden"
             >
               <span className="sr-only">Open sidebar</span>
