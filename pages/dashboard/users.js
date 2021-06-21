@@ -11,7 +11,27 @@ const users = () => {
         <div className="mt-8">
           <div className="max-w-6xl mx-auto">
             {/* Create user button */}
-            <div className="flex justify-end items-center mb-2">
+            <div className="flex justify-between items-center mb-2">
+              <span class="relative z-0 inline-flex shadow-sm rounded-md">
+                <button
+                  type="button"
+                  class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                >
+                  Resend login
+                </button>
+                <button
+                  type="button"
+                  class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                >
+                  Remove
+                </button>
+              </span>
               <button className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -43,6 +63,24 @@ const users = () => {
                             scope="col"
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                           >
+                            <span className="sr-only">Select all</span>
+                            <span class="relative inline-flex items-center bg-white">
+                              <label for="select-all" class="sr-only">
+                                Select all
+                              </label>
+                              <input
+                                id="select-all"
+                                type="checkbox"
+                                name="select-all"
+                                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                              />
+                            </span>
+                          </th>
+
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
                             <span className="sr-only">Image</span>
                           </th>
 
@@ -68,6 +106,18 @@ const users = () => {
                             scope="col"
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider "
                           >
+                            Is Manager
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider "
+                          >
+                            Is Admin
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider "
+                          >
                             <span className="sr-only">See profile</span>
                           </th>
                           {/* 
@@ -77,14 +127,24 @@ const users = () => {
                           >
                             Role
                           </th> */}
-                          <th scope="col" className="relative px-6 py-3">
-                            <span className="sr-only">Edit - Remove</span>
-                          </th>
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200">
                         {/* User item */}
                         <tr>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <span class="relative inline-flex items-center bg-white">
+                              <label for="select-all" class="sr-only">
+                                Select all
+                              </label>
+                              <input
+                                id="select-all"
+                                type="checkbox"
+                                name="select-all"
+                                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                              />
+                            </span>
+                          </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <span className="inline-block bg-gray-100 rounded-full overflow-hidden h-8 w-8">
                               <svg
@@ -104,6 +164,34 @@ const users = () => {
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <span className="text-sm">alex@gmail.com</span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-5 w-5 text-green-500"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-5 w-5 text-red-500"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <a href="/user/3443" target="_blank">
@@ -127,21 +215,6 @@ const users = () => {
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             Admin
                           </td> */}
-                          <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="h-5 w-5"
-                              className="h-6 w-6 inline text-red-600 hover:text-red-900 cursor-pointer"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </td>
                         </tr>
                         {/* End user item */}
                       </tbody>
