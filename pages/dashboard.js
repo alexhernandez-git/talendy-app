@@ -1,7 +1,7 @@
 import Layout from "components/Dashboard/Layout";
 import { DASHBOARD_PAGE } from "pages";
 import React from "react";
-
+import Link from "next/link";
 const dashboard = () => {
   const page = DASHBOARD_PAGE;
   return (
@@ -45,19 +45,21 @@ const dashboard = () => {
                 </div>
               </div>
               <div class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
-                <button
-                  type="button"
-                  class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
-                >
-                  Settings
-                </button>
+                <Link href="/dashboard/settings">
+                  <button
+                    type="button"
+                    class="cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 hover:text-gray-500 dark:hover:text-white dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                  >
+                    Settings
+                  </button>
+                </Link>
               </div>
             </div>{" "}
             <div>
               <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 <div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
                   <dt>
-                    <div class="absolute bg-indigo-500 rounded-md p-3">
+                    <div class="absolute  bg-gradient-to-r from-orange-500 to-pink-500 rounded-md p-3">
                       <svg
                         class="h-6 w-6 text-white"
                         xmlns="http://www.w3.org/2000/svg"
@@ -79,20 +81,22 @@ const dashboard = () => {
                     </p>
                   </dt>
                   <dd class="ml-16 pb-6 flex items-baseline sm:pb-7">
-                    <p class="text-2xl font-semibold text-gray-900">71,897</p>
+                    <p class="text-2xl font-semibold text-gray-900">10</p>
                     <span class="ml-2 text-sm font-medium text-gray-500">
-                      from 70,946
+                      of 50
                     </span>
                     <div class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6">
                       <div class="text-sm">
-                        <a
-                          href="#"
-                          class="font-medium text-indigo-600 hover:text-indigo-500"
-                        >
-                          {" "}
-                          View all
-                          <span class="sr-only"> Total Subscribers stats</span>
-                        </a>
+                        <Link href="/dashboard/users">
+                          <span class="cursor-pointer font-medium text-orange-600 hover:text-orange-500">
+                            {" "}
+                            View all
+                            <span class="sr-only">
+                              {" "}
+                              Total Subscribers stats
+                            </span>
+                          </span>
+                        </Link>
                       </div>
                     </div>
                   </dd>
@@ -100,20 +104,19 @@ const dashboard = () => {
 
                 <div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
                   <dt>
-                    <div class="absolute bg-indigo-500 rounded-md p-3">
+                    <div class="absolute  bg-gradient-to-r from-orange-500 to-pink-500 rounded-md p-3">
                       <svg
-                        class="h-6 w-6 text-white"
                         xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 text-white"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
-                        aria-hidden="true"
                       >
                         <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
                         />
                       </svg>
                     </div>
@@ -126,14 +129,13 @@ const dashboard = () => {
 
                     <div class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6">
                       <div class="text-sm">
-                        <a
-                          href="#"
-                          class="font-medium text-indigo-600 hover:text-indigo-500"
-                        >
-                          {" "}
-                          View all
-                          <span class="sr-only"> Avg. Open Rate stats</span>
-                        </a>
+                        <Link href="/dashboard/posts">
+                          <span class="cursor-pointer font-medium text-orange-600 hover:text-orange-500">
+                            {" "}
+                            View all
+                            <span class="sr-only"> Avg. Open Rate stats</span>
+                          </span>
+                        </Link>
                       </div>
                     </div>
                   </dd>
@@ -141,7 +143,7 @@ const dashboard = () => {
 
                 <div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
                   <dt>
-                    <div class="absolute bg-indigo-500 rounded-md p-3">
+                    <div class="absolute  bg-gradient-to-r from-orange-500 to-pink-500 rounded-md p-3">
                       <svg
                         class="h-6 w-6 text-white"
                         xmlns="http://www.w3.org/2000/svg"
@@ -169,14 +171,13 @@ const dashboard = () => {
                     </p>
                     <div class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6">
                       <div class="text-sm">
-                        <a
-                          href="#"
-                          class="font-medium text-indigo-600 hover:text-indigo-500"
-                        >
-                          {" "}
-                          Select plan
-                          <span class="sr-only"> Avg. Click Rate stats</span>
-                        </a>
+                        <Link href="/dashboard/billing">
+                          <span class="cursor-pointer font-medium text-orange-600 hover:text-orange-500">
+                            {" "}
+                            Select plan
+                            <span class="sr-only"> Avg. Click Rate stats</span>
+                          </span>
+                        </Link>
                       </div>
                     </div>
                   </dd>
