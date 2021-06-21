@@ -64,6 +64,12 @@ const users = () => {
                           >
                             Email
                           </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider "
+                          >
+                            <span className="sr-only">See profile</span>
+                          </th>
                           {/* 
                           <th
                             scope="col"
@@ -99,6 +105,19 @@ const users = () => {
                           <td className="px-6 py-4 whitespace-nowrap">
                             <span className="text-sm">alex@gmail.com</span>
                           </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <a href="/user/3443" target="_blank">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5 text-gray-500"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                              >
+                                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                              </svg>
+                            </a>
+                          </td>
 
                           {/* <td className="px-6 py-4 whitespace-nowrap">
                             <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
@@ -109,25 +128,19 @@ const users = () => {
                             Admin
                           </td> */}
                           <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a
-                              href="#"
-                              className="text-red-600 hover:text-red-900"
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-5 w-5"
+                              className="h-6 w-6 inline text-red-600 hover:text-red-900 cursor-pointer"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
                             >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6 inline"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                                />
-                              </svg>
-                            </a>
+                              <path
+                                fillRule="evenodd"
+                                d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
                           </td>
                         </tr>
                         {/* End user item */}

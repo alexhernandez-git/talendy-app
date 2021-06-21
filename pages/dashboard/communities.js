@@ -45,12 +45,6 @@ const communities = () => {
                             Name
                           </th>
 
-                          <th
-                            scope="col"
-                            className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
-                          >
-                            Posts
-                          </th>
                           {/* 
                           <th
                             scope="col"
@@ -96,11 +90,7 @@ const communities = () => {
                               Optimization
                             </div> */}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-center text-gray-500 font-medium">
-                              43
-                            </div>
-                          </td>
+
                           {/* <td className="px-6 py-4 whitespace-nowrap">
                             <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                               Active
