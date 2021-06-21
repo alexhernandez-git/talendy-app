@@ -12,26 +12,48 @@ const users = () => {
           <div className="max-w-6xl mx-auto">
             {/* Create user button */}
             <div className="flex justify-between items-center mb-2">
-              <span class="relative z-0 inline-flex shadow-sm rounded-3xl">
-                <button
-                  type="button"
-                  class="relative inline-flex items-center px-4 py-2 rounded-l-3xl border border-gray-300  text-sm font-medium text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                >
-                  Resend login
-                </button>
-                <button
-                  type="button"
-                  class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300  text-sm font-medium text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                >
-                  Edit
-                </button>
-                <button
-                  type="button"
-                  class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-3xl border border-gray-300  text-sm font-medium text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                >
-                  Remove
-                </button>
-              </span>
+              <div className="flex items-center">
+                <span class="relative z-0 inline-flex shadow-sm rounded-3xl">
+                  <button
+                    type="button"
+                    class="relative inline-flex items-center px-4 py-2 rounded-l-3xl border border-gray-300  text-sm font-medium text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                      <path
+                        fillRule="evenodd"
+                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Edit membership
+                  </button>
+                  <button
+                    type="button"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-3xl border border-gray-300  text-sm font-medium text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path d="M11 6a3 3 0 11-6 0 3 3 0 016 0zM14 17a6 6 0 00-12 0h12zM13 8a1 1 0 100 2h4a1 1 0 100-2h-4z" />
+                    </svg>
+                    Kick user
+                  </button>
+                </span>
+                <div className="ml-2">
+                  <span className="text-gray-500 text-xs">
+                    23 of 100 selected
+                  </span>
+                </div>
+              </div>
               <button className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +94,7 @@ const users = () => {
                                 id="select-all"
                                 type="checkbox"
                                 name="select-all"
-                                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                                class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
                               />
                             </span>
                           </th>
@@ -141,7 +163,7 @@ const users = () => {
                                 id="select-all"
                                 type="checkbox"
                                 name="select-all"
-                                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                                class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
                               />
                             </span>
                           </td>
