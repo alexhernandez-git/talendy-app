@@ -28,6 +28,36 @@ const Layout = ({ page, children }) => {
             </Link>
           </div>
           <div className="flex-1 mt-6 w-full px-2 space-y-1">
+            <Link href="/dashboard">
+              <span
+                className={
+                  page === DASHBOARD_PAGE
+                    ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                }
+                aria-current="page"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={
+                    page === DASHBOARD_PAGE
+                      ? "text-white h-6 w-6"
+                      : "text-orange-600 group-hover:text-white h-6 w-6"
+                  }
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                  />
+                </svg>
+                <span className="mt-2">Home</span>
+              </span>
+            </Link>
             <Link href="/dashboard/users">
               <span
                 className={
@@ -233,6 +263,37 @@ const Layout = ({ page, children }) => {
           <div className="mt-5 flex-1 h-0 px-2 overflow-y-auto">
             <nav className="h-full flex flex-col">
               <div className="space-y-1">
+                <Link href="/dashboard">
+                  <span
+                    className={
+                      page === DASHBOARD_PAGE
+                        ? "cursor-pointer bg-orange-500 text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                        : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                    }
+                    aria-current="page"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={
+                        page === DASHBOARD_PAGE
+                          ? "text-white mr-3 h-6 w-6"
+                          : "text-orange-600 group-hover:text-white mr-3 h-6 w-6"
+                      }
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                      />
+                    </svg>
+                    <span>Home</span>
+                  </span>
+                </Link>
+
                 <Link href="/dashboard/users">
                   <span
                     className={
