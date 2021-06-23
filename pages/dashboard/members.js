@@ -1,17 +1,18 @@
 import Layout from "components/Dashboard/Layout";
-import { COMMUNITIES_DASHBOARD_PAGE } from "pages";
+import Link from "next/link";
+import { MEMBERS_DASHBOARD_PAGE } from "pages";
 import React from "react";
 import Head from "next/head";
 import Spinner from "components/Layout/Spinner";
 import useAuthRequired from "hooks/useAuthRequired";
-const communities = () => {
-  const page = COMMUNITIES_DASHBOARD_PAGE;
+const users = () => {
+  const page = MEMBERS_DASHBOARD_PAGE;
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
 
   return (
     <>
       <Head>
-        <title>Billing</title>
+        <title>Posts</title>
       </Head>
       {!canRender ? (
         <div className="flex justify-center items-center h-screen dark:bg-gray-800">
@@ -24,7 +25,6 @@ const communities = () => {
               <div className="mt-8">
                 <div className="max-w-6xl mx-auto">
                   {/* Create user button */}
-
                   <div className="flex justify-between items-center mb-2">
                     <div className="flex items-center">
                       <span class="relative z-0 inline-flex shadow-sm rounded-3xl">
@@ -38,13 +38,9 @@ const communities = () => {
                             viewBox="0 0 20 20"
                             fill="currentColor"
                           >
-                            <path
-                              fillRule="evenodd"
-                              d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-                              clipRule="evenodd"
-                            />
+                            <path d="M11 6a3 3 0 11-6 0 3 3 0 016 0zM14 17a6 6 0 00-12 0h12zM13 8a1 1 0 100 2h4a1 1 0 100-2h-4z" />
                           </svg>
-                          Remove
+                          Kick member
                         </button>
                       </span>
                       <div className="ml-2">
@@ -68,10 +64,10 @@ const communities = () => {
                           d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                         />
                       </svg>
-                      New community
+                      New member
                     </button>
                   </div>
-                  {/* End create user button */}
+
                   {/* Start users table */}
                   <div className="flex flex-col ">
                     <div className="overflow-x-auto">
@@ -97,13 +93,51 @@ const communities = () => {
                                     />
                                   </span>
                                 </th>
+
                                 <th
                                   scope="col"
                                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                 >
-                                  Name
+                                  <span className="sr-only">Image</span>
                                 </th>
 
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-left  text-xs font-medium text-gray-500 uppercase tracking-wider "
+                                >
+                                  Name
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider "
+                                >
+                                  Username
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider "
+                                >
+                                  Email
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider "
+                                >
+                                  Type
+                                </th>
+
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider "
+                                >
+                                  <span className="sr-only">Edit</span>
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider "
+                                >
+                                  <span className="sr-only">See profile</span>
+                                </th>
                                 {/* 
                           <th
                             scope="col"
@@ -111,9 +145,6 @@ const communities = () => {
                           >
                             Role
                           </th> */}
-                                <th scope="col" className="relative px-6 py-3">
-                                  <span className="sr-only">Edit</span>
-                                </th>
                               </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
@@ -122,7 +153,7 @@ const communities = () => {
                                 <td className="px-6 py-4 whitespace-nowrap">
                                   <span class="relative inline-flex items-center bg-white">
                                     <label for="select-all" class="sr-only">
-                                      Select
+                                      Select all
                                     </label>
                                     <input
                                       id="select-all"
@@ -133,12 +164,62 @@ const communities = () => {
                                   </span>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                  <span className="text-sm text-gray-500">
-                                    Regional Paradigm Technician
+                                  <span className="inline-block bg-gray-100 rounded-full overflow-hidden h-8 w-8">
+                                    <svg
+                                      className="h-8 w-8 text-gray-300"
+                                      fill="currentColor"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    </svg>
                                   </span>
-                                  {/* <div className="text-sm text-gray-500">
-                              Optimization
-                            </div> */}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap">
+                                  <span className="text-sm">
+                                    Alex Hernandez{" "}
+                                  </span>
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap">
+                                  <span className="text-sm">afewafewfe</span>
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap">
+                                  <span className="text-sm">
+                                    alex@gmail.com
+                                  </span>
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-center">
+                                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full uppercase bg-gray-100 text-gray-800">
+                                    BASIC
+                                  </span>
+                                </td>
+
+                                <td className="px-6 py-4 whitespace-nowrap">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-5 w-5 text-orange-500 cursor-pointer"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                  >
+                                    <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                      clipRule="evenodd"
+                                    />
+                                  </svg>
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap">
+                                  <a href="/user/3443" target="_blank">
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      className="h-5 w-5 text-gray-500"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                    >
+                                      <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                      <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                    </svg>
+                                  </a>
                                 </td>
 
                                 {/* <td className="px-6 py-4 whitespace-nowrap">
@@ -149,27 +230,6 @@ const communities = () => {
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             Admin
                           </td> */}
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                  <a
-                                    href="#"
-                                    className="text-orange-600 hover:text-orange-900 mr-3"
-                                  >
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      className="h-6 w-6 inline"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      stroke="currentColor"
-                                    >
-                                      <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                                      />
-                                    </svg>
-                                  </a>
-                                </td>
                               </tr>
                               {/* End user item */}
                             </tbody>
@@ -217,4 +277,4 @@ const communities = () => {
   );
 };
 
-export default communities;
+export default users;

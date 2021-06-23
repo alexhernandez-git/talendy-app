@@ -179,7 +179,7 @@ const settings = () => {
   return (
     <>
       <Head>
-        <title>Account</title>
+        <title>Settings</title>
       </Head>
       {!canRender ? (
         <div className="flex justify-center items-center h-screen dark:bg-gray-800">

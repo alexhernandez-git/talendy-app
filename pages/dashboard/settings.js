@@ -19,7 +19,9 @@ import {
   resetEmailAvailable,
   resetUsernameAvailable,
 } from "redux/actions/auth";
-
+import Head from "next/head";
+import Spinner from "components/Layout/Spinner";
+import useAuthRequired from "hooks/useAuthRequired";
 const settings = () => {
   const page = SETTINGS_DASHBOARD_PAGE;
   const [addBillingInformation, setAddBillingInformation] = useState(false);
@@ -178,174 +180,189 @@ const settings = () => {
   const modalRef = useRef();
   useOutsideClick(modalRef, () => handleModalClose());
 
+  const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
   return (
-    <Layout page={page}>
-      <main class="flex-1 relative pb-8 z-0 overflow-y-auto px-4">
-        <div class="mt-8">
-          <div class="max-w-6xl mx-auto">
-            <div className="mt-6">
-              <div className="lg:grid lg:grid-cols-3 lg:gap-6">
-                <div className="lg:col-span-1">
-                  <div className="px-4 sm:px-0">
-                    <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-white">
-                      Portal
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                      This information will be displayed publicly so be careful
-                      what you share.
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-5 lg:mt-0 md:col-span-2">
-                  <form onSubmit={profileForm.handleSubmit}>
-                    <div className="shadow  sm:rounded-md sm:overflow-hidden">
-                      <div className="bg-white dark:bg-gray-700 py-6 px-4 space-y-6 sm:p-6">
-                        <div className="grid grid-cols-3 gap-6">
-                          <div className="col-span-3 sm:col-span-2">
-                            <label
-                              htmlFor="company_website"
-                              className="block text-sm font-medium text-gray-700 dark:text-gray-100"
-                            >
-                              Name
-                            </label>
-
-                            <input
-                              type="text"
-                              name="username"
-                              id="username"
-                              autoComplete="username"
-                              className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
-                              onChange={profileForm.handleChange}
-                              onBlur={profileForm.handleBlur}
-                              value={profileForm.values.username}
-                            />
-                            {username_available && (
-                              <p
-                                className="mt-2 text-sm text-green-600"
-                                id="email-error"
-                              >
-                                {username_available}
-                              </p>
-                            )}
-                            {username_available_error &&
-                              username_available_error.data.non_field_errors &&
-                              username_available_error.data.non_field_errors.map(
-                                (message, i) => (
-                                  <p
-                                    key={i}
-                                    className="mt-2 text-sm text-green-600"
-                                    id="email-error"
-                                  >
-                                    {message}
-                                  </p>
-                                )
-                              )}
-                            {profileForm.touched.username &&
-                            profileForm.errors.username ? (
-                              <p
-                                className="mt-2 text-sm text-red-600"
-                                id="email-error"
-                              >
-                                {profileForm.errors.username}
-                              </p>
-                            ) : null}
-                          </div>
-                          <div className="col-span-3">
-                            <label
-                              htmlFor="about"
-                              className="block text-sm font-medium text-gray-700 dark:text-gray-100"
-                            >
-                              About
-                            </label>
-                            <div className="mt-1">
-                              <textarea
-                                id="about"
-                                name="about"
-                                rows="3"
-                                className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-lg sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
-                                onChange={profileForm.handleChange}
-                                onBlur={profileForm.handleBlur}
-                                value={profileForm.values.about}
-                              ></textarea>
-                            </div>
-                            {profileForm.touched.about &&
-                            profileForm.errors.about ? (
-                              <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
-                                <p className="font-bold">Error</p>
-                                <p>{profileForm.errors.about}</p>
-                              </div>
-                            ) : null}
-                          </div>
-
-                          <div className="col-span-3">
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-100">
-                              Photo
-                            </label>
-                            <div className="mt-1 flex items-center">
-                              {user && user.picture ? (
-                                <img
-                                  className="inline-block h-12 w-12 rounded-full"
-                                  src={
-                                    new RegExp(
-                                      `${process.env.HOST}|https://talendy.s3.amazonaws.com`
-                                    ).test(user.picture)
-                                      ? user.picture
-                                      : process.env.HOST + user.picture
-                                  }
-                                  alt=""
-                                ></img>
-                              ) : (
-                                <span className="inline-block bg-gray-100 rounded-full overflow-hidden h-12 w-12">
-                                  <svg
-                                    className="h-12 w-12 text-gray-300"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                                  </svg>
-                                </span>
-                              )}
-
-                              <label
-                                className="ml-3 cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                                htmlFor="profile-img"
-                              >
-                                Change
-                              </label>
-                              <input
-                                id={"profile-img"}
-                                type="file"
-                                hidden
-                                onChange={handleChangeImage}
-                              />
-                            </div>
-                          </div>
-                          <CropperModal
-                            show={showCropper}
-                            handleClose={handleCloseCropper}
-                            newImage={newImage}
-                            profile
-                          />
+    <>
+      <Head>
+        <title>Settings</title>
+      </Head>
+      {!canRender ? (
+        <div className="flex justify-center items-center h-screen dark:bg-gray-800">
+          <Spinner />
+        </div>
+      ) : (
+        <>
+          <Layout page={page}>
+            <main class="flex-1 relative pb-8 z-0 overflow-y-auto px-4">
+              <div class="mt-8">
+                <div class="max-w-6xl mx-auto">
+                  <div className="mt-6">
+                    <div className="lg:grid lg:grid-cols-3 lg:gap-6">
+                      <div className="lg:col-span-1">
+                        <div className="px-4 sm:px-0">
+                          <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-white">
+                            Portal
+                          </h3>
+                          <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                            This information will be displayed publicly so be
+                            careful what you share.
+                          </p>
                         </div>
                       </div>
+                      <div className="mt-5 lg:mt-0 md:col-span-2">
+                        <form onSubmit={profileForm.handleSubmit}>
+                          <div className="shadow  sm:rounded-md sm:overflow-hidden">
+                            <div className="bg-white dark:bg-gray-700 py-6 px-4 space-y-6 sm:p-6">
+                              <div className="grid grid-cols-3 gap-6">
+                                <div className="col-span-3 sm:col-span-2">
+                                  <label
+                                    htmlFor="company_website"
+                                    className="block text-sm font-medium text-gray-700 dark:text-gray-100"
+                                  >
+                                    Name
+                                  </label>
 
-                      <div className="px-4 py-3 bg-gray-50 dark:bg-gray-800 text-right sm:px-6">
-                        <button
-                          type="submit"
-                          className=" text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium"
-                        >
-                          Save
-                        </button>
+                                  <input
+                                    type="text"
+                                    name="username"
+                                    id="username"
+                                    autoComplete="username"
+                                    className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                                    onChange={profileForm.handleChange}
+                                    onBlur={profileForm.handleBlur}
+                                    value={profileForm.values.username}
+                                  />
+                                  {username_available && (
+                                    <p
+                                      className="mt-2 text-sm text-green-600"
+                                      id="email-error"
+                                    >
+                                      {username_available}
+                                    </p>
+                                  )}
+                                  {username_available_error &&
+                                    username_available_error.data
+                                      .non_field_errors &&
+                                    username_available_error.data.non_field_errors.map(
+                                      (message, i) => (
+                                        <p
+                                          key={i}
+                                          className="mt-2 text-sm text-green-600"
+                                          id="email-error"
+                                        >
+                                          {message}
+                                        </p>
+                                      )
+                                    )}
+                                  {profileForm.touched.username &&
+                                  profileForm.errors.username ? (
+                                    <p
+                                      className="mt-2 text-sm text-red-600"
+                                      id="email-error"
+                                    >
+                                      {profileForm.errors.username}
+                                    </p>
+                                  ) : null}
+                                </div>
+                                <div className="col-span-3">
+                                  <label
+                                    htmlFor="about"
+                                    className="block text-sm font-medium text-gray-700 dark:text-gray-100"
+                                  >
+                                    About
+                                  </label>
+                                  <div className="mt-1">
+                                    <textarea
+                                      id="about"
+                                      name="about"
+                                      rows="3"
+                                      className="mt-1 focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 rounded-lg sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+                                      onChange={profileForm.handleChange}
+                                      onBlur={profileForm.handleBlur}
+                                      value={profileForm.values.about}
+                                    ></textarea>
+                                  </div>
+                                  {profileForm.touched.about &&
+                                  profileForm.errors.about ? (
+                                    <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+                                      <p className="font-bold">Error</p>
+                                      <p>{profileForm.errors.about}</p>
+                                    </div>
+                                  ) : null}
+                                </div>
+
+                                <div className="col-span-3">
+                                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                                    Photo
+                                  </label>
+                                  <div className="mt-1 flex items-center">
+                                    {user && user.picture ? (
+                                      <img
+                                        className="inline-block h-12 w-12 rounded-full"
+                                        src={
+                                          new RegExp(
+                                            `${process.env.HOST}|https://talendy.s3.amazonaws.com`
+                                          ).test(user.picture)
+                                            ? user.picture
+                                            : process.env.HOST + user.picture
+                                        }
+                                        alt=""
+                                      ></img>
+                                    ) : (
+                                      <span className="inline-block bg-gray-100 rounded-full overflow-hidden h-12 w-12">
+                                        <svg
+                                          className="h-12 w-12 text-gray-300"
+                                          fill="currentColor"
+                                          viewBox="0 0 24 24"
+                                        >
+                                          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                        </svg>
+                                      </span>
+                                    )}
+
+                                    <label
+                                      className="ml-3 cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                                      htmlFor="profile-img"
+                                    >
+                                      Change
+                                    </label>
+                                    <input
+                                      id={"profile-img"}
+                                      type="file"
+                                      hidden
+                                      onChange={handleChangeImage}
+                                    />
+                                  </div>
+                                </div>
+                                <CropperModal
+                                  show={showCropper}
+                                  handleClose={handleCloseCropper}
+                                  newImage={newImage}
+                                  profile
+                                />
+                              </div>
+                            </div>
+
+                            <div className="px-4 py-3 bg-gray-50 dark:bg-gray-800 text-right sm:px-6">
+                              <button
+                                type="submit"
+                                className=" text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium"
+                              >
+                                Save
+                              </button>
+                            </div>
+                          </div>
+                        </form>
                       </div>
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </main>
-    </Layout>
+            </main>
+          </Layout>
+        </>
+      )}
+    </>
   );
 };
 

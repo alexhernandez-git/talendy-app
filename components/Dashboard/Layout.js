@@ -90,7 +90,7 @@ const Layout = ({ page, search, setSearch, children }) => {
                 <span className="mt-2">Home</span>
               </span>
             </Link>
-            <Link href="/dashboard/users">
+            <Link href="/dashboard/members">
               <span
                 className={
                   page === MEMBERS_DASHBOARD_PAGE ||
@@ -332,7 +332,7 @@ const Layout = ({ page, search, setSearch, children }) => {
                   </span>
                 </Link>
 
-                <Link href="/dashboard/users">
+                <Link href="/dashboard/members">
                   <span
                     className={
                       page === MEMBERS_DASHBOARD_PAGE

@@ -14,6 +14,14 @@ import {
   REQUESTS_PAGE,
   SETTINGS_PAGE,
   SOLVED_CONTRIBUTED_POSTS_PAGE,
+  DASHBOARD_PAGE,
+  MEMBERS_DASHBOARD_PAGE,
+  POSTS_DASHBOARD_PAGE,
+  COMMUNITIES_DASHBOARD_PAGE,
+  STATISTICS_DASHBOARD_PAGE,
+  SETTINGS_DASHBOARD_PAGE,
+  BILLING_DASHBOARD_PAGE,
+  USER_DETAIL_DASHBOARD_PAGE,
 } from "pages";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -22,7 +30,7 @@ const useAuthRequired = (page) => {
   const authReducer = useSelector((state) => state.authReducer);
   const initialDataReducer = useSelector((state) => state.initialDataReducer);
 
-  const { is_authenticated } = authReducer;
+  const { is_authenticated, user } = authReducer;
   const router = useRouter();
   const [canRender, setCanRender] = useState(false);
   const privatePages = [
@@ -40,12 +48,34 @@ const useAuthRequired = (page) => {
     PEOPLE_I_FOLLOW_PAGE,
     REQUESTS_PAGE,
   ];
-  const matches = privatePages.some((privPage) => privPage === page);
+  const dashboardPages = [
+    // Dashboard
+    DASHBOARD_PAGE,
+    MEMBERS_DASHBOARD_PAGE,
+    POSTS_DASHBOARD_PAGE,
+    COMMUNITIES_DASHBOARD_PAGE,
+    STATISTICS_DASHBOARD_PAGE,
+    SETTINGS_DASHBOARD_PAGE,
+    BILLING_DASHBOARD_PAGE,
+    USER_DETAIL_DASHBOARD_PAGE,
+  ];
+  const matches = [...privatePages, ...dashboardPages].some(
+    (privPage) => privPage === page
+  );
+  const dashboardMatches = dashboardPages.some((privPage) => privPage === page);
   useEffect(() => {
     if (initialDataReducer.data_fetched) {
       if (!is_authenticated && matches) {
         router.push("/feed");
       } else {
+        if (dashboardMatches) {
+          if (user?.member_role === "AD" || user?.member_role === "MA") {
+            setCanRender(true);
+          } else {
+            router.push("/feed");
+            return;
+          }
+        }
         setCanRender(true);
       }
     }
