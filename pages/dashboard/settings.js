@@ -21,7 +21,6 @@ import {
 } from "redux/actions/auth";
 import Head from "next/head";
 import Spinner from "components/Layout/Spinner";
-import useAuthRequired from "hooks/useAuthRequired";
 const settings = () => {
   const page = SETTINGS_DASHBOARD_PAGE;
   const [addBillingInformation, setAddBillingInformation] = useState(false);
@@ -180,7 +179,6 @@ const settings = () => {
   const modalRef = useRef();
   useOutsideClick(modalRef, () => handleModalClose());
 
-  const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
   return (
     <>
       <Head>

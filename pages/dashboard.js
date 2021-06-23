@@ -97,11 +97,13 @@ const dashboard = () => {
                             </svg>
                           </div>
                           <p class="ml-16 text-sm font-medium text-gray-500 truncate">
-                            Total Users
+                            Total Members
                           </p>
                         </dt>
                         <dd class="ml-16 pb-6 flex items-baseline sm:pb-7">
-                          <p class="text-2xl font-semibold text-gray-900">10</p>
+                          <p class="text-2xl font-semibold text-gray-900">
+                            {portal?.users_count}
+                          </p>
                           <span class="ml-2 text-sm font-medium text-gray-500">
                             of 50
                           </span>
@@ -146,7 +148,7 @@ const dashboard = () => {
                         </dt>
                         <dd class="ml-16 pb-6 flex items-baseline sm:pb-7">
                           <p class="text-2xl font-semibold text-gray-900">
-                            234
+                            {portal?.posts_count}
                           </p>
 
                           <div class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6">
