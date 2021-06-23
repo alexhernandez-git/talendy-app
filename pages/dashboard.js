@@ -209,16 +209,28 @@ const dashboard = () => {
                           </p>
                         </dt>
                         <dd class="ml-16 pb-6 flex items-baseline sm:pb-7">
-                          <p class="text-2xl font-semibold text-gray-900">
-                            {portal?.is_free_trial && "Trial"}
-                          </p>
-                          <p class="ml-2 flex items-baseline text-sm font-semibold text-yellow-500">
-                            Trial days left:{" "}
-                            {moment(portal?.free_trial_expiration).diff(
-                              moment(),
-                              "days"
-                            )}
-                          </p>
+                          {portal?.is_free_trial ? (
+                            <>
+                              <p class="text-2xl font-semibold text-gray-900">
+                                Trial
+                              </p>
+                              <p class="ml-2 flex items-baseline text-sm font-semibold text-yellow-500">
+                                Trial days left:{" "}
+                                {moment(portal?.free_trial_expiration).diff(
+                                  moment(),
+                                  "days"
+                                )}
+                              </p>
+                            </>
+                          ) : (
+                            <>
+                              <p class="text-2xl font-semibold text-gray-900">
+                                {portal?.plan?.plan_type === "SI" && "Silver"}
+                                {portal?.plan?.plan_type === "GO" && "Gold"}
+                                {portal?.plan?.plan_type === "PL" && "Platinum"}
+                              </p>
+                            </>
+                          )}
                           <div class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6">
                             <div class="text-sm">
                               <Link href="/dashboard/billing">
