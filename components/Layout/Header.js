@@ -132,6 +132,8 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
 
   const authReducer = useSelector((state) => state.authReducer);
   const { user } = authReducer;
+  const portalReducer = useSelector((state) => state.portalReducer);
+  const { portal } = portalReducer;
   const handleSignOut = () => {
     handleCloseMenu();
     handleCloseMobileMenu();
@@ -159,16 +161,26 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
             <div className="flex-shrink-0 flex items-center">
               <Link href={authReducer.is_authenticated ? "/feed" : "/"}>
                 <div>
-                  <img
-                    className="hidden sm:block h-8 w-auto cursor-pointer"
-                    src={logoImage}
-                    alt="Workflow"
-                  />
-                  <img
-                    className="block sm:hidden h-8 w-auto cursor-pointer"
-                    src={"/static/images/talendy-logo.png"}
-                    alt="Workflow"
-                  />
+                  {portal && portal?.url !== "oficial" ? (
+                    <img
+                      className="block h-12 w-auto cursor-pointer"
+                      src={portal?.logo}
+                      alt="Workflow"
+                    />
+                  ) : (
+                    <>
+                      <img
+                        className="hidden sm:block h-8 w-auto cursor-pointer"
+                        src={logoImage}
+                        alt="Workflow"
+                      />
+                      <img
+                        className="block sm:hidden h-8 w-auto cursor-pointer"
+                        src={"/static/images/talendy-logo.png"}
+                        alt="Workflow"
+                      />
+                    </>
+                  )}
                 </div>
               </Link>
             </div>
@@ -413,11 +425,13 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
                   )}
                 </div>
               </div>
-              <Link href="/dashboard">
-                <span className="ml-5 cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 hover:text-gray-500 dark:hover:text-white dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
-                  Dashboard
-                </span>
-              </Link>
+              {(user.member_role === "AD" || user.member_role === "MA") && (
+                <Link href="/dashboard">
+                  <span className="ml-5 cursor-pointer inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 hover:text-gray-500 dark:hover:text-white dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50">
+                    Dashboard
+                  </span>
+                </Link>
+              )}
               <span
                 onClick={handleOpenModal}
                 className="cursor-pointer ml-5 inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"

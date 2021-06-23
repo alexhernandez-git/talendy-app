@@ -2,8 +2,11 @@ import Layout from "components/Dashboard/Layout";
 import { DASHBOARD_PAGE } from "pages";
 import React from "react";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 const dashboard = () => {
   const page = DASHBOARD_PAGE;
+  const portalReducer = useSelector((state) => state.portalReducer);
+  const { portal } = portalReducer;
   return (
     <Layout page={page}>
       <main class="flex-1 relative pb-8 z-0 overflow-y-auto px-4">
@@ -37,7 +40,9 @@ const dashboard = () => {
                 </div>
 
                 <div class="pt-1.5">
-                  <h1 class="text-2xl font-bold text-gray-900">CESF</h1>
+                  <h1 class="text-2xl font-bold text-gray-900">
+                    {portal?.name}
+                  </h1>
                   <p class="text-sm font-medium text-gray-500">
                     Created at{" "}
                     <time datetime="2020-08-25">August 25, 2020</time>

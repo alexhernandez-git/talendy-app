@@ -1,3 +1,8 @@
+// Portals
+export const FETCH_PORTAL = "FETCH_PORTAL";
+export const FETCH_PORTAL_SUCCESS = "FETCH_PORTAL_SUCCESS";
+export const FETCH_PORTAL_FAIL = "FETCH_PORTAL_FAIL";
+
 // Dispatch control reducers
 export const INITIAL_DATA_FETCHED = "INITIAL_DATA_FETCHED";
 export const RESET_DATA_FETCHED = "RESET_DATA_FETCHED";
