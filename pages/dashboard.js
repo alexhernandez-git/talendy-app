@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Head from "next/head";
 import Spinner from "components/Layout/Spinner";
 import useAuthRequired from "hooks/useAuthRequired";
+import moment from "moment";
 const dashboard = () => {
   const page = DASHBOARD_PAGE;
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
@@ -193,10 +194,14 @@ const dashboard = () => {
                         </dt>
                         <dd class="ml-16 pb-6 flex items-baseline sm:pb-7">
                           <p class="text-2xl font-semibold text-gray-900">
-                            Trial
+                            {portal?.is_free_trial && "Trial"}
                           </p>
                           <p class="ml-2 flex items-baseline text-sm font-semibold text-yellow-500">
-                            Trial days left: 23
+                            Trial days left:{" "}
+                            {moment(portal?.free_trial_expiration).diff(
+                              moment(),
+                              "days"
+                            )}
                           </p>
                           <div class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6">
                             <div class="text-sm">
