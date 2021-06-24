@@ -181,8 +181,7 @@ const settings = () => {
                             Portal
                           </h3>
                           <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                            This information will be displayed publicly so be
-                            careful what you share.
+                            Public information about the portal.
                           </p>
                         </div>
                       </div>
