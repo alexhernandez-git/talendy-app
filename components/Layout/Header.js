@@ -459,7 +459,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
                   handleClose={handleCloseLogin}
                 />
               </div>
-
+              {/* 
               <div className="flex-shrink-0 relative ml-3">
                 <div>
                   <span
@@ -469,7 +469,7 @@ const Header = ({ handleOpenModal, page, handleToggleRegister }) => {
                     Register
                   </span>
                 </div>
-              </div>
+              </div> */}
             </div>
           )}
         </div>

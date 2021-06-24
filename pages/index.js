@@ -194,13 +194,13 @@ export default function Home() {
                   {portal?.about}
                 </p>
                 <div className="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
-                  <div className="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
-                    <span
+                  <div className="space-y-4 sm:space-y-0 sm:mx-auto sm:flex sm:justify-center">
+                    {/* <span
                       onClick={handleOpenRegisterByLayout}
                       className="cursor-pointer flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-orange-700 bg-white hover:opacity-90 hover:bg-orange-50 sm:px-8"
                     >
                       Sign in
-                    </span>
+                    </span> */}
                     <Link href={"/feed"}>
                       <span className="cursor-pointer flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r hover:opacity-90 from-orange-500 to-pink-500 hover:to-pink-600 sm:px-8">
                         Earn{" "}
