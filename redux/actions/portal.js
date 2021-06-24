@@ -15,6 +15,8 @@ import {
   RESET_NAME_AVAILABLE,
   RESET_URL_AVAILABLE,
 } from "../types";
+import { createAlert } from "./alerts";
+import { tokenConfig } from "./auth";
 
 export const fetchPortal = () => async (dispatch, getState) => {
   await dispatch({
@@ -82,7 +84,7 @@ export const resetUrlAvailable = () => async (dispatch, getState) => {
   dispatch({ type: RESET_URL_AVAILABLE });
 };
 
-export const updateUser = (portal) => async (dispatch, getState) => {
+export const updatePortal = (portal) => async (dispatch, getState) => {
   dispatch({ type: UPDATE_PORTAL });
   await axios
     .patch(
@@ -100,6 +102,31 @@ export const updateUser = (portal) => async (dispatch, getState) => {
       await dispatch(resetNameAvailable());
       await dispatch(resetUrlAvailable());
       await dispatch(createAlert("SUCCESS", "Portal succesfully updated"));
+    })
+    .catch((err) => {
+      dispatch({
+        type: UPDATE_PORTAL_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
+};
+
+export const updatePortaLogo = (logo) => async (dispatch, getState) => {
+  const fd = new FormData();
+  fd.append("logo", logo, logo.name);
+  dispatch({ type: UPDATE_PORTAL });
+  await axios
+    .patch(
+      `${process.env.HOST}/api/portals/${getState().portalReducer.portal.url}/`,
+      fd,
+      tokenConfig(getState)
+    )
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: UPDATE_PORTAL_SUCCESS,
+        payload: res.data,
+      });
     })
     .catch((err) => {
       dispatch({

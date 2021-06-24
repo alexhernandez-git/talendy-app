@@ -4,8 +4,9 @@ import "cropperjs/dist/cropper.css";
 import { useDispatch } from "react-redux";
 import { dataURLtoFile } from "helpers";
 import { updateUserPicture } from "redux/actions/auth";
+import { updatePortaLogo } from "redux/actions/portal";
 
-const CropperModal = ({ show, handleClose, newImage }) => {
+const CropperModal = ({ show, handleClose, newImage, isPortal }) => {
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
   const [cropData, setCropData] = useState(null);
@@ -24,7 +25,11 @@ const CropperModal = ({ show, handleClose, newImage }) => {
         cropper.getCroppedCanvas().toDataURL(),
         Math.random().toString(36) + newImage.name
       );
-      dispatch(updateUserPicture(file));
+      if (isPortal) {
+        dispatch(updatePortaLogo(file));
+      } else {
+        dispatch(updateUserPicture(file));
+      }
       handleClose();
     }
   };

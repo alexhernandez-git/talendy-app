@@ -447,8 +447,6 @@ export const updateUserPicture = (picture) => async (dispatch, getState) => {
         type: UPDATE_USER_SUCCESS,
         payload: res.data,
       });
-
-      dispatch(resetUsernameAvailable());
     })
     .catch((err) => {
       dispatch({
