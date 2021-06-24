@@ -116,11 +116,12 @@ const settings = () => {
   React.useEffect(() => {
     if (nameFirstLoad) {
       dispatch(resetNameAvailable());
-      const timeoutId = setTimeout(() => {
-        dispatch(isNameAvailable({ name: formik.values.name }));
-      }, 500);
-
-      return () => clearTimeout(timeoutId);
+      if (formik.values.name != portal.name) {
+        const timeoutId = setTimeout(() => {
+          dispatch(isNameAvailable({ name: formik.values.name }));
+        }, 500);
+        return () => clearTimeout(timeoutId);
+      }
     }
     if (formik.values.name) {
       setNameFirstLoad(true);
@@ -132,10 +133,12 @@ const settings = () => {
   React.useEffect(() => {
     if (urlFirstLoad) {
       dispatch(resetUrlAvailable());
-      const timeoutId = setTimeout(() => {
-        dispatch(isUrlAvailable({ url: formik.values.url }));
-      }, 500);
-      return () => clearTimeout(timeoutId);
+      if (formik.values.url != portal.url) {
+        const timeoutId = setTimeout(() => {
+          dispatch(isUrlAvailable({ url: formik.values.url }));
+        }, 500);
+        return () => clearTimeout(timeoutId);
+      }
     }
     if (formik.values.url) {
       setUrlFirstLoad(true);
@@ -348,8 +351,9 @@ const settings = () => {
                                         }`}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        value={formik.values.about}
-                                      ></textarea>
+                                      >
+                                        {formik.values.about}
+                                      </textarea>
                                       {formik.touched.about &&
                                         formik.errors.about && (
                                           <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
