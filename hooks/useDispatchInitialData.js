@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { fetchLastNotifications } from "redux/actions/lastNotifications";
 import { fetchCommunities } from "redux/actions/communities";
 import { fetchPortal } from "redux/actions/portal";
+import { fetchPlans } from "redux/actions/plans";
 
 const useDispatchInitialData = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const useDispatchInitialData = () => {
       await dispatch(loadUser());
       await dispatch(loadCurrency());
       await dispatch(fetchCommunities());
+      await dispatch(fetchPlans());
       // Set initial data fetched
       await dispatch(initialDataFetched());
     };

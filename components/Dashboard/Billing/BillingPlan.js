@@ -1,5 +1,6 @@
 import Spinner from "components/Layout/Spinner";
 import useOutsideClick from "hooks/useOutsideClick";
+import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cancelSubscription, reactivateSubscription } from "redux/actions/auth";
@@ -98,7 +99,7 @@ const BillingPlan = ({ handleOpenAddBilling }) => {
               <button
                 type="button"
                 onClick={handleHideModal}
-                className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 sm:mt-0 sm:w-auto sm:text-sm"
+                className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 sm:mt-0 sm:w-auto sm:text-sm"
               >
                 Go back
               </button>
@@ -150,121 +151,32 @@ const BillingPlan = ({ handleOpenAddBilling }) => {
                 </div>
               </div>
             )}
-            <fieldset>
-              <legend className="sr-only">Pricing plans</legend>
-              <ul className="relative bg-white rounded-md -space-y-px">
-                <li>
-                  <div className="relative border rounded-t-md border-gray-200 p-4 flex flex-col md:pl-4 md:pr-6 md:grid md:grid-cols-3">
-                    <label className="flex items-center text-sm cursor-pointer">
-                      <input
-                        name="pricing_plan"
-                        type="radio"
-                        className="h-4 w-4 text-orange-500 cursor-pointer border-gray-300 focus:ring-cyan-500 "
-                        aria-describedby="plan-option-pricing-1 plan-option-limit-1"
-                        checked
-                      />
-                      <span className="ml-3 font-medium text-gray-900">
-                        Silver
-                      </span>
-                    </label>
-                    <p
-                      id="plan-option-pricing-1"
-                      className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center"
-                    >
-                      <span className="font-medium">
-                        {
-                          authReducer.user?.current_plan_subscription
-                            ?.plan_price_label
-                        }{" "}
-                        / mo
-                      </span>
-                    </p>
-                    <p
-                      id="plan-option-limit-1"
-                      className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right"
-                    >
-                      50 members
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <div className="relative border border-gray-200 p-4 flex flex-col md:pl-4 md:pr-6 md:grid md:grid-cols-3">
-                    <label className="flex items-center text-sm cursor-pointer">
-                      <input
-                        name="pricing_plan"
-                        type="radio"
-                        className="h-4 w-4 text-orange-500 cursor-pointer border-gray-300 focus:ring-cyan-500 "
-                        aria-describedby="plan-option-pricing-1 plan-option-limit-1"
-                        checked
-                      />
-                      <span className="ml-3 font-medium text-gray-900">
-                        Gold
-                      </span>
-                    </label>
-                    <p
-                      id="plan-option-pricing-1"
-                      className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center"
-                    >
-                      <span className="font-medium">
-                        {
-                          authReducer.user?.current_plan_subscription
-                            ?.plan_price_label
-                        }{" "}
-                        / mo
-                      </span>
-                    </p>
-                    <p
-                      id="plan-option-limit-1"
-                      className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right"
-                    >
-                      100 members
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <div className="relative border rounded-b-md border-gray-200 p-4 flex flex-col md:pl-4 md:pr-6 md:grid md:grid-cols-3">
-                    <label className="flex items-center text-sm cursor-pointer">
-                      <input
-                        name="pricing_plan"
-                        type="radio"
-                        className="h-4 w-4 text-orange-500 cursor-pointer border-gray-300 focus:ring-cyan-500 "
-                        aria-describedby="plan-option-pricing-1 plan-option-limit-1"
-                        checked
-                      />
-                      <span className="ml-3 font-medium text-gray-900">
-                        Platinum
-                      </span>
-                    </label>
-                    <p
-                      id="plan-option-pricing-1"
-                      className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center"
-                    >
-                      <span className="font-medium">
-                        {
-                          authReducer.user?.current_plan_subscription
-                            ?.plan_price_label
-                        }{" "}
-                        / mo
-                      </span>
-                    </p>
-                    <p
-                      id="plan-option-limit-1"
-                      className="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-right"
-                    >
-                      200 members
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </fieldset>
+            <div>
+              <div>
+                <span className="text-lg leading-6 font-medium text-gray-900">
+                  Silver Plan
+                </span>{" "}
+                <span className="text-lg leading-6 font-medium text-gray-400">
+                  |
+                </span>{" "}
+                <span className="text-lg leading-6 font-medium text-gray-900">
+                  100€
+                </span>
+              </div>
+              <div className="mt-2">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                  Free trial
+                </span>
+              </div>
+            </div>
           </div>
-          <div className="flex justify-start bg-gray-50">
+          <div className="flex justify-between bg-gray-50">
             <div className="px-4 py-3  text-right sm:px-6">
               {authReducer.user?.current_plan_subscription?.to_be_cancelled ||
               authReducer.user?.current_plan_subscription === null ? (
                 <button
                   type="button"
-                  className="items-center bg-cyan-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
+                  className="items-center bg-orange-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-orange-700"
                   onClick={handleReactivateSubscription}
                 >
                   {authReducer.reactivating_subscription && (
@@ -278,11 +190,21 @@ const BillingPlan = ({ handleOpenAddBilling }) => {
                 <button
                   type="button"
                   onClick={handleShowModal}
-                  className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
+                  className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
                 >
                   Cancel subscription
                 </button>
               )}
+            </div>
+            <div className="px-4 py-3  text-right sm:px-6">
+              <Link href="/dashboard/manage-subscription">
+                <button
+                  type="button"
+                  className="items-center bg-orange-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-orange-700"
+                >
+                  Manage your subscription
+                </button>
+              </Link>
             </div>
           </div>
         </div>

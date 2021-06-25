@@ -19,6 +19,9 @@ const billing = () => {
   const handleOpenAddBilling = () => {
     setAddBillingInformation(true);
   };
+  const handleCloseAddBilling = () => {
+    setAddBillingInformation(false);
+  };
   const [changingPaymentMethod, setChangingPaymentMethod] = useState(false);
   const handleOpenChangePaymentMethod = () => {
     setChangingPaymentMethod(true);
@@ -43,7 +46,9 @@ const billing = () => {
               <div class="mt-8">
                 <div class="max-w-6xl mx-auto">
                   {addBillingInformation ? (
-                    <AddBillingInformationForm />
+                    <AddBillingInformationForm
+                      handleCloseAddBilling={handleCloseAddBilling}
+                    />
                   ) : (
                     <>
                       {false && (
