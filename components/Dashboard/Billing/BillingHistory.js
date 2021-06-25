@@ -1,22 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchSellerInvoces,
-  fetchSellerInvocesPagination,
-} from "redux/actions/customerInvoices";
+import { fetchInvoces, fetchInvocesPagination } from "redux/actions/invoices";
 import moment from "moment";
 import Pagination from "components/Layout/Pagination";
 import Spinner from "components/Layout/Spinner";
 const BillingHistory = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchSellerInvoces());
+    dispatch(fetchInvoces());
   }, []);
-  const customerInvoicesReducer = useSelector(
-    (state) => state.customerInvoicesReducer
-  );
+  const invoicesReducer = useSelector((state) => state.invoicesReducer);
   const handleChangePage = (url) => {
-    dispatch(fetchSellerInvocesPagination(url));
+    dispatch(fetchInvocesPagination(url));
   };
   return (
     <section aria-labelledby="billing_history_heading">
@@ -72,39 +67,37 @@ const BillingHistory = () => {
                   </thead>
 
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {customerInvoicesReducer.invoices.results &&
-                      customerInvoicesReducer.invoices.results.map(
-                        (invoice) => (
-                          <tr>
-                            {console.log(invoice)}
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                              {moment(invoice.created).format("DD-MM-YYYY")}
-                            </td>
-                            {/* <td className="max-w-sm px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate">
+                    {invoicesReducer.invoices.results &&
+                      invoicesReducer.invoices.results.map((invoice) => (
+                        <tr>
+                          {console.log(invoice)}
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            {moment(invoice.created).format("DD-MM-YYYY")}
+                          </td>
+                          {/* <td className="max-w-sm px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate">
                             {invoice.lines.data[0].description}
                           </td> */}
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              {invoice.amount_paid}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              {invoice.currency}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                              <a
-                                href={invoice.invoice_pdf}
-                                target="_blank"
-                                className="text-orange-600 hover:text-orange-900"
-                              >
-                                Invoice PDF
-                              </a>
-                            </td>
-                          </tr>
-                        )
-                      )}
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            {invoice.amount_paid}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            {invoice.currency}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <a
+                              href={invoice.invoice_pdf}
+                              target="_blank"
+                              className="text-orange-600 hover:text-orange-900"
+                            >
+                              Invoice PDF
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
-                {!customerInvoicesReducer.invoices.results &&
-                  customerInvoicesReducer.is_loading && (
+                {!invoicesReducer.invoices.results &&
+                  invoicesReducer.is_loading && (
                     <div classNameName="flex justify-center py-3">
                       <Spinner />
                     </div>
@@ -114,12 +107,12 @@ const BillingHistory = () => {
           </div>
         </div>
       </div>
-      {customerInvoicesReducer.invoices &&
-        (customerInvoicesReducer.invoices.previous ||
-          customerInvoicesReducer.invoices.next) && (
+      {invoicesReducer.invoices &&
+        (invoicesReducer.invoices.previous ||
+          invoicesReducer.invoices.next) && (
           <Pagination
-            previous={customerInvoicesReducer.invoices.previous}
-            next={customerInvoicesReducer.invoices.next}
+            previous={invoicesReducer.invoices.previous}
+            next={invoicesReducer.invoices.next}
             changePage={handleChangePage}
           />
         )}

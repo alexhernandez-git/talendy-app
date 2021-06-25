@@ -28,8 +28,8 @@ import earningsReducer from "./earningsReducer";
 import foldersReducer from "./foldersReducer";
 import filesReducer from "./filesReducer";
 import moveFoldersReducer from "./moveFoldersReducer";
-import customerInvoicesReducer from "./customerInvoicesReducer";
 import portalReducer from "./portalReducer";
+import invoicesReducer from "./invoicesReducer";
 
 export default combineReducers({
   authReducer,
@@ -60,6 +60,6 @@ export default combineReducers({
   foldersReducer,
   filesReducer,
   moveFoldersReducer,
-  customerInvoicesReducer,
   portalReducer,
+  invoicesReducer,
 });

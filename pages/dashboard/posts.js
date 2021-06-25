@@ -23,27 +23,6 @@ const posts = () => {
             <main className="flex-1 relative pb-8 z-0 overflow-y-auto overflow-x-hidden px-4">
               <div className="mt-8">
                 <div className="max-w-6xl mx-auto">
-                  {/* Create user button */}
-                  <div className="flex justify-end items-center mb-2">
-                    <button className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 mr-2"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                        />
-                      </svg>
-                      New posts
-                    </button>
-                  </div>
-
                   {/* Start users table */}
                   <div className="flex flex-col ">
                     <div className="overflow-x-auto">
