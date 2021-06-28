@@ -5,9 +5,12 @@ import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import countries from "data/countries";
 import { useDispatch } from "react-redux";
 import { addBillingInformation } from "redux/actions/portal";
+import Spinner from "components/Layout/Spinner";
+import { useSelector } from "react-redux";
 
 const AddBillingInformationForm = ({ handleCloseAddBilling }) => {
   const dispatch = useDispatch();
+  const portalReducer = useSelector((state) => state.portalReducer);
   const stripe = useStripe();
   const elements = useElements();
   const [stripeError, setStripeError] = useState(null);
@@ -686,8 +689,13 @@ const AddBillingInformationForm = ({ handleCloseAddBilling }) => {
                 />
                 <button
                   type="submit"
-                  className=" bg-gradient-to-r from-orange-500 to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:to-pink-700"
+                  className=" bg-gradient-to-r from-orange-500 to-pink-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center items-center text-sm font-medium text-white hover:to-pink-700"
                 >
+                  {portalReducer.adding_billing_information && (
+                    <div className="mr-2">
+                      <Spinner />
+                    </div>
+                  )}
                   Save
                 </button>
               </div>

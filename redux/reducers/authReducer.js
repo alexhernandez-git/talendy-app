@@ -108,6 +108,7 @@ import {
   UPDATE_GEOLOCATION,
   UPDATE_GEOLOCATION_SUCCESS,
   UPDATE_GEOLOCATION_FAIL,
+  SET_PAYMENT_METHODS,
 } from "../types";
 
 const initialState = {
@@ -932,6 +933,14 @@ export default function authReducer(state = initialState, action) {
         user: {
           ...state.user,
           created_solved_posts_count: --state.user.created_solved_posts_count,
+        },
+      };
+    case SET_PAYMENT_METHODS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          payment_methods: action.payload,
         },
       };
     default:

@@ -12,6 +12,7 @@ import Head from "next/head";
 import Spinner from "components/Layout/Spinner";
 import useAuthRequired from "hooks/useAuthRequired";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 const billing = () => {
   const page = BILLING_DASHBOARD_PAGE;
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
@@ -32,6 +33,32 @@ const billing = () => {
     setChangingPaymentMethod(false);
   };
   const [planPaymentMethod, setPlanPaymentMethod] = useState(null);
+  useEffect(() => {
+    if (
+      !authReducer.is_loading &&
+      !portalReducer.is_loading &&
+      !authReducer.changing_payment_method &&
+      !portalReducer.adding_billing_information &&
+      authReducer.user?.payment_methods
+    ) {
+      const planDefaultPaymentMethod =
+        portalReducer.portal.plan_default_payment_method;
+      const paymentMethod = authReducer.user?.payment_methods.find(
+        (pm) => pm.id == planDefaultPaymentMethod
+      );
+      console.log(authReducer.user?.payment_methods);
+      console.log(portalReducer.portal.plan_default_payment_method);
+
+      if (paymentMethod) {
+        setPlanPaymentMethod(paymentMethod);
+      }
+    }
+  }, [
+    authReducer.is_loading,
+    portalReducer.is_loading,
+    authReducer.changing_payment_method,
+    authReducer.adding_billing_information,
+  ]);
   return (
     <>
       <Head>

@@ -17,6 +17,7 @@ import {
   ADD_BILLING_INFORMATION,
   ADD_BILLING_INFORMATION_SUCCESS,
   ADD_BILLING_INFORMATION_FAIL,
+  SET_PAYMENT_METHODS,
 } from "../types";
 import { createAlert } from "./alerts";
 import { tokenConfig } from "./auth";
@@ -153,11 +154,15 @@ export const addBillingInformation =
         },
         tokenConfig(getState)
       )
-      .then((res) => {
+      .then(async (res) => {
         console.log(res.data);
-        dispatch({
+        await dispatch({
           type: ADD_BILLING_INFORMATION_SUCCESS,
-          payload: res.data,
+          payload: res.data?.portal,
+        });
+        await dispatch({
+          type: SET_PAYMENT_METHODS,
+          payload: res.data?.payment_methods,
         });
       })
       .catch(async (err) => {
