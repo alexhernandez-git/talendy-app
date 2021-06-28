@@ -37,7 +37,7 @@ const billing = () => {
     if (
       !authReducer.is_loading &&
       !portalReducer.is_loading &&
-      !authReducer.changing_payment_method &&
+      !portalReducer.changing_payment_method_portal &&
       !portalReducer.adding_billing_information &&
       authReducer.user?.payment_methods
     ) {
@@ -56,7 +56,7 @@ const billing = () => {
   }, [
     authReducer.is_loading,
     portalReducer.is_loading,
-    authReducer.changing_payment_method,
+    portalReducer.changing_payment_method_portal,
     authReducer.adding_billing_information,
   ]);
   return (

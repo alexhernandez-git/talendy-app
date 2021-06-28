@@ -18,6 +18,9 @@ import {
   ADD_BILLING_INFORMATION_SUCCESS,
   ADD_BILLING_INFORMATION_FAIL,
   SET_PAYMENT_METHODS,
+  CHANGE_PAYMENT_METHOD_PORTAL,
+  CHANGE_PAYMENT_METHOD_PORTAL_SUCCESS,
+  CHANGE_PAYMENT_METHOD_PORTAL_FAIL,
 } from "../types";
 import { createAlert } from "./alerts";
 import { tokenConfig } from "./auth";
@@ -171,6 +174,36 @@ export const addBillingInformation =
         );
         await dispatch({
           type: ADD_BILLING_INFORMATION_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
+
+export const changePaymentMethod =
+  (values, handleCloseChangePaymentMethod, resetForm) =>
+  async (dispatch, getState) => {
+    dispatch({
+      type: CHANGE_PAYMENT_METHOD_PORTAL,
+    });
+    await axios
+      .patch(
+        `${process.env.HOST}/api/portals/change_payment_method/`,
+        values,
+        tokenConfig(getState)
+      )
+      .then((res) => {
+        console.log(res.data);
+        dispatch({
+          type: CHANGE_PAYMENT_METHOD_PORTAL_SUCCESS,
+          payload: res.data,
+        });
+        resetForm({});
+        handleCloseChangePaymentMethod();
+      })
+      .catch((err) => {
+        dispatch(createAlert("ERROR", "Something went wrong"));
+        dispatch({
+          type: CHANGE_PAYMENT_METHOD_PORTAL_FAIL,
           payload: { data: err.response?.data, status: err.response?.status },
         });
       });

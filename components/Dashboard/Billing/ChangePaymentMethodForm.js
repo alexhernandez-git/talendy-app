@@ -3,10 +3,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  changePaymentMethod,
-  attachPlanPaymentMethod,
-} from "redux/actions/auth";
+import { attachPlanPaymentMethod } from "redux/actions/auth";
+import { changePaymentMethod } from "redux/actions/portal";
 import Spinner from "components/Layout/Spinner";
 const ChangePaymentMethodForm = ({
   handleCloseChangePaymentMethod,
@@ -114,7 +112,7 @@ const ChangePaymentMethodForm = ({
       <form onSubmit={formikPaymentMethods.handleSubmit}>
         <div className="shadow sm:rounded-md sm:overflow-hidden">
           <div className="bg-white py-6 px-4 sm:p-6 relative">
-            {authReducer.changing_payment_method && (
+            {portalReducer.changing_payment_method_portal && (
               <div className="absolute right-6">
                 <Spinner />
               </div>
