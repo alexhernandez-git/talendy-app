@@ -799,7 +799,7 @@ export const attachPlanPaymentMethod =
     });
     await axios
       .patch(
-        `${process.env.HOST}/api/users/attach_plan_payment_method/`,
+        `${process.env.HOST}/api/users/attach_payment_method/`,
         values,
         tokenConfig(getState)
       )

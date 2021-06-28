@@ -110,7 +110,7 @@ const privacy = () => {
         <div className="relative px-4 sm:px-6 lg:px-8">
           <div className="text-lg max-w-prose mx-auto">
             <h1>
-              {/* <span className="block text-base text-center text-cyan-600 font-semibold tracking-wide uppercase">
+              {/* <span className="block text-base text-center text-orange-600 font-semibold tracking-wide uppercase">
                 Privacy Policy
               </span> */}
               <span className="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
@@ -118,7 +118,7 @@ const privacy = () => {
               </span>
             </h1>
           </div>
-          <div className="mt-6 prose prose-cyan prose-lg text-gray-500 dark:text-gray-200 mx-auto">
+          <div className="mt-6 prose prose-orange prose-lg text-gray-500 dark:text-gray-200 mx-auto">
             <p>
               This Privacy Policy establishes the terms in which Talendy S.L.
               uses and protects the information that is provided by its users

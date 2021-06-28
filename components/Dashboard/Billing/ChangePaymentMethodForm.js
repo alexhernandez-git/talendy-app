@@ -14,6 +14,7 @@ const ChangePaymentMethodForm = ({
 }) => {
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
+  const portalReducer = useSelector((state) => state.portalReducer);
   const stripe = useStripe();
   const elements = useElements();
   const [stripeError, setStripeError] = useState(null);
@@ -82,11 +83,12 @@ const ChangePaymentMethodForm = ({
   useEffect(() => {
     if (
       !authReducer.is_loading &&
+      !portalReducer.is_loading &&
       planPaymentMethod &&
-      authReducer.user?.plan_payment_methods &&
+      authReducer.user?.payment_methods &&
       !authReducer.adding_payment_method
     ) {
-      const paymentMethods = authReducer.user?.plan_payment_methods.filter(
+      const paymentMethods = authReducer.user?.payment_methods.filter(
         (pm) => pm.id !== planPaymentMethod.id
       );
       setPaymentMethods(paymentMethods);
@@ -94,7 +96,7 @@ const ChangePaymentMethodForm = ({
   }, [planPaymentMethod, authReducer.adding_payment_method]);
   const formikPaymentMethods = useFormik({
     initialValues: {
-      payment_method_id: authReducer.user?.plan_default_payment_method,
+      payment_method_id: portalReducer.portal?.plan_default_payment_method,
     },
     validationSchema: Yup.object({
       payment_method_id: Yup.string().required("Payment method is required"),
@@ -131,8 +133,8 @@ const ChangePaymentMethodForm = ({
                 <fieldset>
                   <legend className="sr-only">Pricing plans</legend>
                   <ul className="relative bg-white rounded-md -space-y-px">
-                    {authReducer.user?.plan_payment_methods &&
-                      authReducer.user?.plan_payment_methods.map(
+                    {authReducer.user?.payment_methods &&
+                      authReducer.user?.payment_methods.map(
                         (payment_method, index) => (
                           <li key={payment_method.id}>
                             <div
@@ -144,7 +146,7 @@ const ChangePaymentMethodForm = ({
                                 <input
                                   name="payment_method_id"
                                   type="radio"
-                                  className="focus:ring-cyan-500 h-4 w-4 text-cyan-500 cursor-pointer border-gray-300"
+                                  className="focus:ring-orange-500 h-4 w-4 text-orange-500 cursor-pointer border-gray-300"
                                   aria-describedby="plan-option-pricing-0 plan-option-limit-0"
                                   onChange={formikPaymentMethods.handleChange}
                                   onBlur={formikPaymentMethods.handleBlur}
@@ -229,7 +231,7 @@ const ChangePaymentMethodForm = ({
                                         formik.touched.card_name &&
                                         formik.errors.card_name
                                           ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
-                                          : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
+                                          : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                                       }
                                       value={formik.values.card_name}
                                       onChange={formik.handleChange}
@@ -281,7 +283,7 @@ const ChangePaymentMethodForm = ({
                                       name="card_number"
                                       id="card_number"
                                       autoComplete="given-name"
-                                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
+                                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                                     />
                                   </div>
                                   {stripeError && (
@@ -308,14 +310,14 @@ const ChangePaymentMethodForm = ({
                               <button
                                 type="button"
                                 onClick={handleCloseAddPaymentMethod}
-                                className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
+                                className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
                               >
                                 Cancel
                               </button>
                               <button
                                 form="new-payment-method-form"
                                 type="submit"
-                                className="bg-gradient-to-r from-teal-500 to-cyan-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
+                                className="bg-orange-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-orange-700"
                               >
                                 Add
                               </button>
@@ -356,13 +358,13 @@ const ChangePaymentMethodForm = ({
             <button
               type="button"
               onClick={handleCloseChangePaymentMethod}
-              className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
+              className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="bg-gradient-to-r from-teal-500 to-cyan-600  border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
+              className="bg-orange-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-orange-700"
             >
               Change
             </button>
