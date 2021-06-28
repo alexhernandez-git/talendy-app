@@ -13,6 +13,9 @@ import {
   IS_URL_AVAILABLE_FAIL,
   RESET_NAME_AVAILABLE,
   RESET_URL_AVAILABLE,
+  ADD_BILLING_INFORMATION,
+  ADD_BILLING_INFORMATION_SUCCESS,
+  ADD_BILLING_INFORMATION_FAIL,
 } from "../types";
 import { HYDRATE } from "next-redux-wrapper";
 
@@ -20,6 +23,8 @@ const initialState = {
   is_loading: false,
   portal: null,
   error: null,
+  adding_billing_information: false,
+  add_billing_information_error: null,
   is_updating_portal: false,
   update_portal_error: null,
   name_available_loading: false,
@@ -121,6 +126,23 @@ export default function portalReducer(state = initialState, action) {
         ...state,
         url_available: false,
         url_available_error: null,
+      };
+    case ADD_BILLING_INFORMATION:
+      return {
+        ...state,
+        adding_billing_information: true,
+      };
+    case ADD_BILLING_INFORMATION_SUCCESS:
+      return {
+        ...state,
+        portal: action.payload,
+        adding_billing_information: false,
+      };
+    case ADD_BILLING_INFORMATION_FAIL:
+      return {
+        ...state,
+        adding_billing_information: false,
+        add_billing_information_error: action.payload,
       };
     default:
       return state;

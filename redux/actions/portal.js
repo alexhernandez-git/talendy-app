@@ -14,6 +14,9 @@ import {
   IS_URL_AVAILABLE_FAIL,
   RESET_NAME_AVAILABLE,
   RESET_URL_AVAILABLE,
+  ADD_BILLING_INFORMATION,
+  ADD_BILLING_INFORMATION_SUCCESS,
+  ADD_BILLING_INFORMATION_FAIL,
 } from "../types";
 import { createAlert } from "./alerts";
 import { tokenConfig } from "./auth";
@@ -135,3 +138,35 @@ export const updatePortaLogo = (logo) => async (dispatch, getState) => {
       });
     });
 };
+
+export const addBillingInformation =
+  (values, payment_method) => async (dispatch, getState) => {
+    dispatch({
+      type: ADD_BILLING_INFORMATION,
+    });
+    await axios
+      .patch(
+        `${process.env.HOST}/api/portals/add_billing_information/`,
+        {
+          ...values,
+          payment_method_id: payment_method.id,
+        },
+        tokenConfig(getState)
+      )
+      .then((res) => {
+        console.log(res.data);
+        dispatch({
+          type: ADD_BILLING_INFORMATION_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch(async (err) => {
+        await dispatch(
+          createAlert("ERROR", "Something went wrong with Stripe")
+        );
+        await dispatch({
+          type: ADD_BILLING_INFORMATION_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
