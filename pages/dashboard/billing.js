@@ -11,9 +11,11 @@ import AddBillingInformationForm from "components/Dashboard/Billing/AddBillingIn
 import Head from "next/head";
 import Spinner from "components/Layout/Spinner";
 import useAuthRequired from "hooks/useAuthRequired";
+import { useSelector } from "react-redux";
 const billing = () => {
   const page = BILLING_DASHBOARD_PAGE;
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
+  const portalReducer = useSelector((state) => state.portalReducer);
 
   const [addBillingInformation, setAddBillingInformation] = useState(false);
   const handleOpenAddBilling = () => {
@@ -51,7 +53,7 @@ const billing = () => {
                     />
                   ) : (
                     <>
-                      {false && (
+                      {portalReducer.portal?.plan_default_payment_method && (
                         <>
                           <div className="">
                             <div class="lg:grid lg:grid-cols-3 lg:gap-6">
@@ -95,7 +97,13 @@ const billing = () => {
                         </>
                       )}
 
-                      <div class={`mt-10 ${true ? "sm:mt-6" : "sm:mt-0"}`}>
+                      <div
+                        class={`mt-10 ${
+                          !portalReducer.portal?.plan_default_payment_method
+                            ? "sm:mt-6"
+                            : "sm:mt-0"
+                        }`}
+                      >
                         <div class="lg:grid lg:grid-cols-3 lg:gap-6">
                           <div class="lg:col-span-1">
                             <div class="px-4 sm:px-0">

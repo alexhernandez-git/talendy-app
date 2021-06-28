@@ -21,7 +21,7 @@ export const fetchInvoces = () => async (dispatch, getState) => {
     .catch((err) => {
       dispatch({
         type: FETCH_INVOICES_FAIL,
-        payload: { data: err.response.data, status: err.response.status },
+        payload: { data: err?.response?.data, status: err?.response?.status },
       });
     });
 };
@@ -41,7 +41,7 @@ export const fetchInvocesPagination = (url) => async (dispatch, getState) => {
     .catch((err) => {
       dispatch({
         type: FETCH_INVOICES_FAIL,
-        payload: { data: err.response.data, status: err.response.status },
+        payload: { data: err?.response?.data, status: err?.response?.status },
       });
     });
 };

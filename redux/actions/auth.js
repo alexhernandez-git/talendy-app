@@ -62,9 +62,6 @@ import {
   SET_PENDING_MESSAGES,
   UNSET_PENDING_NOTIFICATIONS,
   UNSET_PENDING_MESSAGES,
-  ADD_BILLING_INFORMATION,
-  ADD_BILLING_INFORMATION_SUCCESS,
-  ADD_BILLING_INFORMATION_FAIL,
   CHANGE_PAYMENT_METHOD,
   CHANGE_PAYMENT_METHOD_SUCCESS,
   CHANGE_PAYMENT_METHOD_FAIL,
@@ -654,35 +651,6 @@ export const unsetPendingMessages = () => async (dispatch, getState) => {
     type: UNSET_PENDING_MESSAGES,
   });
 };
-
-export const addBillingInformation =
-  (values, payment_method) => async (dispatch, getState) => {
-    dispatch({
-      type: ADD_BILLING_INFORMATION,
-    });
-    await axios
-      .patch(
-        `${process.env.HOST}/api/users/seller_add_payment_method/`,
-        {
-          ...values,
-          payment_method_id: payment_method.id,
-        },
-        tokenConfig(getState)
-      )
-      .then((res) => {
-        console.log(res.data);
-        dispatch({
-          type: ADD_BILLING_INFORMATION_SUCCESS,
-          payload: res.data,
-        });
-      })
-      .catch(async (err) => {
-        await dispatch({
-          type: ADD_BILLING_INFORMATION_FAIL,
-          payload: { data: err.response?.data, status: err.response?.status },
-        });
-      });
-  };
 
 export const loadCurrency = () => async (dispatch) => {
   // User Loading

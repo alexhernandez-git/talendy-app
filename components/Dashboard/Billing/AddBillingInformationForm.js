@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import countries from "data/countries";
 import { useDispatch } from "react-redux";
-import { addBillingInformation } from "redux/actions/auth";
+import { addBillingInformation } from "redux/actions/portal";
 
 const AddBillingInformationForm = ({ handleCloseAddBilling }) => {
   const dispatch = useDispatch();
@@ -153,7 +153,7 @@ const AddBillingInformationForm = ({ handleCloseAddBilling }) => {
                         className={
                           formik.touched.first_name && formik.errors.first_name
                             ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
-                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
+                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                         }
                         value={formik.values.first_name}
                         onChange={formik.handleChange}
@@ -200,7 +200,7 @@ const AddBillingInformationForm = ({ handleCloseAddBilling }) => {
                         className={
                           formik.touched.last_name && formik.errors.last_name
                             ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
-                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
+                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                         }
                         value={formik.values.last_name}
                         onChange={formik.handleChange}
@@ -247,7 +247,7 @@ const AddBillingInformationForm = ({ handleCloseAddBilling }) => {
                         className={
                           formik.touched.email && formik.errors.email
                             ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
-                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
+                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                         }
                         value={formik.values.email}
                         onChange={formik.handleChange}
@@ -305,7 +305,7 @@ const AddBillingInformationForm = ({ handleCloseAddBilling }) => {
                         className={
                           formik.touched.country && formik.errors.country
                             ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
-                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
+                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                         }
                         value={formik.values.country}
                         onChange={formik.handleChange}
@@ -366,7 +366,7 @@ const AddBillingInformationForm = ({ handleCloseAddBilling }) => {
                         className={
                           formik.touched.line1 && formik.errors.line1
                             ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
-                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
+                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                         }
                         value={formik.values.line1}
                         onChange={formik.handleChange}
@@ -409,7 +409,7 @@ const AddBillingInformationForm = ({ handleCloseAddBilling }) => {
                         className={
                           formik.touched.line2 && formik.errors.line2
                             ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
-                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
+                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                         }
                         value={formik.values.line2}
                         onChange={formik.handleChange}
@@ -457,7 +457,7 @@ const AddBillingInformationForm = ({ handleCloseAddBilling }) => {
                         className={
                           formik.touched.city && formik.errors.city
                             ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
-                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
+                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                         }
                         value={formik.values.city}
                         onChange={formik.handleChange}
@@ -506,7 +506,7 @@ const AddBillingInformationForm = ({ handleCloseAddBilling }) => {
                         className={
                           formik.touched.state && formik.errors.state
                             ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
-                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
+                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                         }
                         value={formik.values.state}
                         onChange={formik.handleChange}
@@ -556,7 +556,7 @@ const AddBillingInformationForm = ({ handleCloseAddBilling }) => {
                           formik.touched.postal_code &&
                           formik.errors.postal_code
                             ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
-                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
+                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                         }
                         value={formik.values.postal_code}
                         onChange={formik.handleChange}
@@ -616,7 +616,7 @@ const AddBillingInformationForm = ({ handleCloseAddBilling }) => {
                         className={
                           formik.touched.card_name && formik.errors.card_name
                             ? "block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
-                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
+                            : "block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                         }
                         value={formik.values.card_name}
                         onChange={formik.handleChange}
@@ -666,7 +666,7 @@ const AddBillingInformationForm = ({ handleCloseAddBilling }) => {
                         name="card_number"
                         id="card_number"
                         autoComplete="given-name"
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                       />
                     </div>
                     {stripeError && (

@@ -8,6 +8,7 @@ import { cancelSubscription, reactivateSubscription } from "redux/actions/auth";
 const BillingPlan = ({ handleOpenAddBilling }) => {
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
+  const portalReducer = useSelector((state) => state.portalReducer);
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => {
     setShowModal(true);
@@ -119,7 +120,7 @@ const BillingPlan = ({ handleOpenAddBilling }) => {
       <form action="#" method="POST">
         <div className="shadow sm:rounded-md sm:overflow-hidden">
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
-            {true && (
+            {!portalReducer.portal?.plan_default_payment_method && (
               <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 ">
                 <div className="flex">
                   <div className="flex-shrink-0">

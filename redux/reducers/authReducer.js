@@ -61,9 +61,6 @@ import {
   STRIPE_CONNECT,
   STRIPE_CONNECT_SUCCESS,
   STRIPE_CONNECT_FAIL,
-  ADD_BILLING_INFORMATION,
-  ADD_BILLING_INFORMATION_SUCCESS,
-  ADD_BILLING_INFORMATION_FAIL,
   CHANGE_PAYMENT_METHOD,
   CHANGE_PAYMENT_METHOD_SUCCESS,
   CHANGE_PAYMENT_METHOD_FAIL,
@@ -668,23 +665,7 @@ export default function authReducer(state = initialState, action) {
           pending_messages: false,
         },
       };
-    case ADD_BILLING_INFORMATION:
-      return {
-        ...state,
-        adding_billing_information: true,
-      };
-    case ADD_BILLING_INFORMATION_SUCCESS:
-      return {
-        ...state,
-        user: action.payload,
-        adding_billing_information: false,
-      };
-    case ADD_BILLING_INFORMATION_FAIL:
-      return {
-        ...state,
-        adding_billing_information: false,
-        add_billing_information_error: action.payload,
-      };
+
     case CHANGE_PAYMENT_METHOD:
       return {
         ...state,
