@@ -65,12 +65,6 @@ import {
   CHANGE_PAYMENT_METHOD_SUCCESS,
   CHANGE_PAYMENT_METHOD_FAIL,
   CHANGE_CURRENCY,
-  CANCEL_SUBSCRIPTION,
-  CANCEL_SUBSCRIPTION_SUCCESS,
-  CANCEL_SUBSCRIPTION_FAIL,
-  REACTIVATE_SUBSCRIPTION,
-  REACTIVATE_SUBSCRIPTION_SUCCESS,
-  REACTIVATE_SUBSCRIPTION_FAIL,
   BECOME_A_SELLER,
   BECOME_A_SELLER_SUCCESS,
   BECOME_A_SELLER_FAIL,
@@ -160,10 +154,7 @@ const initialState = {
   change_payment_method_error: null,
   fetching_invoices: false,
   fetch_invoice_error: null,
-  cancelling_subscription: false,
-  cancel_subscription_error: null,
-  reactivating_subscription: false,
-  reactivate_subscription_error: null,
+
   becoming_a_seller: false,
   become_a_seller_error: null,
   adding_payment_method: false,
@@ -684,42 +675,7 @@ export default function authReducer(state = initialState, action) {
         changing_payment_method: false,
         change_payment_method_error: action.payload,
       };
-    case CANCEL_SUBSCRIPTION:
-      return {
-        ...state,
-        cancelling_subscription: true,
-      };
-    case CANCEL_SUBSCRIPTION_SUCCESS:
-      return {
-        ...state,
-        cancelling_subscription: false,
-        cancel_subscription_error: null,
-        user: action.payload,
-      };
-    case CANCEL_SUBSCRIPTION_FAIL:
-      return {
-        ...state,
-        cancelling_subscription: false,
-        cancel_subscription_error: action.payload,
-      };
-    case REACTIVATE_SUBSCRIPTION:
-      return {
-        ...state,
-        reactivating_subscription: true,
-      };
-    case REACTIVATE_SUBSCRIPTION_SUCCESS:
-      return {
-        ...state,
-        reactivating_subscription: false,
-        reactivate_subscription_error: null,
-        user: action.payload,
-      };
-    case REACTIVATE_SUBSCRIPTION_FAIL:
-      return {
-        ...state,
-        reactivating_subscription: false,
-        reactivate_subscription_error: action.payload,
-      };
+
     case BECOME_A_SELLER:
       return {
         ...state,

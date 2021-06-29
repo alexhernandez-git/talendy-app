@@ -16,9 +16,11 @@ import useOutsideClick from "hooks/useOutsideClick";
 import { useRef } from "react";
 import { changePlan } from "redux/actions/portal";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 const billing = () => {
   const page = BILLING_DASHBOARD_PAGE;
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
+  const router = useRouter();
   const plansReducer = useSelector((state) => state.plansReducer);
   const portalReducer = useSelector((state) => state.portalReducer);
   const { portal } = portalReducer;
@@ -39,7 +41,7 @@ const billing = () => {
   useOutsideClick(modalRef, () => handleHideModal());
   const dispatch = useDispatch();
   const handleChangePlan = () => {
-    dispatch(changePlan({ plan_id: planSelected }, handleHideModal));
+    dispatch(changePlan({ plan_id: planSelected }, handleHideModal, router));
   };
   const ChangeSubscriptionModal = () => {
     return (

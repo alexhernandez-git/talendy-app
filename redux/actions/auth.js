@@ -66,12 +66,6 @@ import {
   CHANGE_PAYMENT_METHOD_SUCCESS,
   CHANGE_PAYMENT_METHOD_FAIL,
   CHANGE_CURRENCY,
-  CANCEL_SUBSCRIPTION,
-  CANCEL_SUBSCRIPTION_SUCCESS,
-  CANCEL_SUBSCRIPTION_FAIL,
-  REACTIVATE_SUBSCRIPTION,
-  REACTIVATE_SUBSCRIPTION_SUCCESS,
-  REACTIVATE_SUBSCRIPTION_FAIL,
   BECOME_A_SELLER,
   BECOME_A_SELLER_SUCCESS,
   BECOME_A_SELLER_FAIL,
@@ -710,60 +704,6 @@ export const changePaymentMethod =
         });
       });
   };
-
-export const cancelSubscription =
-  (handleHideModal) => async (dispatch, getState) => {
-    dispatch({
-      type: CANCEL_SUBSCRIPTION,
-    });
-    await axios
-      .patch(
-        `${process.env.HOST}/api/users/seller_cancel_subscription/`,
-        {},
-        tokenConfig(getState)
-      )
-      .then((res) => {
-        dispatch();
-
-        dispatch({
-          type: CANCEL_SUBSCRIPTION_SUCCESS,
-          payload: res.data,
-        });
-        handleHideModal();
-      })
-      .catch((err) => {
-        dispatch({
-          type: CANCEL_SUBSCRIPTION_FAIL,
-          payload: { data: err.response?.data, status: err.response?.status },
-        });
-      });
-  };
-
-export const reactivateSubscription = () => async (dispatch, getState) => {
-  dispatch({
-    type: REACTIVATE_SUBSCRIPTION,
-  });
-  await axios
-    .patch(
-      `${process.env.HOST}/api/users/seller_reactivate_subscription/`,
-      {},
-      tokenConfig(getState)
-    )
-    .then((res) => {
-      dispatch();
-
-      dispatch({
-        type: REACTIVATE_SUBSCRIPTION_SUCCESS,
-        payload: res.data,
-      });
-    })
-    .catch((err) => {
-      dispatch({
-        type: REACTIVATE_SUBSCRIPTION_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
-    });
-};
 
 export const becomeASeller = () => async (dispatch, getState) => {
   dispatch({

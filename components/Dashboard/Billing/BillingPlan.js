@@ -3,12 +3,16 @@ import useOutsideClick from "hooks/useOutsideClick";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { cancelSubscription, reactivateSubscription } from "redux/actions/auth";
+import {
+  cancelSubscription,
+  reactivateSubscription,
+} from "redux/actions/portal";
 
 const BillingPlan = ({ handleOpenAddBilling }) => {
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
   const portalReducer = useSelector((state) => state.portalReducer);
+  const { portal } = portalReducer;
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => {
     setShowModal(true);
@@ -50,7 +54,7 @@ const BillingPlan = ({ handleOpenAddBilling }) => {
             aria-labelledby="modal-headline"
             ref={modalRef}
           >
-            {authReducer.cancelling_subscription && (
+            {portalReducer.cancelling_subscription && (
               <div className="absolute right-5">
                 <Spinner />
               </div>
@@ -120,7 +124,7 @@ const BillingPlan = ({ handleOpenAddBilling }) => {
       <form action="#" method="POST">
         <div className="shadow sm:rounded-md sm:overflow-hidden">
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
-            {!portalReducer.portal?.plan_default_payment_method && (
+            {!portal?.plan_default_payment_method && (
               <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 ">
                 <div className="flex">
                   <div className="flex-shrink-0">
@@ -155,13 +159,15 @@ const BillingPlan = ({ handleOpenAddBilling }) => {
             <div>
               <div>
                 <span className="text-lg leading-6 font-medium text-gray-900">
-                  Silver Plan
+                  {portal.plan.plan_type === "SI" && "Silver"}
+                  {portal.plan.plan_type === "GO" && "Gold"}
+                  {portal.plan.plan_type === "PL" && "Platinum"} Plan
                 </span>{" "}
                 <span className="text-lg leading-6 font-medium text-gray-400">
                   |
                 </span>{" "}
                 <span className="text-lg leading-6 font-medium text-gray-900">
-                  100€
+                  {portal.plan.plan_unit_amount}€
                 </span>
               </div>
               <div className="mt-2">
@@ -173,14 +179,14 @@ const BillingPlan = ({ handleOpenAddBilling }) => {
           </div>
           <div className="flex justify-between bg-gray-50">
             <div className="px-4 py-3  text-right sm:px-6">
-              {authReducer.user?.current_plan_subscription?.to_be_cancelled ||
-              authReducer.user?.current_plan_subscription === null ? (
+              {portalReducer.portal?.plan?.to_be_cancelled ||
+              portalReducer.portal?.plan === null ? (
                 <button
                   type="button"
                   className="items-center bg-orange-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-orange-700"
                   onClick={handleReactivateSubscription}
                 >
-                  {authReducer.reactivating_subscription && (
+                  {portalReducer.reactivating_subscription && (
                     <span className="mr-3">
                       <Spinner />
                     </span>

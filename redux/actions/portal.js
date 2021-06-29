@@ -24,6 +24,12 @@ import {
   CHANGE_PLAN,
   CHANGE_PLAN_SUCCESS,
   CHANGE_PLAN_FAIL,
+  CANCEL_SUBSCRIPTION,
+  CANCEL_SUBSCRIPTION_SUCCESS,
+  CANCEL_SUBSCRIPTION_FAIL,
+  REACTIVATE_SUBSCRIPTION,
+  REACTIVATE_SUBSCRIPTION_SUCCESS,
+  REACTIVATE_SUBSCRIPTION_FAIL,
 } from "../types";
 import { createAlert } from "./alerts";
 import { tokenConfig } from "./auth";
@@ -213,7 +219,7 @@ export const changePaymentMethod =
   };
 
 export const changePlan =
-  (values, handleClose) => async (dispatch, getState) => {
+  (values, handleClose, router) => async (dispatch, getState) => {
     dispatch({
       type: CHANGE_PLAN,
     });
@@ -230,6 +236,7 @@ export const changePlan =
           payload: res.data,
         });
         await handleClose();
+        await router.push("/dashboard/billing");
       })
       .catch(async (err) => {
         console.log(err.response);
@@ -240,3 +247,53 @@ export const changePlan =
         });
       });
   };
+
+export const cancelSubscription =
+  (handleHideModal) => async (dispatch, getState) => {
+    dispatch({
+      type: CANCEL_SUBSCRIPTION,
+    });
+    await axios
+      .patch(
+        `${process.env.HOST}/api/portals/cancel_subscription/`,
+        {},
+        tokenConfig(getState)
+      )
+      .then((res) => {
+        dispatch({
+          type: CANCEL_SUBSCRIPTION_SUCCESS,
+          payload: res.data,
+        });
+        handleHideModal();
+      })
+      .catch((err) => {
+        dispatch({
+          type: CANCEL_SUBSCRIPTION_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
+
+export const reactivateSubscription = () => async (dispatch, getState) => {
+  dispatch({
+    type: REACTIVATE_SUBSCRIPTION,
+  });
+  await axios
+    .patch(
+      `${process.env.HOST}/api/portals/reactivate_subscription/`,
+      {},
+      tokenConfig(getState)
+    )
+    .then((res) => {
+      dispatch({
+        type: REACTIVATE_SUBSCRIPTION_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: REACTIVATE_SUBSCRIPTION_FAIL,
+        payload: { data: err.response?.data, status: err.response?.status },
+      });
+    });
+};

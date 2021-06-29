@@ -22,6 +22,12 @@ import {
   CHANGE_PLAN,
   CHANGE_PLAN_SUCCESS,
   CHANGE_PLAN_FAIL,
+  CANCEL_SUBSCRIPTION,
+  CANCEL_SUBSCRIPTION_SUCCESS,
+  CANCEL_SUBSCRIPTION_FAIL,
+  REACTIVATE_SUBSCRIPTION,
+  REACTIVATE_SUBSCRIPTION_SUCCESS,
+  REACTIVATE_SUBSCRIPTION_FAIL,
 } from "../types";
 import { HYDRATE } from "next-redux-wrapper";
 
@@ -43,6 +49,10 @@ const initialState = {
   change_payment_method_portal_error: null,
   is_changing_plan: false,
   change_plan_error: null,
+  cancelling_subscription: false,
+  cancel_subscription_error: null,
+  reactivating_subscription: false,
+  reactivate_subscription_error: null,
 };
 export default function portalReducer(state = initialState, action) {
   switch (action.type) {
@@ -190,6 +200,42 @@ export default function portalReducer(state = initialState, action) {
         ...state,
         is_changing_plan: false,
         change_plan_error: action.payload,
+      };
+    case CANCEL_SUBSCRIPTION:
+      return {
+        ...state,
+        cancelling_subscription: true,
+      };
+    case CANCEL_SUBSCRIPTION_SUCCESS:
+      return {
+        ...state,
+        cancelling_subscription: false,
+        cancel_subscription_error: null,
+        portal: action.payload,
+      };
+    case CANCEL_SUBSCRIPTION_FAIL:
+      return {
+        ...state,
+        cancelling_subscription: false,
+        cancel_subscription_error: action.payload,
+      };
+    case REACTIVATE_SUBSCRIPTION:
+      return {
+        ...state,
+        reactivating_subscription: true,
+      };
+    case REACTIVATE_SUBSCRIPTION_SUCCESS:
+      return {
+        ...state,
+        reactivating_subscription: false,
+        reactivate_subscription_error: null,
+        portal: action.payload,
+      };
+    case REACTIVATE_SUBSCRIPTION_FAIL:
+      return {
+        ...state,
+        reactivating_subscription: false,
+        reactivate_subscription_error: action.payload,
       };
     default:
       return state;
