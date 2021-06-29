@@ -46,9 +46,9 @@ const Layout = ({ page, search, setSearch, children }) => {
   const menuRef = useRef();
   useOutsideClick(menuRef, () => handleCloseMenu());
   return (
-    <div className="h-screen bg-gray-50 flex overflow-hidden">
+    <div className="h-screen bg-gray-50 dark:bg-gray-900 flex overflow-hidden">
       {alert}
-      <div className="hidden w-28 bg-orange-200 overflow-y-auto md:block">
+      <div className="hidden w-28 bg-orange-200 dark:bg-orange-400 overflow-y-auto md:block">
         <div className="w-full py-6 flex flex-col items-center">
           <div className="flex-shrink-0 flex items-center">
             <Link href="/feed">
@@ -64,8 +64,8 @@ const Layout = ({ page, search, setSearch, children }) => {
               <span
                 className={
                   page === DASHBOARD_PAGE
-                    ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
-                    : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    ? "cursor-pointer bg-orange-400 dark:bg-orange-300 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    : "cursor-pointer text-orange-600 dark:text-white hover:bg-orange-400 dark:hover:bg-orange-300 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                 }
                 aria-current="page"
               >
@@ -74,7 +74,7 @@ const Layout = ({ page, search, setSearch, children }) => {
                   className={
                     page === DASHBOARD_PAGE
                       ? "text-white h-6 w-6"
-                      : "text-orange-600 group-hover:text-white h-6 w-6"
+                      : "text-orange-600 dark:text-white group-hover:text-white h-6 w-6"
                   }
                   fill="none"
                   viewBox="0 0 24 24"
@@ -95,8 +95,8 @@ const Layout = ({ page, search, setSearch, children }) => {
                 className={
                   page === MEMBERS_DASHBOARD_PAGE ||
                   page === USER_DETAIL_DASHBOARD_PAGE
-                    ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
-                    : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    ? "cursor-pointer bg-orange-400 dark:bg-orange-300 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    : "cursor-pointer text-orange-600 dark:text-white hover:bg-orange-400 dark:hover:bg-orange-300 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                 }
                 aria-current="page"
               >
@@ -106,7 +106,7 @@ const Layout = ({ page, search, setSearch, children }) => {
                     page === MEMBERS_DASHBOARD_PAGE ||
                     page === USER_DETAIL_DASHBOARD_PAGE
                       ? "text-white h-6 w-6"
-                      : "text-orange-600 group-hover:text-white h-6 w-6"
+                      : "text-orange-600 dark:text-white group-hover:text-white h-6 w-6"
                   }
                   fill="none"
                   viewBox="0 0 24 24"
@@ -126,8 +126,8 @@ const Layout = ({ page, search, setSearch, children }) => {
               <span
                 className={
                   page === COMMUNITIES_DASHBOARD_PAGE
-                    ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
-                    : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    ? "cursor-pointer bg-orange-400 dark:bg-orange-300 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    : "cursor-pointer text-orange-600 dark:text-white hover:bg-orange-400 dark:hover:bg-orange-300 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                 }
               >
                 <svg
@@ -135,7 +135,7 @@ const Layout = ({ page, search, setSearch, children }) => {
                   className={
                     page === COMMUNITIES_DASHBOARD_PAGE
                       ? "text-white h-6 w-6"
-                      : "text-orange-600 group-hover:text-white h-6 w-6"
+                      : "text-orange-600 dark:text-white group-hover:text-white h-6 w-6"
                   }
                   fill="none"
                   viewBox="0 0 24 24"
@@ -155,8 +155,8 @@ const Layout = ({ page, search, setSearch, children }) => {
               <span
                 className={
                   page === POSTS_DASHBOARD_PAGE
-                    ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
-                    : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    ? "cursor-pointer bg-orange-400 dark:bg-orange-300 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    : "cursor-pointer text-orange-600 dark:text-white hover:bg-orange-400 dark:hover:bg-orange-300 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                 }
               >
                 <svg
@@ -164,7 +164,7 @@ const Layout = ({ page, search, setSearch, children }) => {
                   className={
                     page === POSTS_DASHBOARD_PAGE
                       ? "text-white h-6 w-6"
-                      : "text-orange-600 group-hover:text-white h-6 w-6"
+                      : "text-orange-600 dark:text-white group-hover:text-white h-6 w-6"
                   }
                   fill="none"
                   viewBox="0 0 24 24"
@@ -185,15 +185,15 @@ const Layout = ({ page, search, setSearch, children }) => {
               <span
                 className={
                   page === SETTINGS_DASHBOARD_PAGE
-                    ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
-                    : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    ? "cursor-pointer bg-orange-400 dark:bg-orange-300 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    : "cursor-pointer text-orange-600 dark:text-white hover:bg-orange-400 dark:hover:bg-orange-300 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                 }
               >
                 <svg
                   className={
                     page === SETTINGS_DASHBOARD_PAGE
                       ? "text-white h-6 w-6"
-                      : "text-orange-600 group-hover:text-white h-6 w-6"
+                      : "text-orange-600 dark:text-white group-hover:text-white h-6 w-6"
                   }
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -221,8 +221,8 @@ const Layout = ({ page, search, setSearch, children }) => {
               <span
                 className={
                   page === BILLING_DASHBOARD_PAGE
-                    ? "cursor-pointer bg-orange-500 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
-                    : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    ? "cursor-pointer bg-orange-400 dark:bg-orange-300 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                    : "cursor-pointer text-orange-600 dark:text-white hover:bg-orange-400 dark:hover:bg-orange-300 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                 }
               >
                 <svg
@@ -230,7 +230,7 @@ const Layout = ({ page, search, setSearch, children }) => {
                   className={
                     page === BILLING_DASHBOARD_PAGE
                       ? "text-white h-6 w-6"
-                      : "text-orange-600 group-hover:text-white h-6 w-6"
+                      : "text-orange-600 dark:text-white group-hover:text-white h-6 w-6"
                   }
                   fill="none"
                   viewBox="0 0 24 24"
@@ -497,11 +497,11 @@ const Layout = ({ page, search, setSearch, children }) => {
 
       <div className="flex-1 flex flex-col overflow-hidden">
         <header className="w-full">
-          <div className="relative flex-shrink-0 h-16 bg-white border-b border-gray-200 shadow-sm flex">
+          <div className="relative flex-shrink-0 h-16 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600 shadow-sm flex">
             <button
               type="button"
               onMouseDown={handleToggleMenu}
-              className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500 md:hidden"
+              className="border-r border-gray-200 dark:border-gray-600 px-4 text-gray-500 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500 md:hidden"
             >
               <span className="sr-only">Open sidebar</span>
 
