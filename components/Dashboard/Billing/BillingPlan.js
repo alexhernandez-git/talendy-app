@@ -203,16 +203,19 @@ const BillingPlan = ({ handleOpenAddBilling }) => {
                 </button>
               )}
             </div>
-            <div className="px-4 py-3  text-right sm:px-6">
-              <Link href="/dashboard/manage-subscription">
-                <button
-                  type="button"
-                  className="items-center bg-orange-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-orange-700"
-                >
-                  Manage your subscription
-                </button>
-              </Link>
-            </div>
+            {!portalReducer.portal?.plan?.to_be_cancelled &&
+              portalReducer.portal?.plan !== null && (
+                <div className="px-4 py-3  text-right sm:px-6">
+                  <Link href="/dashboard/manage-subscription">
+                    <button
+                      type="button"
+                      className="items-center bg-orange-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-orange-700"
+                    >
+                      Manage your subscription
+                    </button>
+                  </Link>
+                </div>
+              )}
           </div>
         </div>
       </form>
