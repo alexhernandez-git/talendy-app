@@ -21,6 +21,9 @@ import {
   CHANGE_PAYMENT_METHOD_PORTAL,
   CHANGE_PAYMENT_METHOD_PORTAL_SUCCESS,
   CHANGE_PAYMENT_METHOD_PORTAL_FAIL,
+  CHANGE_PLAN,
+  CHANGE_PLAN_SUCCESS,
+  CHANGE_PLAN_FAIL,
 } from "../types";
 import { createAlert } from "./alerts";
 import { tokenConfig } from "./auth";
@@ -204,6 +207,35 @@ export const changePaymentMethod =
         dispatch(createAlert("ERROR", "Something went wrong"));
         dispatch({
           type: CHANGE_PAYMENT_METHOD_PORTAL_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
+
+export const changePlan =
+  (values, handleClose) => async (dispatch, getState) => {
+    dispatch({
+      type: CHANGE_PLAN,
+    });
+    await axios
+      .patch(
+        `${process.env.HOST}/api/portals/change_plan/`,
+        values,
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        console.log(res.data);
+        await dispatch({
+          type: CHANGE_PLAN_SUCCESS,
+          payload: res.data,
+        });
+        await handleClose();
+      })
+      .catch(async (err) => {
+        console.log(err.response);
+        await dispatch(createAlert("ERROR", "Something went wrong"));
+        await dispatch({
+          type: CHANGE_PLAN_FAIL,
           payload: { data: err.response?.data, status: err.response?.status },
         });
       });

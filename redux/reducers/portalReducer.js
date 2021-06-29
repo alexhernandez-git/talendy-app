@@ -19,6 +19,9 @@ import {
   CHANGE_PAYMENT_METHOD_PORTAL,
   CHANGE_PAYMENT_METHOD_PORTAL_SUCCESS,
   CHANGE_PAYMENT_METHOD_PORTAL_FAIL,
+  CHANGE_PLAN,
+  CHANGE_PLAN_SUCCESS,
+  CHANGE_PLAN_FAIL,
 } from "../types";
 import { HYDRATE } from "next-redux-wrapper";
 
@@ -38,6 +41,8 @@ const initialState = {
   url_available_error: null,
   changing_payment_method_portal: false,
   change_payment_method_portal_error: null,
+  is_changing_plan: false,
+  change_plan_error: null,
 };
 export default function portalReducer(state = initialState, action) {
   switch (action.type) {
@@ -167,6 +172,24 @@ export default function portalReducer(state = initialState, action) {
         ...state,
         changing_payment_method_portal: false,
         change_payment_method_portal_error: action.payload,
+      };
+    case CHANGE_PLAN:
+      return {
+        ...state,
+        is_changing_plan: true,
+      };
+    case CHANGE_PLAN_SUCCESS:
+      return {
+        ...state,
+        portal: action.payload,
+        is_changing_plan: false,
+        change_plan_error: null,
+      };
+    case CHANGE_PLAN_FAIL:
+      return {
+        ...state,
+        is_changing_plan: false,
+        change_plan_error: action.payload,
       };
     default:
       return state;

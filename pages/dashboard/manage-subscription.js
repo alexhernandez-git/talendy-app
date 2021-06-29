@@ -14,25 +14,33 @@ import useAuthRequired from "hooks/useAuthRequired";
 import { useSelector } from "react-redux";
 import useOutsideClick from "hooks/useOutsideClick";
 import { useRef } from "react";
+import { changePlan } from "redux/actions/portal";
+import { useDispatch } from "react-redux";
 const billing = () => {
   const page = BILLING_DASHBOARD_PAGE;
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
   const plansReducer = useSelector((state) => state.plansReducer);
   const portalReducer = useSelector((state) => state.portalReducer);
   const { portal } = portalReducer;
+  const [planSelected, setPlanSelected] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const handleShowModal = () => {
+  const handleShowModal = (plan_id) => {
+    setPlanSelected(plan_id);
     setShowModal(true);
   };
 
   const handleHideModal = () => {
+    setPlanSelected(null);
     if (showModal) {
       setShowModal(false);
     }
   };
   const modalRef = useRef();
   useOutsideClick(modalRef, () => handleHideModal());
-
+  const dispatch = useDispatch();
+  const handleChangePlan = () => {
+    dispatch(changePlan({ plan_id: planSelected }, handleHideModal));
+  };
   const ChangeSubscriptionModal = () => {
     return (
       <div
@@ -99,14 +107,20 @@ const billing = () => {
             <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
               <button
                 type="button"
-                className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-orange-600 text-base font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 sm:ml-3 sm:w-auto sm:text-sm"
+                onClick={handleChangePlan}
+                className="w-full inline-flex justify-center items-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-orange-600 text-base font-medium text-white hover:bg-orange-700 sm:ml-3 sm:w-auto sm:text-sm"
               >
+                {portalReducer.is_changing_plan && (
+                  <div className="mr-2">
+                    <Spinner />
+                  </div>
+                )}
                 Select plan
               </button>
               <button
                 type="button"
                 onClick={handleHideModal}
-                className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 sm:mt-0 sm:w-auto sm:text-sm"
+                className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm"
               >
                 Cancel
               </button>
@@ -168,7 +182,7 @@ const billing = () => {
                                 </span>
                               ) : (
                                 <span
-                                  onClick={handleShowModal}
+                                  onClick={handleShowModal.bind(this, plan.id)}
                                   class="mt-8 cursor-pointer block w-full bg-orange-500 border border-orange-600 rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-orange-600"
                                 >
                                   Select
@@ -195,26 +209,9 @@ const billing = () => {
                                     />
                                   </svg>
                                   <span class="text-sm text-gray-500">
-                                    Potenti felis, in cras at at ligula nunc.
-                                  </span>
-                                </li>
-
-                                <li class="flex space-x-3">
-                                  <svg
-                                    class="flex-shrink-0 h-5 w-5 text-green-500"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                    aria-hidden="true"
-                                  >
-                                    <path
-                                      fill-rule="evenodd"
-                                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                      clip-rule="evenodd"
-                                    />
-                                  </svg>
-                                  <span class="text-sm text-gray-500">
-                                    Orci neque eget pellentesque.
+                                    {plan.type === "SI" && 50}
+                                    {plan.type === "GO" && 100}
+                                    {plan.type === "PL" && 200} members max.
                                   </span>
                                 </li>
                               </ul>
