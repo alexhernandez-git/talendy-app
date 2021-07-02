@@ -383,15 +383,48 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                           aria-activedescendant="listbox-option-0"
                         >
                           <li
-                            onClick={handleChangePrivacity.bind(this, "AN")}
+                            onClick={handleChangePrivacity.bind(this, "BA")}
                             className="text-gray-900 dark:text-white  dark:hover:bg-gray-900 hover:bg-gray-100 dark:hover:text-white cursor-pointer select-none relative p-4 text-sm"
                             id="listbox-option-0"
                             role="option"
                           >
                             <div className="flex flex-col">
                               <div className="flex justify-between">
-                                <p className="font-semibold">Anyone</p>
-                                {formik.values.privacity === "AN" && (
+                                <p className="font-semibold">Basic</p>
+                                {formik.values.privacity === "BA" && (
+                                  <span className="text-gray-900 dark:text-white">
+                                    <svg
+                                      className="h-5 w-5"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                      aria-hidden="true"
+                                    >
+                                      <path
+                                        fillRule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clipRule="evenodd"
+                                      />
+                                    </svg>
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-gray-500 dark:text-gray-300 mt-2">
+                                Everyone can ask to help you.
+                              </p>
+                            </div>
+                          </li>
+
+                          <li
+                            onClick={handleChangePrivacity.bind(this, "MA")}
+                            className="text-gray-900 dark:text-white  dark:hover:bg-gray-900 hover:bg-gray-100 dark:hover:text-white cursor-pointer select-none relative p-4 text-sm"
+                            id="listbox-option-0"
+                            role="option"
+                          >
+                            <div className="flex flex-col">
+                              <div className="flex justify-between">
+                                <p className="font-semibold">Manager</p>
+                                {formik.values.privacity === "MA" && (
                                   <span className="text-gray-900 dark:text-white">
                                     <svg
                                       className="h-5 w-5"
@@ -415,17 +448,15 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                             </div>
                           </li>
                           <li
-                            onClick={handleChangePrivacity.bind(this, "CO")}
+                            onClick={handleChangePrivacity.bind(this, "AD")}
                             className="text-gray-900 dark:text-white  dark:hover:bg-gray-900 hover:bg-gray-100 dark:hover:text-white cursor-pointer select-none relative p-4 text-sm"
                             id="listbox-option-0"
                             role="option"
                           >
                             <div className="flex flex-col">
                               <div className="flex justify-between">
-                                <p className="font-semibold">
-                                  Connections only
-                                </p>
-                                {formik.values.privacity === "CO" && (
+                                <p className="font-semibold">Admin</p>
+                                {formik.values.privacity === "AD" && (
                                   <span className="text-gray-900 dark:text-white">
                                     <svg
                                       className="h-5 w-5"
