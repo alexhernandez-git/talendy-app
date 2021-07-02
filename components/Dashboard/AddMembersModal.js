@@ -628,7 +628,7 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                     </p>
                   )}
                 </div>
-                <div className="sm:col-span-2">
+                {/* <div className="sm:col-span-2">
                   <div className="mt-1 relative">
                     <textarea
                       id="message"
@@ -668,7 +668,7 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                       {formik.errors.message}
                     </p>
                   )}
-                </div>
+                </div> */}
                 <div className="sm:col-span-2">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-100">
                     Photo
