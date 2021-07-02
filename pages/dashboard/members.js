@@ -5,9 +5,31 @@ import React from "react";
 import Head from "next/head";
 import Spinner from "components/Layout/Spinner";
 import useAuthRequired from "hooks/useAuthRequired";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useRef } from "react";
+import useOutsideClick from "hooks/useOutsideClick";
+import AddMembersModal from "components/Dashboard/AddMembersModal";
+
 const users = () => {
   const page = MEMBERS_DASHBOARD_PAGE;
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
+  const dispatch = useDispatch();
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    if (modalOpen) {
+      setModalOpen(false);
+    }
+  };
+  const handleToggleModal = () => {
+    setModalOpen(!modalOpen);
+  };
+  const modalRef = useRef();
+  useOutsideClick(modalRef, () => handleCloseModal());
 
   return (
     <>
@@ -30,7 +52,22 @@ const users = () => {
                       <span class="relative z-0 inline-flex shadow-sm rounded-3xl">
                         <button
                           type="button"
-                          class="-ml-px relative inline-flex items-center px-4 py-2 rounded-3xl border border-gray-300  text-sm font-medium text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                          class="-ml-px relative inline-flex items-center px-4 py-2 rounded-l-3xl border border-gray-300  text-sm font-medium text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5 mr-2"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                          </svg>
+                          Resend access
+                        </button>
+                        <button
+                          type="button"
+                          class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-3xl border border-gray-300  text-sm font-medium text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +86,10 @@ const users = () => {
                         </span>
                       </div>
                     </div>
-                    <button className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600">
+                    <button
+                      onClick={handleOpenModal}
+                      className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-3xl shadow-sm text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:to-pink-600"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-5 w-5 mr-2"
@@ -64,7 +104,7 @@ const users = () => {
                           d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                         />
                       </svg>
-                      New member
+                      Add member
                     </button>
                   </div>
 
@@ -123,9 +163,14 @@ const users = () => {
                                   scope="col"
                                   className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider "
                                 >
+                                  Active
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider "
+                                >
                                   Role
                                 </th>
-
                                 <th
                                   scope="col"
                                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider "
@@ -188,11 +233,26 @@ const users = () => {
                                   </span>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-center">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-6 w-6 text-green-500 text-center m-auto"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M5 13l4 4L19 7"
+                                    />
+                                  </svg>
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap text-center">
                                   <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full uppercase bg-gray-100 text-gray-800">
                                     BASIC
                                   </span>
                                 </td>
-
                                 <td className="px-6 py-4 whitespace-nowrap">
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -271,6 +331,12 @@ const users = () => {
               </div>
             </main>
           </Layout>
+          <AddMembersModal
+            modalOpen={modalOpen}
+            handleToggleModal={handleToggleModal}
+            modalRef={modalRef}
+            handleCloseModal={handleCloseModal}
+          />
         </>
       )}
     </>

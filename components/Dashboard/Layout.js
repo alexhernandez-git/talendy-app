@@ -527,7 +527,7 @@ const Layout = ({ page, search, setSearch, children }) => {
                 <div className="hidden md:flex items-center space-x-4 sm:space-x-6">
                   <div className="relative flex-shrink-0">
                     <div>
-                      <Link href="/">
+                      <Link href="/feed">
                         <button
                           type="button"
                           className=" rounded-full flex text-md items-center text-gray-500 dark:text-gray-100"

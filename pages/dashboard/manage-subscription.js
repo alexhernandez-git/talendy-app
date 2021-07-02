@@ -211,9 +211,7 @@ const billing = () => {
                                     />
                                   </svg>
                                   <span class="text-sm text-gray-500">
-                                    {plan.type === "SI" && 50}
-                                    {plan.type === "GO" && 100}
-                                    {plan.type === "PL" && 200} members max.
+                                    {plan.users_amount} members max.
                                   </span>
                                 </li>
                               </ul>
