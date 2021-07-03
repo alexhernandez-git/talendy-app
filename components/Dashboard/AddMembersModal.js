@@ -19,20 +19,20 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
 
-  const [privacityOpen, setPrivacityOpen] = useState(false);
-  const handleOpenPrivacity = () => {
-    setPrivacityOpen(true);
+  const [roleOpen, setRoleOpen] = useState(false);
+  const handleOpenRole = () => {
+    setRoleOpen(true);
   };
-  const handleClosePrivacity = () => {
-    if (privacityOpen) {
-      setPrivacityOpen(false);
+  const handleCloseRole = () => {
+    if (roleOpen) {
+      setRoleOpen(false);
     }
   };
-  const handleTogglePrivacity = () => {
-    setPrivacityOpen(!privacityOpen);
+  const handleToggleRole = () => {
+    setRoleOpen(!roleOpen);
   };
-  const privacityRef = useRef();
-  useOutsideClick(privacityRef, () => handleClosePrivacity());
+  const roleRef = useRef();
+  useOutsideClick(roleRef, () => handleCloseRole());
 
   const formik = useFormik({
     initialValues: {
@@ -40,11 +40,13 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
       last_name: "",
       email: "",
       password: "",
+      role: "BA",
       initial_karma_amount: 0,
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
       first_name: Yup.string().required("First name is required"),
+      role: Yup.string().max(2),
       initial_karma_amount: Yup.number().required(
         "Initial Karma amount are required"
       ),
@@ -58,21 +60,16 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
         .required("Password is required"),
     }),
     onSubmit: async (values, { resetForm }) => {
-      const fd = new FormData();
-      fd.append("first_name", values.first_name);
-      fd.append("last_name", values.last_name);
-      fd.append("email", values.email);
-
-      dispatch(createMember(fd, resetForm, handleCloseModal));
+      dispatch(createMember(values, resetForm, handleCloseModal));
     },
   });
   const handleChangeKarmasOffered = (value) => {
     formik.setFieldValue("initial_karma_amount", value);
   };
 
-  const handleChangePrivacity = (value) => {
-    formik.setFieldValue("privacity", value);
-    handleClosePrivacity();
+  const handleChangeRole = (value) => {
+    formik.setFieldValue("role", value);
+    handleCloseRole();
   };
 
   return (
@@ -203,32 +200,22 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                   <dd className="text-sm text-gray-900 flex justify-end">
                     <div>
                       <label id="listbox-label" className="sr-only">
-                        Change published status
+                        Change role
                       </label>
                       <div className="relative">
                         <div className="inline-flex shadow-sm rounded-md divide-x divide-gray-900">
                           <div className="relative z-0 inline-flex shadow-sm rounded-md divide-x divide-gray-200 dark:divide-gray-900">
                             <div className="relative inline-flex items-center dark:bg-gray-800 py-2 pl-3 pr-4 border border-transparent rounded-l-md shadow-sm text-gray-900 dark:text-white">
                               <>
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="h-5 w-5"
-                                  viewBox="0 0 20 20"
-                                  fill="currentColor"
-                                >
-                                  <path
-                                    fillRule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z"
-                                    clipRule="evenodd"
-                                  />
-                                </svg>
-                                <p className="ml-2.5 text-sm font-medium">
-                                  Basic
+                                <p className="text-sm font-medium">
+                                  {formik.values.role === "BA" && "Basic"}
+                                  {formik.values.role === "MA" && "Manager"}
+                                  {formik.values.role === "AD" && "Admin"}
                                 </p>
                               </>
                             </div>
                             <button
-                              onMouseDown={handleTogglePrivacity}
+                              onMouseDown={handleToggleRole}
                               type="button"
                               className="relative inline-flex items-center dark:bg-gray-800 p-2 rounded-l-none rounded-r-md text-sm font-medium text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
                               aria-haspopup="listbox"
@@ -257,9 +244,9 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                         </div>
 
                         <ul
-                          ref={privacityRef}
+                          ref={roleRef}
                           className={`${
-                            privacityOpen ? "block" : "hidden"
+                            roleOpen ? "block" : "hidden"
                           } origin-top-right absolute right-0 z-20 mt-2 w-full sm:w-72 rounded-md shadow-lg overflow-hidden bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-900 ring-1 ring-black ring-opacity-5 focus:outline-none`}
                           tabIndex="-1"
                           role="listbox"
@@ -267,7 +254,7 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                           aria-activedescendant="listbox-option-0"
                         >
                           <li
-                            onClick={handleChangePrivacity.bind(this, "BA")}
+                            onClick={handleChangeRole.bind(this, "BA")}
                             className="text-gray-900 dark:text-white  dark:hover:bg-gray-900 hover:bg-gray-100 dark:hover:text-white cursor-pointer select-none relative p-4 text-sm"
                             id="listbox-option-0"
                             role="option"
@@ -293,14 +280,14 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                                   </span>
                                 )}
                               </div>
-                              <p className="text-gray-500 dark:text-gray-300 mt-2">
+                              {/* <p className="text-gray-500 dark:text-gray-300 mt-2">
                                 Everyone can ask to help you.
-                              </p>
+                              </p> */}
                             </div>
                           </li>
 
                           <li
-                            onClick={handleChangePrivacity.bind(this, "MA")}
+                            onClick={handleChangeRole.bind(this, "MA")}
                             className="text-gray-900 dark:text-white  dark:hover:bg-gray-900 hover:bg-gray-100 dark:hover:text-white cursor-pointer select-none relative p-4 text-sm"
                             id="listbox-option-0"
                             role="option"
@@ -326,13 +313,13 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                                   </span>
                                 )}
                               </div>
-                              <p className="text-gray-500 dark:text-gray-300 mt-2">
+                              {/* <p className="text-gray-500 dark:text-gray-300 mt-2">
                                 Everyone can ask to help you.
-                              </p>
+                              </p> */}
                             </div>
                           </li>
                           <li
-                            onClick={handleChangePrivacity.bind(this, "AD")}
+                            onClick={handleChangeRole.bind(this, "AD")}
                             className="text-gray-900 dark:text-white  dark:hover:bg-gray-900 hover:bg-gray-100 dark:hover:text-white cursor-pointer select-none relative p-4 text-sm"
                             id="listbox-option-0"
                             role="option"
@@ -358,9 +345,9 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                                   </span>
                                 )}
                               </div>
-                              <p className="text-gray-500 dark:text-gray-300 mt-2">
+                              {/* <p className="text-gray-500 dark:text-gray-300 mt-2">
                                 Only your connections can ask to help you.
-                              </p>
+                              </p> */}
                             </div>
                           </li>
                         </ul>
