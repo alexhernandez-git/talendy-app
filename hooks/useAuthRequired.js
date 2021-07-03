@@ -69,7 +69,7 @@ const useAuthRequired = (page) => {
         router.push("/feed");
       } else {
         if (dashboardMatches) {
-          if (user?.member_role === "AD" || user?.member_role === "MA") {
+          if (user?.member?.role === "AD" || user?.member?.role === "MA") {
             setCanRender(true);
           } else {
             router.push("/feed");

@@ -127,7 +127,7 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                 id="applicant-information-title"
                 className="text-lg leading-6 font-medium text-white"
               >
-                Add member
+                New member
               </h2>
               <button
                 type="button"
@@ -160,7 +160,7 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                 <div>
                   <dd className="text-sm text-gray-500 dark:text-white">
                     <div className="flex justify-between mb-1">
-                      <span className="font-medium">Karma offered</span>
+                      <span className="font-medium">Initial Karma</span>
                       <span className="text-center text-sm text-orange-500 font-bold flex items-center ">
                         <svg
                           className="w-4 h-4 mr-1"
