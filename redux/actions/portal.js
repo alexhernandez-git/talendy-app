@@ -38,11 +38,11 @@ export const fetchPortal = () => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_PORTAL,
   });
+
   var host = window.location.host;
   var subdomain = host.split(".")[0];
-  console.log("subdomain", subdomain);
   await axios
-    .get(`${process.env.HOST}/api/portals/${subdomain}/`)
+    .get(`${process.env.HOST}/api/${subdomain}/portals/${subdomain}/`)
     .then(async (res) => {
       await dispatch({
         type: FETCH_PORTAL_SUCCESS,
@@ -59,8 +59,13 @@ export const fetchPortal = () => async (dispatch, getState) => {
 
 export const isNameAvailable = (values) => async (dispatch, getState) => {
   await dispatch({ type: IS_NAME_AVAILABLE });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .post(`${process.env.HOST}/api/portals/is_name_available/`, values)
+    .post(
+      `${process.env.HOST}/api/${subdomain}/portals/is_name_available/`,
+      values
+    )
     .then(async (res) => {
       await dispatch({
         type: IS_NAME_AVAILABLE_SUCCESS,
@@ -80,8 +85,13 @@ export const resetNameAvailable = () => async (dispatch, getState) => {
 
 export const isUrlAvailable = (values) => async (dispatch, getState) => {
   await dispatch({ type: IS_URL_AVAILABLE });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .post(`${process.env.HOST}/api/portals/is_url_available/`, values)
+    .post(
+      `${process.env.HOST}/api/${subdomain}/portals/is_url_available/`,
+      values
+    )
     .then(async (res) => {
       await dispatch({
         type: IS_URL_AVAILABLE_SUCCESS,
@@ -102,9 +112,13 @@ export const resetUrlAvailable = () => async (dispatch, getState) => {
 
 export const updatePortal = (portal) => async (dispatch, getState) => {
   dispatch({ type: UPDATE_PORTAL });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/portals/${getState().portalReducer.portal.url}/`,
+      `${process.env.HOST}/api/${subdomain}/portals/${
+        getState().portalReducer.portal.url
+      }/`,
       portal,
       tokenConfig(getState)
     )
@@ -131,9 +145,13 @@ export const updatePortaLogo = (logo) => async (dispatch, getState) => {
   const fd = new FormData();
   fd.append("logo", logo, logo.name);
   dispatch({ type: UPDATE_PORTAL });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/portals/${getState().portalReducer.portal.url}/`,
+      `${process.env.HOST}/api/${subdomain}/portals/${
+        getState().portalReducer.portal.url
+      }/`,
       fd,
       tokenConfig(getState)
     )
@@ -157,9 +175,11 @@ export const addBillingInformation =
     dispatch({
       type: ADD_BILLING_INFORMATION,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .patch(
-        `${process.env.HOST}/api/portals/add_billing_information/`,
+        `${process.env.HOST}/api/${subdomain}/portals/add_billing_information/`,
         {
           ...values,
           payment_method_id: payment_method.id,
@@ -194,9 +214,11 @@ export const changePaymentMethod =
     dispatch({
       type: CHANGE_PAYMENT_METHOD_PORTAL,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .patch(
-        `${process.env.HOST}/api/portals/change_payment_method/`,
+        `${process.env.HOST}/api/${subdomain}/portals/change_payment_method/`,
         values,
         tokenConfig(getState)
       )
@@ -223,9 +245,11 @@ export const changePlan =
     dispatch({
       type: CHANGE_PLAN,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .patch(
-        `${process.env.HOST}/api/portals/change_plan/`,
+        `${process.env.HOST}/api/${subdomain}/portals/change_plan/`,
         values,
         tokenConfig(getState)
       )
@@ -253,9 +277,11 @@ export const cancelSubscription =
     dispatch({
       type: CANCEL_SUBSCRIPTION,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .patch(
-        `${process.env.HOST}/api/portals/cancel_subscription/`,
+        `${process.env.HOST}/api/${subdomain}/portals/cancel_subscription/`,
         {},
         tokenConfig(getState)
       )
@@ -278,9 +304,11 @@ export const reactivateSubscription = () => async (dispatch, getState) => {
   dispatch({
     type: REACTIVATE_SUBSCRIPTION,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/portals/reactivate_subscription/`,
+      `${process.env.HOST}/api/${subdomain}/portals/reactivate_subscription/`,
       {},
       tokenConfig(getState)
     )

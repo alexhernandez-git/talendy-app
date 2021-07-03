@@ -31,9 +31,11 @@ export const fetchFiles =
           getState().foldersReducer.current_folders.length - 1
         ];
     }
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .get(
-        `${process.env.HOST}/api/posts/${
+        `${process.env.HOST}/api/${subdomain}/posts/${
           getState().collaborateRoomReducer.collaborate_room?.id
         }/files/?search=${search}&top_folder=${current_folder}`,
         tokenConfig(getState)
@@ -56,9 +58,11 @@ export const editFile = (file) => async (dispatch, getState) => {
   await dispatch({
     type: EDIT_FILE,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/posts/${
+      `${process.env.HOST}/api/${subdomain}/posts/${
         getState().collaborateRoomReducer.collaborate_room?.id
       }/files/${file.id}/`,
       file,
@@ -96,9 +100,11 @@ export const createFile = (file) => async (dispatch, getState) => {
     );
   }
 
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .post(
-      `${process.env.HOST}/api/posts/${
+      `${process.env.HOST}/api/${subdomain}/posts/${
         getState().collaborateRoomReducer.collaborate_room?.id
       }/files/`,
       fd,
@@ -132,7 +138,7 @@ export const deleteFiles = (id) => (dispatch, getState) => {
 
   axios
     .delete(
-      `${process.env.HOST}/api/posts/${
+      `${process.env.HOST}/api/${subdomain}/posts/${
         getState().collaborateRoomReducer.collaborate_room?.id
       }/files/${id}/`,
       tokenConfig(getState)
@@ -157,7 +163,7 @@ export const editSharedUsersFile = (file) => (dispatch, getState) => {
   });
   axios
     .patch(
-      `${process.env.HOST}/api/posts/${
+      `${process.env.HOST}/api/${subdomain}/posts/${
         getState().collaborateRoomReducer.collaborate_room?.id
       }/files/${file.id}/update_shared_users/`,
       file,

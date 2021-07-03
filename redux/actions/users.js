@@ -18,9 +18,11 @@ export const fetchUsers =
     await dispatch({
       type: FETCH_USERS,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .get(
-        `${process.env.HOST}/api/users/?search=${search}`,
+        `${process.env.HOST}/api/${subdomain}/users/?search=${search}`,
         getState().authReducer.is_authenticated ? tokenConfig(getState) : null
       )
       .then(async (res) => {
@@ -43,6 +45,8 @@ export const fetchMoreUsers = () => async (dispatch, getState) => {
     dispatch({
       type: FETCH_MORE_USERS,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .get(url, tokenConfig(getState))
       .then(async (res) => {
@@ -67,8 +71,14 @@ export const followUserInUsers = (id) => async (dispatch, getState) => {
   const values = {
     followed_user: id,
   };
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .post(`${process.env.HOST}/api/follows/`, values, tokenConfig(getState))
+    .post(
+      `${process.env.HOST}/api/${subdomain}/follows/`,
+      values,
+      tokenConfig(getState)
+    )
     .then(async (res) => {
       await dispatch({
         type: FOLLOW_USER_IN_USERS_SUCCESS,

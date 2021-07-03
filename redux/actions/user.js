@@ -27,8 +27,13 @@ export const fetchUser = (id) => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_USER,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .get(`${process.env.HOST}/api/users/${id}/`, tokenConfig(getState))
+    .get(
+      `${process.env.HOST}/api/${subdomain}/users/${id}/`,
+      tokenConfig(getState)
+    )
     .then(async (res) => {
       await dispatch({
         type: FETCH_USER_SUCCESS,
@@ -52,8 +57,14 @@ export const followUser =
     const values = {
       followed_user: id ? id : getState().userReducer.user?.id,
     };
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
-      .post(`${process.env.HOST}/api/follows/`, values, tokenConfig(getState))
+      .post(
+        `${process.env.HOST}/api/${subdomain}/follows/`,
+        values,
+        tokenConfig(getState)
+      )
       .then(async (res) => {
         await dispatch({
           type: FOLLOW_USER_SUCCESS,
@@ -75,9 +86,11 @@ export const unfollowUser = () => async (dispatch, getState) => {
   const values = {
     followed_user: getState().userReducer.user?.id,
   };
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .post(
-      `${process.env.HOST}/api/follows/unfollow/`,
+      `${process.env.HOST}/api/${subdomain}/follows/unfollow/`,
       values,
       tokenConfig(getState)
     )
@@ -102,8 +115,14 @@ export const connectUser = () => async (dispatch, getState) => {
   const values = {
     addressee: getState().userReducer.user?.id,
   };
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .post(`${process.env.HOST}/api/connections/`, values, tokenConfig(getState))
+    .post(
+      `${process.env.HOST}/api/${subdomain}/connections/`,
+      values,
+      tokenConfig(getState)
+    )
     .then(async (res) => {
       await dispatch({
         type: CONNECT_USER_SUCCESS,
@@ -124,9 +143,11 @@ export const acceptUserInvitation = () => async (dispatch, getState) => {
   const values = {
     requester: getState().userReducer.user?.id,
   };
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/connections/accept/`,
+      `${process.env.HOST}/api/${subdomain}/connections/accept/`,
       values,
       tokenConfig(getState)
     )
@@ -173,9 +194,11 @@ export const donateUser =
     if (values.email) {
       fd.append("email", values.email);
     }
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .patch(
-        `${process.env.HOST}/api/users/${id}/make_donation/`,
+        `${process.env.HOST}/api/${subdomain}/users/${id}/make_donation/`,
         fd,
         tokenConfig(getState)
       )

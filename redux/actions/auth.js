@@ -120,8 +120,13 @@ export const changeStatusFilter = (status) => async (dispatch, getState) => {
 export const loadUser = () => async (dispatch, getState) => {
   // User Loading
   await dispatch({ type: USER_LOADING });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .get(`${process.env.HOST}/api/users/get_user/`, tokenConfig(getState))
+    .get(
+      `${process.env.HOST}/api/${subdomain}/users/get_user/`,
+      tokenConfig(getState)
+    )
     .then((res) => {
       dispatch({
         type: USER_LOADED,
@@ -137,8 +142,10 @@ export const loadUser = () => async (dispatch, getState) => {
 export const getUserByJwt = (token) => async (dispatch, getState) => {
   // User Loading
   await dispatch({ type: USER_LOADING });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .post(`${process.env.HOST}/api/users/get_user_by_email_jwt/`, {
+    .post(`${process.env.HOST}/api/${subdomain}/users/get_user_by_email_jwt/`, {
       token: token,
     })
     .then((res) => {
@@ -151,8 +158,10 @@ export const getUserByJwt = (token) => async (dispatch, getState) => {
 };
 export const login =
   (data, handleClose, resetForm, router) => async (dispatch, getState) => {
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
-      .post(`${process.env.HOST}/api/users/login/`, data)
+      .post(`${process.env.HOST}/api/${subdomain}/users/login/`, data)
       .then(async (res) => {
         await dispatch({
           type: LOGIN_SUCCESS,
@@ -171,8 +180,13 @@ export const login =
 
 export const isEmailAvailable = (email) => async (dispatch, getState) => {
   dispatch({ type: IS_EMAIL_AVAILABLE });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .post(`${process.env.HOST}/api/users/is_email_available/`, email)
+    .post(
+      `${process.env.HOST}/api/${subdomain}/users/is_email_available/`,
+      email
+    )
     .then((res) => {
       dispatch({
         type: IS_EMAIL_AVAILABLE_SUCCESS,
@@ -192,8 +206,13 @@ export const resetEmailAvailable = () => async (dispatch, getState) => {
 };
 export const isUsernameAvailable = (email) => async (dispatch, getState) => {
   dispatch({ type: IS_USERNAME_AVAILABLE });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .post(`${process.env.HOST}/api/users/is_username_available/`, email)
+    .post(
+      `${process.env.HOST}/api/${subdomain}/users/is_username_available/`,
+      email
+    )
     .then((res) => {
       dispatch({
         type: IS_USERNAME_AVAILABLE_SUCCESS,
@@ -213,8 +232,13 @@ export const resetUsernameAvailable = () => async (dispatch, getState) => {
 };
 export const isCouponAvailable = (email) => async (dispatch, getState) => {
   dispatch({ type: IS_COUPON_AVAILABLE });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .post(`${process.env.HOST}/api/users/is_coupon_available/`, email)
+    .post(
+      `${process.env.HOST}/api/${subdomain}/users/is_coupon_available/`,
+      email
+    )
     .then((res) => {
       dispatch({
         type: IS_COUPON_AVAILABLE_SUCCESS,
@@ -238,8 +262,10 @@ export const register =
     await dispatch({
       type: REGISTER,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
-      .post(`${process.env.HOST}/api/users/signup/`, data)
+      .post(`${process.env.HOST}/api/${subdomain}/users/signup/`, data)
       .then(async (res) => {
         await dispatch({
           type: REGISTER_SUCCESS,
@@ -262,9 +288,11 @@ export const logout = () => async (dispatch, getState) => {
 
 export const sendVerificationEmail = () => async (dispatch, getState) => {
   dispatch({ type: SEND_VERIFICATION_EMAIL });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .get(
-      `${process.env.HOST}/api/users/send_verification_email/`,
+      `${process.env.HOST}/api/${subdomain}/users/send_verification_email/`,
       tokenConfig(getState)
     )
     .then(async (res) => {
@@ -284,8 +312,12 @@ export const sendVerificationEmail = () => async (dispatch, getState) => {
 export const verifyAccount = (token, router) => async (dispatch, getState) => {
   dispatch({ type: VERIFY_ACCOUNT });
   console.log(token);
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .post(`${process.env.HOST}/api/users/verify/`, { token: token })
+    .post(`${process.env.HOST}/api/${subdomain}/users/verify/`, {
+      token: token,
+    })
     .then(async (res) => {
       await dispatch({
         type: VERIFY_ACCOUNT_SUCCESS,
@@ -307,10 +339,15 @@ export const verifyAccount = (token, router) => async (dispatch, getState) => {
 export const validateChangeEmail =
   (token, router) => async (dispatch, getState) => {
     dispatch({ type: VALIDATE_CHANGE_EMAIL });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
-      .post(`${process.env.HOST}/api/users/validate_change_email/`, {
-        token: token,
-      })
+      .post(
+        `${process.env.HOST}/api/${subdomain}/users/validate_change_email/`,
+        {
+          token: token,
+        }
+      )
       .then((res) => {
         dispatch({
           type: VALIDATE_CHANGE_EMAIL_SUCCESS,
@@ -331,8 +368,13 @@ export const validateChangeEmail =
 export const forgetPassword =
   (values, handleClose, resetForm) => async (dispatch, getState) => {
     dispatch({ type: FORGET_PASSWORD });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
-      .post(`${process.env.HOST}/api/users/forget_password/`, values)
+      .post(
+        `${process.env.HOST}/api/${subdomain}/users/forget_password/`,
+        values
+      )
       .then(async (res) => {
         await dispatch({
           type: FORGET_PASSWORD_SUCCESS,
@@ -352,8 +394,10 @@ export const forgetPassword =
 
 export const resetPassword = (values, router) => async (dispatch, getState) => {
   dispatch({ type: RESET_PASSWORD });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .post(`${process.env.HOST}/api/users/reset_password/`, values)
+    .post(`${process.env.HOST}/api/${subdomain}/users/reset_password/`, values)
     .then((res) => {
       dispatch({
         type: RESET_PASSWORD_SUCCESS,
@@ -374,9 +418,13 @@ export const resetPassword = (values, router) => async (dispatch, getState) => {
 
 export const updateUser = (user) => async (dispatch, getState) => {
   dispatch({ type: UPDATE_USER });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/users/${getState().authReducer.user.id}/`,
+      `${process.env.HOST}/api/${subdomain}/users/${
+        getState().authReducer.user.id
+      }/`,
       user,
       tokenConfig(getState)
     )
@@ -400,9 +448,11 @@ export const updateUser = (user) => async (dispatch, getState) => {
 
 export const updateGeolocation = (data) => async (dispatch, getState) => {
   dispatch({ type: UPDATE_GEOLOCATION });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/users/${
+      `${process.env.HOST}/api/${subdomain}/users/${
         getState().authReducer.user.id
       }/update_geolocation/`,
       data,
@@ -426,9 +476,13 @@ export const updateUserPicture = (picture) => async (dispatch, getState) => {
   const fd = new FormData();
   fd.append("picture", picture, picture.name);
   dispatch({ type: UPDATE_USER });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/users/${getState().authReducer.user.id}/`,
+      `${process.env.HOST}/api/${subdomain}/users/${
+        getState().authReducer.user.id
+      }/`,
       fd,
       tokenConfig(getState)
     )
@@ -453,9 +507,11 @@ export const changePassword =
     dispatch({
       type: CHANGE_PASSWORD,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .post(
-        `${process.env.HOST}/api/users/change_password/`,
+        `${process.env.HOST}/api/${subdomain}/users/change_password/`,
         data,
         tokenConfig(getState)
       )
@@ -484,9 +540,11 @@ export const changeEmail = (data) => async (dispatch, getState) => {
   dispatch({
     type: CHANGE_EMAIL,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .post(
-      `${process.env.HOST}/api/users/change_email/`,
+      `${process.env.HOST}/api/${subdomain}/users/change_email/`,
       data,
       tokenConfig(getState)
     )
@@ -510,9 +568,11 @@ export const stripeConnect = (auth_code) => async (dispatch, getState) => {
   dispatch({
     type: STRIPE_CONNECT,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .post(
-      `${process.env.HOST}/api/users/stripe_connect/`,
+      `${process.env.HOST}/api/${subdomain}/users/stripe_connect/`,
       { auth_code: auth_code },
       tokenConfig(getState)
     )
@@ -537,9 +597,11 @@ export const paypalConnect =
     await dispatch({
       type: PAYPAL_CONNECT,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .post(
-        `${process.env.HOST}/api/users/paypal_connect/`,
+        `${process.env.HOST}/api/${subdomain}/users/paypal_connect/`,
         values,
         tokenConfig(getState)
       )
@@ -564,9 +626,13 @@ export const paypalConnect =
 export const toggleView = () => async (dispatch, getState) => {
   const view = getState().authReducer.user.seller_view;
 
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/users/${getState().authReducer.user.id}/`,
+      `${process.env.HOST}/api/${subdomain}/users/${
+        getState().authReducer.user.id
+      }/`,
       { seller_view: !view },
       tokenConfig(getState)
     )
@@ -588,9 +654,11 @@ export const inviteUser =
     dispatch({
       type: INVITE_USER,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .post(
-        `${process.env.HOST}/api/users/invite_user/`,
+        `${process.env.HOST}/api/${subdomain}/users/invite_user/`,
         values,
         tokenConfig(getState)
       )
@@ -650,8 +718,10 @@ export const loadCurrency = () => async (dispatch) => {
   // User Loading
   const currency = localStorage.getItem("currency");
   if (currency) return;
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .get(`${process.env.HOST}/api/users/get_currency/`)
+    .get(`${process.env.HOST}/api/${subdomain}/users/get_currency/`)
     .then(async (res) => {
       await dispatch({
         type: CHANGE_CURRENCY,
@@ -682,9 +752,11 @@ export const changePaymentMethod =
     dispatch({
       type: CHANGE_PAYMENT_METHOD,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .patch(
-        `${process.env.HOST}/api/users/seller_change_payment_method/`,
+        `${process.env.HOST}/api/${subdomain}/users/seller_change_payment_method/`,
         values,
         tokenConfig(getState)
       )
@@ -709,9 +781,11 @@ export const becomeASeller = () => async (dispatch, getState) => {
   dispatch({
     type: BECOME_A_SELLER,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/users/become_a_seller/`,
+      `${process.env.HOST}/api/${subdomain}/users/become_a_seller/`,
       {},
       tokenConfig(getState)
     )
@@ -737,9 +811,11 @@ export const attachPlanPaymentMethod =
     dispatch({
       type: ADD_PAYMENT_METHOD,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .patch(
-        `${process.env.HOST}/api/users/attach_payment_method/`,
+        `${process.env.HOST}/api/${subdomain}/users/attach_payment_method/`,
         values,
         tokenConfig(getState)
       )
@@ -765,9 +841,11 @@ export const attachPaymentMethod =
     dispatch({
       type: ADD_PAYMENT_METHOD,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .patch(
-        `${process.env.HOST}/api/users/attach_payment_method/`,
+        `${process.env.HOST}/api/${subdomain}/users/attach_payment_method/`,
         values,
         tokenConfig(getState)
       )
@@ -791,9 +869,13 @@ export const removeAccount = (router) => async (dispatch, getState) => {
   dispatch({
     type: REMOVE_ACCOUNT,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .delete(
-      `${process.env.HOST}/api/users/${getState().authReducer.user.id}/`,
+      `${process.env.HOST}/api/${subdomain}/users/${
+        getState().authReducer.user.id
+      }/`,
       tokenConfig(getState)
     )
     .then(async (res) => {
@@ -816,9 +898,11 @@ export const sendFeedback = (data, resetForm) => async (dispatch, getState) => {
   dispatch({
     type: LEAVE_FEEDBACK,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .post(
-      `${process.env.HOST}/api/users/leave_feedback/`,
+      `${process.env.HOST}/api/${subdomain}/users/leave_feedback/`,
       data,
       tokenConfig(getState)
     )

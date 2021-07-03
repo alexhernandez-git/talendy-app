@@ -45,8 +45,14 @@ const useUserConfirmation = ({ isOpen, onResolve, onReject }) => {
         config.headers["Authorization"] = `Token ${token}`;
       }
       setIsConfirming(true);
+      var host = window.location.host;
+      var subdomain = host.split(".")[0];
       await axios
-        .post(`${process.env.HOST}/api/users/confirm_user/`, values, config)
+        .post(
+          `${process.env.HOST}/api/${subdomain}/users/confirm_user/`,
+          values,
+          config
+        )
         .then((res) => {
           resetForm({});
           setIsConfirming(false);

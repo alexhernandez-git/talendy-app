@@ -6,7 +6,14 @@ import { dataURLtoFile } from "helpers";
 import { updateUserPicture } from "redux/actions/auth";
 import { updatePortaLogo } from "redux/actions/portal";
 
-const CropperModal = ({ show, handleClose, newImage, isPortal }) => {
+const CropperModal = ({
+  show,
+  handleClose,
+  newImage,
+  isPortal,
+  isMember,
+  setPicture,
+}) => {
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
   const [cropData, setCropData] = useState(null);
@@ -25,10 +32,14 @@ const CropperModal = ({ show, handleClose, newImage, isPortal }) => {
         cropper.getCroppedCanvas().toDataURL(),
         Math.random().toString(36) + newImage.name
       );
-      if (isPortal) {
-        dispatch(updatePortaLogo(file));
+      if (isMember) {
+        setPicture(file);
       } else {
-        dispatch(updateUserPicture(file));
+        if (isPortal) {
+          dispatch(updatePortaLogo(file));
+        } else {
+          dispatch(updateUserPicture(file));
+        }
       }
       handleClose();
     }

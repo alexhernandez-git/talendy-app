@@ -10,8 +10,13 @@ export const fetchInvoces = () => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_INVOICES,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .get(`${process.env.HOST}/api/plan-payments/`, tokenConfig(getState))
+    .get(
+      `${process.env.HOST}/api/${subdomain}/plan-payments/`,
+      tokenConfig(getState)
+    )
     .then(async (res) => {
       await dispatch({
         type: FETCH_INVOICES_SUCCESS,
@@ -30,6 +35,8 @@ export const fetchInvocesPagination = (url) => async (dispatch, getState) => {
   dispatch({
     type: FETCH_INVOICES,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .get(url, tokenConfig(getState))
     .then((res) => {

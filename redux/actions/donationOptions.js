@@ -9,8 +9,10 @@ export const fetchDonationOptions = () => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_DONATION_OPTIONS,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .get(`${process.env.HOST}/api/donation-options/`)
+    .get(`${process.env.HOST}/api/${subdomain}/donation-options/`)
     .then(async (res) => {
       await dispatch({
         type: FETCH_DONATION_OPTIONS_SUCCESS,

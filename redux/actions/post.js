@@ -14,9 +14,11 @@ export const fetchPost = (id) => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_POST,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .get(
-      `${process.env.HOST}/api/posts/${id}/`,
+      `${process.env.HOST}/api/${subdomain}/posts/${id}/`,
       getState().authReducer.is_authenticated ? tokenConfig(getState) : null
     )
     .then(async (res) => {
@@ -39,9 +41,11 @@ export const createPostContributeRequest =
       type: CREATE_POST_CONTRIBUTE_REQUEST,
     });
 
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .post(
-        `${process.env.HOST}/api/collaborate-requests/`,
+        `${process.env.HOST}/api/${subdomain}/collaborate-requests/`,
         values,
         tokenConfig(getState)
       )

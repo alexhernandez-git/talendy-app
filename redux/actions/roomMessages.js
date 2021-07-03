@@ -22,8 +22,13 @@ export const fetchRoomMessages = (id) => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_ROOM_MESSAGES,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .get(`${process.env.HOST}/api/posts/${id}/messages/`, tokenConfig(getState))
+    .get(
+      `${process.env.HOST}/api/${subdomain}/posts/${id}/messages/`,
+      tokenConfig(getState)
+    )
     .then(async (res) => {
       await dispatch({
         type: FETCH_ROOM_MESSAGES_SUCCESS,
@@ -50,9 +55,11 @@ export const fetchMessage =
     await dispatch({
       type: FETCH_ROOM_MESSAGE,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .get(
-        `${process.env.HOST}/api/posts/${chat__pk}/messages/${message__pk}/`,
+        `${process.env.HOST}/api/${subdomain}/posts/${chat__pk}/messages/${message__pk}/`,
         tokenConfig(getState)
       )
       .then(async (res) => {
@@ -80,6 +87,8 @@ export const fetchMoreRoomMessages = () => async (dispatch, getState) => {
     dispatch({
       type: FETCH_MORE_ROOM_MESSAGES,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .get(url, tokenConfig(getState))
       .then(async (res) => {

@@ -31,9 +31,11 @@ export const fetchFolders =
           getState().moveFoldersReducer.current_folders.length - 1
         ];
     }
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .get(
-        `${process.env.HOST}/api/posts/${
+        `${process.env.HOST}/api/${subdomain}/posts/${
           getState().collaborateRoomReducer.collaborate_room?.id
         }/folders/?search=${search}&top_folder=${current_folder}`,
         tokenConfig(getState)
@@ -68,9 +70,11 @@ export const moveFolder = (folder) => async (dispatch, getState) => {
   // User Loading
   await dispatch({ type: MOVE_FOLDER });
 
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/posts/${
+      `${process.env.HOST}/api/${subdomain}/posts/${
         getState().collaborateRoomReducer.collaborate_room?.id
       }/folders/${folder.id}/update_top_folder/`,
       folder,
@@ -95,9 +99,11 @@ export const moveFolder = (folder) => async (dispatch, getState) => {
 export const moveFile = (file) => async (dispatch, getState) => {
   // User Loading
   await dispatch({ type: MOVE_FILE });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/posts/${
+      `${process.env.HOST}/api/${subdomain}/posts/${
         getState().collaborateRoomReducer.collaborate_room?.id
       }/files/${file.id}/update_top_folder/`,
       file,

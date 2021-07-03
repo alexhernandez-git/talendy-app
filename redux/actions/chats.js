@@ -44,10 +44,12 @@ export const fetchChats =
     await dispatch({
       type: FETCH_CHATS,
     });
-    console.log(`${process.env.HOST}/api/chats/?search=${search}`);
+    console.log(`${process.env.HOST}/api/${subdomain}/chats/?search=${search}`);
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .get(
-        `${process.env.HOST}/api/chats/?search=${search}`,
+        `${process.env.HOST}/api/${subdomain}/chats/?search=${search}`,
         tokenConfig(getState)
       )
       .then(async (res) => {
@@ -77,9 +79,11 @@ export const getOrCreateChat = (user_id) => async (dispatch, getState) => {
     type: CREATE_CHAT,
   });
   console.log(user_id);
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .post(
-      `${process.env.HOST}/api/chats/`,
+      `${process.env.HOST}/api/${subdomain}/chats/`,
       { to_user: user_id },
       tokenConfig(getState)
     )
@@ -108,9 +112,11 @@ export const addChatToFeed = (id) => async (dispatch, getState) => {
   await dispatch({
     type: ADD_CHAT_TO_FEED,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .get(
-      `${process.env.HOST}/api/chats/${id}/retrieve_chat_feed/`,
+      `${process.env.HOST}/api/${subdomain}/chats/${id}/retrieve_chat_feed/`,
       tokenConfig(getState)
     )
     .then(async (res) => {

@@ -28,9 +28,11 @@ export const fetchContributeRoom = (id) => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_CONTRIBUTE_ROOM,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .get(
-      `${process.env.HOST}/api/posts/${id}/retrieve_collaborate_room/`,
+      `${process.env.HOST}/api/${subdomain}/posts/${id}/retrieve_collaborate_room/`,
       tokenConfig(getState)
     )
     .then(async (res) => {
@@ -59,9 +61,11 @@ export const updateMemberReview =
     await dispatch({
       type: UPDATE_MEMBER_REVIEW,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .patch(
-        `${process.env.HOST}/api/posts/${
+        `${process.env.HOST}/api/${subdomain}/posts/${
           getState().collaborateRoomReducer.collaborate_room?.id
         }/members/${id}/`,
         values,
@@ -84,9 +88,11 @@ export const updateSolution = (values) => async (dispatch, getState) => {
   await dispatch({
     type: UPDATE_SOLUTION,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/posts/${
+      `${process.env.HOST}/api/${subdomain}/posts/${
         getState().collaborateRoomReducer.collaborate_room?.id
       }/update_solution/`,
       values,
@@ -109,9 +115,11 @@ export const updateKarmaWinner = (values) => async (dispatch, getState) => {
   await dispatch({
     type: UPDATE_KARMA_WINNER,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/posts/${
+      `${process.env.HOST}/api/${subdomain}/posts/${
         getState().collaborateRoomReducer.collaborate_room?.id
       }/update_karma_winner/`,
       values,
@@ -133,9 +141,11 @@ export const stopCollaborating = (router) => async (dispatch, getState) => {
   await dispatch({
     type: STOP_COLLABORATING,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/posts/${
+      `${process.env.HOST}/api/${subdomain}/posts/${
         getState().collaborateRoomReducer.collaborate_room?.id
       }/stop_collaborating/`,
       { stop_collaborating_user: getState().authReducer.user?.id },
@@ -165,9 +175,11 @@ export const finalizePost =
     await dispatch({
       type: FINALIZE_POST,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .patch(
-        `${process.env.HOST}/api/posts/${
+        `${process.env.HOST}/api/${subdomain}/posts/${
           getState().collaborateRoomReducer.collaborate_room?.id
         }/finalize/`,
         {},

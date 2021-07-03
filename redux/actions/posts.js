@@ -40,8 +40,14 @@ export const createPost =
     await dispatch({
       type: CREATE_POST,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
-      .post(`${process.env.HOST}/api/posts/`, data, tokenConfig(getState))
+      .post(
+        `${process.env.HOST}/api/${subdomain}/posts/`,
+        data,
+        tokenConfig(getState)
+      )
       .then(async (res) => {
         await dispatch({
           type: CREATE_POST_SUCCESS,
@@ -72,9 +78,11 @@ export const updatePost =
       type: UPDATE_POST,
     });
     console.log("entra update post");
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .patch(
-        `${process.env.HOST}/api/posts/${id}/`,
+        `${process.env.HOST}/api/${subdomain}/posts/${id}/`,
         data,
         tokenConfig(getState)
       )
@@ -101,8 +109,13 @@ export const deletePost = (post, closeModal) => async (dispatch, getState) => {
     type: DELETE_POST,
   });
   console.log("entra update post");
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .delete(`${process.env.HOST}/api/posts/${post?.id}/`, tokenConfig(getState))
+    .delete(
+      `${process.env.HOST}/api/${subdomain}/posts/${post?.id}/`,
+      tokenConfig(getState)
+    )
     .then(async (res) => {
       await dispatch({
         type: DELETE_POST_SUCCESS,
@@ -141,9 +154,11 @@ export const fetchPosts = (page, filters) => async (dispatch, getState) => {
   const community = filters?.community ? filters.community : "";
   const status = filters?.status ? filters.status : "";
 
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .get(
-      `${process.env.HOST}/api/${url}/?search=${search}&community=${community}&status=${status}`,
+      `${process.env.HOST}/api/${subdomain}/${url}/?search=${search}&community=${community}&status=${status}`,
       getState().authReducer.is_authenticated ? tokenConfig(getState) : null
     )
     .then(async (res) => {
@@ -167,6 +182,8 @@ export const fetchMorePosts = () => async (dispatch, getState) => {
     dispatch({
       type: FETCH_MORE_POSTS,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .get(url, tokenConfig(getState))
       .then(async (res) => {
@@ -190,9 +207,11 @@ export const createContributeRequest =
       type: CREATE_CONTRIBUTE_REQUEST,
     });
 
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .post(
-        `${process.env.HOST}/api/collaborate-requests/`,
+        `${process.env.HOST}/api/${subdomain}/collaborate-requests/`,
         values,
         tokenConfig(getState)
       )

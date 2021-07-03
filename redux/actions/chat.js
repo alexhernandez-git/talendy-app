@@ -20,8 +20,13 @@ export const fetchChat = (id) => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_CHAT,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .get(`${process.env.HOST}/api/chats/${id}/`, tokenConfig(getState))
+    .get(
+      `${process.env.HOST}/api/${subdomain}/chats/${id}/`,
+      tokenConfig(getState)
+    )
     .then(async (res) => {
       try {
         await dispatch({

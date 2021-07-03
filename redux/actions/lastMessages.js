@@ -10,8 +10,13 @@ export const fetchLastMessages = () => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_LAST_MESSAGES,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .get(`${process.env.HOST}/api/chats/last_messages/`, tokenConfig(getState))
+    .get(
+      `${process.env.HOST}/api/${subdomain}/chats/last_messages/`,
+      tokenConfig(getState)
+    )
     .then(async (res) => {
       await dispatch({
         type: FETCH_LAST_MESSAGES_SUCCESS,

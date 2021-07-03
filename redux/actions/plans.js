@@ -5,8 +5,10 @@ export const fetchPlans = () => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_PLANS,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .get(`${process.env.HOST}/api/plans/`)
+    .get(`${process.env.HOST}/api/${subdomain}/plans/`)
     .then(async (res) => {
       await dispatch({
         type: FETCH_PLANS_SUCCESS,

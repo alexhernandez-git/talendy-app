@@ -24,8 +24,13 @@ export const fetchContributeRequests = () => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_CONTRIBUTE_REQUESTS,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .get(`${process.env.HOST}/api/collaborate-requests/`, tokenConfig(getState))
+    .get(
+      `${process.env.HOST}/api/${subdomain}/collaborate-requests/`,
+      tokenConfig(getState)
+    )
     .then(async (res) => {
       await dispatch({
         type: FETCH_CONTRIBUTE_REQUESTS_SUCCESS,
@@ -45,9 +50,11 @@ export const fetchContributeRequest =
     await dispatch({
       type: FETCH_CONTRIBUTE_REQUEST,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .get(
-        `${process.env.HOST}/api/collaborate-requests/${collaborate_request__pk}/`,
+        `${process.env.HOST}/api/${subdomain}/collaborate-requests/${collaborate_request__pk}/`,
         tokenConfig(getState)
       )
       .then(async (res) => {
@@ -75,6 +82,8 @@ export const fetchMoreContributeRequests = () => async (dispatch, getState) => {
     dispatch({
       type: FETCH_MORE_CONTRIBUTE_REQUESTS,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .get(url, tokenConfig(getState))
       .then(async (res) => {
@@ -97,9 +106,11 @@ export const acceptContributeRequest =
     await dispatch({
       type: ACCEPT_CONTRIBUTE_REQUEST,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .patch(
-        `${process.env.HOST}/api/collaborate-requests/${collaborate_request__pk}/accept/`,
+        `${process.env.HOST}/api/${subdomain}/collaborate-requests/${collaborate_request__pk}/accept/`,
         {},
         tokenConfig(getState)
       )
@@ -130,9 +141,11 @@ export const ignoreContributeRequest =
     await dispatch({
       type: IGNORE_CONTRIBUTE_REQUEST,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .delete(
-        `${process.env.HOST}/api/collaborate-requests/${collaborate_request__pk}/`,
+        `${process.env.HOST}/api/${subdomain}/collaborate-requests/${collaborate_request__pk}/`,
         tokenConfig(getState)
       )
       .then(async (res) => {

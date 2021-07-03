@@ -18,9 +18,11 @@ export const fetchInvitations = () => async (dispatch, getState) => {
     type: FETCH_INVITATIONS,
   });
 
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .get(
-      `${process.env.HOST}/api/connections/list_invitations/`,
+      `${process.env.HOST}/api/${subdomain}/connections/list_invitations/`,
       tokenConfig(getState)
     )
     .then(async (res) => {
@@ -44,9 +46,11 @@ export const acceptInvitation = (id) => async (dispatch, getState) => {
   const values = {
     requester: id,
   };
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/connections/accept/`,
+      `${process.env.HOST}/api/${subdomain}/connections/accept/`,
       values,
       tokenConfig(getState)
     )
@@ -75,9 +79,11 @@ export const ignoreInvitation = (id) => async (dispatch, getState) => {
     requester: id,
   };
   console.log(values);
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/connections/ignore/`,
+      `${process.env.HOST}/api/${subdomain}/connections/ignore/`,
       values,
       tokenConfig(getState)
     )

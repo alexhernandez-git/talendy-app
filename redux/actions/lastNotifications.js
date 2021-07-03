@@ -17,8 +17,13 @@ export const fetchLastNotifications = () => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_LAST_NOTIFICATIONS,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .get(`${process.env.HOST}/api/notifications/`, tokenConfig(getState))
+    .get(
+      `${process.env.HOST}/api/${subdomain}/notifications/`,
+      tokenConfig(getState)
+    )
     .then(async (res) => {
       await dispatch({
         type: FETCH_LAST_NOTIFICATIONS_SUCCESS,
@@ -38,9 +43,11 @@ export const addOrUpdateNotificationToFeed =
     await dispatch({
       type: ADD_NOTIFICATION_TO_FEED,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .get(
-        `${process.env.HOST}/api/notifications/${id}/`,
+        `${process.env.HOST}/api/${subdomain}/notifications/${id}/`,
         tokenConfig(getState)
       )
       .then(async (res) => {
@@ -72,9 +79,11 @@ export const setAllNotificationsRead = () => async (dispatch, getState) => {
   await dispatch({
     type: SET_ALL_NOTIFICATIONS_READ,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .get(
-      `${process.env.HOST}/api/notifications/set_all_notifications_read/`,
+      `${process.env.HOST}/api/${subdomain}/notifications/set_all_notifications_read/`,
       tokenConfig(getState)
     )
     .then(async (res) => {

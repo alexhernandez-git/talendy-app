@@ -10,8 +10,13 @@ export const fetchCommunities = () => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_COMMUNITIES,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .get(`${process.env.HOST}/api/communities/`, tokenConfig(getState))
+    .get(
+      `${process.env.HOST}/api/${subdomain}/communities/`,
+      tokenConfig(getState)
+    )
     .then(async (res) => {
       await dispatch({
         type: FETCH_COMMUNITIES_SUCCESS,

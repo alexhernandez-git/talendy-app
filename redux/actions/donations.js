@@ -13,8 +13,13 @@ export const fetchDonations = () => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_DONATIONS,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .get(`${process.env.HOST}/api/donations/`, tokenConfig(getState))
+    .get(
+      `${process.env.HOST}/api/${subdomain}/donations/`,
+      tokenConfig(getState)
+    )
     .then(async (res) => {
       console.log(res.data);
       await dispatch({
@@ -36,6 +41,8 @@ export const fetchMoreDonations = () => async (dispatch, getState) => {
     dispatch({
       type: FETCH_MORE_DONATIONS,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .get(url, tokenConfig(getState))
       .then(async (res) => {

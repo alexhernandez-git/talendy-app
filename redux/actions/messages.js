@@ -20,8 +20,13 @@ export const fetchMessages = (id) => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_MESSAGES,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .get(`${process.env.HOST}/api/chats/${id}/messages/`, tokenConfig(getState))
+    .get(
+      `${process.env.HOST}/api/${subdomain}/chats/${id}/messages/`,
+      tokenConfig(getState)
+    )
     .then(async (res) => {
       await dispatch({
         type: FETCH_MESSAGES_SUCCESS,
@@ -48,9 +53,11 @@ export const fetchMessage =
     await dispatch({
       type: FETCH_MESSAGE,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .get(
-        `${process.env.HOST}/api/chats/${chat__pk}/messages/${message__pk}/`,
+        `${process.env.HOST}/api/${subdomain}/chats/${chat__pk}/messages/${message__pk}/`,
         tokenConfig(getState)
       )
       .then(async (res) => {
@@ -78,6 +85,8 @@ export const fetchMoreMessages = () => async (dispatch, getState) => {
     dispatch({
       type: FETCH_MORE_MESSAGES,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .get(url, tokenConfig(getState))
       .then(async (res) => {

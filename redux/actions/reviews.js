@@ -16,11 +16,17 @@ export const fetchReviews =
       type: FETCH_REVIEWS,
     });
     console.log(
-      `${process.env.HOST}/api/reviews/${user ? user + "/user/" : ""}`
+      `${process.env.HOST}/api/${subdomain}/reviews/${
+        user ? user + "/user/" : ""
+      }`
     );
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .get(
-        `${process.env.HOST}/api/reviews/${user ? user + "/user/" : ""}`,
+        `${process.env.HOST}/api/${subdomain}/reviews/${
+          user ? user + "/user/" : ""
+        }`,
         tokenConfig(getState)
       )
       .then(async (res) => {
@@ -44,6 +50,8 @@ export const fetchMoreReviews = () => async (dispatch, getState) => {
     dispatch({
       type: FETCH_MORE_REVIEWS,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .get(url, tokenConfig(getState))
       .then(async (res) => {

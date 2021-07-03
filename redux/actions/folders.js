@@ -32,9 +32,11 @@ export const fetchFolders =
           getState().foldersReducer.current_folders.length - 1
         ];
     }
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .get(
-        `${process.env.HOST}/api/posts/${
+        `${process.env.HOST}/api/${subdomain}/posts/${
           getState().collaborateRoomReducer.collaborate_room?.id
         }/folders/?search=${search}&top_folder=${current_folder}`,
         tokenConfig(getState)
@@ -57,9 +59,11 @@ export const editFolder = (folder) => async (dispatch, getState) => {
   await dispatch({
     type: EDIT_FOLDER,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/posts/${
+      `${process.env.HOST}/api/${subdomain}/posts/${
         getState().collaborateRoomReducer.collaborate_room?.id
       }/folders/${folder.id}/`,
       folder,
@@ -94,9 +98,11 @@ export const createFolder = () => async (dispatch, getState) => {
         getState().foldersReducer.current_folders.length - 1
       ];
   }
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .post(
-      `${process.env.HOST}/api/posts/${
+      `${process.env.HOST}/api/${subdomain}/posts/${
         getState().collaborateRoomReducer.collaborate_room?.id
       }/folders/`,
       folder,
@@ -124,9 +130,11 @@ export const deleteFolders = (id) => async (dispatch, getState) => {
     payload: id,
   });
 
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .delete(
-      `${process.env.HOST}/api/posts/${
+      `${process.env.HOST}/api/${subdomain}/posts/${
         getState().collaborateRoomReducer.collaborate_room?.id
       }/folders/${id}/`,
       tokenConfig(getState)

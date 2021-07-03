@@ -13,14 +13,12 @@ import CreateEditPostEditor from "components/Editor/CreateEditPostEditor";
 import { createPost, updatePost } from "redux/actions/posts";
 import { useDispatch } from "react-redux";
 import CropperModal from "components/Pages/Settings/CropperModal";
+import { createMember } from "redux/actions/members";
 const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
-  const communitiesReducer = useSelector((state) => state.communitiesReducer);
-  const handleGoToProfile = () => {
-    router.push("/profile/posts");
-  };
+
   const [privacityOpen, setPrivacityOpen] = useState(false);
   const handleOpenPrivacity = () => {
     setPrivacityOpen(true);
@@ -38,157 +36,43 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
 
   const formik = useFormik({
     initialValues: {
-      members: [],
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: "",
+      initial_karma_amount: 0,
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
       first_name: Yup.string().required("First name is required"),
+      initial_karma_amount: Yup.number().required(
+        "Initial Karma amount are required"
+      ),
+
       last_name: Yup.string().required("Last name is required"),
       email: Yup.string()
         .email("Email is not valid")
         .required("Email is required"),
+      password: Yup.string()
+        .min(8, "Password must be at least 8 characters long ")
+        .required("Password is required"),
     }),
     onSubmit: async (values, { resetForm }) => {
       const fd = new FormData();
-      fd.append("title", values.title);
-      fd.append("text", values.text);
-      const currentImages = images.filter((image) => image.id);
-      const currentImagesId = currentImages.map((image) => image.id);
-      fd.append("current_images", JSON.stringify(currentImagesId));
+      fd.append("first_name", values.first_name);
+      fd.append("last_name", values.last_name);
+      fd.append("email", values.email);
 
-      const fileImages = images.filter((image) => !image.id);
-      for (let i = 0; i < fileImages.length; i++) {
-        try {
-          fd.append("images", fileImages[i], fileImages[i].name);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-      fd.append("privacity", values.privacity);
-      if (values.community) {
-        fd.append("community", values.community);
-      }
-      fd.append("karma_offered", values.karma_offered);
+      dispatch(createMember(fd, resetForm, handleCloseModal));
     },
   });
   const handleChangeKarmasOffered = (value) => {
-    formik.setFieldValue("karma_offered", value);
-  };
-  const [imagesOpen, setImagesOpen] = useState(false);
-  const handleOpenImages = () => {
-    setImagesOpen(true);
-  };
-  const handleCloseImages = () => {
-    setImagesOpen(false);
-  };
-  const [communitiesOpen, setCommunitiesOpen] = useState(false);
-  const handleOpenCommunities = () => {
-    setCommunitiesOpen(true);
-  };
-  const handleCloseCommunities = () => {
-    if (communitiesOpen) {
-      setCommunitiesOpen(false);
-    }
-  };
-  const handleToggleCommunities = () => {
-    setCommunitiesOpen(!communitiesOpen);
-  };
-  const communitiesRef = useRef();
-  useOutsideClick(communitiesRef, () => handleCloseCommunities());
-
-  const fileValidator = (file) => {
-    if (
-      file.type !== "image/jpeg" &&
-      file.type !== "image/png" &&
-      file.type !== "image/jpg"
-    ) {
-      alert("Only .png, .jpg, .jpeg files are allowed");
-      return {
-        code: "Type not allowed",
-        message: `Only .png, .jpg, .jpeg files are allowed`,
-      };
-    }
-    return null;
-  };
-  const [images, setImages] = useState([]);
-
-  const onDrop = useCallback((acceptedFilesNew) => {
-    // Do something with the files
-    let totalSize = 0;
-
-    for (let i; i < acceptedFilesNew.length; i++) {
-      totalSize += acceptedFilesNew[i]?.size;
-    }
-    const maxAllowedSize = 1073741824;
-    if (totalSize > maxAllowedSize) {
-      alert("Over max size");
-      return;
-    }
-    setImages(acceptedFilesNew);
-  }, []);
-  const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
-    useDropzone({
-      onDrop,
-      validator: fileValidator,
-      accept: "image/jpeg, image/png, image/jpg",
-      maxSize: 1073741824,
-    });
-  const handleRemoveFile = (file, index) => {
-    acceptedFiles.splice(acceptedFiles.indexOf(file), 1);
-    let imagesArr = [...images];
-    imagesArr.splice(index, 1);
-    setImages(imagesArr);
-  };
-  const handleChangeCommunity = (id) => {
-    formik.setFieldValue("community", id);
-
-    handleCloseCommunities();
-  };
-
-  const handleChangeTitle = (e) => {
-    formik.setFieldValue("title", e.target.innerText);
-  };
-  const handleChangeText = (e) => {
-    formik.setFieldValue("text", e.target.innerHTML);
+    formik.setFieldValue("initial_karma_amount", value);
   };
 
   const handleChangePrivacity = (value) => {
     formik.setFieldValue("privacity", value);
     handleClosePrivacity();
-  };
-
-  const handleResetImages = () => {
-    setImages([]);
-    acceptedFiles.splice(0, acceptedFiles.length);
-  };
-
-  const [showCropper, setShowCropper] = React.useState(false);
-  const [newImage, setNewImage] = React.useState({
-    image: null,
-    name: "",
-  });
-  const handleOpenCropper = (e) => {
-    setShowCropper(true);
-  };
-  const handleCloseCropper = () => {
-    setShowCropper(false);
-  };
-  const handleChangeImage = (e) => {
-    e.preventDefault();
-    let files;
-    if (e.dataTransfer) {
-      files = e.dataTransfer.files;
-    } else if (e.target) {
-      files = e.target.files;
-    }
-    if (files.length > 0) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setNewImage({ image: reader.result, name: files[0].name });
-        handleOpenCropper();
-      };
-      reader.readAsDataURL(files[0]);
-    }
   };
 
   return (
@@ -295,14 +179,14 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                             d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                           />
                         </svg>
-                        {formik.values.karma_offered}
+                        {formik.values.initial_karma_amount}
                       </span>
                     </div>
                     <Slider
-                      value={formik.values.karma_offered}
+                      value={formik.values.initial_karma_amount}
                       onChange={handleChangeKarmasOffered}
-                      max={authReducer.user?.karma_amount}
-                      min={100}
+                      max={1000}
+                      min={0}
                       railStyle={{}}
                       handleStyle={{
                         backgroundColor: "#f97316",
@@ -700,55 +584,6 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                     </p>
                   )}
                 </div> */}
-                <div className="sm:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-100">
-                    Photo
-                  </label>
-                  <div className="mt-1 flex items-center">
-                    {/* {user && user.picture ? (
-                      <img
-                        className="inline-block h-12 w-12 rounded-full"
-                        src={
-                          new RegExp(
-                            `${process.env.HOST}|https://talendy.s3.amazonaws.com`
-                          ).test(user.picture)
-                            ? user.picture
-                            : process.env.HOST + user.picture
-                        }
-                        alt=""
-                      ></img>
-                    ) : ( */}
-                    <span className="inline-block bg-gray-100 rounded-full overflow-hidden h-12 w-12">
-                      <svg
-                        className="h-12 w-12 text-gray-300"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                      </svg>
-                    </span>
-                    {/* )} */}
-
-                    <label
-                      className="ml-3 cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                      htmlFor="profile-img"
-                    >
-                      Change
-                    </label>
-                    <input
-                      id={"profile-img"}
-                      type="file"
-                      hidden
-                      // onChange={handleChangeImage}
-                    />
-                  </div>
-
-                  <CropperModal
-                    show={showCropper}
-                    handleClose={handleCloseCropper}
-                    newImage={newImage}
-                  />
-                </div>
               </form>
             </div>
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-right sm:px-6 rounded-b-xl">

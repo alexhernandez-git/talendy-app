@@ -14,8 +14,10 @@ export const fetchFollowing = () => async (dispatch, getState) => {
     type: FETCH_FOLLOWING,
   });
 
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .get(`${process.env.HOST}/api/follows/`, tokenConfig(getState))
+    .get(`${process.env.HOST}/api/${subdomain}/follows/`, tokenConfig(getState))
     .then(async (res) => {
       await dispatch({
         type: FETCH_FOLLOWING_SUCCESS,
@@ -37,9 +39,11 @@ export const unfollow = (id) => async (dispatch, getState) => {
   const values = {
     followed_user: id,
   };
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .post(
-      `${process.env.HOST}/api/follows/unfollow/`,
+      `${process.env.HOST}/api/${subdomain}/follows/unfollow/`,
       values,
       tokenConfig(getState)
     )

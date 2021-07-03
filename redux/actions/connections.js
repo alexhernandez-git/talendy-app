@@ -15,8 +15,13 @@ export const fetchConnections = () => async (dispatch, getState) => {
     type: FETCH_CONNECTIONS,
   });
 
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .get(`${process.env.HOST}/api/connections/`, tokenConfig(getState))
+    .get(
+      `${process.env.HOST}/api/${subdomain}/connections/`,
+      tokenConfig(getState)
+    )
     .then(async (res) => {
       await dispatch({
         type: FETCH_CONNECTIONS_SUCCESS,
@@ -39,9 +44,11 @@ export const removeConnection = (id) => async (dispatch, getState) => {
     user: id,
   };
   console.log(values);
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .patch(
-      `${process.env.HOST}/api/connections/remove/`,
+      `${process.env.HOST}/api/${subdomain}/connections/remove/`,
       values,
       tokenConfig(getState)
     )

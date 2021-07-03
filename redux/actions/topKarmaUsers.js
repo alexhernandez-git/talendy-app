@@ -13,9 +13,11 @@ export const fetchTopKarmaUsers = () => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_TOP_KARMA_USERS,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .get(
-      `${process.env.HOST}/api/users/list_users_with_most_karma/`,
+      `${process.env.HOST}/api/${subdomain}/users/list_users_with_most_karma/`,
       tokenConfig(getState)
     )
     .then(async (res) => {
@@ -39,8 +41,14 @@ export const followTopKarmaUser = (id) => async (dispatch, getState) => {
   const values = {
     followed_user: id,
   };
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .post(`${process.env.HOST}/api/follows/`, values, tokenConfig(getState))
+    .post(
+      `${process.env.HOST}/api/${subdomain}/follows/`,
+      values,
+      tokenConfig(getState)
+    )
     .then(async (res) => {
       await dispatch({
         type: FOLLOW_TOP_KARMA_USER_SUCCESS,
@@ -55,30 +63,3 @@ export const followTopKarmaUser = (id) => async (dispatch, getState) => {
       });
     });
 };
-
-// export const unfollowTopKarmaUser = (id) => async (dispatch, getState) => {
-//   await dispatch({
-//     type: STOP_FOLLOWING_TOP_KARMA_USER,
-//   });
-//   const values = {
-//     followed_user: id,
-//   };
-//   await axios
-//     .post(
-//       `${process.env.HOST}/api/follows/unfollow/`,
-//       values,
-//       tokenConfig(getState)
-//     )
-//     .then(async (res) => {
-//       await dispatch({
-//         type: STOP_FOLLOWING_TOP_KARMA_USER_SUCCESS,
-//         payload: id,
-//       });
-//     })
-//     .catch(async (err) => {
-//       await dispatch({
-//         type: STOP_FOLLOWING_TOP_KARMA_USER_FAIL,
-//         payload: { data: err.response?.data, status: err.response?.status },
-//       });
-//     });
-// };

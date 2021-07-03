@@ -15,8 +15,13 @@ export const fetchEarnings = () => async (dispatch, getState) => {
   await dispatch({
     type: FETCH_EARNINGS,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
-    .get(`${process.env.HOST}/api/earnings/`, tokenConfig(getState))
+    .get(
+      `${process.env.HOST}/api/${subdomain}/earnings/`,
+      tokenConfig(getState)
+    )
     .then(async (res) => {
       await dispatch({
         type: FETCH_EARNINGS_SUCCESS,
@@ -35,6 +40,8 @@ export const fetchEarningsPagination = (url) => async (dispatch, getState) => {
   dispatch({
     type: FETCH_EARNINGS,
   });
+  var host = window.location.host;
+  var subdomain = host.split(".")[0];
   await axios
     .get(url, tokenConfig(getState))
     .then((res) => {
@@ -57,9 +64,11 @@ export const withdrawFounds =
     await dispatch({
       type: WITHDRAW_FUNDS,
     });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
     await axios
       .post(
-        `${process.env.HOST}/api/earnings/withdraw_funds/`,
+        `${process.env.HOST}/api/${subdomain}/earnings/withdraw_funds/`,
         values,
         tokenConfig(getState)
       )
