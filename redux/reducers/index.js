@@ -31,6 +31,7 @@ import moveFoldersReducer from "./moveFoldersReducer";
 import portalReducer from "./portalReducer";
 import invoicesReducer from "./invoicesReducer";
 import plansReducer from "./plansReducer";
+import membersReducer from "./membersReducer";
 
 export default combineReducers({
   authReducer,
@@ -64,4 +65,5 @@ export default combineReducers({
   portalReducer,
   invoicesReducer,
   plansReducer,
+  membersReducer,
 });

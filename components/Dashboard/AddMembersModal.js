@@ -1,23 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { useRouter } from "next/router";
-import Editor from "components/Editor/Editor";
 import useOutsideClick from "hooks/useOutsideClick";
 import Slider from "rc-slider";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useSelector } from "react-redux";
-import { useCallback } from "react";
-import { useDropzone } from "react-dropzone";
-import CreateEditPostEditor from "components/Editor/CreateEditPostEditor";
-import { createPost, updatePost } from "redux/actions/posts";
 import { useDispatch } from "react-redux";
-import CropperModal from "components/Pages/Settings/CropperModal";
-import { createMember } from "redux/actions/members";
+import {
+  createMember,
+  isMemberEmailAvailable,
+  resetMemberEmailAvailable,
+} from "redux/actions/members";
+
 const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
+  const { email_available_error } = authReducer;
 
   const [roleOpen, setRoleOpen] = useState(false);
   const handleOpenRole = () => {
@@ -71,6 +71,16 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
     formik.setFieldValue("role", value);
     handleCloseRole();
   };
+
+  useEffect(() => {
+    if (formik.values.email != "") {
+      dispatch(resetMemberEmailAvailable());
+      const timeoutId = setTimeout(() => {
+        dispatch(isMemberEmailAvailable({ email: formik.values.email }));
+      }, 500);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [formik.values.email]);
 
   return (
     <div
@@ -457,12 +467,14 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                       type="email"
                       autocomplete="email"
                       className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm dark:focus:text-white bg-white border-gray-300  text-sm  focus:placeholder-gray-400 focus:text-gray-900 dark:bg-gray-600 ${
-                        formik.touched.email && formik.errors.email
+                        (formik.touched.email && formik.errors.email) ||
+                        email_available_error
                           ? "pr-10 border-red-300 text-red-600   placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
                           : " text-sm placeholder-gray-500  dark:placeholder-gray-300 dark:text-white  focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
                       }`}
                     />
-                    {formik.touched.email && formik.errors.email && (
+                    {((formik.touched.email && formik.errors.email) ||
+                      email_available_error) && (
                       <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                         <svg
                           className="h-5 w-5 text-red-500"
@@ -485,6 +497,17 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                       {formik.errors.email}
                     </p>
                   )}
+                  {email_available_error &&
+                    email_available_error?.data?.non_field_errors.map(
+                      (message, i) => (
+                        <p
+                          className="mt-2 text-sm text-red-600"
+                          id="email-error"
+                        >
+                          {message}
+                        </p>
+                      )
+                    )}
                 </div>
                 <div className="sm:col-span-2">
                   <div className="mt-1 relative">

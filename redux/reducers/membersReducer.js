@@ -5,6 +5,10 @@ import {
   CREATE_MEMBER,
   CREATE_MEMBER_SUCCESS,
   CREATE_MEMBER_FAIL,
+  IS_MEMBER_EMAIL_AVAILABLE,
+  IS_MEMBER_EMAIL_AVAILABLE_SUCCESS,
+  IS_MEMBER_EMAIL_AVAILABLE_FAIL,
+  RESET_MEMBER_EMAIL_AVAILABLE,
 } from "../types";
 import { HYDRATE } from "next-redux-wrapper";
 
@@ -24,20 +28,23 @@ const initialState = {
   update_member_error: null,
   is_deleting_member: false,
   delete_member_error: null,
-  is_creating_collaborate_request: false,
-  create_collaborate_request_error: null,
+  is_creating_member: false,
+  create_member_error: null,
+  member_email_available_loading: false,
+  member_email_available: false,
+  member_email_available_error: null,
 };
 export default function membersReducer(state = initialState, action) {
   switch (action.type) {
     // case HYDRATE:
     //   // Attention! This will overwrite client state! Real apps should use proper reconciliation.
     //   return { ...state, ...action.payload.initialDataReducer };
-    case FETCH_POSTS:
+    case FETCH_MEMBERS:
       return {
         ...state,
         is_loading: true,
       };
-    case FETCH_POSTS_SUCCESS:
+    case FETCH_MEMBERS_SUCCESS:
       return {
         ...state,
         is_loading: false,
@@ -46,7 +53,7 @@ export default function membersReducer(state = initialState, action) {
         },
         error: null,
       };
-    case FETCH_POSTS_FAIL:
+    case FETCH_MEMBERS_FAIL:
       return {
         ...state,
         is_loading: false,
@@ -58,27 +65,7 @@ export default function membersReducer(state = initialState, action) {
         },
         error: action.payload,
       };
-    case FETCH_MORE_POSTS:
-      return {
-        ...state,
-        is_fetching_more_members: true,
-      };
-    case FETCH_MORE_POSTS_SUCCESS:
-      return {
-        ...state,
-        is_fetching_more_members: false,
-        members: {
-          next: action.payload.next,
-          results: [...state.members.results, ...action.payload.results],
-        },
-        error: null,
-      };
-    case FETCH_MORE_POSTS_FAIL:
-      return {
-        ...state,
-        is_fetching_more_members: false,
-        error: action.payload,
-      };
+
     case CREATE_MEMBER:
       return {
         ...state,
@@ -90,73 +77,6 @@ export default function membersReducer(state = initialState, action) {
         is_creating_member: false,
         members: {
           ...state.members,
-          results: [action.payload, ...state.members.results],
-        },
-        create_member_error: null,
-      };
-    case CREATE_MEMBER_FAIL:
-      return {
-        ...state,
-        is_creating_member: false,
-        create_member_error: action.payload,
-      };
-    case UPDATE_POST:
-      return {
-        ...state,
-        is_updating_member: true,
-      };
-    case UPDATE_POST_SUCCESS:
-      return {
-        ...state,
-        members: {
-          ...state.members,
-          results: state.members.results.map((member) =>
-            member.id === action.payload.id ? action.payload : member
-          ),
-        },
-        is_updating_member: false,
-        update_member_error: null,
-      };
-    case UPDATE_POST_FAIL:
-      return {
-        ...state,
-        is_updating_member: false,
-        update_member_error: action.payload,
-      };
-    case DELETE_POST:
-      return {
-        ...state,
-        is_deleting_member: true,
-      };
-    case DELETE_POST_SUCCESS:
-      return {
-        ...state,
-        members: {
-          ...state.members,
-          results: state.members.results.filter(
-            (member) => member.id !== action.payload
-          ),
-        },
-        is_deleting_member: false,
-        delete_member_error: null,
-      };
-    case DELETE_POST_FAIL:
-      return {
-        ...state,
-        is_deleting_member: false,
-        delete_member_error: action.payload,
-      };
-    case CREATE_CONTRIBUTE_REQUEST:
-      return {
-        ...state,
-        is_creating_collaborate_request: true,
-      };
-    case CREATE_CONTRIBUTE_REQUEST_SUCCESS:
-      return {
-        ...state,
-        is_creating_collaborate_request: false,
-        members: {
-          ...state.members,
           results: state.members.results.map((member) =>
             member.id === action.payload
               ? { ...member, is_collaborate_requested: true }
@@ -164,12 +84,39 @@ export default function membersReducer(state = initialState, action) {
           ),
         },
       };
-    case CREATE_CONTRIBUTE_REQUEST_FAIL:
+    case CREATE_MEMBER_FAIL:
       return {
         ...state,
-        is_creating_collaborate_request: false,
-        create_collaborate_request_error: action.payload,
+        is_creating_member: false,
+        create_member_error: action.payload,
       };
+    case IS_MEMBER_EMAIL_AVAILABLE:
+      return {
+        ...state,
+        member_email_available_loading: true,
+      };
+    case IS_MEMBER_EMAIL_AVAILABLE_SUCCESS:
+      return {
+        ...state,
+        member_email_available_loading: false,
+
+        member_email_available: action.payload.email,
+        member_email_available_error: null,
+      };
+    case IS_MEMBER_EMAIL_AVAILABLE_FAIL:
+      return {
+        ...state,
+        member_email_available_loading: false,
+        member_email_available: false,
+        member_email_available_error: action.payload,
+      };
+    case RESET_MEMBER_EMAIL_AVAILABLE:
+      return {
+        ...state,
+        member_email_available: false,
+        member_email_available_error: null,
+      };
+
     default:
       return state;
   }
