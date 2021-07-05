@@ -10,9 +10,10 @@ import { useState } from "react";
 import { useRef } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
 import AddMembersModal from "components/Dashboard/AddMembersModal";
-import { fetchMembers } from "redux/actions/members";
+import { fetchMembers, fetchMembersPagination } from "redux/actions/members";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import Pagination from "components/Layout/Pagination";
 
 const users = () => {
   const page = MEMBERS_DASHBOARD_PAGE;
@@ -43,6 +44,9 @@ const users = () => {
 
     fetchInitialData();
   }, [initialDataFetched]);
+  const handleChangePage = (url) => {
+    dispatch(fetchMembersPagination(url));
+  };
   return (
     <>
       <Head>
@@ -333,34 +337,15 @@ const users = () => {
                               {/* End user item */}
                             </tbody>
                           </table>
-                          {/* Pagination */}
-                          <nav
-                            className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
-                            aria-label="Pagination"
-                          >
-                            <div className="hidden sm:block">
-                              <p className="text-sm text-gray-700">
-                                Showing <span className="font-medium">1</span>{" "}
-                                to <span className="font-medium">10</span> of{" "}
-                                <span className="font-medium">20</span> results
-                              </p>
-                            </div>
-                            <div className="flex-1 flex justify-between sm:justify-end">
-                              <a
-                                href="#"
-                                className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 hover:text-gray-500 dark:hover:text-white dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                              >
-                                Previous
-                              </a>
-                              <a
-                                href="#"
-                                className="ml-3 inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-3xl text-gray-500 hover:text-gray-500 dark:hover:text-white dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
-                              >
-                                Next
-                              </a>
-                            </div>
-                          </nav>
-                          {/* End pagination */}
+                          {membersReducer.members &&
+                            (membersReducer.members.previous ||
+                              membersReducer.members.next) && (
+                              <Pagination
+                                previous={membersReducer.members.previous}
+                                next={membersReducer.members.next}
+                                changePage={handleChangePage}
+                              />
+                            )}
                         </div>
                       </div>
                     </div>

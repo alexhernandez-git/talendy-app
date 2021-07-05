@@ -77,11 +77,7 @@ export default function membersReducer(state = initialState, action) {
         is_creating_member: false,
         members: {
           ...state.members,
-          results: state.members.results.map((member) =>
-            member.id === action.payload
-              ? { ...member, is_collaborate_requested: true }
-              : member
-          ),
+          results: [action.payload, ...state.members.results],
         },
       };
     case CREATE_MEMBER_FAIL:
