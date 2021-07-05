@@ -178,7 +178,10 @@ const users = () => {
                                       onChange={handleSelectAll}
                                       checked={
                                         membersSelected.length ===
-                                        membersReducer.members.results.length
+                                          membersReducer.members.results
+                                            .length &&
+                                        membersReducer.members.results.length >
+                                          0
                                       }
                                       type="checkbox"
                                       name="select-all"
