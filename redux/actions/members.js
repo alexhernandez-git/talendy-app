@@ -14,27 +14,32 @@ import {
 } from "../types";
 import { createAlert } from "./alerts";
 
-export const fetchMembers = () => async (dispatch, getState) => {
-  await dispatch({
-    type: FETCH_MEMBERS,
-  });
-  var host = window.location.host;
-  var subdomain = host.split(".")[0];
-  await axios
-    .get(`${process.env.HOST}/api/${subdomain}/members/`, tokenConfig(getState))
-    .then(async (res) => {
-      await dispatch({
-        type: FETCH_MEMBERS_SUCCESS,
-        payload: res.data,
-      });
-    })
-    .catch((err) => {
-      dispatch({
-        type: FETCH_MEMBERS_FAIL,
-        payload: { data: err.response?.data, status: err.response?.status },
-      });
+export const fetchMembers =
+  (search = "") =>
+  async (dispatch, getState) => {
+    await dispatch({
+      type: FETCH_MEMBERS,
     });
-};
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
+    await axios
+      .get(
+        `${process.env.HOST}/api/${subdomain}/members/?search=${search}`,
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        await dispatch({
+          type: FETCH_MEMBERS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: FETCH_MEMBERS_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
 
 export const fetchMembersPagination = (url) => async (dispatch, getState) => {
   dispatch({

@@ -67,6 +67,17 @@ const users = () => {
       );
     }
   };
+  const [search, setSearch] = useState("");
+  const [firstLoad, setFirstLoad] = useState(true);
+  useEffect(() => {
+    setFirstLoad(false);
+    if (!firstLoad) {
+      const timeoutId = setTimeout(() => {
+        dispatch(fetchMembers(search));
+      }, 500);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [search]);
   return (
     <>
       <Head>
@@ -78,7 +89,7 @@ const users = () => {
         </div>
       ) : (
         <>
-          <Layout page={page}>
+          <Layout page={page} search={search} setSearch={setSearch}>
             <main className="flex-1 relative pb-8 z-0 overflow-y-auto overflow-x-hidden px-4">
               <div className="mt-8">
                 <div className="max-w-6xl mx-auto">
