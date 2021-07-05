@@ -10,10 +10,14 @@ import { useState } from "react";
 import { useRef } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
 import AddMembersModal from "components/Dashboard/AddMembersModal";
+import { fetchMembers } from "redux/actions/members";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const users = () => {
   const page = MEMBERS_DASHBOARD_PAGE;
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
+  const membersReducer = useSelector((state) => state.membersReducer);
   const dispatch = useDispatch();
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -30,7 +34,15 @@ const users = () => {
   };
   const modalRef = useRef();
   useOutsideClick(modalRef, () => handleCloseModal());
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      if (initialDataFetched) {
+        await dispatch(fetchMembers());
+      }
+    };
 
+    fetchInitialData();
+  }, [initialDataFetched]);
   return (
     <>
       <Head>
@@ -147,12 +159,7 @@ const users = () => {
                                 >
                                   Name
                                 </th>
-                                <th
-                                  scope="col"
-                                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider "
-                                >
-                                  Username
-                                </th>
+
                                 <th
                                   scope="col"
                                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider "
@@ -194,95 +201,125 @@ const users = () => {
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
                               {/* User item */}
-                              <tr>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                  <span class="relative inline-flex items-center bg-white">
-                                    <label for="select-all" class="sr-only">
-                                      Select all
-                                    </label>
-                                    <input
-                                      id="select-all"
-                                      type="checkbox"
-                                      name="select-all"
-                                      class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
-                                    />
-                                  </span>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                  <span className="inline-block bg-gray-100 rounded-full overflow-hidden h-8 w-8">
-                                    <svg
-                                      className="h-8 w-8 text-gray-300"
-                                      fill="currentColor"
-                                      viewBox="0 0 24 24"
-                                    >
-                                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                                    </svg>
-                                  </span>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                  <span className="text-sm">
-                                    Alex Hernandez{" "}
-                                  </span>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                  <span className="text-sm">afewafewfe</span>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                  <span className="text-sm">
-                                    alex@gmail.com
-                                  </span>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-center">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6 text-green-500 text-center m-auto"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M5 13l4 4L19 7"
-                                    />
-                                  </svg>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-center">
-                                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full uppercase bg-gray-100 text-gray-800">
-                                    BASIC
-                                  </span>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-5 w-5 text-orange-500 cursor-pointer"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                  >
-                                    <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                  <a href="/user/3443" target="_blank">
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      className="h-5 w-5 text-gray-500"
-                                      viewBox="0 0 20 20"
-                                      fill="currentColor"
-                                    >
-                                      <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                      <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                                    </svg>
-                                  </a>
-                                </td>
+                              {membersReducer.members.results?.length > 0 &&
+                                membersReducer.members.results.map((member) => (
+                                  <tr>
+                                    {console.log(member)}
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                      <span class="relative inline-flex items-center bg-white">
+                                        <label for="select-all" class="sr-only">
+                                          Select all
+                                        </label>
+                                        <input
+                                          id="select-all"
+                                          type="checkbox"
+                                          name="select-all"
+                                          class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
+                                        />
+                                      </span>
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                      <span className="inline-block bg-gray-100 rounded-full overflow-hidden h-8 w-8">
+                                        <svg
+                                          className="h-8 w-8 text-gray-300"
+                                          fill="currentColor"
+                                          viewBox="0 0 24 24"
+                                        >
+                                          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                        </svg>
+                                      </span>
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                      <span className="text-sm">
+                                        {member?.first_name} {member?.last_name}
+                                      </span>
+                                    </td>
 
-                                {/* <td className="px-6 py-4 whitespace-nowrap">
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                      <span className="text-sm">
+                                        {member?.email}
+                                      </span>
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                                      {member?.is_active ? (
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          className="h-6 w-6 text-green-500 text-center m-auto"
+                                          fill="none"
+                                          viewBox="0 0 24 24"
+                                          stroke="currentColor"
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M5 13l4 4L19 7"
+                                          />
+                                        </svg>
+                                      ) : (
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          className="h-6 w-6 text-red-500 text-center m-auto"
+                                          fill="none"
+                                          viewBox="0 0 24 24"
+                                          stroke="currentColor"
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M6 18L18 6M6 6l12 12"
+                                          />
+                                        </svg>
+                                      )}
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                                      {member?.role === "BA" && (
+                                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full uppercase bg-gray-100 text-gray-800">
+                                          BASIC
+                                        </span>
+                                      )}
+                                      {member?.role === "MA" && (
+                                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full uppercase bg-blue-100 text-gray-800">
+                                          MANAGER
+                                        </span>
+                                      )}
+                                      {member?.role === "AD" && (
+                                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full uppercase bg-green-100 text-gray-800">
+                                          ADMIN
+                                        </span>
+                                      )}
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="h-5 w-5 text-orange-500 cursor-pointer"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                      >
+                                        <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                        <path
+                                          fillRule="evenodd"
+                                          d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                          clipRule="evenodd"
+                                        />
+                                      </svg>
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                      <a href="/user/3443" target="_blank">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          className="h-5 w-5 text-gray-500"
+                                          viewBox="0 0 20 20"
+                                          fill="currentColor"
+                                        >
+                                          <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                          <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                        </svg>
+                                      </a>
+                                    </td>
+
+                                    {/* <td className="px-6 py-4 whitespace-nowrap">
                             <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                               Active
                             </span>
@@ -290,7 +327,9 @@ const users = () => {
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             Admin
                           </td> */}
-                              </tr>
+                                  </tr>
+                                ))}
+
                               {/* End user item */}
                             </tbody>
                           </table>
