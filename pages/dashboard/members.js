@@ -47,6 +47,26 @@ const users = () => {
   const handleChangePage = (url) => {
     dispatch(fetchMembersPagination(url));
   };
+
+  const [membersSelected, setMembersSelected] = useState([]);
+  const handleSelectMember = (id) => {
+    if (membersSelected.includes(id)) {
+      setMembersSelected(
+        membersSelected.filter((member_id) => member_id !== id)
+      );
+    } else {
+      setMembersSelected([...membersSelected, id]);
+    }
+  };
+  const handleSelectAll = () => {
+    if (membersSelected.length === membersReducer.members.results.length) {
+      setMembersSelected([]);
+    } else {
+      setMembersSelected(
+        membersReducer.members.results.map((member) => member.id)
+      );
+    }
+  };
   return (
     <>
       <Head>
@@ -98,7 +118,8 @@ const users = () => {
                       </span>
                       <div className="ml-2">
                         <span className="text-gray-500 text-xs">
-                          23 of 100 selected
+                          {membersSelected.length} of{" "}
+                          {membersReducer.members.results.length} selected
                         </span>
                       </div>
                     </div>
@@ -143,6 +164,11 @@ const users = () => {
                                     </label>
                                     <input
                                       id="select-all"
+                                      onChange={handleSelectAll}
+                                      checked={
+                                        membersSelected.length ===
+                                        membersReducer.members.results.length
+                                      }
                                       type="checkbox"
                                       name="select-all"
                                       class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
@@ -207,7 +233,7 @@ const users = () => {
                               {/* User item */}
                               {membersReducer.members.results?.length > 0 &&
                                 membersReducer.members.results.map((member) => (
-                                  <tr>
+                                  <tr key={member.id}>
                                     {console.log(member)}
                                     <td className="px-6 py-4 whitespace-nowrap">
                                       <span class="relative inline-flex items-center bg-white">
@@ -216,6 +242,13 @@ const users = () => {
                                         </label>
                                         <input
                                           id="select-all"
+                                          onChange={handleSelectMember.bind(
+                                            this,
+                                            member.id
+                                          )}
+                                          checked={membersSelected.some(
+                                            (id) => id === member.id
+                                          )}
                                           type="checkbox"
                                           name="select-all"
                                           class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
