@@ -337,16 +337,16 @@ const users = () => {
                               {/* End user item */}
                             </tbody>
                           </table>
-                          {membersReducer.members &&
-                            (membersReducer.members.previous ||
-                              membersReducer.members.next) && (
-                              <Pagination
-                                previous={membersReducer.members.previous}
-                                next={membersReducer.members.next}
-                                changePage={handleChangePage}
-                              />
-                            )}
                         </div>
+                        {membersReducer.members &&
+                          (membersReducer.members.previous ||
+                            membersReducer.members.next) && (
+                            <Pagination
+                              previous={membersReducer.members.previous}
+                              next={membersReducer.members.next}
+                              changePage={handleChangePage}
+                            />
+                          )}
                       </div>
                     </div>
                   </div>
