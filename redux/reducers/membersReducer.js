@@ -12,6 +12,9 @@ import {
   REMOVE_MEMBERS,
   REMOVE_MEMBERS_SUCCESS,
   REMOVE_MEMBERS_FAIL,
+  RESEND_ACCESS,
+  RESEND_ACCESS_SUCCESS,
+  RESEND_ACCESS_FAIL,
 } from "../types";
 import { HYDRATE } from "next-redux-wrapper";
 
@@ -38,6 +41,8 @@ const initialState = {
   member_email_available_error: null,
   is_removing_members: false,
   remove_members_error: null,
+  is_resending_access: false,
+  resend_access_error: null,
 };
 export default function membersReducer(state = initialState, action) {
   switch (action.type) {
@@ -129,8 +134,8 @@ export default function membersReducer(state = initialState, action) {
         remove_members_error: null,
         members: {
           ...state.members,
-          results: state.members.results.filter((member) =>
-            action.payload.some((id) => id !== member.id)
+          results: state.members.results.filter(
+            (member) => !action.payload.some((id) => id === member.id)
           ),
         },
       };
@@ -139,6 +144,23 @@ export default function membersReducer(state = initialState, action) {
         ...state,
         is_removing_members: false,
         remove_members_error: action.payload,
+      };
+    case RESEND_ACCESS:
+      return {
+        ...state,
+        is_resending_access: false,
+      };
+    case RESEND_ACCESS_SUCCESS:
+      return {
+        ...state,
+        is_resending_access: false,
+        resend_access_error: null,
+      };
+    case RESEND_ACCESS_FAIL:
+      return {
+        ...state,
+        is_resending_access: false,
+        resend_access_error: action.payload,
       };
     default:
       return state;

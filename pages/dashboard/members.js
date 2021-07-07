@@ -14,6 +14,7 @@ import {
   fetchMembers,
   fetchMembersPagination,
   removeMembers,
+  resendAccess,
 } from "redux/actions/members";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -93,7 +94,22 @@ const users = () => {
   }, [membersReducer.is_loading]);
 
   const handleRemoveMembers = () => {
-    dispatch(removeMembers(membersSelected, resetMembersSelected));
+    dispatch(
+      removeMembers(
+        membersSelected,
+        resetMembersSelected,
+        handleCloseRemoveMembersModal
+      )
+    );
+  };
+  const handleResendAccess = () => {
+    dispatch(
+      resendAccess(
+        membersSelected,
+        resetMembersSelected,
+        handleCloseRemoveMembersModal
+      )
+    );
   };
 
   const [search, setSearch] = useState("");
@@ -129,6 +145,8 @@ const users = () => {
                       <span className="relative z-0 inline-flex shadow-sm rounded-3xl">
                         <button
                           type="button"
+                          disabled={membersSelected.length === 0}
+                          onClick={handleResendAccess}
                           className="-ml-px relative inline-flex items-center px-4 py-2 rounded-l-3xl border border-gray-300  text-sm font-medium text-gray-500 dark:text-white bg-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-gray-50"
                         >
                           <svg

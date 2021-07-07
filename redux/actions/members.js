@@ -14,6 +14,9 @@ import {
   REMOVE_MEMBERS,
   REMOVE_MEMBERS_SUCCESS,
   REMOVE_MEMBERS_FAIL,
+  RESEND_ACCESS,
+  RESEND_ACCESS_SUCCESS,
+  RESEND_ACCESS_FAIL,
 } from "../types";
 import { createAlert } from "./alerts";
 
@@ -139,17 +142,50 @@ export const removeMembers =
         tokenConfig(getState)
       )
       .then(async (res) => {
+        console.log("res.dataw", res.data);
         await dispatch({
           type: REMOVE_MEMBERS_SUCCESS,
-          payload: members,
+          payload: res.data,
         });
-        await resetMembersSelected({});
-        await handleCloseRemoveMembersModal({});
+        await resetMembersSelected();
+        await handleCloseRemoveMembersModal();
         await dispatch(createAlert("SUCCESS", "Members successfully removed"));
       })
       .catch(async (err) => {
         await dispatch({
           type: REMOVE_MEMBERS_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
+
+export const resendAccess =
+  (members, resetMembersSelected, handleCloseRemoveMembersModal) =>
+  async (dispatch, getState) => {
+    await dispatch({
+      type: RESEND_ACCESS,
+    });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
+    await axios
+      .post(
+        `${process.env.HOST}/api/${subdomain}/members/resend_access/`,
+        { members: members },
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        console.log("res.dataw", res.data);
+        await dispatch({
+          type: RESEND_ACCESS_SUCCESS,
+          payload: res.data,
+        });
+        await resetMembersSelected();
+        await handleCloseRemoveMembersModal();
+        await dispatch(createAlert("SUCCESS", "Access successfully sended"));
+      })
+      .catch(async (err) => {
+        await dispatch({
+          type: RESEND_ACCESS_FAIL,
           payload: { data: err.response?.data, status: err.response?.status },
         });
       });
