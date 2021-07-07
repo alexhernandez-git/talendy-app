@@ -11,6 +11,9 @@ import {
   IS_MEMBER_EMAIL_AVAILABLE_SUCCESS,
   IS_MEMBER_EMAIL_AVAILABLE_FAIL,
   RESET_MEMBER_EMAIL_AVAILABLE,
+  REMOVE_MEMBERS,
+  REMOVE_MEMBERS_SUCCESS,
+  REMOVE_MEMBERS_FAIL,
 } from "../types";
 import { createAlert } from "./alerts";
 
@@ -120,3 +123,34 @@ export const isMemberEmailAvailable = (email) => async (dispatch, getState) => {
 export const resetMemberEmailAvailable = () => async (dispatch, getState) => {
   dispatch({ type: RESET_MEMBER_EMAIL_AVAILABLE });
 };
+
+export const removeMembers =
+  (members, resetMembersSelected, handleCloseRemoveMembersModal) =>
+  async (dispatch, getState) => {
+    await dispatch({
+      type: REMOVE_MEMBERS,
+    });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
+    await axios
+      .post(
+        `${process.env.HOST}/api/${subdomain}/members/remove_members/`,
+        { members: members },
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        await dispatch({
+          type: REMOVE_MEMBERS_SUCCESS,
+          payload: members,
+        });
+        await resetMembersSelected({});
+        await handleCloseRemoveMembersModal({});
+        await dispatch(createAlert("SUCCESS", "Members successfully removed"));
+      })
+      .catch(async (err) => {
+        await dispatch({
+          type: REMOVE_MEMBERS_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
