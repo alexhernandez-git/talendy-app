@@ -67,6 +67,9 @@ const users = () => {
       );
     }
   };
+  useEffect(() => {
+    setMembersSelected([]);
+  }, [membersReducer.is_loading]);
   const [search, setSearch] = useState("");
   const [firstLoad, setFirstLoad] = useState(true);
   useEffect(() => {
@@ -124,7 +127,7 @@ const users = () => {
                           >
                             <path d="M11 6a3 3 0 11-6 0 3 3 0 016 0zM14 17a6 6 0 00-12 0h12zM13 8a1 1 0 100 2h4a1 1 0 100-2h-4z" />
                           </svg>
-                          Kick
+                          Remove
                         </button>
                       </span>
                       <div className="ml-2">
@@ -282,13 +285,20 @@ const users = () => {
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                       <span className="text-sm">
-                                        {member?.first_name} {member?.last_name}
+                                        {member?.is_active
+                                          ? member?.user?.first_name
+                                          : member?.first_name}{" "}
+                                        {member?.is_active
+                                          ? member?.user?.last_name
+                                          : member?.last_name}
                                       </span>
                                     </td>
 
                                     <td className="px-6 py-4 whitespace-nowrap">
                                       <span className="text-sm">
-                                        {member?.email}
+                                        {member?.is_active
+                                          ? member?.user?.email
+                                          : member?.email}
                                       </span>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-center">
