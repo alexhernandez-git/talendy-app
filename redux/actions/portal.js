@@ -171,7 +171,8 @@ export const updatePortaLogo = (logo) => async (dispatch, getState) => {
 };
 
 export const addBillingInformation =
-  (values, payment_method) => async (dispatch, getState) => {
+  (values, payment_method, handleCloseAddBilling) =>
+  async (dispatch, getState) => {
     dispatch({
       type: ADD_BILLING_INFORMATION,
     });
@@ -196,6 +197,7 @@ export const addBillingInformation =
           type: SET_PAYMENT_METHODS,
           payload: res.data?.payment_methods,
         });
+        await handleCloseAddBilling();
       })
       .catch(async (err) => {
         await dispatch(

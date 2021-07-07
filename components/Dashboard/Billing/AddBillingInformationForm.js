@@ -38,7 +38,9 @@ const AddBillingInformationForm = ({ handleCloseAddBilling }) => {
     } else {
       console.log("[PaymentMethod]", paymentMethod);
       setStripeError(null);
-      dispatch(addBillingInformation(values, paymentMethod));
+      dispatch(
+        addBillingInformation(values, paymentMethod, handleCloseAddBilling)
+      );
     }
   };
   const formik = useFormik({
