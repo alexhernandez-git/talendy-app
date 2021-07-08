@@ -19,7 +19,8 @@ const UserCard = ({ mobile, page, profile, user }) => {
   const dispatch = useDispatch();
 
   const authReducer = useSelector((state) => state.authReducer);
-
+  const portalReducer = useSelector((state) => state.portalReducer);
+  const { portal } = portalReducer;
   const handleFollowUser = () => {
     if (!authReducer.is_authenticated) {
       dispatch(createAlert("ERROR", "You are not authenticated"));
@@ -333,36 +334,38 @@ const UserCard = ({ mobile, page, profile, user }) => {
           </>
         )}
         <div className={profile ? "sticky top-24" : ""}>
-          {profile && page !== PROFILE_DONATIONS_PAGE && (
-            <section aria-labelledby="trending-heading" className="mb-4">
-              <div className="bg-white dark:bg-gray-700 rounded-lg shadow">
-                <div className="p-6">
-                  <div>
-                    <Link href={`/profile/donations/`}>
-                      <button
-                        type="button"
-                        className="w-full bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5 mr-2"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
+          {profile &&
+            portal?.donations_enabled &&
+            page !== PROFILE_DONATIONS_PAGE && (
+              <section aria-labelledby="trending-heading" className="mb-4">
+                <div className="bg-white dark:bg-gray-700 rounded-lg shadow">
+                  <div className="p-6">
+                    <div>
+                      <Link href={`/profile/donations/`}>
+                        <button
+                          type="button"
+                          className="w-full bg-gradient-to-r from-green-400 to-green-600 hover:to-green-700 border border-transparent rounded-3xl shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white"
                         >
-                          <path
-                            fillRule="evenodd"
-                            d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        Donations
-                      </button>
-                    </Link>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5 mr-2"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          Donations
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </section>
-          )}
+              </section>
+            )}
           <section aria-labelledby="trending-heading" className="mb-4">
             <div className="bg-white dark:bg-gray-700 rounded-lg shadow">
               <div className="p-6">

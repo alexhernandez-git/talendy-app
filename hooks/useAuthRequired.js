@@ -28,6 +28,8 @@ import { useSelector } from "react-redux";
 
 const useAuthRequired = (page) => {
   const authReducer = useSelector((state) => state.authReducer);
+  const portalReducer = useSelector((state) => state.portalReducer);
+  const { portal } = portalReducer;
   const initialDataReducer = useSelector((state) => state.initialDataReducer);
 
   const { is_authenticated, user } = authReducer;
@@ -59,15 +61,30 @@ const useAuthRequired = (page) => {
     BILLING_DASHBOARD_PAGE,
     USER_DETAIL_DASHBOARD_PAGE,
   ];
+  const donationPages = [
+    // Dashboard
+    PROFILE_DONATIONS_PAGE,
+  ];
   const matches = [...privatePages, ...dashboardPages].some(
     (privPage) => privPage === page
   );
   const dashboardMatches = dashboardPages.some((privPage) => privPage === page);
+  const donationMatches = donationPages.some(
+    (donationPage) => donationPage === page
+  );
   useEffect(() => {
     if (initialDataReducer.data_fetched) {
       if (!is_authenticated && matches) {
         router.push("/feed");
       } else {
+        if (donationMatches) {
+          if (portal?.donations_enabled) {
+            setCanRender(true);
+          } else {
+            router.push("/feed");
+            return;
+          }
+        }
         if (dashboardMatches) {
           if (user?.member?.role === "AD" || user?.member?.role === "MA") {
             setCanRender(true);
