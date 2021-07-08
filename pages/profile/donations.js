@@ -31,7 +31,9 @@ export default function Donaitons() {
     }
   }, [initialDataFetched]);
   const donationsReducer = useSelector((state) => state.donationsReducer);
-
+  const initialDataReducer = useSelector((state) => state.initialDataReducer);
+  const portalReducer = useSelector((state) => state.portalReducer);
+  const { portal } = portalReducer;
   const handleFetchMoreDonations = () => {
     dispatch(fetchMoreDonations());
   };
@@ -40,6 +42,14 @@ export default function Donaitons() {
       handleFetchMoreDonations();
     }
   };
+  useEffect(() => {
+    if (initialDataReducer.data_fetched) {
+      if (!portal?.donations_enabled) {
+        router.push("/feed");
+        return;
+      }
+    }
+  }, [initialDataReducer.data_fetched]);
   return (
     <Layout>
       <div className="py-10">
