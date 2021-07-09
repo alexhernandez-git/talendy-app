@@ -17,6 +17,8 @@ export default function Donation() {
   const router = useRouter();
   const initialDataReducer = useSelector((state) => state.initialDataReducer);
   const authReducer = useSelector((state) => state.authReducer);
+  const portalReducer = useSelector((state) => state.portalReducer);
+  const { portal } = portalReducer;
   const userReducer = useSelector((state) => state.userReducer);
   useEffect(() => {
     const handleFetchData = async () => {
@@ -28,6 +30,14 @@ export default function Donation() {
       handleFetchData();
     }
   }, [initialDataReducer.data_fetched, router.query?.user]);
+  useEffect(() => {
+    if (initialDataReducer.data_fetched) {
+      if (!portal?.donations_enabled) {
+        router.push("/feed");
+        return;
+      }
+    }
+  }, [initialDataReducer.data_fetched]);
   return (
     <Layout>
       <div className="py-10">

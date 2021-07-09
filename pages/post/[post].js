@@ -415,7 +415,7 @@ export default function PostPage() {
                           >
                             {member.user.username}
                           </span>
-                          {member.role === "AD" && (
+                          {member?.role === "AD" && (
                             <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-orange-500 to-pink-500 text-white">
                               Admin
                             </span>
