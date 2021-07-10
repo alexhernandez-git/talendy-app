@@ -15,6 +15,9 @@ import {
   RESEND_ACCESS,
   RESEND_ACCESS_SUCCESS,
   RESEND_ACCESS_FAIL,
+  EDIT_MEMBER,
+  EDIT_MEMBER_SUCCESS,
+  EDIT_MEMBER_FAIL,
 } from "../types";
 import { HYDRATE } from "next-redux-wrapper";
 
@@ -43,6 +46,8 @@ const initialState = {
   remove_members_error: null,
   is_resending_access: false,
   resend_access_error: null,
+  is_editing_member: false,
+  edit_member_error: null,
 };
 export default function membersReducer(state = initialState, action) {
   switch (action.type) {
@@ -161,6 +166,29 @@ export default function membersReducer(state = initialState, action) {
         ...state,
         is_resending_access: false,
         resend_access_error: action.payload,
+      };
+    case EDIT_MEMBER:
+      return {
+        ...state,
+        is_editing_member: true,
+      };
+    case EDIT_MEMBER_SUCCESS:
+      return {
+        ...state,
+        is_editing_member: false,
+        members: {
+          ...state.members,
+          results: state.members.results.map((member) =>
+            member.id === action.payload.id ? action.payload : member
+          ),
+        },
+        edit_member_error: null,
+      };
+    case EDIT_MEMBER_FAIL:
+      return {
+        ...state,
+        is_editing_member: false,
+        edit_member_error: action.payload,
       };
     default:
       return state;

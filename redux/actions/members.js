@@ -17,6 +17,9 @@ import {
   RESEND_ACCESS,
   RESEND_ACCESS_SUCCESS,
   RESEND_ACCESS_FAIL,
+  EDIT_MEMBER,
+  EDIT_MEMBER_SUCCESS,
+  EDIT_MEMBER_FAIL,
 } from "../types";
 import { createAlert } from "./alerts";
 
@@ -186,6 +189,37 @@ export const resendAccess =
       .catch(async (err) => {
         await dispatch({
           type: RESEND_ACCESS_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
+
+export const updateMemberRole =
+  (member_id, role, setRole, handleCloseEdit) => async (dispatch, getState) => {
+    console.log("role", role);
+    await dispatch({
+      type: EDIT_MEMBER,
+    });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
+    await axios
+      .patch(
+        `${process.env.HOST}/api/${subdomain}/members/${member_id}/update_member_role/`,
+        { role: role },
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        console.log("res.dataw", res.data);
+        await dispatch({
+          type: EDIT_MEMBER_SUCCESS,
+          payload: res.data,
+        });
+        await setRole(role);
+        await handleCloseEdit();
+      })
+      .catch(async (err) => {
+        await dispatch({
+          type: EDIT_MEMBER_FAIL,
           payload: { data: err.response?.data, status: err.response?.status },
         });
       });
