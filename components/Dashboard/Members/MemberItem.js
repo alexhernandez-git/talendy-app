@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 
 const MemberItem = ({ member, handleSelectMember, membersSelected }) => {
   const authReducer = useSelector((state) => state.authReducer);
+  const portalReducer = useSelector((state) => state.portalReducer);
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
   const handleOpenEdit = () => {
@@ -121,7 +122,13 @@ const MemberItem = ({ member, handleSelectMember, membersSelected }) => {
         </td>
         {isEdit ? (
           <td className="px-6 py-4 whitespace-nowrap text-center">
-            <select name="" id="" value={role} onChange={handleChangeRole}>
+            <select
+              name=""
+              className="focus:ring-orange-500 focus:border-orange-500 flex-grow block w-24 min-w-0 m-auto rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+              id=""
+              value={role}
+              onChange={handleChangeRole}
+            >
               <option value="BA">Basic</option>
               <option value="MA">Manager</option>
               <option value="AD">Admin</option>
@@ -147,42 +154,44 @@ const MemberItem = ({ member, handleSelectMember, membersSelected }) => {
           </td>
         )}
         <td className="px-6 py-4 whitespace-nowrap">
-          {authReducer.user?.member?.role === "AD" && (
-            <>
-              {isEdit ? (
-                <svg
-                  onClick={handleCloseEdit}
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-red-500 cursor-pointer"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  onClick={handleOpenEdit}
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-orange-500 cursor-pointer"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                  <path
-                    fillRule="evenodd"
-                    d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              )}
-            </>
-          )}
+          {authReducer.user?.member?.role === "AD" &&
+            member?.user?.id !== authReducer.user?.id &&
+            member?.user?.id !== portalReducer.portal?.owner && (
+              <>
+                {isEdit ? (
+                  <svg
+                    onClick={handleCloseEdit}
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-red-500 cursor-pointer"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    onClick={handleOpenEdit}
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-orange-500 cursor-pointer"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                    <path
+                      fillRule="evenodd"
+                      d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                )}
+              </>
+            )}
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
           {member?.is_active && (
