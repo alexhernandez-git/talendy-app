@@ -1,6 +1,22 @@
 import React from "react";
+import { useState } from "react";
 
 const MemberItem = ({ member, handleSelectMember, membersSelected }) => {
+  const [isEdit, setIsEdit] = useState(false);
+  const handleOpenEdit = () => {
+    setIsEdit(true);
+  };
+  const handleCloseEdit = () => {
+    setIsEdit(false);
+  };
+  const [role, setRole] = useState(member.role);
+  const handleChangeRole = (e) => {
+    e.preventDefault();
+    console.log(e.target.value);
+    // Call the action to save the changes
+    setRole(e.target.value);
+    handleCloseEdit();
+  };
   return (
     <tr>
       {console.log(member)}
@@ -75,25 +91,36 @@ const MemberItem = ({ member, handleSelectMember, membersSelected }) => {
           </svg>
         )}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-center">
-        {member?.role === "BA" && (
-          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full uppercase bg-gray-100 text-gray-800">
-            BASIC
-          </span>
-        )}
-        {member?.role === "MA" && (
-          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full uppercase bg-blue-100 text-gray-800">
-            MANAGER
-          </span>
-        )}
-        {member?.role === "AD" && (
-          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full uppercase bg-green-100 text-gray-800">
-            ADMIN
-          </span>
-        )}
-      </td>
+      {isEdit ? (
+        <td className="px-6 py-4 whitespace-nowrap text-center">
+          <select name="" id="" value={role} onChange={handleChangeRole}>
+            <option value="BA">Basic</option>
+            <option value="MA">Manager</option>
+            <option value="AD">Admin</option>
+          </select>
+        </td>
+      ) : (
+        <td className="px-6 py-4 whitespace-nowrap text-center">
+          {member?.role === "BA" && (
+            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full uppercase bg-gray-100 text-gray-800">
+              BASIC
+            </span>
+          )}
+          {member?.role === "MA" && (
+            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full uppercase bg-blue-100 text-gray-800">
+              MANAGER
+            </span>
+          )}
+          {member?.role === "AD" && (
+            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full uppercase bg-green-100 text-gray-800">
+              ADMIN
+            </span>
+          )}
+        </td>
+      )}
       <td className="px-6 py-4 whitespace-nowrap">
         <svg
+          onClick={handleOpenEdit}
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5 text-orange-500 cursor-pointer"
           viewBox="0 0 20 20"
@@ -122,15 +149,6 @@ const MemberItem = ({ member, handleSelectMember, membersSelected }) => {
           </a>
         )}
       </td>
-
-      {/* <td className="px-6 py-4 whitespace-nowrap">
-                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                              Active
-                            </span>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Admin
-                          </td> */}
     </tr>
   );
 };
