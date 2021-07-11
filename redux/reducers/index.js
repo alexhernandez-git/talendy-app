@@ -32,6 +32,7 @@ import portalReducer from "./portalReducer";
 import invoicesReducer from "./invoicesReducer";
 import plansReducer from "./plansReducer";
 import membersReducer from "./membersReducer";
+import dashboardCommunitiesReducer from "./dashboardCommunitiesReducer";
 
 export default combineReducers({
   authReducer,
@@ -66,4 +67,5 @@ export default combineReducers({
   invoicesReducer,
   plansReducer,
   membersReducer,
+  dashboardCommunitiesReducer,
 });

@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useRef } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
-import AddMembersModal from "components/Dashboard/AddMembersModal";
+import AddMembersModal from "components/Dashboard/Members/AddMembersModal";
 import {
   fetchMembers,
   fetchMembersPagination,
