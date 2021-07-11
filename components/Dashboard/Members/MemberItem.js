@@ -124,7 +124,7 @@ const MemberItem = ({ member, handleSelectMember, membersSelected }) => {
           <td className="px-6 py-4 whitespace-nowrap text-center">
             <select
               name=""
-              className="focus:ring-orange-500 focus:border-orange-500 flex-grow block w-24 min-w-0 m-auto rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
+              className="focus:ring-orange-500 focus:border-orange-500 flex-grow block w-full min-w-0 m-auto rounded-3xl sm:text-sm border-gray-300 dark:bg-gray-600 dark:text-white dark:placeholder-gray-100"
               id=""
               value={role}
               onChange={handleChangeRole}

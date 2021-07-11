@@ -209,7 +209,7 @@ const UserCard = ({ mobile, page, profile, user }) => {
       </div>
 
       <div className="sticky top-24">
-        {!profile && page !== DONATION_PAGE && (
+        {!profile && page !== DONATION_PAGE && portal?.donations_enabled && (
           <>
             <section aria-labelledby="trending-heading" className="mb-4">
               <div className="bg-white dark:bg-gray-700 rounded-lg shadow">
