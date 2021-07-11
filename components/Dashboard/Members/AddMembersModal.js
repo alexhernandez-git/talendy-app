@@ -498,7 +498,8 @@ const AddMembersModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                       {formik.errors.email}
                     </p>
                   )}
-                  {member_email_available_error &&
+                  {member_email_available_error?.data?.non_field_errors
+                    ?.length > 0 &&
                     member_email_available_error?.data?.non_field_errors.map(
                       (message, i) => (
                         <p
