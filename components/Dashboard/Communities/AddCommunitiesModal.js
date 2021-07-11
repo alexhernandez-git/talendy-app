@@ -152,7 +152,7 @@ const AddCommunitiesModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.name}
-                      placeholder="First name"
+                      placeholder="Community name"
                       autocomplete="given-name"
                       className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm dark:focus:text-white bg-white border-gray-300  text-sm  focus:placeholder-gray-400 focus:text-gray-900 dark:bg-gray-600 ${
                         formik.touched.name && formik.errors.name

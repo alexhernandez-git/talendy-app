@@ -7,7 +7,12 @@ import { HYDRATE } from "next-redux-wrapper";
 
 const initialState = {
   is_loading: false,
-  communities: [],
+  communities: {
+    results: [],
+    count: 0,
+    next: [],
+    previous: [],
+  },
   error: null,
 };
 export default function dashboardCommunitiesReducer(
@@ -27,7 +32,9 @@ export default function dashboardCommunitiesReducer(
       return {
         ...state,
         is_loading: false,
-        communities: action.payload,
+        communities: {
+          ...action.payload,
+        },
         error: null,
       };
     case FETCH_DASHBOARD_COMMUNITIES_FAIL:

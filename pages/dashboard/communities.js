@@ -13,6 +13,8 @@ import {
   fetchDahboardCommunities,
   fetchDashboardCommunitiesPagination,
 } from "redux/actions/dashboardCommunities";
+import AddCommunitiesModal from "components/Dashboard/Communities/AddCommunitiesModal";
+import Pagination from "components/Layout/Pagination";
 const communities = () => {
   const page = COMMUNITIES_DASHBOARD_PAGE;
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
@@ -172,7 +174,7 @@ const communities = () => {
                         <span className="text-gray-500 text-xs">
                           {communitiesSelected.length} of{" "}
                           {
-                            dashboardCommunitiesReducer.communtities.results
+                            dashboardCommunitiesReducer.communities.results
                               .length
                           }{" "}
                           selected
@@ -333,6 +335,13 @@ const communities = () => {
               </div>
             </main>
           </Layout>
+
+          <AddCommunitiesModal
+            modalOpen={modalOpen}
+            handleToggleModal={handleToggleModal}
+            modalRef={modalRef}
+            handleCloseModal={handleCloseModal}
+          />
         </>
       )}
     </>

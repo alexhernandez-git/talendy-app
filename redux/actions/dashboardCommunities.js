@@ -16,10 +16,11 @@ export const fetchDahboardCommunities =
     var subdomain = host.split(".")[0];
     await axios
       .get(
-        `${process.env.HOST}/api/${subdomain}/communities/?search=${search}`,
+        `${process.env.HOST}/api/${subdomain}/dashboard-communities/?search=${search}`,
         tokenConfig(getState)
       )
       .then(async (res) => {
+        console.log("comm", res.data);
         await dispatch({
           type: FETCH_DASHBOARD_COMMUNITIES_SUCCESS,
           payload: res.data,
