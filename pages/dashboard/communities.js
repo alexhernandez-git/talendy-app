@@ -132,7 +132,7 @@ const communities = () => {
   return (
     <>
       <Head>
-        <title>Billing</title>
+        <title>Communities</title>
       </Head>
       {!canRender ? (
         <div className="flex justify-center items-center h-screen dark:bg-gray-800">
@@ -272,7 +272,7 @@ const communities = () => {
                                       </td>
                                       <td className="px-6 py-4 whitespace-nowrap">
                                         <span className="text-sm text-gray-500">
-                                          Regional Paradigm Technician
+                                          {community.name}
                                         </span>
                                         {/* <div className="text-sm text-gray-500">
                               Optimization

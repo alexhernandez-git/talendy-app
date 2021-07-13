@@ -12,6 +12,7 @@ import {
   isMemberEmailAvailable,
   resetMemberEmailAvailable,
 } from "redux/actions/members";
+import { createCommunity } from "redux/actions/dashboardCommunities";
 
 const AddCommunitiesModal = ({ modalOpen, modalRef, handleCloseModal }) => {
   const router = useRouter();
@@ -44,7 +45,7 @@ const AddCommunitiesModal = ({ modalOpen, modalRef, handleCloseModal }) => {
       name: Yup.string().required("Name is required"),
     }),
     onSubmit: async (values, { resetForm }) => {
-      dispatch(createMember(values, resetForm, handleCloseModal));
+      dispatch(createCommunity(values, resetForm, handleCloseModal));
     },
   });
 
