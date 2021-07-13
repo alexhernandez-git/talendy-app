@@ -7,7 +7,11 @@ import {
   CREATE_COMMUNITY,
   CREATE_COMMUNITY_SUCCESS,
   CREATE_COMMUNITY_FAIL,
+  REMOVE_COMMUNITIES,
+  REMOVE_COMMUNITIES_SUCCESS,
+  REMOVE_COMMUNITIES_FAIL,
 } from "../types";
+import { createAlert } from "./alerts";
 
 export const fetchDahboardCommunities =
   (search = "") =>
@@ -82,6 +86,40 @@ export const createCommunity =
       .catch((err) => {
         dispatch({
           type: CREATE_COMMUNITY_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
+
+export const removeCommunities =
+  (communities, resetCommunitiesSelected, handleCloseRemoveCommunitiesModal) =>
+  async (dispatch, getState) => {
+    await dispatch({
+      type: REMOVE_COMMUNITIES,
+    });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
+    await axios
+      .post(
+        `${process.env.HOST}/api/${subdomain}/dashboard-communities/remove_communities/`,
+        { communities: communities },
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        console.log("res.dataw", res.data);
+        await dispatch({
+          type: REMOVE_COMMUNITIES_SUCCESS,
+          payload: res.data,
+        });
+        await resetCommunitiesSelected();
+        await handleCloseRemoveCommunitiesModal();
+        await dispatch(
+          createAlert("SUCCESS", "Communities successfully removed")
+        );
+      })
+      .catch(async (err) => {
+        await dispatch({
+          type: REMOVE_COMMUNITIES_FAIL,
           payload: { data: err.response?.data, status: err.response?.status },
         });
       });
