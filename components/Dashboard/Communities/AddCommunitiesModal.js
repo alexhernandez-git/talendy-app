@@ -140,10 +140,7 @@ const AddCommunitiesModal = ({ modalOpen, modalRef, handleCloseModal }) => {
               </button>
             </div>
             <div className=" px-4 py-5 sm:px-6">
-              <form
-                onSubmit={formik.handleSubmit}
-                className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
-              >
+              <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
                 <div className="sm:col-span-2">
                   <div className="mt-1 relative">
                     <input
@@ -185,7 +182,7 @@ const AddCommunitiesModal = ({ modalOpen, modalRef, handleCloseModal }) => {
                     </p>
                   )}
                 </div>
-              </form>
+              </div>
             </div>
             <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700 text-right sm:px-6 rounded-b-xl">
               <button
