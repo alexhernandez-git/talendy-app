@@ -6,6 +6,8 @@ import Container from "react-modal-promise";
 import useUserConfirmationModal from "hooks/useUserConfirmation";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const CommunityItem = ({
   community,
@@ -22,31 +24,23 @@ const CommunityItem = ({
   const handleCloseEdit = () => {
     setIsEdit(false);
   };
-  const [role, setRole] = useState(community.role);
-  const newRoleRef = useRef(null);
-  const handleChangeRole = async (e) => {
-    e.preventDefault();
-    console.log(e.target.value);
-    // Call the action to save the changes
-    newRoleRef.current = e.target.value;
-    await useUserConfirmationModal()
-      .then(async () => {
-        console.log("success");
-        if (newRoleRef.current) {
-          await dispatch(
-            updateMemberRole(
-              community.id,
-              newRoleRef.current,
-              setRole,
-              handleCloseEdit
-            )
-          );
-        }
-      })
-      .catch(async () => {
-        console.log("error");
-        await handleCloseEdit();
-      });
+  const formik = useFormik({
+    initialValues: {
+      name: community.name,
+    },
+    enableReinitialize: true,
+    validationSchema: Yup.object({
+      name: Yup.string().required("Name is required"),
+    }),
+    onSubmit: async (values, { resetForm }) => {
+      handleCloseEdit();
+
+      //   dispatch(createCommunity(values, resetForm, handleCloseModal));
+    },
+  });
+  const handleBlur = (e) => {
+    formik.handleBlur(e);
+    formik.handleSubmit(e);
   };
   return (
     <tr>
@@ -66,25 +60,52 @@ const CommunityItem = ({
         </span>
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
-        <span className="text-sm text-gray-500">{community.name}</span>
-        {/* <div className="text-sm text-gray-500">
-                              Optimization
-                            </div> */}
+        {isEdit ? (
+          <div className="mt-1 relative">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              onChange={formik.handleChange}
+              onBlur={handleBlur}
+              value={formik.values.name}
+              placeholder="Community name"
+              autocomplete="given-name"
+              className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm dark:focus:text-white bg-white border-gray-300  text-sm  focus:placeholder-gray-400 focus:text-gray-900 dark:bg-gray-600 ${
+                formik.touched.name && formik.errors.name
+                  ? "pr-10 border-red-300 text-red-600   placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
+                  : " text-sm placeholder-gray-500  dark:placeholder-gray-300 dark:text-white  focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
+              }`}
+            />
+            {formik.touched.name && formik.errors.name && (
+              <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                <svg
+                  className="h-5 w-5 text-red-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            )}
+          </div>
+        ) : (
+          <span className="text-sm text-gray-500">{community.name}</span>
+        )}
       </td>
 
-      {/* <td className="px-6 py-4 whitespace-nowrap">
-                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                              Active
-                            </span>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Admin
-                          </td> */}
-      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-        <a href="#" className="text-orange-600 hover:text-orange-900 mr-3">
+      <td className="px-6 py-4 whitespace-nowrap">
+        {isEdit ? (
           <svg
+            onClick={handleCloseEdit}
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 inline"
+            className="h-5 w-5 text-red-500 cursor-pointer"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -93,10 +114,25 @@ const CommunityItem = ({
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
-              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+              d="M6 18L18 6M6 6l12 12"
             />
           </svg>
-        </a>
+        ) : (
+          <svg
+            onClick={handleOpenEdit}
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 text-orange-500 cursor-pointer"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+            <path
+              fillRule="evenodd"
+              d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+              clipRule="evenodd"
+            />
+          </svg>
+        )}
       </td>
     </tr>
   );
