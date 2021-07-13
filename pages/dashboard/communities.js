@@ -15,6 +15,7 @@ import {
 } from "redux/actions/dashboardCommunities";
 import AddCommunitiesModal from "components/Dashboard/Communities/AddCommunitiesModal";
 import Pagination from "components/Layout/Pagination";
+import CommunityItem from "components/Dashboard/Communities/CommunityItem";
 const communities = () => {
   const page = COMMUNITIES_DASHBOARD_PAGE;
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
@@ -51,7 +52,7 @@ const communities = () => {
   };
 
   const [communitiesSelected, setCommunitiesSelected] = useState([]);
-  const handleSelectMember = (id) => {
+  const handleSelectCommunity = (id) => {
     if (communitiesSelected.includes(id)) {
       setCommunitiesSelected(
         communitiesSelected.filter((member_id) => member_id !== id)
@@ -222,6 +223,14 @@ const communities = () => {
                                     </label>
                                     <input
                                       id="select-all"
+                                      onChange={handleSelectAll}
+                                      checked={
+                                        communitiesSelected.length ===
+                                          dashboardCommunitiesReducer
+                                            .communities.results.length &&
+                                        dashboardCommunitiesReducer.communities
+                                          .results.length > 0
+                                      }
                                       type="checkbox"
                                       name="select-all"
                                       class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
@@ -253,62 +262,14 @@ const communities = () => {
                                 ?.length > 0 &&
                                 dashboardCommunitiesReducer.communities.results.map(
                                   (community) => (
-                                    <tr>
-                                      <td className="px-6 py-4 whitespace-nowrap">
-                                        <span class="relative inline-flex items-center bg-white">
-                                          <label
-                                            for="select-all"
-                                            class="sr-only"
-                                          >
-                                            Select
-                                          </label>
-                                          <input
-                                            id="select-all"
-                                            type="checkbox"
-                                            name="select-all"
-                                            class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
-                                          />
-                                        </span>
-                                      </td>
-                                      <td className="px-6 py-4 whitespace-nowrap">
-                                        <span className="text-sm text-gray-500">
-                                          {community.name}
-                                        </span>
-                                        {/* <div className="text-sm text-gray-500">
-                              Optimization
-                            </div> */}
-                                      </td>
-
-                                      {/* <td className="px-6 py-4 whitespace-nowrap">
-                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                              Active
-                            </span>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Admin
-                          </td> */}
-                                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a
-                                          href="#"
-                                          className="text-orange-600 hover:text-orange-900 mr-3"
-                                        >
-                                          <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-6 w-6 inline"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                          >
-                                            <path
-                                              strokeLinecap="round"
-                                              strokeLinejoin="round"
-                                              strokeWidth={2}
-                                              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                                            />
-                                          </svg>
-                                        </a>
-                                      </td>
-                                    </tr>
+                                    <CommunityItem
+                                      key={community.id}
+                                      community={community}
+                                      handleSelectCommunity={
+                                        handleSelectCommunity
+                                      }
+                                      communitiesSelected={communitiesSelected}
+                                    />
                                   )
                                 )}
                             </tbody>

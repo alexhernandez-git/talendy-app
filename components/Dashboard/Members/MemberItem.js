@@ -52,7 +52,7 @@ const MemberItem = ({ member, handleSelectMember, membersSelected }) => {
         <td className="px-6 py-4 whitespace-nowrap">
           <span className="relative inline-flex items-center bg-white">
             <label for="select-all" className="sr-only">
-              Select all
+              Select
             </label>
             <input
               id="select-all"
