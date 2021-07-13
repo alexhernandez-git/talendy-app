@@ -8,6 +8,7 @@ import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useEffect } from "react";
 
 const CommunityItem = ({
   community,
@@ -21,9 +22,17 @@ const CommunityItem = ({
   const handleOpenEdit = () => {
     setIsEdit(true);
   };
+
   const handleCloseEdit = () => {
     setIsEdit(false);
   };
+  useEffect(() => {
+    if (isEdit) {
+      if (inputRef.current) {
+        inputRef.current.select();
+      }
+    }
+  }, [isEdit]);
   const formik = useFormik({
     initialValues: {
       name: community.name,
@@ -38,10 +47,12 @@ const CommunityItem = ({
       //   dispatch(createCommunity(values, resetForm, handleCloseModal));
     },
   });
+  const inputRef = useRef(null);
   const handleBlur = (e) => {
-    formik.handleBlur(e);
     formik.handleSubmit(e);
   };
+  const handleFocus = (event) => event.target.select();
+
   return (
     <tr>
       <td className="px-6 py-4 whitespace-nowrap">
@@ -67,8 +78,10 @@ const CommunityItem = ({
               name="name"
               id="name"
               onChange={formik.handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               value={formik.values.name}
+              ref={inputRef}
               placeholder="Community name"
               autocomplete="given-name"
               className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm dark:focus:text-white bg-white border-gray-300  text-sm  focus:placeholder-gray-400 focus:text-gray-900 dark:bg-gray-600 ${
