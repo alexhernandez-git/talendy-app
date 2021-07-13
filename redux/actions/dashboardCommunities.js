@@ -10,6 +10,9 @@ import {
   REMOVE_COMMUNITIES,
   REMOVE_COMMUNITIES_SUCCESS,
   REMOVE_COMMUNITIES_FAIL,
+  EDIT_COMMUNITY,
+  EDIT_COMMUNITY_SUCCESS,
+  EDIT_COMMUNITY_FAIL,
 } from "../types";
 import { createAlert } from "./alerts";
 
@@ -120,6 +123,35 @@ export const removeCommunities =
       .catch(async (err) => {
         await dispatch({
           type: REMOVE_COMMUNITIES_FAIL,
+          payload: { data: err.response?.data, status: err.response?.status },
+        });
+      });
+  };
+
+export const updateCommunity =
+  (community_id, values, handleCloseEdit) => async (dispatch, getState) => {
+    await dispatch({
+      type: EDIT_COMMUNITY,
+    });
+    var host = window.location.host;
+    var subdomain = host.split(".")[0];
+    await axios
+      .patch(
+        `${process.env.HOST}/api/${subdomain}/dashboard-communities/${community_id}/`,
+        values,
+        tokenConfig(getState)
+      )
+      .then(async (res) => {
+        console.log("res.dataw", res.data);
+        await dispatch({
+          type: EDIT_COMMUNITY_SUCCESS,
+          payload: res.data,
+        });
+        await handleCloseEdit();
+      })
+      .catch(async (err) => {
+        await dispatch({
+          type: EDIT_COMMUNITY_FAIL,
           payload: { data: err.response?.data, status: err.response?.status },
         });
       });

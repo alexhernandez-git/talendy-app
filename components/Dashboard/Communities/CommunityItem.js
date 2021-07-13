@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useEffect } from "react";
+import { updateCommunity } from "redux/actions/dashboardCommunities";
 
 const CommunityItem = ({
   community,
@@ -41,10 +42,8 @@ const CommunityItem = ({
     validationSchema: Yup.object({
       name: Yup.string().required("Name is required"),
     }),
-    onSubmit: async (values, { resetForm }) => {
-      handleCloseEdit();
-
-      //   dispatch(createCommunity(values, resetForm, handleCloseModal));
+    onSubmit: async (values) => {
+      dispatch(updateCommunity(community.id, values, handleCloseEdit));
     },
   });
   const inputRef = useRef(null);
@@ -72,42 +71,44 @@ const CommunityItem = ({
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
         {isEdit ? (
-          <div className="mt-1 relative">
-            <input
-              type="text"
-              name="name"
-              id="name"
-              onChange={formik.handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-              value={formik.values.name}
-              ref={inputRef}
-              placeholder="Community name"
-              autocomplete="given-name"
-              className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm dark:focus:text-white bg-white border-gray-300  text-sm  focus:placeholder-gray-400 focus:text-gray-900 dark:bg-gray-600 ${
-                formik.touched.name && formik.errors.name
-                  ? "pr-10 border-red-300 text-red-600   placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
-                  : " text-sm placeholder-gray-500  dark:placeholder-gray-300 dark:text-white  focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
-              }`}
-            />
-            {formik.touched.name && formik.errors.name && (
-              <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                <svg
-                  className="h-5 w-5 text-red-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-            )}
-          </div>
+          <form onSubmit={formik.handleSubmit}>
+            <div className="mt-1 relative">
+              <input
+                type="text"
+                name="name"
+                id="name"
+                onChange={formik.handleChange}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                value={formik.values.name}
+                ref={inputRef}
+                placeholder="Community name"
+                autocomplete="given-name"
+                className={`appearance-none block w-full border rounded-3xl shadow-sm py-2 px-4 focus:outline-none  sm:text-sm dark:focus:text-white bg-white border-gray-300  text-sm  focus:placeholder-gray-400 focus:text-gray-900 dark:bg-gray-600 ${
+                  formik.touched.name && formik.errors.name
+                    ? "pr-10 border-red-300 text-red-600   placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 "
+                    : " text-sm placeholder-gray-500  dark:placeholder-gray-300 dark:text-white  focus:placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
+                }`}
+              />
+              {formik.touched.name && formik.errors.name && (
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  <svg
+                    className="h-5 w-5 text-red-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              )}
+            </div>
+          </form>
         ) : (
           <span className="text-sm text-gray-500">{community.name}</span>
         )}

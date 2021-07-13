@@ -8,6 +8,9 @@ import {
   REMOVE_COMMUNITIES,
   REMOVE_COMMUNITIES_SUCCESS,
   REMOVE_COMMUNITIES_FAIL,
+  EDIT_COMMUNITY,
+  EDIT_COMMUNITY_SUCCESS,
+  EDIT_COMMUNITY_FAIL,
 } from "../types";
 import { HYDRATE } from "next-redux-wrapper";
 
@@ -24,6 +27,8 @@ const initialState = {
   create_community_error: null,
   is_removing_communities: false,
   remove_communities_error: null,
+  is_editing_community: false,
+  edit_community_error: null,
 };
 export default function dashboardCommunitiesReducer(
   state = initialState,
@@ -94,6 +99,29 @@ export default function dashboardCommunitiesReducer(
         ...state,
         is_removing_communities: false,
         remove_communities_error: action.payload,
+      };
+    case EDIT_COMMUNITY:
+      return {
+        ...state,
+        is_editing_community: true,
+      };
+    case EDIT_COMMUNITY_SUCCESS:
+      return {
+        ...state,
+        is_editing_community: false,
+        communities: {
+          ...state.communities,
+          results: state.communities.results.map((community) =>
+            community.id === action.payload.id ? action.payload : community
+          ),
+        },
+        edit_community_error: null,
+      };
+    case EDIT_COMMUNITY_FAIL:
+      return {
+        ...state,
+        is_editing_community: false,
+        edit_community_error: action.payload,
       };
     default:
       return state;
