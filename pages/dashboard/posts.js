@@ -12,6 +12,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import Pagination from "components/Layout/Pagination";
+import { useState } from "react";
 const posts = () => {
   const page = POSTS_DASHBOARD_PAGE;
   const [canRender, authReducer, initialDataFetched] = useAuthRequired(page);
@@ -31,6 +32,17 @@ const posts = () => {
   const handleChangePage = (url) => {
     dispatch(fetchDashboardPostsPagination(url));
   };
+  const [search, setSearch] = useState("");
+  const [firstLoad, setFirstLoad] = useState(true);
+  useEffect(() => {
+    setFirstLoad(false);
+    if (!firstLoad) {
+      const timeoutId = setTimeout(() => {
+        dispatch(fetchDahboardPosts(search));
+      }, 500);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [search]);
   return (
     <>
       <Head>
@@ -42,7 +54,7 @@ const posts = () => {
         </div>
       ) : (
         <>
-          <Layout page={page}>
+          <Layout page={page} search={search} setSearch={setSearch}>
             <main className="flex-1 relative pb-8 z-0 overflow-y-auto overflow-x-hidden px-4">
               <div className="mt-8">
                 <div className="max-w-6xl mx-auto">

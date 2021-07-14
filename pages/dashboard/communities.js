@@ -116,12 +116,11 @@ const communities = () => {
     setFirstLoad(false);
     if (!firstLoad) {
       const timeoutId = setTimeout(() => {
-        dispatch(fetchCommunities(search));
+        dispatch(fetchDahboardCommunities(search));
       }, 500);
       return () => clearTimeout(timeoutId);
     }
   }, [search]);
-
   return (
     <>
       <Head>
@@ -133,7 +132,7 @@ const communities = () => {
         </div>
       ) : (
         <>
-          <Layout page={page}>
+          <Layout page={page} search={search} setSearch={setSearch}>
             <main className="flex-1 relative pb-8 z-0 overflow-y-auto overflow-x-hidden px-4">
               <div className="mt-8">
                 <div className="max-w-6xl mx-auto">
