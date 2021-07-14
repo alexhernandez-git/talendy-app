@@ -768,7 +768,7 @@ export default function authReducer(state = initialState, action) {
         ...state,
         user: {
           ...state.user,
-          karma_amount: state.user?.karma_amount + action.payload,
+          karma_amount: state.user?.member?.karma_amount + action.payload,
         },
       };
     case SUBSTRACT_KARMA_AMOUNT:
@@ -776,7 +776,7 @@ export default function authReducer(state = initialState, action) {
         ...state,
         user: {
           ...state.user,
-          karma_amount: state.user?.karma_amount - action.payload,
+          karma_amount: state.user?.member?.karma_amount - action.payload,
         },
       };
     case ADD_INVITATION:

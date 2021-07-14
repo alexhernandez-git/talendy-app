@@ -308,7 +308,7 @@ const CreateEditPostModal = ({
                     <Slider
                       value={formik.values.karma_offered}
                       onChange={handleChangeKarmasOffered}
-                      max={authReducer.user?.karma_amount}
+                      max={authReducer.user?.member?.karma_amount}
                       min={100}
                       railStyle={{}}
                       handleStyle={{

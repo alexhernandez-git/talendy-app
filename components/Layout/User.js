@@ -116,7 +116,7 @@ const User = ({ page, user }) => {
                   />
                 </svg>
                 <span className="font-medium text-orange-500">
-                  {user?.karma_amount} Karma
+                  {user?.member?.karma_amount} Karma
                 </span>
                 <span className="sr-only">karmas amount</span>
               </span>
