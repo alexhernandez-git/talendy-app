@@ -217,35 +217,37 @@ const Layout = ({ page, search, setSearch, children }) => {
                 <span className="mt-2">Settings</span>
               </span>
             </Link>
-            <Link href="/dashboard/billing">
-              <span
-                className={
-                  page === BILLING_DASHBOARD_PAGE
-                    ? "cursor-pointer bg-orange-400 dark:bg-orange-300 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
-                    : "cursor-pointer text-orange-600 dark:text-white hover:bg-orange-400 dark:hover:bg-orange-300 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
-                }
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
+            {authReducer.user?.member?.role === "AD" && (
+              <Link href="/dashboard/billing">
+                <span
                   className={
                     page === BILLING_DASHBOARD_PAGE
-                      ? "text-white h-6 w-6"
-                      : "text-orange-600 dark:text-white group-hover:text-white h-6 w-6"
+                      ? "cursor-pointer bg-orange-400 dark:bg-orange-300 text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+                      : "cursor-pointer text-orange-600 dark:text-white hover:bg-orange-400 dark:hover:bg-orange-300 hover:text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                   }
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                  />
-                </svg>
-                <span className="mt-2">Billing</span>
-              </span>
-            </Link>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={
+                      page === BILLING_DASHBOARD_PAGE
+                        ? "text-white h-6 w-6"
+                        : "text-orange-600 dark:text-white group-hover:text-white h-6 w-6"
+                    }
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                    />
+                  </svg>
+                  <span className="mt-2">Billing</span>
+                </span>
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -458,35 +460,37 @@ const Layout = ({ page, search, setSearch, children }) => {
                     <span>Settings</span>
                   </span>
                 </Link>
-                <Link href="/dashboard/billing">
-                  <span
-                    className={
-                      page === BILLING_DASHBOARD_PAGE
-                        ? "cursor-pointer bg-orange-500 text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
-                        : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
-                    }
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
+                {authReducer.user?.member?.role === "AD" && (
+                  <Link href="/dashboard/billing">
+                    <span
                       className={
                         page === BILLING_DASHBOARD_PAGE
-                          ? "text-white mr-3 h-6 w-6"
-                          : "text-orange-600 group-hover:text-white mr-3 h-6 w-6"
+                          ? "cursor-pointer bg-orange-500 text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
+                          : "cursor-pointer text-orange-600 hover:bg-orange-500 hover:text-white group py-2 px-3 rounded-md flex items-center text-sm font-medium"
                       }
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                      />
-                    </svg>
-                    <span>Billing</span>
-                  </span>
-                </Link>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={
+                          page === BILLING_DASHBOARD_PAGE
+                            ? "text-white mr-3 h-6 w-6"
+                            : "text-orange-600 group-hover:text-white mr-3 h-6 w-6"
+                        }
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                        />
+                      </svg>
+                      <span>Billing</span>
+                    </span>
+                  </Link>
+                )}
               </div>
             </nav>
           </div>

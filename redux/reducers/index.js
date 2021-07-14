@@ -33,6 +33,7 @@ import invoicesReducer from "./invoicesReducer";
 import plansReducer from "./plansReducer";
 import membersReducer from "./membersReducer";
 import dashboardCommunitiesReducer from "./dashboardCommunitiesReducer";
+import dashboardPostsReducer from "./dashboardPostsReducer";
 
 export default combineReducers({
   authReducer,
@@ -68,4 +69,5 @@ export default combineReducers({
   plansReducer,
   membersReducer,
   dashboardCommunitiesReducer,
+  dashboardPostsReducer,
 });

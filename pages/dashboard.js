@@ -230,18 +230,24 @@ const dashboard = () => {
                               </p>
                             </>
                           )}
+
                           <div class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6">
                             <div class="text-sm">
-                              <Link href="/dashboard/billing">
-                                <span class="cursor-pointer font-medium text-orange-600 hover:text-orange-500">
-                                  {" "}
-                                  Select plan
-                                  <span class="sr-only">
+                              {authReducer.user?.member?.role === "AD" ? (
+                                <Link href="/dashboard/billing">
+                                  <span class="cursor-pointer font-medium text-orange-600 hover:text-orange-500">
                                     {" "}
-                                    Avg. Click Rate stats
+                                    Manage plan
+                                    <span class="sr-only"> Manage plan</span>
                                   </span>
+                                </Link>
+                              ) : (
+                                <span class="font-medium text-gray-300">
+                                  {" "}
+                                  Manage plan
+                                  <span class="sr-only"> Manage plan</span>
                                 </span>
-                              </Link>
+                              )}
                             </div>
                           </div>
                         </dd>
