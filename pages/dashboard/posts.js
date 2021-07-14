@@ -141,7 +141,10 @@ const posts = () => {
                                         )}
                                       </td>
                                       <td className="px-6 py-4 whitespace-nowrap">
-                                        <a href="/post/3443" target="_blank">
+                                        <a
+                                          href={`/post/${post?.id}`}
+                                          target="_blank"
+                                        >
                                           <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             className="h-5 w-5 text-gray-500"
