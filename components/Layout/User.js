@@ -116,7 +116,12 @@ const User = ({ page, user }) => {
                   />
                 </svg>
                 <span className="font-medium text-orange-500">
-                  {user?.member?.karma_amount} Karma
+                  {authReducer.user?.member?.role === "MA" ||
+                  authReducer.user?.member?.role === "AD" ? (
+                    "Infinite Karma"
+                  ) : (
+                    <>{user?.member?.karma_amount} Karma</>
+                  )}
                 </span>
                 <span className="sr-only">karmas amount</span>
               </span>
