@@ -103,11 +103,7 @@ const CreateEditPostModal = ({
   });
   const handleChangeKarmasOffered = (value) => {
     if (post) return;
-    if (
-      authReducer.user?.member?.role === "MA" ||
-      authReducer.user?.member?.role === "AD"
-    )
-      return;
+
     formik.setFieldValue("karma_offered", value);
   };
   const [imagesOpen, setImagesOpen] = useState(
@@ -307,18 +303,18 @@ const CreateEditPostModal = ({
                             d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                           />
                         </svg>
-                        {authReducer.user?.member?.role === "MA" ||
-                        authReducer.user?.member?.role === "AD" ? (
-                          <>Infinite</>
-                        ) : (
-                          <> {formik.values.karma_offered}</>
-                        )}
+                        {formik.values.karma_offered}
                       </span>
                     </div>
                     <Slider
                       value={formik.values.karma_offered}
                       onChange={handleChangeKarmasOffered}
-                      max={authReducer.user?.member?.karma_amount}
+                      max={
+                        authReducer.user?.member?.role === "MA" ||
+                        authReducer.user?.member?.role === "AD"
+                          ? 1000
+                          : authReducer.user?.member?.karma_amount
+                      }
                       min={100}
                       railStyle={{}}
                       handleStyle={{
